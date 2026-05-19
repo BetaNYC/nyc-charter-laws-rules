@@ -14,7 +14,8 @@
     "nyc-charter-laws-rules": "dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "data/index"
   ],
   "scripts": {
     "build": "tsc",
