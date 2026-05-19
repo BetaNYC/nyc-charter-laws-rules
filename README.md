@@ -215,6 +215,18 @@ npm run build-index   # parses XML, writes data/index/json/ and data/index/markd
 
 Then commit the updated index files and push. The `get_version` tool will reflect the new currency dates after the next server restart.
 
+#### Placing ZIP files manually
+
+If you prefer to download the ZIPs yourself rather than using `npm run fetch-data`, place them in `data/raw/` with these exact filenames before running `npm run build-index`:
+
+```
+data/raw/charter.zip       ← http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip
+data/raw/admin_code.zip    ← http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip
+data/raw/rules.zip         ← http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip
+```
+
+The `data/raw/` directory is gitignored — the ZIPs will not be committed.
+
 ---
 
 ## Configuration
