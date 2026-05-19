@@ -21,10 +21,13 @@
     "dev": "tsc --watch",
     "start": "node dist/index.js",
     "prepare": "npm run build",
-    "fetch-data": "node scripts/fetch-data.js"
+    "fetch-data": "node scripts/fetch-data.js",
+    "build-index": "node scripts/build-index.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
+    "adm-zip": "^0.5.17",
+    "fast-xml-parser": "^5.8.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
