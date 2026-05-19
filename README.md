@@ -14,7 +14,7 @@ This repo includes:
 
 Clone the repo and everything is ready to use. No setup required to browse or query the current index. Run `npm run fetch-data && npm run build-index` only when you want to refresh from AML.
 
-Built by [BetaNYC](https://beta.nyc).
+Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 ---
 
@@ -137,7 +137,7 @@ Caveats are encoded at three levels so no response can be returned without them:
 >
 > **Official disclaimer from American Legal Publishing:** The Codes and other documents that appear on this site may not yet reflect the most current legislation or rules adopted by the City. In addition, certain textual errors and omissions may temporarily exist, resulting from problems in the source database provided to American Legal and from which this website was created. Although these errors and omissions are being corrected, any user discovering any such error is invited to contact the publisher at NYC.editor@amlegal.com or 800-445-5588 and/or the NYC Law Department at NYCCodeRulesCharter@law.nyc.gov.
 >
-> Built by [BetaNYC](https://beta.nyc). Feedback and improvements welcome — [file a GitHub issue](https://github.com/BetaNYC/nyc-charter-laws-rules).
+> Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc). Feedback and improvements welcome — [file a GitHub issue](https://github.com/BetaNYC/nyc-charter-laws-rules).
 
 ---
 
@@ -307,4 +307,12 @@ Issues and pull requests welcome at [github.com/BetaNYC/nyc-charter-laws-rules](
 
 ## License
 
-MIT © [BetaNYC](https://beta.nyc)
+MIT License
+
+Copyright (c) 2026 BetaNYC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
