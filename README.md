@@ -1,10 +1,18 @@
 # nyc-charter-laws-rules
 
-An [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server giving AI assistants access to New York City's three primary legal documents:
+The single place to access, process, and query New York City's three primary legal documents:
 
 - **The New York City Charter**
 - **The New York City Administrative Code**
 - **The Rules of the City of New York**
+
+This repo includes:
+- A **[MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server** so AI assistants can query the documents directly
+- **Scripts** to fetch and parse the latest bulk XML from American Legal Publishing
+- A committed **JSON index** (`data/index/json/`) for machine use
+- A committed **Markdown index** (`data/index/markdown/`) for human browsing — readable directly on GitHub
+
+Clone the repo and everything is ready to use. No setup required to browse or query the current index. Run `npm run fetch-data && npm run build-index` only when you want to refresh from AML.
 
 Built by [BetaNYC](https://beta.nyc).
 
@@ -133,17 +141,37 @@ Caveats are encoded at three levels so no response can be returned without them:
 
 ---
 
+## Repository structure
+
+```
+nyc-charter-laws-rules/
+├── src/                        ← MCP server (TypeScript)
+├── scripts/
+│   ├── fetch-data.js           ← downloads bulk XML ZIPs from AML
+│   └── build-index.js          ← parses XML, writes JSON + Markdown indexes
+├── data/
+│   ├── raw/                    ← downloaded ZIPs (gitignored — build locally)
+│   └── index/
+│       ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json
+│       └── markdown/           ← committed: charter.md, admin_code.md, rules.md
+└── dist/                       ← compiled MCP server (built locally)
+```
+
+The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets 22,050 sections across all three documents immediately — no build step required to browse or run the server.
+
+---
+
 ## Data source
 
 All content is sourced from publicly available bulk XML downloads hosted by [American Legal Publishing](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview). No API key required.
 
-| Document | Bulk XML source |
-|---|---|
-| NYC Charter | `http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip` |
-| NYC Administrative Code | `http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip` |
-| Rules of the City of New York | `http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip` |
+| Document | Sections | Bulk XML source |
+|---|---|---|
+| NYC Charter | 854 | `http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip` |
+| NYC Administrative Code | 12,551 | `http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip` |
+| Rules of the City of New York | 8,645 | `http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip` |
 
-AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm run fetch-data && npm run build-index` to refresh the index.
+AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm run fetch-data && npm run build-index` to refresh the index and commit the updated files.
 
 ---
 
@@ -163,32 +191,29 @@ npm install
 
 ---
 
-## Setup: download and index the data
+## Setup
 
-The XML source files are not included in the repo — each user builds the index locally from the public AML downloads.
+**The index is already committed — no data download needed to run the server.**
 
-**Step 1 — Download the bulk XML ZIPs:**
-
-```bash
-npm run fetch-data
-```
-
-This downloads three ZIP files (~50MB total) into `data/raw/`.
-
-**Step 2 — Parse and index the XML:**
-
-```bash
-npm run build-index
-```
-
-This unzips and parses all XML files, extracts sections and version dates, and writes the index to `data/index/`. Expect about 30–60 seconds on a modern machine.
-
-**Step 3 — Build and start the server:**
+**Step 1 — Build and start the server:**
 
 ```bash
 npm run build
 npm start
 ```
+
+That's it. The committed JSON index is loaded automatically.
+
+### Refreshing the index from AML
+
+Run this when AML publishes a new version of the Charter, Admin Code, or Rules:
+
+```bash
+npm run fetch-data    # downloads ~50MB of bulk XML ZIPs into data/raw/
+npm run build-index   # parses XML, writes data/index/json/ and data/index/markdown/
+```
+
+Then commit the updated index files and push. The `get_version` tool will reflect the new currency dates after the next server restart.
 
 ---
 
@@ -259,16 +284,6 @@ Add to your project's `.mcp.json` or `.claude/settings.json`:
 ```
 
 ---
-
-## Refreshing the index
-
-AML publishes updated ZIPs as laws and rules change. To update your local index:
-
-```bash
-npm run fetch-data && npm run build-index
-```
-
-The `get_version` tool will reflect the new currency dates after the next server restart.
 
 ---
 
