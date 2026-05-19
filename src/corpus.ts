@@ -3,7 +3,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const INDEX_DIR = join(__dirname, "..", "data", "index");
+const INDEX_DIR = join(__dirname, "..", "data", "index", "json");
 
 export type Corpus = "charter" | "admin_code" | "rules";
 
