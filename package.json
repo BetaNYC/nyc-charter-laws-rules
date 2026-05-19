@@ -1,0 +1,37 @@
+{
+  "name": "@betanyc/nyc-charter-laws-rules",
+  "version": "0.1.0",
+  "description": "MCP server for NYC Charter, Administrative Code, and Rules of the City of New York",
+  "license": "MIT",
+  "author": "BetaNYC",
+  "homepage": "https://github.com/BetaNYC/nyc-charter-laws-rules",
+  "bugs": {
+    "url": "https://github.com/BetaNYC/nyc-charter-laws-rules/issues"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "nyc-charter-laws-rules": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build",
+    "fetch-data": "node scripts/fetch-data.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
