@@ -183,6 +183,23 @@ AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm 
 
 ## Installation
 
+### npx (recommended — no install required)
+
+```bash
+npx @betanyc/nyc-charter-laws-rules
+```
+
+The corpus data is bundled in the package — no setup required.
+
+### Global install
+
+```bash
+npm install -g @betanyc/nyc-charter-laws-rules
+nyc-charter-laws-rules
+```
+
+### From source (for development or refreshing the index)
+
 ```bash
 git clone https://github.com/BetaNYC/nyc-charter-laws-rules.git
 cd nyc-charter-laws-rules
@@ -191,11 +208,40 @@ npm install
 
 ---
 
+## Claude Desktop configuration
+
+Add to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "nyc-charter-laws-rules": {
+      "command": "npx",
+      "args": ["-y", "@betanyc/nyc-charter-laws-rules"]
+    }
+  }
+}
+```
+
+Or if installed globally:
+
+```json
+{
+  "mcpServers": {
+    "nyc-charter-laws-rules": {
+      "command": "nyc-charter-laws-rules"
+    }
+  }
+}
+```
+
+---
+
 ## Setup
 
 **The index is already committed — no data download needed to run the server.**
 
-**Step 1 — Build and start the server:**
+**Step 1 — Build and start the server (from source only):**
 
 ```bash
 npm run build
@@ -231,24 +277,22 @@ The `data/raw/` directory is gitignored — the ZIPs will not be committed.
 
 ## Configuration
 
-### Claude Desktop
+### Claude Code
 
-Add to your `claude_desktop_config.json`:
+Add to your project's `.mcp.json` or `.claude/settings.json`:
 
 ```json
 {
   "mcpServers": {
     "nyc-charter-laws-rules": {
-      "command": "node",
-      "args": ["/path/to/nyc-charter-laws-rules/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "@betanyc/nyc-charter-laws-rules"]
     }
   }
 }
 ```
 
-### Claude Code
-
-Add to your project's `.mcp.json` or `.claude/settings.json`:
+Or if running from a local clone:
 
 ```json
 {
