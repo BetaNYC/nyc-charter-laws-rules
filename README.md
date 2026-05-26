@@ -112,11 +112,11 @@ get_version()
 Example response:
 
 ```
-NYC Charter:           Current through Local Law 2026/086, enacted April 25, 2026, and includes amendments effective through May 17, 2026. (854 sections)
-Administrative Code:   Current through Local Law 2026/086, enacted April 25, 2026, and includes amendments effective through May 17, 2026. (12551 sections)
-Rules of NYC:          Current through rules effective May 15, 2026. (8645 sections)
+NYC Charter:           Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (854 sections)
+Administrative Code:   Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (12558 sections)
+Rules of NYC:          Current through rules effective May 20, 2026. (8645 sections)
 
-Index built: 2026-05-19T19:57:18.179Z
+Index built: 2026-05-26T01:30:51.847Z
 ```
 
 ---
@@ -157,7 +157,7 @@ nyc-charter-laws-rules/
 └── dist/                       ← compiled MCP server (built locally)
 ```
 
-The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets 22,050 sections across all three documents immediately — no build step required to browse or run the server.
+The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets 22,057 sections across all three documents immediately — no build step required to browse or run the server.
 
 ---
 
@@ -165,11 +165,11 @@ The JSON and Markdown indexes are committed to the repo. Anyone who clones it ge
 
 All content is sourced from publicly available bulk XML downloads hosted by [American Legal Publishing](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview). No API key required.
 
-| Document | Sections | Bulk XML source |
-|---|---|---|
-| NYC Charter | 854 | `http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip` |
-| NYC Administrative Code | 12,551 | `http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip` |
-| Rules of the City of New York | 8,645 | `http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip` |
+| Document | Sections | Current Through | Bulk XML source |
+|---|---|---|---|
+| NYC Charter | 854 | LL 2026/094, amendments through May 17, 2026 | `http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip` |
+| NYC Administrative Code | 12,558 | LL 2026/094, amendments through May 17, 2026 | `http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip` |
+| Rules of the City of New York | 8,645 | Rules effective through May 20, 2026 | `http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip` |
 
 AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm run fetch-data && npm run build-index` to refresh the index and commit the updated files.
 
@@ -340,6 +340,22 @@ Or if running from a local clone:
 ```
 
 ---
+
+---
+
+## Changelog
+
+### 0.1.2 — May 25, 2026
+- Updated index: Charter and Admin Code now current through **Local Law 2026/094** (enacted May 16, 2026), up from LL 2026/086
+- Updated index: Rules now current through **May 20, 2026**, up from May 15, 2026
+- Admin Code gained 7 sections (12,551 → 12,558)
+- Total indexed sections: 22,057 (up from 22,050)
+
+### 0.1.1
+- Initial published release with full JSON and Markdown indexes committed to repo
+
+### 0.1.0
+- Initial release
 
 ---
 
