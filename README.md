@@ -341,21 +341,29 @@ Or if running from a local clone:
 
 ---
 
----
-
 ## Changelog
 
-### 0.1.2 — May 25, 2026
-- Updated index: Charter and Admin Code now current through **Local Law 2026/094** (enacted May 16, 2026), up from LL 2026/086
-- Updated index: Rules now current through **May 20, 2026**, up from May 15, 2026
-- Admin Code gained 7 sections (12,551 → 12,558)
-- Total indexed sections: 22,057 (up from 22,050)
+The complete, dated record of **every index rebuild** lives in **[CHANGELOG.md](CHANGELOG.md)**. Each entry records which corpus version was current at the time of the build and flags whenever a corpus's `currentThrough` version advanced.
 
-### 0.1.1
-- Initial published release with full JSON and Markdown indexes committed to repo
+The block below is stamped automatically with the most recent rebuild every time `npm run update-changelog` runs — see [CHANGELOG.md](CHANGELOG.md) for the full history.
 
-### 0.1.0
-- Initial release
+<!-- LATEST_INDEX_UPDATE:START -->
+**Last index update:** 2026-05-29 — ⬆️ Updated
+
+| Corpus | Current through | Sections |
+|---|---|---|
+| NYC Charter | Current through Local Law 2026/094, enacted May 16, 2026,and includes amendments effective through May 27, 2026. | 854 |
+| NYC Administrative Code | Current through Local Law 2026/094, enacted May 16, 2026,and includes amendments effective through May 27, 2026. | 12,558 |
+| Rules of the City of New York | Current through rules effective May 20, 2026. | 8,645 |
+<!-- LATEST_INDEX_UPDATE:END -->
+
+### Release history
+
+Package version history (distinct from the per-rebuild record in CHANGELOG.md):
+
+- **0.1.2 — May 25, 2026:** Charter and Admin Code current through **LL 2026/094** (enacted May 16, 2026), up from LL 2026/086; Rules through **May 20, 2026**, up from May 15; Admin Code 12,551 → 12,558 sections.
+- **0.1.1:** Initial published release with full JSON and Markdown indexes committed to repo.
+- **0.1.0:** Initial release.
 
 ---
 

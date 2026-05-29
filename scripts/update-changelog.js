@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-// Updates data/changelog.json and CHANGELOG.md after each index build.
-// Run after build-index: npm run update-changelog
+// Updates data/changelog.json and CHANGELOG.md after each index build, and
+// stamps the "Last index update" block in README.md.
+//
+// Run after build-index:   npm run update-changelog
+// Re-stamp README only:     node scripts/update-changelog.js --stamp-only
 //
 // Records every index refresh — whether or not the corpus version changed.
 // "changed: true" means at least one corpus has a new "currentThrough" string.
@@ -14,6 +17,73 @@ const ROOT = join(__dirname, "..");
 const VERSIONS_PATH = join(ROOT, "data", "index", "json", "versions.json");
 const CHANGELOG_JSON_PATH = join(ROOT, "data", "changelog.json");
 const CHANGELOG_MD_PATH = join(ROOT, "CHANGELOG.md");
+const README_PATH = join(ROOT, "README.md");
+
+// README marker block — rewritten in place on every run so the README always
+// shows the latest rebuild. Text outside these markers is left untouched.
+const README_START = "<!-- LATEST_INDEX_UPDATE:START -->";
+const README_END = "<!-- LATEST_INDEX_UPDATE:END -->";
+
+const STAMP_ONLY = process.argv.includes("--stamp-only");
+
+const CORPORA_LABELS = {
+  charter: "NYC Charter",
+  admin_code: "NYC Administrative Code",
+  rules: "Rules of the City of New York",
+};
+
+// Splice the "Last index update" block (built from a changelog entry) between
+// the README markers. No-op (with a warning) if README or markers are absent.
+function stampReadme(entry) {
+  if (!existsSync(README_PATH)) {
+    console.error("README.md not found — skipping stamp.");
+    return;
+  }
+  const readme = readFileSync(README_PATH, "utf8");
+  const start = readme.indexOf(README_START);
+  const end = readme.indexOf(README_END);
+  if (start === -1 || end === -1) {
+    console.error(
+      `README markers not found (${README_START} / ${README_END}) — skipping stamp.`
+    );
+    return;
+  }
+
+  const statusBadge = entry.changed ? "⬆️ Updated" : "✓ No change";
+  const rows = Object.values(entry.corpora).map(
+    (c) => `| ${c.label} | ${c.currentThrough} | ${c.sectionCount.toLocaleString()} |`
+  );
+  const block = [
+    README_START,
+    `**Last index update:** ${entry.date} — ${statusBadge}`,
+    ``,
+    `| Corpus | Current through | Sections |`,
+    `|---|---|---|`,
+    ...rows,
+    README_END,
+  ].join("\n");
+
+  const updated =
+    readme.slice(0, start) + block + readme.slice(end + README_END.length);
+  writeFileSync(README_PATH, updated);
+  console.log(`Stamped README.md "Last index update" → ${entry.date} (${statusBadge})`);
+}
+
+// ── --stamp-only: re-stamp README from the existing latest entry, no append ───
+
+if (STAMP_ONLY) {
+  if (!existsSync(CHANGELOG_JSON_PATH)) {
+    console.error("changelog.json not found — run a full update first.");
+    process.exit(1);
+  }
+  const cl = JSON.parse(readFileSync(CHANGELOG_JSON_PATH, "utf8"));
+  if (!cl.entries?.length) {
+    console.error("changelog.json has no entries — run a full update first.");
+    process.exit(1);
+  }
+  stampReadme(cl.entries[0]);
+  process.exit(0);
+}
 
 // ── Load current versions ────────────────────────────────────────────────────
 
@@ -33,12 +103,6 @@ const changelog = existsSync(CHANGELOG_JSON_PATH)
 const prior = changelog.entries[0] ?? null;
 
 // ── Build new entry ───────────────────────────────────────────────────────────
-
-const CORPORA_LABELS = {
-  charter: "NYC Charter",
-  admin_code: "NYC Administrative Code",
-  rules: "Rules of the City of New York",
-};
 
 const corporaEntries = {};
 let anyChanged = false;
@@ -127,6 +191,10 @@ for (const e of changelog.entries) {
 
 writeFileSync(CHANGELOG_MD_PATH, lines.join("\n"));
 console.log(`Regenerated CHANGELOG.md`);
+
+// ── Stamp README "Last index update" block ────────────────────────────────────
+
+stampReadme(entry);
 
 // ── Summary ───────────────────────────────────────────────────────────────────
 
