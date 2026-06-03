@@ -1,12 +1,33 @@
 #!/usr/bin/env node
 // Parses the three AML bulk XML ZIPs and builds JSON + Markdown indexes.
 // Run after fetch-data: npm run build-index
+//
+// Parsing note (fix #3, 2026-06): we parse with `preserveOrder: true` so that
+// inline cross-reference elements (<LINK>, <CHARFORMAT>) stay in document order
+// relative to the surrounding running text. In the default (non-ordered) mode a
+// node's direct text collapsed into a single "#text" and child elements were
+// grouped by tag, so extractText() emitted all the running text first and then
+// appended the inline elements — relocating spelled-out section numbers to the
+// end of the sentence and running adjacent words together ("sectionof").
+//
+// In preserveOrder mode the parsed tree is an array of single-key objects in
+// document order. The shapes used below:
+//   - text node:      { "#text": "..." }
+//   - element node:   { "TAGNAME": [ ...children... ], ":@": { "@_attr": val } }
+// Attributes live under the ":@" key (not inline), keyed with the "@_" prefix.
 
-import { XMLParser } from "fast-xml-parser";
 import AdmZip from "adm-zip";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import {
+  makeParser,
+  tagOf,
+  getAttr,
+  childrenByTag,
+  extractText,
+  normalize,
+} from "./lib/extract-text.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data");
@@ -23,32 +44,7 @@ const CORPORA = [
   { key: "rules", zip: "rules.zip", xmlDir: "XML" },
 ];
 
-const parser = new XMLParser({
-  ignoreAttributes: false,
-  attributeNamePrefix: "@_",
-  textNodeName: "#text",
-  isArray: (name) => ["LEVEL", "RECORD", "PARA", "CHARFORMAT"].includes(name),
-});
-
-// Recursively extract all text from a node, stripping XML tags.
-function extractText(node) {
-  if (!node) return "";
-  if (typeof node === "string") return node;
-  if (typeof node === "number") return String(node);
-
-  let text = "";
-  if (node["#text"]) text += node["#text"];
-
-  for (const [key, val] of Object.entries(node)) {
-    if (key.startsWith("@_") || key === "#text") continue;
-    if (Array.isArray(val)) {
-      text += val.map(extractText).join(" ");
-    } else if (typeof val === "object") {
-      text += extractText(val);
-    }
-  }
-  return text.replace(/\s+/g, " ").trim();
-}
+const parser = makeParser();
 
 // Extract the "Current through..." version string from the root document.
 // The text lives in CHARFORMAT nodes inside Introduction-style PARAs.
@@ -64,16 +60,18 @@ function extractVersion(parsed) {
 }
 
 // Walk the LEVEL tree and collect sections.
+// `node` is an ordered element object (DOCUMENT, then each LEVEL as we recurse).
 function collectSections(node, corpus, sections, depth = 0) {
   if (!node) return;
 
-  const levels = [node.LEVEL].flat().filter(Boolean);
+  const levels = childrenByTag(node, "LEVEL");
   for (const level of levels) {
-    const styleName = level["@_style-name"] || "";
-    const records = [level.RECORD].flat().filter(Boolean);
+    const styleName = getAttr(level, "style-name") || "";
+    const records = childrenByTag(level, "RECORD");
 
     for (const record of records) {
-      const heading = extractText(record.HEADING || "");
+      const headingNodes = childrenByTag(record, "HEADING");
+      const heading = normalize(headingNodes.map(extractText).join(""));
       if (!heading) continue;
 
       // Only index Chapter and Section level records with real headings.
@@ -83,13 +81,13 @@ function collectSections(node, corpus, sections, depth = 0) {
       ) {
         // Collect body text from child Normal Level records.
         const bodyParts = [];
-        const childLevels = [level.LEVEL].flat().filter(Boolean);
+        const childLevels = childrenByTag(level, "LEVEL");
         for (const child of childLevels) {
-          if ((child["@_style-name"] || "") === "Normal Level") {
-            const childRecords = [child.RECORD].flat().filter(Boolean);
+          if ((getAttr(child, "style-name") || "") === "Normal Level") {
+            const childRecords = childrenByTag(child, "RECORD");
             for (const cr of childRecords) {
-              const paras = [cr.PARA].flat().filter(Boolean);
-              bodyParts.push(...paras.map(extractText));
+              const paras = childrenByTag(cr, "PARA");
+              bodyParts.push(...paras.map((p) => normalize(extractText(p))));
             }
           }
         }
@@ -97,10 +95,10 @@ function collectSections(node, corpus, sections, depth = 0) {
         const citation = extractCitation(heading);
         sections.push({
           corpus,
-          id: record["@_id"] || "",
+          id: getAttr(record, "id") || "",
           citation,
           heading,
-          text: bodyParts.join(" ").replace(/\s+/g, " ").trim(),
+          text: normalize(bodyParts.join(" ")),
         });
       }
     }
@@ -121,6 +119,13 @@ function extractCitation(heading) {
   const titleMatch = heading.match(/[Tt]itle\s+([\d\-]+)/);
   if (titleMatch) return `Title ${titleMatch[1]}`;
   return heading.split(":")[0].split(".")[0].trim();
+}
+
+// Find the DOCUMENT element in the ordered top-level array (which also holds
+// processing-instruction nodes like <?xml?> and <?xml-stylesheet?>).
+function findDocument(parsed) {
+  if (!Array.isArray(parsed)) return null;
+  return parsed.find((n) => tagOf(n) === "DOCUMENT") || null;
 }
 
 const versions = {};
@@ -160,7 +165,7 @@ for (const corpus of CORPORA) {
       console.log(`  Version: ${version}`);
     }
 
-    collectSections(parsed.DOCUMENT, corpus.key, sections);
+    collectSections(findDocument(parsed), corpus.key, sections);
     fileCount++;
     if (fileCount % 50 === 0) process.stdout.write(`  Parsed ${fileCount}/${entries.length} files...\r`);
   }
