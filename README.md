@@ -121,6 +121,33 @@ Index built: 2026-05-26T01:30:51.847Z
 
 ---
 
+## Testing and CI
+
+### Running tests
+
+```bash
+npm test
+```
+
+`npm test` builds the TypeScript source first (`pretest` script), then runs the full suite with `node --test`. All three test layers run together; the suite completes in under 2 seconds on a laptop.
+
+### Test layers
+
+| File | What it covers |
+|---|---|
+| `test/extract-text.test.js` | Unit tests for the `extractText`, `normalize`, `childrenByTag`, `getAttr`, and `tagOf` helpers in `scripts/lib/extract-text.js`. Covers inline-LINK document order (issue #3 regression), entity decoding, ALP-marker stripping, enumeration-marker repair, empty/self-closing elements, deep nesting, whitespace-only text nodes, and helper edge cases. |
+| `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming the subdivision-letter nit (`(6)the`) is left untouched. |
+| `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
+| `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
+
+### Continuous integration
+
+`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** (both are active LTS releases that satisfy `engines.node >= 18`; Node 18 was excluded because it reached End-of-Life on 2025-04-30).
+
+The planned cron for corpus data refresh (issue #2) will live in a separate `refresh-data.yml` workflow.
+
+---
+
 ## Legal disclaimer
 
 This server is for **research and informational purposes only. It does not provide legal advice.**
