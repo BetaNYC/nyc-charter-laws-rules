@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-5708" number="5893" version="386">
+			<HEADING>Chapter 65: New York City Taxi and Limousine Commission</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1347" name="Chapter 65"/>Chapter 65: New York City Taxi and Limousine Commission</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3908" number="5894" version="3">
+				<HEADING>Section 2300. Commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1349" name="2300"/>Section 2300. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3909" number="5895" version="618">
+					<PARA>There shall be a New York city taxi and limousine commission, the purposes of which shall be the continuance, further development and improvement of taxi and limousine service in the city of New York. It shall be the further purpose of the commission, consonant with the promotion and protection of the public comfort and convenience to adopt and establish an overall public transportation policy governing taxi, coach, limousine, wheelchair accessible van services and commuter van services as it relates to the overall public transportation network of the city; to establish certain rates, standards of service, standards of insurance and minimum coverage; standards for driver safety, standards for equipment safety and design; standards for noise and air pollution control; and to set standards and criteria for the licensing of vehicles, drivers and chauffeurs, owners and operators engaged in such services; all as more particularly set forth herein. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3910" number="5896" version="704">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1997/083" destination-id="0-0-0-0">L.L. 1997/083</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6713" number="5897" version="704">
+				<HEADING>Section 2301. Membership of commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1351" name="2301"/>Section 2301. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Membership of commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3911" number="5898" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The commission shall consist of nine members to be appointed by the mayor with the advice and consent of the city council; five of said members, one resident from each of the five boroughs of New York city, shall be recommended for appointment by a majority vote of the councilmen of the respective borough.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3912" number="5899" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Such members shall be appointed for terms of seven years. The members shall first be appointed to serve as follows: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3913" number="5900" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Five members recommended by the city council for a term of two years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3914" number="5901" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Two members for a term of four years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3915" number="5902" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Two members for a term of six years.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3916" number="5903" version="778">
+					<PARA>
+						<TAB tab-count="1"/>Each such other member shall serve until the appointment and qualification of a successor. For the purpose of fixing the expiration of terms, they shall be deemed to have commenced on the first day of February in the year of appointment and qualification, irrespective of the actual date of appointment and qualification. Vacancies other than by expiration of a term shall be filled for the unexpired term. The mayor may remove any such member for cause, upon stated charges. Notwithstanding the provisions of this paragraph, any public officer appointed to the commission shall serve only during the period that he holds such public office and shall receive no additional compensation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3917" number="5904" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The mayor shall designate one member of the commission to act as the chairman and chief executive officer. The chairman shall have charge of the organization of its office and have authority to employ, assign and superintend the duties of such officers and employees as may be necessary to carry out the provisions of this chapter. The chairman shall devote his full time to this position and as such he shall receive compensation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3918" number="5905" version="770">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The other members of the commission shall not be entitled to compensation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3919" number="5906" version="48">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>A majority of the whole number of members of the commission then in office shall constitute a quorum for the transaction of any business. The commission shall have power to act by a majority of its members. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3920" number="5907" version="3">
+				<HEADING>Section 2302. Reports of commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1353" name="2302"/>Section 2302. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Reports of commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3921" number="5908" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>All proceedings of the commission and all documents and records in its possession shall be public records and the commission shall make an annual report to the city council on or before the second Monday of January in each year. Such annual report shall contain information regarding complaints received by the commission from the public, including, but not limited to, complaints of overcharging, as well as enforcement actions undertaken by the commission, whether the enforcement action was dismissed or settled, or if a penalty was imposed by the commission on the subject of the enforcement action. The information regarding enforcement actions shall include, but not be limited to, enforcement actions relating to illegal street hails, unlicensed vehicles, overcharging, and toll lane infractions. The complaint and enforcement action information shall be disaggregated by the type of license held by the person or entity who is the subject of the complaint or action and the month during which the complaint was received or enforcement action undertaken. Enforcement actions shall be further disaggregated by the subject matter of the action and geographic location. Complaint information shall be further disaggregated to the extent practicable by the subject matter of the complaint. In addition to inclusion in the commission&apos;s annual report, the disaggregated complaint and enforcement information shall be posted on the commission&apos;s website updated no less than monthly. Information shall be published in a manner that does not identify the individual parties involved in the actions reported upon in this section. The chairman of the city council committee on transportation may at any time direct the commission or the chairman of the commission to appear before the committee to give testimony pertaining thereto, and to furnish to the members of the council any reports deemed necessary.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3922" number="5909" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commission shall make a quarterly report to the city council on or before the second Monday of March, June, September and December in each year. Each such quarterly report shall contain information for the immediately preceding quarter regarding the average wait time to secure a vehicle inspection at the commission&apos;s assigned inspection facility as required under the rules of the commission. Such report shall also contain the number of instances when the wait for an inspection exceeds four weeks. All information shall be disaggregated by vehicle type. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3923" number="5910" version="3">
+				<HEADING>Section 2303. Jurisdiction, powers and duties of commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1355" name="2303"/>Section 2303. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Jurisdiction, powers and duties of commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3924" number="5911" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The jurisdiction, powers and duties of the commission shall include the regulation and supervision of the business and industry of transportation of persons by licensed vehicles for hire in the city, pursuant to provisions of this chapter. Except as otherwise provided herein, charges of violations of the provisions of the administrative code and rules promulgated thereunder shall be adjudicated by the administrative tribunal established by the commission and governed by the citywide administrative procedure act.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3925" number="5912" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Such regulation and supervision shall extend to: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3926" number="5913" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The regulation and supervision of rates of fare to be charged and collected. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3927" number="5914" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The regulation and supervision of standards and conditions of service. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3928" number="5915" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The revocation and suspension of licenses for vehicles, other than licenses issued pursuant to state law, provided, however, that taxicab licenses represented by medallions heretofore issued shall in all respects remain valid in accordance with their terms and transferable according to law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3929" number="5916" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Taxicab licenses represented by medallions which have heretofore been surrendered are hereby revoked. Additional taxicab licenses may be issued from time to time only upon the enactment of a local law providing therefor. Any nontransferable licenses shall be deemed revoked upon the surrender by or death of the holder thereof. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3930" number="5917" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The issuance, revocation, suspension of licenses for drivers, chauffeurs, owners or operators of vehicles, other than licenses issued pursuant to state law, and for taxicab brokers and the establishment of qualifying standards required for such licensees. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3931" number="5918" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Requirements of standards of safety, and design, comfort, convenience, noise and air pollution control and efficiency in the operation of vehicles and auxiliary equipment. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3932" number="5919" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Requirements for the maintenance of financial responsibility, insurance and minimum coverage. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3933" number="5920" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>The establishment of, and the requirement of adherence to, uniform system of accounts, with the right of the commission to inspect books and records and to require the submission of such reports as the commission may determine. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3934" number="5921" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>The development and effectuation of a broad public policy of transportation affected by this chapter as it relates to forms of public transportation in the city, including innovation and experimentation in relation to type and design of equipment, modes of service and manner of operation, which for limited purposes and limited periods of time may depart from the requirements otherwise established for licensed vehicles pursuant to this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3935" number="5922" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>Assistance to the business and industry of public transportation affected by this chapter in aid of the continuation, development and improvement of service and the safety and convenience of the public, including assistance in securing federal and state grants. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3936" number="5923" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>The formulation, promulgation and effectuation of rules and regulations reasonably designed to carry out the purposes, terms and provisions of this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3937" number="5924" version="618">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>1.<TAB tab-count="1"/>The commission shall create an administrative tribunal to adjudicate charges of violation of provisions of the administrative code and rules promulgated thereunder. The commission shall have the power to enforce its tribunal&apos;s decisions and orders imposing civil penalties, not to exceed ten thousand dollars for each respondent, for violations relating to unlicensed vehicles for hire and unlicensed drivers of vehicles for hire and for violations relating to the operation of commuter van services without authorization and the operation of unlicensed commuter vans and unlicensed drivers of commuter vans pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T19C005" destination-id="0-0-0-0">chapter five of title nineteen</LINK> of the administrative code as if they were money judgments, without court proceedings, in the following manner: Any such decision or order of the commission&apos;s administrative tribunal imposing a civil penalty, whether the adjudication was had by hearing or upon default or otherwise, shall constitute a judgment rendered by the commission which may be entered in the civil court of New York or any other place provided for the entry of civil judgments within the state. Before a judgment based upon a default may be so entered the commission or administrative tribunal shall have first notified the respondent by first class mail in such form as the commission may direct: (i) of the default and order and the penalty imposed; (ii) that a judgment will be entered in the civil court of the city of New York or any other place provided by law for the entry of civil judgments within the state of New York; and (iii) that entry of such judgment may be avoided by requesting a stay of default for good cause shown and either requesting a hearing or entering a plea pursuant to the rules of the commission or administrative tribunal within thirty days of the mailing of such notice. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3938" number="5925" version="618">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The commission or tribunal shall not enter any decision or order pursuant to paragraph one of this subdivision unless the notice of violation shall have been served in the same manner as is prescribed for service of process by article three of the civil practice law and rules or article three of the business corporation law except that: (a) with respect to any notice of violation which alleges the operation of an unlicensed vehicle for hire the operator of such vehicle who is not the owner thereof but who uses or operates such vehicle with the permission of the owner, express or implied, shall be deemed to be the agent of such owner to receive such notice of violation and service made pursuant to this paragraph on such operator shall also be deemed to be lawful service upon such owner; or (b) with respect to any notice of violation which alleges the operation of an unauthorized commuter van service or an unlicensed commuter van, the operator of the vehicle giving rise to such violation who is not the owner of such commuter van service or such commuter van, as applicable, but who uses or operates such vehicle with the permission, express or implied, of the owner of such commuter van service or such commuter van, as the case may be, shall be deemed to be the agent of the owner of such commuter van service or such commuter van, as the case may be, to receive such notice of violation. Service made pursuant to this paragraph on such operator shall be deemed to be lawful service upon the owner of such commuter van service or commuter van, as applicable. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3939" number="5926" version="48">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>No resolution of approval of a pilot program shall be approved by the commission unless such resolution is posted in a prominent location on the commission&apos;s website and electronically transmitted to each member of the commission at least three calendar days, exclusive of Sundays, prior to the commission&apos;s vote to approve or reject such resolution of approval; provided, however, that revisions may be made to a resolution of approval for a pilot program posted online and sent electronically in conformity with this subdivision at any time prior to a vote on such resolution if such revisions are approved by all members of the commission by unanimous consent. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3940" number="5927" version="726">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1993/115" destination-id="0-0-0-0">L.L. 1993/115</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6807" number="5928" version="726">
+				<HEADING>Section 2304. Rates. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1357" name="2304"/>Section 2304. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Rates. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3941" number="5929" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The amount to be charged and collected for the hire of a taxicab for one or more passengers within the city of New York shall be the total of the following items:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3942" number="5930" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>For the first one-fifth mile or fraction thereof, or the first one minute of waiting time or fraction thereof, or the combination thereof, sixty cents. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3943" number="5931" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>For each additional one-fifth mile or fraction thereof, or seventy-two seconds of waiting time or fraction thereof, or the combination thereof, ten cents. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3944" number="5932" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Fifty cents for each trunk. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3945" number="5933" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>All bridge and tunnel and ferry tolls. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3946" number="5934" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>There shall be no charge for personal luggage or for other belongings of the passengers transported in the interior of the taxicab. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3947" number="5935" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Hereafter, and notwithstanding the rates set forth in paragraph a of this section, the commission shall prescribe, revise and otherwise regulate reasonable rates of fare which may be charged and collected for each type of service rendered. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3948" number="5936" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>In determining the rates of fare, the commission may consider all facts which in its judgment have a bearing on a proper determination, with due regard among other things to the time and distance of travel, to the character of the service provided, to the gross revenues derived from operation, to the net return derived from operation, to the expenses of operation including the income of drivers or operators, to the return upon capital actually expended and the necessity of making reservations out of income for surplus and contingencies, to the number of passengers transported, to the effect of fares upon the public and in relation to the fares for other forms of public transportation, and to the fares and practices with respect to similar services in other cities of the United States. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3949" number="5937" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>No determination by the commission changing the rates of fare shall be made except after a public hearing before the commission, at which evidence shall be taken. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3950" number="5938" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>At any public hearing involving a change in the rates of fare, the burden of proof to show that existing rates are not reasonable shall be upon such segment of the business or industry affected by this chapter as is involved in the change in rates. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3951" number="5939" version="224">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The costs reasonably attributable to a public hearing involving a change in the rates of fare, including the expenses of the commission and the compensation of its officers, agents and employees, shall be charged to and paid by such segment of the business or industry affected by this chapter as is involved in the change in rates.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5005" number="5940" version="224">
+				<HEADING>Section 2305. Office of inclusion.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1569" name="2305"/>Section 2305. Office of inclusion.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5022" number="5941" version="224">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT> As used in this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5021" number="5942" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Director.</CHARFORMAT> The term &quot;director&quot; means the director of the office of inclusion. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5020" number="5943" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Driver.</CHARFORMAT> The term &quot;driver&quot; means any driver licensed by the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5019" number="5944" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Office. </CHARFORMAT>The term &quot;office&quot; means the office of inclusion. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5018" number="5945" version="224">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commission shall establish an office of inclusion. Such office shall be headed by a director. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5017" number="5946" version="224">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The director shall have the power and duty to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5016" number="5947" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Compile and report statistics relating to driver demographics, disaggregated by ethnicity or race, gender, disability and other categories as appropriate; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5015" number="5948" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Compile and report statistics relating to discrimination against passengers or prospective passengers on the basis of ethnicity or race, gender, disability and other categories as appropriate; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5014" number="5949" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Examine and address issues related to discrimination in the taxi and for-hire vehicle industry, including but not limited to refusals by drivers to provide service to passengers or prospective passengers on the basis of ethnicity or race, disability, gender, sexual orientation or destination; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5013" number="5950" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Develop policies and best practices to encourage greater representation of drivers from members of communities underserved by taxi and for-hire vehicle transportation services; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5012" number="5951" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Develop and implement trainings for drivers that promote cultural sensitivity towards passengers and prospective passengers and educate drivers about discriminatory treatment in the taxi and for-hire vehicle industry. Such trainings shall be conducted by persons with experience. Such trainings shall include best practices on how drivers can meet the needs of passengers with disabilities, including but not limited to caring for mobility devices, communicating with persons who are hearing impaired and alerting passengers with visual impairments awaiting a ride once the vehicle has arrived; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5011" number="5952" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Assess the feasibility of driver-to-driver mentorship and cultural awareness programs which the commission may implement as warranted; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5010" number="5953" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Expand public awareness regarding service refusals by drivers through means such as, but not limited to, running a public awareness campaign and conducting outreach to community groups whose members have experienced service refusals; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5009" number="5954" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Provide one or more mechanisms by which passengers and prospective passengers can submit complaints of discrimination directly to the commission, and ensure such complaints are processed by the appropriate authorities; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5008" number="5955" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>Serve as a resource to support the needs of persons with disabilities in receiving services from vehicles licensed by the commission; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5007" number="5956" version="224">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>Perform any other relevant duties as the commission deems appropriate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5006" number="5957" version="772">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Within 12 months of the effective date of the local law that added this section, and annually thereafter for the next three years, the director shall post on the commission&apos;s website and submit to the mayor and the speaker of the council a report containing, at a minimum, the findings required by paragraphs 1 and 2 of subdivision c of this section. The report shall also contain information on the programs and resources described in paragraphs 4, 5, 6, 7 and 8 of subdivision c of this section, including statistics on how many people utilized these programs and resources. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5004" number="5958" version="224">
+					<PARA>(L.L. 2018/219, 12/15/2018, eff. 3/15/2019) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3952" number="5959" version="409">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2018/219" destination-id="0-0-0-0">L.L. 2018/219</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

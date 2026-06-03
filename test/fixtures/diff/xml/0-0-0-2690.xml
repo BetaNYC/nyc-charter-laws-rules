@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-2690" number="4041" version="83">
+			<HEADING>Chapter 40: New York City Human Rights Commission</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1537" name="Chapter 40"/>Chapter 40: New York City Human Rights Commission</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2691" number="4042" version="215">
+				<HEADING>Section 900. Declaration of intent.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-991" name="900"/>Section 900. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Declaration of intent.</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4887" number="4043" version="617">
+					<PARA>It is the public policy of the city to promote equal opportunity and freedom from unlawful discrimination through the provisions of the city&apos;s human rights law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4962" number="4044" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2693" number="4045" version="215">
+				<HEADING>Section 901. Executive orders.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-993" name="901"/>Section 901. Executive orders.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4888" number="4046" version="617">
+					<PARA>The mayor may issue such executive orders as the mayor deems appropriate to provide for city agencies and contractors to act in accordance with the policy set forth in this chapter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4963" number="4047" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2695" number="4048" version="215">
+				<HEADING>Section 902. Commission on human rights.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-995" name="902"/>Section 902. Commission on human rights.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2697" number="4049" version="777">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The New York city commission on human rights is hereby established and continued. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4967" number="4050" version="409">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commission has general jurisdiction and power to eliminate and prevent unlawful discrimination by enforcing the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08C001" destination-id="0-0-0-0">chapter 1 of title 8</LINK> of the administrative code and also has the powers conferred upon such commission by such title and all other applicable laws in furtherance of the elimination and prevention of such unlawful discrimination. The commission may, in addition, take such other actions as may be provided by law against prejudice, intolerance, bigotry and unlawful discrimination and has the powers and duties conferred by this chapter and any other law in furtherance of such purposes. Nothing in this chapter shall be construed to limit the powers of the corporation counsel pursuant to applicable law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4965" number="4051" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2698" number="4052" version="215">
+				<HEADING>Section 903. Commission membership; chairperson; appointment; vacancy.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-997" name="903"/>Section 903. Commission membership; chairperson; appointment; vacancy.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4890" number="4053" version="617">
+					<PARA>The commission shall consist of 15 members, to be appointed by the mayor, one of whom shall be designated by the mayor as its chairperson and shall serve as such at the pleasure of the mayor. The chairperson shall devote the chairperson&apos;s entire time to the chairperson&apos;s duties and shall not engage in any other occupation, profession or employment. Members other than the chairperson shall serve without compensation for a term of three years. In the event of the death or resignation of any member, such member&apos;s successor shall be appointed to serve for the unexpired portion of the term for which such member had been appointed. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4968" number="4054" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2700" number="4055" version="215">
+				<HEADING>Section 904. Functions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-999" name="904"/>Section 904. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Functions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2705" number="4056" version="617">
+					<PARA>The functions of the commission are: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4978" number="4057" version="215">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>To foster mutual understanding and respect among all persons in the city; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4977" number="4058" version="215">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>To encourage equality of treatment for, and prevent discrimination against, any group or its members; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4976" number="4059" version="215">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>To cooperate with governmental and non-governmental agencies and organizations having like or kindred functions; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4975" number="4060" version="215">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>To make such investigations and studies in the field of human relations as in the judgment of the commission will aid in effectuating its general purposes. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4970" number="4061" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2706" number="4062" version="215">
+				<HEADING>Section 905. Powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1001" name="905"/>Section 905. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2721" number="4063" version="617">
+					<PARA>The powers and duties of the commission shall be exercised in a manner consistent with this chapter, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08" destination-id="0-0-0-0">title 8</LINK> of the administrative code and all other applicable laws and include but are not limited to the following: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4999" number="4064" version="215">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Public education and other activities.</CHARFORMAT> To work together with federal, state and city agencies in developing courses of instruction, for presentation to city employees and in public and private schools, public libraries, museums and other suitable places, on techniques for achieving harmonious intergroup relations within the city and on types of bias-related harassment and repeated hostile behavior including conduct or verbal threats, taunting, intimidation, abuse, and cyberbullying, and to engage in other anti-discrimination activities. For the purposes of this subdivision, the term &quot;cyberbullying&quot; means willful and repeated harm inflicted through the use of computers, cell phones, and other electronic devices that is intended to frighten, harass, cause harm to, extort, or otherwise target another; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4998" number="4065" version="215">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Cooperation with groups and organizations.</CHARFORMAT> To enlist the cooperation of various groups and organizations in mediation efforts, programs and campaigns devoted to eliminating group prejudice, intolerance, hate crimes, bigotry and discrimination. For the purposes of this subdivision, the term &quot;hate crime&quot; means a crime that manifests evidence of prejudice based on race, religion, ethnicity, disability, sexual orientation, national origin, age, gender, or alienage or citizenship status; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4997" number="4066" version="215">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Studies.</CHARFORMAT> To study the problems of prejudice, intolerance, bigotry, discrimination and disorder occasioned thereby in all or any fields of human relationship; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4996" number="4067" version="215">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Investigations and complaints; referral.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4995" number="4068" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>To receive, investigate and pass upon complaints and to initiate its own investigation of: (i) group tensions, prejudice, intolerance, bigotry and disorder occasioned thereby, and (ii) unlawful discrimination against any person or group of persons, except that with respect to discrimination alleged to be committed by city officials or city agencies, such investigation shall be commenced after consultation with the mayor; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4994" number="4069" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Upon its own motion, to make, sign and file administrative complaints alleging violations of the city&apos;s human rights law; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4993" number="4070" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>In the event that any investigation undertaken pursuant to paragraph 1 of this subdivision discloses information that any person or group of persons may be engaged in a pattern or practice that results in the denial to any person or group of persons of the full enjoyment of any right secured by the human rights law, in addition to making, signing and filing an administrative complaint upon its own motion pursuant to paragraph 2 of this subdivision, to refer such information to the corporation counsel for the purpose of commencing a civil action pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08C004" destination-id="0-0-0-0">chapter 4 of title 8</LINK> of the administrative code; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4992" number="4071" version="215">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Hearings and production of evidence; order to preserve records.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4991" number="4072" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>To issue subpoenas in the manner provided for in the civil practice law and rules compelling the attendance of witnesses and requiring the production of any evidence relating to any matter under investigation or any question before the commission, and to take proof with respect thereto; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4990" number="4073" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>To hold hearings, administer oaths and take testimony of any person under oath; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4989" number="4074" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>To require the production of any names of persons necessary for the investigation of any institution, club or other place or provider of accommodation; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4988" number="4075" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>To require, in accordance with the provisions of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-114" destination-id="0-0-0-0">8-114</LINK> of the administrative code, any person or persons who are the subject of an investigation by the commission to preserve such records as are in the possession of such person or persons and to continue to make and keep the type of records that have been made and kept by such person or persons in the ordinary course of business within the previous year, which records are relevant to the determination whether such person or persons have committed unlawful discriminatory practices or other acts made unlawful by&#160;<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08C001" destination-id="0-0-0-0">chapter 1</LINK> or <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08C006" destination-id="0-0-0-0">chapter 6 of title 8</LINK> of the administrative code with respect to activities in the city; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4987" number="4076" version="215">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Publications and reports.</CHARFORMAT> To issue publications and reports of investigation and research designed to promote good will and minimize or eliminate prejudice, intolerance, bigotry, discrimination and disorder occasioned thereby; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4986" number="4077" version="409">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Appointments and assignments; expenses.</CHARFORMAT> To appoint such employees and agents as it deems to be necessary to carry out its functions, powers and duties and to assign to such persons any of such functions, powers and duties, except that the commission shall not delegate its power to adopt rules and also except that the commission&apos;s power to order that records be preserved or made and kept pursuant to subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-114" destination-id="0-0-0-0">8-114</LINK> of the administrative code and the commission&apos;s power to determine that a respondent has engaged in an unlawful discriminatory practice and to issue an order for such relief as is necessary and proper shall be delegated only to members of the commission. The expenses for the carrying on of the commission&apos;s activities shall be paid out of the funds in the city treasury. The commission&apos;s appointment and assignment powers as set forth in this subdivision may be exercised by the chairperson of the commission; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4985" number="4078" version="215">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Recommendations.</CHARFORMAT> To recommend to the mayor and to the council legislation to aid in carrying out the purposes of this chapter; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4984" number="4079" version="215">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Annual reporting.</CHARFORMAT> To submit a report by September 30, 2018 and September 30 of each year thereafter to the mayor and the speaker of the council. Such report shall be published in the City Record and shall include information for the previous fiscal year regarding: (i) inquiries received by the commission from the public; (ii) investigations initiated by the commission; (iii) complaints filed with the commission; and (iv) education and outreach efforts made by the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4983" number="4080" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The information regarding inquiries received by the commission from the public shall include, but not be limited to: (i) the total number of inquiries; (ii) the number of inquiries made by limited English proficient persons disaggregated by language; (iii) the subject matter of inquiries disaggregated by the alleged category of unlawful discriminatory practice as set forth by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-107" destination-id="0-0-0-0">8-107</LINK> of the administrative code and the protected class of person; and (iv) the number of inquiries resolved by pre-complaint intervention. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4982" number="4081" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The information regarding investigations initiated by the commission shall include, but not be limited to: (i) the total number of investigations initiated by the commission disaggregated by the category of unlawful discriminatory practice as set forth by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-107" destination-id="0-0-0-0">8-107</LINK> of the administrative code and the protected class at issue; (ii) the total number of commission-initiated complaints filed pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-109" destination-id="0-0-0-0">8-109</LINK> of the administrative code after an investigation finding that a person or group of persons may be engaged in a pattern or practice of discrimination; (iii) the total number of investigations referred to the corporation counsel for the purpose of commencing a civil action pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08C004" destination-id="0-0-0-0">chapter 4 of title 8</LINK> of the administrative code; and (iv) the total number of publications and reports of investigations designed to promote good will and minimize or eliminate prejudice, intolerance, bigotry, discrimination and disorder occasioned thereby. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4981" number="4082" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The information regarding complaints filed with the commission shall include, but not be limited to, the number of complaints filed with the commission and shall be disaggregated by: (i) the category of unlawful discriminatory practice, as set forth by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-107" destination-id="0-0-0-0">8-107</LINK> of the administrative code, alleged; (ii) the basis of the alleged discriminatory practice based on protected class of the complainant; (iii) whether the complaint was resolved by mediation and conciliation, as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-115" destination-id="0-0-0-0">8-115</LINK> of the administrative code; a determination of no probable cause, as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-116" destination-id="0-0-0-0">8-116</LINK> of the administrative code; or a hearing, as set forth by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="8-119" destination-id="0-0-0-0">8-119</LINK> of the administrative code; (iv) the number of days the complaint was outstanding at the time such resolution occurred; and (v) whether a fine, penalty or cash award was imposed and, if so, the dollar amount of such fine, penalty or cash award. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4980" number="4083" version="215">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The information regarding the commission&apos;s education and outreach efforts as required by subdivisions a and b of this section shall include, but not be limited to: (i) the types of outreach initiated; (ii) the number of people with whom the commission made contact as a result of outreach; (iii) the number of limited English proficient persons served; and (iv) the languages in which such outreach was conducted; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4979" number="4084" version="409">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Rules.</CHARFORMAT> To adopt rules to carry out the powers and duties delegated to the commission by this chapter, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T08" destination-id="0-0-0-0">title 8</LINK> of the administrative code or any other law, and the policies and procedures of the commission in connection therewith. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2722" number="4085" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 1/19/2018 and 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4972" number="4086" version="215">
+				<HEADING>Section 906. Relations with city departments and agencies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1003" name="906"/>Section 906. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Relations with city departments and agencies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4973" number="4087" version="617">
+					<PARA>So far as practicable and subject to the approval of the mayor, the services of all other city departments and agencies shall be made available by their respective heads to the commission for the carrying out of the functions stated in this chapter. The head of any department or agency shall furnish information in the possession of such department or agency when the commission so requests. The corporation counsel, upon request of the chairperson, may assign counsel to assist the commission in the conduct of its investigative or prosecutorial functions. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5000" number="4088" version="215">
+					<PARA>(Am. L.L. 2018/063, 1/19/2018, eff. 10/16/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-030]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

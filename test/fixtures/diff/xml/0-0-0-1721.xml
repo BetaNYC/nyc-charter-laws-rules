@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-1721" number="2745" version="42">
+			<HEADING>Chapter 18-D: Sale, Purchase and Possession of Weapons</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-641" name="Chapter 18-d"/>Chapter 18-D: Sale, Purchase and Possession of Weapons</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1722" number="2746" version="3">
+				<HEADING>Section 461. Definition. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-643" name="461"/>Section 461. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definition. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1723" number="2747" version="617">
+					<PARA>The term &quot;firearm&quot; means a firearm, rifle, shotgun, or assault weapon, as such terms are defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="10-301" destination-id="0-0-0-0">10-301</LINK> of the administrative code, or a machine gun, as defined in penal law section 265.00. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1724" number="2748" version="3">
+				<HEADING>Section 462. Permits and licenses for the purchase and possession of firearms. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-645" name="462"/>Section 462. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Permits and licenses for the purchase and possession of firearms. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1725" number="2749" version="617">
+					<PARA>Notwithstanding any other provision of local law, no person under the age of twenty-one shall be granted a permit or license to purchase and possess a firearm. If the applicant for a permit or license is a partnership or corporation, only those members of the partnership or corporation over the age of twenty-one may apply for a permit or license to purchase and possess a firearm on behalf of the partnership or corporation. This section shall not apply to any person under the age of twenty-one who has been issued a valid permit or license to possess a firearm on the date that this section shall become law. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1726" number="2750" version="3">
+				<HEADING>Section 463. Sale or disposal of firearms. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-647" name="463"/>Section 463. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Sale or disposal of firearms. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1727" number="2751" version="617">
+					<PARA>It shall be a crime for any person to sell, offer for sale, or dispose of a firearm to any person under the age of twenty-one within the city of New York, unless such person under the age of twenty-one has a valid permit or license or is otherwise exempted by law. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1728" number="2752" version="3">
+				<HEADING>Section 464. Carrying and possession of firearms. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-649" name="464"/>Section 464. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Carrying and possession of firearms. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1729" number="2753" version="617">
+					<PARA>It shall be a crime for any person under the age of twenty-one to carry or otherwise have in his or her possession any firearm within the limits of the city of New York, unless such person has a valid permit or license or is otherwise exempted by law. If a partnership or corporation carries or has in its possession a firearm, no member, officer or employee of such partnership or corporation under the age of twenty-one shall carry or have in his or her possession such firearm within the limits of the city of New York. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1730" number="2754" version="3">
+				<HEADING>Section 465. Exemptions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-651" name="465"/>Section 465. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Exemptions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1731" number="2755" version="81">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="462" destination-id="0-0-0-645">four hundred sixty-two</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="464" destination-id="0-0-0-649">four hundred sixty-four</LINK> shall not apply to:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1732" number="2756" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>persons in the military service of the state of New York when duly authorized by regulations issued by the chief of staff to the governor to carry or possess a firearm; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1733" number="2757" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>persons in the military or other service of the United States, in pursuit of official duty or when duly authorized by federal law, regulation or order to carry or possess a firearm; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1734" number="2758" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>persons employed in fulfilling defense contracts with the government of the United States or agencies thereof when possession of a firearm is necessary for manufacture, transport, installation and testing under the requirements of such contract; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1735" number="2759" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>police officers as defined by the criminal procedure law section 1.20; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1736" number="2760" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>peace officers as defined by the criminal procedure law section 2.10, provided that such peace officers are (i) authorized pursuant to law or regulation of the state or city of New York to possess a firearm within the city of New York without a license or permit therefore; and (ii) authorized by their employer to possess such firearm; or </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1737" number="2761" version="769">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>participants in special events when authorized by the police commissioner. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1738" number="2762" version="81">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Any person listed in subdivision a of this section may be permitted or licensed to purchase a firearm according to State law and the rules of the city of New York. Pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="463" destination-id="0-0-0-647"> four hundred sixty-three</LINK>, it shall be a crime for a dealer to sell any firearm to any person listed in subdivision a without securing full and secure proof of identification. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1739" number="2763" version="3">
+				<HEADING>Section 466. Penalties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-653" name="466"/>Section 466. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Penalties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1740" number="2764" version="81">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Any violation of the provisions of sections<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="463" destination-id="0-0-0-647"> four hundred sixty-three</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="464" destination-id="0-0-0-649">four hundred sixty-four</LINK> or subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="465" destination-id="0-0-0-651">four hundred sixty-five</LINK> shall be a misdemeanor and punishable by not more than one year imprisonment or by a fine of not more than ten thousand dollars or by both.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1741" number="2765" version="81">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>In addition to the penalties prescribed in subdivision a of this section, any person who violates the provisions of sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="463" destination-id="0-0-0-647">four hundred sixty-three</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="464" destination-id="0-0-0-649">four hundred sixty-four</LINK> or subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="465" destination-id="0-0-0-651">four hundred sixty-five</LINK> shall be liable for a civil penalty of not more than ten thousand dollars. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

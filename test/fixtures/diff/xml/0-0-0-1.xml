@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="1">
+	<LEVEL style-name="Title" style-name-escaped="Title" style-id="0-0-0-32" level-depth="1" toc-section="false">
+		<RECORD id="0-0-0-1" number="1" version="169">
+			<HEADING>NEW YORK CITY CHARTER</HEADING>
+			<PARA>NEW YORK CITY<LINEBRK/>CHARTER</PARA>
+		</RECORD>
+		<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+			<RECORD id="0-0-0-6306" number="2" version="1033">
+				<PARA style-name="Introduction" style-name-escaped="Introduction" style-id="0-0-0-20">
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Current through Local Law 2026/086, enacted April 25, 2026,<LINEBRK/>and includes amendments effective through May 17, 2026.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-121]</HIGHLIGHTER>
+				</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-3" number="3" version="637">
+				<PARA style-name="Introduction" style-name-escaped="Introduction" style-id="0-0-0-20">
+					<CHARFORMAT bold="0" italic="0" underline="0" strike-out="0" hidden="0" point-size="12">Published by:<LINEBRK/>
+					</CHARFORMAT>
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0" point-size="12">
+					</CHARFORMAT>
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0" point-size="14">American Legal Publishing</CHARFORMAT>
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0" point-size="12">
+						<LINEBRK/>
+					</CHARFORMAT>
+					<CHARFORMAT bold="0" italic="0" underline="0" strike-out="0" hidden="0" point-size="12">
+					</CHARFORMAT>Cincinnati, Ohio<LINEBRK/>800-445-5588<LINEBRK/>
+					<LINK style-name="Web" style-name-escaped="Web" style-id="0-0-0-23" type="Web" url="http://www.amlegal.com">www.amlegal.com</LINK>
+				</PARA>
+			</RECORD>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

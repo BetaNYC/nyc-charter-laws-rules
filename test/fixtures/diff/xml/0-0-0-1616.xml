@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-1616" number="2600" version="3">
+			<HEADING>Chapter 18: Police Department</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-591" name="Chapter 18"/>Chapter 18: Police Department</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1617" number="2601" version="3">
+				<HEADING>Section 431. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-593" name="431"/>Section 431. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1618" number="2602" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a police department the head of which shall be the police commissioner who shall be appointed by the mayor and shall, unless sooner removed, hold office for a term of five years.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1619" number="2603" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Whenever in the judgment of the mayor or the governor the public interests shall so require, the commissioner may be removed from office by either, and shall be ineligible for reappointment thereto. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1620" number="2604" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Whenever a vacancy shall occur in the office of police commissioner, a police commissioner shall be appointed by the mayor within ten days thereafter. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1621" number="2605" version="3">
+				<HEADING>Section 432. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-595" name="432"/>Section 432. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1622" number="2606" version="617">
+					<PARA>The commissioner shall have the power to appoint and at pleasure remove seven deputies, one to be known as first deputy commissioner. During the absence or disability of the commissioner, the first deputy commissioner, or if he shall be absent or under disability, the deputy commissioner designated by the commissioner shall possess all the powers and perform all the duties of the commissioner except the power of making appointments and transfers. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1623" number="2607" version="3">
+				<HEADING>Section 433. Member of department; no other office. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-597" name="433"/>Section 433. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Member of department; no other office. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1624" number="2608" version="46">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">&#160;<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> Became Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1129" destination-id="0-0-0-599">1129</LINK>.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1625" number="2609" version="3">
+				<HEADING>Section 434. Commissioner; powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-601" name="434"/>Section 434. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Commissioner; powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1626" number="2610" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The commissioner shall have cognizance and control of the government, administration, disposition and discipline of the department, and of the police force of the department.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1627" number="2611" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commissioner shall be the chief executive officer of the police force. He shall be chargeable with and responsible for the execution of all laws and the rules and regulations of the department. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1628" number="2612" version="3">
+				<HEADING>Section 435. Department; duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-603" name="435"/>Section 435. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1629" number="2613" version="771">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The police department and force shall have the power and it shall be their duty to preserve the public peace, prevent crime, detect and arrest offenders, suppress riots, mobs and insurrections, disperse unlawful or dangerous assemblages and assemblages which obstruct the free passage of public streets, sidewalks, parks and places; protect the rights of persons and property, guard the public health, preserve order at elections and all public meetings and assemblages; subject to the provisions of law and the rules and regulations of the commissioner of traffic, regulate, direct, control and restrict the movement of vehicular and pedestrian traffic for the facilitation of traffic and the convenience of the public as well as the proper protection of human life and health; remove all nuisances in the public streets, parks and places; arrest all street mendicants and beggars; provide proper police attendance at fires; inspect and observe all places of public amusement, all places of business having excise or other licenses to carry on any business; enforce and prevent the violation of all laws and ordinances in force in the city; and for these purposes to arrest all persons guilty of violating any law or ordinance for the suppression or punishment of crimes or offenses.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1630" number="2614" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The provisions of law and the rules and regulations of the commissioner of transportation relating to regulating, directing, controlling and restricting the parking of vehicles and the movement and conduct of vehicular and pedestrian traffic for the facilitation of traffic and the convenience of the public as well as the proper protection of human life and health may also be enforced by an employee of the police department. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1631" number="2615" version="83">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Except as specifically provided herein, nothing contained in this section shall be deemed to limit, restrict, divest, transfer or supersede the powers or the jurisdiction of any agency as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1150" destination-id="0-0-0-1179">eleven hundred fifty</LINK> of the charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1632" number="2616" version="48">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Nothing contained in this charter shall be deemed to grant the department of traffic cognizance or control over the government, administration, disposition and discipline of the police department or police force. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1633" number="2617" version="713">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/058" destination-id="0-0-0-0">L.L. 1996/058</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2006/022" destination-id="0-0-0-0">L.L. 2006/022</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6568" number="2618" version="673">
+				<HEADING>Section 436. Powers over certain trades. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-605" name="436"/>Section 436. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers over certain trades. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1634" number="2619" version="771">
+					<PARA>The commissioner shall possess powers of general supervision and inspection over all licensed or unlicensed pawnbrokers, vendors, junkshop keepers, junk boatmen, cartmen, dealers in second-hand merchandise and auctioneers within the city; and in connection with the performance of any police duties he shall have power to examine such persons, their clerks and employees and their books, business premises, and any articles of merchandise in their possession. A refusal or neglect to comply in any respect with the provisions of this section on the part of any pawnbroker, vendor, junkshop keeper, junk boatman, cartman, dealer in second-hand merchandise or auctioneer, or any clerk or employee of any thereof shall be triable by a judge of the criminal court and punishable by not more than thirty days&apos; imprisonment, or by a fine of not more than fifty dollars, or both. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1635" number="2620" version="3">
+				<HEADING>Section 437. Detail to attend court. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-607" name="437"/>Section 437. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Detail to attend court. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1636" number="2621" version="617">
+					<PARA>The commissioner is empowered to cause some intelligent and experienced person connected with the department to attend any courts in the city in cases where there is need of assistance, who shall, to such extent as shall be permitted by the rules of the court, aid in proceedings pending in such courts. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1637" number="2622" version="3">
+				<HEADING>Section 438. Maintenance and operation of telegraph and telephone lines, etc. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-609" name="438"/>Section 438. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Maintenance and operation of telegraph and telephone lines, etc. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1638" number="2623" version="617">
+					<PARA>The commissioner shall have power to erect, operate, supply and maintain, subject to the general laws of the state, all such lines of telegraph and telephones and other means of communication as for the purposes and business of the police the commissioner shall deem necessary. The commissioner may provide all instruments, fixtures, property and materials for the purpose above mentioned and control the same. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

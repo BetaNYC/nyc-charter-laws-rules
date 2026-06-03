@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-4357" number="6517" version="3">
+			<HEADING>Chapter 72: Department of Records and Information Services</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1443" name="Chapter 72"/>Chapter 72: Department of Records and Information Services</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4358" number="6518" version="3">
+				<HEADING>Section 3000. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1445" name="3000"/>Section 3000. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4359" number="6519" version="616">
+					<PARA>There shall be a department of records and information services which shall include, but not be limited to, municipal archives, a municipal reference and research center and municipal records management division. The head of the department shall be the commissioner, who shall be appointed by the mayor. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4360" number="6520" version="3">
+				<HEADING>Section 3001. Deputy. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1447" name="3001"/>Section 3001. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputy. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4361" number="6521" version="616">
+					<PARA>The commissioner may appoint one deputy. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4362" number="6522" version="3">
+				<HEADING>Section 3002. Technical assistants. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1449" name="3002"/>Section 3002. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Technical assistants. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4363" number="6523" version="3">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> bracketed out of law at General Election, November 8, 1988.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">
+						</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4364" number="6524" version="3">
+				<HEADING>Section 3003. Powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1451" name="3003"/>Section 3003. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4365" number="6525" version="616">
+					<PARA>The commissioner:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4366" number="6526" version="616">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>shall be the chief archivist of the city and shall advise the mayor, borough presidents and council on those matters concerning the preservation of the city&apos;s historical documentation;</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4367" number="6527" version="616">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>shall act as the chief reference and research librarian for the mayor, borough presidents and council and shall ensure that all significant research material pertaining to the operations of the city as well as other municipalities shall be preserved and readily available for use; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4368" number="6528" version="616">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>shall act as the chief public records officer for the mayor, borough presidents and council and shall, except as otherwise provided by law, establish standards for the proper records management in any agency or government instrumentality funded in whole or in part from local tax levy monies, and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4369" number="6529" version="616">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>shall have the power to exercise or delegate any of the functions and duties vested in such commissioner by law, subject to the provisions of subdivision five of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4370" number="6530" version="616">
+					<PARA>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>In addition to the above duties, the commissioner shall ensure the city&apos;s custody and control of city records as follows: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4371" number="6531" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Pursuant to an approved records disposition schedule as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1133" destination-id="0-0-0-1145">eleven hundred thirty-three</LINK> of this charter, the commissioner shall ensure that the records of any city officer or agency that are of historical, research, cultural or other important value shall be delivered directly to the department&apos;s municipal archives. Upon delivery, the department shall begin to review such records and publish a survey of such records with appropriate specificity, and, to the extent practicable, the contents of such records. Where the commissioner has certified in writing as to its necessity, under extraordinary circumstances, such records may be transferred to an archival establishment to be organized and prepared for archival preservation, provided that such establishment meets the specific requirements specified in paragraph b of this subdivision. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4372" number="6532" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>If the commissioner decides that it is necessary to enter into an agreement or contract with another archival establishment outside the department, to organize and prepare records for archival preservation, it may not be with a private entity as defined by this chapter, and may not be with any entity outside the city. The commissioner shall include with the agreement or contract a plan for strictly monitoring the status and progress of the archiving operations. The commissioner shall devise and publish such plan, which shall include at least the following: (i) a list of the tasks to be conducted and a timetable for the completion of each such task; (ii) a description of the resources, staffing and training dedicated by the archival establishment to carrying out such tasks; (iii) allowances for direct supervision by department archivists; and (iv) an agreement by the archival establishment to issue, at a minimum, quarterly reports of its activities to the commissioner. The commissioner shall also include with such agreement and publish a schedule, where applicable, for the municipal archives to send original records to such archival establishment and to receive such records when processing is completed. To the extent practicable, such schedule shall take into account that original records should be sent in a limited and controlled manner and that no new such original records should be sent until receipt of any previously sent under such schedule. Any such agreement, contract, plan and schedule must be approved by the law department for compliance with this subdivision. The commissioner will at all times remain responsible for the proper handling and archiving of records, notwithstanding any agreement with an archival establishment outside the department. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4373" number="6533" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>No agreement provided for in subdivision five of this section shall be entered into during the term of office of any elected official of the city with regard to whose records such agreement applies. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4374" number="6534" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Nothing in this subdivision shall prevent officers or members of such officer&apos;s administration from donating money to the department&apos;s municipal archives or other archival establishment so long as such officers or members are not involved in the supervision, control or management of the archival processing pertaining to their respective administrations. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4375" number="6535" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Nothing in this subdivision should be construed to limit access by the public to city records. The department shall be responsible for granting access to records in accordance with applicable provisions of law. Additionally, agencies of the city shall have free access to such records as needed. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4376" number="6536" version="686">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2003/022" destination-id="0-0-0-0">L.L. 2003/022</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6582" number="6537" version="686">
+				<HEADING>Section 3004. Department; duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1453" name="3004"/>Section 3004. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7420" number="6538" version="954">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The department shall operate a municipal archives, the head of which shall be a professional archivist. The archives shall perform the following functions:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4378" number="6539" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>develop and promulgate standards, procedures and techniques with regard to archives management; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4379" number="6540" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>make continuing surveys of existing records to determine the most suitable methods to be used for the creating, maintaining, storing and servicing of archival material; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4380" number="6541" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>preserve and receive all city records of historical, research, cultural or other important value; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4381" number="6542" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>appraise, accession, classify, arrange and make available for reference all records which come into the possession of the archives and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4382" number="6543" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>establish and maintain an archives depository for the storage, conservation, processing and servicing of records. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4383" number="6544" version="3">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The department shall operate a municipal reference and research center, the head of which shall be a professional librarian. The center shall perform the following functions: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4384" number="6545" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>provide information and assistance to the mayor, the board of estimate, members of committees thereof and administrative officers of the city in connection with problems of municipal administration and proposed legislation; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4385" number="6546" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>provide legislative reference assistance to the council, its members and committees and maintain, in a legislative reference section, such records and papers as the council and city clerk may remand to its custody; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4386" number="6547" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>maintain facilities which shall be open to the public wherein, subject to such reasonable regulation as may be prescribed, all books, reports, documents and other materials shall be available for public inspection; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4387" number="6548" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>ensure that at least one copy of each report, document, study or publication of the city or any of its administrations, departments, boards or other agencies shall be available at the center at all times; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4388" number="6549" version="954">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>collect, compile and maintain data and information pertaining to the operation of the city as well as other municipalities, governmental bodies and public authorities and arrange for the exchange, sale, purchase and loan of information materials from and with legislative and research services, libraries and institutions in other municipalities, governmental bodies and public authorities; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4389" number="6550" version="954">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>ensure that each report, document, study or publication that is electronically transmitted to the department of records and information services pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1133" destination-id="0-0-0-1145">1133</LINK> of the charter is made available to the public on or through the website of the department, or its successor&apos;s website, within ten business days of publication, issuance, release or transmittal to the council or mayor; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7437" number="6551" version="954">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>maintain a publicly accessible and searchable online database that contains all publicly viewable content and metadata shared by an official government social media account. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4390" number="6552" version="3">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The department shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4391" number="6553" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>provide for the distribution of publications of the city, where such authority is not vested in another city agency, and issue at regular intervals, no less than quarterly, a bulletin describing its facilities and resources; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4392" number="6554" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>institute actions in replevin to recover any historical and/or other documents properly owned by, or originating from, the city of New York; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4393" number="6555" version="954">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>report annually by the thirtieth day of September to the mayor and city council on the powers and duties herein mentioned including, but not limited to, the cost of savings effectuated by the department during the preceding fiscal year. This report shall further include an evaluation of compliance with the requirements of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1133" destination-id="0-0-0-1145">1133</LINK> of the charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4394" number="6556" version="771">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The department shall operate a municipal records management division, the head of which shall be a professional records manager. The center shall perform the following functions: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4395" number="6557" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>develop and promulgate standards, procedures and techniques in relation to records management; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4396" number="6558" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>make continuing surveys of operations relating to records and recommend improvements in current records management practices, including the use of space, equipment and materials employed in the creation, maintenance, storage and servicing of records; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4397" number="6559" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>establish standards for the preparation of schedules for the disposition of records, providing for the retention of records and archives of continuing value, and for the prompt and orderly disposal of records no longer possessing sufficient administrative, legal or fiscal value to warrant their further retention; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4398" number="6560" version="954">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>establish, maintain and operate facilities for the storage, processing and servicing of records for all city agencies pending their deposit in the municipal archives or their disposition in any manner as may be authorized by law.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7436" number="6561" version="954">
+					<PARA>(Am. L.L. 2025/041, 4/11/2025, eff. 8/9/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4399" number="6562" version="687">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2003/011" destination-id="0-0-0-0">L.L. 2003/011</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6585" number="6563" version="687">
+				<HEADING>Section 3005. Archival review board. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1455" name="3005"/>Section 3005. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Archival review board. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4400" number="6564" version="1027">
+					<PARA style-name="EdNote" style-name-escaped="EdNote" style-id="0-0-0-18">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note: </CHARFORMAT>this section has been amended by <LINK style-name="Web" style-name-escaped="Web" style-id="0-0-0-23" type="Web" url="https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=7861512&amp;GUID=00F6A0F7-E9CF-40EE-B46E-ABEEE1803AB0&amp;Options=ID|Text|&amp;Search=">L.L. 2026/077, 4/9/2026, eff. 8/7/2026</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7840" number="6565" version="1027">
+					<PARA>There shall be in the department an archival review board which shall consist of five members; two of whom shall be appointed by the speaker, two of whom shall be appointed by the mayor, and one of whom shall be the commissioner, who shall serve ex officio as chairperson of the board. At least one such appointment shall be a professional archivist and at least one other such appointment shall be a professional historian. The members of the commission, other than the chair, shall be appointed within 30 days of the effective date of this section and shall be entitled to reasonable expenses. All appointed members of the commission shall be residents of the city. Members shall serve for terms of four years from such date of appointment. Vacancies in appointed membership of the board shall be filled by appointment by whosoever was responsible for such original appointment. The board shall meet once every 90 days or upon the request of any of its members. Any member of such board shall have complete access, during work hours, to inspect and review any appraisal, organization, processing or archiving of city records in the custody of an entity with which an agreement has been entered into for the purposes specified in subdivision five of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3003" destination-id="0-0-0-1451">3003</LINK>. Such board may request and receive, from the department, assistance and data as may be necessary for the proper execution of its powers and duties. Such board shall render annually to the mayor a report reviewing the archival processing of any city papers during the year for which the report has been written. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4401" number="6566" version="1027">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2003/022" destination-id="0-0-0-0">L.L. 2003/022</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2026/077" destination-id="0-0-0-0">L.L. 2026/077</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6583" number="6567" version="686">
+				<HEADING>Section 3006. Destruction of other materials. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1457" name="3006"/>Section 3006. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Destruction of other materials. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4402" number="6568" version="46">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> became Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1133" destination-id="0-0-0-1145">1133</LINK>(c).</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4403" number="6569" version="3">
+				<HEADING>Section 3007. Departmental libraries. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1459" name="3007"/>Section 3007. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Departmental libraries. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4404" number="6570" version="1027">
+					<PARA style-name="EdNote" style-name-escaped="EdNote" style-id="0-0-0-18">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note: </CHARFORMAT>this section has been amended by <LINK style-name="Web" style-name-escaped="Web" style-id="0-0-0-23" type="Web" url="https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=7861512&amp;GUID=00F6A0F7-E9CF-40EE-B46E-ABEEE1803AB0&amp;Options=ID|Text|&amp;Search=">L.L. 2026/077, 4/9/2026, eff. 8/7/2026</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7841" number="6571" version="1027">
+					<PARA>The commissioner shall analyze the needs of each city agency, except the law department, with respect to the establishment and maintenance of any library or research facility therein, and make such recommendations as may be appropriate in the circumstances. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4405" number="6572" version="1027">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2026/077" destination-id="0-0-0-0">L.L. 2026/077</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7838" number="6573" version="1027">
+				<HEADING>Section 3008. Rules and regulations. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1461" name="3008"/>Section 3008. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Rules and regulations. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4406" number="6574" version="616">
+					<PARA>The commissioner shall promulgate rules and regulations to effectuate the purposes of this chapter, except that rules and regulations relating to the disposal of records pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1133" destination-id="0-0-0-1145">eleven hundred thirty-three</LINK> shall be issued by the commissioner after consultation with the corporation counsel and the comptroller. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4407" number="6575" version="3">
+				<HEADING>Section 3009. Archives, reference and research advisory board. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1463" name="3009"/>Section 3009. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Archives, reference and research advisory board. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4408" number="6576" version="1027">
+					<PARA style-name="EdNote" style-name-escaped="EdNote" style-id="0-0-0-18">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note: </CHARFORMAT>this section has been repealed by <LINK style-name="Web" style-name-escaped="Web" style-id="0-0-0-23" type="Web" url="https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=7861512&amp;GUID=00F6A0F7-E9CF-40EE-B46E-ABEEE1803AB0&amp;Options=ID|Text|&amp;Search=">L.L. 2026/077, 4/9/2026, eff. 8/7/2026</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7842" number="6577" version="1027">
+					<PARA>There shall be in the department an archives, reference and research advisory board which shall consist of fifteen members who shall be appointed by the mayor and which shall consult with the commissioner with respect to the functions referred to in subdivisions one and two of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3004" destination-id="0-0-0-1453">three thousand four</LINK> of this chapter to advise such commissioner in matters at his or her request and render annually to the mayor a report regarding the development of municipal archives, reference and research services in the government and administration of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4409" number="6578" version="1027">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2026/077" destination-id="0-0-0-0">L.L. 2026/077</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-120]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7839" number="6579" version="1027">
+				<HEADING>Section 3010. Municipal archives reference and research fund. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1465" name="3010"/>Section 3010. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Municipal archives reference and research fund. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4410" number="6580" version="3">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>There is hereby established a municipal archives reference and research fund, which shall be credited with all sums appropriated therefor, donations made thereto, and proceeds from the disposition of personal property which is in the custody of the department and which the commissioner has determined is not a record which must be retained pursuant to law and is not necessary for archival, reference, or research purposes. Interest accruing on principal from all aforementioned sources also shall be credited to the fund.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4411" number="6581" version="48">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The municipal archives reference and research fund established by this section shall be used, subject to the approval of the director of management and budget, by the department for purposes related to its library and archival research programs including, but not limited to, purchasing and conserving books and other records, financing lecture series and commissioning studies and articles. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4412" number="6582" version="3">
+				<HEADING>Section 3011. Definitions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1467" name="3011"/>Section 3011. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definitions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7421" number="6583" version="954">
+					<PARA>As used in this chapter:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4414" number="6584" version="616">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>&quot;Archives&quot; means those official records which have been determined by the department to have sufficient historical or other value to warrant their continued preservation by the city;</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4415" number="6585" version="616">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>&quot;Records&quot; means any documents, books, papers, photographs, sound recordings, machine readable materials or any other materials, regardless of physical form or characteristics, made or received pursuant to law or ordinance or in connection with the transaction of official city business. Library and museum materials made or acquired and preserved solely for reference or exhibition purposes, extra copies of documents preserved only for convenience of reference and stocks of publications are not included within the definition of records as used in this chapter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4416" number="6586" version="616">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>&quot;Records management&quot; means the planning, controlling, directing, organizing, training, promoting and other managerial activities involved in records creation, records maintenance and use and records disposition, including but not limited to, the management of correspondence, forms, directives, reports, machine readable records, microfilms information retrieval, files, mail, vital records, equipment and supplies, office copiers, word processing and source data automation techniques, records preservation, records disposal and records centers or other storage facilities; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4417" number="6587" version="616">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>&quot;Records management practices&quot; means any system, procedure or technique followed with respect to effective records creation, records maintenance and use and records disposition; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4418" number="6588" version="616">
+					<PARA>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>&quot;Records disposition&quot; means:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4419" number="6589" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The removal by a city agency, in accordance with approved records retention schedules, of records no longer necessary for the conduct of business by such agency through removal methods which may include: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4420" number="6590" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>the disposal of temporary records by destruction or donation; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4421" number="6591" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>the transfer of records to the department, and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4422" number="6592" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>the transfer to the department of records determined to have historical or other sufficient value to warrant continued preservation and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4423" number="6593" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>the transfer of records from one city agency to any other city agency; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4424" number="6594" version="616">
+					<PARA>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>&quot;Records creation&quot; means any process involved in producing any recorded information necessary to conduct the business of a city agency; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4425" number="6595" version="616">
+					<PARA>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>&quot;Records management division&quot; means an establishment maintained by the department primarily for the storage, servicing, security and processing of records which must be preserved for varying periods of time and need not be retained in office equipment or space and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4426" number="6596" version="616">
+					<PARA>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>&quot;Servicing&quot; means making information in records available to any city agency for official use or to the public. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4427" number="6597" version="616">
+					<PARA>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>&quot;Private entity&quot; means a for-profit or not-for-profit corporation, or non-governmental organization, but shall not include the City and State Universities of New York, public libraries, including the New York Public Library, and any college or university in the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4428" number="6598" version="954">
+					<PARA>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>“Social media platform” means a website or application that enables users to publish and share information. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7440" number="6599" version="954">
+					<PARA>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>“Official government social media account” means any account provided to the department of records and information services pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="23-202" destination-id="0-0-0-0">23-202</LINK> of the administrative code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7439" number="6600" version="954">
+					<PARA>(Am. L.L. 2025/041, 4/11/2025, eff. 8/9/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7438" number="6601" version="954">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2003/022" destination-id="0-0-0-0">L.L. 2003/022</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6584" number="6602" version="993">
+				<HEADING>Section 3012. Centralized freedom of information law request system.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1847" name="3012"/>Section 3012. Centralized freedom of information law request system.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7770" number="6603" version="992">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>For purposes of this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7769" number="6604" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency.</CHARFORMAT> The term “agency” means a governmental entity of the city of New York subject to the requirements of article 6 of the public officers law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7768" number="6605" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Request.</CHARFORMAT> The term “request” means a request for records made pursuant to article 6 of the public officers law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7767" number="6606" version="993">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>No later than 18 months after the effective date of the local law that added this section, the commissioner, in consultation with the department of information technology and telecommunications or any successor agencies, shall develop and maintain a portal to process requests, whether such requests are received through such portal or sent directly to an agency by any other method. Access to such portal shall be maintained on the department’s website, and such portal shall provide information documenting each step of the freedom of information law process for each request received, including the following information, which shall be in a machine-readable and externally-searchable format: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7766" number="6607" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>A unique identification number; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7765" number="6608" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>A title related to the content of such request; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7764" number="6609" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The date such request was received by the applicable agency; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7763" number="6610" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The date of such agency’s acknowledgment of receipt of such request; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7762" number="6611" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The expected date of such agency’s response, as provided in such acknowledgment; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7761" number="6612" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>The number of extensions of time to respond indicated by the applicable agency to date; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7760" number="6613" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>The date of any determination made in response to such request; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7759" number="6614" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Whether such request was granted in whole, granted in part and denied in part, or denied in whole; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7758" number="6615" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>If such request was denied in whole or in part, which specific exemption under subdivision 2 of section 87 of the public officers law or any other grounds cited as a basis for such denial; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7757" number="6616" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>If such request was denied in whole or in part, whether the agency determined there were no responsive records, if known; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7756" number="6617" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>The date of filing for any appeal of the final response; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7755" number="6618" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>12.<TAB tab-count="1"/>The status of any appeal; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7754" number="6619" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>13.<TAB tab-count="1"/>If the original denial was upheld in whole or in part on appeal, which specific exemptions under subdivision 2 of section 87 of the public officers law or any other grounds cited as a basis for such determination; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7753" number="6620" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>14.<TAB tab-count="1"/>The total dollar amount of fees collected from the person who submitted such request; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7752" number="6621" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>15.<TAB tab-count="1"/>The number of records that were produced, if any; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7751" number="6622" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>16.<TAB tab-count="1"/>A downloadable copy of records released in response to such request in a machine-readable format if one exists, except to the extent prohibited by New York city, New York state, or federal law, or to the extent that publication of such records would constitute an unwarranted invasion of personal privacy, as described in subparagraphs i through viii of paragraph (b) of subdivision 2 of section 89 of the public officers law, or would be inconsistent with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="23-1202" destination-id="0-0-0-0">23-1202</LINK> of the administrative code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7750" number="6623" version="993">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The portal developed and maintained pursuant to subdivision b of this section shall allow: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7749" number="6624" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Agencies to receive and respond to requests from within the portal; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7748" number="6625" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Agencies to upload digital files containing records responsive to a request in multiple formats; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7747" number="6626" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Agencies and members of the public to track the progress of a request; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7746" number="6627" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Members of the public to file requests on such portal; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7745" number="6628" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The full text search of the content of all requests on such portal, to the extent practicable, and the ability to filter search results by agency and by the information described in paragraphs 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, and 15 of subdivision b of this section; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7744" number="6629" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>The full text search of machine-readable records made available in response to a request on such portal and to which access is provided in accordance with paragraph 7 of this subdivision; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7743" number="6630" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Access to electronic copies of records, regardless of form or format, sent in response to a request on such portal, provided that such access is consistent with New York city, New York state, and federal law and does not result in an unwarranted invasion of personal privacy, as described in subparagraphs i through viii of paragraph (b) of subdivision 2 of section 89 of the public officers law, and provided further that such access shall be in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="23-1202" destination-id="0-0-0-0">23-1202</LINK> of the administrative code; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7742" number="6631" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>A person to elect to receive automated notifications of a determination or other action involving information required to be reported on such portal; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7741" number="6632" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>Access to a directory, which shall be prominently displayed on such portal, that includes the name, title, and contact information for each records access officer and records access appeals officer at each agency; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7740" number="6633" version="993">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>Access to statistics on requests made through such portal, disaggregated by agency, including the status of each request and the aggregate number of monthly, yearly, and year-to-date requests received. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7739" number="6634" version="993">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The information required to be posted on the portal pursuant to paragraphs 1 through 10 of subdivision b of this section shall be posted with respect to each request as soon as practicable, but in no case more than 14 days after the occurrence of any determination regarding the release of records and any other action involving information required to be reported on such portal relating to a request. Records published pursuant to paragraph 16 of subdivision b of this section shall be posted 14 days after being made available to the requestor, except to the extent prohibited by New York city, New York state, or federal law, or to the extent that the release of such records would constitute an unwarranted invasion of personal privacy, as described in subparagraphs i through viii of paragraph (b) of subdivision 2 of section 89 of the public officers law, or would be inconsistent with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="23-1202" destination-id="0-0-0-0">23-1202</LINK> of the administrative code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7738" number="6635" version="993">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The website of every agency shall include a link to the portal developed and maintained pursuant to subdivision b of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7737" number="6636" version="993">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The information provided on the portal developed and maintained pursuant to subdivision b of this section shall also be made available to the public on a city website through a web application program interface, provided that for information required pursuant to paragraph 16 of subdivision b, the department may instead provide a link to such information through such web application program interface. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7736" number="6637" version="993">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>Upon receipt of a request by means other than the portal developed and maintained pursuant to subdivision b of this section, the receiving agency shall enter the request into such portal and shall track the progress of such request as required by subdivision c of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7735" number="6638" version="993">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The department, in consultation with the mayor’s office of operations and as part of the mayor’s management report as required by section 12, shall develop performance indicators in connection with the statistical information required to be made available pursuant to paragraph 10 of subdivision c of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7734" number="6639" version="993">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>Within 180 days of the enactment of this local law, the department shall submit an implementation plan to the mayor and the speaker of the council. The plan shall describe the steps necessary to implement the requirements of this local law, and the standards for the tracking and filing of requests and responses to such requests. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7733" number="6640" version="993">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>This section shall not be construed to create a private right of action to enforce the provisions set forth in this section. Failure to comply with this section shall not result in liability to the city or an agency or employee thereof. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7731" number="6641" version="992">
+					<PARA>(L.L. 2025/199, 12/25/2025, eff. 12/25/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7730" number="6642" version="992">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2025/199" destination-id="0-0-0-0">L.L. 2025/199</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

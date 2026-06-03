@@ -1,0 +1,915 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-3316" number="5023" version="3">
+			<HEADING>Chapter 52: General Provisions</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1177" name="Chapter 52"/>Chapter 52: General Provisions</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3317" number="5024" version="3">
+				<HEADING>Section 1150. Definitions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1179" name="1150"/>Section 1150. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definitions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3318" number="5025" version="617">
+					<PARA>For the purposes of this charter:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3319" number="5026" version="617">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The term &quot;city&quot; shall mean the city of New York, and unless the context otherwise requires, shall include the several boroughs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3320" number="5027" version="617">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The term &quot;agency&quot; shall mean a city, county, borough, or other office, position, administration, department, division, bureau, board or commission, or a corporation, institution or agency of government, the expenses of which are paid in whole or in part from the city treasury. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3321" number="5028" version="617">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The term &quot;law&quot; or &quot;laws&quot; shall include the constitution, this charter, any statute, the administrative code, any local law, and any ordinance, rule or regulation having the force of law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3322" number="5029" version="617">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The term &quot;statute&quot; shall mean an act of the legislature. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3323" number="5030" version="617">
+					<PARA>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The term &quot;maintenance&quot; shall include minor repairs, and in case of doubt the mayor or an officer designated by him shall decide whether a repair is a minor repair. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3324" number="5031" version="617">
+					<PARA>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>The term &quot;intercepting sewer&quot; shall mean a sewer the principal purpose of which is the interception from other sewers and conveyance of sewage to treatment plants. In case of doubt the council shall decide whether a sewer is an intercepting sewer. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3325" number="5032" version="617">
+					<PARA>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>a.<TAB tab-count="1"/>The term &quot;wharf property&quot; shall mean wharves, piers, docks and bulkheads and structures thereon and slips and basins, the land beneath any of the foregoing, and all rights, privileges and easements appurtenant thereto and land under water in the port of New York, and such upland or made land adjacent thereto as was vested in the department of docks on January first, nineteen hundred thirty-eight or thereafter was or may be assigned to it or its successor agencies. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3326" number="5033" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>&quot;Water front property&quot; shall mean all property fronting on all the tidal waters in the port and city of New York and extending inshore to the property line of the first adverse owner and shall include such land under water extending outshore to the pierhead line or the property line, whichever extends furthest outshore. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3327" number="5034" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>&quot;Water front commerce&quot; shall mean the activity on water front property which encompasses the receipt of cargo or goods at the wharves, piers, docks or bulkheads from ships and their delivery to points inland or the receipt of such cargo or goods at such wharves, piers, docks or bulkheads from points inland for shipment by ships and shall include the temporary storage of such cargo or goods in the sheds or warehouses on such property pending their delivery or shipment. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3328" number="5035" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>&quot;Furtherance of navigation&quot; shall mean the activity on water front property which involves ship building, ship repairing, boating, dry dock facilities and similar uses. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3329" number="5036" version="617">
+					<PARA>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>The term &quot;the port of New York&quot; shall include all the waters of the North river, the East river and the Harlem river and all the tidal waters embraced within or adjacent to or opposite to the shores of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3330" number="5037" version="617">
+					<PARA>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>The terms &quot;three-fourths vote&quot; and &quot;two-thirds vote&quot; when they apply to the council shall mean respectively three-fourths and two-thirds of all the members of the council are entitled to cast. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3331" number="5038" version="617">
+					<PARA>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>The term &quot;administrative code&quot; shall mean the administrative code of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3332" number="5039" version="617">
+					<PARA>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>The term &quot;budget&quot; shall mean the expense budget unless the context otherwise requires. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3333" number="5040" version="617">
+					<PARA>
+						<TAB tab-count="1"/>12.<TAB tab-count="1"/>Except as in this charter otherwise provided, the term &quot;real property&quot; shall include real estate, lands, tenements and hereditaments, corporeal or incorporeal. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3334" number="5041" version="617">
+					<PARA>
+						<TAB tab-count="1"/>13.<TAB tab-count="1"/>The term &quot;domestic partner&quot; shall mean persons who have a registered domestic partnership pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="3-240" destination-id="0-0-0-0">3-240</LINK> of the administrative code, a domestic partnership registered in accordance with executive order number 123, dated August 7, 1989, or a domestic partnership registered in accordance with executive order number 48, dated January 7, 1993. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3335" number="5042" version="697">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1998/027" destination-id="0-0-0-0">L.L. 1998/027</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6594" number="5043" version="697">
+				<HEADING>Section 1151. Effect of this charter on existing law. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1181" name="1151"/>Section 1151. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Effect of this charter on existing law. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3336" number="5044" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>All laws and parts of laws relating to or affecting the city of New York or the municipalities consolidated therein in force when this charter as amended shall take effect are hereby repealed and superseded to the extent that the same are inconsistent with the provisions of this charter and no further.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3337" number="5045" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>All other laws and parts of laws shall continue in force until repealed, amended, modified or superseded. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3338" number="5046" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Insofar as the provisions of this charter are the same in terms or in substance and effect as provisions of law in force when this charter shall take effect, relating to or affecting the city of New York, the provisions of this charter are intended to be not a new enactment but a continuation of such provisions of law, and this charter shall be so construed and applied. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3339" number="5047" version="613">
+				<HEADING>Section 1151-a. Effect of preamble.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1751" name="1151-a"/>Section 1151-a. Effect of preamble.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6358" number="5048" version="613">
+					<PARA>The purpose of the preamble is to serve as a unifying statement of values and a vision for an equitable city. It is intended to set forth values to inform and guide the actions of city agencies and officers in carrying out the mandates created and delegated to them by the charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6357" number="5049" version="613">
+					<PARA>City agencies and officers empowered by this charter or other applicable law to perform planning, programmatic reviews, and audits are (1) authorized and required to consider and be guided by the values set out in the preamble within the scope and subject matter of such planning; and (2) authorized and required to examine the extent to which such values have been fulfilled through the policies and programs of city agencies and officers subject to such programmatic reviews and audits. The preamble, together with this section, is not intended to create a direct or indirect right of action to enforce its terms or the terms of any other provision of law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6356" number="5050" version="613">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6377" number="5051" version="613">
+				<HEADING>Section 1151-b. Effect of chapter 78.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1755" name="1151-b"/>Section 1151-b. Effect of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 78" destination-id="0-0-0-1757">chapter 78</LINK>.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6379" number="5052" version="613">
+					<PARA>Nothing in <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 78" destination-id="0-0-0-1757">chapter 78</LINK> shall be construed to prevent any agency from complying with existing federal or state law or regulation. In addition, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 78" destination-id="0-0-0-1757">chapter 78</LINK> is not intended to create a direct or indirect right of action to enforce its terms.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6378" number="5053" version="613">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6364" number="5054" version="613">
+				<HEADING>Section 1151-c. Effect of true cost of living.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1753" name="1151-c"/>Section 1151-c. Effect of true cost of living.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6365" number="5055" version="613">
+					<PARA>The true cost of living measurement established in subdivision c of section 16 would be reported in addition to standards that are used to measure poverty or set eligibility for public benefits. It is not intended to create a direct or indirect right of action to enforce its terms or the terms of any other provision of law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6363" number="5056" version="613">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6355" number="5057" version="613">
+				<HEADING>Section 1152. Time of taking effect. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1183" name="1152"/>Section 1152. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Time of taking effect. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3340" number="5058" version="84">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>This charter shall take effect on the first day of January, nineteen hundred sixty-three and thereafter shall control in respect to all the powers, functions and duties of all officers, agencies, and employees of the city as provided herein, except that <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 12" destination-id="0-0-0-417">chapter twelve</LINK> hereof shall take effect on January first, nineteen hundred sixty-two.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3341" number="5059" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The amendments to the charter approved by the electors on November fourth, nineteen hundred seventy-five shall take effect on January first, nineteen hundred seventy-seven, and thereafter shall control as provided in respect to all the powers, functions and duties of all offices, agencies, and employees except as further specifically provided in other sections of this revised charter and except: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3342" number="5060" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>that existing community districts and community boards shall continue in force and effect until the new community districts and community boards pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 69" destination-id="0-0-0-1403">chapters sixty-nine</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 70" destination-id="0-0-0-1423">seventy</LINK> are established pursuant to this revised charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3343" number="5061" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>that powers and duties of community boards and borough boards pursuant to chapters <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 6" destination-id="0-0-0-197">six</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 8" destination-id="0-0-0-263">eight</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 9" destination-id="0-0-0-301">nine</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 14" destination-id="0-0-0-523">fourteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">fifteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 27" destination-id="0-0-0-1517">twenty-seven</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 69" destination-id="0-0-0-1403">sixty-nine</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 70" destination-id="0-0-0-1423">seventy</LINK> shall be assumed by the existing community boards and borough boards on July first, nineteen hundred seventy-six and such boards shall continue to have such powers and duties until new community boards and borough boards are established within the new community districts and the boroughs pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 69" destination-id="0-0-0-1403">chapters sixty-nine</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 70" destination-id="0-0-0-1423">seventy</LINK>, which boards shall assume the powers and duties specified in this charter at such time; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3344" number="5062" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>that the other amended provisions of this charter requiring any act to be done prior to January first, nineteen hundred seventy-seven shall take effect immediately upon adoption. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3345" number="5063" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The amendments to the charter approved by the electors on November eighth, nineteen hundred eighty-eight shall take effect immediately, and thereafter shall control as provided in respect to all the powers, functions and duties of all offices, agencies, and employees except as further specifically provided in other sections of this revised charter and except: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3346" number="5064" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>that, with respect to the tax appeals tribunal established in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="168" destination-id="0-0-0-253">one hundred sixty-eight</LINK>, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3347" number="5065" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>the mayor shall appoint the first three commissioners, and shall designate one of them as president, no later than the first day of July, nineteen hundred eighty-nine; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3348" number="5066" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>the tribunal shall adopt rules of procedure pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="169" destination-id="0-0-0-255">one hundred sixty-nine</LINK> no later than the first day of December, nineteen hundred eighty-nine; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3349" number="5067" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>the tribunal shall begin accepting, hearing and determining appeals on the first day of January, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3350" number="5068" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>that the effective date of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1046" destination-id="0-0-0-1017">one thousand forty-six </LINK>shall be the first day of July nineteen hundred ninety, and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3351" number="5069" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>that the provisions of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>, entitled conflicts of interest, shall take effect on the first day of January, nineteen hundred ninety, and the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect, entitled ethics, shall remain in effect up to and including the thirty-first day of December of nineteen hundred and eighty-nine, at which time they shall be repealed, provided, however, that: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3352" number="5070" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>section twenty-six hundred eight of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall not be repealed but shall be renumbered as section one hundred thirty-one and shall continue in effect; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3353" number="5071" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">twenty-six hundred two</LINK> shall take effect immediately and subdivisions a, b, c, d, i, j and k of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2603" destination-id="0-0-0-1393">twenty-six hundred three</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> shall become effective upon confirmation of the members nominated by the mayor pursuant to subdivision c of such section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">twenty-six hundred two</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3354" number="5072" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2600" destination-id="0-0-0-1387">twenty-six hundred</LINK> of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect, shall only remain in effect until the confirmation of the members nominated by the mayor pursuant to subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">twenty-six hundred two</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3355" number="5073" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>the powers vested in the board of ethics by <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall, upon the expiration of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2600" destination-id="0-0-0-1387">twenty-six hundred</LINK> of such chapter, be transferred, assigned and devolved upon the conflicts of interest board established by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">twenty-six hundred two</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> of the charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3356" number="5074" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>the provisions of sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2605" destination-id="0-0-0-1397">twenty-six hundred five</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2606" destination-id="0-0-0-1399">twenty-six hundred six</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2607" destination-id="0-0-0-1401">twenty-six hundred seven</LINK> of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall govern the conduct of officers or employees of the city or of any city agency and former officers or employees of the city or of any city agency engaged in prior to the effective date of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3357" number="5075" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>the provisions of subdivision h of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall govern the conduct of former officers or employees of the city or of any city agency who leave city employ prior to the effective date of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>, engaged in on or after such date, and shall be enforceable pursuant to subdivisions j, k and l of such section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3358" number="5076" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>for any officer or employee of the city who is in city employ as of the thirty-first day of December, nineteen hundred eighty-nine, the provisions of subdivisions g, h and i of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall remain in effect up to and including the thirty-first day of March, nineteen hundred ninety and shall be enforceable pursuant to subdivisions j, k and l of such section, and the provisions of paragraphs one, two, four, six and seven of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> shall become effective on the first day of April, nineteen hundred ninety, provided, however, that this subparagraph shall not apply to elected officials, members of the city planning commission, including the chair, and employees of the department of city planning. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3359" number="5077" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>for members of the city planning commission, including the chair, and employees of the department of city planning, the provisions of subdivisions g, h and i of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395"> twenty-six hundred four</LINK> of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> heretofore in effect shall remain in effect up to and including the thirtieth day of June, nineteen hundred ninety and shall be enforceable pursuant to subdivisions j, k and l of such section, and the provisions of paragraphs one, two, three, four, six, and seven of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> of the new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> shall become effective on the first day of July, nineteen hundred ninety. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3360" number="5078" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The amendments to the charter approved by the electors on November seventh, nineteen hundred eighty-nine shall take effect on the first day of January, nineteen hundred ninety, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter and except: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3361" number="5079" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>that, except for the new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="311" destination-id="0-0-0-469">three hundred eleven</LINK> which shall take effect on the first day of January, nineteen hundred ninety, the amendments of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 13" destination-id="0-0-0-465">chapter thirteen</LINK> shall take effect on the first day of September, nineteen hundred ninety, provided, however, that: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3362" number="5080" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>the appointments required to be made by the mayor and the comptroller to the procurement policy board pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="311" destination-id="0-0-0-469">three hundred eleven</LINK> shall be made by the fifteenth day of January, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3363" number="5081" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>the procurement policy board, upon its creation, shall be authorized to exercise the authority granted to it by the remaining sections of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 13" destination-id="0-0-0-465">chapter thirteen</LINK> otherwise not to take effect until the first day of September, nineteen hundred ninety, to promulgate rules prior to the effective date of those sections as are necessary to implement the provisions of the chapter. Such rules required by the chapter to be promulgated shall be proposed in accordance with the requirements of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1043" destination-id="0-0-0-1011">one thousand forty-three</LINK> of this charter by the first day of June, nineteen hundred ninety; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3364" number="5082" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>contract solicitations initiated prior to the first day of September, nineteen hundred ninety which would otherwise require the approval of the board of estimate that are not submitted to the board of estimate for approval by such date shall be awarded by the agency in accordance with the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 13" destination-id="0-0-0-465">chapter thirteen</LINK> otherwise not to take effect until the first day of September, nineteen hundred ninety and, to the extent practicable, with the rules of the procurement policy board; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3365" number="5083" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>all other contract solicitations for which the contract will be executed on or after the first day of September, nineteen hundred ninety shall be awarded in accordance with the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 13" destination-id="0-0-0-465">chapter thirteen</LINK> otherwise not to take effect until the first day of September, nineteen hundred ninety, and, to the extent practicable, with the rules of the procurement policy board; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3366" number="5084" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>notwithstanding anything to the contrary herein, the proceedings of any contractor board of responsibility pending as of the thirty-first day of August, nineteen hundred ninety may be continued after such date until final determination. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3367" number="5085" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>that <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 11" destination-id="0-0-0-411">chapter eleven</LINK> of the charter shall take effect on the first day of January, nineteen hundred ninety-six and the provisions of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="259" destination-id="0-0-0-413">two hundred fifty-nine</LINK> of such chapter shall apply with respect to the fiscal year beginning on the first day of July, nineteen hundred ninety-six and that, pursuant to the requirements of such chapter, the comptroller and the public advocate shall appoint the independent budget office advisory committee no later than the fifteenth day of February of nineteen hundred ninety-six; such advisory committee shall make its recommendations, to the special committee convened to appoint the director of the independent budget office, no later than the fifteenth day of June of nineteen hundred ninety-six; and such special committee shall make its appointment of a director no later than the first day of August nineteen hundred ninety-six; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3368" number="5086" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>that, effective immediately, no appointment to the civil service commission shall be made except upon the recommendation of the screening committee required by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="812" destination-id="0-0-0-921">eight hundred twelve</LINK> of the charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3369" number="5087" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>that, the provisions of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="104" destination-id="0-0-0-209">one hundred and four</LINK> of the charter shall not apply to the contract budget submitted by the mayor for the fiscal year beginning the first day of July, nineteen hundred ninety nor to the contract budget adopted by the council for such year; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3370" number="5088" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>that, the amendments to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="192" destination-id="0-0-0-267">one hundred ninety-two</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="196" destination-id="0-0-0-273">one hundred ninety-six</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="198" destination-id="0-0-0-283">one hundred ninety-eight</LINK> and to<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 27" destination-id="0-0-0-1517"> chapters twenty-seven</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 71" destination-id="0-0-0-1429">seventy-one</LINK>, and the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK> shall take effect immediately upon certification that the electors have approved the amendments to the charter, provided, however, that the amendments to subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="192" destination-id="0-0-0-267">one hundred ninety-two</LINK> (other than the portions thereof requiring appointments of the members of the city planning commission on or before the first day of March, nineteen hundred ninety and providing for the length of the terms of the first appointees to the commission) shall take effect on the first day of July, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3371" number="5089" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>that, the amendments to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="191" destination-id="0-0-0-265">one hundred ninety-one</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="193" destination-id="0-0-0-269">one hundred ninety-three</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety-seven-a</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-b" destination-id="0-0-0-277">one hundred ninety-seven-b</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="199" destination-id="0-0-0-285">one hundred ninety-nine</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="202" destination-id="0-0-0-291">two hundred two</LINK>; the provisions of sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="195" destination-id="0-0-0-271">one hundred ninety-five</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">two hundred four</LINK> (except for subdivisions (g) and (h) thereof); the amendments to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 14" destination-id="0-0-0-523">chapters fourteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">fifteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 21" destination-id="0-0-0-733">twenty-one</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 29" destination-id="0-0-0-1521">twenty-nine</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 59" destination-id="0-0-0-1313">fifty-nine</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 61" destination-id="0-0-0-1315">sixty-one</LINK>; and the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 48" destination-id="0-0-0-1085">chapters forty-eight</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 74" destination-id="0-0-0-1471">seventy-four</LINK> shall take effect on the first day of July, nineteen hundred ninety, provided, however, that: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3372" number="5090" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>notwithstanding anything to the contrary herein, the board of estimate shall continue to review and approve applications pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> as heretofore in effect that have been acted upon by the city planning commission on or before the thirtieth day of June, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3373" number="5091" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>notwithstanding anything to the contrary herein, subdivisions b, d, e, f and g of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> shall take effect on the second day of May, nineteen hundred ninety; and the period for review of applications by the borough presidents provided for in such subdivision g shall extend until the thirtieth day of June, nineteen hundred ninety in the case of all applications referred to the borough presidents in the month of May, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3374" number="5092" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>notwithstanding anything to the contrary herein, any application pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> or <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> heretofore in effect that requires borough board review and is acted on by the affected borough board after the second day of May, nineteen hundred ninety shall be forwarded to the affected borough president for review pursuant to subdivision g of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> in accordance with paragraph (b) of this subdivision; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3375" number="5093" version="409">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>notwithstanding anything to the contrary herein, the board of estimate shall continue up to and including the thirty-first day of August, nineteen hundred ninety, to review designations by the landmarks preservation commission, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="25-303" destination-id="0-0-0-0">25-303</LINK> of the administrative code, which have been approved by the landmarks preservation commission on or before the first day of May, nineteen hundred ninety; and designations by the landmarks preservation commission made after the first day of May and on or before the thirtieth day of June, nineteen hundred ninety, shall be subject to subdivisions eight and nine of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3020" destination-id="0-0-0-743"> three thousand twenty</LINK>, provided that the period for any reviews by the city planning commission and the council under such subdivisions eight and nine shall commence on the first day of July, nineteen hundred ninety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3376" number="5094" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>that, subdivisions g and h of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295"> two hundred four</LINK> shall take effect on the first day of July, nineteen hundred ninety-one; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3377" number="5095" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>that, an elected city official who, as of the first day of January nineteen hundred ninety, holds both an elected city office and a party office, shall not be subject to the requirements of paragraph fifteen of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">twenty-six hundred four</LINK> in regard to such offices until the earlier of (i) the expiration of the term of the city office to which such official was elected prior to such date or (ii) the expiration of the term of the party office to which such official was elected or appointed prior to such date; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3378" number="5096" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>that, notwithstanding the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="25" destination-id="0-0-0-109">twenty-five</LINK>, the council members elected at the general election in the year nineteen hundred eighty-nine shall serve for a term of two years and an additional election of council members shall be held at the general election in the year nineteen hundred ninety-one. The council members elected at such election shall serve for a term of two years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3379" number="5097" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>that, notwithstanding the provisions of paragraph two of subdivision b, and subdivision c, of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="50" destination-id="0-0-0-161">fifty</LINK>, a districting commission shall be appointed to prepare a districting plan for the nineteen hundred ninety-one additional election of council members in accordance with all of the requirements of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK> except that such appointments shall be made in accordance with the following schedule: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3380" number="5098" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>between the tenth and twentieth days of January nineteen hundred ninety, the mayor shall convene the meeting or meetings required by paragraph two of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="50" destination-id="0-0-0-161">fifty</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3381" number="5099" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>on or before the fifteenth day of March of nineteen hundred ninety, each council delegation authorized to make appointments to the districting commission shall make such appointments, and each chairperson of a county committee of a political party authorized to submit nominations to the mayor shall submit such nominations; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3382" number="5100" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>following the actions required by subparagraph (b) of this paragraph but no later than the fifteenth day of April of nineteen hundred ninety, the mayor shall make the remaining appointments to the districting commission. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3383" number="5101" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The commission&apos;s term shall end sixty days after the day of the general election of the council in the year nineteen hundred ninety-one. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3384" number="5102" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>that, notwithstanding the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>, the districting commission appointed pursuant to paragraph ten of ten of this subdivision shall prepare a districting plan for the nineteen hundred ninety-one additional election of council members in accordance with the provisions of this paragraph and in accordance with the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>, to the extent that the provisions of such chapter are not inconsistent with the provisions of this paragraph. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3385" number="5103" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Following its appointment, the districting commission appointed pursuant to paragraph ten of this subdivision shall meet at least once each month during nineteen hundred ninety and at least once every two weeks during nineteen hundred ninety-one until such time as it has completed its duties pursuant to this paragraph and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3386" number="5104" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>In carrying out its responsibilities under this paragraph and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>, the commission shall utilize the final count results of the nineteen hundred ninety census delivered to the governor no later than the first day of April, nineteen hundred ninety-one in accordance with the provisions of section one hundred forty-one of title thirteen of the United States code. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3387" number="5105" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>As soon as practicable, the commission shall (i) establish liaison with the United States census bureau and relevant New York state agencies to facilitate the orderly and timely receipt of the results of the nineteen hundred ninety census in a format that will facilitate the commission&apos;s completion of its responsibilities and (ii) obtain such equipment, software, services and personnel as are necessary for it to effectively carry out its responsibilities under this paragraph and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3388" number="5106" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>On or before the fifteenth day of May, nineteen hundred ninety, the director of city planning shall present to the commission an analysis of the demographic changes that have occurred in the city of New York since the nineteen hundred eighty census, a summary of the various estimates that have been made of the nineteen hundred ninety population of the city and various subdivisions of the city, an analysis of the implications of such forecasts for the establishment of districts for the nineteen hundred ninety-one council elections, and estimates of the nineteen hundred ninety population and population characteristics of existing council, assembly, community and congressional districts, to the extent such information is available. The director of city planning shall periodically thereafter provide the commission with any revisions of such information and any such additional information that will be of assistance to the commission in carrying out its responsibilities under <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>. The director of city planning shall, to the maximum extent practicable, provide the commission with such technical assistance as it may require to carry out its responsibilities. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3389" number="5107" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>On or before the fifteenth day of June of nineteen hundred ninety, the director of city planning and the corporation counsel shall provide the commission with all information, available to them, regarding the status of the nineteen hundred ninety census and the schedule for the release of the results of such census, as will assist the commission in developing the work plan and schedule required by this paragraph. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3390" number="5108" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>On or before the fifteenth day of June, nineteen hundred ninety, the director of city planning and the commissioner of computer and data communications services shall provide the commission with as complete a listing as possible of the computer software products available for the utilization of census data in the establishment of districts and the analysis of the demographic characteristics of such districts; a comparative evaluation of the strengths, weaknesses, costs and benefits of the various products available including information as to the quantity and type of staff necessary to utilize the various products; an identification and description of the relevant professional services available from public and private entities; including information regarding the rates at which such services are likely to be available; and a description of the assistance which the department of city planning and the computer and data communications services agency can provide to the commission. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3391" number="5109" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>On or before the fifteenth day of September, nineteen hundred ninety, the commission shall adopt a work plan and time schedule for the establishment of council districts for the nineteen hundred ninety-one elections in accordance with the provisions of this paragraph and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 2-a" destination-id="0-0-0-159">chapter two-A</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3392" number="5110" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>Between the first day of October and the tenth day of December, nineteen hundred ninety, the commission shall hold at least one public hearing in each borough to obtain (i) information regarding demographic trends and conditions and suggestions regarding the factors that interested parties believe the commission should consider and the procedures that it should utilize in the establishment of council districts for the nineteen hundred ninety-one elections. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3393" number="5111" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>On or before the first day of February, nineteen hundred ninety-one, the commission shall produce, and make available for public inspection, prototype fifty-one district plans for the purpose of testing and demonstrating the analytical and technical capabilities necessary to meet the deadlines set forth in subparagraph j of this paragraph. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3394" number="5112" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(j)<TAB tab-count="1"/>Notwithstanding the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="51" destination-id="0-0-0-163">fifty-one</LINK>, the commission shall complete the following steps in accordance with the following schedule: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3395" number="5113" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>on or before the first day of May, nineteen hundred ninety-one, the commission shall make its plan available to the public and the council for review and comment; and on or before the tenth day of such month the commission shall hold one or more public hearings on such plan; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3396" number="5114" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>on or before the twentieth day of May, nineteen hundred ninety-one, the commission, after consideration of all comments received from the public and the council by the fourteenth day of May of such year, shall make a revised plan and supporting data available for public inspection and shall give public notice that comments on such revised plan may be submitted through the twenty-seventh day of May, nineteen hundred ninety-one; and on or before such latter date, the commission shall hold one or more public hearings on such plan; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3397" number="5115" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>on or before the seventh day of June, nineteen hundred ninety-one, the commission shall adopt its final plan in accordance with subdivision g of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="51" destination-id="0-0-0-163">fifty-one</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3398" number="5116" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(k)<TAB tab-count="1"/>After the commission files its final plan with the city clerk pursuant to clause (iii) of subparagraph (j) of paragraph (10) of subdivision (d) of this section, the commission shall make such adjustments in its plan as may be required by court order or upon a determination of the United States Department of Justice. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3399" number="5117" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(12)<TAB tab-count="1"/>that the amendments to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 46" destination-id="0-0-0-1033">chapter forty-six</LINK> shall take effect immediately; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3400" number="5118" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(13)<TAB tab-count="1"/>that the provisions of subdivision a of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2800" destination-id="0-0-0-1425"> twenty eight hundred</LINK> shall take effect immediately and: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3401" number="5119" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>that for the purpose of appointing members of community boards for terms commencing on the first day of April, nineteen hundred ninety and on the first day of April, nineteen hundred ninety-one pursuant to such subdivision, the city planning commission shall, by the first day of January, nineteen hundred ninety, determine the proportion of the community district&apos;s population represented by each council member on the basis of data available as of such date and file the determination with the appropriate borough president, community board and council member; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3402" number="5120" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>that the terms of community board members which would expire on the thirty-first day of December, nineteen hundred eighty nine, pursuant to the charter heretofore in effect, shall expire on the thirty-first day of March, nineteen hundred ninety and that the terms of community board members which would expire on the thirty-first day of December, nineteen hundred ninety, pursuant to the charter heretofore in effect, shall expire on the thirty-first day of March, nineteen hundred ninety-one. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3403" number="5121" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(14)<TAB tab-count="1"/>that the repeal of sections sixty-one through sixty-six of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 3" destination-id="0-0-0-167">chapter three</LINK>, the amendment of subdivision nine of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1150" destination-id="0-0-0-1179">eleven hundred fifty</LINK> and the amendments to subdivisions one and sixteen of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="38" destination-id="0-0-0-135">thirty-eight</LINK>, as renumbered by these amendments, deleting references to the Board of Estimate shall take effect on the first day of September of nineteen hundred ninety. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3404" number="5122" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(15)<TAB tab-count="1"/>that, subdivisions a, b, and c and the first sentence of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="195" destination-id="0-0-0-271">one hundred ninety-five</LINK> shall take effect upon the first to occur of (a) November 1, 1990 or (b) the effective date of the criteria for the location of city facilities promulgated pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. Any agency proposing an acquisition pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="195" destination-id="0-0-0-271">one hundred ninety-five</LINK> prior thereto shall, upon receiving approval of such acquisition from the commissioner of general services, file a notice of intent to acquire with the Council, which may consider and act upon the acquisition pursuant to the last sentence of subdivision d of such section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3405" number="5123" version="91">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(16)<TAB tab-count="1"/>that the provisions of paragraph a of subdivision three of section sixteen hundred two requiring the commissioner of general services to consider the criteria for location of city facilities prior to submitting an application pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> for an acquisition or disposition of property shall take effect upon the effective date of such criteria pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3406" number="5124" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>On and after the first day of September of nineteen hundred ninety the powers and responsibilities of the board of estimate, set forth in any state or local law, that are not otherwise devolved by the terms of such law, upon another body, agency or officer shall devolve upon the body, agency or officer of the city charged with comparable and related powers and responsibilities under this charter, consistent with the purposes and intent of this charter, provided specifically that the council shall succeed to the powers and responsibilities exercised by the board of estimate pursuant to article sixteen of the general municipal law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3407" number="5125" version="3">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Officers and employees of the city may take any actions as are necessary and appropriate to prepare for the implementation of the provisions of amendments to the charter approved by the electors on November seventh, nineteen hundred eighty-nine prior to such effective dates as are prescribed by subdivision d of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3408" number="5126" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>The amendments to the charter approved by the electors on November third, nineteen hundred ninety-eight shall take effect on the first day of January, nineteen hundred ninety-nine, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3409" number="5127" version="90">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter, amending section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="603" destination-id="0-0-0-797"> six hundred three</LINK> and adding a new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 24-b" destination-id="0-0-0-815">chapter twenty-four-B</LINK>, approved by the electors on November sixth, two thousand-one, shall take effect immediately, or as soon thereafter as a transfer of agency functions may be effectuated, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3410" number="5128" version="771">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of the provisions of the amendments to the charter, approved by the electors on November sixth, two thousand-one, prior to the effective dates prescribed in subparagraph a of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3411" number="5129" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter, adding new<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 18-c" destination-id="0-0-0-635"> chapters eighteen-C</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 18-d" destination-id="0-0-0-641">eighteen-D</LINK>, and a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="526-a" destination-id="0-0-0-717">five hundred twenty-six-a</LINK>, approved by the electors on November sixth, two thousand-one, shall take effect immediately upon certification that the electors have approved the amendments to the charter, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3412" number="5130" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The amendments to the charter, adding a new subdivision g to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="8" destination-id="0-0-0-57">eight</LINK>, a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="18" destination-id="0-0-0-87">eighteen</LINK>, and a new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 40" destination-id="0-0-0-1537">chapter forty</LINK>, approved by the electors on November sixth, two thousand-one, shall take effect immediately, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3413" number="5131" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter, amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="15" destination-id="0-0-0-81">fifteen</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 22" destination-id="0-0-0-749">chapter twenty-two</LINK>, repealing <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 23" destination-id="0-0-0-789">chapter twenty-three</LINK>, renumbering section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1058" destination-id="0-0-0-1061">one thousand fifty-eight</LINK>, amending renumbered section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057-a" destination-id="0-0-0-1049">one thousand fifty-seven-a</LINK> and sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1403" destination-id="0-0-0-1245">fourteen hundred three</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1404" destination-id="0-0-0-1495">fourteen hundred four</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2903" destination-id="0-0-0-1435">twenty-nine hundred three</LINK>, approved by the electors on November sixth, two thousand-one, shall take effect immediately, or as soon thereafter as a transfer of agency functions may be effectuated, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter, except that the amendments to the charter, amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="553" destination-id="0-0-0-757">five hundred fifty-three</LINK> of such <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 22" destination-id="0-0-0-749">chapter twenty-two</LINK>, shall take effect June 1, 2002 or the date upon which the ten members of the reconstituted and expanded board other than the chairperson have been duly appointed and qualified, whichever is earlier, provided, however, that of the first nine members of the board of health appointed on or after the effective date of these amendments, three members shall serve for two years, three members shall serve for four years, and the remainder shall serve for six years, provided further, however, that the term of any member of the board of health serving on the date of the approval of these amendments shall be deemed expired on such effective date. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3414" number="5132" version="771">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of the provisions of the amendments to the charter, approved by the electors on November sixth, two thousand-one, prior to the effective dates prescribed in subparagraph a of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3415" number="5133" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter, adding new <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 19-a" destination-id="0-0-0-687">chapters nineteen-A</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 63" destination-id="0-0-0-1329">sixty-three</LINK>, and new sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="19" destination-id="0-0-0-89">nineteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="335" destination-id="0-0-0-517">three hundred thirty-five</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="398" destination-id="0-0-0-589">three hundred ninety-eight</LINK>, approved by the electors on November sixth, two thousand-one, shall take effect immediately, or as soon thereafter as a transfer of agency functions may be effectuated, and thereafter shall control as provided in respect to all the powers, functions and duties of all officers, agencies and employees, except as further specifically provided in other sections of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3416" number="5134" version="771">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of the provisions of the amendments to the charter, approved by the electors on November sixth, two thousand-one, prior to the effective dates prescribed in subparagraph a of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3417" number="5135" version="80">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter, amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="10" destination-id="0-0-0-61">ten</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="24" destination-id="0-0-0-107">twenty-four</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="44" destination-id="0-0-0-147">forty-four</LINK>, approved by the electors on November fifth, two thousand two, shall take effect immediately, provided that any vacancy that occurs in the office of the mayor on or after September twentieth, two thousand two, and before the effective date of the amendments referenced in this subdivision, shall be governed by such amendments, and any such vacancy shall be deemed to have occurred on such effective date. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3418" number="5136" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Notwithstanding the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1153" destination-id="0-0-0-1185">1153</LINK>, in the event that the amendment set forth in paragraph 10 of the new subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="10" destination-id="0-0-0-61">10</LINK> is finally adjudicated to be invalid or otherwise cannot be implemented, all of the amendments referenced in this subdivision shall be without any further force and effect and, at such time, sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="10" destination-id="0-0-0-61">ten</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="24" destination-id="0-0-0-107">twenty-four</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="44" destination-id="0-0-0-147">forty-four</LINK> as they existed immediately prior to the effective date of such amendments shall be reinstated and shall be deemed to have always remained in full force and effect and unamended by such amendments. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3419" number="5137" version="80">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter, adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="13-a" destination-id="0-0-0-69">thirteen-a</LINK> and amending subdivision two of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049" destination-id="0-0-0-1025">one thousand forty-nine</LINK>, approved by the electors on November eighth, two thousand five, shall take effect immediately, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3420" number="5138" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter, repealing and reenacting section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">two hundred fifty-eight</LINK> and amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="95" destination-id="0-0-0-191">ninety-five</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="101" destination-id="0-0-0-201">one hundred one</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="213" destination-id="0-0-0-309">two hundred thirteen</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="233" destination-id="0-0-0-359">two hundred thirty-three</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="266" destination-id="0-0-0-423">two hundred sixty-six</LINK> and subdivision six of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">two hundred fifty</LINK>, approved by the electors on November eighth, two thousand five, shall take effect immediately, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3421" number="5139" version="80">
+					<PARA>
+						<TAB tab-count="1"/>(k)<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter, amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1137" destination-id="0-0-0-1155">eleven hundred thirty-seven</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1138" destination-id="0-0-0-1157">eleven hundred thirty-eight</LINK>, approved by the electors on November second, two thousand ten, shall take effect immediately, and hereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees; provided, however, that, notwithstanding any inconsistent provision of the charter, persons holding the offices of mayor, public advocate, comptroller, borough president or council member on the date such amendments take effect shall be subject, with respect to eligibility to be elected to or serve in the offices so held, to the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1138" destination-id="0-0-0-1157">eleven hundred thirty-eight</LINK> that were in effect immediately prior to the approval of such amendments, and to the provisions of subdivision b of such section as added by such amendments until one full term or more has elapsed since having last held such offices, after which such persons shall be fully subject to the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1138" destination-id="0-0-0-1157">eleven hundred thirty-eight</LINK>, as amended by such amendments, in its entirety. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3422" number="5140" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>(i)<TAB tab-count="1"/>The amendments to the charter, amending subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">two hundred four</LINK>, subdivision e of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1046" destination-id="0-0-0-1017">one thousand forty-six</LINK>, section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1048" destination-id="0-0-0-1023">one thousand forty-eight</LINK>, subdivision one of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049" destination-id="0-0-0-1025">one thousand forty-nine</LINK>, subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049-a" destination-id="0-0-0-1029">one thousand forty-nine-a</LINK>, paragraph one of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1052" destination-id="0-0-0-1037">one thousand fifty-two</LINK>, paragraph two of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2603" destination-id="0-0-0-1393">twenty-six hundred three</LINK>, and subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2606" destination-id="0-0-0-1399">twenty-six hundred six</LINK>, and adding a new paragraph fifteen of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1052" destination-id="0-0-0-1037">one thousand fifty-two</LINK>, a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057-b" destination-id="0-0-0-1051">one thousand fifty-seven-b</LINK>, a new subdivision (g) of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2203" destination-id="0-0-0-1343">twenty-two hundred three</LINK>, and a new subdivision b-one of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2606" destination-id="0-0-0-1399">twenty-six hundred six</LINK>, approved by the electors on November second, two thousand ten, shall take effect immediately, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter, and, with respect to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057-b" destination-id="0-0-0-1051">one thousand fifty-seven-b</LINK>, shall apply to elections for the offices specified in such section held after such date; provided, however, that the amendments to the charter, amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1056" destination-id="0-0-0-1045">one thousand fifty-six</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057" destination-id="0-0-0-1047">one thousand fifty-seven</LINK> and subdivision one of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057-a" destination-id="0-0-0-1049">one thousand fifty-seven-a</LINK>, repealing and reenacting section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1054" destination-id="0-0-0-1041">one thousand fifty-four</LINK>, repealing section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1055" destination-id="0-0-0-1043">one thousand fifty-five</LINK>, and adding a new subdivision e of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1052" destination-id="0-0-0-1037">one thousand fifty-two</LINK> and a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1113" destination-id="0-0-0-1117">eleven hundred thirteen</LINK>, approved by the electors on November second, two thousand ten, shall take effect on the first day of January, two thousand eleven, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3423" number="5141" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendment prior to the effective date prescribed in this subparagraph.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3424" number="5142" version="230">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Severability. If any clause, sentence, subparagraph, paragraph, subdivision, section or part of the amendments described in subparagraph (a) of this paragraph shall be adjudged by any court of competent jurisdiction to be invalid or otherwise cannot be implemented pursuant to law, such judgment or inability to implement shall not affect, impair or invalidate the remainder thereof, but shall be confined in its operation to the clause, sentence, subparagraph, paragraph, subdivision, section or part thereof directly involved in the controversy in which such judgment shall have been rendered or in the matter with respect to which implementation may not occur. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5065" number="5143" version="291">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>[Repealed.] <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-039]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5063" number="5144" version="291">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter adding section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="225-a" destination-id="0-0-0-1573">225-a</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 76" destination-id="0-0-0-1575">chapter 76</LINK>, approved by the electors on November 6, 2018, shall take effect on April 1, 2019, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5146" number="5145" version="230">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendment prior to April 1. 2019. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5147" number="5146" version="232">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="82" destination-id="0-0-0-173">82</LINK> and subdivisions a and d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2800" destination-id="0-0-0-1425">2800</LINK>, approved by the electors on November 6, 2018, shall take effect on January 1, 2019, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5201" number="5147" version="232">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendment prior to such date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5200" number="5148" version="232">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>The amendments to the charter adding section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3203" destination-id="0-0-0-1585">3203</LINK>, approved by the electors on November 6, 2018, shall take effect on April 1, 2019, and thereafter shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendment prior to such date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-032]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3425" number="5149" version="327">
+					<PARA>
+						<TAB tab-count="1"/>m.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter amending paragraphs 6 and 10 of subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="10" destination-id="0-0-0-61">10</LINK>, paragraph 6 of subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="24" destination-id="0-0-0-107">24</LINK>, paragraph 6 of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="25" destination-id="0-0-0-109">25</LINK>, subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="50" destination-id="0-0-0-161">50</LINK>, subdivisions c, e and f of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="51" destination-id="0-0-0-163">51</LINK>, paragraph 6 of subdivision e of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="81" destination-id="0-0-0-171">81</LINK>, and paragraph 6 of subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="94" destination-id="0-0-0-189">94</LINK>, and adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1057-g" destination-id="0-0-0-1609">1057-g</LINK>, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments to the charter, and thereafter such amendments shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5500" number="5150" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter amending paragraphs 1, 3, and 4 of subdivision (b), paragraphs 1, 2, 3, and 5 of subdivision (c), and paragraphs 1 and 2 of subdivision (d), of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="440" destination-id="0-0-0-611">440</LINK>, approved by the electors on November 5, 2019, shall take effect on March 31, 2020. Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendments prior to such date, and the civilian complaint review board shall promulgate any rules necessary for the timely implementation of such amendments prior to such date.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5511" number="5151" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The amendments to the charter amending paragraph 3 of subdivision (d) and adding a new subdivision (g) of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="440" destination-id="0-0-0-611">440</LINK>, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments to the charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5510" number="5152" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Upon the effective dates included in this paragraphs, the amendments described therein shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5509" number="5153" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="20-h" destination-id="0-0-0-1611">20-h</LINK>, approved by the electors on November 5, 2019, shall take effect on March 31, 2020. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5565" number="5154" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The amendments to the charter amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="31" destination-id="0-0-0-121">31</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="391" destination-id="0-0-0-575">391</LINK> and subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="392" destination-id="0-0-0-577">392</LINK>, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments to the charter; provided, however, that if the office of the corporation counsel is vacant on such effective date, such vacancy will be deemed to have occurred on such effective date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5564" number="5155" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The amendments to the charter amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">2602</LINK>, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments to the charter. Provided, however, that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5563" number="5156" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>The two offices of the conflicts of interest board for which terms expire on March 31, 2022 shall continue until successors have been appointed by the public advocate and comptroller, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">2602</LINK>, for the ensuing terms. The mayor shall not make nominations for successors to such offices unless such offices become vacant prior to March 31, 2022, in which case the mayor shall make nominations for successors to serve for the unexpired portion of the terms. The public advocate and comptroller shall make their initial nominations to the conflicts of interest board by January 30, 2022. If either fails to do so by such date, the term of the member in office shall be extended for an additional year, and the term of the successor to such member shall be shortened by an equal amount of time, pursuant to subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">2602</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5562" number="5157" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>The amendments to the charter amending subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">2602</LINK> shall only apply to members serving on the conflicts of interest board whose terms begin after the effective date of such amendments, except that such amendments shall apply to any member whose term is extended pursuant to subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2602" destination-id="0-0-0-1391">2602</LINK> after the effective date of such amendments. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5561" number="5158" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The amendments to the charter amending paragraphs 1 through 3 of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2604" destination-id="0-0-0-1395">2604</LINK>, approved by the electors on November 5, 2019, shall take effect on January 1, 2022 and shall only apply to public servants, as that terms is defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2601" destination-id="0-0-0-1389">2601</LINK>, who leave service with the city after such date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5560" number="5159" version="327">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Upon the effective dates included in this paragraph, the amendments described therein shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as specified by the terms of this paragraph or as specifically provided in other sections of this charter. Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendments prior to such effective dates. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5558" number="5160" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The following amendments to the charter, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5592" number="5161" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter adding a new subdivision o to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="24" destination-id="0-0-0-107">24</LINK> and adding a new subdivision 18 to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="82" destination-id="0-0-0-173">82</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5591" number="5162" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter renumbering subdivisions 5 through 16 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">250</LINK> to subdivisions 6 through 17, respectively, adding a new subdivision 5 to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">250</LINK> and amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1515" destination-id="0-0-0-1281">1515</LINK> and subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1516" destination-id="0-0-0-1283">1516</LINK>; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5590" number="5163" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The amendments to the charter amending subdivision a and paragraph 1 of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">258</LINK> and adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1528" destination-id="0-0-0-1613">1528</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5589" number="5164" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The amendments to the charter relettering subdivisions e and f of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">258</LINK> to be subdivisions f and g, respectively, and adding a new subdivision e to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">258</LINK>, approved by the electors on November 5, 2019, shall take effect on July 1, 2020. Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of these amendments prior to such date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5588" number="5165" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Upon the effective dates included in this paragraph, the amendments described therein shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5586" number="5166" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The amendments to the charter amending subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">197-c</LINK>, approved by the electors on November 5, 2019, shall take effect on August 31, 2020. Officers and employees of the city shall take any actions as are necessary and appropriate to prepare for the implementation of such amendments prior to the such date, and, no later than such date, the city planning commission shall establish rules providing minimum standards for the content and form of pre-certification notices to be submitted to community boards, borough boards and borough presidents. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5602" number="5167" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The amendments to the charter amending subdivision e of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">197-c</LINK>, approved by the electors on November 5, 2019, shall take effect immediately upon certification that the electors have approved such amendments to the charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5601" number="5168" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Upon the effective dates included in this paragraph, the amendments described therein shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5499" number="5169" version="613">
+					<PARA>
+						<TAB tab-count="1"/>n.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter adding the preamble and adding section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1151-a" destination-id="0-0-0-1751">1151-a</LINK> to this chapter, approved by the electors on November 8, 2022, shall take effect immediately upon certification that the electors have approved such amendments to the charter, and thereafter shall apply as provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1151-a" destination-id="0-0-0-1751">1151-a</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6360" number="5170" version="613">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter adding <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 78" destination-id="0-0-0-1757">chapter 78</LINK> and adding a section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1151-b" destination-id="0-0-0-1755">1151-b</LINK>, approved by the electors on November 8, 2022, shall take effect immediately upon certification that the electors have approved such amendments to the charter, and thereafter such amendments shall control as provided with respect to all the powers, functions and duties of officers, agencies and employees, except as further specifically provided in other sections of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6376" number="5171" version="613">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The amendments to the charter adding a subdivision c to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="16" destination-id="0-0-0-83">16</LINK> and adding a section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1151-c" destination-id="0-0-0-1753">1151-c</LINK>, approved by the electors on November 8, 2022, shall take effect immediately upon certification that the electors have approved such amendments to the charter, and thereafter shall apply as provided by section 16 and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1151-c" destination-id="0-0-0-1753">1151-c</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6361" number="5172" version="898">
+					<PARA>
+						<TAB tab-count="1"/>o.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter amending section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="13-e" destination-id="0-0-0-1655">13-e</LINK> and subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="753" destination-id="0-0-0-895">753</LINK> and adding a new subdivision g to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="753" destination-id="0-0-0-895">753</LINK>, approved by the electors on November 5, 2024, shall take effect immediately upon certification that the electors have approved such amendments to the charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-104]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7355" number="5173" version="898">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="33" destination-id="0-0-0-125">33</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="235" destination-id="0-0-0-363">235</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="236" destination-id="0-0-0-365">236</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="237" destination-id="0-0-0-367">237</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="251" destination-id="0-0-0-395">251</LINK>, and subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="249" destination-id="0-0-0-391">249</LINK>, approved by the electors on November 5, 2024, shall take effect immediately upon certification that the electors have approved such amendments, provided, however, that the amendments to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="33" destination-id="0-0-0-125">33</LINK> shall apply only to proposed local laws for which a public hearing or vote of the council is held after the effective date. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-104]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7369" number="5174" version="1009">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The amendments to the charter adding section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="33-a" destination-id="0-0-0-1815">33-a</LINK>, approved by the electors on November 5, 2024, shall take effect immediately upon certification that the electors have approved such amendments. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-104]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7376" number="5175" version="898">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>The amendments to the charter amending subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">204</LINK>, and sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="215" destination-id="0-0-0-313">215</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="228" destination-id="0-0-0-349">228</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="234" destination-id="0-0-0-361">234</LINK>, approved by the electors on November 5, 2024, shall take effect on April 1, 2025.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7382" number="5176" version="988">
+					<PARA>
+						<TAB tab-count="1"/>p.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The amendments to the charter adding sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-f" destination-id="0-0-0-1835">197-f</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="666-a" destination-id="0-0-0-1839">666-a</LINK> and subdivision d-1 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="668" destination-id="0-0-0-875">668</LINK>, and amending subdivisions b and g of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">197-e</LINK>, subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="215" destination-id="0-0-0-313">215</LINK>, subdivisions 9 and 10 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="666" destination-id="0-0-0-871">666</LINK>, and subdivisions e and h of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="668" destination-id="0-0-0-875">668</LINK>, as approved by the electors on November 4, 2025, shall take effect immediately upon certification that the electors have approved such amendments to the charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7666" number="5177" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The amendments to the charter amending sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">197-d</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="199" destination-id="0-0-0-285">199</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">200</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">201</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="218" destination-id="0-0-0-319">218</LINK> and adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">197-e</LINK>, approved by the electors on November 4, 2025, shall take effect immediately upon certification that the electors have approved such amendments to the charter, provided that such amendments shall not apply to an application that has been certified as complete pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">197-c</LINK> at the time such amendments take effect. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7668" number="5178" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The amendments to the charter adding a new section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-g" destination-id="0-0-0-1841">197-g</LINK> and a new subdivision e-1 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">197-d</LINK>, and amending subdivision f of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">197-d</LINK>, as approved by the electors on November 4, 2025, shall take effect immediately upon certification that the electors have approved such amendments to the charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7688" number="5179" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>The amendments to the charter amending subdivision 3 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="82" destination-id="0-0-0-173">82</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="198" destination-id="0-0-0-283">198</LINK>, approved by the electors on November 4, 2025, shall take effect immediately upon certification that the electors have approved such amendments to the charter, except that the amendments to subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="198" destination-id="0-0-0-283">198</LINK> shall take effect on January 1, 2027.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7689" number="5180" version="988">
+					<PARA>(Am. L.L. 2018/211, 12/3/2018, eff. 12/3/2018; Am. L.L. 2019/001, 1/2/2019, eff. 1/2/2019; Am. L.L. 2019/128, 7/14/2019, eff. 7/14/2019; Am. L.L. 2019/215, 12/11/2019, eff. 12/11/2019; Am. L.L. 2022/121, 12/2/2022, eff. 12/2/2022; Am. L.L. 2024/117, 12/3/2024, eff. 12/3/2024; Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6359" number="5181" version="748">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/042" destination-id="0-0-0-0">L.L. 1989/042</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2001/077" destination-id="0-0-0-0">L.L. 2001/077</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6846" number="5182" version="748">
+				<HEADING>Section 1153. Separability clause. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1185" name="1153"/>Section 1153. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Separability clause. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3426" number="5183" version="617">
+					<PARA>If any provisions of this charter or of any amendments thereto shall be held invalid or ineffective in whole or in part or inapplicable to any person or situation, it is the purpose and intent of this charter that all other provisions thereof shall nevertheless be separately and fully effective and that the application of any such provision to other persons or situations shall not be affected. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-3427" number="5184" version="3">
+				<HEADING>Section 1154. Short title. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1187" name="1154"/>Section 1154. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Short title. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3428" number="5185" version="617">
+					<PARA>This charter shall be known and may be cited as &quot;The New York city charter.&quot; </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

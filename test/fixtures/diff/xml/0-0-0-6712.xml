@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-6712" number="2716" version="703">
+			<HEADING>Chapter 18-C: Public Safety</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-635" name="Chapter 18-c"/>Chapter 18-C: Public Safety</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1693" number="2717" version="3">
+				<HEADING>Section 459. Definitions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-637" name="459"/>Section 459. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definitions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1694" number="2718" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The term &quot;school&quot; means a public, private or parochial, day care center or nursery or pre-school, elementary, intermediate, junior high, vocational, or high school.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1695" number="2719" version="769">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The term &quot;school zone&quot; means in or on or within any building, structure, athletic playing field, playground or land contained within the real property boundary line of a public, private or parochial day care center or nursery or pre-school, elementary, intermediate, junior high, vocational, or high school, or within one thousand feet of the real property boundary line comprising any such school. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1696" number="2720" version="408">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The term &quot;firearm&quot; means a firearm, rifle, shotgun, or assault weapon, as such terms are defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="10-301" destination-id="0-0-0-0">10-301</LINK> of the administrative code, or a machine gun, as defined in penal law section 265.00. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1697" number="2721" version="3">
+				<HEADING>Section 460. Gun-free school safety zones. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-639" name="460"/>Section 460. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Gun-free school safety zones. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1698" number="2722" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>It shall be a crime for any individual knowingly to possess a firearm at a place that the individual knows, or has reasonable cause to believe, is a school zone.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1699" number="2723" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Subdivision a of this section shall not apply where the firearm is: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1700" number="2724" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>possessed and kept in such individual&apos;s home in a school zone, provided that such individual is licensed or permitted to possess such firearm; or </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1701" number="2725" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>possessed and kept at such individual&apos;s business in a school zone, provided that such individual is licensed or permitted to possess such firearm. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1702" number="2726" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Affirmative defenses to the crime established in subdivision a shall include possession of a firearm: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1703" number="2727" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>carried for personal safety between such individual&apos;s business, home, or bank in a school zone, provided that such individual is licensed or permitted to possess such firearm for such purpose; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1704" number="2728" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>just purchased or obtained by such individual and being transported that same day for the first time to such individual&apos;s home or business in a school zone where it will be stored, provided that such individual is licensed or permitted to possess such firearm; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1705" number="2729" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>carried between a police department facility for inspection and an individual&apos;s business, home, bank, or point of purchase in a school zone, provided that such individual is licensed or permitted to possess such firearm; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1706" number="2730" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>carried by licensed or permitted individuals and being transported to or from an authorized target practice facility; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1707" number="2731" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(v)<TAB tab-count="1"/>carried between a gunsmith for demonstrably needed repairs and an individual&apos;s business or home in a school zone, provided that such individual is licensed or permitted to possess such firearm; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1708" number="2732" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(vi)<TAB tab-count="1"/>used in an athletic or safety program approved by a school in a school zone, or by the police commissioner, or in accordance with a contract entered into between a school within the school zone and the individual or an employer of the individual, provided that such individual is licensed or permitted to possess such firearm for such purpose; or </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1709" number="2733" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(vii)<TAB tab-count="1"/>used in accordance with a contract entered into between a business within the school zone and the individual or an employer of the individual, provided that such individual is licensed or permitted to possess such firearm for such purpose. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1710" number="2734" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>It shall be a crime for any person, knowingly or with reckless disregard for the safety of another, to discharge a firearm in a school zone. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1711" number="2735" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Affirmative defenses to the crime established in subdivision d shall include discharge of a firearm: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1712" number="2736" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>by an individual for self-defense, provided that such individual is licensed or permitted to possess such firearm for such purpose; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1713" number="2737" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>for use in a special event or safety program authorized by a school in a school zone or by the police commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1714" number="2738" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>by an individual in accordance with a contract entered into between a school in the school zone and the individual or an employer of the individual, provided that such individual is licensed or permitted to possess such firearm for such purpose; or </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1715" number="2739" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>by an individual in accordance with a contract entered into between a business and the individual or an employer of the individual, provided that such individual is licensed or permitted to possess such firearm for such purpose. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1716" number="2740" version="3">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Any person who violates this section shall be guilty of a misdemeanor, punishable by imprisonment of not more than one year or by a fine of not more than ten thousand dollars, or both. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1717" number="2741" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>In addition to the penalties prescribed in subdivision f of this section, any person who violates this section shall be liable for a civil penalty of not more than ten thousand dollars. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1718" number="2742" version="3">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>This section shall not apply to a police officer, as such term is defined in section 1.20 of the criminal procedure law, or a federal law enforcement officer, as such term is defined in section 2.15 of the criminal procedure law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1719" number="2743" version="3">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>The police commissioner may promulgate rules implementing the provisions of this section. The police commissioner shall provide written notice of the requirements of this section to all persons who receive an official authorization to purchase a firearm and to all persons applying for a license or permit, or renewal of a license or permit. Failure to receive such notice shall not be a defense to any violation of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1720" number="2744" version="48">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>The city of New York and its agencies, officers or employees shall not be liable to any party by reason of any incident or injury occurring in a gun-free school safety zone arising out of a violation of any provision of this section. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

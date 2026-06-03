@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-4283" number="6439" version="3">
+			<HEADING>Chapter 71: Department of Transportation</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1429" name="Chapter 71"/>Chapter 71: Department of Transportation</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4284" number="6440" version="3">
+				<HEADING>Section 2901. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1431" name="2901"/>Section 2901. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4285" number="6441" version="616">
+					<PARA>There shall be a department of transportation, the head of which shall be the commissioner of transportation. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4286" number="6442" version="3">
+				<HEADING>Section 2902. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1433" name="2902"/>Section 2902. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4287" number="6443" version="616">
+					<PARA>The commissioner may appoint three deputies, one of whom shall be in charge of highway operations and be a licensed professional engineer in good standing under the education law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4288" number="6444" version="722">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1994/025" destination-id="0-0-0-0">L.L. 1994/025</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6796" number="6445" version="722">
+				<HEADING>Section 2903. Powers and duties of the commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1435" name="2903"/>Section 2903. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties of the commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4289" number="6446" version="616">
+					<PARA>Except as otherwise provided by law, the commissioner shall have control over and be responsible for all those functions and operations of the city relating to transportation including, without limitation, the following:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4290" number="6447" version="616">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Parking and traffic operations.</CHARFORMAT> The commissioner shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4291" number="6448" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>make such rules and regulations for the conduct of vehicular and pedestrian traffic in the streets, squares, avenues, highways and parkways of the city as may be necessary. The violation of such rules and regulations shall be a traffic infraction triable by a judge of the criminal court of the city of New York and, except as otherwise provided by law, punishable by not more than fifteen days&apos; imprisonment, or by a fine of not more than fifty dollars, or both, and may also be adjudicated pursuant to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="t19" destination-id="0-0-0-0">title nineteen</LINK> of the administrative code or pursuant to articles 2-A and 2-B of the vehicle and traffic law. The police commissioner may, in an emergency, suspend for a period of forty-eight hours the provisions of any such rule or regulation and shall immediately notify the commissioner of such suspension. In order to expedite the movement of traffic or to safeguard pedestrians or property, a police officer or authorized employee of the transportation department may order a person to disregard any traffic signal or any such rule or regulation; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4292" number="6449" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>establish, determine, control, install and maintain the design, type, size and location of any and all signs, signals, marking, and similar devices indicating the names of the streets and other public places and for guiding, directing or otherwise regulating and controlling vehicular and pedestrian traffic in the streets, squares, parks, parkways, highways, roads, alleys, marginal streets, bridges and other public ways of the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4293" number="6450" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>make recommendations to the mayor as to the design and location of highway lighting devices, poles and fixtures, and the type of intensity of illumination of streets and highways; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4294" number="6451" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>prepare and submit to the mayor a proposed comprehensive city traffic plan; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4295" number="6452" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>collect and compile traffic data and prepare engineering studies and surveys in regard to vehicular and pedestrian traffic; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4296" number="6453" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>prepare and submit to the mayor detailed reports in regard to traffic conditions in the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4297" number="6454" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>make recommendations to the mayor in regard to methods of ameliorating traffic conditions which adversely affect the welfare of the city and which cannot be remedied by traffic rules and regulations; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4298" number="6455" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>submit to the mayor from time to time for consideration and forwarding to appropriate city agencies, specific proposals for amendment of any resolutions, rules, or regulations of any city agency which affect traffic conditions in the city, and proposed legislation which may be necessary to implement and effectuate such proposals; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4299" number="6456" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>prepare and submit to the mayor, for consideration and forwarding to the council, the city planning commission and to other agencies of the city, recommendations and proposals for the improvement of existing streets, street widening and location of new streets, avenues, highways and parkways; the location and design of parking garages and parking areas; the establishment of public parking garages and parking areas; the location, type and design of off-street loading and unloading and parking facilities; and other matters relating to traffic control; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4300" number="6457" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>coordinate the efforts of and consider the reports, recommendations and suggestions of public and private agencies and civic groups in regard to traffic conditions and traffic control in the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4301" number="6458" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>prepare analyses of traffic accidents with a view to determining their causes and means for their prevention; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4302" number="6459" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(12)<TAB tab-count="1"/>carry on educational activities for the purpose of promoting traffic safety and free movement of vehicular and pedestrian traffic in the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4303" number="6460" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(13)<TAB tab-count="1"/>establish parking meter zones, determine the design, type, size, location and use of parking meters and fix the fees for parking in parking areas and public parking garages except that regulations pertaining to the use of parking meter zones shall not apply to vehicles operated by disabled persons duly displaying special vehicle identification cards issued by the commissioner other than at those periods of time when &quot;no standing&quot; restrictions are in effect in the metered zones. The parking fees and fines and penalties for violation of parking rules so collected shall be paid into a special fund to be known as the &quot;traffic improvement fund.&quot; The revenues of such fund, upon authorization by the council, shall be used for the payment of all costs of purchase, rental, engineering, installation, operation, maintenance and repair of parking meters, for the collection of coins, for the enforcement of rules and regulations pertaining to vehicular parking, the collections of fines and penalties for violation of such rules and regulations, and for the payment of interest on, amortization of, or payment of any indebtedness contracted by the city in connection with the installation, operation and maintenance of parking meters. Any revenues remaining after such payments are made shall be used for capital and other expenditures to ameliorate traffic conditions which adversely affect the welfare of the city;</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4575" number="6461" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(13-a)<TAB tab-count="1"/>in conjunction with the commissioner of finance and with any other city agency, enter into at least one agreement with a financing agency or card issuer to provide for the acceptance by the city of credit cards as an alternate means of payment of fines, civil penalties, charges and fees incurred due to a violation of any law, rule, or regulation providing for or regulating parking, stopping, standing or trespassing of a motor vehicle. Such agreement(s) shall be in accordance with the provisions of the administrative code governing the acceptance by the city of credit cards as an alternate means of payment of fines, civil penalties, taxes, fees, rent, rates, charges or other amounts owed by a person to the city.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4576" number="6462" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(13-b)<TAB tab-count="1"/>notwithstanding the provisions of any other law, consult with the commissioner of finance or the police commissioner, or any other appropriate agency head, one or more of whom shall enter into at least one agreement with a financing agency or card issuer to provide for the acceptance by the city of at least two major credit cards as an alternate means of payment of fees or charges required to be paid in order to retrieve a motor vehicle which has been towed due to a violation of any law, rule, or regulation providing for or regulating parking, stopping, standing or trespassing of a motor vehicle. Such agreement(s) shall be in accordance with the provisions of the administrative code governing the acceptance by the city of credit cards as an alternate means of payment of fines, civil penalties, taxes, fees, rent, rates, charges or other amounts owed by a person to the city. For purposes of this provision, the term &quot;major credit card&quot; shall mean MasterCard, Visa, American Express or Discover. This provision shall not be construed to apply to the towing of a vehicle in satisfaction of a judgment for an outstanding debt owed to the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4304" number="6463" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(14)<TAB tab-count="1"/>enforce laws, rules and regulations concerning the parking of vehicles and the movement and conduct of vehicular and pedestrian traffic; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4305" number="6464" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Notwithstanding the provisions of any other law the commissioner shall have the power, concurrently with the police department, to enforce all laws, rules and regulations prohibiting, regulating, directing, controlling or restricting both the parking of vehicles and the movement and conduct of vehicular and pedestrian traffic in and on all streets, squares, avenues, highways, parkways and public off-street parking facilities in the city. As used in this section the term &quot;parking&quot; shall mean and include the parking, standing and stopping of vehicles at meters and off-street parking metered areas and on any highway in the city as such terms are defined in the traffic regulations of the city promulgated pursuant to law; and the term &quot;highway&quot; shall mean and include any highway or public highway as defined in sections one hundred thirty-four and sixteen hundred forty-two of the vehicle and traffic law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4306" number="6465" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The commissioner may employ, hire and retain officers, agents and employees for the purpose of enforcing laws, rules and regulations prohibiting, regulating, directing, controlling or restricting the parking of vehicles and the movement and conduct of vehicular and pedestrian traffic, which officers, agents and employees are hereby authorized, empowered and designated to issue, make and serve tickets, summonses and complaints for traffic infractions pursuant to article two-A of the vehicle and traffic law and such rules and regulations as may be promulgated thereunder, to issue, make and serve simplified traffic informations and to issue, make and serve appearance tickets for traffic infractions, misdemeanors and violations related to the movement and conduct of vehicular traffic, pursuant to article two-B of the vehicle and traffic law and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T19" destination-id="0-0-0-0">title nineteen</LINK> of the administrative code of the city of New York and such rules and regulations as may be promulgated thereunder. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4307" number="6466" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(15)<TAB tab-count="1"/>issue special vehicle identification parking permits; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4308" number="6467" version="771">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The commissioner shall issue a special vehicle identification parking permit to a New York city resident who requires the use of a private automobile for transportation and to a non-resident who requires the use of a private automobile for transportation to a school in which such applicant is enrolled or to a place of employment, when such person has been certified by the department of health and mental hygiene or a provider designated by the department or the department of health and mental hygiene, who shall make such certification in accordance with standards and guidelines prescribed by the department or the department of health and mental hygiene, as having a permanent disability seriously impairing mobility. A permit shall be issued to such person upon his or her application. A permit shall also be issued to such person upon application made on such person&apos;s behalf by a parent, spouse, domestic partner, guardian or other individual having legal responsibility for the administration of such person&apos;s day to day affairs. Any vehicle displaying such permit shall be used exclusively in connection with parking a vehicle in which the person to whom it has been issued is being transported or will be transported within a reasonable period of time. Such permit shall not be transferable and shall be revoked if used on behalf of any other person. Any abuse by any person to whom such permit has been issued of any privilege, benefit or consideration granted pursuant to such permit, shall be sufficient cause for revocation of said permit. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4309" number="6468" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>A vehicle bearing such special vehicle identification permit when parked shall not be deemed in violation of any of the provisions of the rules and regulations governing parking in the city except where such a vehicle shall be parked in a bus stop, a taxi-stand, within fifteen feet of a fire hydrant, a fire zone, a driveway, a crosswalk, a no stopping zone, a no standing zone, or where such vehicle is double parked. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4310" number="6469" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The name, address and telephone number where the permittee can be reached shall be written on the reverse side of the permit, not to be displayed to the public, but to be available for emergency purposes. Such permit shall also include on the front side thereof, the license plate number(s) of the vehicle(s) which will be used to transport the permittee. The commissioner shall allow the permittee to add or delete license plate number(s) as may be necessary; however, at no time shall the number of license plate numbers on any given permit exceed ten. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4311" number="6470" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Any person to whom a permit has not been issued, and who shall use a permit issued pursuant to this section for any purpose other than parking a motor vehicle while transporting a physically handicapped person, shall be guilty of a misdemeanor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4312" number="6471" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Certifications by the department of health and mental hygiene of applications for special vehicle identification permits shall be made at those district health offices designated for such purpose by the commissioner of health and mental hygiene. At least one such district health office shall be designated in each borough for special vehicle identification permit certifications. Such certifications shall be available by appointment at each of said borough health offices, or an alternative location within the borough as designated by the commissioner by regulation, on a regular basis. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4313" number="6472" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(16)<TAB tab-count="1"/>[Repealed.]</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4314" number="6473" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(17)<TAB tab-count="1"/>Establish and publicize a telephone number for citizen reporting of violations of section 1203-c of the vehicle and traffic law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4315" number="6474" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The department shall affix a sign indicating the aforementioned telephone number to all above grade signs, located on city property which display the international symbol of access; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4316" number="6475" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Any person, firm or corporation that is required by law to install such above grade signs, which display the international symbol of access, shall affix a sign indicating the aforementioned telephone number to these signs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4317" number="6476" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Whenever the department shall determine that such a sign should be installed or affixed, it may order the owner of the property to perform such work. Such order shall specify the work to be performed and shall fix a reasonable time for compliance. The department shall, by appropriate regulations, provide for a reinspection by a departmental inspector, if the owner of the property requests such reinspection. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4318" number="6477" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Upon the owner&apos;s failure to comply with such order or notice within thirty days of service thereof, the department may perform the work or cause same to be performed, the cost of which, together with administrative expenses, as determined by the commissioner, but not to exceed twenty percent of the cost of performance, shall constitute a debt recoverable from the owner by lien on the property affected or otherwise. Upon entry by the city collector, in the book in which such charges are to be entered, of the amount definitely computed as a statement of account by the department, such debt shall become a lien prior to all liens or encumbrances on such property, other than taxes. An owner shall be deemed to have complied with this subdivision if he or she performs such work as specified in the order within the time set forth therein. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4319" number="6478" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Service of a notice or order upon an owner pursuant to the provisions of this section shall be made upon such owner or upon his or her designated managing agent personally or by certified or registered mail, return receipt requested, addressed to the person whose name appears on the records of the city collector as being the owner of the premises. If the records of the city collector show that a party other than the owner, has been designated to receive tax bills for such property, the notice shall be mailed to such party as well as to the owner of record, at his or her last known address. If the postal service returns the order with a notation that the owner refused to accept delivery of such notice, it may be served by ordinary mail and posted in a conspicuous place on the premises. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4320" number="6479" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>A copy of such notice or order shall also be filed in the office of the clerk of the county where the property is situated, together with proof of service thereof. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4321" number="6480" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>A notice of such account, stating the amount due and the nature of the charge, shall be mailed by the city collector, within five days after such entry, to the last known address of the person whose name appears on the records of the city collector as being the owner or the agent or as the person designated by the owner to receive tax bills or where no name appears, to the premises, addressed to either the owner or the agent. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4322" number="6481" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>If such charge is not paid within ninety days from the date of entry, it shall be the duty of the city collector to charge and receive interest thereon, to be calculated to the date of payment from the date of entry. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4323" number="6482" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Such charge and interest shall be collected and the lien thereof may be foreclosed in the manner provided by law for the collection and foreclosure of the lien of taxes, sewer rents, sewer surcharges and water charges due and payable to the city, and the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T11C004" destination-id="0-0-0-0">chapter four of title eleven</LINK> of the code shall apply to such charge and the interest thereon and the lien thereof. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4324" number="6483" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(j)<TAB tab-count="1"/>In addition to collecting the charge for the cost of installation or affixing of such a sign, the city may maintain a civil action for recovery of such charge against a property owner who is responsible under this section for such work in the first instance, provided however, that in the event that the department performs the work without duly notifying such person in the manner prescribed in subdivision e, the cost to the city of performing such work shall be prima facie evidence of the reasonable cost thereof. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4325" number="6484" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(18)<TAB tab-count="1"/>upon receipt of a complaint in the appropriate borough office of the department concerning a measurement error, incorrect property assessment, or that the property qualifies for local law sixty-seven, the borough office shall notify the property owner, within ten business days, in writing, where appropriate, that all records will be reviewed and the results will be sent, if applicable, to the sidewalk assessment review board within the department for review within thirty days of receipt of the complaint. The property owner may schedule an appointment in the appropriate borough office of the department to review that property owner&apos;s records. The appropriate borough office shall notify the property owner of the determination of the sidewalk assessment review board in writing within fifteen business days of receiving the determination from the sidewalk assessment review board. The borough office shall also notify the property owner in writing that if the property owner is not satisfied with the determination, of the right to file a notice of claim with the office of the comptroller as provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.2" destination-id="0-0-0-0">19-152.2</LINK> of the administrative code of the city of New York and of the right to file a petition for appeal and commence a proceeding to review and/or correct the notice of account and/or the quality of work performed under the direction of the department in the manner provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.3" destination-id="0-0-0-0">19-152.3</LINK> of the administrative code of the city of New York. Such notice shall also include the appropriate claim form to be filed with the office of the comptroller.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4326" number="6485" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>Upon receipt of complaint in the appropriate borough office of the department regarding the quality of work, the department shall send an inspector to investigate the complaint within thirty days. Where appropriate the department shall notify the property owner in writing of the inspection date at least five days prior to the inspection date. If the quality of the work is determined to be poor, the work shall be corrected by the appropriate contractor within eighteen months of substantial completion. If the property owner alleges that the subsequent or the corrective work was of poor quality, or if the inspector determines that no correction is required, the property owner shall be informed in writing, where appropriate, within ten business days, by the appropriate borough office of the department of the right to file a notice of claim with the office of the comptroller as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.2" destination-id="0-0-0-0">19-152.2</LINK> of the administrative code of the city of New York and of the right to file a petition for appeal and commence a proceeding to review and/or correct the notice of account and/or the quality of work performed under the direction of or by the department in the manner provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.3" destination-id="0-0-0-0">19-152.3</LINK> of the administrative code of the city of New York. Such notice shall also include the appropriate claim form to be filed with the office of the comptroller. Upon receipt of a complaint other than a measurement error, incorrect property assessment, that the property qualifies for local law sixty-seven or concerning quality of work performed under the direction of or by the department in the appropriate borough office of the department, the appropriate borough office shall notify, in writing, where appropriate, within ten business days, of the right to file a notice of claim with the office of the comptroller as provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.2" destination-id="0-0-0-0">19-152.2</LINK> of the administrative code of the city of New York and of the right to file a petition for appeal and commence a proceeding to review and/or correct the notice of account in the manner provided by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152.3" destination-id="0-0-0-0">19-152.3</LINK> of the administrative code of the city of New York. Upon request of the owner of property, the department through the appropriate borough office shall within fifteen business days provide for the reinspection as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152" destination-id="0-0-0-0">19-152</LINK> of the administrative code of the city of New York. Upon request of the owner of property, the appropriate borough office shall within fifteen business days provide for the reinspection as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152" destination-id="0-0-0-0">19-152</LINK> of the administrative code of the city of New York. The department shall also post signs in conspicuous places in the borough offices advising the public of such rights; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4327" number="6486" version="616">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Highway operations.</CHARFORMAT> The commissioner shall have charge and control of the following functions relating to the construction, maintenance and repair of public roads, streets, highways, parkways, bridges and tunnels: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4328" number="6487" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>regulating, grading, curbing, flagging and guttering of streets, including marginal streets and places, and the laying of crosswalks; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4329" number="6488" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>designing, constructing and repairing of public roads, streets, highways and parkways; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4330" number="6489" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>paving, repaving, resurfacing and repairing of all public roads, streets, including marginal streets and places, highways and parkways and the relaying of all pavement removed for any cause including cleaning, sweeping, landscaping and maintenance functions for arterial highways as defined by regulation; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4331" number="6490" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>filling of sunken lots, fencing of vacant lots, digging down of lots and licensing of vaults under sidewalks; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4332" number="6491" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>regulation of the use and transmission of gas, electricity, pneumatic power and steam for all purposes in, upon, across, over and under all streets, roads, avenues, parks, public places and public buildings; regulation of the construction of electric mains, conduits, conductors and subways in any streets, roads, avenues, parks and public places and the issuance of permits to builders and others to use or open a street; and to open the same for the purpose of carrying on the business of transmitting, conducting, using and selling gas, electricity or steam or for the service of pneumatic tubes, provided, however, that this subdivision shall not be construed to grant permission to open or use the streets except by persons or corporations otherwise duly authorized to carry on business of the character above specified; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4333" number="6492" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>construction, alteration and maintenance of all bridges and tunnels. The commissioner shall issue a report to the mayor, city council and the people of the city about the condition of all bridges and tunnels operated and maintained by the department on March first, as of December thirty-first of the preceding calendar year. The report shall include a description of all capital and revenue budget funds appropriated for rehabilitation and maintenance of bridges and tunnels as well as the program developed by the commission for the maintenance of all bridges and tunnels in the city of New York; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4334" number="6493" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>removal of encroachments on public roads, streets, highways and parkways, with the exception of seasonal horticultural operations, as defined by regulations to be adopted by the commissioner, to be executed by the department of parks and recreation, and snow removal and de-icing operations to be carried out by the department of sanitation; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4335" number="6494" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>clearing, grubbing, grading, filling or excavating of vacant lots and other land areas, as provided by law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4336" number="6495" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>installation of metal chain link fences or barriers on overpasses, footbridges, bridges or walkways extending over highways, roadways, parkways and streets. Every fence or barrier so installed shall extend a suitable height above the surface level of such overpass, footbridge, bridge or railing, abutment or curbing thereon or adjacent thereto; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4337" number="6496" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>designing, constructing and maintaining a lighting system for streets, highways, parks and public places in the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4338" number="6497" version="616">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Ferries and related facilities.</CHARFORMAT> The commissioner shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4339" number="6498" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>maintain and operate the ferries of the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4340" number="6499" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>be responsible for constructing, acquiring, operating, maintaining or controlling all ferry boats, ferry houses, ferry terminals and equipment thereof and all wharf property and marginal roads adjacent to such wharves, ferry houses and terminals necessary for the operation of the ferries and related facilities, including parking sites; any ferry and any other such property, including but not limited to, all or part of such wharf property, may be leased in the same manner as other wharf property, provided, however, that from and after the sixtieth day next succeeding the date on which the provisions of this paragraph as hereby amended take effect, no substantial or general change in the level of services furnished upon any such ferry facility under the jurisdiction of the commissioner shall be instituted, allowed or continued except upon not less than thirty days notice to the city planning commission and the council. Provided, further that notice of such change shall be conspicuously posted in a public place at each ferry house and terminal for a continuous period of at least thirty days in advance of any such change taking effect and in addition, such notice shall further be published at least once during such thirty day period in a daily newspaper of general circulation in the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4341" number="6500" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>have charge and control of all marine operations within the city and the power to regulate public and private ferry operations originating or terminating within the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4342" number="6501" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>establish tours of ferry facilities and their related operations as well as tours of the New York harbor at fees to be established by the commissioner, together with the authority to publicize and advertise the same; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4343" number="6502" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>issue permits for the control of television and photography activities within or upon ferries and related facilities; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4344" number="6503" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>construct, operate and maintain marinas and public boat launching ramps and related facilities of ferry property and collect fees for the use thereof; such fees to be deposited in a special fund for the continued maintenance, operation or reconstruction of public marine facilities. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4345" number="6504" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Mass transportation facilities.</CHARFORMAT> The commissioner shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4346" number="6505" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>prepare or review plans and recommendations with respect to the nature, location, construction, operation and financing of roads, highways, bridges, tunnels, subways or other facilities for mass transportation other than aviation facilities for use in whole or in part within the city whether or not the funds provided for such facilities are derived from the city treasury; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4347" number="6506" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>develop and coordinate planning and programming for all forms of mass transportation within the city of New York whether or not said transportation is within the sole operating jurisdiction of the city of New York; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4348" number="6507" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>make recommendations to the mayor, the metropolitan transportation authority, the New York city transit authority, the port authority of New York and New Jersey and other city, state and federal authorities and agencies concerning the mass transit needs of the city of New York. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4349" number="6508" version="984">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1985/069" destination-id="0-0-0-0">L.L. 1985/069</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1986/005" destination-id="0-0-0-0">L.L. 1986/005</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/014" destination-id="0-0-0-0">L.L. 1989/014</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1994/025" destination-id="0-0-0-0">L.L. 1994/025</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6797" number="6509" version="722">
+				<HEADING>Section 2904. Duties and obligations of property owner with respect to sidewalk flags, fencing of vacant lots and filling of sunken lots or cutting down of raised lots. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1437" name="2904"/>Section 2904. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Duties and obligations of property owner with respect to sidewalk flags, fencing of vacant lots and filling of sunken lots or cutting down of raised lots. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4350" number="6510" version="616">
+					<PARA>The owner of any property at his own cost, shall</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4351" number="6511" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>install, reconstruct, repave and repair the sidewalk flags in front of or abutting such property, including but not limited to the intersection quadrant for corner property, and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4352" number="6512" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>fence any vacant lot or lots comprising part or all of such property and fill any sunken lot or lots comprising part or all of such property or cut down any raised lot or lots comprising part or all of such property whenever the transportation department shall so order pursuant to standards and policies of the transportation department and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152" destination-id="0-0-0-0">19-152</LINK> of the administrative code of the city of New York. In the event that the owner fails to comply with the provisions of this section, the transportation department may provide for the doing of same at the expense of the owner in the manner to be provided by local law and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="19-152" destination-id="0-0-0-0">19-152</LINK> of the administrative code of the city of New York. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4353" number="6513" version="3">
+				<HEADING>Section 2905. Right of entry. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1439" name="2905"/>Section 2905. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Right of entry. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4354" number="6514" version="616">
+					<PARA>The commissioner or his agent when authorized by him may in accordance with law enter upon public or private property the purpose of making surveys, borings or other investigations necessary for the exercise of the powers or the performance of the duties of the department. Refusal to permit such entry shall be triable by the judge of the criminal court of the city of New York and punishable by not more than thirty days&apos; imprisonment or by a fine of not more than fifty dollars or both. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4355" number="6515" version="3">
+				<HEADING>Section 2906. Improved traffic flow at highway construction sites. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1441" name="2906"/>Section 2906. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Improved traffic flow at highway construction sites. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4356" number="6516" version="616">
+					<PARA>The commissioner may provide that on any city-sponsored, authorized or assisted arterial highway construction site, or major repair site that in the discretion of the commissioner is likely to substantially disrupt traffic, signs be posted at least one half mile or more prior to the area under construction or repair warning motorists of the fact that such work is in progress and, wherever possible, advising of an available alternate route. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

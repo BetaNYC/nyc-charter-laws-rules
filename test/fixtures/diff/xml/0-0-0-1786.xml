@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-1786" number="2812" version="42">
+			<HEADING>Chapter 19-A: Emergency Management Department</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-687" name="Chapter 19-a"/>Chapter 19-A: Emergency Management Department</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1787" number="2813" version="3">
+				<HEADING>Section 495. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-689" name="495"/>Section 495. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1788" number="2814" version="617">
+					<PARA>There shall be an emergency management department, which may also be known as the New York city office of emergency management, the head of which shall be the commissioner of emergency management. The commissioner shall be appointed by the mayor. The commissioner shall also serve as the local director of civil defense, with the powers of a local director of civil defense. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1789" number="2815" version="3">
+				<HEADING>Section 496. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-691" name="496"/>Section 496. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1790" number="2816" version="617">
+					<PARA>The commissioner shall have the power to appoint and, at pleasure, remove deputies, one to be known as first deputy commissioner. During the absence or disability of the commissioner, the first deputy commissioner, or if the first deputy commissioner shall be absent or under disability, the deputy commissioner designated by the commissioner, shall possess all the powers and perform all the duties of the commissioner, except the power of making appointments and transfers. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1791" number="2817" version="530">
+				<HEADING>Section 497. Powers and duties of the commissioner.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-693" name="497"/>Section 497. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties of the commissioner.</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1792" number="2818" version="617">
+					<PARA>The commissioner shall have cognizance and control of the government, administration, disposition and discipline of the department. The commissioner shall have the powers and duties to:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1793" number="2819" version="617">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>coordinate the city&apos;s response to all emergency conditions and potential incidents which require a multi-agency response, including but not limited to severe weather, threats from natural hazards and natural disasters, power and other public service outages, labor unrest other than the keeping of the peace, water main breaks, transportation and transit incidents, hazardous substance discharges, building collapses, aviation disasters, explosions, acts of terrorism and such other emergency conditions and incidents which affect public health and safety; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1794" number="2820" version="617">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>monitor on a constant basis all potential emergency conditions and potential incidents which may require a multi-agency response; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1795" number="2821" version="617">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>coordinate and implement training programs for public safety and health, including emergency response drills, to prepare for emergency conditions and potential incidents which may require a multi-agency response; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1796" number="2822" version="617">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>prepare plans for responding to emergency conditions and potential incidents, including but not limited to plans for the implementation of such emergency orders as may be approved by the mayor to protect public safety and facilitate the rapid response and mobilization of agencies and resources; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1797" number="2823" version="617">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>make recommendations to the mayor concerning the city&apos;s emergency response capabilities and concerning the city&apos;s capacity to address potential emergency conditions and potential incidents; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1798" number="2824" version="617">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>increase public awareness as to the appropriate responses by members of the public to emergency conditions and potential incidents, and review the city&apos;s systems for disseminating information to the public; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1799" number="2825" version="617">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>operate an emergency operations center to assist the city in managing emergency conditions and potential incidents that may require a multi-agency response; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1800" number="2826" version="617">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>hold regular and frequent meetings of designated emergency response personnel of all city agencies that are determined by the commissioner to have a direct or support role in the city&apos;s management of emergency conditions and potential incidents which may require a multi-agency response; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1801" number="2827" version="617">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>acquire federal and other funding for emergency management, including but not limited to disaster relief, and civil defense, and assist other agencies in obtaining such funding; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1802" number="2828" version="617">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>coordinate with all city agencies to ensure that all such agencies develop, implement and periodically review citywide emergency plans; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1803" number="2829" version="617">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>coordinate with state, federal and other governmental bodies to effectuate the purposes of the department; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1804" number="2830" version="617">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>coordinate the operation of the local emergency planning committee established pursuant to Title III of the federal Superfund Amendments and Reauthorization Act; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1805" number="2831" version="617">
+					<PARA>
+						<TAB tab-count="1"/>m.<TAB tab-count="1"/>coordinate New York city&apos;s civil defense effort in accordance with the provisions of the Defense Emergency Act of New York state and the city&apos;s civil defense emergency operations plan, as such plan may be amended from time to time; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1806" number="2832" version="617">
+					<PARA>
+						<TAB tab-count="1"/>n.<TAB tab-count="1"/>perform all other functions previously performed by the former office of emergency management and the emergency control board; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1807" number="2833" version="617">
+					<PARA>
+						<TAB tab-count="1"/>o.<TAB tab-count="1"/>promulgate such rules and regulations as may be necessary to implement the provisions of this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1808" number="2834" version="530">
+					<PARA>(Am. L.L. 2022/012, 1/9/2022, eff. 1/9/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6194" number="2835" version="530">
+				<HEADING>Section 498. Agency cooperation and review of citywide emergency plans.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-695" name="498"/>Section 498. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency cooperation and review of citywide emergency plans.</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1809" number="2836" version="617">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The department shall be the lead agency in the coordination and facilitation of resources in incidents involving public safety and health, including incidents which may involve acts of terrorism. All agencies shall provide the department promptly with all information relevant to the performance of the emergency management functions and shall collect and make available any information requested by the department for use in emergency planning. All agencies further shall promptly provide the department with all appropriate material, equipment and resources needed for emergency management functions, including personnel. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6196" number="2837" version="530">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>No later than two years after the effective date of the local law that created this subdivision, and every two years thereafter, the department shall convene relevant agencies to review citywide emergency plans coordinated by the department. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6199" number="2838" version="772">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Following each review conducted pursuant to subdivision b of this section, the department shall publish on its website a list of citywide emergency plans coordinated by the department and a summary of each such plan, including but not limited to information on the roles and responsibilities of relevant agencies and other partners. Publication of summaries concerning a particular plan shall not be required where the mayor has determined that it would impede the city&apos;s ability to plan for and respond to threats to security including terrorism and cyber attacks; however, in such instances the department shall disclose the existence of such plans and identity relevant agencies and other partners involved in implementation of such plans. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6198" number="2839" version="530">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The department shall establish procedures through which members of the public can submit public comments on emergency planning. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1810" number="2840" version="530">
+					<PARA>(Am. L.L. 2022/012, 1/9/2022, eff. 1/9/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

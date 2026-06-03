@@ -1,0 +1,1277 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-926" number="1829" version="3">
+			<HEADING>Chapter 9: Capital Projects and Budget</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-301" name="Chapter 9"/>Chapter 9: Capital Projects and Budget</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-927" number="1830" version="3">
+				<HEADING>Section 210. Definitions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-303" name="210"/>Section 210. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definitions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-928" number="1831" version="616">
+					<PARA>As used in this charter:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-929" number="1832" version="3">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The term &quot;capital project&quot; shall mean: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-930" number="1833" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>A project which provides for the construction, reconstruction, acquisition or installation of a physical public betterment or improvement which would be classified as a capital asset under generally accepted accounting principles for municipalities or any preliminary studies and surveys relative thereto or any underwriting or other costs incurred in connection with the financing thereof. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-931" number="1834" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The acquisition of property of a permanent nature including wharf property. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-932" number="1835" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The acquisition of any furnishings, machinery, apparatus or equipment for any public betterment or improvement when such betterment or improvement is first constructed or acquired. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-933" number="1836" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Any public betterment involving either a physical improvement or the acquisition of real property for a physical improvement consisting in, including or affecting: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-934" number="1837" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Streets and parks; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-935" number="1838" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Bridges and tunnels; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-936" number="1839" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Receiving basins, inlets and sewers, including intercepting sewers, plants or structures for the treatment, disposal or filtration of sewage, including grit chambers, sewer tunnels and all necessary accessories thereof; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-937" number="1840" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>The fencing of vacant lots and the filling of sunken lots. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-938" number="1841" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Any other project allowed to be financed by the local finance law, with the approval of the mayor and the comptroller. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-939" number="1842" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>Any combination of the above. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-940" number="1843" version="3">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The term &quot;pending&quot; shall mean not yet completed. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-941" number="1844" version="3">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The term &quot;standards&quot; for each category of capital projects to which they apply shall include: maximum gross and net areas allowed; types of programs which may be operated in the facility; performance requirements for environmental systems; allowable materials and finishes; maximum areas allowed for different functions and activities; approximate cost limits per square foot of construction; and such other items designated by the mayor or by resolution of the council. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-942" number="1845" version="3">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The term &quot;scope of project&quot; or &quot;proposed scope of project&quot; shall mean a description of a capital project included in the capital budget that contains specific guidelines for the design and implementation of such project consistent with the standards for the appropriate category of capital projects and includes each of the following items of information which are relevant to the capital project involved: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-943" number="1846" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Purposes and public to be served; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-944" number="1847" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Programs to be conducted in the facility; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-945" number="1848" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Gross and net amounts of space and bulk for any building or structure and for areas for different functions and activities; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-946" number="1849" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Identification of required architectural, engineering or other consultants and estimated fees for such consultants; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-947" number="1850" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Estimated completion dates for scope, design and construction; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-948" number="1851" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>Total estimated project costs, including costs for site acquisition, preparation and tenant relocation, design, construction and equipment; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-949" number="1852" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>Estimated expenditures for the project for each fiscal year until its completion; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-950" number="1853" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>Estimated annual costs to operate programs within the facility when fully staffed and to maintain the facility; and, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-951" number="1854" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Such other information as shall be required by the mayor or by resolution of the council. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-952" number="1855" version="3">
+					<PARA>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The term &quot;cost&quot; shall include the contract liabilities and expenditure incurred for work in carrying out the physical improvement and interest thereon, and the compensation to be made to the owner of any real property acquired for the improvement as determined by a court or by agreement, and interest thereon. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-953" number="1856" version="3">
+					<PARA>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>The term &quot;expenses&quot; shall mean any expenses incurred in relation to an assessable improvement exclusive of cost and of damages assessed by the board of assessors. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-954" number="1857" version="3">
+					<PARA>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>The term &quot;street,&quot; as used in this chapter, shall include street, avenue, road, alley, lane, highway, boulevard, concourse, parkway, driveway, culvert, sidewalk, crosswalk, boardwalk, and viaduct, and every class of public road, square and place, except marginal streets. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-955" number="1858" version="48">
+					<PARA>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>The term &quot;real property&quot; shall include all lands and improvements, lands under water, water front property, the water of any lake, pond or stream, all easements and hereditaments, corporeal or incorporeal, and every estate, interest and right, legal or equitable, in lands or water, and right, interest, privilege, easement and franchise relating to the same, including terms for years and liens by way judgment, mortgage or otherwise. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-956" number="1859" version="3">
+				<HEADING>Section 211. Capital budget borough allocations. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-305" name="211"/>Section 211. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Capital budget borough allocations. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-957" number="1860" version="48">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Borough allocation.</CHARFORMAT> Five percent of the appropriations, funded by debt supported by city tax levy funds and state and federal funds over which the city has substantial discretion, proposed in the executive capital budget for the ensuing fiscal year, except any lump sum appropriation for school construction or rapid transit proposed to be made to public authorities established pursuant to the provisions of state law, shall be allocated among the boroughs by a formula based on an equal weighting of factors relating to population and geographic area, and shall be known as the capital budget borough allocation. Such formula shall be established by local law, but in any fiscal year for which no such local law is effective such amount shall be allocated among the boroughs on the basis of the average of (i) each borough&apos;s share of the total population of the city, and (ii) each borough&apos;s share of the total land area of the city.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-958" number="1861" version="87">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Preliminary borough allocations; initial borough president notification.</CHARFORMAT> Concomitantly with the submission of the preliminary capital budget and preliminary certificate, the mayor shall inform each borough president of the portion of the executive capital budget for the ensuing fiscal year and of the executive capital budgets for each of the three succeeding years that, pursuant to the formula required by subdivision a of this section, would be allocated to each borough if the amount of the appropriations proposed in the executive capital budget for each of such fiscal years were the same as the maximum amounts of appropriations for such years which the mayor anticipates to be certified in the preliminary certificate issued in accordance with section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="235" destination-id="0-0-0-363"> two hundred thirty-five</LINK>. The amount of such portion shall be known as the preliminary capital budget borough allocation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-959" number="1862" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Borough president proposals.</CHARFORMAT>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-960" number="1863" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Each borough president, during the consultations required by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="244" destination-id="0-0-0-381">two hundred forty-four</LINK>, shall submit to the mayor, in such form as the mayor shall prescribe, proposed capital appropriations in an amount not exceeding that borough&apos;s allocation of the capital budget borough allocation as certified by the mayor to the borough presidents during such consultations. The timing of such certification shall allow sufficient time for such consultations and for meeting the deadlines established by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="249" destination-id="0-0-0-391">two hundred forty-nine</LINK>. Each such proposed appropriation shall be accompanied by the following information: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-961" number="1864" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>for each such proposed appropriation for construction of a capital project, the estimated annual cost to operate and maintain the facility to be constructed pursuant to such appropriation when construction is completed. Such estimates shall be prepared in accordance with the standards established for this purpose pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="221" destination-id="0-0-0-325">two hundred twenty-one</LINK> of this chapter and shall be certified by the director of the office of management and budget. In the event that a borough president and the director of management and budget do not agree on such estimate for a particular project, such director and the director of the independent budget office shall jointly certify an estimate for such purpose; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-962" number="1865" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>for each such proposed appropriation for the planning and design of a capital project, (i) the estimated cost of the construction of the project, and (ii) the fiscal year in which the borough president intends to propose an appropriation for the construction of the project, if no technical problems regarding the viability of the project are identified during planning, site selection or design; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-963" number="1866" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>the total of all appropriations which will be necessary during the three ensuing fiscal years to provide for the construction of projects for which planning and design appropriations are being proposed. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-964" number="1867" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>If a borough president proposes an appropriation for the construction of a capital project, the appropriation must provide for the total amount estimated to be necessary for the completion of the project. If such a proposed appropriation for the construction of a capital project is for an amount which is less than the amount that the office of management and budget estimates to be necessary for the completion of the project, the borough&apos;s capital budget borough allocation in any future year in which additional appropriations are necessary for the completion of the project shall be reduced by the amount of such additional appropriations. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-965" number="1868" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>If the total appropriations necessary, during any of the ensuing three fiscal years, to provide for the construction of (i) projects for which the borough president is proposing appropriations for planning and design, and (ii) projects for which appropriations were previously made for planning and design on the recommendation of the borough president, is greater than the capital budget borough allocation anticipated to be available during such years based on the certificate issued pursuant to paragraph sixteen of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">two hundred fifty</LINK> of this charter, then the borough president shall submit for inclusion in the executive budget a list of the projects requiring construction appropriations during such year, in priority order. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-966" number="1869" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>If the estimated annual cost to operate and maintain the capital projects being proposed for construction by a borough president is greater than the amounts dedicated to such expense budget purposes from the expense budget borough allocation and the capital budget borough allocation expense budget contingency projected to be available to the borough president in one or more ensuing fiscal years then such proposed appropriations may only be included by a borough president in the capital budget with the concurrence of the mayor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-967" number="1870" version="48">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The mayor shall include the proposed appropriations submitted by the borough presidents in accordance with subdivision c of this section in the executive capital budget provided however, that the mayor may also include such comments and recommendations relating to such proposals as the mayor deems appropriate. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-968" number="1871" version="3">
+				<HEADING>Section 212. Format of departmental estimates for capital projects, preliminary capital budget and executive capital budget. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-307" name="212"/>Section 212. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Format of departmental estimates for capital projects, preliminary capital budget and executive capital budget. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-969" number="1872" version="616">
+					<PARA>The departmental estimates for capital projects and the executive capital budget shall consist of a detailed estimate of all capital projects pending or which the agency head, for departmental estimates, or the mayor, for the executive budget, believes should be undertaken within the ensuing fiscal year and the three succeeding fiscal years. Each agency head, for departmental estimates, and the mayor, for the executive budget, shall submit a written response to each of the capital budget priorities included in the community board&apos;s statement of budget priorities submitted in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="230" destination-id="0-0-0-353">two hundred thirty</LINK>. Such responses shall include the response of the agency head and the mayor, as appropriate, regarding the disposition of each such priority and meaningful explanations of any disapprovals contained in such estimates or budget. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-970" number="1873" version="3">
+				<HEADING>Section 213. Preliminary capital budget. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-309" name="213"/>Section 213. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Preliminary capital budget. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-971" number="1874" version="616">
+					<PARA>The preliminary capital budget shall consist of: (1) a financial plan, consistent with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">two hundred fifty-eight</LINK>, covering estimates of capital expenditures for the four ensuing fiscal years, (2) departmental estimates for capital projects as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="212" destination-id="0-0-0-307">two hundred twelve</LINK> together with the cash flow requirements and proposed sources of funding for each project included in such estimates, (3) a capital program status report which sets forth the appropriations for each project included in the capital budget for the current fiscal year together with the expenditures to date, and (4) a summary description of the purpose of each capital project and the needs it will fulfill, the schedule for beginning and constructing the project, its period of probable usefulness and an appropriate maintenance schedule. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-972" number="1875" version="3">
+				<HEADING>Section 214. Executive capital budget. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-311" name="214"/>Section 214. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Executive capital budget. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-973" number="1876" version="88">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The executive capital budget shall set forth separately each capital project, including the capital projects proposed by the borough presidents in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="211" destination-id="0-0-0-305">two hundred eleven</LINK>, and shall include:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-974" number="1877" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>A brief description and the location of each project; the total estimated cost of the project; the appropriations which have been previously adopted for this project; the amount of appropriations recommended to be adopted for the ensuing fiscal year, the aggregate amount of which shall not exceed the amount in the mayor&apos;s certificate; the amount of appropriations required thereafter to complete the project; the sources of funds for the project including state, federal, private and other funds; the period of probable usefulness; the estimated additional annual maintenance and operation costs; any terms and conditions of the project; and the estimated dates of completion of final scope, final design and final construction; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-975" number="1878" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A listing of all pending projects; and any recommendations that any pending projects be modified, rescinded or postponed accompanied by a statement of the budgetary impact of any such action; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-976" number="1879" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>A listing of proposed capital projects by community district and by borough and an identification of those projects which were included in the statement of capital priorities submitted by each community board and borough board. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-977" number="1880" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The executive capital program shall set forth for both program categories and individual projects: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-978" number="1881" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>A statement for each of the three succeeding fiscal years of the total dollar amounts necessary to complete projects initiated in prior years and projects proposed in the executive budget, the amounts necessary for projects proposed to be initiated in future years and the amounts necessary for amendments and contingencies; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-979" number="1882" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A statement of the likely impact on the expense budget of staffing, maintaining and operating the capital projects included in or contemplated by the capital program. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-980" number="1883" version="3">
+				<HEADING>Section 215. Ten-year capital strategy. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-313" name="215"/>Section 215. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Ten-year capital strategy. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7399" number="1884" version="918">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>For the purposes of this section, the term &quot;ten-year capital strategy&quot; means the report issued by the mayor in accordance with this section and pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="248" destination-id="0-0-0-389">two hundred forty-eight</LINK>. Such strategy shall be informed by the citywide statement of needs and the capital plant inventory required by sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">two hundred four</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1110-a" destination-id="0-0-0-1111">one thousand one hundred ten-a</LINK>, respectively. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7404" number="1885" version="918">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The ten-year capital strategy shall be issued by the mayor pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="248" destination-id="0-0-0-389">two hundred forty-eight</LINK> after (i) submission of a preliminary strategy by the department of city planning and the office of management and budget pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="228" destination-id="0-0-0-349">two hundred twenty-eight</LINK>, and (ii) submission of a report on the preliminary strategy by the city planning commission following a public hearing, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="234" destination-id="0-0-0-361">two hundred thirty-four</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7384" number="1886" version="918">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Contents of ten-year capital strategy.</CHARFORMAT> Each ten-year capital strategy shall include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7385" number="1887" version="918">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>a narrative describing the strategy for the development of the city&apos;s capital facilities for the ensuing ten fiscal years; the factors underlying such strategy including goals, policies, constraints and assumptions and the city&apos;s capital needs; the anticipated sources of financing for such strategy; and the implications of the strategy, including possible economic, social and environmental effects; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7386" number="1888" version="918">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>tables presenting the capital commitments estimated to be made during each of the ensuing ten fiscal years, by program category and agency. Where relevant the anticipated sources of financing for particular categories and projects shall be specified; and</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7387" number="1889" version="918">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>a map or maps which illustrate major components of the strategy as relevant.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7388" number="1890" version="988">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>In the preparation of the preliminary ten-year capital strategy, the department of city planning and office of management and budget shall consider (i) the strategic policy statements of the mayor and the borough presidents pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="17" destination-id="0-0-0-85">seventeen</LINK>, (ii) relevant citywide, borough and community plans adopted pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety seven-a</LINK>, the fair housing plan submitted pursuant to subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="16-a" destination-id="0-0-0-1799">sixteen-a</LINK>, and the list of twelve community districts published pursuant to subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-f" destination-id="0-0-0-1835">one hundred ninety-seven-f</LINK>, (iii) the reports pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="257" destination-id="0-0-0-407">two hundred fifty-seven</LINK> comparing the most recent ten-year capital strategy with the capital budgets and programs adopted for the current and previous fiscal years, and (iv) the city&apos;s capital needs, as informed by the citywide statement of needs and the capital plant inventory required by sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">two hundred four</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1110-a" destination-id="0-0-0-1111">one thousand one hundred ten-a</LINK>, respectively, including but not limited to city facility and capital plant conditions and deterioration, geographic distribution, impact on agency function or mission, impact on resiliency, and relevant federal or state conditions or requirements. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7403" number="1891" version="988">
+					<PARA>(Am. L.L. 2024/117, 12/3/2024, eff. 4/1/2025; Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7653" number="1892" version="988">
+				<HEADING>Section 216. Amendment. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-315" name="216"/>Section 216. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Amendment. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-988" number="1893" version="88">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Upon receipt of a recommendation in writing from the mayor or a borough president, in manner specified herein, the council may amend the capital budget or capital program in the same manner as the adoption of the capital budget and capital program including the right to approve the proposed amendment as submitted or to increase or decrease the amounts of funds proposed to be appropriated thereby, but only if funds are available within the capital budget and the applicable program category of the capital program; provided, however, that (i) the mayor may only recommend such an amendment relating to an appropriation included in the capital budget pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="211" destination-id="0-0-0-305">two hundred eleven</LINK> with the concurrence of the relevant borough president; and (ii) the borough president may only make such a recommendation with regard to such an appropriation if it provides for an offsetting reduction in another appropriation included in the capital budget pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="211" destination-id="0-0-0-305">two hundred eleven</LINK> on the recommendation of such borough president and it is concurred in by the mayor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-989" number="1894" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Upon the adoption of any such amendment by the council, it shall be certified by the mayor, the public advocate and the city clerk and the capital budget shall be amended accordingly. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-990" number="1895" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Not later than five days after such certification such amendment shall be filed in the office of the comptroller and shall be published forthwith in the City Record. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-991" number="1896" version="3">
+				<HEADING>Section 217. Restrictions on capital projects. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-317" name="217"/>Section 217. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Restrictions on capital projects. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-992" number="1897" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>No obligations of the city shall be issued or authorized for or on account of any capital project not included in a capital budget, or for which funds have not been reserved in an appropriate program category of the capital program for any year of such program in which it is projected that funds will be expended for the completion of the project, or in excess of the maximum amount of obligations which may be issued on account of such project as fixed in such capital budget; and no amount may be expended on account of any capital project in excess of the amount appropriated for such purposes in a capital budget, except that the amount appropriated for such purposes may be increased by the mayor by not more than fifteen per centum thereof in order to meet any costs required to advance such project. Notice of any such increase shall be provided to the council together with a statement of identifiable funds available for payment of the increase.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-993" number="1898" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Funds included in the capital budget for a capital project that are not obligated or committed during the fiscal year in which appropriated shall not be obligated or committed in the subsequent fiscal year unless reappropriated in a subsequent capital budget or an amendment thereto. A capital project included in a capital budget that is not initiated by the expenditure of funds within two years after its inclusion in the budget shall be eliminated from the budget. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-994" number="1899" version="88">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The city may issue capital debt only to finance capital projects as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="210" destination-id="0-0-0-303">two hundred ten</LINK>. The capital budget may not include expense items that are properly includable only in the expense budget, as determined in accordance with the accounting principles set forth in the state comptroller&apos;s uniform system of accounts for municipalities, as the same may be modified by the state comptroller, in consultation with the city comptroller, for application to the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-995" number="1900" version="48">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>No capital project shall be included in the proposed executive capital budget or otherwise adopted as part of the capital budget or as an amendment thereto unless sufficient funds are available within the appropriate general program category of the capital program for any year of such program in which it is projected that additional appropriations will be necessary for the completion of the project. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-996" number="1901" version="3">
+				<HEADING>Section 218. Site selection. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-319" name="218"/>Section 218. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Site selection. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-997" number="1902" version="988">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The selection of sites for capital projects shall be pursuant to the uniform procedures provided pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, except for acquisition of office space pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="195" destination-id="0-0-0-271">one hundred ninety-five</LINK>, and except for the selection of a site for a resiliency project, a solar energy generation project, or the creation of open space subject to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-998" number="1903" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>To the maximum extent feasible, final approval of a site for a capital project shall occur prior to or simultaneously with the approval of the scope of the project pursuant to this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-999" number="1904" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>During the review required by subdivision a, the community board and borough president shall also review, and may comment on, the scope of the project. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1000" number="1905" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7672" number="1906" version="988">
+				<HEADING>Section 219. Project initiation; commitment plan.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-321" name="219"/>Section 219. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Project initiation; commitment plan.</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1001" number="1907" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The inclusion of a capital project in the capital budget as adopted or amended shall constitute a direction and order to the agency to proceed with the preparation of a scope of project pursuant to this chapter unless sufficient planning funds for such purpose have not been appropriated in the capital budget. The head of the agency shall notify the comptroller of the amount of appropriated planning funds to be encumbered for such purpose.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1002" number="1908" version="461">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The approval of a scope of project for a capital project pursuant to this chapter, including the amount of obligations necessary to finance the design and construction of the project, shall constitute a direction and order to the agency to design the project, unless sufficient funds for such purpose have not been appropriated in the capital budget or are otherwise not available within the appropriate program category of the capital program. Such approval shall constitute notification to the comptroller of the comptroller&apos;s authorization to expend appropriated design funds.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1003" number="1909" version="461">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The approval of the final design for a capital project pursuant to this chapter shall constitute a direction and order to the agency responsible for construction to prepare bid and award documents and to proceed to bid, unless sufficient funds for such purpose have not been appropriated in the capital budget or are otherwise not available within each year of the capital program in which it is projected that funds will be expended for the completion of the project. Such approval shall constitute notification to the comptroller of the comptroller&apos;s authorization to expend appropriated construction funds.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1007" number="1910" version="461">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>1.<TAB tab-count="1"/>The mayor shall ensure the preparation of capital commitment plans in the form of periodic reports in regard to capital projects. Such reports shall be published at least three times each year as follows: a report that includes information for the current year and the ensuing three fiscal years shall be published no later than 90 days after the adoption of the capital budget; a report that includes information for the current fiscal year and the ensuing four fiscal years shall be published with the preliminary capital budget; and a report that includes information for the current fiscal year and the ensuing four fiscal years shall be published with the executive capital budget. Each report shall include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5820" number="1911" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>for the current year and each ensuing fiscal year for which information is included, appropriations and planned commitments by project type and planned commitments by agency; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5819" number="1912" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>for each capital project, as applicable, a description of such project, the schedule of planned commitments for the current year and each ensuing fiscal year for which information is included, available appropriations, expenditures and the current milestone associated with such project; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5818" number="1913" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>for the prior four fiscal years, commitments by project type and total expenditures by fiscal year. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5817" number="1914" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The mayor shall ensure the preparation of periodic capital project detail data reports in regard to the progress of capital projects, including schedules and clear explanations of any delays for particular projects and summary information on each agency&apos;s record on such matters. Such capital project detail data reports shall be published at least three times each year: no later than 120 days after the adoption of the capital budget; no later than 30 days after submission of the preliminary capital budget; and no later than 30 days after submission of the executive capital budget. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5816" number="1915" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Copies of reports required by paragraphs 1 and 2 of this subdivision shall be transmitted by the mayor to the council, the city planning commission, the community boards, the borough boards and borough presidents, and posted online on the website of the office of management and budget in a machine-readable format. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5815" number="1916" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>As used in this subdivision, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5814" number="1917" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Commitment.</CHARFORMAT> The term &quot;commitment&quot; means a procurement contract for the development or execution of a capital project that is registered pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="328" destination-id="0-0-0-503">328</LINK> or otherwise made effective. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5813" number="1918" version="461">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Planned commitment.</CHARFORMAT> The term &quot;planned commitment&quot; means a procurement contract provisionally approved by the director of management and budget that, if registered pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="328" destination-id="0-0-0-503">328</LINK> or otherwise made effective, would constitute a commitment. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1008" number="1919" version="461">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Any capital project which results in the acquisition or construction of a capital asset which will be subject to the requirements of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1110-a" destination-id="0-0-0-1111">eleven hundred ten-a</LINK> shall contain a provision requiring a comprehensive manual setting forth the useful life of the asset and explaining the activities necessary to maintain the asset throughout such useful life.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1009" number="1920" version="461">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The mayor may issue directives and adopt rules and regulations in regard to the execution of capital projects, consistent with the requirements of subdivisions a, b, c and d of this section, which shall be binding upon all agencies.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1010" number="1921" version="461">
+					<PARA>(Am. L.L. 2020/037, 3/13/2020, eff. 3/13/2020; Am. L.L. 2021/035, 3/28/2021, eff. 3/28/2021) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-059]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5630" number="1922" version="408">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/037" destination-id="0-0-0-0">L.L. 2020/037</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5696" number="1923" version="383">
+				<HEADING>Section 220. Improvements payable other than by city. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-323" name="220"/>Section 220. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Improvements payable other than by city. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1011" number="1924" version="616">
+					<PARA>Any owner of real property or any other person interested may apply to the council to authorize an improvement referred to in paragraph d of subdivision one of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="210" destination-id="0-0-0-303">two hundred ten</LINK> hereof, not included in the capital budget. The council may authorize such improvement to be made by the city or by such owner or other person interested upon compliance with the following conditions:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1012" number="1925" version="616">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Such owner or group or other persons interested shall enter into an agreement with the city, whereby they will either authorize the city, or themselves agree, to perform such work in accordance with such plans and specifications approved by the agencies having jurisdiction thereover and under their supervision. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1013" number="1926" version="616">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>All of such work shall be done for the account of or at the sole cost and expense of the person or persons applying for permission to do the same, who shall furnish to the city such security and in such amount as may be required to secure the payment of such cost and expense or the proper performance of the said work in the time and in the manner agreed upon, and shall further secure the city, in the latter case, against latent defects in such work for a period of two years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1014" number="1927" version="616">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Such improvement shall be approved by the city planning commission and reviewed pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1015" number="1928" version="616">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Any agreement providing for the performance of such work and the furnishing of such security, shall be first approved by the council before the same shall become effective. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1016" number="1929" version="3">
+				<HEADING>Section 221. Standards for capital projects. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-325" name="221"/>Section 221. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Standards for capital projects. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1017" number="1930" version="616">
+					<PARA>The mayor shall prepare general standards and cost limits for categories of capital projects and standards for the preparation of the scope of project for capital projects of various types. Such standards and limits shall be submitted by the mayor to the council for review. The proposed standards shall become effective thirty days after they have been filed with the council unless within that time the council modifies or disapproves them or part of them, after conducting a public hearing. Any modification by the council shall be subject to disapproval by the mayor in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="38" destination-id="0-0-0-135">thirty-eight</LINK> and any such disapproval shall be subject to override by the council in accordance with such section. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1018" number="1931" version="3">
+				<HEADING>Section 222. Scope of project. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-327" name="222"/>Section 222. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Scope of project. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1019" number="1932" version="88">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Each agency, with respect to a capital project under its jurisdiction included in a capital budget, shall prepare a proposed scope of project within appropriated planning funds. In preparing the proposed scope of project, the agency shall consult with the community board for the community district in which the capital project is to be located. The proposed scope of project, or, in the case of a delay, an explanation for such delay along with a revised schedule, shall be submitted to the mayor and to the respective council committee, borough president and community board by the date specified in the adopted capital budget in which the capital project is included. Such proposed scope shall identify all substantial differences between the guidelines for the capital project as contained in such scope and the description of the capital project contained in the report issued pursuant to subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="219" destination-id="0-0-0-321">two hundred nineteen</LINK> at the time such project was proposed in the executive budget or following the budget adoption in which such project was added to the capital budget.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1020" number="1933" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Not later than sixty days after receipt of the proposed scope of project from an agency pursuant to subdivision a of this section, the mayor shall approve, modify, or disapprove the proposed scope of project and notify the agency, and the respective council committee, borough president and community board. In the case of a scope approved by the mayor with modifications, such notification shall include a copy of the scope as approved. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1021" number="1934" version="80">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>During the review of the selection of a site of a capital project pursuant to the uniform land use review procedure established by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, the community board and borough president shall also review, and may comment on, the scope of the project. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1022" number="1935" version="88">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>No scope of project shall be approved by the mayor unless (1) it contains the information required by paragraph four of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="210" destination-id="0-0-0-303">two hundred ten</LINK> and it conforms to the applicable standards for the type of project adopted pursuant to this chapter, and (2) funds are available within the appropriate program category of the capital program that can be reserved for each fiscal year required to complete the project. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1023" number="1936" version="3">
+				<HEADING>Section 223. Design of capital project. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-329" name="223"/>Section 223. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Design of capital project. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1024" number="1937" version="616">
+					<PARA>The proposed design and final design for a capital project shall be made available for review to the respective council committee, borough president and the community board for the community district in which the project is to be located. The mayor or his representative shall review the final design to determine its conformance with the approved scope of project pursuant to this chapter. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1025" number="1938" version="3">
+				<HEADING>Section 224. Works of art. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-331" name="224"/>Section 224. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Works of art. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1026" number="1939" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>For purposes of this section: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1027" number="1940" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Demographic information.</CHARFORMAT> The term &quot;demographic information&quot; includes age, gender, race and any other related information the department of cultural affairs deems relevant. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1028" number="1941" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Design agency.</CHARFORMAT> The term &quot;design agency&quot; means the agency responsible for the preparation of the design for the capital project that includes works of art pursuant to this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1029" number="1942" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Sponsor agency.</CHARFORMAT> The term &quot;sponsor agency&quot; means the agency whose capital project is subject to the provisions of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1030" number="1943" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Works of art.</CHARFORMAT> The term &quot;works of art&quot; includes all forms of the visual and performing arts conceived in any medium, material or combination thereof. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1031" number="1944" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Works of art shall be provided for each capital project which involves the construction or the substantial reconstruction of a city-owned public building or structure the intended use of which requires that it be accessible to the public generally or to members of the public participating in, requiring or receiving programs, services or benefits provided thereat. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1032" number="1945" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>An amount not less than one percent of the first fifty million dollars and one-half of one percent of any amount in excess of fifty million dollars of capital funds appropriated by the city for each such capital project, other than funds appropriated for the acquisition of real property, shall be allocated for works of art; provided, however, that this section shall in no case require, but shall not prohibit, the expenditure of more than nine hundred thousand dollars for works of art for any capital project nor more than the sum of four million dollars for all works of art in any fiscal year. The mayor may exempt a capital project from the provisions of this section if in the mayor&apos;s sole judgment the inclusion of works of art as provided hereby would be inappropriate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1033" number="1946" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>1.<TAB tab-count="1"/>The department of cultural affairs shall engage in outreach and education efforts regarding the opportunity to submit works of art for consideration for inclusion in capital projects as provided for by this section. Such outreach and education efforts shall include but not be limited to information sessions in each borough that shall be open to the public and the development of written materials that describe the submission and selection process for works of art. The department shall make such written materials available in a manner deemed appropriate by the department, including but not limited to making such materials available to arts and cultural organizations, community-based organizations, and colleges and universities. Such written materials shall be made available in English and in the six languages most commonly spoken by limited English proficient individuals in the city as determined by the department of city planning. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1034" number="1947" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Reasonable advance notification of the intention to include works of art in a project shall be provided to the appropriate council member, borough president and chairperson of the community board of the community district in which the project is located. Reasonable advance notification of the intention to include works of art in a project shall also be posted on the website of the department of cultural affairs. Following notification of the intention to include works of art in any project, the department of cultural affairs shall hold or present at a public meeting, such as a meeting of the community board of the community district in which the project is located, on such works of art prior to such inclusion. A notice of such public meeting shall be posted on the website of the department of cultural affairs not less than fourteen days prior to any such meeting. All such works of art shall be subject to the approval of the art commission pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="854" destination-id="0-0-0-333">eight hundred fifty-four</LINK> of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1035" number="1948" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The mayor shall adopt rules and regulations to implement the provisions of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1036" number="1949" version="772">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The department of cultural affairs shall post on the department&apos;s website information about works of art that were included in a capital project pursuant to this section after the effective date of the local law that added this subdivision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1037" number="1950" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Such information shall include but not be limited to the name of the work of art; name of the artist; capital project completion date; medium and dimensions of the work of art; location of the work of art, including council district and borough; sponsor agency; and design agency. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1038" number="1951" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The department shall post on the department&apos;s website aggregated demographic information about the artists whose works of art are subject to the provisions of this subdivision, to the extent such demographic information is provided to the department. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1039" number="1952" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>There shall be an advisory panel to recommend eligible works of art to be included in a capital project pursuant to this section. The commissioner of cultural affairs or his or her designee shall serve as chairperson of such panel and shall ensure that such panel includes members who are knowledgeable about public art, knowledgeable about the project, and knowledgeable about the community in which the project will be located. The panel shall further include but not be limited to at least one representative of the president of the borough in which the project will be located, at least one representative of the council member in whose district the project will be located, and at least one representative of the community board for the community district in which the project will be located, provided, however, that such representatives shall be non-voting ex officio members. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4630" number="1953" version="412">
+					<PARA>(Am. L.L. 2015/052, 6/2/2015, eff. 6/2/2015; Am. L.L. 2017/019, 2/15/2017, eff. 2/15/2017; Am. L.L. 2017/021, 2/15/2017, eff. 2/15/2017; Am. L.L. 2017/022, 2/15/2017, eff. 2/15/2017; Am. L.L. 2017/023, 2/15/2017, eff. 2/15/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-010]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1041" number="1954" version="3">
+				<HEADING>Section 224.1. Green building standards. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-335" name="224.1"/>Section 224.1. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Green building standards. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6632" number="1955" version="700">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>As used in this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6702" number="1956" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">ASHRAE 90.1.</CHARFORMAT> The term &quot;ASHRAE 90.1&quot; means the edition of the energy standard for buildings except low-rise residential buildings published by the American society of heating, refrigerating and air conditioning engineers (ASHRAE) as indicated by rule of the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6701" number="1957" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Base building systems.</CHARFORMAT> The term &quot;base building systems&quot; has the same meaning as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="28-308.1" destination-id="0-0-0-0">28-308.1</LINK> of the administrative code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6700" number="1958" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Capital project.</CHARFORMAT> The term &quot;capital project&quot; means a capital project as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="210" destination-id="0-0-0-303">210</LINK> of this chapter that is paid for in whole or in part from the city treasury. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6699" number="1959" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">City agency.</CHARFORMAT> The term &quot;city agency&quot; has the same meaning as the term &quot;agency&quot; as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1150" destination-id="0-0-0-1179">1150</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6698" number="1960" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Construction work.</CHARFORMAT> The term &quot;construction work&quot; means any work or operations necessary or incidental to the erection, demolition, assembling, alteration, installing or equipping of any building. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6697" number="1961" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Energy use intensity.</CHARFORMAT> The term &quot;energy use intensity&quot; means, for a building, the energy use intensity projected for such building based on its design at the time of filing with the department of buildings. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6696" number="1962" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Estimated construction cost.</CHARFORMAT> The term &quot;estimated construction cost&quot; means capital dollars allocated to construction as defined in the respective project&apos;s certificate to proceed, or with respect to entities that are not city agencies, cost allocated to construction of a project intended to achieve a public purpose of the city as such project is described in supporting documentation submitted to the office of management and budget for the issuance of the certificate to proceed. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6695" number="1963" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Green building standards.</CHARFORMAT> The term &quot;green building standards&quot; means design guidelines, a rating system or rules for constructing buildings that ensure site planning, water efficiency, energy efficiency and renewable energy, conservation of materials and resources and indoor environmental quality. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6694" number="1964" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Inflation.</CHARFORMAT> The term &quot;inflation&quot; means the annual 12-month average of the consumer price index published by the United States department of labor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6693" number="1965" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">LEED green building rating system.</CHARFORMAT> The term &quot;LEED green building rating system&quot; means a version of the leadership in energy and environmental design (LEED) building rating system published by the United States green building council that is not less stringent than the selected green building rating system, or another standard not less stringent than the selected green building rating system which has been developed by or for the city consisting of practices and technologies derived from the LEED rating system that are reasonable and appropriate for building in New York city and approved by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6692" number="1966" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">LEED water efficiency: indoor water use reduction credit.</CHARFORMAT> The term &quot;LEED water efficiency: indoor water use reduction credit&quot; means the credit to achieve points under the LEED for building design and construction version 4, or another version as approved by the mayor, intended to achieve water use reduction. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6691" number="1967" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Mayor.</CHARFORMAT> The term &quot;mayor&quot; means the mayor, or as designated by the mayor, an office within the office of the mayor or any department or office the head of which is appointed by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6690" number="1968" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Net zero energy building.</CHARFORMAT> The term &quot;net zero energy building&quot; means a building that has been designed and constructed to produce energy onsite from renewable energy sources in an amount equal to or greater than such building&apos;s total energy needs. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6689" number="1969" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Not less stringent.</CHARFORMAT> The term &quot;not less stringent&quot; means providing no less net environmental and health benefits. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6688" number="1970" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Occupancy group.</CHARFORMAT> The term &quot;occupancy group&quot; means occupancy group as classified in accordance with the New York city construction codes. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6687" number="1971" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Onsite energy generating building.</CHARFORMAT> The term &quot;onsite energy generating building&quot; means a building that has been designed and constructed to produce energy onsite from renewable energy sources to the maximum practicable extent as leads to a system of high performance and best value to New York city. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6686" number="1972" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Rehabilitation work.</CHARFORMAT> The term &quot;rehabilitation work&quot; means any restoration, replacement or repair of any materials, systems or components. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6685" number="1973" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Renewable energy source.</CHARFORMAT> The term &quot;renewable energy source&quot; means a qualified energy resource, as such term is defined in paragraph (1) of subsection (c) of section 45 of title 26 of the United States code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6684" number="1974" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Selected green building rating system.</CHARFORMAT> The term &quot;selected green building rating system&quot; means LEED building design and construction version 4, building operations and maintenance version 4 or interior design and construction version 4, whichever is most appropriate for the project under United States green building council guidelines, or other not less stringent versions of such building rating systems as approved by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6683" number="1975" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Source energy use intensity.</CHARFORMAT> The term &quot;source energy use intensity&quot; means, for a building, the total energy used by such building in a year, including losses that take place during generation, transmission and distribution of such energy, divided by the building&apos;s gross floor area. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6682" number="1976" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Substantial reconstruction.</CHARFORMAT> The term &quot;substantial reconstruction&quot; means: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6681" number="1977" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>For buildings not classified in occupancy group R, a capital project in which (i) the scope of work includes rehabilitation work in at least two of the following three major systems of the building: electrical, HVAC (heating, ventilating and air conditioning) and plumbing, and (ii) at least 50 percent of the building&apos;s gross floor area is subject to construction work. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6680" number="1978" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>For buildings classified in occupancy group R, a capital project that includes (i) heating system replacement, which includes the heating equipment and distribution system, (ii) work on at least 75 percent of dwelling units contained within such building, including but not limited to fixture replacements in kitchens and bathrooms, and (iii) substantial work on the building envelope. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6679" number="1979" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Substantial work on the building envelope.</CHARFORMAT> The term &quot;substantial work on the building envelope&quot; means the replacement or alteration of 50 percent or more of the building envelope&apos;s total glazing area, or 50 percent or more of the building envelope&apos;s total area of opaque components, including, but not limited to, recladding, work on the interior side of exterior walls, such as removal of interior wallboard or plaster, and roof replacements. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6678" number="1980" version="700">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Except as otherwise provided in this section, each capital project with an estimated construction cost of $2,000,000 or more involving the construction of a new building, an addition to an existing building or the substantial reconstruction of an existing building, shall be designed and constructed to comply with green building standards not less stringent than the standards prescribed for buildings designed in accordance with the LEED green building rating system to achieve a LEED gold or higher rating, or, with respect to buildings classified in occupancy groups F or H, to achieve a LEED certified or higher rating, or, with respect to buildings classified in occupancy group R, to comply with the version of the New York city overlay of the enterprise green communities criteria designated by rule of the department of housing preservation and development. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6677" number="1981" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>This subdivision shall not apply to a capital project involving additions to or the substantial reconstruction of existing buildings in occupancy groups F or H with an estimated construction cost of not more than $10,000,000. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6676" number="1982" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>If the mayor elects to utilize a green building standard other than the LEED green building rating system for compliance with paragraph (1) of this subdivision, the mayor shall publish findings demonstrating that such other green building standards are not less stringent than the LEED standards described above for achievement of a LEED gold or, if applicable, a LEED certified rating. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6675" number="1983" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>The green building standards utilized by the city in accordance with this subdivision shall be reviewed and updated, as necessary, by the mayor no less often than once every three years. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6674" number="1984" version="700">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>For capital projects required to comply with subdivision b of this section that are buildings classified in occupancy groups E, F, H, I-2 or R, the mayor may, in coordination, when relevant, with the New York city economic development corporation, the New York city school construction authority or any other relevant office or agency, establish by rule alternative design and construction standards that may be less stringent than the green building standards described in subdivision b of this section provided that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6673" number="1985" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>For buildings classified in occupancy groups F, H or I-2, such alternative standards may be less stringent than the green building standards described in subdivision b only to the minimum extent necessary to address provisions of the green building standards described in such subdivision that the mayor finds to be impracticable or burdensome for the particular occupancy group; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6672" number="1986" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>For buildings classified in occupancy group R, such alternative standards shall not be less stringent than the standards prescribed for buildings designed to achieve a LEED certified rating under LEED green building rating system version 4; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6671" number="1987" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>For buildings classified in occupancy group E, such alternative standards may be the version of the New York city green schools guide designated by the mayor but shall be not less stringent than the standards prescribed for buildings designed to achieve a LEED certified rating under LEED green building rating system version 4. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6670" number="1988" version="700">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>In addition to compliance with subdivision b or c, each capital project that involves the construction of a new city-owned building, and each capital project that involves an addition to, or the substantial reconstruction of, an existing city-owned building, where such substantial reconstruction involves substantial work on the building envelope, shall be designed and constructed to reduce energy use as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6669" number="1989" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>For a building that is not classified in occupancy groups F or H, either: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6668" number="1990" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>An energy use intensity that is no greater than 50 percent below the energy use intensity of such a building if designed and constructed according to the prescriptive and mandatory requirements of ASHRAE 90.1; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6667" number="1991" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>For new buildings, a source energy use intensity not more than 38 kBTU/yr per square foot of floor area, and for additions to or substantial reconstructions of existing buildings involving substantial work on the building envelope, a source energy use intensity not more than 42 kBTU/yr per square foot of floor area. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6666" number="1992" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>For a building classified in occupancy groups F or H, energy usage of the base building systems, exclusive of process loads, that is at least 50 percent less than such energy usage would be if such building were designed and constructed according to ASHRAE 90.1. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6665" number="1993" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>For each capital project required to comply with this subdivision, the design agency shall: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6664" number="1994" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Conduct a design alternate study to construct such project as an onsite energy generating building; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6663" number="1995" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Where a capital project involves a building that is no more than three stories above grade, conduct a design alternate study to construct such project as a net zero energy building; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6662" number="1996" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Conduct a design alternate study to construct such project to incorporate green infrastructure. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6661" number="1997" version="700">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Capital projects with an estimated construction cost of $12,000,000 or more required to comply with green building standards in accordance with subdivision b, and which involve buildings that are not city-owned or involve city-owned buildings not subject to subdivision d, shall be designed and constructed to reduce energy use as set forth in this subdivision, provided that this subdivision shall not apply to buildings that are not city-owned and projects involving city-owned buildings not subject to subdivision d that are classified in occupancy groups E or R. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6660" number="1998" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Capital projects with an estimated construction cost of $12,000,000 or more but less than $30,000,000 shall be designed and constructed to reduce energy use as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6659" number="1999" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>For capital projects involving buildings not classified in occupancy groups F or H that are new buildings or additions to existing buildings, the energy use intensity shall be no less than 25 percent below the design energy use intensity of such a building if designed and constructed according to the prescriptive and mandatory requirements of ASHRAE 90.1. For such capital projects that are substantial reconstructions of existing buildings, the energy use intensity shall be no less than 25 percent below the existing building&apos;s energy use as determined in accordance with a methodology determined by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6658" number="2000" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>For capital projects involving buildings classified in occupancy groups F or H that are for new buildings and additions to existing buildings, energy usage of the base building systems, exclusive of process loads, shall be no less than 25 percent below what it would be if such building were designed and constructed according to ASHRAE 90.1. For such capital projects that are for substantial reconstruction of existing buildings, energy usage shall be no less than 25 percent below the existing building&apos;s energy usage as determined in accordance with a methodology determined by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6657" number="2001" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Capital projects with an estimated construction cost of $30,000,000 or more shall be designed and constructed to reduce energy use as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6656" number="2002" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>For capital projects involving buildings not classified in occupancy groups F or H that are for new buildings and additions to existing buildings, energy use intensity shall be no less than 30 percent below the design energy use intensity of such a building if designed and constructed according to the prescriptive and mandatory requirements of ASHRAE 90.1 1. For such capital projects that are for substantial reconstruction of existing buildings, design energy use intensity shall be no less than 30 percent below the existing building&apos;s energy use intensity measured in accordance with a methodology determined by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6655" number="2003" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>For capital projects involving buildings classified in occupancy groups F or H that are for new buildings and additions to existing buildings, energy usage of the base building systems, exclusive of process loads, shall be no less than 30 percent below what it would be if such building were designed and constructed according to ASHRAE 90.1. For such capital projects that are for substantial reconstruction of existing buildings, energy usage of the base building systems shall be no less than 30 percent below the existing building&apos;s energy usage as measured in accordance with a methodology determined by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6654" number="2004" version="700">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>For capital projects required to comply with subdivision d or e, the mayor may establish an alternative energy intensity requirement for new buildings, or additions to or substantial reconstructions of existing buildings classified in a particular occupancy group that may be less stringent than the energy intensity requirements described in subdivision d or e. Such alternative energy intensity requirement may be less stringent than the energy use intensity described by subdivision d or e to the minimum extent necessary to avoid impracticality or undue burden found by the mayor for a particular occupancy group. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6653" number="2005" version="700">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>Capital projects, other than those required to comply with green building and energy use standards in accordance with subdivision b, that involve the installation or replacement of HVAC systems at an estimated construction cost for such installation or replacement of $2,000,000 or more, shall be designed and constructed to reduce energy use by a minimum of 10 percent from the standard as determined by the New York city energy conservation code, or other methodology designated by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6652" number="2006" version="700">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>In addition to complying with any other applicable subdivisions in this section, each capital project involving the installation or replacement of plumbing systems that includes the installation or replacement of plumbing fixtures at an estimated construction cost for such installation or replacement of $500,000 or more shall be designed and constructed to reduce potable water consumption in the aggregate by a minimum of 30 percent from the calculated baseline as determined by a methodology not less stringent than that prescribed in LEED water efficiency: indoor water use reduction credit. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6651" number="2007" version="700">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>This section shall not apply to capital projects that only involve buildings classified in occupancy groups A-5 or U. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6650" number="2008" version="700">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>The mayor may exempt from each provision of this section a capital project accounting for up to 20 percent of the capital dollars in each fiscal year subject to such provision if, in the mayor&apos;s sole judgment, exemption from such provision is necessary for the public interest. At the conclusion of each year, the mayor shall inform the city council of any exemption granted pursuant to this subdivision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6649" number="2009" version="700">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>This section shall not apply to capital projects of entities that are not city agencies unless 50 percent or more of the estimated cost of such project is to be paid for out of the city treasury. This exemption shall not apply to any capital project that receives $10,000,000 or more out of the city treasury. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6648" number="2010" version="700">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>The costs listed in subdivisions b, c, d and g are denominated in January 2022 dollars and shall be indexed to inflation annually. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6647" number="2011" version="700">
+					<PARA>
+						<TAB tab-count="1"/>m.<TAB tab-count="1"/>Capital projects that are subject to subdivision b that utilize a version of the LEED green building rating system for which the United States green building council will accept applications for certification, shall apply to the United States green building council for certification that such projects have achieved a gold or higher rating under the LEED green building rating system, or where applicable, a certified or higher rating. The mayor shall establish an alternative certification process for capital projects that are complying with alternative standards promulgated by the mayor pursuant to subdivision c. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6646" number="2012" version="700">
+					<PARA>
+						<TAB tab-count="1"/>n.<TAB tab-count="1"/>No later than December 1 of each year, the mayor shall submit to the speaker of the council a report, containing, at a minimum: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6645" number="2013" version="700">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>For each capital project subject to this section completed during the preceding fiscal year: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6644" number="2014" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>A brief description of such project, including the total cost of the project; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6643" number="2015" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The street address of such project and the community district and council district in which such project is located; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6642" number="2016" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The estimated level of LEED certification such project has achieved as determined by the city agency that designed such project in accordance with the LEED green building rating system or, if applicable, the level achieved, as certified by the United States green building council; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6641" number="2017" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>A statement as to whether such project has been designed and constructed to comply with the energy use reduction required in subdivision e, as an onsite energy generating building or a net zero energy building and, for each project designed and constructed to comply with the prescribed energy use reduction, the energy use intensity for such building or, if the mayor has adopted an alternative energy intensity target pursuant to subdivision f, such alternative target; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6640" number="2018" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>If such capital project was not designed and constructed as an onsite energy generating building, a description of the reasons therefor, a statement as to whether such building has been designed and constructed to produce any energy onsite from renewable energy sources and, if so, the amount of such onsite energy production expressed as a percentage of the building&apos;s total energy needs; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6639" number="2019" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>An assessment of the environmental and energy-related benefits achieved in comparison with a base-case code compliant project, including projected energy savings reductions in peak load, reductions in emissions and potable water use. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6638" number="2020" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The total value of capital allocations in the preceding calendar year to projects exempted from the requirements of this section by the mayor pursuant to subdivision j, and a list and brief description of each such project, including but not limited to square footage, project cost and the reason for such exemption, disaggregated by city agency. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6637" number="2021" version="701">
+					<PARA>
+						<TAB tab-count="1"/>o.<TAB tab-count="1"/>The mayor shall publish online and submit a report to the speaker of the council within 12 months of establishing any alternative standards pursuant to subdivisions c or f, and every three years thereafter. Such report shall: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6636" number="2022" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Describe the alternative standard and the occupancy groups to which it will apply; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6635" number="2023" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Identify any provision in such alterative standard that is less stringent than the standard which it replaces, and for each such provision, describe the reasons why compliance with the standard which it replaces would be impracticable or unduly burdensome for buildings classified in such occupancy groups; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6634" number="2024" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>For an alternative standard provided pursuant to subdivision c that is not for a building classified in occupancy group R, describe how such alternative standard is not less stringent than the standard prescribed for buildings designed to achieve a LEED certified rating under LEED green building rating system version 4; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6633" number="2025" version="701">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Describe the reasons why the mayor has determined that such alternative standard continues to be necessary and why such standard cannot be made more stringent. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1108" number="2026" version="700">
+					<PARA>(Am. L.L. 2016/031, 3/28/2016, eff. 3/28/2016; Am. L.L. 2016/032, 3/28/2016, eff. 3/28/2016; Am. L.L. 2017/097, 5/30/2017, eff. 6/29/2017; Am. L.L. 2023/051, 4/16/2023, eff. 4/16/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1109" number="2027" version="700">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2005/086" destination-id="0-0-0-0">L.L. 2005/086</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2016/032" destination-id="0-0-0-0">L.L. 2016/032</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2023/051" destination-id="0-0-0-0">L.L. 2023/051</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6573" number="2028" version="678">
+				<HEADING>Section 224.2. Required energy conservation projects in city buildings. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-337" name="224.2"/>Section 224.2. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Required energy conservation projects in city buildings. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1110" number="2029" version="408">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Definitions. For the purposes of this section, the terms &quot;base building systems&quot;, &quot;city building&quot;, &quot;energy audit&quot;, &quot;energy efficiency report&quot;, and &quot;simple payback&quot; shall have the same meanings as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="28-308.1" destination-id="0-0-0-0">28-308.1</LINK> of the administrative code.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1111" number="2030" version="408">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>No later than one year after the submission, in accordance with <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="28-308" destination-id="0-0-0-0">article three hundred eight of chapter three of title twenty-eight</LINK> of the administrative code, of an energy efficiency report for a city building, reasonable capital improvements to the building&apos;s base building systems that are recommended in the building&apos;s energy audit shall be completed, including, at a minimum, all those improvements of the base building systems having a simple payback of not more than seven years or capital improvements that, when combined, would equal or exceed the overall reduction in energy consumption of such recommended capital improvements having a simple payback of not more than seven years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1112" number="2031" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The mayor shall promulgate rules as may be necessary to carry out the provisions of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1113" number="2032" version="652">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2009/087" destination-id="0-0-0-0">L.L. 2009/087</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-083]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6543" number="2033" version="652">
+				<HEADING>Section 224.3. Induction loop systems.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1493" name="224.3"/>Section 224.3. Induction loop systems.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1114" number="2034" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>As used in this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1115" number="2035" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Assembly area.</CHARFORMAT> The term &quot;assembly area&quot; means an assembly area, as defined in section 106.5 of the 2010 Americans with Disabilities Act standards for accessible design, in which audible communication is integral to the use of the space, except that such term shall not include classrooms in schools; facilities primarily used to deploy first responders, courthouses and outdoor facilities such as athletic fields and stadiums. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1116" number="2036" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Baseline construction cost.</CHARFORMAT> The term &quot;baseline construction cost&quot; means the total cost of a proposed capital project not including the cost of installing an assistive listening system. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1117" number="2037" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Capital project.</CHARFORMAT> The term &quot;capital project&quot; means a capital project as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="210" destination-id="0-0-0-303">210</LINK> of this chapter that is paid for in whole or in part from the city treasury. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1118" number="2038" version="604">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Each capital project with an estimated baseline construction cost of $950,000 or more involving the construction or reconstruction of one or more assembly areas shall be designed and constructed to include in at least one assembly area the installation of an induction loop assistive listening system that complies with section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="BC N102" destination-id="0-0-0-0"> N102 of appendix N</LINK> of the New York city building code, or an alternative assistive listening system that complies with <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="BC AppN" destination-id="0-0-0-0">appendix N</LINK> of the New York city building code that has been determined by the mayor in accordance with subdivision i of this section to be significantly more effective for the hard of hearing than an induction loop system. Each security, information, or reception desk used for the checking-in or screening of persons attending a meeting or event held in a looped assembly area shall be equipped with microloops. This section shall not apply to a capital project involving the reconstruction of an assembly area if the estimated cost of installing an induction loop system or alternative system exceeds 5% of the baseline construction cost of the project. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1119" number="2039" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Directional signage that includes guidance to an assistive listening assembly area, including raised graphics and letters with Braille descriptors, must be provided in accordance with section 1110.2 of the New York city building code, and other signage indicating any special accessibility features must be provided in accordance with section 1110.3 of such code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1120" number="2040" version="774">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The entrance to any building containing an assistive listening assembly area and any security, information, or reception area used for the checking-in or screening of persons attending a meeting or event held in such assembly area shall display the international symbol of access for hearing loss pursuant to figure 703.6.3.3 of ICC A117.1 - 2009 and a &quot;T&quot; in the lower right-hand corner of such symbol indicating the availability of an induction loop system or a symbol indicating an alternative system if applicable. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1121" number="2041" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>No later than July 1, 2018, the mayor or an office or agency designated by the mayor shall post on its website the locations of facilities owned or operated by the city at which an assistive listening system such as an induction loop, infrared, FM, or other type of system, is permanently available or in the process of being installed, as well as which type of assistive listening system is permanently available or in the process of being installed, including the cost associated with installation of new assistive listening systems. The list shall be updated annually thereafter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1122" number="2042" version="3">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>This section shall not apply to capital projects involving the construction or reconstruction of assembly areas that are not owned by the city unless 50 percent or more of the estimated cost of such project is to be paid for out of the city treasury, provided that this exemption shall not apply to any capital project that receives $1,000,000 or more out of the city treasury. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1123" number="2043" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>The mayor may exempt from this section projects accounting for up to 20% of the capital dollars in each fiscal year subject to this section for the installation of assistive listening systems if in his or her sole judgment such exemption is necessary in the public interest. At the conclusion of each fiscal year the mayor shall report to the council the exemptions granted pursuant to this section, including the basis for such exemption. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1124" number="2044" version="3">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The mayor or an office or agency designated by the mayor shall promulgate rules to carry out the provisions of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1125" number="2045" version="3">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>Where the mayor determines, after consulting with experts in the field of hearing disabilities and assistive listening systems and advocates for people who are hard of hearing, that there is new technology with respect to an assistive listening system that makes such system significantly more effective than an induction loop system, the mayor may promulgate a rule allowing the use of such system as an alternative to an induction loop system in accordance with subdivision b. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1126" number="2046" version="3">
+					<PARA>(L.L. 2017/051, 3/21/2017, eff 1/2/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-011]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1128" number="2047" version="408">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2017/051" destination-id="0-0-0-0">L.L. 2017/051</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

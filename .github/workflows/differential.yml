@@ -1,0 +1,73 @@
+# Differential parser test — runs the Layer 4 cross-engine comparison
+# (JS build-corpus.js vs. Python stdlib xml.etree + itertext()) over the
+# committed charter XML fixtures in test/fixtures/diff/xml/.
+#
+# Cadence: manual dispatch (workflow_dispatch) + nightly at 03:00 UTC.
+# This job is intentionally NOT on the per-PR/per-push path because it
+# shells out to python3 and is heavier than the unit test suite. It serves
+# as a nightly regression guard and a pre-release gate (trigger manually
+# before tagging a release).
+#
+# File naming: differential.yml — distinct from test.yml (unit tests,
+# per-PR) and the planned refresh-data.yml (issue #2 corpus cron).
+#
+# Python version: we test on 3.11 (the floor of the team's spread) and 3.12
+# (current stable). The harness uses stdlib-only apis compatible with 3.8+.
+
+name: Differential Parser Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual run (optional)"
+        required: false
+        default: ""
+  schedule:
+    # Nightly at 03:00 UTC — after the main test suite is most likely green.
+    - cron: "0 3 * * *"
+
+jobs:
+  differential:
+    name: Differential (Node ${{ matrix.node-version }} / Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - "20.x"
+        python-version:
+          - "3.11"
+          - "3.12"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Run differential test
+        run: npm run test:diff
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "Node: $(node --version)"
+          echo "Python: $(python3 --version)"
+          echo "Fixture count: $(ls test/fixtures/diff/xml/*.xml 2>/dev/null | wc -l)"

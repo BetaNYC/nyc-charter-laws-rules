@@ -7,6 +7,15 @@ Each entry records which corpus version was current at the time of the build.
 
 ---
 
+## 2026-06-02 (test: Layer 4 differential)
+
+**Branch:** `test/differential-parser` (PR-C)  
+**No index rebuild** — test infrastructure only.
+
+Added the Layer 4 differential parser test (`npm run test:diff`): compares JS extraction against Python stdlib `xml.etree` + `itertext()` over 44 committed charter XML fixtures. 393 sections compared; 393 agreed. Also added `test:diff` script to `package.json`, Python harness at `test/fixtures/diff/extract_itertext.py`, committed XML fixtures at `test/fixtures/diff/xml/`, and nightly dispatch CI job at `.github/workflows/differential.yml`.
+
+---
+
 ## 2026-06-02
 
 **Index built:** 2026-06-02T04:46:39.537Z  
