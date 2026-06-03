@@ -40,7 +40,8 @@
     "prepare": "npm run build",
     "fetch-data": "node scripts/fetch-data.js",
     "build-index": "node scripts/build-index.js",
-    "update-changelog": "node scripts/update-changelog.js"
+    "update-changelog": "node scripts/update-changelog.js",
+    "test": "node --test \"test/**/*.test.js\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
