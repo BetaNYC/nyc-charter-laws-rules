@@ -1,6 +1,10 @@
 #!/usr/bin/env node
-// Parses the three AML bulk XML ZIPs and builds JSON + Markdown indexes.
+// CLI: parses the three AML bulk XML ZIPs and builds JSON + Markdown indexes.
 // Run after fetch-data: npm run build-index
+//
+// This file is the thin I/O wrapper. The parsing/section-building core lives in
+// scripts/lib/build-corpus.js (importable + unit-tested via test/build-smoke.test.js);
+// the ordered-tree extraction helpers live in scripts/lib/extract-text.js.
 //
 // Parsing note (fix #3, 2026-06): we parse with `preserveOrder: true` so that
 // inline cross-reference elements (<LINK>, <CHARFORMAT>) stay in document order
@@ -9,25 +13,17 @@
 // grouped by tag, so extractText() emitted all the running text first and then
 // appended the inline elements — relocating spelled-out section numbers to the
 // end of the sentence and running adjacent words together ("sectionof").
-//
-// In preserveOrder mode the parsed tree is an array of single-key objects in
-// document order. The shapes used below:
-//   - text node:      { "#text": "..." }
-//   - element node:   { "TAGNAME": [ ...children... ], ":@": { "@_attr": val } }
-// Attributes live under the ":@" key (not inline), keyed with the "@_" prefix.
 
 import AdmZip from "adm-zip";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { makeParser } from "./lib/extract-text.js";
 import {
-  makeParser,
-  tagOf,
-  getAttr,
-  childrenByTag,
-  extractText,
-  normalize,
-} from "./lib/extract-text.js";
+  extractVersion,
+  collectSections,
+  findDocument,
+} from "./lib/build-corpus.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data");
@@ -45,88 +41,6 @@ const CORPORA = [
 ];
 
 const parser = makeParser();
-
-// Extract the "Current through..." version string from the root document.
-// The text lives in CHARFORMAT nodes inside Introduction-style PARAs.
-function extractVersion(parsed) {
-  try {
-    const fullText = JSON.stringify(parsed);
-    const match = fullText.match(/Current through[^"\\]*/);
-    if (match) {
-      return match[0].replace(/\\n/g, " ").replace(/\[ALP.*?\]/g, "").replace(/\s+/g, " ").trim();
-    }
-  } catch {}
-  return "Unknown";
-}
-
-// Walk the LEVEL tree and collect sections.
-// `node` is an ordered element object (DOCUMENT, then each LEVEL as we recurse).
-function collectSections(node, corpus, sections, depth = 0) {
-  if (!node) return;
-
-  const levels = childrenByTag(node, "LEVEL");
-  for (const level of levels) {
-    const styleName = getAttr(level, "style-name") || "";
-    const records = childrenByTag(level, "RECORD");
-
-    for (const record of records) {
-      const headingNodes = childrenByTag(record, "HEADING");
-      const heading = normalize(headingNodes.map(extractText).join(""));
-      if (!heading) continue;
-
-      // Only index Chapter and Section level records with real headings.
-      if (
-        (styleName === "Section" || styleName === "Chapter") &&
-        heading.length > 3
-      ) {
-        // Collect body text from child Normal Level records.
-        const bodyParts = [];
-        const childLevels = childrenByTag(level, "LEVEL");
-        for (const child of childLevels) {
-          if ((getAttr(child, "style-name") || "") === "Normal Level") {
-            const childRecords = childrenByTag(child, "RECORD");
-            for (const cr of childRecords) {
-              const paras = childrenByTag(cr, "PARA");
-              bodyParts.push(...paras.map((p) => normalize(extractText(p))));
-            }
-          }
-        }
-
-        const citation = extractCitation(heading);
-        sections.push({
-          corpus,
-          id: getAttr(record, "id") || "",
-          citation,
-          heading,
-          text: normalize(bodyParts.join(" ")),
-        });
-      }
-    }
-
-    // Recurse into nested levels.
-    collectSections(level, corpus, sections, depth + 1);
-  }
-}
-
-// Pull the citation out of a heading string.
-// e.g. "Section 259. Independent budget office." → "§ 259"
-// e.g. "Chapter 11: Independent Budget Office" → "Chapter 11"
-function extractCitation(heading) {
-  const sectionMatch = heading.match(/[Ss]ection\s+([\d\-\.a-zA-Z]+)/);
-  if (sectionMatch) return `§ ${sectionMatch[1].replace(/\.$/, "")}`;
-  const chapterMatch = heading.match(/[Cc]hapter\s+([\d\-]+)/);
-  if (chapterMatch) return `Chapter ${chapterMatch[1]}`;
-  const titleMatch = heading.match(/[Tt]itle\s+([\d\-]+)/);
-  if (titleMatch) return `Title ${titleMatch[1]}`;
-  return heading.split(":")[0].split(".")[0].trim();
-}
-
-// Find the DOCUMENT element in the ordered top-level array (which also holds
-// processing-instruction nodes like <?xml?> and <?xml-stylesheet?>).
-function findDocument(parsed) {
-  if (!Array.isArray(parsed)) return null;
-  return parsed.find((n) => tagOf(n) === "DOCUMENT") || null;
-}
 
 const versions = {};
 
