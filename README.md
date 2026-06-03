@@ -139,6 +139,7 @@ npm test
 | `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming the subdivision-letter nit (`(6)the`) is left untouched. |
 | `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
+| `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 
 ### Continuous integration
 
@@ -175,7 +176,10 @@ nyc-charter-laws-rules/
 ├── src/                        ← MCP server (TypeScript)
 ├── scripts/
 │   ├── fetch-data.js           ← downloads bulk XML ZIPs from AML
-│   └── build-index.js          ← parses XML, writes JSON + Markdown indexes
+│   ├── build-index.js          ← thin CLI: reads ZIPs, writes JSON + Markdown indexes
+│   └── lib/
+│       ├── extract-text.js     ← ordered-tree text-extraction helpers
+│       └── build-corpus.js     ← pure section builder (buildSectionsFromXml), unit-tested
 ├── data/
 │   ├── raw/                    ← downloaded ZIPs (gitignored — build locally)
 │   └── index/
