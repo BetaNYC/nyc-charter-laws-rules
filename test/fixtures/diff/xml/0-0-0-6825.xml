@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-6825" number="3546" version="739">
+			<HEADING>Chapter 30: Department of Youth and Community Development</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1523" name="Chapter 30"/>Chapter 30: Department of Youth and Community Development</PARA>
+		</RECORD>
+		<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+			<RECORD id="0-0-0-2337" number="3547" version="749">
+				<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+				</PARA>
+			</RECORD>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6716" number="3548" version="708">
+				<HEADING>Section 731. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-879" name="731"/>Section 731. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2338" number="3549" version="617">
+					<PARA>There shall be a department of youth and community development, the head of which shall be the commissioner of youth and community development. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6717" number="3550" version="749">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6848" number="3551" version="749">
+				<HEADING>Section 732. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-881" name="732"/>Section 732. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2340" number="3552" version="617">
+					<PARA>The commissioner shall appoint at least one deputy for youth services who shall be responsible for youth services programs and one deputy for community services who shall be responsible for community development programs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6718" number="3553" version="749">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6849" number="3554" version="749">
+				<HEADING>Section 733. Powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-883" name="733"/>Section 733. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2342" number="3555" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The department shall have all the powers and duties of a youth bureau as prescribed in article nineteen-a of the executive law and the regulations promulgated thereunder, and shall in addition have the following powers and duties:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2343" number="3556" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>to advise and assist the mayor and the city council in developing policies designed to meet the needs of youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2344" number="3557" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>to initiate youth programs and coordinate youth programs and activities sponsored by other city agencies and responsible organizations in the private sector; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2345" number="3558" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>to plan for and coordinate neighborhood youth services in conjunction with community boards and youth services planning committees; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2346" number="3559" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>to stimulate community interest in the problems of youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2347" number="3560" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>to promote public awareness of resources available for youth, and to refer the public to appropriate departments, agencies and organizations for advice, assistance and services available to youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2348" number="3561" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>to make such studies and reports regarding needs of youth as the commissioner, the city council or the mayor may deem appropriate; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2349" number="3562" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>to serve as the central source of information relating to services and programs available to youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2350" number="3563" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>to enter into contracts with individuals, organizations and institutions as may be necessary to implement policies and programs consistent with the provisions of this chapter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2351" number="3564" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>to disburse available city, state and federal funds to programs throughout the city and, when practical, coordinate such funds with available funding from the private sector; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2352" number="3565" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>to maintain, operate and control such programs and facilities as may be necessary or required for the proper administration of the department; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2353" number="3566" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>to promulgate rules for the operation of facilities, services and programs under the department&apos;s jurisdiction. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2354" number="3567" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The department shall have all the powers and duties of a designated community action agency for the community services block grant program established pursuant to chapter 106 of title 42 of the United States code (the &quot;omnibus budget reconciliation act of 1981&quot;; 42 U.S.C. §§ 9901-9912), and any amendments thereto. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2355" number="3568" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The department shall be authorized to carry out programs and activities for eligible youths pursuant to chapter 30 of title 29 of the United States Code (title 1 of the &quot;workforce investment act of 1998&quot;; 29 U.S.C. §§ 2801-2945), and any amendments thereto. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2356" number="3569" version="984">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2003/052" destination-id="0-0-0-0">L.L. 2003/052</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6580" number="3570" version="685">
+				<HEADING>Section 734. Youth board. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-885" name="734"/>Section 734. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Youth board. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2357" number="3571" version="1025">
+					<PARA style-name="EdNote" style-name-escaped="EdNote" style-id="0-0-0-18">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note: </CHARFORMAT>this section has been amended by <LINK style-name="Web" style-name-escaped="Web" style-id="0-0-0-23" type="Web" url="https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=7824620&amp;GUID=82610FD7-5216-4996-A8C3-FC130D1930AD&amp;Options=ID%7cText%7c&amp;Search=">L.L. 2026/076, 3/27/2026, eff. 9/23/2026</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-119]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7837" number="3572" version="1025">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be in the department a youth board, which shall serve as a forum for representatives of disciplines directly concerned with the welfare of youth.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2359" number="3573" version="920">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The youth board shall be representative of the community, and shall include persons representing the areas of social service, health care, education, business, industry and labor. To the extent practicable, at least 3 members of the youth board shall be between the age of 16 and 24. No member of the board shall be removed or required to step down due to reaching 25 years of age. If a vacancy arises and no remaining member of the board is between the age of 16 and 24, such vacancy must be filled by a person between the age of 16 and 24. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-107]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7419" number="3574" version="920">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The youth board shall consist of up to 28 members, appointed by the mayor, 14 of whom shall be appointed upon recommendation of the city council. In making such appointments and recommendations, the mayor and the city council shall make efforts to identify persons who have demonstrated experience with organizations or activities directly concerned with the welfare of youth. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-107]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2360" number="3575" version="920">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The mayor shall designate one of the members of the youth board to be chair.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2361" number="3576" version="920">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The members of the youth board shall serve without compensation.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2362" number="3577" version="920">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The youth board shall meet at least quarterly.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7418" number="3578" version="920">
+					<PARA>(Am. L.L. 2025/032, 3/29/2025, eff. 3/29/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-107]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6719" number="3579" version="749">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6850" number="3580" version="749">
+				<HEADING>Section 735. Interagency coordinating council. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-887" name="735"/>Section 735. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Interagency coordinating council. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2364" number="3581" version="84">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be an interagency coordinating council established by the mayor which shall consist of representatives of each city agency providing services to youth, representatives from the youth board established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="734" destination-id="0-0-0-885">seven hundred thirty-four</LINK> of this chapter and a representative of the city council who shall be appointed by the speaker of the city council. The mayor, or his or her designee, shall serve as chairperson of the interagency coordinating council and shall preside over all meetings. The commissioner shall serve as director of the interagency coordinating council.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2365" number="3582" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The interagency coordinating council shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2366" number="3583" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>prepare and include in the report required by paragraph ten of this subdivision an annual breakdown for the immediately preceding fiscal year of each member agency&apos;s allocations for services to youth and the number of youth served; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2367" number="3584" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>recommend, in consultation with the office of operations, means for improving member agencies&apos; delivery, management and supervision of services to youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2368" number="3585" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>recommend means by which the duplication and fragmentation of service delivery to youth may be reduced and the efficiency, effectiveness and economy of service delivery may be enhanced; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2369" number="3586" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>consider proposals from member agencies, the city council and the youth board for the improvement of service delivery to youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2370" number="3587" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>recommend to the mayor joint agency projects or programs which could make more efficient use of existing resources; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2371" number="3588" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>plan and develop a comprehensive information service for the benefit of youth, their families, service providers and school and government personnel, which shall include citywide, boroughwide and community board program directories, hotlines and other such services designed to facilitate public accessibility to such information; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2372" number="3589" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>conduct an annual comprehensive youth services needs assessment on a citywide, boroughwide and community district basis; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2373" number="3590" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>formulate an integrated, comprehensive plan for the delivery of community-based services to youth; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2374" number="3591" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>compile, collect and develop periodically, and make available, information and data relating to youth and youth services in New York city; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2375" number="3592" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>issue an annual report, in October of each year, to the city council and the mayor summarizing its activity during the previous fiscal year and detailing recommendations for improving service delivery and coordination, reducing duplication and fragmentation and facilitating the more efficient use of existing resources. Such report shall also include an annual breakdown of member agencies&apos; allocations for services to youth and the number of youth served as prescribed in paragraph one of this subdivision, an annual comprehensive youth services needs assessment as prescribed in paragraph seven of this subdivision, and a two-year proposed agenda consisting of specific issues that the interagency coordinating council plans to address during the current and subsequent fiscal years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2376" number="3593" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The interagency coordinating council shall meet at least quarterly and shall hold at least one public hearing annually, at which public testimony shall be taken. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2377" number="3594" version="984">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1989/018" destination-id="0-0-0-0">L.L. 1989/018</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1994/027" destination-id="0-0-0-0">L.L. 1994/027</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6720" number="3595" version="708">
+				<HEADING>Section 736. Community action board. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-889" name="736"/>Section 736. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Community action board. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2378" number="3596" version="617">
+					<PARA>There shall be in the department a community action board which shall be constituted so as to assure that it is in compliance with applicable federal and state requirements. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2379" number="3597" version="708">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/081" destination-id="0-0-0-0">L.L. 1996/081</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

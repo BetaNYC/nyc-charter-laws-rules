@@ -1,0 +1,1185 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-2433" number="3699" version="149">
+			<HEADING>Chapter 35: Department of Citywide Administrative Services</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1527" name="Chapter 35"/>Chapter 35: Department of Citywide Administrative Services</PARA>
+		</RECORD>
+		<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+			<RECORD id="0-0-0-2434" number="3700" version="710">
+				<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+				</PARA>
+			</RECORD>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6723" number="3701" version="710">
+				<HEADING>Section 810. Department, commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-917" name="810"/>Section 810. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department, commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2435" number="3702" version="617">
+					<PARA>There shall be a department of citywide administrative services, the head of which shall be the commissioner of citywide administrative services. The commissioner may appoint deputies within available appropriations. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2436" number="3703" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6724" number="3704" version="710">
+				<HEADING>Section 811. Powers and duties of the commissioner; general. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-919" name="811"/>Section 811. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties of the commissioner; general. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2437" number="3705" version="617">
+					<PARA>The commissioner shall be responsible for citywide personnel matters, as set forth in this chapter, and shall have all the powers and duties of a municipal civil service commission provided in the civil service law or in any other statute or local law other than such powers and duties as are by this chapter assigned to the mayor, the city civil service commission or the heads of the city agencies; the commissioner shall in addition have the power to perform all the functions and operations of the city of New York relating to the maintenance and care of public buildings and facilities; the procurement of goods and other personal property; the disposition of surplus property; the provision to city agencies of services other than personal services; the acquisition, disposition and management by the city of real property other than housing; and the provision of automotive, communication, energy, and data processing services. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2438" number="3706" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6725" number="3707" version="710">
+				<HEADING>Section 812. Personnel management, declaration of intent. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-921" name="812"/>Section 812. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Personnel management, declaration of intent. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2439" number="3708" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The personnel policies and practices of the city government, in furtherance of this charter, the civil service law and rules and other applicable law, shall: (1) preserve and promote merit and fitness in city employment, (2) ensure that appointments and promotions in city service are made, and that wages are set, without regard to political affiliation, and without unlawful discrimination based on sex, race, color, religion, religious observance, national origin, disability, age, marital status, citizenship status or sexual orientation; and promote and support the efficient and effective delivery of services to the public.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2440" number="3709" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Consistent with subdivision a of this section, the heads of city agencies shall have such powers, duties and responsibilities for personnel management as they shall require to administer their agencies effectively and to supervise, evaluate, motivate, discipline, provide incentives for and improve the skills of employees of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2441" number="3710" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6726" number="3711" version="710">
+				<HEADING>Section 813. City civil service commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-923" name="813"/>Section 813. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">City civil service commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2442" number="3712" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a city civil service commission, consisting of five members, not more than three of whom shall be members of the same political party. Members shall be appointed by the mayor, from a list of nominations provided by the screening committee established pursuant to subdivision b of this section, for overlapping terms of six years. Of the members first appointed, two shall serve for two years and two for four years and one for six years. The members shall be removable in the manner provided for members of a municipal civil service commission in the civil service law. A vacancy in such commission shall be filled in the same manner as regular appointments for the balance of the unexpired term. The mayor shall designate a member as chair and vice chair, respectively, for one-year terms. Within appropriations for such purposes, the members of the commission shall be reimbursed on a per diem basis for attendance at regularly scheduled meetings and hearings of the commission.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2443" number="3713" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>There shall be a screening committee which shall submit to the mayor a list of nominees, which shall include persons with knowledge or experience of the civil service system, or personnel management, or compensation practices, from which the mayor shall make appointments to the city civil service commission. Such screening committee shall consist of six members, of whom four shall be appointed by the mayor and two shall be appointed by the municipal labor committee. The screening committee shall submit the list of nominees upon the occurrence of any vacancy on the commission or at least three months prior to the expiration of the term of any incumbent member. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2444" number="3714" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The commission shall appoint a counsel, who shall not be employed or retained by any other city agency, and may appoint a secretary and such other subordinates as may be necessary within the appropriation therefor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2445" number="3715" version="88">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The civil service commission shall have the power to hear and determine appeals by any person aggrieved by any action or determination of the commissioner made pursuant to paragraphs three, four, five, six, seven and eight of subdivision a or paragraph five of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="814" destination-id="0-0-0-925">eight hundred fourteen</LINK> of this chapter and may affirm, modify, or reverse such action or determination. Any such appeal shall be taken by application in writing to the commission within thirty days after the action or determination appealed from. The commission shall also have the powers and responsibilities of a municipal civil service commission under section seventy-six of the state civil service law. In accordance with the requirements of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 45" destination-id="0-0-0-1005">chapter forty-five</LINK>, the commission shall promulgate rules of procedure, including rules establishing time schedules, for the hearings and determinations authorized by this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2446" number="3716" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The commission, on its own initiative, or upon request of the mayor, council, or commissioner, shall have the power and duty to conduct reviews, studies, or analyses of the administration of personnel in the city, including the classification of titles by the commissioner. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2447" number="3717" version="87">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The commission shall prepare and transmit directly to the mayor departmental estimates as required by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="231" destination-id="0-0-0-355">two hundred thirty-one</LINK>. The mayor shall include such proposed appropriations for the commission as a separate agency in the preliminary and executive budgets as are sufficient for the commission to fulfill the obligations assigned to it by this charter or other law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2448" number="3718" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6727" number="3719" version="710">
+				<HEADING>Section 814. Personnel management; powers and duties of the commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-925" name="814"/>Section 814. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Personnel management; powers and duties of the commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5204" number="3720" version="267">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The commissioner shall have the following powers and duties in addition to the powers and duties of a municipal civil service commission provided in the civil service law, and those vested in the commissioner as head of the department, except where any specific power or duty is assigned to the mayor, heads of city agencies or the civil service commission pursuant to this chapter: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2450" number="3721" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>To recruit personnel; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2451" number="3722" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>To make studies in regard to the grading and classifying of positions in the civil service, establish criteria and guidelines for allocating positions to an existing class of positions, and grade and establish classes of positions; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2452" number="3723" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>To schedule and conduct examinations for positions in the civil service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2453" number="3724" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>To establish, promulgate and certify eligible lists in the manner provided in the civil service law, and the rules of the commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2454" number="3725" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>To determine the appropriateness of eligible lists for the filing of vacancies in the manner provided in the civil service law and the rules of the commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2455" number="3726" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>To investigate applicants for positions in the civil service; to review their qualifications, and to revoke or rescind any certification or appointment by reason of the disqualification of the applicant or appointee under the provisions of the civil service law, and the rules of the commissioner or any other law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2456" number="3727" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>To review any appointment of persons as provisional employees within sixty days after appointment to assure compliance with this chapter, the civil service law, and any rule or regulation issued pursuant to this charter or civil service law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2457" number="3728" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>To certify payrolls in accordance with the provisions of the civil service law and the rules of the commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2458" number="3729" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>To keep records regarding candidates for appointment to the civil service and officers and employees in the civil service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2459" number="3730" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>To develop and recommend to the mayor standard rules governing working conditions, vacations and leaves of absence; and career, salary and wage plans providing for the creation, abolition and modification of positions and grades and fixing salaries of persons paid from the city treasury, subject to the provisions of this charter, the civil service law, other applicable statutes and collective bargaining agreements; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2464" number="3731" version="267">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>To administer the city-wide safety incentive, training and development, and other such personnel programs of the city. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2465" number="3732" version="88">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commissioner shall have the following powers and duties with respect to the personnel management functions assigned to city agencies pursuant to subdivisions a, b, c, and d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2466" number="3733" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>To aid in the development of effective and efficient personnel programs and professional personnel staffs in the agencies of the city; and to convene the personnel officers of the agencies from time to time as a personnel council to consider personnel matters of inter-agency or of city-wide concern; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2467" number="3734" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>To approve agency plans and programs pursuant to paragraphs seven, nine and thirteen of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2468" number="3735" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>To establish and enforce standards, guidelines and criteria for the personnel management functions assigned to the agencies and to audit performance by the agencies of such personnel functions; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2469" number="3736" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>To reverse or rescind any agency personnel action or decision pursuant to an assignment or delegation of authority in this chapter, upon a finding of abuse after notification to the agency and an opportunity to be heard; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2470" number="3737" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>To hear and determine appeals by any person aggrieved by any action or determination of the head of an agency made pursuant to paragraphs three, five, seven and eleven of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>, subject to review by the civil service commission as provided in subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="813" destination-id="0-0-0-923">eight hundred thirteen</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2471" number="3738" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>To delegate to the head of an agency personnel management functions assigned to the commissioner where such delegation is not otherwise prohibited by the civil service law, and pursuant to terms and conditions prescribed by the commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2473" number="3739" version="267">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>To administer personnel programs of a city-wide nature or common to two or more departments where administration by separate agencies would be impracticable and uneconomical. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2474" number="3740" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The commissioner shall promulgate rules and regulations relating to the personnel policies, programs and activities of city government in furtherance of and consistent with the state civil service law and this chapter. The commissioner shall transmit to the state civil service commission each proposed rule which must be submitted to such commission, including any which establishes or reclassifies titles in the non-competitive or exempt class, within sixty days after the public hearing has been held on such rule. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2475" number="3741" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The commissioner shall, at the time requested by the city civil service commission or the equal employment practices commission, provide each commission with all the information which such commission deems necessary to fulfill the duties assigned to it by the charter. The provisions of this subdivision shall not apply to any information which is required by law to be kept confidential or which is protected by the privileges for attorney-client communications, attorney work products, or material prepared for litigation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2476" number="3742" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The commissioner shall submit a quarterly report to the mayor, the council, the civil service commission and the equal employment practices commission. Such report shall specify, by agency and by title, including temporary titles: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2477" number="3743" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>the number of provisional employees at the end of the second month of the quarter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2478" number="3744" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>the length of time such provisional employees have served in their positions; and</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2479" number="3745" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>the actions taken by the city to reduce the number of such provisional employees and the length of their service in such positions. Such reports shall be submitted by the last day of March, June, September, and December of each year.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5251" number="3746" version="267">
+					<PARA>(Am. L.L. 2019/012, 1/11/2019, eff. 5/11/2019) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5205" number="3747" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6728" number="3748" version="710">
+				<HEADING>Section 814.1. Office of diversity and inclusion.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1587" name="814.1"/>Section 814.1. Office of diversity and inclusion.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6533" number="3749" version="783">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT>
+						<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5221" number="3750" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Chief.</CHARFORMAT> The term &quot;chief&quot; means the director of the office of diversity and inclusion.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5220" number="3751" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Office.</CHARFORMAT> The term &quot;office&quot; means the office of diversity and inclusion.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5219" number="3752" version="240">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The commissioner shall establish an office of diversity and inclusion. Such office shall be headed by a chief who shall be appointed by the commissioner.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5218" number="3753" version="240">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Powers and duties.</CHARFORMAT> The commissioner, acting through the office, shall have the power to:<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5217" number="3754" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Compile and report on statistics relating to hiring, salary, and promotion for all city agencies disaggregated by race, gender, civil service classification, and other categories as appropriate, and make such reports publicly available online on an annual basis.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5216" number="3755" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Establish and enforce uniform procedures and standards to be utilized by city agencies in establishing measures, programs and plans to ensure a fair and effective affirmative employment plan for equal employment opportunities for minority group members and women who are employed by, or who seek employment with, city agencies. Such procedures shall include a time schedule for the development of such plans which provides for the preparation by each agency of a draft plan, the review of such draft plan by the department of citywide administrative services, the equal employment practices commission, and such other agency as the mayor requires, and the consideration by the agency of any comments received on such draft plans prior to the adoption of a final plan as required by paragraph nineteen of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5215" number="3756" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Establish a uniform format to be utilized by all city agencies in the preparation of the quarterly reports required by subdivision i of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>. Such format shall provide for the presentation of statistical information regarding total employment, including provisional, seasonal, per-diem and part-time employees, new hiring and promotions in a manner that facilitates understanding of an agency&apos;s efforts to provide fair and effective equal opportunity employment for minority group members, women and members of other groups who are employed by, or who seek employment with, city agencies;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5214" number="3757" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Ensure accountability by evaluating each city agency in accordance with the procedures and standards set by the office pursuant to paragraph 1 of this subdivision. The office shall ensure that each evaluation shall include, but not be limited to, the following: (i) a determination for each city agency of whether such agency is compliant with such procedures and standards; (ii) an analysis of whether and how such procedures and standards should be expanded or modified for the next annual reporting period, with a view towards improving upon prior benchmarks; and (iii) any other information the office deems relevant. The evaluations shall be compiled and included in the annual report to the mayor, the city council, the equal employment practices commission and the city civil service commission pursuant to paragraph 8 of this subdivision. Such report shall be made publicly available on the city&apos;s website.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5213" number="3758" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Develop, in conjunction with other city agencies, a clearinghouse for information on employment and educational programs and services for minority group members and women; and<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5212" number="3759" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>Provide assistance to minority group members and women employed by, or interested in being employed by, city agencies to ensure that such minority group members and women benefit, to the maximum extent possible, from city employment and educational assistance programs.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5211" number="3760" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>Develop policies and best practices to ensure that adequate support, training and mentorship is made available to underrepresented city employees to assist with career advancement in the civil service.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5210" number="3761" version="240">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>Develop recruitment, hiring, and career advancement procedures that address unconscious biases and systemic barriers to achieve greater diversity in the recruitment and career advancement of city employees, and provide trainings for city agency employees responsible for recruitment, discretionary hiring, and career advancement.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-033]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5209" number="3762" version="783">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>Train city agencies on how to review and evaluate whether job postings and recruitment materials for civil service positions reflect unconscious bias that could discourage a diverse pool of applicants from applying, and how to amend such postings and materials accordingly, if applicable.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6867" number="3763" version="783">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>No later than September 30, 2020, and no later than September 30 annually thereafter, publish and submit to the mayor, council and the commission on equal employment practices a report on the activities of the department of citywide administrative services and city agencies to provide fair and effective affirmative employment practices to ensure equal employment opportunity for minority group members and women who are employed by, or who seek employment with, city agencies. Such report shall include, but not be limited to, an analysis of the city government workforce and applicants for such employment by agency, title and classification except where a civil service exam was the basis of appointment; statistics relating to hiring, salary and promotion for all city agencies disaggregated by race, gender, and civil service classification and other categories as appropriate; a description of each agency&apos;s employment practices, policies and programs; an analysis of the effectiveness of the city&apos;s efforts to provide fair and effective affirmative employment practices to ensure equal employment opportunity for minority group members and women who are employed by, or who seek employment with, city agencies; an analysis of employee response rates to efforts to collect demographic information over time, and whether changes in the racial and ethnic classification categories used to collect demographic information have had an impact on employee response rates; a review of racial and ethnic classification categories used to collect demographic information and recommendations for how to improve the use of such categories to reflect the city government workforce; and such legislative, programmatic and budgetary recommendations for the development, implementation or improvement of such activities as the commissioner deems appropriate.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5207" number="3764" version="783">
+					<PARA>(L.L. 2019/012, 1/11/2019, eff. 5/11/2019; Am. L.L. 2019/014, 1/11/2019, eff. 5/11/2019; Am. L.L. 2023/028, 2/21/2023, eff. 6/21/2023)<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2480" number="3765" version="240">
+				<HEADING>Section 815. Agency heads; powers and duties concerning personnel management. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-927" name="815"/>Section 815. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency heads; powers and duties concerning personnel management. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7320" number="3766" version="878">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Subject to the civil service law and applicable provisions of this charter, heads of city agencies shall have the following powers and duties essential for the management of their agencies in addition to powers and duties vested in them pursuant to this charter or other applicable law:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2482" number="3767" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>To recruit personnel; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2483" number="3768" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>To participate with the department of citywide administrative services in job analyses for the classification of positions; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2484" number="3769" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>To allocate individual positions to existing civil service titles; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2485" number="3770" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>To allocate individual managerial or executive positions to managerial assignment levels; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2486" number="3771" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>To assist the department of citywide administrative services in the determination of minimum qualifications for classes of positions and to review and evaluate qualifications of candidates for positions in the civil service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2487" number="3772" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>To assist the commissioner in the planning and preparation of open competitive examinations; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2488" number="3773" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>To schedule and conduct tests other than written tests for promotion to competitive class positions; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2489" number="3774" version="867">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>To determine whether to hold an open competitive or promotion examination to fill positions in the civil service subject to disapproval of the commissioner within 30 days; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-099]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2490" number="3775" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>To plan and administer employee incentive and recognition programs; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2491" number="3776" version="867">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>To fill vacant positions within quarterly spending allotments and personnel controls pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="106" destination-id="0-0-0-213">106</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-099]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2492" number="3777" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>To administer and certify eligible lists for classes of positions unique to the agency; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2493" number="3778" version="867">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(12)<TAB tab-count="1"/>To make appointments to competitive positions from eligible lists pursuant to subsection 1 of section 61 of the state civil service law, which authority shall not be abridged or modified by local law or in any other manner; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-099]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2494" number="3779" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(13)<TAB tab-count="1"/>To establish and administer performance evaluation programs to be used during the probationary period and for promotions, assignments, incentives and training; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2495" number="3780" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(14)<TAB tab-count="1"/>To conduct training and development programs to improve the skills, performance and career opportunities of employees; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2496" number="3781" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(15)<TAB tab-count="1"/>To ensure and promote equal opportunity for all persons in appointment, payment of wages, development and advancement; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2497" number="3782" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(16)<TAB tab-count="1"/>To administer employee safety programs; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2498" number="3783" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(17)<TAB tab-count="1"/>To maintain personnel records; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2499" number="3784" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(18)<TAB tab-count="1"/>To perform such other personnel management functions as are delegated by the commissioner pursuant to this chapter or that are not otherwise assigned by this chapter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2500" number="3785" version="878">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(19)<TAB tab-count="1"/>To establish measures and programs to ensure a fair and effective affirmative employment plan to provide equal employment opportunity for minority group members and women who are employed by, or who seek employment with, the agency and, in accordance with the uniform procedures and standards established by the department of citywide administrative services for this purpose, to adopt and implement an annual plan to accomplish this objective. Such plan shall include the following information: an analysis of the agency’s compensation data and measures to address pay disparity and occupational segregation, developed both within the agency and as a result of consultation with prospective applicants and external stakeholders, in the most recent fiscal year; diversity and inclusion training; and schedule and workplace accommodations and access to facilities, including access for individuals with disabilities, gender appropriate bathrooms, and lactation rooms. Such plan shall first be submitted to the department of citywide administrative services pursuant to the customary annual plan schedule. Copies of such plans shall be filed with the mayor, council, department of citywide administrative services, equal employment practices commission, and city civil service commission and shall be made available for reasonable public inspection. In carrying out duties related to this paragraph, the heads of city agencies shall cooperate fully with the department of citywide administrative services&apos; office of diversity and inclusion in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="814.1" destination-id="0-0-0-1587">814.1</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-101]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2501" number="3786" version="878">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(20)<TAB tab-count="1"/>To provide assistance to minority group members and women interested in being employed by city agencies to ensure that such minority group members and women benefit, to the maximum extent possible, from city employment and educational assistance programs; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-101]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7328" number="3787" version="878">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(21)<TAB tab-count="1"/>To offer career counseling to employees of the city civil service. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-101]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2502" number="3788" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Within one year from the effective date of this chapter, the head of each agency shall prepare and submit to the mayor and the commissioner a plan and schedule for the discharge of the powers and duties assigned in this section. No such plan shall take effect until approved by the mayor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2503" number="3789" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The mayor may modify, suspend, or withdraw for cause any power or duty assigned or delegated to the head of an agency pursuant to paragraphs three, four, seven, eight, and eleven of subdivision a of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2504" number="3790" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Notification prior to each action or decision of an agency pursuant to this chapter which changes the status of an individual employee, a position, or a class of positions shall be provided to the commissioner. The head of each agency shall certify on each payroll that all personnel actions and transactions of the agency conform with the provisions of the civil service law and this chapter, the rules of the commissioner and other applicable law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2505" number="3791" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Before any new position in the city service shall be created, the agency head shall furnish the commissioner of finance with a certificate stating the title of the class of positions to which the position is to be allocated. If the position is to be allocated to a new class of positions, the agency head shall request of the commissioner, and the commissioner shall furnish to the agency head and the commissioner of finance, a certificate stating the appropriate civil service title for the proposed position, the range of salary of comparable civil service positions and a statement of the class specifications and line of promotion into which such new position will be placed and any such new position shall be created only with the title approved by the commissioner, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2506" number="3792" version="409">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The heads of all agencies shall, except as otherwise provided by law, have power to appoint and remove, subject to the provisions of the civil service law, all chiefs of bureaus and all other officers, employees and subordinates in their respective administrations, departments or offices, without reference to the tenure of office of any appointee and to assign them their duties. Nothing herein shall be construed to preclude the mayor from entering into a collective bargaining agreement which provides for a procedure governing the discipline of employees, including their removal, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="12-312" destination-id="0-0-0-0">12-312</LINK> of the administrative code of the city of New York for employees of agencies the heads of which are appointed by the mayor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2507" number="3793" version="80">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>The heads of city agencies or their designated representatives shall fulfill the requirements for agency participation in matters affecting the management of the agency in advance of collective bargaining negotiations affecting employees of any agency contained in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1177" destination-id="0-0-0-1205">eleven hundred seventy-seven</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2508" number="3794" version="3">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The head of each city agency shall ensure that such agency does not discriminate against employees or applicants for employment as prohibited by federal, state and local law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2509" number="3795" version="88">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>The head of each city agency shall quarterly publish and submit to the mayor, council, department of citywide administrative services, and the equal employment practices commission a report on the agency&apos;s efforts during the previous quarter to implement the plan adopted pursuant to paragraph nineteen of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815" destination-id="0-0-0-927">eight hundred fifteen</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2510" number="3796" version="3">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>The head of each city agency shall include in all employment retention, recruitment, training and promotional program literature, advertisements, solicitations and job applications, such language as may be necessary to effectuate the purpose of this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2511" number="3797" version="268">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>The head of each city agency shall require each employment agency, or authorized representative of workers with which it has a collective bargaining or other agreement or understanding and which is involved in the performance of recruitment and retention with the agency to furnish a written statement that such employment agency, labor union or representative shall not discriminate against employees or applicants for employment pursuant to federal, state or local law and that such union or representative will cooperate in the implementation of the agency&apos;s obligations pursuant to this chapter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5252" number="3798" version="782">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>No later than September 30, 2023, and by each September 30 thereafter, the head of each city agency shall publish and submit to the mayor, the speaker of the council, the department of citywide administrative services, and the equal employment practices commission a report that contains the following information: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6866" number="3799" version="782">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Number of new full-time and part-time employees retained by such agency; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6865" number="3800" version="782">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Number of employees promoted at such agency, their level of promotion, old and new titles, and their change in pay; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6864" number="3801" version="782">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Number of employees terminated by such agency and their pay at the time of termination; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6863" number="3802" version="782">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Number of employees that left such agency and the pay received by such employees; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6862" number="3803" version="782">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Aggregated data showing the frequency of full-time, part-time, and seasonal employees retained by such agency, EEO-4 job group, pay band, race, ethnicity, gender, and any factors that affect the pay of such employees. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4901" number="3804" version="878">
+					<PARA>(Am. L.L. 2019/012, 1/11/2019, eff. 5/11/2019; Am. L.L. 2023/027, 2/21/2023, eff. 6/21/2023; Am. L.L. 2024/075, 7/6/2024, eff. 9/4/2024; Am. L.L. 2024/076, 7/6/2024, eff. 7/6/2024) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-101]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7319" number="3805" version="867">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6729" number="3806" version="710">
+				<HEADING>Section 815.1. Anti-sexual harassment training.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1563" name="815.1"/>Section 815.1. Anti-sexual harassment training.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4918" number="3807" version="180">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT> For purposes of this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4917" number="3808" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency.</CHARFORMAT> The term &quot;agency&quot; has the same meaning as such term is defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1150" destination-id="0-0-0-1179">1150</LINK> and shall include the offices of the borough presidents, the comptroller and the public advocate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4916" number="3809" version="774">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Interactive training.</CHARFORMAT> The term &quot;interactive training&quot; means participatory teaching whereby the trainee is engaged in a trainer-trainee interaction, use of audio-visuals, computer or online training program or other participatory demonstrations as determined by the department. However, such &quot;interactive training&quot; is not required to be live or facilitated by an in-person instructor in order to satisfy the provisions of this subdivision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4915" number="3810" version="180">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">All personnel.</CHARFORMAT> The head of each agency, in consultation with the department, shall ensure that each employee of such agency receives anti-sexual harassment interactive training annually. Such training shall be designed to create an environment that is free from sexual harassment, to discourage the development of sexual harassment, to raise awareness and sensitivity of employees to potential sexual harassment and to enable employees to prevent and respond to sexual harassment. Such training shall include the specific responsibilities of supervisory and managerial employees in the prevention of sexual harassment and retaliation, and measures that such employees may take to appropriately address sexual harassment complaints. Such training may be included as a part of a broader anti-discrimination training and shall include but not be limited to the following: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4914" number="3811" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>An explanation of sexual harassment as a form of unlawful discrimination under local law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4913" number="3812" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>A statement that sexual harassment is a form of unlawful discrimination under federal and state law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4912" number="3813" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>A description of what sexual harassment is; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4911" number="3814" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The internal complaint process available to employees within such agency; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4910" number="3815" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The complaint process available through the commission on human rights, the division of human rights and the United States equal employment opportunity commission, including contact information; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4909" number="3816" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>The prohibition of retaliation, pursuant to federal, state and local law and the internal complaint process, and examples thereof; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4908" number="3817" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Information concerning bystander intervention, including but not limited to any resources that explain how to engage in bystander intervention. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4907" number="3818" version="774">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>For purposes of this section the term &quot;employee&quot; shall apply to interns. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4906" number="3819" version="180">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Compliance.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4905" number="3820" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The department of citywide administrative services shall maintain a record of all trainings required pursuant to this section for at least three years. On or before January 31 of each year the department of citywide administrative services shall report to the mayor and the speaker the results of agency compliance with the requirements of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4904" number="3821" version="180">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The training required pursuant to this section is intended to establish a minimum threshold and does not prohibit any agency from providing more frequent or additional anti-sexual harassment training. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4902" number="3822" version="440">
+					<PARA>(L.L. 2018/092, 5/9/2018, eff. 9/6/2018; Am. L.L. 2018/108, 5/26/2018, eff. 9/6/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-025]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5772" number="3823" version="440">
+				<HEADING>Section 815.2. Age discrimination training.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1647" name="815.2"/>Section 815.2. Age discrimination training.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5775" number="3824" version="440">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The department, in consultation with the commission on human rights, shall create training, including materials, to identify, prevent and eliminate age discrimination in the workplace. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-056]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5774" number="3825" version="772">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The head of each agency, in consultation with the department, shall ensure that each employee of such agency receives age discrimination training biennially. Such training may be provided in combination with other training on equal employment provided to the agency&apos;s employees. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-056]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5773" number="3826" version="440">
+					<PARA>(L.L. 2020/121, 12/20/2020, eff. 4/19/2021) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-056]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2512" number="3827" version="836">
+				<HEADING>Section 815.3. Anti-racism and anti-racial discrimination trainings.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1803" name="815.3"/>Section 815.3. Anti-racism and anti-racial discrimination trainings.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7199" number="3828" version="836">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT> For purposes of this section, the terms “agency” and “interactive training” have the same meanings as in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="815.1" destination-id="0-0-0-1563">815.1</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7198" number="3829" version="836">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Employee.</CHARFORMAT> The term “employee” means employees, interns, independent contractors, and volunteers of city agencies. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7197" number="3830" version="836">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Independent contractor.</CHARFORMAT> The term “independent contractor” means an independent contractor of an agency, or an employee thereof, who communicates with one or more city employees for at least one hour each week in work for the city which is anticipated to extend for not fewer than four weeks. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7196" number="3831" version="836">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Volunteer.</CHARFORMAT> The term “volunteer” means an individual who, other than a city employee, is appointed to and serves without compensation on a board, commission, committee or other body created by law, rule or executive order, the expenses of which are paid in whole or part from the city treasury. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7195" number="3832" version="836">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The department, in consultation with the office of racial equity and the commission on human rights, shall create and update, as necessary in the view of the department, an anti-racism and anti-racial discrimination training for agency employees. Such training shall be an interactive training, the purpose of which shall be to enable agency employees, including supervisory and managerial employees, to identify, respond to, and combat racism and racial discrimination in the workplace. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7194" number="3833" version="836">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The department, in consultation with the office of racial equity and the commission on human rights, may create a unique version of such training for any particular group of agency employees to ensure that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7193" number="3834" version="836">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The information covered is relevant to such employees in light of their particular duties or work environment; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7192" number="3835" version="836">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The training avoids duplication with other trainings such employees are required to complete pursuant to federal, state, or local law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7191" number="3836" version="836">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Each agency, in consultation with the department, shall ensure that each of its employees completes such training at least once per year. Such training may be provided in combination with other trainings provided to the agency’s employees. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7190" number="3837" version="836">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Notwithstanding any other provision of this section, an agency may satisfy its obligation pursuant to subdivision d of this section using an alternative training, provided that the department, in consultation with the office of racial equity and the commission on human rights, has reviewed and approved such training for such purpose. Any such approval shall be valid for no longer than 5 years. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7188" number="3838" version="836">
+					<PARA>(L.L. 2024/014, 1/6/2024, eff. 7/1/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7187" number="3839" version="836">
+				<HEADING>Section 816. Management service. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-929" name="816"/>Section 816. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Management service. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2513" number="3840" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The commissioner, in consultation with the heads of agencies, shall develop and submit to the mayor a city-wide plan and schedule for the development of qualified and competent technical, professional, management, administrative, and supervisory personnel in the civil service to meet the managerial needs of city government. The mayor shall approve, disapprove or modify the plan within one year after the effective date of this chapter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2514" number="3841" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The city-wide plan shall establish a management service for city agencies and shall provide for: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2515" number="3842" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Membership in the service of employees with significant policy, administrative, supervisory, managerial or professional duties that require the exercise of independent judgment in the scheduling and assignment of work, program management or planning, evaluation of performance or allocation of resources; and including the ranking officials assigned to the local service districts of agencies within community districts and boroughs; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2516" number="3843" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Opportunities for entry into the service by qualified civil servants and qualified persons not employed by the city consistent with requirements of the civil service law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2517" number="3844" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>A city-wide qualifying test for entry into the service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2518" number="3845" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Assessments of capacity and potential to perform managerial duties as part of competitive tests for entry into the service and assignments within the service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2519" number="3846" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>A single managerial class of positions for each occupational series within the service with assignment levels within each such class; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2520" number="3847" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>A plan for achieving equitable pay scales for members of the service consonant with their duties and responsibilities; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2521" number="3848" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>Merit increases, incentive awards, and recognition programs for members of the service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2522" number="3849" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>Performance evaluations for members of the service to be used for assignments, incentive awards, probationary period review, and disciplinary action; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2523" number="3850" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>A probationary period not to exceed one year for members of the service; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2524" number="3851" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>Management intern programs, and, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2525" number="3852" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>Training and career development programs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2526" number="3853" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The commissioner shall conduct city-wide programs and functions related to the management service; assist agencies in the implementation of the management service plan; and review and evaluate agency performance under the plan. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2527" number="3854" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6730" number="3855" version="710">
+				<HEADING>Section 817. Appointments and promotions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-931" name="817"/>Section 817. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Appointments and promotions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2528" number="3856" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>All appointments, promotions and changes in status of persons in the public service of the city shall be made in the manner prescribed by the constitution of the state and in accordance with the provisions of the civil service law and other provisions of law not inconsistent therewith nor with this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2529" number="3857" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Whenever qualifications for the appointment of persons to public office are prescribed by law, the appointing officer shall, upon making such appointment, file with the civil service commission a certificate that such appointment complies with such law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2530" number="3858" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6731" number="3859" version="710">
+				<HEADING>Section 818. Power of investigation. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-933" name="818"/>Section 818. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Power of investigation. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2531" number="3860" version="617">
+					<PARA>The commissioner shall have the power to make investigations concerning all matters touching the enforcement and effect of the provisions of the civil service law insofar as it applies to the city and the rules and regulations prescribed thereunder, or concerning the actions of any examiner or subordinate of the department, or of any officer or employee of the city or of any county within the city, in respect to the execution of the civil service law; and in the course of such investigations the commissioner shall have the power to administer oaths, to compel the attendance of witnesses, and to examine such persons as deemed necessary. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2532" number="3861" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6732" number="3862" version="710">
+				<HEADING>Section 819. No compensation to unauthorized employee. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-935" name="819"/>Section 819. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">No compensation to unauthorized employee. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2533" number="3863" version="617">
+					<PARA>No officer of the city whose duty is to sign or countersign warrants shall draw, sign or issue, or authorize the drawing, signing or issuing of any warrant on the commissioner of finance or other disbursing officer of the city for payment of salary to any person in its service whose appointment or retention has not been in accordance with the civil service law and the valid rules in force thereunder. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2534" number="3864" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6733" number="3865" version="710">
+				<HEADING>Section 820. Examination for licenses. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-937" name="820"/>Section 820. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Examination for licenses. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2535" number="3866" version="617">
+					<PARA>The commissioner shall, unless otherwise provided by law, have power, upon request of any person charged with the duty of issuing licenses or permits, to conduct, under rules and regulations to be established by the commissioner, examinations and tests to determine the qualifications of persons applying for such licenses or permits. The commissioner shall certify to the person having power to issue the license or permit the result of any such examination or test. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2536" number="3867" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6734" number="3868" version="710">
+				<HEADING>Section 821. Officers or employees designated to serve in exempt civil service positions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-939" name="821"/>Section 821. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Officers or employees designated to serve in exempt civil service positions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2537" number="3869" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Notwithstanding any provision in this charter to the contrary, the mayor or head of an agency may designate any officer or employee occupying a position in the competitive class of the civil service to serve in a position in the exempt class, and in such case, the officer or employee so designated shall thereupon enter upon and exercise all the powers and duties and receive the salary of such exempt position, and shall retain all the rights, privileges and status of such officer or employee&apos;s position in the competitive class.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2538" number="3870" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The appointment of any person chosen to fill the position thus left vacant shall be temporary and shall terminate upon the return of such officer or employee to such position as provided in subdivision e of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2539" number="3871" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Such designation shall be in writing and shall be filed and remain of record in the office of such agency, in the office of the commissioner and in the office of the mayor and shall remain in force until revoked by the mayor or head of such agency, as the case may be. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2540" number="3872" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Service in such position in the exempt class shall be credited as service in the competitive class and the status of such officer or employee in respect to pensions or otherwise shall not be adversely affected by such designation. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2541" number="3873" version="48">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Upon the termination of the officer or employee&apos;s services in such exempt position, except by dismissal for cause in the manner provided in section seventy-five of the civil service law, such officer or employee shall immediately and without further application return to the position in the competitive class with the status, rights, privileges and salary enjoyed immediately prior to the designation to the position in the exempt class. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2542" number="3874" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6735" number="3875" version="710">
+				<HEADING>Section 822. Public buildings and facilities. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-941" name="822"/>Section 822. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Public buildings and facilities. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2543" number="3876" version="617">
+					<PARA>With respect to public buildings and facilities, the commissioner shall have the following powers and duties:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2544" number="3877" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>to manage, alter, repair, operate, maintain and clean buildings, facilities and offices leased or occupied for public use by more than one city agency whose management, alteration, repair, operation, maintenance or cleaning is paid for in whole or in part from the city treasury, and as directed by the mayor, to perform services in space occupied for public use by a single city agency; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2545" number="3878" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>except for the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 9" destination-id="0-0-0-301">chapter nine</LINK> of this charter, to employ, when in the commissioner&apos;s opinion such services are necessary or desirable, qualified consultants in private practice to aid the commissioner in carrying out his or her duties and responsibilities with respect to public buildings or facilities; such consulting or advisory services shall be performed under the supervision of the commissioner; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2546" number="3879" version="778">
+					<PARA>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>to exercise and perform such other powers and duties as may be prescribed by law or delegated to him or her in relation to laboratory testing of commodities and construction materials.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6859" number="3880" version="778">
+					<PARA>Notwithstanding the provisions of this section, the exercise of the powers and duties set forth herein shall be subject to the jurisdiction of any city agency performing urban renewal and public and publicly-aided housing functions to the extent, and in such areas, as directed by the mayor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2547" number="3881" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6736" number="3882" version="710">
+				<HEADING>Section 823. Procurement of goods, other personal property and services. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-943" name="823"/>Section 823. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Procurement of goods, other personal property and services. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2548" number="3883" version="617">
+					<PARA>With respect to the procurement and disposal of goods and other personal property and the procurement of services other than personal services, the commissioner shall have the following powers and duties:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2549" number="3884" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>to purchase, inspect, store and distribute all goods, supplies, materials, equipment and other personal property required by any city agency, except as otherwise provided by law, or by any office of any county wholly included in the city for which supplies, materials or equipment are required, payment for which is made from the city treasury; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2550" number="3885" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>to establish and maintain one or more city storehouses, operating therein a modern system of stores control, to supply the estimated current needs of the agencies for which the commissioner is authorized to purchase. All purchases other than such purchases for stock for estimated needs and all deliveries from such stock shall be upon justified requisitions. The commissioner shall also oversee the establishment of efficient and economical systems of stores control in other city agencies and review the operations of such storehouses to assure their efficient and economical management; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2551" number="3886" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>to receive all surplus and obsolete personal property not required by any agency for which the commissioner has the power to make purchases and all such agencies shall surrender such property to the commissioner who shall dispose thereof pursuant to rules promulgated by him or her governing its redistribution, exchange, transfer, sale or other disposition; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2552" number="3887" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>to procure, supply and manage contractual services other than personal or professional services for the use of city agencies; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2553" number="3888" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>to promulgate rules governing the purchase, payment, storage, and delivery of goods, supplies, materials and equipment by agencies of the city and the disposal of surplus and obsolete materials, and to supervise their enforcement; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2554" number="3889" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>to classify all goods, supplies, materials and equipment; to adopt as standards the minimum number of qualities, sizes and types of commodities consistent with efficient operation and life cycle costs; and to promulgate and enforce written specifications for all such standard commodities. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2555" number="3890" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6737" number="3891" version="710">
+				<HEADING>Section 824. Real property. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-945" name="824"/>Section 824. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Real property. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2556" number="3892" version="617">
+					<PARA>With respect to real property, the commissioner shall have the following powers and duties:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2557" number="3893" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>to purchase, lease condemn or otherwise acquire real property for the city, subject to the approval of the mayor, and to sell, lease, exchange or otherwise dispose of real property of the city, subject to the requirements of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="384" destination-id="0-0-0-557">three hundred eighty-four</LINK> and subject to review and approval either pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="195" destination-id="0-0-0-271">one hundred ninety-five</LINK>, if applicable, or pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. No such purchase, lease, condemnation or other acquisition shall be authorized until a public hearing has been held with respect to such acquisition after the publishing of notice in the City Record at least ten days but not more than thirty days in advance of such hearing; provided, however, that in the case of an acquisition by purchase or condemnation, no such hearing shall be required if a public hearing is held with respect to such purchase or condemnation pursuant to any other requirement of law. In the case of a lease in which the city is to be the tenant, the notice for the hearing required in this subdivision shall include a statement of the location and proposed use of the premises, and the term and annual rent of the proposed lease. Before submitting an application pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> for an acquisition or a disposition pursuant to this section, the commissioner shall take into consideration the criteria for location of city facilities established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. If two years, not including time spent in litigation, have elapsed between (1) the final approval of a disposition or acquisition pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK> and (2) execution of an agreement in connection with such disposition or acquisition, a public hearing shall be held on the proposed acquisition or disposition after the publishing of notice in the City Record at least forty-five days in advance of such hearing; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2558" number="3894" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>to assign and reallocate to city agencies space and real property owned or leased by the city, to establish comprehensive and continuing programs and standards for utilization of space owned or leased by the city and to conduct surveys of space utilization; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2559" number="3895" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>to manage all real property of the city not used for public purposes, including real property acquired for a public purpose and not being currently utilized for such purpose, except wharf property or other real property under the jurisdiction of the department of small business services, the department of housing preservation and development, the New York city transit authority, and the New York city housing authority by virtue of an authorization granted by the mayor pursuant to the provisions of subdivision three of section one hundred twenty-five of the public housing law, or except as otherwise provided by law, real property under the jurisdiction of the triborough bridge and tunnel authority; provided, that the commissioner shall be responsible for the management, leasing or permitting of any parcels of wharf property and water front property as provided in any designation made by the commissioner of small business services pursuant to paragraph b of subdivision two of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1301" destination-id="0-0-0-1225">thirteen hundred one</LINK> of this charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2560" number="3896" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>to exercise and perform such other powers and duties as may be prescribed by law or delegated to the commissioner in relation to the acquisition, disposition, management, site selection, assignment, demolition or other treatment of real property of the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2561" number="3897" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>to employ, where desirable, managing agents to manage city properties and collect rents therefrom and pay bills; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2562" number="3898" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>to keep, maintain and annually update a master list of leases wherein the city or its agencies is a tenant. Such master list shall contain at least the following information: name and address of lessor, location wherein lease property is situated, base rent, square footage, escalation provisions, and any other information which the department deems necessary and appropriate. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2563" number="3899" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6738" number="3900" version="710">
+				<HEADING>Section 825. Communications and energy. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-947" name="825"/>Section 825. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Communications and energy. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2564" number="3901" version="617">
+					<PARA>With respect to communications and energy, the commissioner shall have the following powers and duties:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2565" number="3902" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>WNYC Communications Group: to maintain, operate and administer in conformance with all federal, state and local laws and to use the facilities of such group to assist any agency which shall require and use such service and also for the instruction, enlightenment, entertainment, recreation and welfare of the inhabitants of the city by the broadcast of any matters which are deemed appropriate and necessary for the public interest and advantage and to connect such facilities with any broadcasting station to unite in the broadcasting of such matters and activities; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2566" number="3903" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Gas and electricity: to have charge and control of furnishing the city or any part thereof, by contract or otherwise, with gas, electricity, steam, hot water or other energy source, except such functions as are exercised by the public utility service of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2567" number="3904" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6739" number="3905" version="710">
+				<HEADING>Section 826. Data processing services. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-949" name="826"/>Section 826. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Data processing services. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2568" number="3906" version="617">
+					<PARA>The commissioner shall provide data processing support, programming, and computer systems analysis services for city agencies when necessary or desirable, in accordance with executive orders promulgated by the mayor. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2569" number="3907" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6740" number="3908" version="710">
+				<HEADING>Section 827. Automotive services. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-951" name="827"/>Section 827. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Automotive services. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2570" number="3909" version="617">
+					<PARA>The commissioner shall acquire by purchase, lease or otherwise, vehicles and other automotive equipment for the use of city agencies; manage, maintain, store and operate a fleet of motor vehicles; assign fleets to agencies in accordance with the direction of the mayor and ensure the effective operation of all shops, yards, garages, fuel depots and other facilities required for the maintenance of fleets operated by agencies; and ensure the maintenance of records for all city-owned vehicles. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2571" number="3910" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6741" number="3911" version="710">
+				<HEADING>Section 828. Right of entry. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-953" name="828"/>Section 828. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Right of entry. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2572" number="3912" version="617">
+					<PARA>The commissioner, officers and employees of the department may, in accordance with law, enter upon public or private property for the purpose of making surveys, borings or other investigations necessary for the exercise of the powers or the performance of the duties of the commissioner and the department. Refusal to permit such entry shall be a misdemeanor punishable by not more than thirty days&apos; imprisonment or by a fine of not more than fifty dollars, or both. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2573" number="3913" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6742" number="3914" version="710">
+				<HEADING>Section 829. Performing administrative functions for the office of administrative trials and hearings and the board of standards and appeals. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-955" name="829"/>Section 829. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Performing administrative functions for the office of administrative trials and hearings and the board of standards and appeals. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2574" number="3915" version="617">
+					<PARA>The mayor may designate the department to perform specified administrative functions for the office of administrative trials and hearings and the board of standards and appeal when the mayor determines that such a designation will reduce costs or result in more effective performance of such functions. Such functions may include personnel services, labor relations, facilities management, purchasing, management information systems, budget administration, and internal auditing. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2575" number="3916" version="710">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

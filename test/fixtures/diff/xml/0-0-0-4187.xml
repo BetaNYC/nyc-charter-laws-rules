@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-4187" number="6337" version="3">
+			<HEADING>Chapter 69: Community Districts and Coterminality of Services</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1403" name="Chapter 69"/>Chapter 69: Community Districts and Coterminality of Services</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4188" number="6338" version="3">
+				<HEADING>Section 2700. Declaration of intent. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1405" name="2700"/>Section 2700. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Declaration of intent. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4189" number="6339" version="618">
+					<PARA>It is the intent of this chapter to encourage and facilitate coterminous community districts and service districts to be used for the planning of community life within the city, the participation of citizens in city government within their communities, and the efficient and effective organization of agencies that deliver municipal services in local communities and boroughs. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4190" number="6340" version="3">
+				<HEADING>Section 2701. Community districts. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1407" name="2701"/>Section 2701. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Community districts. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4191" number="6341" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Each community district shall:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4192" number="6342" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Lie within the boundaries of a single borough, except as provided in subdivisions d and e of this section, and coincide with historic, geographic and identifiable communities from which the city has developed; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4193" number="6343" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Be suitable for the efficient and effective delivery of those services of municipal agencies required to be made coterminous with the community districts, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2704" destination-id="0-0-0-1413">two thousand seven hundred four</LINK>, including particularly the service and districting requirements of the police and sanitation departments; and, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4194" number="6344" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Be compact and contiguous and have a population of not more than two hundred fifty thousand persons. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4195" number="6345" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Community districts shall be as nearly equal in population with each other as is possible under the criteria in paragraphs one, two and three of subdivision a of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4196" number="6346" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>With respect to the city&apos;s central business district in the borough of Manhattan from fifty-ninth street south, the council may adopt as part of the community district map, districts which shall reflect its unique character as the city&apos;s financial, business and entertainment center. In so doing, the council shall take into consideration the residential, working and other daytime population as well as the hotel and transient or other nighttime populations and adhere as nearly as possible to the provisions of paragraph (3) of subdivision a of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4197" number="6347" version="88">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The community district map for the borough of Manhattan shall include Roosevelt Island, located in the east river, as part of a community district in the borough of Manhattan, immediately opposite and to the west of Roosevelt Island. However, for the purposes of meeting the requirements of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2704" destination-id="0-0-0-1413">twenty-seven hundred four</LINK> relating to coterminality of local services, section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2705" destination-id="0-0-0-1415">twenty-seven hundred five</LINK> relating to district service cabinets and section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2707" destination-id="0-0-0-1419"> twenty-seven hundred seven</LINK> relating to agency budget and service statements, Roosevelt Island shall be deemed included within a community district of the borough of Queens immediately opposite and to the east of Roosevelt Island. The chairperson of the community board of the Manhattan community district which includes Roosevelt Island, or his or her designee, shall be a member of the district service cabinet of each of the community districts in which Roosevelt Island is included in the respective boroughs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4198" number="6348" version="48">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The community district map for the borough of the Bronx shall include that portion of the borough of Manhattan which lies north of the Harlem River. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4199" number="6349" version="3">
+				<HEADING>Section 2702. Preparation and adoption of map. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1409" name="2702"/>Section 2702. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Preparation and adoption of map. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4200" number="6350" version="777">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The map of community districts in effect as of the seventh day of November, nineteen hundred eighty-nine shall be continued until modified pursuant to this section. Not later than the first day of May nineteen hundred ninety-four and every tenth year thereafter, the mayor shall, and at such other times as the mayor deems appropriate, the mayor may, prepare and present to the council a report reviewing the community district map then in force and presenting such recommendations for changes in the map as the mayor deems appropriate. Such review shall consider shifts in population shown in the most recent decennial census that may require adjustments in the community district map to conform to the criteria in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2701" destination-id="0-0-0-1407">twenty-seven hundred one</LINK>. Such review shall also consider whether reducing the size of any community district would provide more efficient and effective service delivery within the district or districts involved. If the mayor&apos;s recommendations for changes in the map would produce a community district with a population below seventy-five thousand persons, the mayor may consider whether partial suspension of coterminality within the district is likely to provide more efficient or effective service delivery of one or more of the services for which coterminality is required, and may recommend that coterminality for one or more designated services within the community district and any adjacent district be suspended. The mayor&apos;s recommendations for changes shall be referred to as the preliminary revision of the community district map.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4201" number="6351" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The borough presidents, city planning commission, community boards and other civic, community and neighborhood groups and associations shall be consulted and their recommendations considered in the preparation of the preliminary revision of the community district map. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4202" number="6352" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The mayor shall publish the preliminary revision of the community district map in the City Record and in each borough of the city and shall, jointly with the borough president, conduct one or more public hearings on it in each borough of the city. Within sixty days after the last such hearing, the mayor shall submit to the council such preliminary revisions of the community district map as he or she deems appropriate. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4203" number="6353" version="48">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The council shall conduct public hearings on the preliminary revision of the community district map submitted by the mayor and it shall, by resolution, within one hundred twenty days of such submission, adopt, adopt with modifications, or disapprove the map as submitted. If the council adopts the proposed map without modifications, or if the mayor concurs in any modifications adopted by the council, the new map shall be effective as of the date specified in the mayor&apos;s proposal or in the modifications adopted by the council and concurred in by the mayor. If the council disapproves the map as submitted by the mayor, or if the council fails to act within the one hundred twenty day period, or if the mayor does not concur in any modifications adopted by the council, the community district map then in force shall remain in effect. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4204" number="6354" version="730">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1993/071" destination-id="0-0-0-0">L.L. 1993/071</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6809" number="6355" version="730">
+				<HEADING>Section 2703. Modification and review. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1411" name="2703"/>Section 2703. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Modification and review. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4205" number="6356" version="3">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> bracketed out of law at General Election, November 7, 1989.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">
+						</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4206" number="6357" version="3">
+				<HEADING>Section 2704. Coterminality of local services. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1413" name="2704"/>Section 2704. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Coterminality of local services. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6853" number="6358" version="786">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The head of each agency responsible for one or more of the services listed below shall organize the local service delivery districts of such agency as follows:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4208" number="6359" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>To be coterminous with each of the community districts: local parks services; local recreation services; street cleaning and refuse collection services; the patrol services of the police department; and social services, including community services, community development, youth services, child development, and special services for children; and, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4209" number="6360" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>To be coterminous with one or more community districts or aggregates of them: housing code enforcement, highway and street maintenance and repair, sewer maintenance and repair, and health services, other than municipal hospitals. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4210" number="6361" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Notwithstanding the provisions of subdivision a, the requirement that patrol services of the police department be coterminous with each of the community districts in any borough shall not apply to any community district where the mayor, after consultation with the police commissioner, shall determine that establishment of such coterminality would be inconsistent with the most effective delivery of such services. The mayor shall promptly notify the council of any such determination, and the council may, by majority vote, disapprove such determination with respect to any community district within sixty days after the first stated meeting of the council following the receipt of such notice. If the council shall disapprove such determination with respect to any community district, the police commissioner shall organize patrol services to be coterminous with such district within ninety days of such disapproval. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4211" number="6362" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The council, by resolution subject to the approval of the mayor, or the mayor by executive order, may direct that city services in addition to those specified in subdivision a of this section be made coterminous with one or more community districts or aggregates of them. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4212" number="6363" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The head of each agency whose local service delivery districts are not required to be coterminous with community districts pursuant to subdivision a or c of this section shall organize the local service delivery districts of the agency to coincide as closely as possible to the boundaries of the community districts. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4213" number="6364" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>For purposes of this section, coterminality of services shall mean that the boundaries of the local service districts of each agency service listed in subdivision a or required to be made coterminous pursuant to subdivision c shall coincide with the boundaries of community districts. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4214" number="6365" version="88">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The head of each agency responsible for one or more of the services listed in subdivision a or required to be made coterminous pursuant to subdivision c shall: (1) assign to each such local service district at least one official with managerial responsibilities involving the exercise of independent judgment in the scheduling, allocation and assignment of personnel and equipment and the evaluation of performance or the management and planning of programs; each such official shall have operating or line authority over agency programs, personnel and facilities within the local service district; (2) assign to each borough at least one borough commissioner, or official with an equivalent title, who shall have line authority over agency programs, personnel and facilities within the borough related to such services; such official shall consult regularly with the borough president and shall be a member of the borough service cabinet established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2706" destination-id="0-0-0-1417">twenty-seven hundred six</LINK> of the charter; and (3) publish semi-annually in the City Record and make available to interested parties a list, by community district and borough, of the name, title, office mailing address, and office telephone number of the officials appointed pursuant to paragraphs one and two of this subdivision and to subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2706" destination-id="0-0-0-1417">twenty-seven hundred six</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4215" number="6366" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>The head of any agency may assign or reallocate personnel, equipment or other resources outside a community district to meet emergency needs, special situations, or temporary conditions. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4216" number="6367" version="3">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>Nothing in this chapter shall prohibit any agency from maintaining sub-districts within a community district for purposes of efficient and effective service delivery so long as the combined sub-districts shall coincide with the boundaries of the community district. Nothing contained in this section shall prevent the establishment of any special district authorized pursuant to federal, state or local law, the boundaries of which do not coincide with the boundaries of a community district. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4217" number="6368" version="3">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>Each borough president may publish an annual report evaluating the delivery, within the borough, of the services which are listed in subdivision a, or are required to be made coterminous pursuant to subdivision c, of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4218" number="6369" version="786">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>Reserved. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4219" number="6370" version="786">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>The mayor shall report biennially to the council on the implementation of the requirements of this section. Such report shall include: (1) an evaluation of the quality of the services delivered to community districts pursuant to subdivisions a and c of this section during the preceding two fiscal years, (2) a review of the agencies&apos; implementation of subdivisions d and f of this section, and of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2706" destination-id="0-0-0-1417">twenty-seven hundred six</LINK>, and (3) any recommendations for changes in the services listed or in the requirements for those services which the mayor deems appropriate.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6869" number="6371" version="786">
+					<PARA>(Am. L.L. 2023/068, 5/29/2023, eff. 6/28/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-086]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4220" number="6372" version="3">
+				<HEADING>Section 2705. District service cabinet. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1415" name="2705"/>Section 2705. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">District service cabinet. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4221" number="6373" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a district service cabinet within each community district established pursuant to this chapter. The members of the district service cabinet shall include:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4222" number="6374" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The agency officials designated pursuant to paragraph one of subdivision f of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2704" destination-id="0-0-0-1413">twenty-seven hundred four</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4223" number="6375" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Representatives of other agencies that provide local services on a regular basis in the community district, who shall be the ranking line official assigned to the district; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4224" number="6376" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Each council member whose district comprises all or part of the community district; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4225" number="6377" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>A representative of the department of city planning designated by director of city planning; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4226" number="6378" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>The district manager appointed pursuant to subdivision f of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2800" destination-id="0-0-0-1425">twenty-eight hundred</LINK>; and, </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4227" number="6379" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>The chairperson of the community board for the community district or his or her representative. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4228" number="6380" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Each district service cabinet shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4229" number="6381" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Coordinate service functions and programs of the agencies that deliver services in the community district; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4230" number="6382" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>consider interagency problems and impediments to the effective and economic delivery of services in the district; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4231" number="6383" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Plan and recommend joint programs to meet the needs and priorities of community districts and their residents; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4232" number="6384" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Consult with residents of the community district and their representatives about local service problems and activities; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4233" number="6385" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Keep a public record of its activities and transactions, including minutes of its meetings. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4234" number="6386" version="3">
+				<HEADING>Section 2706. Borough agency managers and borough service cabinets. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1417" name="2706"/>Section 2706. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Borough agency managers and borough service cabinets. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4235" number="6387" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The head of each agency delivering services in the boroughs shall designate one or more senior officials of the agency with line authority as borough representatives of the agency with such coordinative or other duties and responsibilities as the head of the agency may specify in a written statement filed in the agency and with the director of operations and the appropriate borough president.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4236" number="6388" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>There shall be a borough service cabinet within each borough whose members shall include the borough representatives designated pursuant to subdivision a of this section, and the borough president, who shall be the chairperson. Each borough service cabinet shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4237" number="6389" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Coordinate at the borough level service delivery functions and programs of agencies that provide services in the borough; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4238" number="6390" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Consider interagency problems and impediments to the effective and economic delivery of services in the borough; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4239" number="6391" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Plan and develop programs addressed to the needs and priorities of the borough and its residents; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4240" number="6392" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Consult with residents of the borough and representatives of the community boards about service problems and activities. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4241" number="6393" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Keep a public record of its activities and transactions, including minutes of its meetings. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4242" number="6394" version="3">
+				<HEADING>Section 2707. Agency budgets and service statements. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1419" name="2707"/>Section 2707. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency budgets and service statements. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4243" number="6395" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Each agency with service districts within the community districts and boroughs shall prepare annually a statement of its service objectives, priorities, programs and projected activities within each community district and each borough for the new fiscal year, if requested by the respective community board or borough board.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4244" number="6396" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>In preparing such statements for community districts the agencies shall consult with the respective district service cabinets and community boards. In preparing such statements for the borough, the agencies shall consult with the borough service cabinet and borough board. The statements shall be filed no later than the fifteenth day of August with the mayor, council, borough president, community board and borough board. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4245" number="6397" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>By no later than four months after the end of the fiscal year, each agency with service districts within the community districts and boroughs shall report to the respective community and borough boards the amount of expenditures within each service district for each unit of appropriation for the preceding year. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4246" number="6398" version="3">
+				<HEADING>Section 2708. Agency information. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1421" name="2708"/>Section 2708. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency information. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4247" number="6399" version="618">
+					<PARA>Each agency with service districts within the community districts and boroughs shall make available to each community board and borough board and to the respective borough presidents current information on its operations and programs within each community district and borough. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

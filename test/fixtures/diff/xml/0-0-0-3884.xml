@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-3884" number="5833" version="380">
+			<HEADING>Chapter 64: Department of Consumer and Worker Protection</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1337" name="Chapter 64"/>Chapter 64: Department of Consumer and Worker Protection</PARA>
+		</RECORD>
+		<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+			<RECORD id="0-0-0-3885" number="5834" version="412">
+				<PARA>
+					<PARAFORMAT justify="center">(Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARAFORMAT>
+				</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-5686" number="5835" version="409">
+				<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+					<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/080" destination-id="0-0-0-0">L.L. 2020/080</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+				</PARA>
+			</RECORD>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5704" number="5836" version="386">
+				<HEADING>Section 2201. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1339" name="2201"/>Section 2201. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3886" number="5837" version="618">
+					<PARA>There shall be a department of consumer and worker protection, the head of which shall be the commissioner of consumer and worker protection. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5687" number="5838" version="412">
+					<PARA>(Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3887" number="5839" version="409">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/080" destination-id="0-0-0-0">L.L. 2020/080</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5705" number="5840" version="386">
+				<HEADING>Section 2202. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1341" name="2202"/>Section 2202. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3888" number="5841" version="618">
+					<PARA>The commissioner may appoint such deputies as he or she deems necessary for the discharge of his or her duties. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3889" number="5842" version="412">
+					<PARA>(Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5688" number="5843" version="409">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/080" destination-id="0-0-0-0">L.L. 2020/080</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5706" number="5844" version="386">
+				<HEADING>Section 2203. Powers of the commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1343" name="2203"/>Section 2203. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers of the commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5994" number="5845" version="580">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The commissioner shall plan, make recommendations, conduct research and develop programs for consumer education and protection, facilitate the exchange and dissemination of information in consultation with agencies, federal and state officials, commercial interests, private groups and others working in this field and coordinate the consumer protection activities of other city agencies.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3891" number="5846" version="3">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The commissioner shall enforce all laws in relation to weights and measures. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3892" number="5847" version="3">
+					<PARA>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The commissioner shall have cognizance and control of the granting, issuing, transferring, renewing, revoking, suspending and cancelling of all licenses and permits, except in the cases with respect to which and to the extent to which any of said powers are conferred on other persons or agency by laws, and shall collect all fees for licenses and permits the collection of which by some other person or agency is not authorized by law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3893" number="5848" version="380">
+					<PARA>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The commissioner shall enforce all laws relating to the advertising and offering for sale and the sale of all commodities, goods, wares and services. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3894" number="5849" version="380">
+					<PARA>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>The office of labor standards shall be established within the department. Such office shall be headed by a director who shall be appointed by the commissioner. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3895" number="5850" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The commissioner shall: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5695" number="5851" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>enforce municipal labor laws and other labor laws the commissioner is empowered to enforce; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5694" number="5852" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>plan, make recommendations, conduct research and develop programs for worker education, worker safety and worker protection; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5693" number="5853" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>facilitate the exchange and dissemination of information in consultation with city agencies, federal and state officials, businesses, employees, independent contractors, labor unions and nonprofit organizations working in the field of worker education, safety, and protection; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5692" number="5854" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>provide educational materials to employers and develop programs, including administrative support, to assist employers with compliance with labor laws; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5691" number="5855" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(v)<TAB tab-count="1"/>implement public education campaigns to heighten awareness of employee and independent contractor rights under federal, state, and local law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5690" number="5856" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(vi)<TAB tab-count="1"/>collect and analyze available federal, state, and local data on the city&apos;s workforce and workplaces and coordinate with federal and state officials and other city agencies to identify gaps and prioritize areas for the improvement of working conditions and practices for employees and independent contractors in the city and within particular industries, and to promote the implementation and enforcement of laws, rules and regulations designed to improve such working conditions and practices; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5689" number="5857" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(vii)<TAB tab-count="1"/>recommend efforts to achieve workplace equity for women, communities of color, immigrants and refugees, and other vulnerable workers. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3896" number="5858" version="380">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Division of paid care.</CHARFORMAT> The commissioner shall establish a division of paid care within the office of labor standards and shall appoint the division head, who shall be distinct from the director of the office of labor standards. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3897" number="5859" version="580">
+					<PARA>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>The commissioner, in the performance of said functions, shall be authorized to hold public and private hearings, administer oaths, take testimony, serve subpoenas, receive evidence, mediate disputes, receive and evaluate complaints, conduct investigations in response to complaints or upon his or her own initiative, and take appropriate action, including referral to a federal or state agency, and to receive, administer, pay over and distribute monies collected in and as a result of actions brought for violations of laws relating to deceptive or unconscionable trade practices, labor standards, or of related laws, and to promulgate, amend and modify rules and regulations necessary to carry out the powers and duties of the department. Each inspector or other employee of the department who issues notices of violation shall, for provisions of law that are enforced exclusively by the department, have access at the time that a violation is issued to equipment allowing such person: (1) to determine if such violation is a first-time violation of the applicable provision of law, and (2) if permitted by law, to issue a warning for such violation and to record that such a warning has been issued. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-074]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3898" number="5860" version="3">
+					<PARA>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>The commissioner shall exercise the powers of a commissioner of public markets under the agriculture and markets law with respect to open air markets.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3899" number="5861" version="778">
+					<PARA>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The department shall have the power to render decisions and orders. Notwithstanding any inconsistent provision of law, the department shall be authorized, upon due notice and hearing, to impose civil penalties for, and to order restitution or other forms of equitable relief, and payment of monetary damages, to a consumer or worker in connection with the violation of any laws or rules the enforcement of which is within the jurisdiction of the department pursuant to this charter, the administrative code or any other general, special or local law. Where the department has delegated any adjudicatory powers to the office of administrative trials and hearings, for all cases heard by the adjudicatory body authorized to conduct trials in such office, the office of administrative trials and hearings shall issue a recommended decision which the commissioner may adopt, reverse, modify, or remand in whole or in part for additional proceedings. Except to the extent that dollar limits are otherwise specifically provided, such civil penalties shall not exceed five hundred dollars for each violation. All proceedings authorized pursuant to this subdivision shall be conducted in accordance with rules promulgated by the commissioner. The remedies and penalties provided for in this subdivision shall be in addition to any other remedies or penalties provided for the enforcement of such provisions under any other law including, but not limited to, civil or criminal actions or proceedings. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3900" number="5862" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>All such proceedings shall be commenced by the service of a notice of violation. The commissioner shall prescribe the form and wording of notices of violation. The notice of violation or copy thereof when filled in and served shall constitute notice of the violation charged, and, if sworn to or affirmed, shall be prima facie evidence of the facts contained therein. The notice of violation shall contain information advising the person charged of the manner and the time in which such person may either admit or deny the violation charged in the notice. Such notice of violation shall also contain a warning to advise the person charged that failure to plead in the manner and time stated in the notice may result in a default decision and order being entered against such person. The original or a copy of the notice of violation shall be filed and retained by the department and shall be deemed a record kept in the ordinary course of business. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5767" number="5863" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Where a respondent has failed to plead within the time allowed by the rules of the commissioner or has failed to appear on a designated hearing date or a subsequent date following an adjournment of a violation, such failure to plead or appear shall be deemed, for all purposes, to be an admission of liability for the purposes of such violation and shall be grounds for rendering a default decision and order imposing a penalty up to the maximum amount prescribed under law for the violation charged. For purposes of this subdivision, &quot;designated violation&quot; means: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5766" number="5864" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(A)<TAB tab-count="1"/>any violation of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T20" destination-id="0-0-0-0">title 20</LINK> of the administrative code or of any law or rule, the enforcement of which is within the jurisdiction of the department, to the extent any final decision or order relating to such violation authorizes restitution, imposes an award of monetary damages or provides equitable relief to a consumer or a worker; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5765" number="5865" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(B)<TAB tab-count="1"/>any violation of subchapters 1, 7, 11, 22, 29, 30, 31 or 35 of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T20C002" destination-id="0-0-0-0">chapter 2 of title 20</LINK> of the administrative code or of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T20C008" destination-id="0-0-0-0">chapters 8</LINK> or <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T20C012" destination-id="0-0-0-0">12 of title 20</LINK> of the administrative code or of article eleven of the general business law, including any rules or regulations promulgated thereunder, to the extent any final decision or order relating to such violation imposes both civil penalties and restitution, monetary damages or equitable relief to a consumer or a worker; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5764" number="5866" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(C)<TAB tab-count="1"/>any violation of subchapters 1, 8 or 14-a of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="T20C005" destination-id="0-0-0-0">chapter 5 of title 20</LINK> of the administrative code, including any rules promulgated under such subchapters, to the extent any final decision or order relating to such violation imposes civil penalties for two or more violations and the aggregate penalty for such violations exceeds five thousand dollars and the final decision or order imposes restitution, monetary damages or equitable relief to a consumer. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5763" number="5867" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>At the request of a consumer or a worker, the department shall assign, without consideration or liability, a final decision or order, provided that such decision or order solely authorizes restitution, imposes an award of monetary damages or provides equitable relief to such consumer or a worker, or that portion of such award that authorizes restitution, imposes an award of monetary damages or provides equitable relief to such consumer or a worker. After such assignment, the department shall not be required to take any further action to enforce such restitution, award of monetary damages or equitable relief to such consumer. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5762" number="5868" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Any final decision or order of the department relating to a designated violation, whether the adjudication was had by hearing or upon default or otherwise, shall constitute a judgment that may be entered and docketed in the civil court of the city of New York or any other place provided for the entry and docketing of civil judgments within the state and may be enforced without court proceedings in the same manner as the enforcement of money judgments entered and docketed in civil actions. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5761" number="5869" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>Notwithstanding paragraph five of this subdivision, before a judgment based upon a default may be so entered and docketed, the department must have notified the respondent in accordance with this paragraph. The commissioner shall determine the form of such notice. If the respondent is a licensee of the department, notice shall be provided by first class mail or hand delivery to the address the licensee has filed with the department pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="20-112" destination-id="0-0-0-0">20-112</LINK> of the administrative code. For all other respondents, the notice shall be served by first class mail or hand delivery to the address where the decision or order was sent to the respondent by the department. Such notice shall state that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5760" number="5870" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(A)<TAB tab-count="1"/>a decision and order of default was issued against the respondent by the department and the amounts of the penalty, restitution, or other monetary relief imposed; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5759" number="5871" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(B)<TAB tab-count="1"/>a judgment will be entered and docketed in the civil court of the city of New York or any other place provided for the entry of civil judgments within the state of New York; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5758" number="5872" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(C)<TAB tab-count="1"/>entry and docketing of such judgment may be avoided by requesting a stay of default for good cause shown and either requesting a new hearing or entering a plea pursuant to applicable rules within thirty days of the mailing or hand delivery date of such notice. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5757" number="5873" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>The department shall not enter any final decision or order pursuant to this subdivision unless the notice of violation shall have been served as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5756" number="5874" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(A)<TAB tab-count="1"/>for any respondent that is a licensee of the department, the department shall serve a notice of violation of a designated violation in one of the following ways: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5755" number="5875" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>by mailing a copy of such notice to the address the licensee has filed with the department pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="20-112" destination-id="0-0-0-0">20-112</LINK> of the administrative code; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5754" number="5876" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>by personally serving the respondent or delivering the notice of violation to a person of suitable age and discretion employed by the respondent at the premises at which the respondent conducts the business the operation of which gave rise to the violation. In the case of a business that is carried out at large and not at a fixed place of business or that has filed with the department an out-of-state address pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="20-112" destination-id="0-0-0-0">20-112</LINK> of the administrative code, the department shall also serve a licensee or employee of such business at the location which gave rise to the violation, the secretary of state pursuant to section three hundred four of the business corporation law or an agent designated for service pursuant to rule three hundred eighteen of the civil practice law and rules or section three hundred five of the business corporation law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5753" number="5877" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(B)<TAB tab-count="1"/>For any respondent that is not a licensee of the department, the department shall serve a notice of violation of a designated violation in one of the following ways: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5752" number="5878" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>by serving the respondent in the same manner as is prescribed for service of process by article three of the civil practice law and rules or article three of the business corporation law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5751" number="5879" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>by delivering such notice to a person of suitable age and discretion employed by the respondent at the premises where the respondent is operating; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5750" number="5880" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>by affixing such notice in a conspicuous place to the premises where the respondent is operating and delivering such notice by first class mail to the address of such premises; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5749" number="5881" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>by sending such notice by certified mail, return receipt requested, to the respondent&apos;s last known business address, provided that delivery of such notice shall be restricted to the respondent; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5748" number="5882" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(v)<TAB tab-count="1"/>by sending such notice by electronic mail to the respondent&apos;s electronic mail address, provided that the department has received communication from such electronic mail address in the one year prior to the electronic mailing of such notice, and provided further that service in the manner prescribed by clauses (i) though (iv) of this subparagraph are impracticable. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5747" number="5883" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>Service by certified mail pursuant to clause (iv) of subparagraph B of paragraph seven of this subdivision shall be deemed complete upon the mailing of the notice of violation described in such clause, unless the notice of violation is returned to the sender by the United States postal service for any reason other than refusal of delivery. Service by electronic mail pursuant to clause (v) of subparagraph B of paragraph seven of this subdivision shall be deemed complete upon the electronic mailing of the notice of violation described in such clause unless the department receives an electronic message that its electronic mailing of the notice of violation was undeliverable. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5746" number="5884" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>Proof of service made pursuant to paragraph seven of this subdivision shall be maintained by, and preserved within, the department for at least six years following the date of the final decision or order relating to the adjudication of the subject notice of violation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5745" number="5885" version="432">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>Entry and docketing of a judgment shall not limit the application of any other remedies or penalties provided for the enforcement of laws or rules under the jurisdiction of the department. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-054]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3902" number="5886" version="777">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>Notwithstanding any other inconsistent provision of law, powers conferred upon the department by this subdivision may be exercised by the office of administrative trials and hearings consistent with orders of the mayor issued in accordance with subdivisions two and three of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1048" destination-id="0-0-0-1023">one thousand forty-eight</LINK> of this charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-069]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3903" number="5887" version="380">
+					<PARA>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>All powers granted to the commissioner of consumer affairs, the commissioner of consumer and worker protection, or the director of the office of labor standards by this charter, the administrative code, or any other general, special, or local law shall be deemed to be granted to the commissioner or his or her designee. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3904" number="5888" version="580">
+					<PARA>(Am. L.L. 2015/104, 11/30/2015, eff. 3/29/2016; Am. L.L. 2016/011, 2/8/2016, eff. 5/8/2016; Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020; Am. 2020 N.Y. Laws Ch. 205, 10/7/2020, eff. 10/7/2020; Am. L.L. 2021/098, 9/26/2021, eff. 1/24/2022; Am. L.L. 2021/159, 12/24/2021, eff. 6/22/2022)<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24"> [ALP S-074]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5707" number="5889" version="645">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2013/046" destination-id="0-0-0-0">L.L. 2013/046</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2014/007" destination-id="0-0-0-0">L.L. 2014/007</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2015/104" destination-id="0-0-0-0">L.L. 2015/104</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/080" destination-id="0-0-0-0">L.L. 2020/080</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2021/098" destination-id="0-0-0-0">L.L. 2021/098</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-082]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5732" number="5890" version="427">
+				<HEADING>Section 2204. Consumers council. [Repealed]</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1345" name="2204"/>Section 2204. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Consumers council. [Repealed]</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-3906" number="5891" version="412">
+					<PARA>(Repealed L.L. 2020/080, 8/28/2020, eff. 8/28/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-3907" number="5892" version="409">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2020/080" destination-id="0-0-0-0">L.L. 2020/080</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-053]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

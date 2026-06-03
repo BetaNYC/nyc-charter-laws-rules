@@ -141,9 +141,25 @@ npm test
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 
+### Differential test (Layer 4 — occasional cadence)
+
+A cross-engine differential test compares our JS extraction against an independent Python reference over 44 committed charter XML fixtures. It is **not part of `npm test`** — it runs only when explicitly invoked:
+
+```bash
+npm run test:diff
+```
+
+The test shells out to `python3` (stdlib `xml.etree.ElementTree` + `itertext()`) and asserts that both engines agree on normalized section text for all 393 sections across the fixture set. If `python3` is not on PATH, the test skips gracefully rather than erroring.
+
+The fixtures live in `test/fixtures/diff/xml/` — 44 files selected deterministically (every 2nd file by sorted filename from `data/raw/charter/XML/`, always including `0-0-0-1277.xml`). They are committed to the repo so the test runs in CI without downloading ZIPs.
+
+**Calibrated baseline (2026-06-02):** 393/393 sections agree after the comparison normalizer. One intentional formatting difference is neutralized before comparing: the JS path appends a trailing space after standalone digit-dot enumeration markers (`"1."`) to restore a formatting separator that empty `<TAB/>` elements drop; Python's `itertext()` returns raw source text. Both are faithful to the source; the space is a readability aid. The comparison normalizer collapses `"N. "` → `"N."` on the JS side so the comparison tests token order and content only. No allowlist entries are required.
+
 ### Continuous integration
 
 `.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** (both are active LTS releases that satisfy `engines.node >= 18`; Node 18 was excluded because it reached End-of-Life on 2025-04-30).
+
+`.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
 The planned cron for corpus data refresh (issue #2) will live in a separate `refresh-data.yml` workflow.
 

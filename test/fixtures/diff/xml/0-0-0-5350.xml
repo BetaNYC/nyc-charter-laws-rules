@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-5350" number="4016" version="315">
+			<HEADING>Chapter 38: Financial Information Services Agency</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1533" name="Chapter 38"/>Chapter 38: Financial Information Services Agency</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2666" number="4017" version="3">
+				<HEADING>Section 860. Financial information services agency. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-979" name="860"/>Section 860. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Financial information services agency. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2667" number="4018" version="617">
+					<PARA>There shall be a financial information services agency which shall be headed by three directors appointed by the mayor, one of whom shall be appointed upon the recommendation of the comptroller, and one of whom shall be appointed upon the recommendation of the other two. The directors may be city employees. They shall receive no compensation for their services to the agency (except that a city employee may continue to receive regular compensation) but shall be compensated for expenses actually and necessarily incurred in the performance of their duties. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2668" number="4019" version="3">
+				<HEADING>Section 861. Powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-981" name="861"/>Section 861. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2669" number="4020" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The agency shall have the power and duty to: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2670" number="4021" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>implement and manage the integrated financial management system;</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2671" number="4022" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>control and exercise responsibility for all data processing functions and operations of the city which support the activities of those officers, employees, and agencies of the city responsible for organizing, compiling, coordinating and reporting upon the city&apos;s central financial records, data and other related information; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2672" number="4023" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>provide efficient, coordinated and rapid access to such information for the use of those officers, employees, and agencies of the city responsible for the determination and administration of the estimated and actual expenditures of the city; the receipt, investment and disbursement of city funds; the issuance and payment of principal and interest on obligations of the city; and for the use of such other officers, employees, or agencies as may require such information; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2673" number="4024" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>render services to, and receive information and assistance from, such other bodies defined as &quot;covered organizations&quot; in the New York state financial emergency act for the city of New York, as amended, upon such terms and conditions as may be agreed to by the agency and each such body. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2674" number="4025" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>All agencies shall furnish such information or equipment in their possession as shall be necessary and proper to carry out the functions of the financial information services agency as determined by its executive director with the approval of its directors. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2675" number="4026" version="3">
+				<HEADING>Section 862. Staff. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-983" name="862"/>Section 862. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Staff. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2676" number="4027" version="617">
+					<PARA>The directors shall recommend and the mayor shall appoint an executive director of financial information services. Within the appropriations therefor, the agency shall employ such other officers and employees as may be required to perform its duties. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

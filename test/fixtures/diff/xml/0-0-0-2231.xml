@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-2231" number="3365" version="83">
+			<HEADING>Chapter 26: Department of Buildings</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1515" name="Chapter 26"/>Chapter 26: Department of Buildings</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2232" number="3366" version="3">
+				<HEADING>Section 641. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-841" name="641"/>Section 641. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2233" number="3367" version="617">
+					<PARA>There shall be a department of buildings, the head of which shall be the commissioner of buildings. The commissioner or the first deputy commissioner shall be a registered architect or a licensed professional engineer in good standing under the education law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2234" number="3368" version="665">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2008/039" destination-id="0-0-0-0">L.L. 2008/039</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6552" number="3369" version="665">
+				<HEADING>Section 642. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-843" name="642"/>Section 642. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2235" number="3370" version="617">
+					<PARA>The commissioner shall appoint two deputies, one of whom shall be the first deputy commissioner. The commissioner may, by instrument in writing filed with the department, designate a deputy commissioner who is a registered architect or a licensed professional engineer to possess any of the powers granted to the commissioner by subdivision (b) or (d) of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="645" destination-id="0-0-0-849">six hundred forty-five</LINK> of this chapter. The deputy commissioner so designated shall possess such powers in addition to any other powers that may be assigned to him or her by the commissioner pursuant to any other provision of law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2236" number="3371" version="665">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2008/039" destination-id="0-0-0-0">L.L. 2008/039</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6553" number="3372" version="665">
+				<HEADING>Section 643. Department; functions. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-845" name="643"/>Section 643. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; functions. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2237" number="3373" version="617">
+					<PARA>The department shall enforce, with respect to buildings and structures, such provisions of the building code, zoning resolution, multiple dwelling law, labor law and other laws, rules and regulations as may govern the construction, alteration, maintenance, use, occupancy, safety, sanitary conditions, mechanical equipment and inspection of buildings or structures in the city, and shall perform the functions of the city of New York relating to</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2238" number="3374" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>the designation of buildings and structures as unsafe and the necessary legal action in relation thereto prior to the removal of the unsafe condition through demolition or sealing except as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1802" destination-id="0-0-0-1321">eighteen hundred two</LINK> of this charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2239" number="3375" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>the shoring of hazardous and unsafe buildings and structures; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2240" number="3376" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>the testing and approval of power-operated cranes and derricks used for construction, alteration, demolition, excavation and maintenance purposes, including such uses in highways or sewers, or used to hoist or lower any article on the outside of any building, excluding cranes and derricks used in industrial plants or yards; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2241" number="3377" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>the location, construction, alteration and removal of signs, illuminated or non-illuminated, attached to the exterior of any building or structure; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2242" number="3378" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>(i) all surface and subsurface construction within the curb line, including curb cuts and driveways, the covering thereof and entrances thereto and the issuance of permits in reference thereto, (ii) in conjunction with the issuance of permits for surface and subsurface construction within the curbline, such surface and subsurface construction outside the curbline as shall be expressly delegated to the department in the administrative code and the issuance of permits in relation thereto and, (iii) notwithstanding any inconsistent provision of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1403" destination-id="0-0-0-1245">fourteen hundred three</LINK> of this charter, in conjunction with the issuance of a permit for the construction of a building, the commissioner may approve the installation of and issue a permit for the construction of an individual on site private sewage disposal system for the premises. Such permit shall be issued in accordance with standards and specifications prescribed by the commissioner, in consultation with the commissioner of environmental protection, for the installation of individual on site private sewage disposal systems;&#160;</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2243" number="3379" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>the regulation, inspection and testing of gas and electricity used for light, heat and power purposes, electric, gas and steam meters, electric wires and all lights furnished to the city; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2244" number="3380" version="617">
+					<PARA>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>the regulation, inspection and testing of electric wires and wiring apparatus and other appliances used or to be used for the transmission of electricity for electric light, heat, power, signaling, communication, alarm and data transmission in or on any building or structure in the city; provided, however, that the jurisdiction of the department, except for the testing and approval of power-operated cranes and derricks used for construction, alteration, demolition, excavation and maintenance purposes and the licensing of the operators of such equipment, the regulation, inspection and testing of gas and electricity used for light, heat and power purposes, electric, gas and steam meters, electric wires and lights and the regulation, inspection and testing of wiring and appliances for electric light, heat and power, shall not extend to waterfront property owned by the city and under the jurisdiction of the department of ports, international trade and commerce, or to the following structures on any such waterfront property; wharves, piers, docks, bulkheads, structures wholly or partly thereon, or to such other structures used in conjunction with or in furtherance of waterfront commerce or navigation, or to bridges, tunnels or subways or structures appurtenant thereto. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2245" number="3381" version="984">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1985/069" destination-id="0-0-0-0">L.L. 1985/069</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/065" destination-id="0-0-0-0">L.L. 1996/065</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2001/064" destination-id="0-0-0-0">L.L. 2001/064</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6592" number="3382" version="693">
+				<HEADING>Section 644. Department; powers. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-847" name="644"/>Section 644. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; powers. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2246" number="3383" version="3">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> bracketed out of law at General Election, November 8, 1988.<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">
+						</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2247" number="3384" version="3">
+				<HEADING>Section 645. Offices of the department; powers and duties. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-849" name="645"/>Section 645. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Offices of the department; powers and duties. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2252" number="3385" version="127">
+					<PARA>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>There shall be a main office of the department and in each borough at least one branch office and a borough superintendent. Persons appointed as inspectors to perform functions of the department shall have such qualifications as shall be prescribed by the commissioner of citywide administrative services after consultation with the commissioner; provided however that, for inspections related to work on medical and natural gas piping systems, backflow prevention, electrical work and other work as the department may include through rule, such qualifications shall include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4792" number="3386" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>a minimum of five years of acceptable experience working in the construction industry; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4791" number="3387" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>a license as a professional engineer or architect issued pursuant to the education law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4790" number="3388" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>a minimum of three years of acceptable experience working in the construction industry and a minimum of two years of formal training or education in a field of study relevant to the discipline(s) inspected; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4789" number="3389" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>a minimum of two years of acceptable experience working in the construction industry and completion of an apprentice program, a minimum of three years in length, in a trade relevant to the discipline(s) inspected; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4788" number="3390" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>a minimum of two years of formal training or education in a field of study relevant to the discipline(s) inspected and completion of an apprentice program, a minimum of three years in length, in a trade relevant to the discipline(s) inspected; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4787" number="3391" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>equivalent education and experience. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4786" number="3392" version="127">
+					<PARA>
+						<TAB tab-count="1"/>Further provided however that, for all other inspections, such qualifications shall include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4785" number="3393" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>a minimum of two years of acceptable experience working in the construction industry; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4784" number="3394" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>60 credits towards a degree in a field of study relevant to the discipline(s) inspected; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4783" number="3395" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>a minimum of one year of acceptable experience working in the construction industry and a minimum of one year of formal training or education in a field of study relevant to the discipline(s) inspected; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4782" number="3396" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>a license or certification in a field of study relevant to the discipline(s) inspected; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4781" number="3397" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>completion of an apprentice program, a minimum of two years in length, in a trade relevant to the discipline(s) inspected; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4780" number="3398" version="127">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>equivalent education and experience. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2253" number="3399" version="127">
+					<PARA>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>With respect to buildings and structures, the commissioner shall have the following powers and duties exclusively, subject to review only by the board of standards and appeals as provided by law: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2254" number="3400" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>to examine and approve or disapprove plans for the construction or alteration of any building or structure, including the installation or alteration of any service equipment therein, and to direct the inspection of such building or structure, and the service equipment therein, in the course of construction, installation or alteration; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2255" number="3401" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>to require that the construction or alteration of any building or structure, including the installation or alteration of any service equipment therein, shall be in accordance with the provisions of law and the rules, regulations and orders applicable thereto; but where there is a practical difficulty in the way of carrying out the strict letter of any provision of law relating to buildings in respect to the use of prescribed materials, or the installation or alteration of service equipment, or methods of construction and where equally safe and proper materials or forms of construction may be employed in a specific case, he may permit the use of such materials or of such forms of construction, provided that the spirit of the law shall be observed, safety secured and substantial justice done, but he shall have no power to allow any variance from the provisions of any law in any respect except as expressly allowed therein, or from any appellate ruling of the board of standards and appeals; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2256" number="3402" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>to issue certificates of occupancy for any building or structure situated in the city, provided that: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2257" number="3403" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>no building or structure hereafter constructed may be occupied or used in whole or in part for any purpose until a certificate of occupancy has been issued; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2258" number="3404" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>no building or structure or part thereof for which a certificate of occupancy has not been previously issued or required shall be occupied or used for any purpose whatever in case such building shall hereafter be altered or converted so as to decrease or increase the number of living rooms or apartments, until a certificate of occupancy has been issued, except that this requirement shall not apply to any old law or new law tenement wherein two or more apartments are combined creating larger residential units, the total legal number of families within the building is being decreased, and the bulk of the building is not being increased; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2259" number="3405" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>no buildings hereafter altered or converted from one class to another class shall be occupied or used for any purpose whatever in case such building was vacant during the progress of the work, until a certificate of occupancy has been issued; in case such an alteration does not necessitate the vacating of the building during the progress of the work, the occupancy or use of the building shall not continue more than thirty days after the completion of such alteration, unless a certificate of occupancy has been issued; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2260" number="3406" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>a certificate of occupancy of a building or structure shall certify that such building or structure conforms to the requirements of all laws, rules, regulations and orders applicable to it and shall be in such form as the commissioner shall direct; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2261" number="3407" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>every certificate of occupancy shall, unless and until set aside, vacated or modified by the board of standards and appeals or a court of competent jurisdiction, be and remain binding and conclusive upon all agencies and officers of the city, and shall be binding and conclusive upon the department of labor of the state of New York, as to all matters therein set forth, and no order, direction or requirement affecting or at variance with any matter set forth in any certificate of occupancy shall be made or issued by any agency or officer of the city, or by the department of labor of the state of New York, or any commission, board, officer or member thereof, unless and until the certificate is set aside, vacated or modified by the board of standards and appeals or a court of competent jurisdiction upon the application of the agency, department, commission, officer or member thereof seeking to make or issue such order, direction or requirement. All such applications shall be made in writing and filed with the board or court for hearing thereon; and copies of the application and order, direction or requirement sought to be made or issued shall be served upon the owner of the building or structure and upon the commissioner of buildings, if he is not the applicant, and upon such terms and conditions as to service, notice, time and place of hearing as the board or court shall direct; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2262" number="3408" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>the commissioner may, on request of the owner of a building or structure or his authorized representative, issue a temporary certificate of occupancy for any part of such building or structure provided that such temporary occupancy or use would not in any way jeopardize life or property; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2263" number="3409" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>the commissioner may permit in specific cases experimental or demonstration construction not in compliance with the building code in order to obtain knowledge and information not supplied from other experiments within the city; the owner of such construction shall conduct such periodic tests and evaluations as the commissioner may specify and submit results and reports to the department of buildings as the commissioner may require; except as otherwise specifically permitted by the commissioner, the construction shall be erected and maintained in accordance with all provisions of applicable laws, rules and regulations. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2264" number="3410" version="3">
+					<PARA>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The commissioner may, by instrument in writing filed in the department, designate a borough superintendent of the department to possess within a borough any of the powers granted to the commissioner by subdivision (b) of this section and to exercise the same within such borough in the name of the commissioner for such times and under such conditions as he may specify. The borough superintendent shall also perform such other duties as the commissioner may direct. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2265" number="3411" version="3">
+					<PARA>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The commissioner shall review and certify any proposed subdivision of a zoning lot with any building thereon, in order to ensure that the subdivision will not result in any violation of the applicable zoning laws. For such purposes, the subdivision applicant shall file with the commissioner, prior to recordation with the city register or the county clerk in the case of Staten Island the following: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2266" number="3412" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>a subdivision map of the entire original zoning lot with any building thereon; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2267" number="3413" version="126">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>a statement by the subdivision applicant assuring compliance of the proposed subdivision with applicable zoning laws.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4777" number="3414" version="412">
+					<PARA>(Am. L.L. 2017/219, 12/1/2017, eff. 12/1/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-020]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2268" number="3415" version="711">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6754" number="3416" version="711">
+				<HEADING>Section 646. Conduct of investigations. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-851" name="646"/>Section 646. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Conduct of investigations. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2269" number="3417" version="617">
+					<PARA>The commissioner shall have the power and duty to conduct such inquiries as may assist him in the performance of the functions of the department where the public safety is involved and for such purpose he shall have subpoena power to compel the attendance of witnesses, to administer oaths, examine witnesses and to compel the production of books, papers and documents. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2270" number="3418" version="3">
+				<HEADING>Section 647. Definition of &quot;class&quot;. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-853" name="647"/>Section 647. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definition of &quot;class&quot;. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2271" number="3419" version="617">
+					<PARA>The term &quot;class&quot; as used in this chapter refers to the classification of buildings in the building code or other applicable laws and shall be deemed to refer also to the terms &quot;class&quot; or &quot;kinds&quot; as used in the multiple dwelling law where such law is applicable. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2272" number="3420" version="3">
+				<HEADING>Section 648. Appeals. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-855" name="648"/>Section 648. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Appeals. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2273" number="3421" version="617">
+					<PARA>Appeals may be taken from decisions of the commissioner and of a deputy commissioner or the borough superintendent acting under a written delegation of power filed in accordance with the provisions of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="642" destination-id="0-0-0-843">six hundred forty-two</LINK> or subdivision (c) of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="645" destination-id="0-0-0-849">six hundred forty-five</LINK> of this chapter, to the board of standards and appeals as provided by law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2274" number="3422" version="665">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2008/039" destination-id="0-0-0-0">L.L. 2008/039</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6554" number="3423" version="665">
+				<HEADING>Section 649. Inspection. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-857" name="649"/>Section 649. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Inspection. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2275" number="3424" version="617">
+					<PARA>The commissioner, any deputy commissioner, borough superintendents, inspectors, or any officer of the department authorized in writing by the commissioner or a borough superintendent to act in his borough may, in accordance with law, for the purpose of performing their respective official duties, enter and inspect any building, structure, enclosure, premises or any part thereof or anything therein or attached thereto; and any refusal to permit such entry or inspection shall be a misdemeanor triable in criminal court and punishable upon conviction by not more than thirty days imprisonment or by a fine of not more than one hundred dollars, or both. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-4650" number="3425" version="76">
+				<HEADING>Section 650. [Office of the tenant advocate.]</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1509" name="650"/>Section 650. [Office of the tenant advocate.]</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4653" number="3426" version="76">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Establishment of the office of the tenant advocate.</CHARFORMAT> There shall be in the department an office of the tenant advocate, whose duties shall include, but not be limited to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4664" number="3427" version="410">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>monitoring tenant protection plans to ensure that such plans comply with the requirements of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="28-104.8" destination-id="0-0-0-0">28-104.8</LINK>.4 of the administrative code; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4663" number="3428" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>establishing a system to receive comments, questions and complaints with respect to tenant protection plans, including, but not limited to, establishing and publicizing the availability of a telephone number to receive such comments, questions and complaints; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4662" number="3429" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>establishing a system to communicate with tenants who are affected by work in occupied multiple dwellings to ensure that such tenants have notice of such work, understand the applicable tenant protection plan and understand their rights as tenants during such work; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4661" number="3430" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>monitoring sites with tenant protection plans to ensure that such sites are complying with such plans and, if the office finds that a site is not complying with such plan, making a recommendation to the commissioner to issue a stop work order for such site until such site is in compliance. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4660" number="3431" version="772">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Reporting.</CHARFORMAT> The office of the tenant advocate shall submit to the mayor and the speaker of the city council, and publish on the department&apos;s website, quarterly reports related to the responsibilities of the office, including but not limited to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4659" number="3432" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>the number of complaints received by the office and a description of such complaints; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4658" number="3433" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>the average time taken to respond to such complaints; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4657" number="3434" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>a description of efforts made to communicate with tenants; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4656" number="3435" version="76">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>the number of recommendations made to the commissioner to issue a stop work order for a site that is not in complying with a tenant protection plan and the number of such recommendations followed by the commissioner. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4655" number="3436" version="777">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Posting of office information.</CHARFORMAT> The department shall post on its website the phone number of the office of the tenant advocate and a statement indicating that any person may contact such office if such person has a comment, question or complaint regarding tenant protection plans. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4652" number="3437" version="273">
+					<PARA>(L.L. 2017/161, 8/30/2017, eff. 12/28/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-017]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5273" number="3438" version="273">
+				<HEADING>Section 651. Office of building energy and emissions performance.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1595" name="651"/>Section 651. Office of building energy and emissions performance.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5275" number="3439" version="273">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be in the department an office of building energy and emissions performance. The office shall be headed by a director, who is a registered design professional, who shall be appointed by and shall report to the commissioner. The duties of the office shall include, but not be limited to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5286" number="3440" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Overseeing implementation of building energy and emissions performance laws and policies for existing buildings, new construction and major renovations; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5285" number="3441" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Establishing or administering protocols for assessing annual energy use in buildings; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5284" number="3442" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Monitoring buildings&apos; energy use and emissions, and reviewing building emissions assessment methodologies, building emissions limits, goals and timeframes to further the goal of achieving a 40 percent reduction in aggregate greenhouse gas emissions from covered buildings by calendar year 2030, relative to such emissions for the calendar year 2005; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5283" number="3443" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Creating an online portal for the submission of annual building emissions assessments by owners; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5282" number="3444" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Receiving and validating annual building emissions assessments; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5281" number="3445" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Auditing building emissions assessments and inspecting covered buildings, as necessary, to ensure proper reporting; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5280" number="3446" version="273">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Determining recommended penalties, including minimum penalties, for buildings that are noncompliant with applicable emissions limits; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-037]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5279" number="3447" version="297">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Reviewing applications for alternative methods of compliance with building emissions limits, including adjustments of emissions limits, deductions for the purchase of greenhouse gas offsets or renewable energy credits, deductions for the use of distributed energy resources, and adjustments for special categories of buildings or for special use and occupancies; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-040]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5277" number="3448" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>Working in close coordination with the mayor&apos;s office of long-term planning and sustainability; receiving advice and recommendations, as applicable, from the advisory board established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="28-320.2" destination-id="0-0-0-0">28-320.2</LINK> of the administrative code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-040]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5274" number="3449" version="298">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Agencies, including but not limited to the department of environmental protection, the department of housing preservation and development and the department of citywide administrative services shall cooperate with the office as requested by the director. Such participation and cooperation may include detailing agency staff to assist office staff consistent with agency and office functions and reporting to the office on building energy performance issues and related enforcement efforts. Agencies shall provide information necessary to support building energy performance enforcement efforts consistent with applicable law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-040]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5344" number="3450" version="298">
+					<PARA>(L.L. 2019/097, 5/19/2019, eff. 11/15/2019; Am. L.L. 2019/147, 7/27/2019, eff. 11/15/2019) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-040]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

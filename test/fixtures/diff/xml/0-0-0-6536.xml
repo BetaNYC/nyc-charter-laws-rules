@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-6536" number="3025" version="642">
+			<HEADING>Chapter 21: Department of Parks and Recreation</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-733" name="Chapter 21"/>Chapter 21: Department of Parks and Recreation</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1971" number="3026" version="3">
+				<HEADING>Section 531. Department; commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-735" name="531"/>Section 531. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department; commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1972" number="3027" version="617">
+					<PARA>There shall be a department of parks and recreation the head of which shall be the commissioner of parks and recreation. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1973" number="3028" version="3">
+				<HEADING>Section 532. Deputies. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-737" name="532"/>Section 532. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Deputies. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1974" number="3029" version="617">
+					<PARA>The commissioner may appoint three deputies. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1975" number="3030" version="3">
+				<HEADING>Section 533. Powers and duties of the commissioner. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-739" name="533"/>Section 533. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Powers and duties of the commissioner. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1977" number="3031" version="617">
+					<PARA>Except with respect to the functions of the board of education and except as otherwise provided by law, the commissioner shall have the power and it shall be his or her duty:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1978" number="3032" version="617">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Parks</CHARFORMAT>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1979" number="3033" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>to manage and care for all parks, squares and public places, the sidewalks immediately adjoining the same and all playgrounds, playground fixtures and other recreation properties, except those within the jurisdiction of the board of education or other agencies, but such jurisdiction shall not extend to or include the buildings which are not or hereafter may be erected in parks, squares or public places for governmental purposes other than those of the department; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1980" number="3034" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>to prepare plans for the establishment and improvement of a park system for the city with due regard to proper connections with the systems of federal, state and county parks and recreation areas in the city and the counties adjacent to the city, and execute the same when authorized in accordance with the provisions of this charter; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1981" number="3035" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>to maintain the beauty and utility of all parks, squares, public places, playgrounds and other recreational properties, except those within the jurisdiction of the board of education and to institute and execute all measures for the improvement thereof for ornamental purposes and for the beneficial uses of the people of the city; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1982" number="3036" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>to plant and maintain trees and to construct, erect and establish seats, drinking fountains, statues and works of art in any place within his or her jurisdiction, and to determine when and where lamps or lighting appliances shall be placed and lighted therein and the design thereof; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1983" number="3037" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>to authorize and regulate the use of and the projections on and determine the line or curb and the surface construction of all streets and avenues lying within any park, square or public place or within a distance of three hundred fifty feet from the outer boundaries thereof; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1984" number="3038" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>to maintain buildings and structures now or hereafter erected or established in any park, square, public place or playground under his or her jurisdiction and to carry out and perform existing contracts with corporations or institutions for the construction and maintenance of such buildings and structures; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1985" number="3039" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>to provide the necessary instruments, furniture and equipment for the several buildings and structures within his or her jurisdiction and to develop and improve the same subject to the provisions of law and existing contracts; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1986" number="3040" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>to have the management, direction and control of all real or personal property granted, devised, bequeathed or conveyed to the city for the extension, improvement or ornamentation of the parks, squares or public places in the city or for the establishment or maintenance, within the limits of any such park, square or public place, of playgrounds, other recreational properties and other facilities within the department&apos;s jurisdiction and upon such trusts and conditions as may be prescribed by the grantors or donors thereof and accepted by the commissioner, or proposed by the commissioner and accepted by the grantors or donor thereof; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1990" number="3041" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>to establish and enforce rules and regulations for the use, government and protection of public parks and of all property under the charge and control of the department, which rules and regulations so far as practicable shall be uniform in all boroughs and shall have the force and effect of law. Such rules and regulations shall apply to and be enforceable within public parks, recreational facilities and other property under the jurisdiction of the Hudson River park trust, the battery park city authority and the Brooklyn bridge park corporation provided that such trust, authority or corporation have entered into agreements with the commissioner to provide for the maintenance, protection and/or government of such property by the department, except to the extent that such rules and regulations are inconsistent with specific rules and regulations of the Hudson river park trust, the battery park city authority or the Brooklyn bridge park corporation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-014]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4521" number="3042" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Except as otherwise provided by subparagraphs (ii) and (iii) of this paragraph, any violation of such rules or regulations shall be an offense punishable by imprisonment of up to one day or by a fine of not more than 200 dollars. Any violation of such rules or regulations shall also subject the violator to a civil penalty of not more than 300 dollars for each violation, provided that the default judgment for any such violation shall not exceed 150 percent of the scheduled penalty as set forth in section 3-116 of title 48 of the rules of the city of New York or any successor provision, which may be recovered in a proceeding before the office of administrative trials and hearings pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049-a" destination-id="0-0-0-1029">1049-a</LINK>. Such proceeding shall be commenced by the service of a notice of violation returnable to such office pursuant to such section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-014]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4520" number="3043" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Notwithstanding subparagraph (i) of this paragraph, the civil penalty limitations in relation to open container restrictions, littering and urination, and noise set forth in sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="10-173" destination-id="0-0-0-0">10-173</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="16-141" destination-id="0-0-0-0">16-141</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="24-270" destination-id="0-0-0-0">24-270</LINK>, respectively, shall govern where applicable. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-014]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4519" number="3044" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>Notwithstanding subparagraphs (i) and (ii) of this paragraph, the administrative code may classify violations of such rules as misdemeanors, and may prescribe sanctions consistent with such classification. Violations of rules that are subject to misdemeanor sanctions in accordance with this subparagraph and the administrative code may also subject the violator to civil penalties greater than those specified in subparagraph (i), as may be provided in such code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-014]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1991" number="3045" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9-a.<TAB tab-count="1"/>by agreement with the battery park city authority (a public benefit corporation established pursuant to title twelve of article eight of the public authorities law), to enforce the rules and regulations of such authority or of a not-for-profit corporation acting on behalf of such authority, relating to the use, government and protection of public parks and recreational facilities of and adjacent to battery park city within the jurisdiction of such authority. In addition to or as an alternative to any of the remedies or penalties provided under any other provision of law, violation of such rules and regulations shall be punishable by a civil penalty of not more than five hundred dollars for each violation, which may be recovered in a proceeding before the environmental control board. Such proceeding shall be commenced by a notice of violation returnable before such board. The procedures set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049-a" destination-id="0-0-0-1029">one thousand forty-nine-a</LINK> of this charter applicable to the adjudication by the environmental control board of violations within the jurisdiction of the commissioner shall apply to the adjudication of violations of such rules and regulations by such board and final orders of such board imposing civil penalties for such violations shall constitute judgments that may be entered and enforced as set forth in such section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1992" number="3046" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9-b.<TAB tab-count="1"/>by agreement with the Hudson river park trust (a public benefit corporation established pursuant to section five of the Hudson river park act, chapter five hundred ninety-two of the laws of nineteen hundred ninety-eight), to enforce the rules and regulations of such trust relating to the use, government and protection of the Hudson river park, created pursuant to section four of such act. In addition to or as an alternative to any of the remedies or penalties provided under any other provision of law, violation of such rules and regulations shall be punishable by a civil penalty of not more than five hundred dollars for each violation, which may be recovered in a proceeding before the environmental control board. Such proceeding shall be commenced by a notice of violation returnable before such board. The procedures set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049-a" destination-id="0-0-0-1029">one thousand forty-nine-a</LINK> of this charter applicable to the adjudication by the environmental control board of violations within the jurisdiction of the commissioner shall apply to the adjudication of violations of such rules and regulations by such board and final orders of such board imposing civil penalties for such violations shall constitute judgments that may be entered and enforced as set forth in such section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1993" number="3047" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9-c.<TAB tab-count="1"/>by agreement with the Brooklyn bridge park corporation (a not-for-profit corporation formed pursuant to section four hundred two of the not-for-profit corporation law), to enforce the rules and regulations of such corporation, relating to the use, government and protection of public parks and recreational facilities within the jurisdiction of such corporation. In addition to or as an alternative to any of the remedies or penalties provided under any other provision of law, violation of such rules and regulations shall be punishable by a civil penalty of not more than five hundred dollars for each violation, which may be recovered in a proceeding before the environmental control board. Such proceeding shall be commenced by a notice of violation returnable before such board. The procedures set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1049-a" destination-id="0-0-0-1029">one thousand forty-nine-a</LINK> of this charter applicable to the adjudication by the environmental control board of violations within the jurisdiction of the commissioner shall apply to the adjudication of violations of such rules and regulations by such board and final orders of such board imposing civil penalties for such violations shall constitute judgments that may be entered and enforced as set forth in such section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1994" number="3048" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>to plan, conduct, supervise, coordinate and promote conservation, environmental, and nature education programs and research and demonstration projects relating thereto and to plan, acquire, design, construct, improve, alter, maintain and manage areas and facilities for conservation and the preservation of natural beauty; and subject to the approval of the mayor, undertake to enter into arrangements with other city, state or federal agencies and recommend to the mayor such arrangements with private, voluntary or commercial agencies, to be entered into subject to the provisions of law, for the performance of functions relating to conservation and the preservation of natural beauty; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1995" number="3049" version="769">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>to plan, plant and maintain trees and other plantings and to plan, acquire, design, construct, improve, alter, repair and maintain works of art, as same are defined in subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="854" destination-id="0-0-0-333">eight hundred fifty-four</LINK> of the New York city charter, on or over the streets, avenues, squares, parks, docks, piers or other public places belonging to the city, except as otherwise provided by law; and, subject to the approval of the major, undertake to enter into arrangements with other agencies of the city, state and federal government and recommend to the mayor such arrangements with private, voluntary or commercial agencies, to be entered into subject to the provisions of law, for the performance of functions relating to neighborhood beautification. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1996" number="3050" version="617">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Recreation</CHARFORMAT>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1997" number="3051" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>to plan, acquire, construct, improve and manage facilities for the recreation of the public; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1998" number="3052" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>to plan, develop, conduct and supervise recreation programs for the public including research and demonstration projects relating thereto; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1999" number="3053" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>to review and coordinate recreation activities and programs and facilities conducted by agencies of the city and the budget estimates submitted by such other agencies for such activities and make such recommendations to the mayor with respect to them as may be appropriate; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2000" number="3054" version="617">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>to undertake, subject to the approval of the mayor, and to enter into arrangements with other agencies of the city, state or federal government and to recommend to the mayor such arrangements with private, voluntary or commercial agencies to be entered into, subject to the provisions of law, for the performance of any recreation functions conferred upon the department by this chapter or otherwise.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2001" number="3055" version="35">
+					<PARA>(Am. L.L. 2016/070, 6/13/2016, eff. 6/13/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-014]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-2002" number="3056" version="666">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2008/035" destination-id="0-0-0-0">L.L. 2008/035</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2016/070" destination-id="0-0-0-0">L.L. 2016/070</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5721" number="3057" version="402">
+				<HEADING>Section 534. Landmarks preservation commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-741" name="534"/>Section 534. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Landmarks preservation commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-2003" number="3058" version="46">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> Became Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3020" destination-id="0-0-0-743">3020</LINK>.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

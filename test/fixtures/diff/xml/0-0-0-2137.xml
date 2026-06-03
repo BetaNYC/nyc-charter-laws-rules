@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-2137" number="3204" version="320">
+			<HEADING>Chapter 23: Office of Animal Welfare</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-789" name="Chapter 23"/>Chapter 23: Office of Animal Welfare</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-2139" number="3205" version="320">
+				<HEADING>Section 581. Office of animal welfare.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1603" name="581"/>Section 581. Office of animal welfare.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5395" number="3206" version="774">
+					<PARA>The mayor shall establish an office of animal welfare. Such office may, but need not, be established in the executive office of the mayor and may be established as a separate office, within any other office of the mayor or within any department, the head of which is appointed by the mayor. Such office shall be headed by a director who shall be appointed by the mayor or the head of such department. For the purposes of this section, &quot;director&quot; means the director of the office of animal welfare. The director may appoint deputies and staff within available appropriations. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5394" number="3207" version="321">
+					<PARA>(L.L. 2019/204, 11/25/2019, eff. 3/24/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-5396" number="3208" version="320">
+				<HEADING>Section 582. Powers and duties.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1605" name="582"/>Section 582. Powers and duties.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5393" number="3209" version="320">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The director shall have the power to perform the following functions relating to animal welfare: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5392" number="3210" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Advise and assist the mayor in the coordination and cooperation among agencies under the jurisdiction of the mayor that are involved in animal welfare administration, regulation, management or programs, including, but not limited to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5391" number="3211" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Animal shelters; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5390" number="3212" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Sterilization, euthanizing and immunization of animals; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5389" number="3213" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Animal population control; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5388" number="3214" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Licensing and permitting of animals; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5387" number="3215" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(e)<TAB tab-count="1"/>Restraining of animals; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5386" number="3216" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(f)<TAB tab-count="1"/>Exotic animals; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5385" number="3217" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(g)<TAB tab-count="1"/>Rental horse licensing and protection; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5384" number="3218" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(h)<TAB tab-count="1"/>Dangerous dog regulation; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5383" number="3219" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Boarding kennel regulation; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5382" number="3220" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(j)<TAB tab-count="1"/>Animal abuse and animal abuse registry; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5381" number="3221" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(k)<TAB tab-count="1"/>Pet shops; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5380" number="3222" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(l)<TAB tab-count="1"/>Zoos, oceanariums, nature conservatories and wildlife refuges; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5379" number="3223" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(m)<TAB tab-count="1"/>Disposal of deceased animals; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5378" number="3224" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(n)<TAB tab-count="1"/>Wildlife management; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5377" number="3225" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Review, at the request of the mayor, the budget priorities of all agencies for programs related to animal welfare, and recommend to the mayor budget priorities among such programs; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5376" number="3226" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>No later than January 1, 2021 and annually thereafter, prepare and submit to the mayor and the speaker of the council an annual report of the animal welfare service and program needs in all five boroughs; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5375" number="3227" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Serve as liaison for the city regarding animal welfare needs and concerns; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5374" number="3228" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Provide outreach and education on animal welfare programs and the humane treatment of animals; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5373" number="3229" version="320">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Perform other duties as the mayor may assign. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5371" number="3230" version="321">
+					<PARA>(L.L. 2019/204, 11/25/2019, eff. 3/24/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-043]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

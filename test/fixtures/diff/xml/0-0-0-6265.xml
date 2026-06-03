@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-6265" number="6808" version="613">
+			<HEADING>Chapter 78: Equity</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1757" name="Chapter 78"/>Chapter 78: Equity</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6422" number="6809" version="614">
+				<HEADING>Section 3400. Definitions.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1759" name="3400"/>Section 3400. Definitions.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6479" number="6810" version="618">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Equity.</CHARFORMAT> For the purposes of this chapter the term &quot;equity&quot; means both an outcome and a process. Equity as an outcome shall mean the achievement of a city where the worth, talents, and contributions of all people are valued and recognized, irrespective of race, gender, sexual orientation, gender identity, age, mental or physical disability, national or ethnic origin, immigration status, education, or economic status, and where these characteristics of identity, whether taken individually or through the ways in which they intersect, are not predictors or determinants of economic, political, social, or psychological outcomes, as they neither confer privilege nor deny opportunities. Equity as a process means the closing of gaps in policy, practice, and allocation of city resources through the prioritization of access, opportunities, and resources to those people and communities with the greatest need, whether due to historical or current marginalization or oppression, underinvestment, disinvestment, or under-resourcing of those people and communities, or due to the way in which their intersecting characteristics of identity serve to magnify inequities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6477" number="6811" version="616">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Other Definitions.</CHARFORMAT> For the purposes of this chapter the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6476" number="6812" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Access Design.</CHARFORMAT> The term &quot;access design&quot; means incorporating language justice, plain language, physical accessibility, civic service design, and other principles into communications, policies, and interactions, to reduce barriers to quality service and meaningful participation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6475" number="6813" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Civic service design.</CHARFORMAT> The term &quot;civic service design &quot; means the practice of making the experiences of the people who use and deliver government programs the central focus to inform the policies, processes and systems that affect those experiences. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6474" number="6814" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Covered agency.</CHARFORMAT> The term &quot;covered agency &quot; means (i) an agency to which the provisions of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 16" destination-id="0-0-0-559">chapter 16</LINK> apply, in accordance with subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="385" destination-id="0-0-0-561">385</LINK>, provided that the mayor may determine that agency plans can be consolidated where limited agency personnel or resources do not make it practicable for an agency to prepare its own racial equity plan; (ii) an agency headed by a board, commission, or other multi-member body, provided that either the majority of members of the body or the chief executive officer of the agency is appointed or designated by the mayor alone, and that has, as of January first of the applicable year, at least 40 full-time employees or part-time equivalents, as determined by the office of management and budget in consultation with the office of racial equity; (iii) a contracted entity, as such term is defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="22-821" destination-id="0-0-0-0">22-821</LINK> of the administrative code, where the aggregate value of such entity&apos;s contracts with the city to provide or administer economic development benefits on behalf of the city in the city fiscal year preceding the applicable plan calendar year exceeded $500,000,000; or (iv) an agency that has agreed in writing to comply with some or all of the provisions of this chapter applicable to a &quot;covered agency&quot;, provided that such agreement may be revoked in writing at any time by such agency. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6473" number="6815" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Disaggregated data.</CHARFORMAT> The term &quot;disaggregated data&quot; means data collected from or about multiple persons or households, analyzed and presented as separate categories by different characteristics, such as race, cultural background, neighborhood, language, or gender, at a specified level of detail and granularity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6472" number="6816" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Language justice.</CHARFORMAT> The term &quot;language justice &quot; means a policy of designing interactions, public dialogue, and content, and providing services so that all users likely to benefit from them can interact in the language they feel most comfortable using, in order to reduce barriers that disproportionately exclude people with limited English proficiency from equal access and participation in decision-making. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6471" number="6817" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Marginalization.</CHARFORMAT> The term &quot;marginalization&quot; means the effects of past or current policies or actions that have had a long-term negative impact on an individual, family, community, or neighborhood, including, but not limited to, any collateral consequences of disproportionate law enforcement, any underinvestment in neighborhoods, or any disproportionately penalizing enforcement method. The term &quot;anti-marginalization&quot; means actions and policies that reverse and prevent the effects of past or current marginalization. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6470" number="6818" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Occupational segregation.</CHARFORMAT> The term &quot;occupational segregation&quot; means the under-representation or over-representation of a group, identified on the basis of a shared characteristic protected by the employment related provisions of the city&apos;s human rights law, in a position or field of work to the detriment of that group&apos;s ability to obtain higher levels of pay, responsibility, flexibility, stability, or other indicators of job desirability. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6469" number="6819" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Outcome indicator.</CHARFORMAT> The term &quot;outcome indicator&quot; means a measure of quantitative data that enables an assessment of the improvement, worsening, or stagnancy of an aspect of wellbeing or quality of life for individuals, communities, or populations. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6468" number="6820" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Plain language.</CHARFORMAT> The term &quot;plain language &quot; means using writing, scripting, or other communicating in a way that the reader or listener can understand easily and completely, including using clear and common words, organizing ideas to be easy to follow, and choosing words that would be easy to translate into and understand in a person&apos;s preferred language. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6467" number="6821" version="616">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Priority neighborhoods.</CHARFORMAT> The term &quot;priority neighborhoods&quot; means neighborhoods with disproportionate equity, health, or socio-economic burdens, or that have the potential to be disproportionately impacted by future events that could exacerbate racial disparities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6466" number="6822" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Racial equity.</CHARFORMAT> The term &quot;racial equity&quot; shall mean, when referring to an outcome, the achievement of equity with a particular focus on race or the intersection of race with other characteristics of identity. When referring to a process, the term &quot;racial equity&quot; shall mean the closing of gaps in policy, practice, and allocation of city resources through the prioritization of access, opportunities, and resources to those people and communities who, based on or at least in part due to race, have historically faced or currently face marginalization or oppression, underinvestment, disinvestment, or under-resourcing. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6465" number="6823" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Wage segregation.</CHARFORMAT> The term &quot;wage segregation&quot; means underpayment for work predominantly performed by, or for positions predominantly held by, a group of persons sharing a characteristic which is protected by the employment related provisions of the city&apos;s human rights law, as compared to payment for work performed by, or positions held by, another group who is performing work requiring similar levels of skill, experience, responsibility, and effort. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6464" number="6824" version="614">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6483" number="6825" version="614">
+				<HEADING>Section 3401. Office of racial equity; chief equity officer; staffing; appointment; duties and powers.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1761" name="3401"/>Section 3401. Office of racial equity; chief equity officer; staffing; appointment; duties and powers.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6463" number="6826" version="614">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be established within the executive office of the mayor an office of racial equity, the head of which shall be the city&apos;s chief equity officer. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6462" number="6827" version="615">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The chief equity officer shall be appointed by the mayor as head of a mayoral agency for purposes of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 16" destination-id="0-0-0-559">chapter 16</LINK>. The chief equity officer may hold a deputy mayor position. The chief equity officer may appoint deputies, assistants, and additional employees as may be needed for the performance of the duties prescribed herein, within available appropriations. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6461" number="6828" version="615">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The appropriations available to pay for the expenses of the office of racial equity during each fiscal year shall be not less than an amount sufficient to fund personal service costs for full-time and part-time personnel necessary to implement the charter mandated requirements of the office, as certified by the mayor in the budget message submitted pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">250</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6460" number="6829" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Powers and duties.</CHARFORMAT> The office of racial equity shall have the power and duty to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6459" number="6830" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Develop, provide oversight of, assess, and advance measures to improve and achieve racial equity in the city of New York. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6458" number="6831" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Coordinate citywide and agency racial equity planning, as described in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3403" destination-id="0-0-0-1765">3403</LINK>, including: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6457" number="6832" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>establishing standards for, and overseeing the development, publication, and public dissemination of racial equity strategies, indicators, and progress reports; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6456" number="6833" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>establishing standards for disaggregation of data, across categories that shall include, without limitation, race and gender, and may also include other standard categories of disaggregation, including ethnicity, income, neighborhood, and socio-economic status, or other characteristics, at levels of granularity matching or exceeding generally accepted levels of disaggregation, and sufficient to permit identification of disparity among or within groups, and accounting for an agency&apos;s function, to be utilized in citywide and agency racial equity planning; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6455" number="6834" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>collaborating with the chief privacy officer to develop privacy standards that enable collection and use of disaggregated data while safeguarding individual and community privacy. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6454" number="6835" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Include within the office, and, provide technical and staffing support to, the taskforce on racial inclusion and equity, as established in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3402" destination-id="0-0-0-1763">3402</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6453" number="6836" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Provide technical assistance to, and collaborate with, agencies to support their capacity to engage in meaningful racial equity analysis, and support, confer with, and advise covered agencies as they draft equity plans. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6452" number="6837" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Identify priority neighborhoods, differentiated by categories of needs or disparities, and review the categorization of neighborhoods every two years to adjust for changing equity, health, or socio-economic trends and needs. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6451" number="6838" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Complete preliminary and final racial equity progress reports, in accordance with the racial equity planning schedule as described in paragraphs 6 and 7 of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3403" destination-id="0-0-0-1765">3403</LINK>, to provide periodic updates on the status of the city and covered agencies&apos; progress towards equity goals as set forth in the citywide racial equity plan. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6450" number="6839" version="771">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Develop a citywide access design program to increase equitable access and reduce barriers to in-person and digital city programs and services, including, but not limited to, incorporating civic service design, plain language, language justice, and disability-related access into every agency&apos;s work. The office shall collaborate with city agencies to establish user-centric technology and to integrate access design into the ways agencies interact with the public, including in their programs and in their community outreach. The office may collaborate on agencies&apos; existing city efforts to increase access. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6449" number="6840" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Support all agencies in prioritizing the development and implementation of policies and practices aimed at anti-marginalization of individuals and communities, which may address: (i) reducing or eliminating wage or occupational segregation; (ii) improving equitable hiring and promotion within the City&apos;s workforce; (iii) limiting the use of criminal history and background checks except where necessity is demonstrated; (iv) identifying and employing alternatives to punitive enforcement; (v) providing access to services, information, and decisionmaking for all New Yorkers regardless of language, ability, education, time availability, or expertise; and (vi) prioritizing resources and services into neighborhoods with the greatest need and largest disparity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6448" number="6841" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>To the extent a new measurement for the cost of living in New York city is required to be reported under this charter or by local law, develop, implement and report such measurement. Such measurement may be consolidated with any other report or plan due under this chapter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6447" number="6842" version="614">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6482" number="6843" version="614">
+				<HEADING>Section 3402. Taskforce on racial inclusion and equity; chairs; staffing; duties and powers.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1763" name="3402"/>Section 3402. Taskforce on racial inclusion and equity; chairs; staffing; duties and powers.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6446" number="6844" version="614">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a taskforce on racial inclusion and equity to function as an interagency coordination and leadership body for citywide racial equity policy development and implementation. The taskforce shall be located within the office of racial equity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6445" number="6845" version="614">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The taskforce shall consist of one or more chairs appointed by the chief equity officer in consultation with the mayor, and other members appointed by the chief equity officer in collaboration with their employing agencies. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6444" number="6846" version="614">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The taskforce shall be supported by an executive director selected and hired by the chief equity officer in consultation with the mayor, and such other staff members located within the office of racial equity as may be appointed or designated by the executive director or the chief equity officer. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6443" number="6847" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Duties of the taskforce on racial inclusion and equity.</CHARFORMAT> The taskforce shall function as a citywide racial equity leadership and advisory body providing advice and assistance to the mayor, chief equity officer, and the office of racial equity, and coordinating efforts to increase racial equity within agencies and among programs through the development of multi-agency initiatives and citywide equity policies and practices. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6442" number="6848" version="616">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Powers of the taskforce on racial inclusion and equity.</CHARFORMAT> The taskforce shall have the following powers: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6441" number="6849" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The chair or chairs are authorized to convene meetings and establish such committees of the taskforce as are deemed necessary for the performance and carrying out of its duties. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6440" number="6850" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>All agencies shall cooperate with the taskforce in the performance of its duties and contribute, as appropriate, to the taskforce&apos;s efforts. At the request of the taskforce, an agency shall also designate at least one representative to serve as a member. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6439" number="6851" version="614">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6481" number="6852" version="615">
+				<HEADING>Section 3403. Racial equity plans.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1765" name="3403"/>Section 3403. Racial equity plans.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6438" number="6853" version="616">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Generally.</CHARFORMAT> The city of New York, recognizing that racial inequity respects no boundaries of age, gender, sexual orientation, gender identity, national or ethnic origin, immigration status, disability, education, or economic status, and that addressing racial equity can also address inequity affecting people based on other characteristics of identity, will undertake a process of citywide and agency planning and reporting with a goal of eliminating racial inequity. The citywide and agency racial equity plans shall be guided by the principle of equity with a focus on racial equity as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3400" destination-id="0-0-0-1759">3400</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6437" number="6854" version="616">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Citywide racial equity plan.</CHARFORMAT> The mayor shall issue a biennial preliminary citywide racial equity plan and citywide racial equity plan. The purpose of the publication of a preliminary citywide racial equity plan shall be to provide an opportunity for feedback from the public and from elected officials before publication of the final report. The preliminary and citywide equity plans shall include, at minimum: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6436" number="6855" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Overarching citywide goals and strategies to improve racial equity throughout the city government&apos;s policymaking, operations, and workforce, including the equitable distribution of benefits, of supportive services, and of environmental burdens by neighborhood; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6435" number="6856" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Performance and outcome indicators for citywide racial equity goals reported in accordance with the collection and reporting standards and guidelines, including for disaggregation of data, established by the office of racial equity pursuant to paragraph 2 of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3401" destination-id="0-0-0-1761">3401</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6434" number="6857" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Neighborhood-level outcome indicators that permit the assessment of year-over-year change in wellbeing outcomes and in the level of disparity on a neighborhood level; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6433" number="6858" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Maps of needs-based priority neighborhoods as identified by the office of racial equity; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6432" number="6859" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>A statement from the mayor describing the status of racial equity in New York city; explaining why the citywide racial equity plan selected certain strategies, indicators, and goals. The preliminary racial equity plan shall also include the mayor&apos;s response to the commission&apos;s submission of proposed community racial equity priorities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6431" number="6860" version="616">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Agency racial equity plans.</CHARFORMAT> Every covered agency shall be required to develop biennially a preliminary agency racial equity plan and an agency racial equity plan, guided by the principles and values of equity as defined in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3400" destination-id="0-0-0-1759">3400</LINK>, that will be incorporated into the citywide racial equity plan. The agency racial equity plan shall include, at a minimum: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6430" number="6861" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Agency-specific goals and strategies for the short-term, to effectuate changes within the following two fiscal years, and for the long-term, to improve racial equity and reduce or eliminate racial disparities within the agency&apos;s jurisdiction, including, but not limited to, how and where the agency provides services, resources, and access; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6429" number="6862" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>At least one outcome indicator that reports on an outcome as determined in consultation with the office of racial equity, disaggregated based upon the standards set forth by the office of racial equity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6428" number="6863" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Racial equity planning schedule.</CHARFORMAT> The city&apos;s racial equity planning shall be completed according to the following schedule: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6427" number="6864" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Community racial equity priorities.</CHARFORMAT> Not later than October 1, 2023, and on or before October first of every second year thereafter, the commission on racial equity, as established in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3404" destination-id="0-0-0-1767">3404</LINK>, shall make public and publicly disseminate the community racial equity priorities, in the manner provided in paragraph 1 of subdivision i of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3404" destination-id="0-0-0-1767">3404</LINK> of this chapter and submit to them to the mayor and the office of racial equity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6426" number="6865" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Preliminary citywide racial equity plan.</CHARFORMAT> Not later than January 16, 2024, and on or before January sixteenth of every second year thereafter, the mayor shall make public a preliminary citywide racial equity plan, and submit it to the speaker of the council, the commission on racial equity, the public advocate, and the comptroller. Biennially, not later than such date as the mayor may direct, each covered agency shall submit to the mayor its preliminary agency racial equity plan, which shall be included in the preliminary citywide racial equity plan. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6425" number="6866" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Reply to preliminary racial equity plan.</CHARFORMAT> Not later than February 15, 2024, and on or before February fifteenth of every second year thereafter, the commission on racial equity shall make public the commission&apos;s reply to the preliminary citywide racial equity plan and provide it to the mayor and the office of racial equity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6424" number="6867" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Citywide racial equity plan.</CHARFORMAT> Not later than April 26, 2024, and by April twenty-sixth of every second year thereafter, the mayor shall make public the citywide racial equity plan and submit it to the speaker of the council and the commission on racial equity. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6423" number="6868" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Evaluation of citywide racial equity plan.</CHARFORMAT> Beginning in 2024, and every second year thereafter, not later than three weeks after the mayor&apos;s submission of the citywide racial equity plan, the commission on racial equity shall publish and widely disseminate its evaluation of the citywide racial equity plan. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6421" number="6869" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Preliminary racial equity progress report.</CHARFORMAT> Not later than January 16, 2026, and on or before January sixteenth of every second year thereafter, the office of racial equity shall publish a preliminary racial equity progress report, with data for indicators from the current equity plan for at least the prior fiscal year. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6420" number="6870" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Final racial equity progress report.</CHARFORMAT> Not later than September 1, 2026, and on or before September first of every second year thereafter, the office of racial equity shall publish a final racial equity progress report that, for the prior two fiscal years, updates data for indicators from, published racial equity plans, updates maps of neighborhood-level indicator data, and provides an assessment of the extent to which the city and agencies are progressing towards goals included in the prior citywide racial equity plan. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6419" number="6871" version="616">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Coordination of reporting.</CHARFORMAT> The mayor may, for any other equity reporting mandated by local law, consolidate that reporting into the racial equity plan reporting process as provided in this section, provided that the requirements of that local law reporting, aside from the date it must be completed, are met as part of consolidation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6418" number="6872" version="614">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6480" number="6873" version="823">
+				<HEADING>Section 3404. Commission on racial equity.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1767" name="3404"/>Section 3404. Commission on racial equity.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-6417" number="6874" version="615">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be established a commission on racial equity, the purpose of which is to enable community members with equity expertise or lived experience relevant to the goal of equity to propose priorities for racial equity in city decision-making and policy and assess performance towards those priorities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6416" number="6875" version="616">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Membership of the commission; appointments; executive director; staff. </CHARFORMAT>The commission shall consist of 15 members, including the chair, appointed as follows: seven members of the commission shall be appointed by the mayor; five members of the commission, each of whom shall be a resident of a different borough, shall be appointed by the speaker of the city council; one member of the commission shall be appointed by the public advocate; and one member of the commission shall be appointed by the comptroller. The chair of the commission, who shall be jointly appointed by the mayor and speaker, shall also serve as executive director. The chair shall have charge of the organization of the commission&apos;s office and have authority to employ, assign and superintend the duties of such officers and employees as may be necessary to carry out the provisions of this section. The chair shall devote their full time to the position and shall be entitled to compensation for the position. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6415" number="6876" version="616">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commission compensation.</CHARFORMAT> Members of the commission other than the chair shall be entitled to the following compensation and reimbursement for their service to the commission: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6414" number="6877" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Compensation at a per diem rate for each calendar day they perform the work of the commission, except that any commission members who are also government employees serving as part of their duties are not entitled to receive per diem compensation, but may continue to receive regular compensation for city employment; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6413" number="6878" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Reimbursement for actual and necessary reasonable expenses as determined by the chair, incurred as a result of commission service other than service by governmental employees serving as part of their duties, including, but not limited to expenses incurred for childcare, elder care, or home health care for any dependents who would otherwise have been cared for by that commission member. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6412" number="6879" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commissioner terms.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6411" number="6880" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The first members shall be appointed to serve as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6410" number="6881" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The chair, jointly appointed by the mayor and speaker, for a term of 3 years; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6409" number="6882" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Three members appointed by the mayor, and one member each appointed by the public advocate and the comptroller, for a term of two years; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6408" number="6883" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Five members appointed by the speaker of the city council for a term of three years; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6407" number="6884" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Four members appointed by the mayor for a term of four years. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6406" number="6885" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The first term for each member shall commence on August 1, 2023. Notwithstanding the foregoing, the chair and executive director&apos;s functions and responsibilities may commence on or before August 1, 2023. Thereafter, the terms of all such members shall be three years, and no such member, including the chair, shall be appointed to serve more than three terms. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6404" number="6886" version="616">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Removal of members; vacancies; holdovers.</CHARFORMAT> All members may be removed only by such member&apos;s appointing official or officials and only for cause and upon notice and hearing. Vacancies in the commission as a result of removal, resignation, incapacity, or death shall be filled by such member&apos;s appointing official or officials for the remainder of the unexpired term, in a manner consistent with the requirements of subdivision b of this section. If the appointing official fails to make an appointment to fill the vacancy within 90 days, the commission shall be entitled to fill the vacancy, including the chair, for the remainder of the term. Upon expiration of the term of a member who holds over in their position, if the appointing official shall fail to appoint a member, including the chair, within 90 days of the expiration of such term, the term of the holdover member shall be extended for an additional one year and the term of the successor to such member shall be shortened by an equal amount of time. If the appointing official fails to appoint a member, including the chair, by the end of the additional one year, the commission shall be entitled to fill the vacancy for the remainder of the term. Service as a holdover for an extended year shall not constitute service for an additional term for purposes of paragraph 2 of subdivision d. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6403" number="6887" version="616">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Qualifications of commissioners.</CHARFORMAT> Members of the commission shall be residents of the city of New York. One member each appointed by the mayor and speaker of the council shall represent the perspectives and concerns of New Yorkers under the age of twenty-five. In appointing members to the commission, the mayor, speaker of the city council, public advocate and comptroller shall consider: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6402" number="6888" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Individuals who have expertise in racial equity or racial justice, including at the intersection of race and other marginalized identities; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6401" number="6889" version="619">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Individuals who are representative of or have experience advocating for New Yorkers who are Black, Indigenous or People of Color; immigrants; people with limited English proficiency; people with disabilities; students; youth; elders; people who are lesbian, gay, bisexual, transgender, intersex, gender non-conforming or non-binary; people who are justice-involved; recipients of public benefits; or residents of public housing; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6400" number="6890" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>People who have never served on a New York city public body. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6399" number="6891" version="614">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>A majority of the whole number of members of the commission then in office shall constitute a quorum for the transaction of any business. The commission shall have the power to act by majority of such whole then in office. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6398" number="6892" version="615">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The appropriations available to pay for the expenses of the commission on racial equity during each fiscal year shall be not less than an amount sufficient to fund, personal service costs for full-time and part-time personnel necessary to implement the charter mandated requirements of the commission, as certified by the mayor in the budget message submitted pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="250" destination-id="0-0-0-393">250</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6397" number="6893" version="616">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Jurisdiction, powers and duties of the commission.</CHARFORMAT> The commission shall have the power and duty to: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6396" number="6894" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Propose community equity priorities and outcome indicators relevant to the community, for possible inclusion in the upcoming citywide and agency racial equity plans in accordance with the equity planning schedule established by section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3403" destination-id="0-0-0-1765">3403</LINK>. To develop the community equity priorities, the commission shall: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6395" number="6895" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>consider those needs and priorities that local community members view as most relevant to their wellbeing, giving particular consideration to the priorities of groups or categories of community members that have been historically underrepresented in, or underserved by, government and its processes; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6393" number="6896" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>consider published disparity indicator data and any other information that the commission deems appropriate regarding current, past, or anticipated inequities; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6392" number="6897" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>propose metrics that provide data on outcomes most pertinent to communities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6390" number="6898" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Following the releases of the preliminary citywide racial equity plan and the citywide racial equity plan, the commission shall make public and submit to the mayor and the office of racial equity a statement assessing the extent to which the plan is responsive to the community racial equity priorities and making recommendations, if any, in accordance with paragraphs 3 and 5 of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3403" destination-id="0-0-0-1765">3403</LINK>. In their recommendations, the commission may, among other things: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6389" number="6899" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>propose modifications to priorities, strategies, or indicators in the citywide and agency racial equity plans; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6388" number="6900" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>propose specific strategies to address patterns of inequitable behavior or policy as identified through the receipt of complaints from the public, including by making recommendations to agencies to address such complaints where appropriate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6387" number="6901" version="615">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Track and publicly report on agency and citywide compliance with the racial equity planning process as established by subdivisions b and c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="3403" destination-id="0-0-0-1765">3403</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6386" number="6902" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Receive complaints about agency conduct that may have the effect of exacerbating racial equity disparities and make recommendations to agencies to address such complaints where appropriate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6385" number="6903" version="614">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Respond to requests of the speaker of the council and its committees regarding racial equity concerns. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-6384" number="6904" version="776">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Confidentiality.</CHARFORMAT> The commission, to the extent consistent with law, shall keep confidential any complaints received pursuant to paragraph 4 of subdivision i of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7161" number="6905" version="835">
+					<PARA>(L.L. 2022/121, 12/2/2022, eff. 12/2/2022) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-080]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6382" number="6906" version="835">
+				<HEADING>Section 3405. Anti-racism training for human services contractors.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1801" name="3405"/>Section 3405. Anti-racism training for human services contractors.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7186" number="6907" version="835">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT> For purposes of this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7185" number="6908" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Covered employee.</CHARFORMAT> The term “covered employee” means an employee of a human services contractor who directly renders human services to members of the public in performance of a human services contract, or an employee who supervises such an employee. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7184" number="6909" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Human services.</CHARFORMAT> The term “human services” means any social services provided to members of the public including, but not necessarily limited to, day care, foster care, home care, health or medical services, housing and shelter assistance, preventive services, youth services, the operation of senior centers, employment training and assistance, vocational and educational programs, legal services, and recreation programs. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7183" number="6910" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Human services agency.</CHARFORMAT> The term “human services agency” means any covered agency that provides, or contracts for the provision of, human services. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7182" number="6911" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Human services contract.</CHARFORMAT> The term “human services contract” means a written agreement, other than an emergency contract procured pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="315" destination-id="0-0-0-477">315</LINK>, between a contractor and a human services agency, the principal purpose of which is to provide human services. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7181" number="6912" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Human services contractor.</CHARFORMAT> The term &quot;human services contractor&quot; means any contractor that enters into a human services contract with a human services agency. A person shall be deemed a human services contractor for the duration of the human services contract that such contractor enters into. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7180" number="6913" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Interactive training.</CHARFORMAT> The term “interactive training” means a participatory training program whereby the trainee is actively engaged in a trainer-trainee interaction through the use of questions or other participatory methods as determined by the chief equity officer, provided that an “interactive training” need not be live or facilitated by an in-person instructor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7179" number="6914" version="835">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The chief equity officer, in consultation with the commissioner of citywide administrative services, the head of each human services agency, and representatives from human services contractors, shall create and regularly update an anti-racism training for covered employees. Such training shall be an interactive training, the purpose of which shall be to improve the provision of human services in the city, including by: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7178" number="6915" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Providing covered employees with tools to adequately serve individuals from diverse backgrounds, including members of marginalized groups; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7177" number="6916" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Helping covered employees improve awareness of, and sensitivity to, how racism and related injustices impact the provision of human services in the city; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7176" number="6917" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Promoting policies, practices, and norms designed to combat racism and advance racial equity in the provision of human services in the city. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7175" number="6918" version="835">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The chief equity officer, in consultation with the commissioner of citywide administrative services, the head of each human services agency, and representatives from human services contractors, may create a unique version of such training for any particular group of covered employees to ensure that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7174" number="6919" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The information covered is appropriately tailored to the work of such employees in light of their relevant professional responsibilities, the particular services they provide, or the populations they serve; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7173" number="6920" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The training avoids duplication with other trainings such employees are required to complete pursuant to federal, state, or local law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7172" number="6921" version="835">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The chief equity officer shall ensure that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7171" number="6922" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Such training is available as an online interactive training that can be completed on demand and free of charge on the website of the office of racial equity; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7170" number="6923" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Those who complete such online interactive training are provided with an electronic certification of such completion. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7169" number="6924" version="835">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The chief equity officer may also make such training available as in-person interactive training, provided that the chief equity officer also provides those who complete such in-person training with a certification of such completion. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7168" number="6925" version="835">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Each human services contractor shall: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7167" number="6926" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Ensure that covered employees of such contractor complete such training at least once per year; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7166" number="6927" version="835">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Maintain records showing compliance with this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7165" number="6928" version="835">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>The chief equity officer shall create a process by which human services contractors that are subject to training requirements in multiple jurisdictions, or that otherwise provide an alternative annual interactive anti-racism training to all covered employees, may certify their compliance with this section, provided that such alternative training meets the requirements of subdivision b of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7163" number="6929" version="835">
+					<PARA>(L.L. 2024/013, 1/6/2024, eff. 7/1/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-093]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

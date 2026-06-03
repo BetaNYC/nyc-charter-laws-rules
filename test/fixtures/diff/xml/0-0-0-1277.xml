@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-1277" number="2217" version="3">
+			<HEADING>Chapter 12: Obligations of the City</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-417" name="Chapter 12"/>Chapter 12: Obligations of the City</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1278" number="2218" version="3">
+				<HEADING>Section 265. Allocation of authorizations to department of citywide administrative services. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-419" name="265"/>Section 265. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Allocation of authorizations to department of citywide administrative services. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1279" number="2219" version="616">
+					<PARA>So much of the amount of any obligation authorized as is applicable to the purchase of supplies, materials and equipment or the provision of services, utilities or facilities which the department of citywide administrative services is authorized to purchase or provide shall be allotted to the department of citywide administrative services, but shall be considered and accounted for as a part of the cost of the project for which the obligations were authorized. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1280" number="2220" version="711">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6747" number="2221" version="711">
+				<HEADING>Section 265-a. Allocation of authorizations to department of design and construction. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-421" name="265-a"/>Section 265-a. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Allocation of authorizations to department of design and construction. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1281" number="2222" version="616">
+					<PARA>So much of the amount of any obligation authorized as is applicable to the completion of construction projects, acquisition of real property or acquisition of personal property in connection with construction or a capital project by the department of design and construction, including but not limited to the provision of services, utilities or facilities of such department, shall be allotted to the department of design and construction, but shall be considered and accounted for as a part of the cost of the project for which the obligations were authorized. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1282" number="2223" version="714">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1995/077" destination-id="0-0-0-0">L.L. 1995/077</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6773" number="2224" version="714">
+				<HEADING>Section 266. Short term debt. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-423" name="266"/>Section 266. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Short term debt. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1283" number="2225" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Subject to the provisions of subdivisions b through j of this section, the city may issue temporary debt obligations in anticipation of taxes and revenues as authorized by state law. The city shall issue no short-term obligations which shall be inconsistent with the limitations set forth in subdivisions b through j of this section. The limitations on short-term borrowing imposed upon the city by this section shall be in addition to the limitations on short-term borrowing imposed on the city under the state local finance law. The powers, duties, and obligations set forth in this section shall be subject to the powers, duties, and obligations placed upon any state or local officer or agency, including but not limited to the New York state financial control board, by or pursuant to the New York State Financial Emergency Act for the City of New York, while such act remains in effect.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1284" number="2226" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Revenue or tax anticipation notes shall be issued against a specific tax or revenues receivable which are clearly identified by source and fiscal year. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1285" number="2227" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>If the amount of taxes or revenues receivable against which anticipation notes have been issued becomes equal to the amount of such notes outstanding, the city shall deposit all further funds obtained from such sources into a segregated bank account which may be used only to redeem such debt upon maturity. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1286" number="2228" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The city shall not issue anticipation notes against taxes or revenues which have been receivable for more than two years. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1287" number="2229" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>No tax anticipation notes shall be issued by the city in anticipation of the collection of taxes or assessments levied for a fiscal year which would cause the principal amount of such issue of tax anticipation notes to exceed an amount equal to ninety per cent of the available tax levy with respect to such issue. For purposes of this subdivision, &quot;available tax levy&quot; with respect to an issue of tax anticipation notes means at any date of computation the total amount of city real estate taxes or assessments projected, consistent with the financial plan then in effect, to be received in cash on or before the fifth day preceding the maturity date of such tax anticipation note issue, less amounts required during the period between the date of computation and the fifth day preceding such maturity date to be paid into a general debt service fund or otherwise required to pay interest payable on other outstanding city bonds and notes, principal (including payments into sinking funds) coming due on outstanding city bonds and principal to be paid from sources other than the proceeds of bonds or renewal notes on other outstanding city notes (exclusive of revenue anticipation notes or renewals thereof issued less than two years prior to the date of computation) but not including payments from sinking funds required by the terms of certain city bonds. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1288" number="2230" version="3">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Tax anticipation notes and renewals thereof shall mature not later than the last day of the fiscal year in which they were issued. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1289" number="2231" version="83">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>No revenue anticipation note shall be issued by the city in anticipation of the collection or receipt of revenue in a fiscal year which would cause the principal amount of revenue anticipation notes outstanding to exceed ninety per cent of the available revenues for such fiscal year. For purposes of this subdivision, &quot;available revenues&quot; shall be the revenues other than real estate taxes and assessments which have been estimated in the financial plan prepared pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">two hundred fifty-eight</LINK> to be realized in cash during such year, less revenues previously collected, other than revenues on deposit in any special fund or account established pursuant to law for the payment of interest and/or principal of revenue anticipation notes. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1290" number="2232" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Each issue of revenue anticipation notes shall be issued only in anticipation of the receipt of a specific type or types of revenue and the amount of revenue, the source of revenue and the anticipated date of payment shall be stated in the proceedings authorizing the issuance of such notes. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1291" number="2233" version="83">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Revenue anticipation notes shall mature not later than the last day of the fiscal year in which they were issued, and may not be renewed or extended to a date more than ten days after the anticipated date of receipt of such revenue. No such renewal note shall mature after the last day of such fiscal year unless the mayor shall certify that the revenue against which such renewal note is issued has been properly accrued and estimated in the financial plan set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="258" destination-id="0-0-0-409">two hundred fifty-eight</LINK> in effect on the date of issuance of such renewal note; provided that in no event shall any such renewal notes mature later than one year subsequent to the last day of the fiscal year during which such revenue anticipation notes were originally issued. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1292" number="2234" version="3">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>No bond anticipation note shall be issued by the city in any fiscal year which would cause the principal amount of bond anticipation notes outstanding, together with interest due or to become due thereon, to exceed fifty per cent of the principal amount of bonds issued by the city in the twelve months immediately preceding the month in which the note is to be issued. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1293" number="2235" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The proceeds of each bond issue shall be (i) held in trust for the payment, at maturity, of the principal of and interest on any bond anticipation notes of the city issued in anticipation of such bonds and outstanding at the time of the issuance of such bonds, (ii) paid into the general fund of the city in repayment of any advance made from such fund pursuant to section 165.10 of the state local finance law, and (iii) any balance shall be expended for the object or purpose for which such bonds were issued. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1294" number="2236" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Bond anticipation notes shall mature not later than one year after their date of issuance and may be renewed for a period not to exceed two years, or such longer period as may be permitted for bond anticipation notes of the state, from the date of original issue. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1295" number="2237" version="3">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>Budget notes issued pursuant to section 29.00 of the state local finance law may only be issued to fund projected expense budget deficits. No budget notes or renewals thereof shall mature later than sixty days prior to the last day of the fiscal year next succeeding the fiscal year during which such budget notes were originally issued. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1296" number="2238" version="48">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>All references to the state local finance law in this section shall be deemed to refer to the provisions of the New York state local finance law as such provisions may be amended over time or any successor provisions thereto. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1297" number="2239" version="3">
+				<HEADING>Section 270. Application. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-425" name="270"/>Section 270. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Application. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1298" number="2240" version="616">
+					<PARA>The provisions of sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="271" destination-id="0-0-0-427">two hundred seventy-one</LINK> through two hundred seventy-nine shall apply to the several sinking funds of the city established prior to July first, nineteen hundred eighty-one. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1299" number="2241" version="3">
+				<HEADING>Section 271. Sinking fund of the city of New York. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-427" name="271"/>Section 271. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Sinking fund of the city of New York. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1300" number="2242" version="616">
+					<PARA>There is hereby continued the fund known as the &quot;sinking fund of the city of New York&quot; which shall have for its purpose the amortization and redemption of the principal of the debt of the city of New York incurred on and after the first day of January eighteen hundred ninety-eight, and evidenced by corporate stock of the city of New York, excepting that issued to provide for the supply of water and that issued since the first day of January, nineteen hundred ten, for rapid transit or rapid transit unification purposes and that issued since the first day of July nineteen hundred eighty-one which is redeemable from the general sinking fund or any other sinking fund established pursuant to sections<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="290" destination-id="0-0-0-445"> two hundred ninety</LINK> through <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="299" destination-id="0-0-0-463">two hundred ninety-nine</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1301" number="2243" version="3">
+				<HEADING>Section 272. Water sinking fund of the city of New York. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-429" name="272"/>Section 272. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Water sinking fund of the city of New York. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1302" number="2244" version="616">
+					<PARA>There is hereby continued the fund known as the &quot;water sinking fund of the city of New York&quot; which shall have for its purpose the amortization and redemption of all corporate stock of the city of New York issued on and after the first day of January, eighteen hundred ninety-eight, to provide for the supply of water, excepting that issued since the first day of July nineteen hundred eighty-one which is redeemable from the general sinking fund or any other sinking fund established pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="290" destination-id="0-0-0-445">two hundred ninety</LINK> through <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="299" destination-id="0-0-0-463">two hundred ninety-nine</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1303" number="2245" version="3">
+				<HEADING>Section 273. Rapid transit sinking fund of the city of New York. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-431" name="273"/>Section 273. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Rapid transit sinking fund of the city of New York. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1304" number="2246" version="616">
+					<PARA>There is hereby continued the fund known as the &quot;rapid transit sinking fund of the city of New York&quot; which shall have for its purpose the amortization and redemption of all corporate stock of the city of New York issued on and after the first day of January, nineteen hundred ten, for rapid transit purposes, excepting that issued since the first day of July nineteen hundred eighty-one which is redeemable from the general sinking fund or any other sinking fund established pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="290" destination-id="0-0-0-445">two hundred ninety</LINK> through <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="299" destination-id="0-0-0-463">two hundred ninety-nine</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1305" number="2247" version="3">
+				<HEADING>Section 273-a. Transit unification sinking fund of the city of New York. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-433" name="273-a"/>Section 273-a. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Transit unification sinking fund of the city of New York. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1306" number="2248" version="616">
+					<PARA>There is hereby continued the fund known as the &quot;transit unification sinking fund of the city of New York&quot; which shall have for its purpose the amortization and redemption of all corporate stock of the city of New York issued on and after the first day of January, nineteen hundred thirty-nine, for transit unification purposes. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1307" number="2249" version="3">
+				<HEADING>Section 274. Administration of sinking funds. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-435" name="274"/>Section 274. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Administration of sinking funds. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1308" number="2250" version="616">
+					<PARA>The comptroller shall administer and manage the several sinking funds of the city established prior to July first, nineteen hundred eighty-one, and shall have custody of the securities in such funds. In the administration of such funds the comptroller shall be deemed to be acting in a fiduciary capacity. Where moneys of such sinking funds are invested pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="275" destination-id="0-0-0-437">two hundred seventy-five</LINK>, in securities which are obligations of the United States or of any agency, subdivision, department, division or instrumentality thereof, or obligations fully guaranteed or insured as to interest and principal by an agency, subdivision, department, division or instrumentality of the United States, acting pursuant to a grant of authority from the congress of the United States, notwithstanding any other provision of law, the comptroller may turn over the physical custody and safekeeping of these obligations to (a) any bank or trust company incorporated in this state, or (b) any national bank located in this state, or (c) any private banker duly authorized by the superintendent of banks of this state to engage in business here. All such private bankers shall, as private bankers, maintain a permanent capital of not less than one million dollars in this state. The comptroller may direct such bank, trust company or private banker to register and hold any such securities in its custody, in the name of its nominee. The comptroller may deposit, or authorize such bank, trust company or private banker, to deposit, or arrange for the deposit of, any of such securities with a federal reserve bank to be credited to an account as to which the ownership of, and other interest in, such securities may be transferred by entries on the books of such federal reserve bank without physical delivery of any such securities. The records of any such bank, trust company or private banker shall show, at all times, the ownership of such obligations, and they shall, when held in the possession of such bank, trust company or private banker be, at all times, kept separate from the assets of such bank, trust company or private banker. When any such obligations are so registered in the name of a nominee, such bank, trust company or private banker shall be absolutely liable for any loss occasioned by the acts of such nominee with respect to such obligations. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1309" number="2251" version="3">
+				<HEADING>Section 275. Investment of sinking fund moneys. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-437" name="275"/>Section 275. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Investment of sinking fund moneys. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1310" number="2252" version="616">
+					<PARA>The comptroller may invest the moneys of the several sinking funds of the city established prior to July first, nineteen hundred eighty-one in any of the following securities:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1311" number="2253" version="616">
+					<PARA>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Obligations of the city of New York. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1312" number="2254" version="616">
+					<PARA>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Obligations of the state of New York. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1313" number="2255" version="616">
+					<PARA>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Obligations of the United States or of any agency, subdivision, department, division or instrumentality thereof, or obligations fully guaranteed or insured as to interest and principal by any agency, subdivision, department, division or instrumentality of the United States, acting pursuant to a grant of authority from the congress of the United States. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1314" number="2256" version="616">
+					<PARA>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Obligations of the municipal assistance corporation for the city of New York. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1315" number="2257" version="3">
+				<HEADING>Section 276. Annual appropriations to the sinking funds. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-439" name="276"/>Section 276. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Annual appropriations to the sinking funds. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1316" number="2258" version="616">
+					<PARA>For the redemption of the corporate stock redeemable from the several sinking funds of the city established prior to July first, nineteen hundred eighty-one there shall be included annually in the budget and paid into each of such sinking funds an amount to be estimated and certified by the comptroller, which amount shall be not less than the aggregate of such annual contributions, as calculated at the time each issue of corporate stock redeemable from such sinking fund was made, would be sufficient if thereafter annually contributed to such fund together with the accumulations of interest thereon computed at the rate of four per centum per annum to meet and discharge such outstanding corporate stock when the same shall be payable; provided, however, that if at the close of a fiscal year there is in any sinking fund a surplus over and above the reserve required by such sinking fund computed as hereinabove provided, the comptroller, in estimating the amount to be included for such sinking fund in the budget, shall reduce the amount of the annual contributions by the amount of such surplus. Amounts received annually from the operation of any rapid transit railroad for the construction, equipment or acquisition of which corporate stock redeemable from any such fund shall have been issued, shall not be considered or treated as surplus, but such amounts shall be deducted from the amount certified by the comptroller for the budget for the ensuing year. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1317" number="2259" version="3">
+				<HEADING>Section 277. Monthly report. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-441" name="277"/>Section 277. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Monthly report. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1318" number="2260" version="769">
+					<PARA>Not later than the tenth day in each month, the comptroller shall submit to the mayor and the council a certified report, which shall be published forthwith in the City Record, setting forth the operations of the several sinking funds during the preceding month and the condition of such funds at the commencement and close of such month and such other information as may be required. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1319" number="2261" version="3">
+				<HEADING>Section 278. Annual report. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-443" name="278"/>Section 278. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Annual report. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1320" number="2262" version="616">
+					<PARA>Not later than the first day of September in each year, the comptroller shall submit to the mayor and the council a certified report, which shall be published forthwith in convenient form as a supplement to the City Record and which shall set forth in detail the operations of the several sinking funds during the preceding fiscal year, the reserves required, the assets of such funds at the close of such year, the obligations redeemable from such funds, the dates of their maturities and such other information as may be required. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1321" number="2263" version="3">
+				<HEADING>Section 290. Application. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-445" name="290"/>Section 290. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Application. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1322" number="2264" version="616">
+					<PARA>The provisions of sections<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="291" destination-id="0-0-0-447"> two hundred ninety-one</LINK> through <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="299" destination-id="0-0-0-463">two hundred ninety-nine</LINK> shall apply to the establishment, operation and administration of sinking funds established on or after July first, nineteen hundred eighty-one. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1323" number="2265" version="3">
+				<HEADING>Section 291. General sinking fund. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-447" name="291"/>Section 291. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">General sinking fund. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1324" number="2266" version="616">
+					<PARA>There is hereby established a general sinking fund to amortize and redeem any or all of the sinking fund bonds issued and sold from time to time by the city of New York on or after July first, nineteen hundred eighty-one for any purpose for which sinking fund bonds may be authorized, excepting sinking fund bonds which are redeemable from the sinking fund of the city of New York, the water sinking fund of the city of New York, the rapid transit sinking fund of the city of New York, or any additional sinking fund established pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461"> two hundred ninety-eight</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1325" number="2267" version="3">
+				<HEADING>Section 292. Administration. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-449" name="292"/>Section 292. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Administration. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1326" number="2268" version="616">
+					<PARA>The comptroller shall administer and manage the general sinking fund and any additional sinking funds established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461">two hundred ninety-eight</LINK> of this chapter and shall have custody of the securities and other assets in such funds. In the administration of such funds the comptroller shall be deemed to be acting in a fiduciary capacity. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1327" number="2269" version="3">
+				<HEADING>Section 293. Terms and conditions with respect to the general sinking fund. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-451" name="293"/>Section 293. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Terms and conditions with respect to the general sinking fund. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1328" number="2270" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The comptroller may: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1329" number="2271" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>provide for the redemption, purchase and cancellation prior to maturity of sinking fund bonds redeemable from the general sinking fund; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1330" number="2272" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>establish accounts within the general sinking fund for the amortization and redemption of specific issues of sinking fund bonds and provide for restrictions on the use of assets of any such account for purposes other than the redemption of the sinking fund bonds to be redeemed from such account; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1331" number="2273" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>subject to the rights of bondholders and notwithstanding any other provision of this charter (i) withdraw moneys from the general sinking fund, or (ii) transfer any or all responsibility for the administration and management of the general sinking fund and the custody of securities and other assets contained therein to any bank or trust company incorporated in this state, or any national bank located in this state. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1332" number="2274" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The sinking fund bonds of a particular series redeemable from the general sinking fund may differ among themselves in their stated maturities, rates of interest and applicable redemption provisions. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1333" number="2275" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>A schedule of annual or semiannual payments shall be established at the time of issuance of any series of sinking fund bonds redeemable from the general sinking fund sufficient to provide for the redemption of the principal amount of such bonds, and annual appropriations shall be made to the general sinking fund in accordance with such schedule of payments. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1334" number="2276" version="3">
+				<HEADING>Section 294. Redemption. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-453" name="294"/>Section 294. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Redemption. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1335" number="2277" version="616">
+					<PARA>The sinking fund bonds to be redeemed from the general sinking fund or any additional sinking funds established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461">two hundred ninety-eight</LINK> may be selected in such manner as the comptroller may determine and may be identified on the face thereof. The principal amount of sinking fund bonds required to be redeemed on any date by payment from the general sinking fund or any additional sinking fund shall be reduced by the principal amount of any such bonds which has been timely purchased or redeemed and cancelled by the city and not theretofore applied as a credit against such requirements. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1336" number="2278" version="3">
+				<HEADING>Section 295. Defeasance. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-455" name="295"/>Section 295. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Defeasance. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1337" number="2279" version="616">
+					<PARA>A series or part of a series of sinking fund bonds redeemable from the general sinking fund or any additional sinking fund established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461">two hundred ninety-eight</LINK>, including any covenants or other agreements relative thereto, shall be fully discharged and of no further force and effect at such time as (a) sufficient moneys or direct obligations of the United States or obligations guaranteed by the United States have been deposited in a separate trust account with a bank, trust company or other fiduciary, the principal of and/or interest on which will provide sufficient moneys to pay punctually when due at maturity or prior to maturity by redemption, in accordance with their terms, all principal of, applicable redemption premium, if any, and interest on such sinking fund bonds, and irrevocable instructions from the city to such bank, trust company or other fiduciary to make payment of such principal, applicable redemption premium, if any, and interest with such moneys shall have been given, or (b) such sinking fund bonds, together with interest thereon, shall have been paid in full at maturity, or shall have otherwise been refunded, redeemed, defeased or discharged. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1338" number="2280" version="3">
+				<HEADING>Section 296. Investments. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-457" name="296"/>Section 296. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Investments. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1339" number="2281" version="616">
+					<PARA>Subject to subdivision a of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="293" destination-id="0-0-0-451"> two hundred ninety-three</LINK>, the comptroller may invest the moneys of the general sinking fund or any additional sinking funds established pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461"> two hundred ninety-eight</LINK> in any securities in which the city is authorized to invest, including but not limited to the following securities:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1340" number="2282" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Obligations of the city of New York; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1341" number="2283" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Obligations of the state of New York; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1342" number="2284" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Obligations of the United States or of any agency, subdivision, department, division or instrumentality thereof, or obligations fully guaranteed or insured as to interest and principal by an agency, subdivision, department, division or instrumentality of the United States, acting pursuant to a grant of authority from the congress of the United States; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1343" number="2285" version="616">
+					<PARA>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Obligations of the municipal assistance corporation for the city of New York. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1344" number="2286" version="3">
+				<HEADING>Section 297. [Monthly and annual reports.] </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-459" name="297"/>Section 297. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">[Monthly and annual reports.] </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1345" number="2287" version="616">
+					<PARA>The provisions of sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="277" destination-id="0-0-0-441">two hundred seventy-seven</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="278" destination-id="0-0-0-443">two hundred seventy-eight</LINK> of the charter shall apply to the general sinking fund and any additional sinking funds established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461">two hundred ninety-eight</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1346" number="2288" version="3">
+				<HEADING>Section 298. Additional sinking funds. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-461" name="298"/>Section 298. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Additional sinking funds. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1347" number="2289" version="616">
+					<PARA>On or after July first nineteen hundred eighty-one the comptroller may establish from time to time additional sinking funds to amortize and redeem any or all of the sinking fund bonds issued and sold from time to time by the city of New York on or after that date for any purpose for which sinking fund bonds may be authorized excepting sinking fund bonds which are redeemable from the sinking fund of the city of New York, the water sinking fund of the city of New York, the rapid transit sinking fund of the city of New York or the general sinking fund. Notwithstanding any inconsistent provision of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="293" destination-id="0-0-0-451">two hundred ninety-three</LINK>, such additional sinking funds shall be established with such terms and conditions as the comptroller shall prescribe. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1348" number="2290" version="45">
+				<HEADING>Section 299. [Redemption from sinking funds established prior to July first, nineteen hundred eighty-one.]</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-463" name="299"/>Section 299. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">[Redemption from sinking funds established prior to July first, nineteen hundred eighty-one.]</CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1349" number="2291" version="616">
+					<PARA>The comptroller shall determine whether sinking fund bonds issued on or after July first, nineteen hundred eighty-one shall be redeemable from any of the several sinking funds of the city established prior to July first nineteen hundred eighty-one, the general sinking fund or any of the additional sinking funds established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="298" destination-id="0-0-0-461">two hundred ninety-eight</LINK>. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

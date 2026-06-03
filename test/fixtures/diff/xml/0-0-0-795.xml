@@ -1,0 +1,1275 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-795" number="1602" version="3">
+			<HEADING>Chapter 8: City Planning</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-263" name="Chapter 8"/>Chapter 8: City Planning</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-796" number="1603" version="3">
+				<HEADING>Section 191. Department and director of city planning. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-265" name="191"/>Section 191. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Department and director of city planning. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-4514" number="1604" version="66">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a department of city planning, the head of which shall be the director of city planning. The director of city planning shall be the chair and a member of the city planning commission and shall serve at the pleasure of the mayor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-798" number="1605" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The director of city planning shall: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-799" number="1606" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Advise and assist the mayor, the borough presidents and the council in regard to the physical planning and public improvement aspects of all matters related to the development of the city. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-800" number="1607" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Provide staff assistance to the city planning commission in all matters under its jurisdiction. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-801" number="1608" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Be the custodian of the city map and record thereon all changes legally authorized. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-802" number="1609" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Conduct continuous studies and collect statistical and other data to serve as the basis for planning recommendations. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-803" number="1610" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Provide community boards with such staff assistance and other professional and technical assistance as may be necessary to permit such boards to perform their planning duties and responsibilities under this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-804" number="1611" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Assist the mayor in the preparation of strategic plans, including the preparation of the report provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="16" destination-id="0-0-0-83">sixteen</LINK> concerning the social, economic and environmental health of the city, the strategic policy statement provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="17" destination-id="0-0-0-85">seventeen</LINK> and the ten-year capital strategy provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="215" destination-id="0-0-0-313">two hundred fifteen</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-805" number="1612" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Appoint a deputy executive director for strategic planning. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-806" number="1613" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Make a complete transcript of the public meetings and hearings of the commission available for public inspection free of charge within sixty days after any such meeting or hearing. The director shall also provide a copy of any requested pages of such transcript at a reasonable fee to cover the costs of copying and, where relevant, mailing. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-807" number="1614" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>Indicate on the department&apos;s website the name and contact information of an employee who acts as a coordinator with the board of standards and appeals. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-016]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4629" number="1615" version="772">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>10.<TAB tab-count="1"/>Provide on the department&apos;s website, a record of each application for a variance or special permit to the board of standards and appeals where the department or the city planning commission has submitted testimony and a copy of such testimony in a searchable format. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-016]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4628" number="1616" version="66">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>11.<TAB tab-count="1"/>Perform such other functions as are assigned to him or her by the mayor or other provisions of law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-016]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-808" number="1617" version="66">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The department shall employ such planning experts, engineers, architects and other officers and employees as may be required to perform its duties, within the appropriation therefor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-4626" number="1618" version="66">
+					<PARA>(Am. L.L. 2017/101, 5/30/2017, eff. 8/28/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-016]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-809" number="1619" version="66">
+				<HEADING>Section 192. City planning commission. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-267" name="192"/>Section 192. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">City planning commission. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7322" number="1620" version="870">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be a city planning commission to consist of the chair and twelve other members. The mayor shall appoint the chair and six other members of the commission, the public advocate shall appoint one member, and each borough president shall appoint one member. Members shall be chosen for their independence, integrity and civic commitment. Appointments of all members, except for the chair, shall be subject to the advice and consent of the council. For such appointments by officials other than the mayor, the procedure for obtaining the advice and consent of the council shall be the same as the procedure provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="31" destination-id="0-0-0-121">thirty-one</LINK> for appointments by the mayor. Except as otherwise provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="191" destination-id="0-0-0-265">one hundred ninety-one</LINK>, no member shall hold any other city office. Members other than the chair shall be appointed for a term of five years; provided, however, that of the members other than the chair, one member appointed by the mayor and one member appointed by a borough president shall serve for terms to expire on the thirtieth day of June, nineteen hundred ninety-one; one member appointed by the mayor and one member appointed by a borough president shall serve for terms to expire on the thirtieth day of June, nineteen hundred ninety-two; one member appointed by the mayor and one member appointed by a borough president shall serve for terms to expire on the thirtieth day of June, nineteen hundred ninety-three; one member appointed by the mayor and one member appointed by a borough president shall serve for terms to expire on the thirtieth day of June, nineteen hundred ninety-four; and two members appointed by the mayor, the member appointed by the public advocate and one member appointed by a borough president shall serve for terms to expire on the thirtieth day of June, nineteen hundred ninety-five. The borough presidents shall determine by lot the length of the term to be served by the member first appointed by each borough president. The appointing officials shall make their first appointments to the commission on or before the first day of March, nineteen hundred ninety. The commission members so appointed shall assume office on the first day of July, nineteen hundred ninety. Members of the commission shall serve until their successors have been confirmed. Any vacancy occurring other than by expiration of term shall be filled by the official who appointed the member in the same manner as the original appointment. A person so appointed shall serve for the unexpired portion of the term of the member succeeded. Terms shall begin on the next date after the expiration date of the preceding term.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-811" number="1621" version="84">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Members, except for the chair, shall not be considered regular employees of the city for purposes of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>. The agency served by the members of the commission shall for purposes of <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK> be deemed to be both the commission and the department of city planning. No member, while serving as a member, shall appear directly or indirectly before the department, the commission, or any other city agency for which the conflicts of interest board shall, by rule, determine such appearance creates a conflict of interest with the duties and responsibilities of the member. No firm in which a member has an interest may appear directly or indirectly before the department or commission. For purposes of this section, the terms &quot;agency,&quot; &quot;appear,&quot; &quot;firm,&quot; and &quot;interest&quot; shall be defined as provided in <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 68" destination-id="0-0-0-1385">chapter sixty-eight</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-812" number="1622" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>One of the members other than the chair shall be designated by the mayor as vice-chair and shall serve as vice-chair at the pleasure of the mayor. The vice-chair shall possess the powers and perform the duties of the chair when the chair is absent or while a vacancy exists in the office of the chair, and shall at such times serve as director of city planning. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-813" number="1623" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The city planning commission shall be responsible for the conduct of planning relating to the orderly growth, improvement and future development of the city, including adequate and appropriate resources for the housing, business, industry, transportation, distribution, recreation, culture, comfort, convenience, health and welfare of its population. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-814" number="1624" version="3">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The city planning commission shall oversee implementation of laws that require environmental reviews of actions taken by the city. The commission shall establish by rule procedures for environmental reviews of proposed actions by the city where such reviews are required by law. Such rules shall include procedures for (1) selection of the city agency or agencies that will be responsible for determining whether an environmental impact statement is required in connection with a proposed action and for preparation and filing of any such statement required by law, (2) participation by the city in environmental reviews involving agencies other than city agencies and (3) coordination of environmental review procedures with the land use review procedures set forth in this charter. The director of city planning and the commissioner of the department of environmental protection shall assign from the staffs of such departments an office of environmental coordination, which shall provide assistance to all city agencies in fulfilling their environmental review responsibilities. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-815" number="1625" version="88">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Not later than the thirty-first day of December, nineteen hundred ninety-two and every four years thereafter, the commission shall file with the mayor, the council, the public advocate, the borough presidents, and community boards, a zoning and planning report. The report shall include (1) a statement of the planning policy of the commission, which policy shall take into consideration, among other things, the ten-year capital strategy, the four-year capital program, the report on the social, economic and environmental health of the city issued pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="16" destination-id="0-0-0-83">sixteen</LINK>, the strategic policy statements provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="17" destination-id="0-0-0-85">seventeen</LINK> and plans approved pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety-seven-a</LINK>, (2) a summary of the significant plans and studies completed or undertaken by the department of city planning in the preceding four years, (3) an analysis of those portions of the zoning resolution that merit reconsideration in light of the planning policy of the commission and (4) proposals for implementing the planning policy of the commission whether by amendment of the zoning resolution, development of plans or otherwise. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-816" number="1626" version="3">
+				<HEADING>Section 193. Removal of commission members. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-269" name="193"/>Section 193. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Removal of commission members. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-817" number="1627" version="616">
+					<PARA>A member of the commission other than the chair may be removed by the appointing official only upon proof of official misconduct, neglect of official duties, conduct in any manner connected with his or her official duties which tends to discredit his or her office, or mental or physical inability to perform his or her office, or mental or physical inability to perform his or her duties. Before removal, any such member shall receive a copy of the charges and shall be entitled to a hearing on a record by the office of administrative trials and hearings, which shall make final findings of fact, recommend a decision and submit such findings and recommended decision to the appointing official for final action. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-818" number="1628" version="3">
+				<HEADING>Section 195. Acquisitions of office space. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-271" name="195"/>Section 195. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Acquisitions of office space. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-819" number="1629" version="616">
+					<PARA>Acquisitions by the city of office space or existing buildings for office use, whether by purchase, condemnation, exchange or lease, shall be subject to the following review and approval procedure:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-820" number="1630" version="616">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The agency proposing any such acquisition shall file with the department of city planning a notice of intent to acquire. The department of city planning shall send such notice to the community board in which the proposed acquisition is located and to all borough presidents. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-821" number="1631" version="616">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Within thirty days of the filing of such notice, the city planning commission shall hold a public hearing on such acquisition and shall approve or disapprove such acquisition. Notice of such hearing shall be published in the City Record not less than ten days in advance of such hearing. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-822" number="1632" version="616">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>In reviewing any such acquisition, the commission shall apply the criteria for the location of city facilities provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred and three</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-823" number="1633" version="616">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Within the thirty days provided for commission action pursuant to subdivision b of this section, the commission shall file any approval of such an acquisition with the council. Within twenty days of such filing, the council may by two-thirds vote disapprove such acquisition. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-824" number="1634" version="3">
+				<HEADING>Section 196. Affected boards and borough presidents. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-273" name="196"/>Section 196. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Affected boards and borough presidents. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-825" number="1635" version="616">
+					<PARA>For purposes of this chapter: the term &quot;affected community board&quot; shall mean the community board for a community district in which land included in a plan or an application pursuant to this chapter is located; the term &quot;affected borough president&quot; shall mean the president of a borough in which land included in such a plan or an application is located; and a borough board shall be deemed &quot;affected&quot; if such a plan or application includes land within two or more community districts within the borough represented by such borough board. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-826" number="1636" version="3">
+				<HEADING>Section 197-a. Plans. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-275" name="197-a"/>Section 197-a. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Plans. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-827" number="1637" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Plans for the development, growth, and improvement of the city and of its boroughs and community districts may be proposed by (1) the mayor, (2) the city planning commission, (3) the department of city planning, (4) a borough president with respect to land located within his or her borough, (5) a borough board with respect to land located within its borough, or (6) a community board with respect to land located within its community district. A community board, borough board or borough president that proposes any such plan shall submit the plan together with a written recommendation to the city planning commission for determinations pursuant to subdivision b of this section. Any such submission may be made by a community board, borough board or borough president only after the board or borough president proposing such a plan has held a public hearing on the plan.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-828" number="1638" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The city planning commission shall adopt rules establishing minimum standards for the form and content of plans pursuant to this section within a reasonable time period after the first day of July, nineteen hundred ninety. Upon receipt of a plan proposed pursuant to this section by a community board, borough board or borough president, the city planning commission shall, within a reasonable time period, determine whether such plan satisfies the standards established in such rules and is consistent with sound planning policy. If the commission makes such determinations with respect to a plan submitted by a community board, it shall prepare or cause to be prepared any environmental analysis of such plan required by law to enable the city planning commission and the council to act on the plan pursuant to subdivision d of this section. If the city planning commission makes the determinations provided for in this subdivision with respect to a plan, such plan shall be referred to the department of city planning for circulation and review pursuant to subdivisions c and d of this section. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-829" number="1639" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>All plans proposed pursuant to this section shall be referred to the department of city planning for circulation by the department to all affected community boards, all affected borough boards and all affected borough presidents for review and written recommendation, except that any such plan need not be circulated to the agency or official that proposed such plan. All affected community boards and borough boards to which such a plan is referred shall hold a public hearing on any such plan, except that in the case of a plan that includes an entire borough or land in more than one borough, only one public hearing need be held in each affected borough. The city planning commission shall establish by rule the procedures and schedule for review of such plans, consistent with the provisions of this section. A community board or borough board may review a plan which does not involve land so located as to require its review if in its judgment the plan significantly affects the welfare of the district or borough served by such board. In such case, the plan and any written recommendations relative thereto shall be made available to such board on request. Such board may hold its own public hearing on such plan if it desires and may submit its own written recommendations in regard thereto to the city planning commission. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-830" number="1640" version="79">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Within a reasonable time period following review and recommendation of a plan pursuant to subdivision c of this section, the city planning commission shall (1) review such plan, (2) hold a public hearing on such plan, and (3) by resolution approve, approve with modifications or disapprove such plan. If the commission has approved a plan or approved a plan with modifications, such plan shall be subject to review and action by the council pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281"> one hundred ninety-seven-d</LINK>. The council may by a two-thirds vote approve a plan which the city planning commission disapproved or on which the commission has failed to act if the mayor so requests. Upon the filing by the mayor of such a request with the commission and the council, the commission shall within five days file with the council a copy of its decision together with a copy of the plan. Copies of approved plans shall be filed with the city clerk, the department of city planning, the affected borough presidents, the affected borough boards and the affected community boards. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-831" number="1641" version="668">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2008/017" destination-id="0-0-0-0">L.L. 2008/017</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-084]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6555" number="1642" version="668">
+				<HEADING>Section 197-b. Notification of plans and proposals. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-277" name="197-b"/>Section 197-b. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Notification of plans and proposals. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-832" number="1643" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Advance notice of all preliminary and final plans of public agencies and public benefit corporations or of private agencies, entities or developers filed with the city that relate to the use, development or improvement of land subject to city regulation shall be given to the affected community board or boards and the office of the affected borough president, provided that exceptions may be made in matters of no appreciable public concern by agency rule.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-833" number="1644" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Copies of (1) all requests for proposals and other solicitations of proposals issued by or on behalf of the city, whether or not issued by an agency, a local development corporation or other entity, and (2) all letters of intent executed by or on behalf of the city, whether or not executed by an agency, a local development corporation or other entity, that relate to the private use or the disposition of city-owned land, shall be conveyed to the community boards where such land is located and the office of the borough president where such land is located promptly after issuance or execution. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-834" number="1645" version="3">
+				<HEADING>Section 197-c. Uniform land use review procedure. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-279" name="197-c"/>Section 197-c. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Uniform land use review procedure. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-5606" number="1646" version="377">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Except as otherwise provided in this charter, applications by any person or agency for changes, approvals, contracts, consents, permits or authorization thereof, respecting the use, development or improvement of real property subject to city regulation shall be reviewed pursuant to a uniform review procedure in the following categories:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-836" number="1647" version="79">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Changes in the city map pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="198" destination-id="0-0-0-283"> one hundred ninety-eight</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="199" destination-id="0-0-0-285">one hundred ninety-nine</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-837" number="1648" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Maps of subdivisions or plattings of land into streets, avenues or public places pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="202" destination-id="0-0-0-291">two hundred two</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-838" number="1649" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Designations of zoning districts under the zoning resolution, including conversion from one land use to another land use, pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-839" number="1650" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Special permits within the jurisdiction of the city planning commission under the zoning resolution, pursuant to sections<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287"> two hundred</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-840" number="1651" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Site selection for capital projects pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="218" destination-id="0-0-0-319">two hundred eighteen</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-841" number="1652" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(6)<TAB tab-count="1"/>Revocable consents pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="364" destination-id="0-0-0-529">three hundred sixty-four</LINK>, requests for proposals and other solicitations for franchises pursuant to section t<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="363" destination-id="0-0-0-527">hree hundred sixty-three</LINK>, and major concessions as defined pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="374" destination-id="0-0-0-539">three hundred seventy-four</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-842" number="1653" version="81">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(7)<TAB tab-count="1"/>Improvements in real property the costs of which are payable other than by the city pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="220" destination-id="0-0-0-323">two hundred twenty</LINK>; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-843" number="1654" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(8)<TAB tab-count="1"/>Housing and urban renewal plans and projects pursuant to city, state and federal housing laws; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-844" number="1655" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(9)<TAB tab-count="1"/>Sanitary or waterfront land-fills pursuant to applicable charter provisions or other provisions of law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-845" number="1656" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(10)<TAB tab-count="1"/>Sale, lease (other than the lease of office space), exchange, or other disposition of the real property of the city, including the sale or lease of land under water pursuant to section sixteen hundred two, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law; </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-846" number="1657" version="84">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(11)<TAB tab-count="1"/>Acquisition by the city of real property (other than the acquisition of office space for office use or a building for office use), including acquisition by purchase, condemnation, exchange or lease and including the acquisition of land under water pursuant to section sixteen hundred two, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law; and </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-847" number="1658" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(12)<TAB tab-count="1"/>Such other matters involving the use, development or improvement of property as are proposed by the city planning commission and enacted by the council pursuant to local law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-848" number="1659" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The following documents shall be filed with the department of city planning: (1) applications under this section, (2) any amendments thereto that are made prior to approval of such applications pursuant to this chapter, (3) any written information submitted by an applicant for purposes of determining whether an environmental impact statement will be required by law, and (4) documents or records intended to define or substantially redefine the overall scope of issues to be addressed in any draft environmental impact statement required by law. The department of city planning shall forward a copy of any materials it receives pursuant to this subdivision (whether or not such materials have been certified as complete) within five days to each affected borough president, community board or borough board. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-850" number="1660" version="772">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The department of city planning shall be responsible for certifying that applications pursuant to subdivision a of this section are complete and ready to proceed through the uniform land use review procedure provided for in this section. The department shall not certify an application unless (1) each affected borough board, borough president and community board has received from the department, at least thirty days before certification, a pre-certification notice containing information specified by the city planning commission, which shall include the project location, the purpose of the proposed actions, and a description of the proposed actions, sufficient to put such borough board, borough president and community board on notice of the substance of the application, and (2) the application is substantially consistent with such notice. The department shall publish such notice on the department&apos;s website within five days of the transmission of such notice to the affected borough board, borough president and community board. Upon certification of an application, the department shall give notice of such certification to the council. If an application under this section has not been certified within six months after filing, both the applicant and, if the land use proposed in an application is consistent with the land use policy or strategic policy statement of the affected borough president, the affected borough president shall have the right at any time thereafter to appeal to the city planning commission for certification. The commission shall promptly, but in any event within sixty days of the filing of such an appeal, either certify the application or state in writing what further information is necessary to complete the application. If such an appeal is brought by an affected borough president, the affirmative vote of five members of the commission shall be sufficient to certify the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5607" number="1661" version="328">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>If a meeting involving a city agency and an applicant is convened to define or substantially redefine the overall scope of issues to be addressed in any draft environmental impact statement required by law for an application subject to review under this section, each affected community board and each affected borough president shall receive advance notice of such meeting, and each shall have the right to send one representative to the meeting.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-853" number="1662" version="328">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Except as otherwise provided in paragraph two of this subdivision each affected community board shall, not later than sixty days after receipt of an application that has been certified pursuant to subdivision c of this section, <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5598" number="1663" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>notify the public of the application in a manner specified by the city planning commission pursuant to subdivision i of this section, and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5596" number="1664" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>either (i) conduct a public hearing thereon and prepare and submit a written recommendation directly to the city planning commission and to the affected borough president or (ii) where authorized by this charter, submit a written waiver of the right to conduct a public hearing and to submit such written recommendations to the commission and the affected borough president. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5595" number="1665" version="328">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Where an application has been certified during the month of June, the affected community board shall provide notification pursuant to subparagraph (a) of paragraph 1 of this subdivision and conduct a hearing or, where authorized, submit a waiver of the right to conduct a public hearing pursuant to subparagraph (b) of paragraph 1 of this subdivision not later than ninety days after receipt of such application or, where such application is certified during the period of time from and including July 1 to and including July 15, not later than seventy-five days after receipt of such application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-044]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-854" number="1666" version="328">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>A copy of a recommendation or waiver by a community board pursuant to subdivision e of this section that involves land located within two or more community districts in a borough shall also be filed with the affected borough board within the same time period as specified in subdivision e. Not later than thirty days after the filing of a recommendation or waiver with the borough board by all affected community boards, or, if any affected community board shall fail to act, thirty days after the expiration of the time allowed for such community board to act, the borough board may hold a public hearing on the application and any such recommendations and submit a written recommendation or waiver thereof to the city planning commission. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-855" number="1667" version="3">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>Not later than thirty days after the filing of a recommendation or waiver with the borough president by all affected community boards, or, if any affected community board shall fail to act, thirty days after the expiration of the time allowed for such community board to act, the borough president shall submit a written recommendation or waiver thereof to the city planning commission. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-856" number="1668" version="90">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>Not later than sixty days after expiration of time allowed for the filing of a recommendation or waiver with the city planning commission by a borough president, the commission shall approve, approve with modifications, or disapprove the application. Any such approval or approval with modifications of the commission shall require the affirmative vote of at least seven of the members, except that the affirmative vote of nine members shall be required to approve or approve with modifications an application pursuant to paragraph five, ten or eleven of subdivision a of this section relating to a new city facility if the affected borough president recommends against approval of such application pursuant to subdivision g of this section and has proposed an alternative location in the same borough for such new city facility pursuant to subdivision f or g of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="204" destination-id="0-0-0-295">two hundred four</LINK>. The commission shall conduct a public hearing on all applications that are subject to review and approval by the commission pursuant to this section. Prior to taking any action pursuant to this subdivision on a matter involving the siting of a capital project, the sale, lease, exchange or other disposition or acquisition of real property, a request for a proposal or other solicitation for a franchise or a revocable consent, the city planning commission may obtain a report from the office of management and budget or the department of citywide administrative services, as appropriate. Any action of the city planning commission which modifies or disapproves a written recommendation of the community board, borough president or borough board shall be accompanied by a written explanation of its reason for such action. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-857" number="1669" version="3">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>The city planning commission shall establish rules providing (1) guidelines, minimum standards, and procedural requirements for community boards, borough presidents, borough boards and the commission in the exercise of their duties and responsibilities pursuant to this section, (2) minimum standards for certification of applications pursuant to subdivision c of this section, and (3) specific time periods for review of applications pursuant to this section prior to certification. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-858" number="1670" version="91">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>If a community board, borough president or borough board fails or waives its right to act within the time limits for review pursuant to subdivisions e, f and g of this section, the application shall be referred to the next level of review. If the city planning commission fails to act on an application within the time limit specified in subdivision h of this section, the application shall be deemed to have been denied unless the application (i) is pursuant to paragraph three or four of subdivision a of this section, in which case the application may be forwarded to the council for review pursuant to the provisions of subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK>, if applicable, or (ii) is pursuant to paragraph eight of subdivision a of this section, in which case the application shall be referred to the council for review and action as provided by state law. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-859" number="1671" version="3">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>Notice of any hearing on an application by the city planning commission shall be published in the City Record at least ten days immediately prior to the date of the hearing, and a copy of the notice shall be mailed to all community boards or borough boards affected by the application. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-860" number="1672" version="3">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>The commission shall establish by rule procedures for advance posting of notices of commission hearings on applications. Such notices shall be posted at the location of the land involved in such manner and with respect to such types of applications as the commission deems appropriate. Failure to post any such notice shall not affect or impair the validity of any decision of the city planning commission, the council or other agency or official pursuant to this chapter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-861" number="1673" version="48">
+					<PARA>
+						<TAB tab-count="1"/>m.<TAB tab-count="1"/>A community or borough board may review an application which is subject to the uniform land use review procedure pursuant to this section but does not involve land so located as to require reference to such board for review, if in the board&apos;s judgment the application might significantly affect the welfare of the community district or borough served by such board. In such a case the application and the related materials submitted to the affected board or boards by the city planning department shall be submitted also to such board upon the request of such board, and such board may hold its own public hearing thereon if it so desires and may submit its own written recommendations in regard thereto to the city planning commission for consideration at any time before the city planning commission takes action thereon. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-862" number="1674" version="377">
+					<PARA>(Am. L.L. 2019/215, 12/11/2019, eff. 12/11/2019 and 8/31/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-052]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-5593" number="1675" version="711">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6746" number="1676" version="711">
+				<HEADING>Section 197-d. Council review. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-281" name="197-d"/>Section 197-d. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Council review. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-863" number="1677" version="91">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The city planning commission shall file with the council and with the affected borough president a copy of its decisions to approve or approve with modifications (1) all matters described in subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, (2) plans pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety-seven-a</LINK>, and (3) changes in the text of the zoning resolution pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> and two <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">hundred one</LINK>. Any such filing of a decision pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> shall be completed prior to the expiration of the sixty-day period for action by the commission. Any such filing with the council shall include copies of all written recommendations of community boards, borough boards and borough presidents with respect to the decision being filed.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-864" number="1678" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Except for decisions of the city planning commission to approve or approve with modifications applications reviewed pursuant to the expedited land use review procedure set forth in subdivisions c through j of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, the following decisions filed with the council pursuant to subdivision a of this section, shall be subject to review and action by the council: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-865" number="1679" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>any decision of the city planning commission to approve or approve with modifications a matter described in paragraph three or eight of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, a disposition of residential real property (as defined in this paragraph) pursuant to paragraph ten of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, a plan pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety-seven-a</LINK>, or a change in the text of the zoning resolution pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> or <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>, except for a change to such text pursuant to paragraph four of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK>. For purposes of this section, residential real property shall mean real property improved by structures, whether or not occupied, built for or converted to a use which is primarily residential, but shall not include property subsequently converted to non-residential use; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-866" number="1680" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>any other decision of the city planning commission to approve or approve with modifications a matter described in subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, if (i) both an affected community board (after holding a public hearing) and the affected borough president, within the time periods allotted for their reviews pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279"> one hundred ninety-seven-c</LINK>, have recommended in writing against approval and (ii) the affected borough president, within five days of receiving a copy of the decision of the commission, files with the commission and the council a written objection to the decision; and</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-867" number="1681" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>any other decision of the city planning commission to approve or approve with modifications a matter described in subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, if within twenty days of the filing of such decision pursuant to subdivision a of this section, the council resolves by the majority vote of all the council members to review the decision of the commission.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-868" number="1682" version="988">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Except as provided in subdivision c-1 of this section, within fifty days of the filing with the council pursuant to subdivision a of this section of any decision of the city planning commission which pursuant to subdivision b of this section is subject to review by the council, the council shall hold a public hearing, after giving public notice not less than five days in advance of such hearing, and the council, within such fifty days, shall take final action on the decision. The affirmative vote of a majority of all the council members shall be required to approve, approve with modifications or disapprove such a decision. If, within the time period provided for in this subdivision and, if applicable, in subdivision d of this section, the council fails to act or fails to act by the required vote on a decision of the city planning commission subject to council review pursuant to subdivision b of this section, the council shall be deemed to have approved the decision of the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-869" number="1683" version="988">
+					<PARA>
+						<TAB tab-count="1"/>c-1.<TAB tab-count="1"/>Notwithstanding subdivision c of this section, within thirty days of any filing with the council of any application made by the city pursuant to paragraph one of subdivision k of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, or within forty-five days of any such filing made during the months of June, July or August, the council shall hold a public hearing, after giving public notice not less than five days in advance of such hearing, and, within such thirty days or forty-five days, as applicable, approve or disapprove such application. The affirmative vote of a majority of all the council members shall be required to approve or disapprove such a decision. If, within the time period provided for in this subdivision, the council fails to act or fails to act by the required vote on an application made pursuant to this section, the council shall be deemed to have approved the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7670" number="1684" version="988">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The council shall not approve with modifications a commission decision if the commission has determined pursuant to this subdivision that additional review of the modifications is required. Prior to approving a decision of the commission with modifications, the council shall file the text of any such proposed modifications with the commission. Within fifteen days of such filing, the commission shall file with the council a written statement indicating whether such proposed modifications are of such significance that additional review of environmental issues or additional review pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> is required. If no additional review is required, the commission may include in such statement its advisory recommendation concerning the proposed modifications, together with any proposed amendments to the proposed modifications. The council may thereafter approve such proposed modifications, with or without the amendments proposed by the commission. The time period for council action shall be tolled during such fifteen-day period, provided, however, that proposed modifications may be referred to the commission pursuant to this subdivision only once with respect to each application or group of related applications under review by the council. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-870" number="1685" version="988">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>All actions of the council pursuant to this section shall be filed by the council with the mayor prior to the expiration of the time period for council action under subdivisions c and, if applicable, d of this section. Actions of the council pursuant to this section shall be final unless the mayor within five days of receiving a filing with respect to such an action of the council files with the council a written disapproval of the action. Any mayoral disapproval under this subdivision shall be subject to override by a two-thirds vote of all the council members within ten days of such filing by the mayor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-871" number="1686" version="988">
+					<PARA>
+						<TAB tab-count="1"/>e-1.<TAB tab-count="1"/>Notwithstanding subdivision e of this section, actions of the council pursuant to this section that are subject to review by the affordable housing appeals board pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-g" destination-id="0-0-0-1841">one hundred ninety-seven-g</LINK>, shall be filed by the council with such board prior to the expiration of the time period for council action under subdivision c of this section, or if applicable, subdivision d of this section. Actions of the council subject to review by the affordable housing appeals board pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-g" destination-id="0-0-0-1841">one hundred ninety-seven-g</LINK>, shall be final unless, within five days of such action, the applicant appeals such action to such board or no fewer than two members of such board determine to review such action. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7687" number="1687" version="988">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The mayor shall have the right to file a written disapproval of any approval deemed to have occurred pursuant to subdivisions c or c-1 of this section as a result of a failure of the council to act or to act by the required vote, except where an application is subject to <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-g" destination-id="0-0-0-1841">one hundred ninety-seven-g</LINK>. Any such written disapproval must be filed within five days of the expiration of the time period for action by the council under subdivisions c and, if applicable, d of this section. Any mayoral disapproval under this subdivision shall be subject to override by a two-thirds vote of all the council members within ten days of such filing by the mayor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-872" number="1688" version="988">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>If a decision of the commission approving an application is not subject to council review pursuant to paragraph one of subdivision b of this section or is not made subject to council review pursuant to paragraphs two or three of subdivision b of this section, the mayor may nonetheless file with the council a written objection to such decision of the commission within five days of the expiration of time for the council to act under paragraph three of subdivision b of this section. Any mayoral objection under this subdivision shall be subject to override by a two-thirds vote of all the council members within ten days of such filing by the mayor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7669" number="1689" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-873" number="1690" version="987">
+				<HEADING>Section 197-e. Expedited land use review procedure.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1837" name="197-e"/>Section 197-e. Expedited land use review procedure.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7651" number="1691" version="987">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT> For the purposes of this section, the following terms have the following meanings: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7650" number="1692" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Base flood elevation.</CHARFORMAT> The term “base flood elevation” has the same meaning as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="BC 202" destination-id="0-0-0-0">202</LINK> of the New York city building code. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7649" number="1693" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Coastal special flood hazard area.</CHARFORMAT> The term “coastal special flood hazard area” refers to the areas of land as identified on the flood insurance rate maps referenced in the New York city building code section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="BC G402" destination-id="0-0-0-0">G402</LINK> pursuant to article 36 of the New York state environmental conservation law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7648" number="1694" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Open space.</CHARFORMAT> The term “open space” means real property that: (i) is outdoors, (ii) is owned by the city, (iii) is available for public access or is protected as a sensitive natural area, and (iv) serves to mitigate impacts from or to reduce vulnerability to rising sea levels, extreme weather events and natural disasters, including but not limited to parks, promenades, esplanades, greenways, nature preserves, and recreational piers. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7647" number="1695" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Resiliency project.</CHARFORMAT> The term “resiliency project” means any construction or improvement for which the primary purpose is to mitigate impacts from or to reduce vulnerability to rising sea levels, extreme weather events, and natural disasters, including but not limited to coastal flood protection infrastructure, wetland protection and expansion, and stormwater drainage. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7646" number="1696" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Solar energy generation project.</CHARFORMAT> The term “solar energy generation project” means a project for which the primary purpose is to generate electricity through the use of photovoltaics. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7645" number="1697" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Ten-year rainfall flood risk area.</CHARFORMAT> The term “ten-year rainfall flood risk area” means an area designated on a map promulgated by the department of environmental protection that represents locations in the city where there is a ten percent chance or greater of rainfall- induced flooding in any year. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7644" number="1698" version="987">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Notwithstanding subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and except as provided in subdivision k of this section, applications by any person or agency for any of the following changes, approvals, permits, or authorizations thereof, respecting the use, development or improvement of real property subject to city regulation in any of the following categories, that would otherwise be subject to review pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, shall be reviewed pursuant to the expedited review procedure set forth in this section: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7643" number="1699" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Any of the following changes in the city map pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="198" destination-id="0-0-0-283">one hundred ninety-eight</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="199" destination-id="0-0-0-285">one hundred ninety-nine</LINK>: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7642" number="1700" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The mapping or discontinuance of a street, other than the discontinuance of an existing built street, to enable or facilitate a project for the development or preservation of affordable housing developed or preserved by a company that has been organized exclusively to develop housing projects for persons of low income, or for the development of a resiliency project or open space; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7641" number="1701" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The mapping of any street needed to meet the street or highway public access requirements set forth in section thirty-six of the general city law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7640" number="1702" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The raising of the grade of a street or bridge to no more than two and a half feet above the base flood elevation in any area for which such a base flood elevation has been specified or determined in accordance with the New York city building code, or, in any area where a base flood elevation has not been specified or determined, to no more than two and a half feet above the grade of such street or bridge as established on or before the effective date of this section; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7639" number="1703" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The widening of any street or bridge, as necessary to enable a raising of such street or bridge as described in subparagraph b, no more than five feet greater than the width of such street or bridge as established on or before the effective date of this section; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7638" number="1704" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(d)<TAB tab-count="1"/>Any other change to the city map relating to the acquisition of real property by the city for the purposes of a resiliency project or creation of open space; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7637" number="1705" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Designations of zoning districts under the zoning resolution, including conversion from one land use to another land use, pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>, provided that the area to be designated permits residential uses at the time of application and that no part of the area to be designated has been designated pursuant to this paragraph in the ten years prior to such application, and provided further that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7636" number="1706" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>where the district designated at the time of application (i) is a residence district, or a commercial district that allows residential uses equivalent to such residence district, (ii) has a standard maximum residential building height of greater than forty-five feet, regulates the maximum height of buildings by something other a horizontal plane and such other plane permits residential buildings to exceed forty-five feet, or has no maximum building height, the district to be designated, (i) would increase maximum residential floor area, (ii) such increase does not exceed thirty percent and (iii) would not be a zoning district that regulates the maximum height of buildings by anything other than a horizontal plane, unless the district designated at the time of application also does not regulate the maximum height of buildings by a horizontal plane; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7635" number="1707" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>for any other designation, the district to be designated would increase residential capacity, has a standard maximum residential floor area of not more than 2.0, and has a standard maximum residential building height of not more than forty-five feet; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7634" number="1708" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Site selection for any capital project that is a resiliency project, solar energy generation project or project for the creation of open space, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="218" destination-id="0-0-0-319">two hundred eighteen</LINK>, provided that any buildings included in such capital project shall have an area, in the aggregate, of no more than five thousand square feet; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7633" number="1709" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Sale, lease (other than the lease of office space), exchange, or other disposition of the real property of the city, including the sale or lease of land under water pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="824" destination-id="0-0-0-945">eight hundred twenty-four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law, to private owners of abutting property or an entity comprised thereof, provided such real property of the city is not inalienable property and cannot be independently developed, as determined by the mayor, because singly or in combination, its size, shape, applicable zoning, configuration, or topography render such development economically impracticable or infeasible; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7632" number="1710" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Lease of the real property of the city, for purposes of a solar energy generation project; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7631" number="1711" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>6.<TAB tab-count="1"/>Acquisition by purchase by the city of real property (other than the acquisition of office space for office use or a building for office use), including the acquisition of land under water pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="824" destination-id="0-0-0-945">eight hundred twenty-four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law, for the purpose of a voluntary buy-out program of property, provided that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7630" number="1712" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Such property is used for residential purposes, contains no less than one and no more than four dwelling units, and is located in either a coastal special flood hazard area or a ten-year rainfall flood risk area; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7629" number="1713" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Such property is located in an area that, on any date within the five years preceding the date of filing the application, was a federally declared disaster area; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7628" number="1714" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(c)<TAB tab-count="1"/>Such acquisition is authorized by a local law relating to a voluntary buy-out program; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7627" number="1715" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>7.<TAB tab-count="1"/>Acquisition by the city of real property (other than the acquisition of office space for office use or a building for office use), including acquisition by purchase, condemnation, exchange or lease and including the acquisition by purchase of land under water pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="824" destination-id="0-0-0-945">eight hundred twenty-four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law, for the purpose of developing a resiliency project, open space, or a solar energy generation project, and provided that such property: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7626" number="1716" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Contains freshwater wetlands or tidal wetlands that are adjacent to city-owned property, as such terms are defined in sections 24-0107 and 25-0103 of the environmental conservation law, respectively; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7625" number="1717" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Is undeveloped and in a mapped street or extends under water; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7624" number="1718" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Has no owner of record; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7623" number="1719" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Is privately owned, is adjacent to city-owned property, and cannot be independently developed, as determined by the mayor, because, singly or in combination, its size, shape, applicable zoning, configuration, or topography render such development economically impracticable or infeasible. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7622" number="1720" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>8.<TAB tab-count="1"/>Such other matters involving the use, development or improvement of property as are proposed by the city planning commission and enacted by the council pursuant to local law. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7621" number="1721" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>9.<TAB tab-count="1"/>An application that meets the criteria set forth in subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-f" destination-id="0-0-0-1835">one hundred ninety-seven-f</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7652" number="1722" version="988">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>For any application reviewed pursuant to this section, except as set forth in subdivision k of this section, the applicant shall file with the department of city planning the documents required for applications reviewed under the uniform land use review procedure, as set forth in subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>. The department of city planning shall forward a copy of any materials it receives pursuant to this subdivision (whether or not such materials have been certified as complete) within five days to each affected borough president or community board. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7620" number="1723" version="987">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The department of city planning shall be responsible for certifying that applications filed with such department pursuant to subdivision c of this section are complete and ready to proceed through the expedited land use review procedure. The department shall not certify an application unless (1) each affected borough president and community board has received from the department, at least thirty days before certification, a pre-certification notice containing information specified by the city planning commission, which shall include the project location, the purpose of the proposed actions, and a description of the proposed actions, sufficient to put such borough president and community board on notice of the substance of the application, and (2) the application is substantially consistent with such notice. The department shall also publish such notice on the department’s website within five days of such transmission. Upon certification of an application, the department shall give notice of such certification to the council. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7619" number="1724" version="987">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>1.<TAB tab-count="1"/>Except as otherwise provided in paragraph two of this subdivision or in subdivision k of this section, each affected community board shall, not later than sixty days after receipt of an application that has been certified pursuant to subdivision d of this section: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7618" number="1725" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>notify the public of the application in a manner specified by the city planning commission pursuant to subdivision h of this section; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7617" number="1726" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>either (i) conduct a public hearing thereon and prepare and submit a written recommendation to the city planning commission, or (ii) where authorized by this charter, submit a written waiver of the right to conduct a public hearing and to submit such written recommendations to the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7616" number="1727" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Where an application has been certified during the month of June, the affected community board shall provide notification pursuant to subparagraph a of paragraph one of this subdivision and conduct a hearing or, where authorized, submit a waiver of the right to conduct a public hearing pursuant to subparagraph b of paragraph one of this subdivision not later than ninety days after receipt of such application or, where such application is certified during the period of time from and including July 1 to and including July 15, not later than seventy-five days after receipt of such application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7615" number="1728" version="987">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>1.<TAB tab-count="1"/>Except as otherwise provided in paragraph two of this subdivision, each affected borough president shall, not later than sixty days after receipt of an application that has been certified pursuant to subdivision d of this section, submit a written recommendation or waiver thereof to the city planning commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7614" number="1729" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Where an application has been certified during the month of June, the affected borough president shall submit such recommendation or waiver not later than ninety days after receipt of such application or, where such application is certified during the period of time from and including July 1 to and including July 15, not later than seventy-five days after receipt of such application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7613" number="1730" version="988">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>Not later than thirty days after expiration of time allowed for the filing of a recommendation or waiver with the city planning commission by the affected community board and borough president, the commission shall conduct a public hearing on such application and approve, approve with modifications, or disapprove the application, provided, however, that where the department determines that an application pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-f" destination-id="0-0-0-1835">one hundred ninety-seven-f</LINK> is required by law to include an environmental impact statement, the commission shall approve, approve with modifications, or disapprove such application no later than forty-five days after such expiration of time. Any such approval or approval with modifications of the commission shall require the affirmative vote of at least seven of the members. Prior to taking any action pursuant to this subdivision on a matter involving the siting of a capital project, the sale, lease, exchange or other disposition or acquisition of real property, the city planning commission may obtain a report from the office of management and budget or the department of citywide administrative services, as appropriate. Any action of the city planning commission which modifies or disapproves a written recommendation of the affected community board or borough president shall be accompanied by a written explanation of its reason for such action. Notwithstanding any contrary provision of this chapter, the city planning commission shall not file an application reviewed pursuant to this section with the council, and such an application filed pursuant to this section shall not be subject to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, except as set forth in subdivision k of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7612" number="1731" version="987">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The city planning commission shall establish rules providing (1) guidelines, minimum standards, and procedural requirements for community boards, borough presidents, and the commission in the exercise of their duties and responsibilities pursuant to this section, (2) minimum standards for certification of applications pursuant to subdivision d of this section, and (3) specific time periods for review of applications pursuant to this section prior to certification. The commission may establish such other rules as necessary for the implementation of this section, including rules for determining whether an application is subject to review pursuant to this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7611" number="1732" version="987">
+					<PARA>
+						<TAB tab-count="1"/>i.<TAB tab-count="1"/>If a community board or borough president fails or waives its right to act within the time limits for review pursuant to subdivisions e or f of this section, the application shall be referred to city planning commission, except as set forth in subdivision k of this section. If the city planning commission fails to act on an application within the time limit specified in subdivision g of this section, the application shall be deemed to have been denied. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7610" number="1733" version="987">
+					<PARA>
+						<TAB tab-count="1"/>j.<TAB tab-count="1"/>Notice of any hearing on an application by the city planning commission shall be published in the city record at least ten days immediately prior to the date of the hearing, and a copy of the notice shall be mailed to all community boards affected by the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7609" number="1734" version="987">
+					<PARA>
+						<TAB tab-count="1"/>k.<TAB tab-count="1"/>1.<TAB tab-count="1"/>Notwithstanding subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> or any provision of this section to the contrary, applications by an agency for any of the following changes, approvals, permits, or authorizations thereof, respecting the use, development or improvement of real property subject to city regulation in any of the following categories, that would otherwise be subject to review pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, shall be reviewed pursuant to the procedure set forth in this subdivision: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7608" number="1735" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Sale, lease, exchange, or other disposition of the real property of the city, including the acquisition of land under water pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="824" destination-id="0-0-0-945">eight hundred twenty-four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law, to companies that have been organized exclusively to develop housing projects for persons of low income; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7607" number="1736" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Acquisition by the city of real property, including acquisition by purchase, condemnation, exchange or lease and including the acquisition of land under water pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="824" destination-id="0-0-0-945">eight hundred twenty-four</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="Chapter 15" destination-id="0-0-0-549">chapter fifteen</LINK>, and other applicable provisions of law for the purpose of disposition of such property to a company that has been organized exclusively to develop housing projects for persons of low income. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7606" number="1737" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>The applicant shall submit to each affected community board and affected borough president the documents required for applications reviewed under the uniform land use review procedure, as set forth in subdivision b of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7605" number="1738" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Each affected community board and affected borough president shall, not later than sixty days after receipt of such application, prepare and submit a written recommendation to the council and to the applicant, provided that such community board shall notify the public of the application and conduct a public hearing prior to such submission. Where such application is received during the month of June, the affected community board shall notify the public of the application and conduct a public hearing or, where authorized, submit a waiver of the right to conduct a public hearing not later than ninety days after receipt of such application or, where such application is received during the period of time from and including July 1 to and including July 15, not later than seventy-five days after receipt of such application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7604" number="1739" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>If a community board or borough president fails or waives its right to act within the time limits for review pursuant to paragraph three of this subdivision, the application shall be referred to the council for review and action. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7603" number="1740" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>The applicant shall file such application with the council, and such application shall be reviewed in accordance with subdivision c-1 of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. Any such filing with the council shall include copies of all written recommendations of community boards and borough presidents with respect to the decision being filed. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7602" number="1741" version="987">
+					<PARA>
+						<TAB tab-count="1"/>l.<TAB tab-count="1"/>1.<TAB tab-count="1"/>Notwithstanding any provision in this section to the contrary, applications filed pursuant to paragraphs one through eight of subdivision b or subdivision k of this section that are required by law to include an environmental impact statement shall not be subject to the expedited land use review procedure as set forth in this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7601" number="1742" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Notwithstanding any provision in this section to the contrary, an application subject to one hundred ninety-seven-e that is filed in conjunction with an application subject to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> may adhere to the review process set forth in sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7599" number="1743" version="987">
+					<PARA>(L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7598" number="1744" version="987">
+				<HEADING>Section 197-f. Affordable housing fast track.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1835" name="197-f"/>Section 197-f. Affordable housing fast track.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7597" number="1745" version="987">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>No later than October 1, 2026, and every five years thereafter, the director of city planning shall determine and post on the website of the department a list of the twelve community districts which, during the preceding five years, had the lowest rate of affordable housing development, as measured by the total number of new affordable dwelling units in a community district as a percentage of the total number of housing units located in such community district at the start of each five-year cycle. The city planning commission shall, in consultation with the commissioner of housing preservation and development, develop a methodology to calculate the total number of affordable dwelling units in each community district, considering data that includes, but need not be limited to, the total number of affordable dwelling units for which the department of buildings has issued a permit for construction work and, where applicable, the date upon which an affordable housing unit becomes subject to a regulatory agreement or other similar instrument that provides for the creation of one or more affordable dwelling units. For the purposes of this section, the term “affordable dwelling unit” has the same meaning as set forth in subdivision a of section sixteen-a. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7596" number="1746" version="987">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Applications by any person or agency for any changes, approvals, permits, or authorizations thereof, respecting the use, development or improvement of real property, that would otherwise be subject to review pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279"> one hundred ninety-seven-c</LINK>, shall be instead reviewed pursuant to the expedited land use review procedure set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, provided that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7595" number="1747" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Such real property is located in a community district that, on the date of the filing of such application, is included on the list posted by the director pursuant to subdivision a of this section; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7594" number="1748" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Such real property is, or would be if such application is approved, subject to a program established in the zoning resolution that mandates that any new housing on designated lots include minimum percentages of permanently affordable housing equivalent to or exceeding the requirements under any mandatory inclusionary housing program; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7593" number="1749" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Such application is filed between the first of January succeeding the posting of the list required by subdivision a of this section identifying the community district in which such real property is located and the thirty-first of December five years thereafter; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7592" number="1750" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>The department of city planning certifies such application as complete on or before the thirty-first of December five years succeeding the posting of the list required by subdivision a of this section, provided that where such application is filed within two years of such date, such department shall certify such application as complete no later than two years after such application is filed. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7591" number="1751" version="987">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The department of city planning and city planning commission, as applicable, shall make the determinations set forth in this subdivision regarding an application described in subdivision b of this section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7590" number="1752" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The department shall not certify an application as complete unless it confirms that a primary purpose of such application is to facilitate additional housing and affordable housing. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7589" number="1753" version="987">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>In determining, pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, whether to approve, approve with modifications, or disapprove an application described in subdivision b of this 3 section, the city planning commission shall assess and make a finding regarding the consistency of such application with the fair housing plan submitted pursuant to subdivision b of section sixteen-a and the adequacy of existing transportation, sewer and other infrastructure. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7588" number="1754" version="987">
+					<PARA>The commission may promulgate rules as necessary for the implementation of this section, including, but not limited to, rules relating to the selection of data used to identify the number of affordable housing units in a community district, as set forth in subdivision a of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7587" number="1755" version="988">
+					<PARA>(L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7676" number="1756" version="988">
+				<HEADING>Section 197-g. Affordable housing appeals board.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-1841" name="197-g"/>Section 197-g. Affordable housing appeals board.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7686" number="1757" version="988">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be an affordable housing appeals board to consist of the mayor, the speaker of the council, and the affected borough president, or the designee of each such member. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7685" number="1758" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The affordable housing appeals board shall have the power to review actions of the council that meet the following criteria: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7684" number="1759" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>Such action is taken pursuant to subdivision c of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7683" number="1760" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Such action disapproves or approves with modifications an application that would directly facilitate the development of affordable housing, including but not limited to actions that include the application to specified parcels of real property a program established in the zoning resolution that mandates that any new housing on designated lots include minimum percentages of permanently affordable housing equivalent to or exceeding the requirements under any mandatory inclusionary housing program, and related actions that directly facilitate such housing, such as special permits that modify residential bulk regulations or remove required residential parking; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7682" number="1761" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>The application does not include land located in two or more boroughs or relate to an urban renewal plan filed pursuant to paragraph eight of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7681" number="1762" version="988">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The board shall review such action by the council if, within five days of such action, the applicant requests review of such action by the board or each of at least two members of the board state in separate writings to the department of the city planning that such action should be reviewed. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7680" number="1763" version="988">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Within fifteen days of an applicant requesting review by the board or the date by which two or more members of the board state in writing that such action should be reviewed, the board shall (i) hold a public meeting, after giving public notice not less than five days in advance of such meeting, and (ii) take final action on the decision. The board may, by an affirmative majority vote, approve an application disapproved by the council, or reverse one or more modifications made by the council, provided that any modifications made by the board shall be limited to removing one or more modifications made by the council and restoring, in relevant part, the application as it was approved by the city planning commission. If, within the time period provided for in this subdivision or subdivision e of this section, the board fails to act or fails to act by the required vote, the board shall be deemed to have affirmed the decision of the council. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7679" number="1764" version="988">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>The board shall not approve with modifications an application subject to its review if the city planning commission has determined pursuant to this subdivision that additional review of the modifications is required. Prior to approving a decision of the council with modifications, the board shall file any such proposed modifications with the commission, provided that the board need not file such proposed modifications with the commission where such modifications wholly restore the application as it was approved by the city planning commission. Within fifteen days of such filing, the commission shall file with the council a written statement indicating whether such proposed modifications are of such significance that additional review of environmental issues or additional review pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> is required. If no additional review is required, the board may thereafter approve such proposed modifications. The time period for board action shall be tolled during such fifteen-day period, provided, however, that proposed modifications may be referred to the commission pursuant to this subdivision only once with respect to each application or group of related applications under review by the board. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7678" number="1765" version="988">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>The city planning commission shall promulgate rules for determining whether an application directly facilitates the development of additional affordable housing, as set forth in paragraph two of subdivision b of this section.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7677" number="1766" version="988">
+					<PARA>(L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7586" number="1767" version="988">
+				<HEADING>Section 198. City map and street addresses. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-283" name="198"/>Section 198. City map and street addresses<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-874" number="1768" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>The city map is hereby continued.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-875" number="1769" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The director of city planning shall be the custodian of the city map, and it shall be his or her duty to complete and maintain the same and to register thereon all changes resulting from action authorized by law.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-876" number="1770" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>No later than January 1, 2028, such director shall consolidate each component of the city map maintained by the topographical bureau for each borough into a single city map, which shall be the official city map, provided that, where the city planning commission determines that such consolidation of each such component into a single city map by such date is not practicable, the director of city planning shall consolidate each such component into a single city map by such date as such commission determines is feasible. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7692" number="1771" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>No later than January 1, 2029, such director shall create a digital city map and file an application for review of such digital city map pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, provided that, upon finding that the creation of a digital map is not practicable by such date, the director of city planning shall create such digital map by such date as such director determines is feasible. Upon approval of such digital map pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, such digital map shall become the city map. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7691" number="1772" version="988">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>The city map shall be on file in the office of the department of city planning, and certified copies thereof and of all changes thereto shall be filed in the offices of the corporation counsel, of the city clerk and of the borough president of the borough in which the land shown on the map is located and in the office in which conveyances of real estate are required to be recorded in the county in which the land shown on the map is located, provided that the upon adoption of the digital city map as the city map pursuant to paragraph two of subdivision b of this section, such map need not be on file. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7690" number="1773" version="988">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Notwithstanding any inconsistent provision of this charter or the administrative code, the director of city planning shall assign street numbers of buildings. In all cases where a street shall have been numbered or renumbered, the director shall thereafter adjust and renumber such street as the same may be required from time to time. The director may enact rules relating to: (i) the display, size, form, visibility and location of street numbers; (ii) enforcement of the provisions of this section and any such rules; and (iii) civil penalties for violations of such provisions or rules.* <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7693" number="1774" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025 and eff. 1/1/2027) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-877" number="1775" version="988">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">* Editor&apos;s note:</CHARFORMAT> Pursuant to § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1152" destination-id="0-0-0-1183">1152</LINK>(p)(4), subsecton d of this section is effective January 1, 2027. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7694" number="1776" version="988">
+				<HEADING>Section 199. Projects and changes in city map. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-285" name="199"/>Section 199. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Projects and changes in city map. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-878" number="1777" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>No improvement or project affecting the city map and no addition to or change in the city map shall be authorized otherwise than as provided in this charter.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-879" number="1778" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>The review of any proposed addition to or change in the city map initiated by or referred to the city planning commission shall be made pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, or pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, as applicable. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7671" number="1779" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-880" number="1780" version="988">
+				<HEADING>Section 200. Zoning resolution. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-287" name="200"/>Section 200. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Zoning resolution. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-881" number="1781" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Except as provided in subdivision b, any existing resolution or regulation of the council, the board of estimate or of the city planning commission to regulate and limit the height and bulk of buildings, to regulate and determine the area of yards, courts and other open spaces, to regulate density of population or to regulate and restrict the locations of trades and industries and location of buildings designed for specific uses or creating districts for any such purpose, including any such regulation which provides that the board of standards and appeals may determine and vary the application of such resolutions or regulations in harmony with their general purpose and intent and in accordance with general or specific rules contained in such regulations, may be amended, repealed or added to only in the following manner:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-882" number="1782" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The city planning commission may upon its own initiative at any time or upon application as provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>, adopt a resolution to amend the text of the zoning resolution subject to the limitations provided by law. Before adopting any such resolution, the commission shall notify any community board or borough board affected by the resolution and shall afford persons interested an opportunity to be heard at a time and place to be specified in a notice of hearing to be published in the City Record for the ten days of publication of the City Record immediately prior thereto setting forth in general terms the nature of the proposed resolution and a statement of the place at which the entire resolution may be examined.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-883" number="1783" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Any resolution by the commission approving a change in the text of the zoning resolution shall be subject to review and approval by the council pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281"> one hundred ninety-seven-d</LINK>. Any resolution for a zoning text change which the mayor shall have certified to the council as necessary, and which has been disapproved by the commission, may be adopted by the council by a two-thirds vote and, after notice to the parties affected, a public hearing. The council shall act upon such resolution within fifty days of the filing of the certification of the mayor with the council, and such resolution shall become effective upon approval by the council.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-884" number="1784" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>In case a protest against such a resolution approved by the city planning commission shall have been presented to the city clerk within thirty days from the date of the filing of such resolution with the council, duly signed and acknowledged by the owners of twenty per centum or more of the area of:</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-885" number="1785" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">(1)</CHARFORMAT>
+						<TAB tab-count="1"/>the land included in changes proposed in such proposed resolution, or</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-886" number="1786" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">(2)</CHARFORMAT>
+						<TAB tab-count="1"/>the land immediately adjacent extending one hundred feet therefrom, or</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-887" number="1787" version="988">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">(3)</CHARFORMAT>
+						<TAB tab-count="1"/>the land, if any, directly opposite thereto extending one hundred feet from the street frontage of such opposite land, such resolution shall not be effective after the filing of such protest unless approved by the council by a three-fourths* vote within one hundred eighty days after the filing of said resolution with the city clerk. The effective date of such resolution, if so approved, shall be the date of such approval. A protest duly filed as herein provided may be withdrawn at any time within sixty days from the date of the filing of such resolution.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-888" number="1788" version="1005">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Notwithstanding anything in this subdivision to the contrary, where a resolution that would apply to specified parcels of real property a program established in the zoning resolution that mandates that any new housing on designated lots include minimum percentages of permanently affordable housing equivalent to or exceeding the requirements under any mandatory inclusionary housing program is proposed in conjunction with an application that is reviewed under section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837"> one hundred ninety-seven-e</LINK>, the adoption of such resolution shall be pursuant to the expedited land use review procedure set forth in subdivisions c through j of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK> instead of the review procedure set forth in paragraphs one through three of this subdivision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7674" number="1789" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Designations of zoning districts under the zoning resolution and the issuance of special permits which under the terms of the zoning resolution are within the jurisdiction of the city planning commission shall be subject to review and approval pursuant to the procedures provided in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, except for applications to designate a zoning district under the zoning resolution reviewed in accordance with section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>, and except that whenever the city planning commission has not recommended approval of a proposed change in the designation of a zoning district or the issuance of a special permit under the zoning resolution or has failed to act on such a matter within the time specified in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK>, the council by a two-thirds vote may approve such change or the issuance of such permit only if the mayor shall have certified to the council that such change or issuance is necessary. The council shall act upon such designation or permit within fifty days of the filing of the certification of the mayor with the council. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-889" number="1790" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7673" number="1791" version="988">
+				<HEADING>Section 201. Applications for zoning changes and special permits. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-289" name="201"/>Section 201. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applications for zoning changes and special permits. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-890" number="1792" version="988">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Applications for changes in the zoning resolution may be filed by any taxpayer, community board, borough board, borough president, by the mayor or by the land use committee of the council if two-thirds of the members of the committee shall have voted to approve such filing with the city planning commission. All such applications involving changes in the designation of zoning districts under the zoning resolution shall be subject to review and approval pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279"> one hundred ninety-seven-c</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>, except as set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>. For applications involving other changes in zoning resolutions and regulations, the commission prior to taking action upon any such application shall refer it to the affected community boards or borough boards for a public hearing and recommendation, provided, however, that applications described in paragraph four of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK>, shall be referred to affected community boards and the affected borough president in accordance with the expedited land use review procedure set forth in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-e" destination-id="0-0-0-1837">one hundred ninety-seven-e</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-891" number="1793" version="988">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Applications for special permits within the jurisdiction of the city planning commission under the zoning resolution may be filed by any person or agency. All such applications for the issuance of special permits shall be subject to review and approval pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-892" number="1794" version="988">
+					<PARA>(Am. L.L. 2025/177, 12/2/2025, eff. 12/2/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-116]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-7675" number="1795" version="988">
+				<HEADING>Section 202. Platting of land and dedication of streets and public places. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-291" name="202"/>Section 202. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Platting of land and dedication of streets and public places. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-893" number="1796" version="79">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>No map of a subdivision or platting of land into streets, avenues or public places and blocks within the limits of the city shall be received for filing in the office in which instruments affecting real property are required to be recorded in the county in which the land is situated, unless such map shall have been reviewed and approved pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. If such map is disapproved, the chair of the city planning commission shall certify such fact in writing upon such map, and such map shall be received only for record without such approval.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-894" number="1797" version="48">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>No street, avenue, highway or public place, the layout of which has not been approved as provided in this section, shall be deemed to have been accepted by the city as a street, avenue, highway or public place, unless such street, avenue, highway or public place shall lie within the lines of a street, avenue, highway or public place upon the city map. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-895" number="1798" version="3">
+				<HEADING>Section 203. Criteria for location of city facilities. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-293" name="203"/>Section 203. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Criteria for location of city facilities. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-896" number="1799" version="84">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Not later than the first day of July, nineteen hundred ninety, the mayor, after consulting with each of the borough presidents, shall file with the city planning commission proposed rules establishing criteria for (1) the location of new city facilities and (2) the significant expansion, closing or significant reduction in size or capacity for service delivery of existing facilities. The criteria shall be designed to further the fair distribution among communities of the burdens and benefits associated with city facilities, consistent with community needs for services and efficient and cost effective delivery of services and with due regard for the social and economic impacts of such facilities upon the areas surrounding the sites. Not later than thirty days after the filing of such proposed rules, the city planning commission shall publish a notice of proposed rule making under section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1043" destination-id="0-0-0-1011">one thousand forty-three</LINK> with regard to such rules, as proposed by the mayor or as proposed to be modified by the commission. Promptly thereafter, the commission shall approve or approve with modifications the rules and shall file the rules as approved with the council.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-897" number="1800" version="84">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>At any time after the adoption of such criteria, the mayor, after consulting with the borough presidents, may submit to the city planning commission proposed amendments to the rules. Not later than thirty days after the filing of such proposed amendments, the city planning commission shall publish a notice of proposed rule making under section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="1043" destination-id="0-0-0-1011">one thousand forty-three</LINK> with regard to such amendments, as proposed by the mayor or as proposed to be modified by the commission. Promptly thereafter, the commission shall approve, approve with modifications or determine not to approve the amendments and shall file any approved amended rules with the council. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-898" number="1801" version="48">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>For purposes of this chapter, &quot;city facility&quot; shall mean a facility used or occupied or to be used or occupied to meet city needs that is located on real property owned or leased by the city or is operated by the city or pursuant to a written agreement on behalf of the city. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-899" number="1802" version="3">
+				<HEADING>Section 204. Citywide statement of needs. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-295" name="204"/>Section 204. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Citywide statement of needs. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-7392" number="1803" version="918">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>Each year not later than the fifteenth day of November, the mayor shall submit to the council, borough presidents, borough boards and community boards a citywide statement of needs concerning city facilities prepared in accordance with the criteria established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. Copies of the statement shall also be made available to the public in the main branch of the public library in each borough. The statement shall identify by agency and program: (1) all new city facilities and all significant expansions of city facilities for which the mayor or an agency intends to make or propose an expenditure or to select or propose a site during the ensuing two fiscal years and (2) all city facilities which the city plans to close or to reduce significantly in size or in capacity for service delivery during the ensuing two fiscal years. To the extent practicable, the statement shall also identify for each city facility its condition, function, location, estimated useful life, and whether such facility would enable or benefit from related capital investments in other city facilities. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7383" number="1804" version="898">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>With respect to the city facilities referred to in clause one of subdivision a of this section, the statement of needs shall describe for each proposed new city facility or significant expansion: (1) the public purpose to be served thereby, (2) the size and nature of the facility, (3) the proposed location by borough and, if practicable, by community district or group of community districts, and (4) the specific criteria to be used in locating the new facility or expansion. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-902" number="1805" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>With respect to the city facilities referred to in clause two of subdivision a of this section, the statement of needs shall describe with respect to each such city facility: (1) the reasons for such proposed closing or reduction, (2) the location, and (3) the specific criteria for selecting the city facility for closure or for reduction in size or capacity for service delivery. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-903" number="1806" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>The statement of needs shall be accompanied by a map together with explanatory text, indicating (1) the location and current use of all city-owned real property, (2) all final commitments relating to the disposition or future use of city-owned real property, including assignments by the department of citywide administrative services pursuant to clause b of subdivision three of section sixteen hundred two, and (3) to the extent such information is available to the city, (i) the location of health and social service facilities operated by the state of New York or the federal government or pursuant to written agreement on behalf of the state or the federal government; and (ii) the location of transportation or waste management facilities operated by public entities or by private entities pursuant to written agreements with public entities, or by other private entities that provide comparable services. Information which can be presented most effectively in text may be presented in this manner. In addition to being transmitted with the statement of needs pursuant to subdivision a of this section, such map shall be kept on file with the department of city planning and shall be available for public inspection and copying. The map shall be updated on at least an annual basis. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-904" number="1807" version="48">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>
+						<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Preparation of the statement of needs.</CHARFORMAT>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-905" number="1808" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Annually on such date as the mayor shall direct, each agency shall submit to the mayor a statement containing all the information required to be included in the statement of needs for the ensuing two fiscal years pursuant to subdivisions a, b and c of this section that relates to the plans, jurisdiction and responsibility of such agency. Such statements shall be known as the departmental statements of need for city facilities. In preparing such departmental statements of needs, each agency shall review and consider the district needs statements submitted by community boards pursuant to paragraph ten of subdivision d of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="2800" destination-id="0-0-0-1425">twenty eight hundred</LINK> and the statements of budget priorities submitted by the community boards pursuant to section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="230" destination-id="0-0-0-353"> two hundred thirty</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-906" number="1809" version="88">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The mayor, assisted by the department of city planning, the department of design and construction and the department of citywide administrative services, shall review such departmental statements of need and use them to prepare the statement of needs. In preparing the statement of needs, the mayor shall apply the criteria established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-907" number="1810" version="91">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Upon receipt of the statement of needs pursuant to subdivision a of this section, each community board and borough president shall review the statement of needs. Each community board shall make the statement of needs available to the public and conduct a public hearing on the statement of needs. Each community board and borough president shall have the right to submit comments on the statement of needs to the department of city planning within ninety days of receipt of the statement. Each borough president shall have the right, within ninety days of receipt of the statement of needs, to submit a written statement to the mayor proposing locations for any new city facilities to be located in his or her borough pursuant to the statement of needs. All such locations proposed by a borough president shall be located in his or her borough and shall be certified by the borough president as being consistent with the specific criteria for the location of city facilities contained in the statement of needs and with the criteria established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>. Each city agency shall consider such written statements in taking actions with respect to matters included in the statement of needs. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-908" number="1811" version="91">
+					<PARA>
+						<TAB tab-count="1"/>g.<TAB tab-count="1"/>Whenever an application involving a new city facility is submitted to the department of city planning pursuant to paragraph five, ten or eleven of subdivision a of section<LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279"> one hundred ninety-seven-c</LINK>, the applicant shall include as part of the application a statement of (1) how the proposed action satisfies the criteria for the location of city facilities established pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK>, (2) whether the proposed action is consistent with the most recent statement of needs, and (3) whether the proposed action is consistent with any written statements or comments submitted by borough presidents and community boards in response to the statement of needs. If the proposed action is not consistent with the criteria for location of city facilities, the statement of needs, or any such written statements or comments submitted in response to the statement of needs, the agency shall include as part of its application a statement of the reasons for any such inconsistencies. If the proposed new facility is not referred to in the statement of needs, the applicant shall submit to the affected borough president a description of the public purpose to be served by the city facility, its proposed location, the appropriation (if any) that the agency intends to use in connection with the facility, the size and nature of the facility and the specific criteria for the location of the facility. The affected borough president shall have the right, within thirty days of the submission of such description, to propose an alternative location in his or her borough for the proposed city facility, provided that the borough president shall certify that the alternative location satisfies the criteria for location of city facilities under section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="203" destination-id="0-0-0-293">two hundred three</LINK> and the specific criteria for locating the facility in the statement of needs. The application for the proposed site selection, disposition or acquisition shall not be certified and shall not be reviewed pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> until at least thirty days after the submission of such information to the affected borough president. A borough president may elect to waive the right to such thirty-day review period. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-909" number="1812" version="918">
+					<PARA>
+						<TAB tab-count="1"/>h.<TAB tab-count="1"/>The mayor&apos;s management report, prepared pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="12" destination-id="0-0-0-65">twelve</LINK>, shall include a review of the implementation of the statement of needs. Such review shall consist of (1) a list of the proposed actions in the statement of needs that have been implemented and of those proposed actions that have not been implemented and (2) a description of the proposed actions in the statement of needs which have been implemented in a manner significantly different from what was proposed in the statement of needs and the reasons therefor.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7402" number="1813" version="918">
+					<PARA>(Am. L.L. 2024/117, 12/3/2024, eff. 4/1/2025) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-108]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-7377" number="1814" version="984">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1995/077" destination-id="0-0-0-0">L.L. 1995/077</LINK>, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>, and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 2002/020" destination-id="0-0-0-0">L.L. 2002/020</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-6589" number="1815" version="690">
+				<HEADING>Section 205. Comprehensive waterfront plan. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-297" name="205"/>Section 205. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Comprehensive waterfront plan. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-913" number="1816" version="616">
+					<PARA>Not later than the thirty-first day of December, two thousand and ten and not less than every ten years thereafter, the department of city planning shall file with the mayor, the council, the public advocate, the borough presidents, and the community boards, a comprehensive waterfront plan. Such plan shall be drafted in consultation with the appropriate city, state, and federal agencies and regulatory bodies, and with input from the public, and shall include (1) an assessment of waterfront resources for the natural waterfront, the public waterfront, the working waterfront and the developing waterfront, (2) a statement of the planning policy of the department of city planning, which policy shall take into consideration, among other things, the ten year capital strategy, the assessment of waterfront resources included pursuant to (1) above, the four year capital plan, the strategic policy statements provided for in section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="17" destination-id="0-0-0-85">seventeen</LINK> and plans approved pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-a" destination-id="0-0-0-275">one hundred ninety-seven-a</LINK> and (3) proposals for implementing the planning policy of the department whether by amendment of the zoning resolution, development of plans or otherwise.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-914" number="1817" version="3">
+				<HEADING>Section 206. Tracking of commitments.</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-299" name="206"/>Section 206. Tracking of commitments.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-915" number="1818" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>For the purposes of this section: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-916" number="1819" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Block.</CHARFORMAT> The term &quot;block&quot; has the meaning given to that term in section 12-10 of the zoning resolution. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-917" number="1820" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Such agency as the mayor shall designate shall establish and maintain a publicly accessible online searchable list of all commitments described in this section that relate to an application that: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-918" number="1821" version="91">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>the city planning commission has approved or approved with modifications for a matter described in paragraph one, three, four, five, six, eight, ten, or eleven of subdivision a of section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> or a change in the text of the zoning resolution pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="200" destination-id="0-0-0-287">two hundred</LINK> or <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="201" destination-id="0-0-0-289">two hundred one</LINK>; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-919" number="1822" version="89">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(2)<TAB tab-count="1"/>the commission decision has been approved or approved with modifications by the council pursuant to section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK> and is not subject to further action pursuant to subdivision e or f of such section; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-920" number="1823" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(3)<TAB tab-count="1"/>involves at least four adjacent blocks of real property. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-921" number="1824" version="3">
+					<PARA>
+						<TAB tab-count="1"/>c.<TAB tab-count="1"/>Such list shall include all commitments made by letter by the mayor or a representative designated by the mayor to the council or a council member that relate to an application described in subdivision b of this section on which the city or a not-for-profit corporation of which a majority of its members are appointed by the mayor is either the applicant or co-applicant. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-922" number="1825" version="3">
+					<PARA>
+						<TAB tab-count="1"/>d.<TAB tab-count="1"/>Such list shall include any commitment made by letter by the mayor or a representative designated by the mayor to the council or a council member for which a funding amount of one million dollars or more is set forth in the letter establishing such commitment in relation to an application described in subdivision b of this section on which neither the city nor a not-for-profit corporation of which a majority of its members are appointed by the mayor is either the applicant or co-applicant. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-923" number="1826" version="48">
+					<PARA>
+						<TAB tab-count="1"/>e.<TAB tab-count="1"/>Within thirty days of final council approval of a commission decision described in this section, the designated agency shall submit to the council and record on such list the commitments described in this section, including a description of each commitment, the target commencement and completion dates, the application number, the agency or agencies responsible for implementation of such commitment, and any funding amount set forth in the letter establishing the commitment. The designated agency may include other information that it deems relevant. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-924" number="1827" version="3">
+					<PARA>
+						<TAB tab-count="1"/>f.<TAB tab-count="1"/>Beginning June 30, 2017, and annually thereafter, the designated agency shall report to the mayor and the speaker of the council information relating to commitments that have been recorded pursuant to this section, including any changes to information described in subdivision e that indicate progress toward the fulfillment of each such commitment and whether the commitment has been completed within the preceding year. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-925" number="1828" version="3">
+					<PARA>(L.L. 2016/175, 12/22/2016, eff. 3/22/2017) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-008]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

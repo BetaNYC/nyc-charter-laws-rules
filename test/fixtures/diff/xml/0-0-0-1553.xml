@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Charter" content-collection-id="NYCcharter" source-infobase-title="New York City Charter" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\NYCcharter.mak" css-stylesheet-href="#!-- #ID=NYCcharter_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCcharter\output\HQXLPXGHLGXSQLYY\XML\" css-stylesheet-name="NYCcharter_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-35" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-1553" number="2532" version="3">
+			<HEADING>Chapter 15: Property of the City</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-549" name="Chapter 15"/>Chapter 15: Property of the City</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1554" number="2533" version="3">
+				<HEADING>Section 381. Authority to acquire real property. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-551" name="381"/>Section 381. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Authority to acquire real property. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1555" number="2534" version="617">
+					<PARA>The city may acquire title in fee to real property or any interest therein whenever required for any public or municipal use or purpose or for the promotion of public utility, comfort, health, enjoyment or adornment. Such title or interest shall be acquired according to law by purchase, condemnation or otherwise. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1556" number="2535" version="3">
+				<HEADING>Section 382. Notice to owners of proceeding to acquire property. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-553" name="382"/>Section 382. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Notice to owners of proceeding to acquire property. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1557" number="2536" version="617">
+					<PARA>In addition to all other requirements of law, written notice of the application to have compensation for real property ascertained in any proceeding brought by the city to acquire title to real property shall be given by the corporation counsel to the owners of all property affected by the proceeding at least ten days prior to such application, by mailing the same to such owners at the address registered or filed with the commissioner of finance for the purpose of forwarding to them bills for taxes, assessments and frontage water rates. Such notice shall state the purpose for which the property is to be acquired and the date when such application will be presented and shall contain a copy of such application. Upon request by the corporation counsel, the commissioner of finance shall furnish a certified list of the registered or filed names and addresses of such owners. Failure to comply with the directions contained in this section shall not invalidate or affect the proceeding. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1558" number="2537" version="3">
+				<HEADING>Section 383. Inalienable property. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-555" name="383"/>Section 383. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Inalienable property. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1559" number="2538" version="617">
+					<PARA>The rights of the city in and to its water front, ferries, wharf property, bridges, land under water, public landings, wharves, docks, streets, avenues, highways, parks, waters, waterways and all other public places are hereby declared to be inalienable; but upon the closing or discontinuance of any street, avenue, park or other public place, the property may be sold or otherwise disposed of as may be provided by law, and leases of land under water, wharf property, wharves, docks and piers may be made as may be provided by law. Nothing herein contained shall prevent the granting of franchises, permits and licenses in respect to inalienable property. </PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-38" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-1560" number="2539" version="3">
+				<HEADING>Section 384. Disposal of property of the city. </HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-557" name="384"/>Section 384. <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Disposal of property of the city. </CHARFORMAT>
+				</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-1561" number="2540" version="3">
+					<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>No real property of the city may be sold, leased, exchanged or otherwise disposed of except with the approval of the mayor and as may be provided by law unless such power is expressly vested by law in another agency.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1562" number="2541" version="3">
+					<PARA>
+						<TAB tab-count="1"/>b.<TAB tab-count="1"/>Except as otherwise specifically provided by law: </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1563" number="2542" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>1.<TAB tab-count="1"/>The mayor may authorize the sale or lease only for the highest marketable price or rental, at public auction or by sealed bids and after advertisement for at least thirty days in the City Record, of any real property belonging to the city or any interest therein. No such sale or lease shall be authorized until a public hearing has been held with respect to such sale or lease after the publication of notice in the City Record at least thirty days in advance of such hearing. No such lease shall run for a term longer than ninety-nine years. Any conveyance or lease may provide for the restriction of the use of such real property. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1564" number="2543" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>2.<TAB tab-count="1"/>Real property of the city may be leased only after appraisal made within six months prior to the authorization of the lease by the mayor, provided, however, that advertisement for a public auction or for sealed bids shall be commenced within sixty days of such authorization. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1565" number="2544" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>3.<TAB tab-count="1"/>Real property of the city may be sold only after appraisal made within six months prior to the authorization of the sale and after a review of such appraisal by the department of citywide administrative services within thirty days prior to authorization of the sale, provided that advertisement for the public auction for such sale shall be commenced within sixty days of such authorization. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1566" number="2545" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4.<TAB tab-count="1"/>Notwithstanding the provisions of this charter, or any general, special, or local law to the contrary, the mayor may, with the approval of a majority of the members of the borough board of the borough in which such real property is located, lease or sell any real property of the city, except inalienable property or any interest therein, to a local development corporation without competitive bidding and for such purpose or purposes and at such rental or for such price as may be determined by the mayor to be in the public interest, and no such lease shall run for a term longer than ninety-nine years.</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1567" number="2546" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>4-a.<TAB tab-count="1"/>Notwithstanding the provisions of paragraph one of this subdivision, the mayor may, without public auction or sealed bids, authorize the sale of real property of the city, except inalienable property or any interest therein, that cannot be independently developed, directly to private owners of abutting property, and/or an entity or entities comprised thereof. The consideration for a sale of real property pursuant to this paragraph shall be the fair market value of such parcel as determined by appraisal. For purposes of this paragraph, real property that cannot be independently developed shall mean property that cannot be developed due to its size, shape, applicable zoning, configuration or topography, which factors, singly or in combination, render the development of such property economically impracticable or infeasible. No such sale directly to private property owners shall take place without a public auction or sealed bids (i) unless a finding by the mayor, based on a certification by the commissioner of citywide administrative services that independent development is economically impracticable or infeasible, has been made that such sale is in the best interests of the city, and (ii) until a public hearing has been held with respect to such sale after the publication of notice in the City Record at least thirty days in advance of such hearing, and (iii) at least thirty days in advance of such hearing, a copy of the aforesaid notice in the City Record has been mailed to each abutting property owner accompanied by a statement that the real property to be sold without auction abuts such property owner&apos;s property. Any conveyance may provide for the restriction of the use of such real property. Nothing in this paragraph exempts dispositions of real property to abutting owners (and/or an entity or entities comprised thereof) from any applicable review and approval requirements set forth in sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK> of this charter. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1568" number="2547" version="80">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>5.<TAB tab-count="1"/>Any application for the sale, lease (other than lease of office space), exchange or other disposition of real property of the city shall be subject to review and approval pursuant to sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-c" destination-id="0-0-0-279">one hundred ninety-seven-c</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Jump" destination-name="197-d" destination-id="0-0-0-281">one hundred ninety-seven-d</LINK>. Such review shall be limited to the land use impact and implications of the proposed transaction. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1569" number="2548" version="3">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(a)<TAB tab-count="1"/>A community board may waive the conduct of a public hearing and the preparation of a written recommendation with respect to any proposed lease of property which in the judgment of the board does not involve a substantial land use interest. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1570" number="2549" version="48">
+					<PARA>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>
+						<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The city planning commission may waive a public hearing on any application involving a lease of property. </PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1571" number="2550" version="955">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> paragraph 4-a. of subdivision b. was added to this section 384 by 2010 N.Y. Laws Ch. 548. Section 2 of that legislation, as amended by 2015 N.Y. Laws Ch. 505, 2020 N.Y. Laws Ch. 58, and 2025 N.Y. Laws Ch. 318, provides that &quot;This act shall take effect immediately and shall expire December 31, 2030, when upon such date the provisions of this act shall be deemed repealed.&quot; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-112]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+				<RECORD id="0-0-0-1572" number="2551" version="711">
+					<PARA style-name="EdNoteSm" style-name-escaped="EdNoteSm" style-id="0-0-0-19">
+						<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor&apos;s note:</CHARFORMAT> For related unconsolidated provisions, see Administrative Code Appendix A at <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-21" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="L.L. 1996/059" destination-id="0-0-0-0">L.L. 1996/059</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-24">[ALP S-085]</HIGHLIGHTER>
+					</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>
