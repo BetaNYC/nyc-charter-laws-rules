@@ -42,7 +42,7 @@
     "build-index": "node scripts/build-index.js",
     "update-changelog": "node scripts/update-changelog.js",
     "pretest": "npm run build",
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
