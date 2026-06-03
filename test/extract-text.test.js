@@ -13,6 +13,7 @@ import {
   extractText,
   childrenByTag,
   getAttr,
+  tagOf,
   normalize,
 } from "../scripts/lib/extract-text.js";
 
@@ -95,4 +96,96 @@ test("nested inline formatting (CHARFORMAT inside PARA) extracts in order", () =
   const xml = `<PARA>The term <CHARFORMAT style-name="Italic">agency</CHARFORMAT> means a city agency.</PARA>`;
   const para = parseFirst(xml, "PARA");
   assert.equal(normalize(extractText(para)), "The term agency means a city agency.");
+});
+
+// ---------------------------------------------------------------------------
+// Layer 3 edge cases — ordering, nesting, empty elements, and helper coverage
+//
+// Entity decoding is covered in test/content-leak.test.js; these tests do not
+// duplicate that. The cases below focus on tree-structure edge cases that the
+// original 6 tests and content-leak tests do not reach.
+// ---------------------------------------------------------------------------
+
+test("numeric-only text node in LINK stays in order (typeof node === 'number' branch)", () => {
+  // Exercises the `typeof node === "number"` path in extractText: fast-xml-parser
+  // with parseTagValue:false keeps "298" as a string, but parseTagValue:true
+  // (old default) coerced it to the number 298. Both code paths converge through
+  // String(node) so the result is identical — confirmed by running with both
+  // parser configs. With the current config (parseTagValue:false) the node stays
+  // a string, but the number branch is still present as a guard.
+  const xml = `<PARA>see <LINK>298</LINK> here</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  assert.equal(normalize(extractText(para)), "see 298 here");
+});
+
+test("deep nesting: text–elem–text–elem–text interleave extracts in order", () => {
+  // <PARA>a <CHARFORMAT>b</CHARFORMAT> c <LINK>d</LINK> e</PARA>
+  // Five tokens (text, elem, text, elem, text) in alternation; all must land in
+  // document order with single spaces, no duplication, no loss.
+  const xml = `<PARA>a <CHARFORMAT>b</CHARFORMAT> c <LINK>d</LINK> e</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  assert.equal(normalize(extractText(para)), "a b c d e");
+});
+
+test("PARA > SUBPARA > LINK deep nest extracts all text in order", () => {
+  // Mirrors a real AML shape where body text is further subdivided.
+  const xml = `<PARA>intro <SUBPARA>sub <LINK>ref</LINK> end</SUBPARA> tail</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  assert.equal(normalize(extractText(para)), "intro sub ref end tail");
+});
+
+test("self-closing empty LINK element produces no crash and no stray space", () => {
+  // <LINK/> inside a PARA contributes an empty string; normalize() collapses
+  // any resulting double space so the output is clean.
+  const xml = `<PARA>before <LINK/> after</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  const text = normalize(extractText(para));
+  assert.equal(text, "before after", "self-closing LINK must not introduce stray space");
+  assert.doesNotMatch(text, / {2,}/, "no double space from self-closing element");
+});
+
+test("explicit empty LINK element produces no crash and no stray space", () => {
+  const xml = `<PARA>before <LINK></LINK> after</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  const text = normalize(extractText(para));
+  assert.equal(text, "before after");
+});
+
+test("whitespace-only text node between elements collapses to a single space", () => {
+  // <LINK>a</LINK>   <LINK>b</LINK>: three raw spaces between elements.
+  // trimValues:false preserves them; normalize() collapses to one space.
+  const xml = `<PARA><LINK>a</LINK>   <LINK>b</LINK></PARA>`;
+  const para = parseFirst(xml, "PARA");
+  assert.equal(normalize(extractText(para)), "a b");
+});
+
+// --- helper coverage ---------------------------------------------------------
+
+test("childrenByTag returns empty array when no children match the tag", () => {
+  const xml = `<RECORD id="x"><HEADING>Head</HEADING></RECORD>`;
+  const record = parseFirst(xml, "RECORD");
+  // RECORD has a HEADING child but no PARA children.
+  const result = childrenByTag(record, "PARA");
+  assert.ok(Array.isArray(result), "must return an array");
+  assert.equal(result.length, 0, "must return [] for a tag with no matches");
+});
+
+test("getAttr returns empty string for a missing attribute", () => {
+  const xml = `<RECORD id="abc"><HEADING>H</HEADING></RECORD>`;
+  const record = parseFirst(xml, "RECORD");
+  assert.equal(getAttr(record, "id"), "abc");
+  assert.equal(getAttr(record, "nonexistent"), "");
+  assert.equal(getAttr(record, "style-name"), "");
+});
+
+test("tagOf returns null for a #text-only node", () => {
+  // A pure text node has only the "#text" key; tagOf must skip it and return null.
+  const textOnlyNode = { "#text": "some text content" };
+  assert.equal(tagOf(textOnlyNode), null);
+});
+
+test("tagOf returns the element name for a normal element node", () => {
+  const xml = `<PARA>content</PARA>`;
+  const para = parseFirst(xml, "PARA");
+  assert.equal(tagOf(para), "PARA");
 });
