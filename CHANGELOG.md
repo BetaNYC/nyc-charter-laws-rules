@@ -7,12 +7,21 @@ Each entry records which corpus version was current at the time of the build.
 
 ---
 
-## 2026-06-02 (test: Layer 4 differential)
+## 2026-06-05
 
-**Branch:** `test/differential-parser` (PR-C)  
-**No index rebuild** — test infrastructure only.
+**Index built:** 2026-06-05T02:43:29.088Z  
+**Status:** ⬆️ **Updated**
 
-Added the Layer 4 differential parser test (`npm run test:diff`): compares JS extraction against Python stdlib `xml.etree` + `itertext()` over 44 committed charter XML fixtures. 393 sections compared; 393 agreed. Also added `test:diff` script to `package.json`, Python harness at `test/fixtures/diff/extract_itertext.py`, committed XML fixtures at `test/fixtures/diff/xml/`, and nightly dispatch CI job at `.github/workflows/differential.yml`.
+| Corpus | Current through | Sections | Changed |
+|---|---|---|---|
+| NYC Charter | Current through Local Law 2026/102, enacted May 30, 2026, | 854 | ✅ Yes |
+| NYC Administrative Code | Current through Local Law 2026/102, enacted May 30, 2026, | 12,576 | ✅ Yes |
+| Rules of the City of New York | Current through rules effective May 31, 2026. | 8,656 | — |
+
+**What changed:**
+
+- **NYC Charter:** Current through Local Law 2026/094, enacted May 16, 2026,and includes amendments effective through May 28, 2026. → Current through Local Law 2026/102, enacted May 30, 2026,
+- **NYC Administrative Code:** Current through Local Law 2026/094, enacted May 16, 2026,and includes amendments effective through May 28, 2026. → Current through Local Law 2026/102, enacted May 30, 2026,
 
 ---
 
