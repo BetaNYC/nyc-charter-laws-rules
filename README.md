@@ -395,7 +395,7 @@ The complete, dated record of **every index rebuild** lives in **[CHANGELOG.md](
 The block below is stamped automatically with the most recent rebuild every time `npm run update-changelog` runs — see [CHANGELOG.md](CHANGELOG.md) for the full history.
 
 <!-- LATEST_INDEX_UPDATE:START -->
-**Last index update:** 2026-06-08 — ✓ No change
+**Last index update:** 2026-06-09 — ✓ No change
 
 | Corpus | Current through | Sections |
 |---|---|---|
