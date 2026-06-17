@@ -2,8 +2,14 @@
 #
 # Runs the full index-refresh pipeline against AML's public bulk XML, runs the
 # test suite, and commits the refreshed index back to `main` ONLY when the build
-# actually produced a change. The build is idempotent (PR #10): a no-op rebuild
-# yields a byte-identical tree, so the commit guard is a plain `git diff --quiet`.
+# actually produced a change. The build is now genuinely idempotent: a no-op
+# rebuild yields a byte-identical tree — including the README "Last index update"
+# badge, whose run-outcome churn was fixed at the source in update-changelog.js
+# (the no-op run leaves the badge block untouched; see test/build-idempotence.test.js
+# "README badge does not churn ..."). PR #10 made the index content idempotent but
+# left that badge churn, which an earlier version of this workflow masked with a
+# grep-based guard. That workaround is gone: the commit guard is a plain
+# `git diff --quiet` over the allow-listed paths.
 #
 # File naming: refresh-data.yml — the name test.yml and differential.yml already
 # anticipate. Distinct from test.yml (unit tests, per-PR) and differential.yml
@@ -83,25 +89,24 @@ jobs:
       - name: Commit refreshed index if changed
         # Guard: commit + push iff the pipeline produced a REAL change.
         #
-        # PR #10 made the build content-idempotent, but one residual churn source
-        # remains: README's "Last index update:" badge flips "⬆️ Updated" →
-        # "✓ No change" on the first no-op rebuild after a real update lands
-        # (update-changelog.js stamps the *last run's* outcome, not corpus state).
-        # The date and corpus-table rows in that block are data-bearing and stable
-        # on a no-op; only the badge word churns. So a plain `git diff --quiet`
-        # would still fire a spurious daily commit. The guard below ignores a diff
-        # whose ONLY changed lines are that single badge line, and commits on
-        # anything else (real version bumps move the table rows / data files too).
-        # Follow-up: fix the badge at the source in update-changelog.js, then this
-        # can collapse to `git diff --quiet`. Tracked in the plan doc.
+        # The build is now genuinely idempotent — a no-op rebuild leaves every
+        # allow-listed path byte-identical, INCLUDING the README "Last index update"
+        # badge. That residual badge churn (which PR #10's index-idempotence fix
+        # left behind, and which an earlier version of this step masked with a
+        # grep-based diff filter) is now fixed at the source in update-changelog.js:
+        # a no-op run leaves the badge block untouched. So the guard is a plain
+        # `git diff --quiet` over the allow-list — if nothing changed, exit clean
+        # with no commit; otherwise stage the allow-list and commit. Real version
+        # bumps move versions.json / the index / the table rows, so they always
+        # register.
         #
         # Runs only after tests passed, so any commit is always test-gated.
         run: |
           set -euo pipefail
 
           # Allow-list of legitimate refresh artifacts. Never `git add -A`, and
-          # never stage package-lock.json (defensive — it no longer churns after
-          # PR #10, but the manual /mcp-refresh-data playbook excludes it too).
+          # never stage package-lock.json (defensive — it no longer churns, but the
+          # manual /mcp-refresh-data playbook excludes it too).
           PATHS=(
             data/index/json
             data/index/markdown
@@ -110,17 +115,10 @@ jobs:
             README.md
           )
 
-          # Changed content lines (added/removed), excluding diff headers and the
-          # one-line "+++"/"---" file markers. If the only remaining lines are the
-          # README "Last index update:" badge churn, treat it as no real change.
-          changed_lines="$(git diff -- "${PATHS[@]}" \
-            | grep -E '^[+-]' \
-            | grep -Ev '^[+-]{3} ' \
-            | grep -Ev '^[+-]\*\*Last index update:\*\*' \
-            || true)"
-
-          if [ -z "$changed_lines" ]; then
-            echo "refresh-data: no real change after rebuild (only the README update badge churned, if anything) — skipping commit"
+          # The build is idempotent, so a no-op rebuild leaves the allow-list
+          # byte-identical. Commit iff anything in it actually changed.
+          if git diff --quiet -- "${PATHS[@]}"; then
+            echo "refresh-data: no change after rebuild — skipping commit"
             exit 0
           fi
 
