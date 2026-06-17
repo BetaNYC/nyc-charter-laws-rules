@@ -15,7 +15,7 @@
 // end of the sentence and running adjacent words together ("sectionof").
 
 import AdmZip from "adm-zip";
-import { writeFileSync, mkdirSync, existsSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { makeParser } from "./lib/extract-text.js";
@@ -24,6 +24,7 @@ import {
   collectSections,
   findDocument,
 } from "./lib/build-corpus.js";
+import { mergeVersions } from "./lib/merge-versions.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data");
@@ -133,7 +134,18 @@ for (const corpus of CORPORA) {
   console.log(`  Saved data/index/markdown/${corpus.key}.md`);
 }
 
-writeFileSync(join(JSON_DIR, "versions.json"), JSON.stringify(versions, null, 2));
+// Idempotence (commit-churn fix, 2026-06): `indexedAt` means "as of when the
+// content was last indexed", not "when this process ran". Preserve the prior
+// timestamp for any corpus whose content (currentThrough + sectionCount) did
+// not change, so a no-op rebuild produces a byte-identical versions.json and
+// no git diff. See scripts/lib/merge-versions.js.
+const VERSIONS_PATH = join(JSON_DIR, "versions.json");
+const priorVersions = existsSync(VERSIONS_PATH)
+  ? JSON.parse(readFileSync(VERSIONS_PATH, "utf8"))
+  : null;
+const stableVersions = mergeVersions(versions, priorVersions);
+
+writeFileSync(VERSIONS_PATH, JSON.stringify(stableVersions, null, 2));
 console.log("\nVersions saved to data/index/versions.json:");
-console.log(JSON.stringify(versions, null, 2));
+console.log(JSON.stringify(stableVersions, null, 2));
 console.log("\nIndex build complete.");

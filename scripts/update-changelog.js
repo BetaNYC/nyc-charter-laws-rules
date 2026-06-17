@@ -135,8 +135,46 @@ const entry = {
   corpora: corporaEntries,
 };
 
-// Prepend — most recent first.
-changelog.entries.unshift(entry);
+// Idempotence (commit-churn fix, 2026-06): a no-op rebuild now preserves the
+// prior `indexedAt` in versions.json (see scripts/lib/merge-versions.js), so a
+// fresh build with no content change carries the same date + per-corpus content
+// (currentThrough / sectionCount / indexedAt) as the existing newest entry.
+// Prepending it would duplicate the entry and churn changelog.json /
+// CHANGELOG.md on every refresh. Skip the prepend when the new entry's CONTENT
+// matches the current newest one; the files are then rewritten byte-identically
+// below (zero git diff).
+//
+// We compare only content-bearing fields, NOT `previousThrough` — that field is
+// derivative bookkeeping that legitimately differs between the first build of a
+// version (previousThrough: null) and a re-build of the same version
+// (previousThrough: <that version>). Comparing it would defeat the guard.
+function contentFingerprint(e) {
+  return JSON.stringify({
+    date: e.date,
+    corpora: Object.fromEntries(
+      Object.entries(e.corpora).map(([k, c]) => [
+        k,
+        {
+          currentThrough: c.currentThrough,
+          sectionCount: c.sectionCount,
+          indexedAt: c.indexedAt,
+        },
+      ])
+    ),
+  });
+}
+
+const isDuplicateOfPrior =
+  prior !== null && contentFingerprint(entry) === contentFingerprint(prior);
+
+if (isDuplicateOfPrior) {
+  console.log(
+    "No change since last index entry — changelog already current, not appending a duplicate."
+  );
+} else {
+  // Prepend — most recent first.
+  changelog.entries.unshift(entry);
+}
 
 // ── Write changelog.json ──────────────────────────────────────────────────────
 
