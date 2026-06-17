@@ -161,7 +161,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
-The planned cron for corpus data refresh (issue #2) will live in a separate `refresh-data.yml` workflow.
+`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. The "Last index update" block below is stamped by that job.
 
 ---
 
