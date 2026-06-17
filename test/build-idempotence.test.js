@@ -220,3 +220,90 @@ test("update-changelog: a second no-op run leaves every output byte-identical", 
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+// Seed a prior changelog.json whose newest entry shows an OLDER charter version,
+// so the next build computes changed=true for charter (a real update). This is
+// the missing precondition the bootstrap test above never exercises: without a
+// prior entry, the first build's per-corpus `previousThrough` is null and
+// `changed` is always false, so the README badge starts at "✓ No change" and can
+// never be observed flipping AWAY from a committed "⬆️ Updated".
+function seedPriorChangelog(root, olderCharterThrough) {
+  const versions = JSON.parse(
+    readFileSync(join(root, "data", "index", "json", "versions.json"), "utf8")
+  );
+  const corpora = {};
+  for (const [key, v] of Object.entries(versions)) {
+    corpora[key] = {
+      label: key,
+      currentThrough: key === "charter" ? olderCharterThrough : v.currentThrough,
+      sectionCount: v.sectionCount,
+      indexedAt: "2026-06-09T20:00:00.000Z",
+      previousThrough: null,
+      changed: false,
+    };
+  }
+  const prior = {
+    entries: [
+      {
+        date: "2026-06-09",
+        indexBuiltAt: "2026-06-09T20:00:00.000Z",
+        changed: false,
+        corpora,
+      },
+    ],
+  };
+  writeFileSync(join(root, "data", "changelog.json"), JSON.stringify(prior, null, 2));
+}
+
+// Regression for the README badge churn PR #10 missed (2026-06-17).
+//
+// Sequence: (1) a REAL update lands — charter advances from an older version, so
+// update-changelog stamps the README badge "⬆️ Updated" and commits. (2) The NEXT
+// day a no-op rebuild runs (same versions, fresh wall clock). Because the prior
+// changelog entry now already shows the new version, the build computes
+// changed=false — and the OLD badge logic re-stamped "✓ No change" over the
+// committed "⬆️ Updated", a one-line README diff with zero data change. The fix
+// leaves the badge block untouched on a no-op, so the README stays byte-identical.
+//
+// This test FAILS against the pre-fix badge logic (README differs on run 2 — the
+// badge flips ⬆️ Updated → ✓ No change) and PASSES after the fix.
+test("update-changelog: README badge does not churn on the no-op AFTER a real update", () => {
+  const root = makeFixtureRoot();
+  const script = installScript(root);
+  try {
+    // A prior entry showing an older charter version → next build sees a real bump.
+    seedPriorChangelog(
+      root,
+      "Current through Local Law 2026/102, enacted May 30, 2026,"
+    );
+
+    // Run 1 — the real update. Badge must be stamped "⬆️ Updated".
+    runChangelog(script);
+    const afterUpdate = snapshotOutputs(root);
+    assert.match(
+      afterUpdate.readme,
+      /\*\*Last index update:\*\* .* — ⬆️ Updated/,
+      "real update stamps the ⬆️ Updated badge"
+    );
+
+    // Run 2 — the next-day no-op rebuild (identical versions). The README badge
+    // block must NOT churn: byte-identical README, badge still "⬆️ Updated".
+    runChangelog(script);
+    const afterNoop = snapshotOutputs(root);
+    assert.equal(
+      afterNoop.readme,
+      afterUpdate.readme,
+      "no-op rebuild after a real update leaves the README byte-identical (badge does not flip)"
+    );
+    assert.match(
+      afterNoop.readme,
+      /\*\*Last index update:\*\* .* — ⬆️ Updated/,
+      "badge still reflects the last ACTUAL change, not the no-op rebuild"
+    );
+    // changelog.json/CHANGELOG.md also stay stable across the no-op.
+    assert.equal(afterNoop.changelogJson, afterUpdate.changelogJson, "changelog.json stable on the no-op after a real update");
+    assert.equal(afterNoop.changelogMd, afterUpdate.changelogMd, "CHANGELOG.md stable on the no-op after a real update");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

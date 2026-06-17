@@ -34,7 +34,20 @@ const CORPORA_LABELS = {
 
 // Splice the "Last index update" block (built from a changelog entry) between
 // the README markers. No-op (with a warning) if README or markers are absent.
-function stampReadme(entry) {
+//
+// Badge idempotence (2026-06-17): `entry.changed` is run-history-derived — it
+// records whether THIS build advanced the version vs. the prior changelog entry,
+// not the corpus's own state. So the badge word ("⬆️ Updated" vs "✓ No change")
+// flips on the FIRST no-op rebuild after a real update lands: the prior entry
+// already shows the new version, so `changed` computes false and the badge would
+// re-stamp "✓ No change" over a committed "⬆️ Updated" — a one-line README diff
+// with zero data change. To make a no-op rebuild produce a BYTE-IDENTICAL README,
+// the caller passes `skipIfUnchanged: true` on a duplicate-of-prior run; we then
+// leave the existing badge block untouched. The committed README already reflects
+// the last ACTUAL change, which is exactly what the badge should show. Real
+// version bumps (skipIfUnchanged false) re-stamp as before. The `--stamp-only`
+// recovery path always re-stamps from entries[0] and is unaffected.
+function stampReadme(entry, { skipIfUnchanged = false } = {}) {
   if (!existsSync(README_PATH)) {
     console.error("README.md not found — skipping stamp.");
     return;
@@ -45,6 +58,13 @@ function stampReadme(entry) {
   if (start === -1 || end === -1) {
     console.error(
       `README markers not found (${README_START} / ${README_END}) — skipping stamp.`
+    );
+    return;
+  }
+
+  if (skipIfUnchanged) {
+    console.log(
+      "No change since last index entry — leaving README badge block as-is (byte-identical)."
     );
     return;
   }
@@ -231,8 +251,10 @@ writeFileSync(CHANGELOG_MD_PATH, lines.join("\n"));
 console.log(`Regenerated CHANGELOG.md`);
 
 // ── Stamp README "Last index update" block ────────────────────────────────────
-
-stampReadme(entry);
+//
+// On a duplicate-of-prior (no-op) run, leave the existing badge block untouched so
+// the README stays byte-identical — see stampReadme()'s badge-idempotence note.
+stampReadme(entry, { skipIfUnchanged: isDuplicateOfPrior });
 
 // ── Summary ───────────────────────────────────────────────────────────────────
 

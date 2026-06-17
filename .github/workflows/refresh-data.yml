@@ -1,0 +1,170 @@
+# Daily corpus-data refresh (issue #2).
+#
+# Runs the full index-refresh pipeline against AML's public bulk XML, runs the
+# test suite, and commits the refreshed index back to `main` ONLY when the build
+# actually produced a change. The build is now genuinely idempotent: a no-op
+# rebuild yields a byte-identical tree — including the README "Last index update"
+# badge, whose run-outcome churn was fixed at the source in update-changelog.js
+# (the no-op run leaves the badge block untouched; see test/build-idempotence.test.js
+# "README badge does not churn ..."). PR #10 made the index content idempotent but
+# left that badge churn, which an earlier version of this workflow masked with a
+# grep-based guard. That workaround is gone: the commit guard is a plain
+# `git diff --quiet` over the allow-listed paths.
+#
+# File naming: refresh-data.yml — the name test.yml and differential.yml already
+# anticipate. Distinct from test.yml (unit tests, per-PR) and differential.yml
+# (nightly cross-engine parser check).
+#
+# Auth: the built-in GITHUB_TOKEN is sufficient. `permissions: contents: write`
+# lets the default checkout token push to `main` — NO PAT, NO repository secret,
+# NO deploy key. The AML fetch is public HTTP with no credential.
+
+name: Refresh Data
+
+on:
+  schedule:
+    # 11:00 UTC = 07:00 EDT / 06:00 EST. GitHub Actions cron is UTC ONLY and does
+    # NOT observe DST, so the local run time shifts an hour across the year; it can
+    # also lag several minutes under load. Immaterial — AML publishes irregularly
+    # and the requirement is just "once each morning."
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual run (optional)"
+        required: false
+        default: ""
+
+# Required to push the refreshed index back to main with the built-in token.
+permissions:
+  contents: write
+
+# Never let two refreshes overlap (a slow fetch-data must not race a second
+# trigger). cancel-in-progress: false so an in-flight refresh is never killed
+# mid-commit — the next run queues behind it instead.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh charter index from AML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        # The committed index is the diff baseline for the commit guard.
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # 22.x — upper end of the test.yml matrix; satisfies engines.node >= 18.
+          # This is the operational build, not the cross-version test matrix.
+          node-version: "22.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch data from AML
+        # Pulls AML bulk XML ZIPs (public, no auth). A failure here fails the job
+        # red BEFORE build-index, so no partial/half-refreshed index can land.
+        run: npm run fetch-data
+
+      - name: Build index
+        # Rebuilds data/index/json + data/index/markdown + versions.json.
+        run: npm run build-index
+
+      - name: Update changelog
+        # Updates data/changelog.json, CHANGELOG.md, and re-stamps README.md.
+        run: npm run update-changelog
+
+      - name: Run tests
+        # Full suite (node --test, via pretest build). MUST pass before any commit —
+        # a broken build never reaches main. A failure fails the job and skips
+        # the commit step below.
+        run: npm test
+
+      - name: Commit refreshed index if changed
+        # Guard: commit + push iff the pipeline produced a REAL change.
+        #
+        # The build is now genuinely idempotent — a no-op rebuild leaves every
+        # allow-listed path byte-identical, INCLUDING the README "Last index update"
+        # badge. That residual badge churn (which PR #10's index-idempotence fix
+        # left behind, and which an earlier version of this step masked with a
+        # grep-based diff filter) is now fixed at the source in update-changelog.js:
+        # a no-op run leaves the badge block untouched. So the guard is a plain
+        # `git diff --quiet` over the allow-list — if nothing changed, exit clean
+        # with no commit; otherwise stage the allow-list and commit. Real version
+        # bumps move versions.json / the index / the table rows, so they always
+        # register.
+        #
+        # Runs only after tests passed, so any commit is always test-gated.
+        run: |
+          set -euo pipefail
+
+          # Allow-list of legitimate refresh artifacts. Never `git add -A`, and
+          # never stage package-lock.json (defensive — it no longer churns, but the
+          # manual /mcp-refresh-data playbook excludes it too).
+          PATHS=(
+            data/index/json
+            data/index/markdown
+            data/changelog.json
+            CHANGELOG.md
+            README.md
+          )
+
+          # The build is idempotent, so a no-op rebuild leaves the allow-list
+          # byte-identical. Commit iff anything in it actually changed.
+          if git diff --quiet -- "${PATHS[@]}"; then
+            echo "refresh-data: no change after rebuild — skipping commit"
+            exit 0
+          fi
+
+          echo "refresh-data: real change detected — committing refreshed index"
+
+          # Derive a human-readable delta from the newest changelog.json entry's
+          # per-corpus previousThrough → currentThrough moves. Fail-soft on the
+          # MESSAGE only (never on the guard): fall back to a generic note.
+          DELTA="$(node -e '
+            try {
+              const fs = require("fs");
+              const log = JSON.parse(fs.readFileSync("data/changelog.json", "utf8"));
+              const entry = Array.isArray(log) ? log[0] : (log.entries || [])[0];
+              const corpora = (entry && (entry.corpora || entry.corpuses)) || {};
+              // Shorten "Current through Local Law 2026/110, ..." -> "LL 2026/110";
+              // "... rules effective June 17, 2026." -> "rules eff. June 17, 2026";
+              // otherwise fall back to the raw string.
+              const tag = (s) => {
+                if (!s) return s;
+                const ll = s.match(/Local Law\s+(\d+\/\d+)/i);
+                if (ll) return "LL " + ll[1];
+                const r = s.match(/rules effective\s+(.+?)\.?$/i);
+                if (r) return "rules eff. " + r[1];
+                return s.trim();
+              };
+              const parts = [];
+              for (const [name, c] of Object.entries(corpora)) {
+                const prev = c.previousThrough, cur = c.currentThrough;
+                if (cur && prev && prev !== cur) parts.push(name + " " + tag(prev) + " -> " + tag(cur));
+                else if (cur && !prev) parts.push(name + " " + tag(cur));
+              }
+              process.stdout.write(parts.length ? parts.join("; ") : "index version bump");
+            } catch (e) {
+              process.stdout.write("index version bump");
+            }
+          ')"
+          [ -n "$DELTA" ] || DELTA="index version bump"
+
+          # Stage only the allow-listed paths.
+          git add -- "${PATHS[@]}"
+
+          # Commit as github-actions[bot] with identity set inline (no global config).
+          git \
+            -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "chore: refresh index $(date +%F) — ${DELTA}"
+
+          git push origin HEAD:main
+          echo "refresh-data: pushed refreshed index to main"
