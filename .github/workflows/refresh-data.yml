@@ -134,14 +134,15 @@ jobs:
               const entry = Array.isArray(log) ? log[0] : (log.entries || [])[0];
               const corpora = (entry && (entry.corpora || entry.corpuses)) || {};
               // Shorten "Current through Local Law 2026/110, ..." -> "LL 2026/110";
-              // "... rules effective June 17, 2026." -> "rules eff. June 17, 2026";
+              // "... rules effective June 17, 2026." -> "eff. June 17, 2026" (the
+              // corpus name is prefixed separately, so the tag omits it);
               // otherwise fall back to the raw string.
               const tag = (s) => {
                 if (!s) return s;
                 const ll = s.match(/Local Law\s+(\d+\/\d+)/i);
                 if (ll) return "LL " + ll[1];
                 const r = s.match(/rules effective\s+(.+?)\.?$/i);
-                if (r) return "rules eff. " + r[1];
+                if (r) return "eff. " + r[1];
                 return s.trim();
               };
               const parts = [];
