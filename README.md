@@ -18,6 +18,12 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 ---
 
+## API key
+
+**No API key is required.** The Charter, Administrative Code, and Rules are served from an offline corpus bundled with the package, so this server works out of the box — no signup, no token, no environment variables to set.
+
+---
+
 ## What it does
 
 Exposes 5 tools over MCP:
