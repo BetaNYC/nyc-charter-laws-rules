@@ -426,6 +426,10 @@ Issues and pull requests welcome at [github.com/BetaNYC/nyc-charter-laws-rules](
 
 ---
 
+## Support our work
+
+Freedom isn't free. [Support BetaNYC](https://beta.nyc/donate/).
+
 ## License
 
 MIT License
