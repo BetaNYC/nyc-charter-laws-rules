@@ -7,6 +7,25 @@ Each entry records which corpus version was current at the time of the build.
 
 ---
 
+## 2026-06-29
+
+**Index built:** 2026-06-29T12:33:17.162Z  
+**Status:** ⬆️ **Updated**
+
+| Corpus | Current through | Sections | Changed |
+|---|---|---|---|
+| NYC Charter | Current through Local Law 2026/112, enacted June 19, 2026, | 854 | ✅ Yes |
+| NYC Administrative Code | Current through Local Law 2026/112, enacted June 19, 2026, | 12,587 | ✅ Yes |
+| Rules of the City of New York | Current through rules effective June 28, 2026. | 8,660 | ✅ Yes |
+
+**What changed:**
+
+- **NYC Charter:** Current through Local Law 2026/110, enacted June 13, 2026, → Current through Local Law 2026/112, enacted June 19, 2026,
+- **NYC Administrative Code:** Current through Local Law 2026/110, enacted June 13, 2026, → Current through Local Law 2026/112, enacted June 19, 2026,
+- **Rules of the City of New York:** Current through rules effective June 19, 2026. → Current through rules effective June 28, 2026.
+
+---
+
 ## 2026-06-20
 
 **Index built:** 2026-06-20T11:41:22.650Z  
