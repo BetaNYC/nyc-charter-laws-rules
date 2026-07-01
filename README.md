@@ -163,7 +163,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 ### Continuous integration
 
-`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** (both are active LTS releases that satisfy `engines.node >= 18`; Node 18 was excluded because it reached End-of-Life on 2025-04-30).
+`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** — the ends of the declared `engines.node ">=20 <23"` range, so both ends are tested honestly. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it, so the range was aligned down to what is actually verified.
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
@@ -230,7 +230,7 @@ AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm 
 
 ## Prerequisites
 
-- Node.js 18 or later
+- Node.js 20 or later (tested on 20.x and 22.x)
 
 ---
 
