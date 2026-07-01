@@ -59,7 +59,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          # 22.x — upper end of the test.yml matrix; satisfies engines.node >= 18.
+          # 22.x — upper end of the test.yml matrix; satisfies engines.node ">=20 <23".
           # This is the operational build, not the cross-version test matrix.
           node-version: "22.x"
           cache: "npm"
