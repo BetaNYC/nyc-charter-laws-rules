@@ -21,6 +21,10 @@
   "license": "MIT",
   "author": "BetaNYC",
   "homepage": "https://github.com/BetaNYC/nyc-charter-laws-rules",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetaNYC/nyc-charter-laws-rules.git"
+  },
   "bugs": {
     "url": "https://github.com/BetaNYC/nyc-charter-laws-rules/issues"
   },
