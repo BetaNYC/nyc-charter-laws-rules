@@ -137,3 +137,43 @@ test("build smoke: a parse error is reported via onError and does not throw", ()
   );
   assert.equal(sections.length, 1, "the well-formed file is still indexed");
 });
+
+// ---------------------------------------------------------------------------
+// extractCitation unit cases (fix 2026-07-06: decimal-section truncation).
+// Previously headings were split at the first "." so "§ 11-602.1 ..." produced
+// citation "§ 11-602" — colliding with the real § 11-602 and making 340+
+// duplicate citations in admin_code.
+// ---------------------------------------------------------------------------
+
+import { extractCitation } from "../scripts/lib/build-corpus.js";
+
+test("extractCitation: decimal, hyphenated, lettered, and charter styles", () => {
+  const cases = [
+    // admin_code / rules "§" style
+    ["§ 11-602.1 Application of this subchapter.", "§ 11-602.1"],
+    ["§ 11-602 Definitions.", "§ 11-602"],
+    ["§ 10-110.1 Firearms licenses.", "§ 10-110.1"],
+    ["§ 14-151 Body-worn cameras.", "§ 14-151"],
+    ["§ 19-533.1 Something.", "§ 19-533.1"],
+    ["§ 22-a Reserved.", "§ 22-a"],
+    ["§ 3-04 Obtaining Access to Keys of Premises Sealed Pursuant to § 26-127", "§ 3-04"],
+    ["§§ 27-2004 Definitions.", "§ 27-2004"],
+    ["§3-119.5 No space after symbol.", "§ 3-119.5"],
+    // charter spelled-out style (no "§")
+    ["Section 259. Independent budget office.", "§ 259"],
+    ["Section 1046(c) Hearings.", "§ 1046"],
+    // chapter / title styles
+    ["Chapter 11: Independent Budget Office", "Chapter 11"],
+    ["Title 11 Taxation and Finance", "Title 11"],
+  ];
+  for (const [heading, expected] of cases) {
+    assert.equal(extractCitation(heading), expected, heading);
+  }
+});
+
+test("extractCitation: sentence period does not truncate, decimal dot is kept", () => {
+  // "." followed by a digit is part of the section number; "." followed by a
+  // space (or end) is a sentence period and terminates the token.
+  assert.equal(extractCitation("§ 11-602. Definitions."), "§ 11-602");
+  assert.equal(extractCitation("§ 11-602.1. Application."), "§ 11-602.1");
+});

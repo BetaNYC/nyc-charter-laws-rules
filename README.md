@@ -42,7 +42,7 @@ Exposes 5 tools over MCP:
 
 ### `search`
 
-Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase.
+Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
 
 | Parameter | Type | Required | Default | Description |
 |---|---|---|---|---|
@@ -60,16 +60,17 @@ search("board of health", corpus="rules")
 
 ### `get_section`
 
-Retrieve a specific section by citation or heading fragment.
+Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned — re-run with the `corpus` parameter.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `Chapter 11`) |
+| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `11-602.1`, `Chapter 11`) |
+| `corpus` | string | no | `charter`, `admin_code`, or `rules` (default: all three) |
 
 ```
 get_section("§ 259")
-get_section("Section 20-f")
-get_section("Chapter 11")
+get_section("11-602.1")
+get_section("Chapter 11", corpus="charter")
 ```
 
 ---
@@ -91,7 +92,7 @@ list_titles("rules")
 
 ### `get_title`
 
-Retrieve all sections within a chapter or title.
+Retrieve chapter/title records matching an identifier. Matching is whole-token (`Chapter 1` does not match `Chapter 10`). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. Title-level indexing is a tracked future feature.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -118,11 +119,9 @@ get_version()
 Example response:
 
 ```
-NYC Charter:           Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (854 sections)
-Administrative Code:   Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (12558 sections)
-Rules of NYC:          Current through rules effective May 20, 2026. (8645 sections)
-
-Index built: 2026-05-26T01:30:51.847Z
+NYC Charter:           Current through Local Law 2026/112, enacted June 19, 2026, (854 sections; indexed 2026-06-29T12:33:00.864Z)
+Administrative Code:   Current through Local Law 2026/112, enacted June 19, 2026, (12587 sections; indexed 2026-06-29T12:33:09.801Z)
+Rules of NYC:          Current through rules effective July 1, 2026. (8671 sections; indexed 2026-07-01T12:43:45.635Z)
 ```
 
 ---
@@ -163,7 +162,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 ### Continuous integration
 
-`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** — the ends of the declared `engines.node ">=20 <23"` range, so both ends are tested honestly. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it, so the range was aligned down to what is actually verified.
+`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x**. The manifest declares `engines.node ">=20"` — a floor only; the server uses no APIs newer than Node 20, so newer Node releases are supported even though CI tests the 20.x/22.x pair. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it.
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
