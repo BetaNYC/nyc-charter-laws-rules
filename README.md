@@ -119,11 +119,9 @@ get_version()
 Example response:
 
 ```
-NYC Charter:           Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (854 sections)
-Administrative Code:   Current through Local Law 2026/094, enacted May 16, 2026, and includes amendments effective through May 17, 2026. (12558 sections)
-Rules of NYC:          Current through rules effective May 20, 2026. (8645 sections)
-
-Index built: 2026-05-26T01:30:51.847Z
+NYC Charter:           Current through Local Law 2026/112, enacted June 19, 2026, (854 sections; indexed 2026-06-29T12:33:00.864Z)
+Administrative Code:   Current through Local Law 2026/112, enacted June 19, 2026, (12587 sections; indexed 2026-06-29T12:33:09.801Z)
+Rules of NYC:          Current through rules effective July 1, 2026. (8671 sections; indexed 2026-07-01T12:43:45.635Z)
 ```
 
 ---
@@ -164,7 +162,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 ### Continuous integration
 
-`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x** — the ends of the declared `engines.node ">=20 <23"` range, so both ends are tested honestly. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it, so the range was aligned down to what is actually verified.
+`.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x**. The manifest declares `engines.node ">=20"` — a floor only; the server uses no APIs newer than Node 20, so newer Node releases are supported even though CI tests the 20.x/22.x pair. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it.
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
