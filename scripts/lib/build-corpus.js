@@ -84,12 +84,26 @@ export function collectSections(node, corpus, sections, depth = 0) {
   }
 }
 
+// A section-number token: starts with a digit, may contain letters and
+// hyphens ("14-151", "10-110.1", "22-a"), and may carry one or more decimal
+// suffixes ("11-602.1", "19-533.1.1"). A "." is only consumed when followed
+// by another digit, so the sentence period after "§ 11-602. Definitions"
+// terminates the token instead of truncating decimal sections.
+const SECTION_NUMBER = String.raw`\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*`;
+
 // Pull the citation out of a heading string.
+// e.g. "§ 11-602.1 Application of this subchapter." → "§ 11-602.1"
 // e.g. "Section 259. Independent budget office." → "§ 259"
 // e.g. "Chapter 11: Independent Budget Office" → "Chapter 11"
 export function extractCitation(heading) {
-  const sectionMatch = heading.match(/[Ss]ection\s+([\d\-\.a-zA-Z]+)/);
-  if (sectionMatch) return `§ ${sectionMatch[1].replace(/\.$/, "")}`;
+  // "§ 11-602.1 ..." / "§§ 27-2004 ..." (admin code & rules style)
+  const symbolMatch = heading.match(new RegExp(`§§?\\s*(${SECTION_NUMBER})`));
+  if (symbolMatch) return `§ ${symbolMatch[1]}`;
+  // "Section 259. ..." (charter style, spelled out, no "§")
+  const sectionMatch = heading.match(
+    new RegExp(`[Ss]ection\\s+(${SECTION_NUMBER})`)
+  );
+  if (sectionMatch) return `§ ${sectionMatch[1]}`;
   const chapterMatch = heading.match(/[Cc]hapter\s+([\d\-]+)/);
   if (chapterMatch) return `Chapter ${chapterMatch[1]}`;
   const titleMatch = heading.match(/[Tt]itle\s+([\d\-]+)/);

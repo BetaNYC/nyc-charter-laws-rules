@@ -43,7 +43,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
       name: "search",
-      description: `Search across the NYC Charter, Administrative Code, and Rules of the City of New York by keyword or phrase. ${CAVEAT}`,
+      description: `Search across the NYC Charter, Administrative Code, and Rules of the City of New York by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches. ${CAVEAT}`,
       inputSchema: {
         type: "object",
         properties: {
@@ -63,11 +63,16 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: "get_section",
-      description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', 'Chapter 11'). ${CAVEAT}`,
+      description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. ${CAVEAT}`,
       inputSchema: {
         type: "object",
         properties: {
           citation: { type: "string", description: "Section citation or heading" },
+          corpus: {
+            type: "string",
+            enum: ["charter", "admin_code", "rules"],
+            description: "Which document to look in (default: all three)",
+          },
         },
         required: ["citation"],
       },
@@ -89,7 +94,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: "get_title",
-      description: `Retrieve all sections within a chapter or title. ${CAVEAT}`,
+      description: `Retrieve chapter/title records matching an identifier (whole-token match: 'Chapter 1' does not match 'Chapter 10'). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. ${CAVEAT}`,
       inputSchema: {
         type: "object",
         properties: {
@@ -124,7 +129,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           .object({
             query: z.string(),
             corpus: z.enum(["charter", "admin_code", "rules", "all"]).optional(),
-            limit: z.number().max(50).optional(),
+            limit: z.number().int().min(1).max(50).optional(),
           })
           .parse(args);
         const results = searchCorpus(query, corpus ?? "all", limit ?? 10);
@@ -141,12 +146,33 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case "get_section": {
-        const { citation } = z.object({ citation: z.string() }).parse(args);
-        const section = getSection(citation);
-        if (!section) {
+        const { citation, corpus } = z
+          .object({
+            citation: z.string(),
+            corpus: z.enum(["charter", "admin_code", "rules"]).optional(),
+          })
+          .parse(args);
+        const result = getSection(citation, corpus);
+        if (result.kind === "none") {
           return { content: [{ type: "text", text: withFooter(`Section not found: "${citation}".`) }] };
         }
-        const text = `[${section.corpus.toUpperCase()}] ${section.citation}\n${section.heading}\n\n${section.text}`;
+        if (result.kind === "ambiguous") {
+          const list = result.candidates
+            .map((s) => `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}`)
+            .join("\n");
+          return {
+            content: [
+              {
+                type: "text",
+                text: withFooter(
+                  `Multiple sections match "${citation}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}`
+                ),
+              },
+            ],
+          };
+        }
+        const section = result.section;
+        const text = `[${section.corpus.toUpperCase()}] ${section.citation} (matched in corpus: ${section.corpus})\n${section.heading}\n\n${section.text}`;
         return { content: [{ type: "text", text: withFooter(text) }] };
       }
 
@@ -181,12 +207,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case "get_version": {
         const versions = getVersions();
+        const fmt = (label: string, v?: { currentThrough: string; indexedAt: string; sectionCount: number }) =>
+          `${label} ${v?.currentThrough ?? "unknown"} (${v?.sectionCount ?? 0} sections; indexed ${v?.indexedAt ?? "unknown"})`;
         const lines = [
-          `NYC Charter:           ${versions.charter?.currentThrough ?? "unknown"} (${versions.charter?.sectionCount ?? 0} sections)`,
-          `Administrative Code:   ${versions.admin_code?.currentThrough ?? "unknown"} (${versions.admin_code?.sectionCount ?? 0} sections)`,
-          `Rules of NYC:          ${versions.rules?.currentThrough ?? "unknown"} (${versions.rules?.sectionCount ?? 0} sections)`,
-          ``,
-          `Index built: ${versions.charter?.indexedAt ?? "unknown"}`,
+          fmt("NYC Charter:          ", versions.charter),
+          fmt("Administrative Code:  ", versions.admin_code),
+          fmt("Rules of NYC:         ", versions.rules),
         ];
         return { content: [{ type: "text", text: withFooter(lines.join("\n")) }] };
       }

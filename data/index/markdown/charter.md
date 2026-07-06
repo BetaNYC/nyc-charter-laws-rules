@@ -3496,7 +3496,7 @@ a.The operations of the city shall be such that, at the end of the fiscal year, 
 
 ## § 258.1. Documents to be made available in certain formats.
 
-**Citation:** § 258
+**Citation:** § 258.1
 
 The office of management and budget shall, no later than ten days following the time it posts on its website any budget document, including, but not limited to, such documents as are required by chapters six, nine or ten of this charter or the financial emergency act for the city of New York, post data, as such term is defined in subdivision b of section 23-501, contained in such documents on its website and on the single web portal created pursuant to section 23-502 in a non-proprietary format or spreadsheet that permits automated processing and renders such data capable of being downloaded in bulk, such as those formats that are consistent with the standards established by the secretary of the treasury and the director of the office of management and budget pursuant to section 4 of the digital accountability and transparency act of 2014, as enacted by public law 113-101. (L.L. 2017/218, 12/1/2017, eff. 12/1/2017))
 

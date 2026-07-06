@@ -42,7 +42,7 @@ Exposes 5 tools over MCP:
 
 ### `search`
 
-Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase.
+Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
 
 | Parameter | Type | Required | Default | Description |
 |---|---|---|---|---|
@@ -60,16 +60,17 @@ search("board of health", corpus="rules")
 
 ### `get_section`
 
-Retrieve a specific section by citation or heading fragment.
+Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned — re-run with the `corpus` parameter.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `Chapter 11`) |
+| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `11-602.1`, `Chapter 11`) |
+| `corpus` | string | no | `charter`, `admin_code`, or `rules` (default: all three) |
 
 ```
 get_section("§ 259")
-get_section("Section 20-f")
-get_section("Chapter 11")
+get_section("11-602.1")
+get_section("Chapter 11", corpus="charter")
 ```
 
 ---
@@ -91,7 +92,7 @@ list_titles("rules")
 
 ### `get_title`
 
-Retrieve all sections within a chapter or title.
+Retrieve chapter/title records matching an identifier. Matching is whole-token (`Chapter 1` does not match `Chapter 10`). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. Title-level indexing is a tracked future feature.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|

@@ -4,11 +4,13 @@
 // stdio server is spawned. This exercises the real corpus-loading, search,
 // citation-matching, and version-reading paths against the committed index.
 //
-// Confirmed export names and signatures (src/corpus.ts, verified 2026-06-02):
-//   searchCorpus(query: string, corpus: Corpus | "all" = "all", limit = 10): Section[]
-//   getSection(citation: string): Section | null
+// Confirmed export names and signatures (src/corpus.ts, verified 2026-07-06):
+//   searchCorpus(query: string, corpus: Corpus | "all" = "all", limit = 10): Section[]  // relevance-ranked
+//   getSection(citation: string, corpus?: Corpus): GetSectionResult
+//     GetSectionResult = { kind: "match", section } | { kind: "ambiguous", candidates } | { kind: "none" }
+//   normalizeCitation(input: string): string
 //   listTitles(corpus: Corpus): { citation, heading }[]
-//   getTitle(corpus: Corpus, title: string): Section[]
+//   getTitle(corpus: Corpus, title: string): Section[]  // whole-token prefix match
 //   getVersions(): Versions
 //
 // Note on getSection by raw id: getSection() matches on s.citation or
@@ -27,10 +29,25 @@ import assert from "node:assert/strict";
 import {
   searchCorpus,
   getSection,
+  normalizeCitation,
   listTitles,
   getTitle,
   getVersions,
 } from "../dist/corpus.js";
+
+// Convenience: unwrap a single-match result or fail loudly.
+function expectMatch(citation, corpus) {
+  const result = getSection(citation, corpus);
+  assert.equal(
+    result.kind,
+    "match",
+    `getSection(${JSON.stringify(citation)}${corpus ? `, ${corpus}` : ""}) expected a single match, got kind="${result.kind}"` +
+      (result.kind === "ambiguous"
+        ? ` (${result.candidates.length} candidates)`
+        : "")
+  );
+  return result.section;
+}
 
 // ---------------------------------------------------------------------------
 // searchCorpus
@@ -99,6 +116,39 @@ describe("searchCorpus", () => {
     const results = searchCorpus("zzzqqq", "all", 10);
     assert.deepEqual(results, []);
   });
+
+  // -------------------------------------------------------------------------
+  // Ranking (fix 2026-07-06): heading > citation > body, whole-word > substring,
+  // sorted before truncation (so admin_code/rules are reachable at low limits).
+  // -------------------------------------------------------------------------
+
+  test("heading matches rank above body-only matches", () => {
+    const results = searchCorpus("sinking fund", "charter", 25);
+    const q = "sinking fund";
+    let seenBodyOnly = false;
+    for (const s of results) {
+      const inHeading = s.heading.toLowerCase().includes(q);
+      if (!inHeading) seenBodyOnly = true;
+      else
+        assert.equal(
+          seenBodyOnly,
+          false,
+          "a heading match must not appear after a body-only match"
+        );
+    }
+  });
+
+  test("corpus='all' at a small limit is not exhausted by charter (ranking reaches other corpora)", () => {
+    // "taxicab" appears in admin_code/rules headings; before the ranking fix a
+    // small limit was filled by whatever corpus came first in file order.
+    const results = searchCorpus("taxicab", "all", 10);
+    assert.ok(results.length > 0);
+    const nonCharter = results.some((s) => s.corpus !== "charter");
+    assert.ok(
+      nonCharter,
+      `top-10 'taxicab' results must include admin_code/rules heading matches; got ${results.map((s) => s.corpus).join(",")}`
+    );
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -107,16 +157,14 @@ describe("searchCorpus", () => {
 
 describe("getSection", () => {
   test("getSection('§ 292') returns the charter administration section", () => {
-    const section = getSection("§ 292");
-    assert.ok(section, "§ 292 must be found");
+    const section = expectMatch("§ 292");
     assert.equal(section.corpus, "charter");
     assert.equal(section.citation, "§ 292");
     assert.equal(section.heading, "Section 292. Administration.");
   });
 
   test("§ 292 text is clean — no entities, no leaked XML, no run-together", () => {
-    const section = getSection("§ 292");
-    assert.ok(section, "§ 292 must be found");
+    const section = expectMatch("§ 292");
     assert.doesNotMatch(section.text, /&#\d+;|&[a-z]+;/i, "no undecoded entities");
     assert.doesNotMatch(section.text, /<[A-Z]+[\s>]/, "no leaked XML tags");
     assert.doesNotMatch(section.text, /sectionof/, "no run-together text");
@@ -124,22 +172,65 @@ describe("getSection", () => {
     assert.equal(section.text, section.text.trim(), "text must be trimmed");
   });
 
-  test("getSection('§ 99999') returns null (non-existent section)", () => {
-    const result = getSection("§ 99999");
-    assert.equal(result, null);
+  test("getSection('§ 99999') returns kind 'none' (non-existent section)", () => {
+    assert.equal(getSection("§ 99999").kind, "none");
   });
 
-  test("getSection by raw id ('0-0-0-1325') returns null (not a supported contract)", () => {
+  test("getSection by raw id ('0-0-0-1325') returns 'none' (not a supported contract)", () => {
     // getSection matches on citation or heading-substring, not on the raw id
-    // field. This test documents the current behaviour — id-based lookup is a
-    // potential future enhancement. If this assertion starts failing, it means
-    // id-lookup was added (which would be fine — update the test accordingly).
-    const result = getSection("0-0-0-1325");
-    assert.equal(
-      result,
-      null,
-      "raw id lookup is not currently supported; update this test if id-lookup is added"
-    );
+    // field. This documents current behaviour — id-based lookup is a potential
+    // future enhancement.
+    assert.equal(getSection("0-0-0-1325").kind, "none");
+  });
+
+  test("input normalization: '292', 'Section 292', '§292' all find § 292", () => {
+    for (const q of ["292", "Section 292", "§292", "  §  292 "]) {
+      const section = expectMatch(q, "charter");
+      assert.equal(section.citation, "§ 292", `query ${JSON.stringify(q)}`);
+    }
+  });
+
+  test("decimal sections: § 11-602 and § 11-602.1 are distinct (truncation fix)", () => {
+    const base = expectMatch("§ 11-602", "admin_code");
+    assert.equal(base.citation, "§ 11-602");
+    assert.match(base.heading, /Definitions/);
+
+    const decimal = expectMatch("§ 11-602.1", "admin_code");
+    assert.equal(decimal.citation, "§ 11-602.1");
+    assert.match(decimal.heading, /Application of this subchapter/);
+
+    assert.notEqual(base.id, decimal.id);
+    assert.notEqual(base.text, decimal.text);
+  });
+
+  test("cross-corpus tie ('Chapter 3') returns a disambiguation list", () => {
+    const result = getSection("Chapter 3");
+    assert.equal(result.kind, "ambiguous", "Chapter 3 exists in multiple corpora");
+    assert.ok(result.candidates.length > 1);
+    const corpora = new Set(result.candidates.map((s) => s.corpus));
+    assert.ok(corpora.size > 1, "candidates span multiple corpora");
+  });
+
+  test("corpus param scopes the lookup ('Chapter 11' in charter)", () => {
+    const section = expectMatch("Chapter 11", "charter");
+    assert.equal(section.corpus, "charter");
+    assert.match(section.heading, /Independent Budget Office/i);
+  });
+
+  test("repeated rules citation ('§ 1-01') is ambiguous, not first-hit", () => {
+    const result = getSection("§ 1-01", "rules");
+    assert.equal(result.kind, "ambiguous");
+    assert.ok(result.candidates.length > 1);
+    for (const s of result.candidates) assert.equal(s.citation, "§ 1-01");
+  });
+});
+
+describe("normalizeCitation", () => {
+  test("strips §, 'Section', case, and whitespace", () => {
+    for (const q of ["§ 11-602.1", "§11-602.1", "Section 11-602.1", " 11-602.1 "]) {
+      assert.equal(normalizeCitation(q), "11-602.1", JSON.stringify(q));
+    }
+    assert.equal(normalizeCitation("Chapter 3"), "chapter 3");
   });
 });
 
@@ -169,6 +260,17 @@ describe("getVersions", () => {
       assert.ok(
         typeof v.sectionCount === "number" && v.sectionCount > 0,
         `${corpus}.sectionCount must be a positive number, got ${v.sectionCount}`
+      );
+    }
+  });
+
+  test("each corpus version has its own indexedAt (get_version reports per-corpus dates)", () => {
+    const versions = getVersions();
+    for (const corpus of ["charter", "admin_code", "rules"]) {
+      assert.ok(
+        typeof versions[corpus].indexedAt === "string" &&
+          versions[corpus].indexedAt.length > 0,
+        `${corpus}.indexedAt must be a non-empty string`
       );
     }
   });
@@ -227,5 +329,21 @@ describe("getTitle", () => {
       ch11,
       "Chapter 11 results must include the Independent Budget Office chapter heading"
     );
+  });
+
+  test("whole-token match: 'Chapter 1' does not return 'Chapter 10'..'Chapter 19'", () => {
+    const sections = getTitle("charter", "Chapter 1");
+    assert.ok(sections.length > 0, "Chapter 1 must yield results");
+    for (const s of sections) {
+      assert.doesNotMatch(
+        s.citation + " " + s.heading,
+        /Chapter 1\d/,
+        `over-collected: ${s.citation} — ${s.heading}`
+      );
+    }
+  });
+
+  test("returns [] for empty title", () => {
+    assert.deepEqual(getTitle("charter", "  "), []);
   });
 });
