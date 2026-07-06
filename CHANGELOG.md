@@ -5,6 +5,8 @@ Each entry records which corpus version was current at the time of the build.
 
 "Changed" means the `currentThrough` version string advanced since the prior build.
 
+This file is machine-generated and covers corpus data only. Package release history lives in [RELEASES.md](RELEASES.md).
+
 ---
 
 ## 2026-07-01
