@@ -18,11 +18,9 @@ import AdmZip from "adm-zip";
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { makeParser } from "./lib/extract-text.js";
 import {
   extractVersion,
-  collectSections,
-  findDocument,
+  collectSectionsFromXml,
 } from "./lib/build-corpus.js";
 import { mergeVersions } from "./lib/merge-versions.js";
 
@@ -40,8 +38,6 @@ const CORPORA = [
   { key: "admin_code", zip: "admin_code.zip", xmlDir: "XML" },
   { key: "rules", zip: "rules.zip", xmlDir: "XML" },
 ];
-
-const parser = makeParser();
 
 const versions = {};
 
@@ -65,22 +61,19 @@ for (const corpus of CORPORA) {
   let fileCount = 0;
 
   for (const entry of entries) {
-    const xml = entry.getData().toString("utf8").replace(/^﻿/, ""); // strip BOM
-    let parsed;
-    try {
-      parsed = parser.parse(xml);
-    } catch (e) {
+    const xml = entry.getData().toString("utf8");
+
+    const ok = collectSectionsFromXml(xml, corpus.key, sections, (e) => {
       console.warn(`  Skipping ${entry.entryName}: ${e.message}`);
-      continue;
-    }
+    });
+    if (!ok) continue;
 
     // Extract version from root file.
     if (entry.entryName.endsWith("0-0-0-1.xml")) {
-      version = extractVersion(parsed);
+      version = extractVersion(xml);
       console.log(`  Version: ${version}`);
     }
 
-    collectSections(findDocument(parsed), corpus.key, sections);
     fileCount++;
     if (fileCount % 50 === 0) process.stdout.write(`  Parsed ${fileCount}/${entries.length} files...\r`);
   }

@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "fs";
+import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -34,22 +34,28 @@ let versionsCache: Versions | null = null;
 function loadCorpus(corpus: Corpus): Section[] {
   if (cache[corpus]) return cache[corpus]!;
   const path = join(INDEX_DIR, `${corpus}.json`);
-  if (!existsSync(path)) {
+  let raw: string;
+  try {
+    raw = readFileSync(path, "utf8");
+  } catch {
     throw new Error(
       `Index for "${corpus}" not found. Run: npm run build-index`
     );
   }
-  cache[corpus] = JSON.parse(readFileSync(path, "utf8")) as Section[];
+  cache[corpus] = JSON.parse(raw) as Section[];
   return cache[corpus]!;
 }
 
 function loadVersions(): Versions {
   if (versionsCache) return versionsCache;
   const path = join(INDEX_DIR, "versions.json");
-  if (!existsSync(path)) {
+  let raw: string;
+  try {
+    raw = readFileSync(path, "utf8");
+  } catch {
     throw new Error("Version index not found. Run: npm run build-index");
   }
-  versionsCache = JSON.parse(readFileSync(path, "utf8")) as Versions;
+  versionsCache = JSON.parse(raw) as Versions;
   return versionsCache;
 }
 

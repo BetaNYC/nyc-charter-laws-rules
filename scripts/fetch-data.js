@@ -4,7 +4,6 @@
 
 import { createWriteStream, mkdirSync } from "fs";
 import { pipeline } from "stream/promises";
-import { createGunzip } from "zlib";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -41,4 +40,3 @@ for (const source of SOURCES) {
 }
 
 console.log("\nDone. Unzip each file in data/raw/ to access the XML source files.");
-console.log("XML parsing and indexing — coming soon.");
