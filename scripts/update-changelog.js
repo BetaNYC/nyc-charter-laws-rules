@@ -211,6 +211,8 @@ const lines = [
   ``,
   `"Changed" means the \`currentThrough\` version string advanced since the prior build.`,
   ``,
+  `This file is machine-generated and covers corpus data only. Package release history lives in [RELEASES.md](RELEASES.md).`,
+  ``,
   `---`,
   ``,
 ];

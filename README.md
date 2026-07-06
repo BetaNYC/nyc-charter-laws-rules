@@ -169,6 +169,16 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 `.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. The "Last index update" block below is stamped by that job.
 
+## Releases
+
+Publishing to npm is automated by `.github/workflows/release.yml`, triggered by pushing a version tag:
+
+1. Bump `version` in `package.json` on `main` and add an entry to [RELEASES.md](RELEASES.md).
+2. Tag and push: `git tag vX.Y.Z && git push origin vX.Y.Z` (the tag must match `package.json`, or the workflow fails).
+3. The workflow runs the test suite, publishes to npm with provenance (`--provenance --access public`), and creates a GitHub Release with generated notes.
+
+Requires the `NPM_TOKEN` repository secret. Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
+
 ---
 
 ## Legal disclaimer
