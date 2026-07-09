@@ -453,6 +453,16 @@ If you build something with this project, we'd love to hear about it. We can hel
   newsletter](https://www.beta.nyc/newsletter-inbox/) and we'll consider it for
   an upcoming issue.
 
+## Related BetaNYC MCP servers
+
+BetaNYC maintains a suite of open-source MCP servers for NYC and NYS civic data.
+See the full directory, with install details for each, at
+**[beta.nyc/ai-tools](https://beta.nyc/ai-tools)**.
+
+This server pairs directly with:
+
+- **[nyc-council-mcp](https://github.com/BetaNYC/nyc-council-mcp)**: see the Council legislation, sponsors, votes, and hearings that create and amend the Code.
+
 ---
 
 ## Contributing
