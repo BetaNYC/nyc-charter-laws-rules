@@ -9,6 +9,23 @@ This file is machine-generated and covers corpus data only. Package release hist
 
 ---
 
+## 2026-07-14
+
+**Index built:** 2026-07-14T11:32:03.461Z  
+**Status:** ⬆️ **Updated**
+
+| Corpus | Current through | Sections | Changed |
+|---|---|---|---|
+| NYC Charter | Current through Local Law 2026/112, enacted June 19, 2026, | 854 | — |
+| NYC Administrative Code | Current through Local Law 2026/112, enacted June 19, 2026, | 12,587 | — |
+| Rules of the City of New York | Current through rules effective July 11, 2026. | 8,675 | ✅ Yes |
+
+**What changed:**
+
+- **Rules of the City of New York:** Current through rules effective July 1, 2026. → Current through rules effective July 11, 2026.
+
+---
+
 ## 2026-07-01
 
 **Index built:** 2026-07-01T12:43:45.635Z  
