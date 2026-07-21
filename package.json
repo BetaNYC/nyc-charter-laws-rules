@@ -1,6 +1,6 @@
 {
   "name": "@betanyc/nyc-charter-laws-rules",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "MCP server for NYC Charter, Administrative Code, and Rules of the City of New York",
   "keywords": [
     "mcp",
