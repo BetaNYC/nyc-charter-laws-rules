@@ -22,22 +22,26 @@ import {
   normalize,
 } from "./extract-text.js";
 
-// Extract the "Current through..." version string from the root document.
-// The text lives in CHARFORMAT nodes inside Introduction-style PARAs.
-export function extractVersion(parsed) {
-  try {
-    const fullText = JSON.stringify(parsed);
-    const match = fullText.match(/Current through[^"\\]*/);
-    if (match) {
-      return match[0].replace(/\\n/g, " ").replace(/\[ALP.*?\]/g, "").replace(/\s+/g, " ").trim();
-    }
-  } catch {}
+// Extract the "Current through..." version string from the root document's
+// raw XML text. The text lives in CHARFORMAT nodes inside Introduction-style
+// PARAs. Historical note: this used to run a regex over JSON.stringify(parsedTree),
+// where the match stopped at the first `"` or `\` in the JSON encoding — i.e. at
+// the end of the text node OR at the first escaped control character (newline,
+// tab, etc.). The stop-set below ( `<` for tag boundaries plus `"` `\` and
+// control whitespace) reproduces that behavior exactly over the raw XML, so the
+// extracted string — including any historical mid-sentence truncation — is
+// byte-identical to what the committed versions.json already contains.
+export function extractVersion(xml) {
+  const match = xml.match(/Current through[^<"\\\n\r\t]*/);
+  if (match) {
+    return match[0].replace(/\[ALP.*?\]/g, "").replace(/\s+/g, " ").trim();
+  }
   return "Unknown";
 }
 
 // Walk the LEVEL tree and collect sections.
 // `node` is an ordered element object (DOCUMENT, then each LEVEL as we recurse).
-export function collectSections(node, corpus, sections, depth = 0) {
+export function collectSections(node, corpus, sections) {
   if (!node) return;
 
   const levels = childrenByTag(node, "LEVEL");
@@ -80,7 +84,7 @@ export function collectSections(node, corpus, sections, depth = 0) {
     }
 
     // Recurse into nested levels.
-    collectSections(level, corpus, sections, depth + 1);
+    collectSections(level, corpus, sections);
   }
 }
 

@@ -54,5 +54,3 @@ export function mergeVersions(fresh, prior) {
   }
   return merged;
 }
-
-export { sameContent };
