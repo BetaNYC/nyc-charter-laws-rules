@@ -3,7 +3,6 @@
 // stamps the "Last index update" block in README.md.
 //
 // Run after build-index:   npm run update-changelog
-// Re-stamp README only:     node scripts/update-changelog.js --stamp-only
 //
 // Records every index refresh — whether or not the corpus version changed.
 // "changed: true" means at least one corpus has a new "currentThrough" string.
@@ -24,8 +23,6 @@ const README_PATH = join(ROOT, "README.md");
 const README_START = "<!-- LATEST_INDEX_UPDATE:START -->";
 const README_END = "<!-- LATEST_INDEX_UPDATE:END -->";
 
-const STAMP_ONLY = process.argv.includes("--stamp-only");
-
 const CORPORA_LABELS = {
   charter: "NYC Charter",
   admin_code: "NYC Administrative Code",
@@ -42,12 +39,11 @@ const CORPORA_LABELS = {
 // already shows the new version, so `changed` computes false and the badge would
 // re-stamp "✓ No change" over a committed "⬆️ Updated" — a one-line README diff
 // with zero data change. To make a no-op rebuild produce a BYTE-IDENTICAL README,
-// the caller passes `skipIfUnchanged: true` on a duplicate-of-prior run; we then
-// leave the existing badge block untouched. The committed README already reflects
-// the last ACTUAL change, which is exactly what the badge should show. Real
-// version bumps (skipIfUnchanged false) re-stamp as before. The `--stamp-only`
-// recovery path always re-stamps from entries[0] and is unaffected.
-function stampReadme(entry, { skipIfUnchanged = false } = {}) {
+// the caller skips the stamp entirely on a duplicate-of-prior run (see the call
+// site at the bottom of this file), leaving the existing badge block untouched.
+// The committed README already reflects the last ACTUAL change, which is exactly
+// what the badge should show. Real version bumps re-stamp as before.
+function stampReadme(entry) {
   if (!existsSync(README_PATH)) {
     console.error("README.md not found — skipping stamp.");
     return;
@@ -58,13 +54,6 @@ function stampReadme(entry, { skipIfUnchanged = false } = {}) {
   if (start === -1 || end === -1) {
     console.error(
       `README markers not found (${README_START} / ${README_END}) — skipping stamp.`
-    );
-    return;
-  }
-
-  if (skipIfUnchanged) {
-    console.log(
-      "No change since last index entry — leaving README badge block as-is (byte-identical)."
     );
     return;
   }
@@ -87,22 +76,6 @@ function stampReadme(entry, { skipIfUnchanged = false } = {}) {
     readme.slice(0, start) + block + readme.slice(end + README_END.length);
   writeFileSync(README_PATH, updated);
   console.log(`Stamped README.md "Last index update" → ${entry.date} (${statusBadge})`);
-}
-
-// ── --stamp-only: re-stamp README from the existing latest entry, no append ───
-
-if (STAMP_ONLY) {
-  if (!existsSync(CHANGELOG_JSON_PATH)) {
-    console.error("changelog.json not found — run a full update first.");
-    process.exit(1);
-  }
-  const cl = JSON.parse(readFileSync(CHANGELOG_JSON_PATH, "utf8"));
-  if (!cl.entries?.length) {
-    console.error("changelog.json has no entries — run a full update first.");
-    process.exit(1);
-  }
-  stampReadme(cl.entries[0]);
-  process.exit(0);
 }
 
 // ── Load current versions ────────────────────────────────────────────────────
@@ -188,13 +161,21 @@ const isDuplicateOfPrior =
   prior !== null && contentFingerprint(entry) === contentFingerprint(prior);
 
 if (isDuplicateOfPrior) {
+  // No-op rebuild: the newest changelog entry already carries this exact
+  // content, and the committed changelog.json / CHANGELOG.md / README badge
+  // block already reflect it. Skip all writes so every file stays
+  // byte-identical (zero git diff).
   console.log(
     "No change since last index entry — changelog already current, not appending a duplicate."
   );
-} else {
-  // Prepend — most recent first.
-  changelog.entries.unshift(entry);
+  console.log(
+    "Leaving changelog.json, CHANGELOG.md, and the README badge block as-is (byte-identical)."
+  );
+  process.exit(0);
 }
+
+// Prepend — most recent first.
+changelog.entries.unshift(entry);
 
 // ── Write changelog.json ──────────────────────────────────────────────────────
 
@@ -253,10 +234,7 @@ writeFileSync(CHANGELOG_MD_PATH, lines.join("\n"));
 console.log(`Regenerated CHANGELOG.md`);
 
 // ── Stamp README "Last index update" block ────────────────────────────────────
-//
-// On a duplicate-of-prior (no-op) run, leave the existing badge block untouched so
-// the README stays byte-identical — see stampReadme()'s badge-idempotence note.
-stampReadme(entry, { skipIfUnchanged: isDuplicateOfPrior });
+stampReadme(entry);
 
 // ── Summary ───────────────────────────────────────────────────────────────────
 
