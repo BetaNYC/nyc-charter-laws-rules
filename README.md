@@ -22,6 +22,8 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 **No API key is required.** The Charter, Administrative Code, and Rules are served from an offline corpus bundled with the package, so this server works out of the box — no signup, no token, no environment variables to set.
 
+**The bundled text is as of the release.** An npm install carries the law text from the day that version was published; the daily refresh updates `main`, not the published package. `get_version` reports the dates you are actually serving. To serve the daily-refreshed text with the npm package, see [Getting current law text](#getting-current-law-text-nyc_laws_index_dir).
+
 ---
 
 ## What it does
@@ -141,9 +143,10 @@ npm test
 | File | What it covers |
 |---|---|
 | `test/extract-text.test.js` | Unit tests for the `extractText`, `normalize`, `childrenByTag`, `getAttr`, and `tagOf` helpers in `scripts/lib/extract-text.js`. Covers inline-LINK document order (issue #3 regression), entity decoding, ALP-marker stripping, enumeration-marker repair, empty/self-closing elements, deep nesting, whitespace-only text nodes, and helper edge cases. |
-| `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming the subdivision-letter nit (`(6)the`) is left untouched. |
-| `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
+| `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming that inline labels with no `<TAB/>` after them in the source (`(6)the`) are left untouched. |
+| `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no subdivision label fused to the next word (`a.There`, issue #27), no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
+| `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
 | `test/strict-schema.test.js` | Strict tool schemas (issue #19). Asserts every tool in `TOOLS` (from `dist/tools.js`) advertises `additionalProperties: false`, and that `callTool()` rejects an undeclared parameter with an error naming both the offending key and that tool's accepted keys — rather than silently dropping it and returning unfiltered results. Includes regression guards that valid calls, with and without optional params, still succeed. |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 
@@ -367,6 +370,37 @@ Or if running from a local clone:
   }
 }
 ```
+
+### Getting current law text (`NYC_LAWS_INDEX_DIR`)
+
+The `Refresh Data` workflow commits a refreshed index to `main` every morning when AML has published new text. To serve that text while running the pinned npm package, keep a sparse clone of just the index and point the server at it:
+
+```bash
+git clone --filter=blob:none --sparse https://github.com/BetaNYC/nyc-charter-laws-rules.git
+cd nyc-charter-laws-rules
+git sparse-checkout set data/index/json
+# later, to update:
+git pull
+```
+
+```json
+{
+  "mcpServers": {
+    "nyc-charter-laws-rules": {
+      "command": "npx",
+      "args": ["-y", "@betanyc/nyc-charter-laws-rules"],
+      "env": {
+        "NYC_LAWS_INDEX_DIR": "/path/to/nyc-charter-laws-rules/data/index/json"
+      }
+    }
+  }
+}
+```
+
+- The directory must hold `versions.json`, `charter.json`, `admin_code.json`, and `rules.json`, laid out like `data/index/json/`. A leading `~/` expands to your home directory. Any other relative path resolves against the server process's working directory, which your MCP client chooses, so an absolute path is safest.
+- If the variable is set and `versions.json` is not there, the server refuses to start and says why. It never falls back to the bundled index silently. Unset or blank means the bundled index.
+- The server notes the directory it is serving on stderr at startup. Restart it after a `git pull`; the index is read once per process.
+- `get_version` reports the currency dates of whichever index is loaded.
 
 ---
 

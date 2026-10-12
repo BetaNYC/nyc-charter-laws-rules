@@ -168,6 +168,46 @@ describe("Invariant 1: no run-together text signatures", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Invariant 1b: subdivision labels are separated from the next word (issue #27)
+//
+// Pattern from the issue report: a lettered or numbered label fused onto a
+// capitalized word ("a.There shall be", "i.Is"). Before the fix it matched
+// 333 charter / 3,122 admin_code / 192 rules sections. The cause was the empty
+// <TAB/> (and <LINEBRK/>) separator emitting no text; see extract-text.js.
+//
+// Known source-faithful IDs (verified against the AML XML, 2026-10-11): the
+// source paragraph itself has no separator — "<PARA>§ 3.This local law shall
+// take effect immediately.</PARA>" — in uncodified local-law text appended to
+// the Admin Code. A new hit means either a parser regression or another such
+// source typo: check the raw XML before adding an ID here.
+// ---------------------------------------------------------------------------
+
+const KNOWN_FUSED_LABEL_IN_SOURCE = new Set([
+  "0-0-0-202708",
+  "0-0-0-205294",
+  "0-0-0-207342",
+  "0-0-0-212112",
+]);
+
+const RE_FUSED_LABEL = /(^|\s)([a-z]|\d{1,2})\.([A-Z][a-z]+)/;
+
+describe("Invariant 1b: no subdivision label fused to the next word", () => {
+  for (const [name, sections] of Object.entries(CORPORA)) {
+    test(`${name}: no "a.There"-style fused label outside known source typos`, () => {
+      const violations = collectViolations(sections, name, (s) => {
+        if (KNOWN_FUSED_LABEL_IN_SOURCE.has(s.id)) return null;
+        for (const val of [s.heading, s.text]) {
+          const snip = excerpt(val, RE_FUSED_LABEL);
+          if (snip !== null) return snip;
+        }
+        return null;
+      });
+      assert.equal(violations.length, 0, msg("fused subdivision label", violations));
+    });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // Invariant 2: No leaked XML tags
 // ---------------------------------------------------------------------------
 
