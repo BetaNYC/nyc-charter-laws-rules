@@ -38,6 +38,10 @@ Dates are New York (America/New_York).
 
 ---
 
+## v0.3.1 — 2026-10-11
+
+- No change to the server or the law text. This release checks the new publishing setup (npm trusted publishing) and adds the automatic data releases from [#29](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/29) to the published repo.
+
 ## v0.3.0 — 2026-10-11
 
 - **Current law text without waiting for a release** ([#26](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/26)). Set `NYC_LAWS_INDEX_DIR` to a directory laid out like `data/index/json/` (for example a sparse clone of this repo kept current with `git pull`) and the server serves that index instead of the one bundled in the package. A set but invalid directory stops the server at startup with a message naming the variable; it never falls back silently. See the README, "Getting current law text."
