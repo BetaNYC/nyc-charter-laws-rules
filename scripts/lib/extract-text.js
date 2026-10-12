@@ -28,8 +28,8 @@ import { XMLParser } from "fast-xml-parser";
 // separators contribute no text, fuses it onto the next word: "1Each agency".
 // Disabling value parsing keeps "1." intact as a string so the marker survives;
 // extractText then re-inserts the separator space the empty <TAB/> dropped (see
-// extractText). This does NOT add spaces after letter/paren markers ("a.",
-// "(1)") — those are a separate, source-faithful nit left deliberately untouched.
+// extractText). Letter and paren labels ("a.", "(1)") are separated by the
+// <TAB/> element itself, which extractText renders as a space (issue #27).
 export const ORDERED_PARSER_OPTIONS = {
   ignoreAttributes: false,
   attributeNamePrefix: "@_",
@@ -95,9 +95,10 @@ export function stripAlpMarkers(s) {
 // True when a text node is, on its own, a numeric enumeration marker like "1."
 // or "10." — the standalone "<TAB/>N.<TAB/>" list-item counter in the AML source.
 // Used by extractText to restore the separator space the empty <TAB/> dropped.
-// Deliberately matches ONLY digit-dot markers: letter markers ("a.") and
-// parenthesized markers ("(1)", "(a)") are left as-is (source-faithful nit, out
-// of scope). A standalone "53." that is actually a section number is never a
+// Deliberately matches ONLY digit-dot markers. Since issue #27 the <TAB/> after
+// a marker already yields a space; this remains for the admin_code markers not
+// followed by a <TAB/> (removing it changes admin_code output — measured
+// 2026-10-11). A standalone "53." that is actually a section number is never a
 // lone text node — section citations are running text inside a larger node — so
 // this cannot misfire on "§ 53.The following".
 function isDigitEnumerationMarker(s) {
@@ -155,6 +156,19 @@ export function extractText(node) {
       return str;
     }
     const tag = tagOf(node);
+    // <TAB tab-count="N"/> is an empty element standing in for a tab character.
+    // It is the ONLY separator between a subdivision label and its text in the
+    // AML source ("<TAB/>a.<TAB/>There shall be", "<TAB/>(1)<TAB/>information",
+    // "<TAB/>•<TAB/>at least"), so emitting nothing fused label and word
+    // ("a.There") in thousands of sections (issue #27). A tab is whitespace:
+    // emit one space and let normalize() collapse runs. Labels with no <TAB/>
+    // after them in the source ("systems; (6)the") are untouched.
+    //
+    // <LINEBRK/> is the same shape — an empty element standing in for a line
+    // break — and fused sentences across it ("March 1.<LINEBRK/>Example" →
+    // "March 1.Example"). Zero-width anchors (<DESTINATION/>, <BOOKMARK/>)
+    // still emit nothing: they sit inside words and headings, not between them.
+    if (tag === "TAB" || tag === "LINEBRK") return " ";
     if (tag) return extractText(node[tag]);
   }
   return "";

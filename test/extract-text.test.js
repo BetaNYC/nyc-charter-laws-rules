@@ -189,3 +189,60 @@ test("tagOf returns the element name for a normal element node", () => {
   const para = parseFirst(xml, "PARA");
   assert.equal(tagOf(para), "PARA");
 });
+
+// ---------------------------------------------------------------------------
+// Issue #27 — subdivision labels fused onto the next word ("a.There shall be")
+//
+// In the AML source the only separator between a label and its text is an
+// empty <TAB tab-count="1"/> element; <LINEBRK/> plays the same role between
+// lines. Both emitted no text, so label and word ran together. Every fixture
+// below is verbatim from the AML bulk XML fetched 2026-10-11.
+// ---------------------------------------------------------------------------
+
+test("#27: letter label from <TAB/>a.<TAB/> is separated (Charter § 259)", () => {
+  // charter.zip XML/0-0-0-1262.xml, RECORD 0-0-0-1264.
+  const xml = `<PARA>
+						<TAB tab-count="1"/>a.<TAB tab-count="1"/>There shall be an independent budget office</PARA>`;
+  const text = normalize(extractText(parseFirst(xml, "PARA")));
+  assert.equal(text, "a. There shall be an independent budget office");
+  assert.doesNotMatch(text, /a\.There/);
+});
+
+test("#27: parenthesized label from <TAB/>(1)<TAB/> is separated (Charter § 260)", () => {
+  // charter.zip XML/0-0-0-1262.xml.
+  const xml = `<PARA><TAB tab-count="1"/>
+						<TAB tab-count="1"/>(1)<TAB tab-count="1"/>information with respect to the budget,</PARA>`;
+  assert.equal(
+    normalize(extractText(parseFirst(xml, "PARA"))),
+    "(1) information with respect to the budget,"
+  );
+});
+
+test("#27: hyphenated label and bullet are separated (Admin Code, Rules)", () => {
+  // admin_code.zip: "<TAB/>13-a.<TAB/>&quot;Administrative adjustment".
+  const a = `<PARA><TAB tab-count="1"/>13-a.<TAB tab-count="1"/>&quot;Administrative adjustment</PARA>`;
+  assert.equal(normalize(extractText(parseFirst(a, "PARA"))), '13-a. "Administrative adjustment');
+  // rules.zip: "<TAB/>•<TAB/>at least thirty (30) days written notice".
+  const b = `<PARA><TAB tab-count="1"/>•<TAB tab-count="1"/>at least thirty (30) days written notice</PARA>`;
+  assert.equal(normalize(extractText(parseFirst(b, "PARA"))), "• at least thirty (30) days written notice");
+});
+
+test("#27: <LINEBRK/> separates the words on either side (Rules Appendix 6-B)", () => {
+  // rules.zip: a table cell, "...through March 1.<LINEBRK/>Example: two flies".
+  const xml = `<PARA>1-5 filth flies or FRSA flies in the MFVU during November 1 through March 1.<LINEBRK/>Example: two flies</PARA>`;
+  assert.equal(
+    normalize(extractText(parseFirst(xml, "PARA"))),
+    "1-5 filth flies or FRSA flies in the MFVU during November 1 through March 1. Example: two flies"
+  );
+});
+
+test("#27: zero-width <DESTINATION/> anchor still emits nothing", () => {
+  // charter.zip: the anchor sits directly against the heading text.
+  const xml = `<PARA><DESTINATION id="0-0-0-413" name="259"/>Section 259. <CHARFORMAT bold="1">Independent budget office. </CHARFORMAT></PARA>`;
+  assert.equal(normalize(extractText(parseFirst(xml, "PARA"))), "Section 259. Independent budget office.");
+});
+
+test("#27: leading/trailing <TAB/> leaves no stray whitespace after normalize", () => {
+  const xml = `<PARA><TAB tab-count="1"/><TAB tab-count="1"/>b.<TAB tab-count="1"/>The appropriations<TAB tab-count="1"/></PARA>`;
+  assert.equal(normalize(extractText(parseFirst(xml, "PARA"))), "b. The appropriations");
+});

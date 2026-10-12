@@ -165,6 +165,10 @@ test("GUARD: '(6)the' subdivision marker is left untouched (out of scope)", () =
   assert.equal(field(xml), "systems; (6)the regulation");
 });
 
+// These guards cover labels with NO <TAB/> after them in the source — running
+// text where the AML data itself has no separator. Issue #27 fixed the much
+// more common <TAB/>-separated shape at the <TAB/> element (see
+// test/extract-text.test.js); these inline shapes are still left as-is.
 test("GUARD: '(a)the' and 'a.The' letter markers are left untouched", () => {
   assert.equal(field(`<PARA>means (a)the term</PARA>`), "means (a)the term");
   // Letter-dot marker fused to a capitalized word: source-faithful, left as-is.

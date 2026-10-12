@@ -146,6 +146,15 @@ def extract_from_file(path: str) -> dict:
         print(f'[WARN] ParseError in {path}: {exc}', file=sys.stderr)
         return {}
 
+    # <TAB/> and <LINEBRK/> are empty elements standing in for a tab and a line
+    # break. itertext() yields nothing for them, which fuses the words on either
+    # side ("a.There"). The JS path renders each as one space (issue #27); give
+    # them the same whitespace here so the reference encodes the same reading of
+    # the source format. Zero-width anchors (DESTINATION, BOOKMARK) stay empty.
+    for elem in root.iter():
+        if elem.tag in ('TAB', 'LINEBRK'):
+            elem.text = ' '
+
     results = {}
 
     # The AML tree: DOCUMENT > LEVEL > ... The root IS the DOCUMENT element.

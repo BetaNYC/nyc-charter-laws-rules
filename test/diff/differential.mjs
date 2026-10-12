@@ -29,7 +29,9 @@
  * --- Calibrated baseline (run 2026-06-02 against 44 charter XML fixtures) ---
  *
  * 393 sections compared; 393 agreed after the comparison normalizer below.
- * Zero divergences remain.
+ * Zero divergences remain. Re-run 2026-10-11 after the issue #27 <TAB/> fix:
+ * still 393/393 (it was 185 divergences until the harness gained the matching
+ * TAB/LINEBRK rule described below).
  *
  * One class of difference is neutralized by the comparison normalizer (NOT
  * suppressed by an allowlist — it is equalized before comparison so the test
@@ -47,9 +49,15 @@
  *   JS side before comparing, making the two sides agree on content.
  *   Source: scripts/lib/extract-text.js isDigitEnumerationMarker() + extractText().
  *
- *   SUBDIVISION-LETTER NIT ("(1)that", "(a)the"): NOT a divergence. Both
- *   parsers reproduce "(1)that" identically — it is a source-data property
- *   (the source XML genuinely lacks the space), not a parser difference.
+ *   TAB / LINEBRK AS WHITESPACE (issue #27, 2026-10-11): the source separates
+ *   labels from text with empty <TAB/> elements ("<TAB/>a.<TAB/>There") and
+ *   lines with empty <LINEBRK/>. The JS path renders each as one space; the
+ *   Python harness gives those elements a " " text before itertext(), so both
+ *   engines encode the same reading of the format. The earlier note here
+ *   ("(1)that" is a source-data property) was wrong for the <TAB/> shape: the
+ *   source does carry a separator, as an element rather than a character.
+ *   Inline labels with no <TAB/> ("systems; (6)the") still come out identical
+ *   on both sides.
  *
  *   ENTITY DECODING: after PR-A0 (content-leak fix), both parsers agree on
  *   entity decoding. No allowlist entry needed.
