@@ -22,7 +22,7 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 **No API key is required.** The Charter, Administrative Code, and Rules are served from an offline corpus bundled with the package, so this server works out of the box — no signup, no token, no environment variables to set.
 
-**The bundled text is as of the release.** An npm install carries the law text from the day that version was published; the daily refresh updates `main`, not the published package. `get_version` reports the dates you are actually serving. To serve the daily-refreshed text with the npm package, see [Getting current law text](#getting-current-law-text-nyc_laws_index_dir).
+**The bundled text is as of the release.** An npm install carries the law text from the day that version was published. When the daily refresh picks up new law text, it also publishes a new patch release automatically (see [Releases](#releases)), so `npx -y @betanyc/nyc-charter-laws-rules` is normally at most a day behind `main`. `get_version` reports the dates you are actually serving. To serve `main`'s index directly, see [Getting current law text](#getting-current-law-text-nyc_laws_index_dir).
 
 ---
 
@@ -170,17 +170,26 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
-`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. The "Last index update" block below is stamped by that job.
+`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). The "Last index update" block below is stamped by that job.
 
 ## Releases
 
-Publishing to npm is automated by `.github/workflows/release.yml`, triggered by pushing a version tag:
+`.github/workflows/release.yml` is the only workflow that publishes to npm. It runs the test suite, checks that the tag matches `package.json`, publishes with provenance, and creates a GitHub Release with generated notes. It starts in one of two ways.
+
+**Automatic patch releases (law text changed).** When the daily refresh commits new law text, the same commit bumps the patch version (`package.json` and `package-lock.json`) and adds a dated "Automatic data release" entry to [RELEASES.md](RELEASES.md) naming which corpora moved. The job then pushes the `vX.Y.Z` tag and starts `release.yml` on it with `gh workflow run` (a tag pushed by the built-in token does not trigger workflows by itself; `workflow_dispatch` is GitHub's documented exception). Days with no new text produce no release. An automatic release ships `main` as it stands, so code merged since the last release goes out in the next one; bump the minor version by hand first if that code warrants it.
+
+If the current version is not on npm yet (for example you bumped it by hand and have not tagged it), the refresh still commits data but does not bump past your version. If an automatic release fails, its Release run goes red and every following refresh run goes red too, naming the run to rerun, until the version is published. To recover, fix the cause and rerun the failed Release run (Actions → Release → Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
+
+**Manual releases (code changes).**
 
 1. Bump `version` in `package.json` on `main` and add an entry to [RELEASES.md](RELEASES.md).
 2. Tag and push: `git tag vX.Y.Z && git push origin vX.Y.Z` (the tag must match `package.json`, or the workflow fails).
-3. The workflow runs the test suite, publishes to npm with provenance (`--provenance --access public`), and creates a GitHub Release with generated notes.
 
-Requires the `NPM_TOKEN` repository secret. Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
+**Authentication.** `release.yml` is set up for [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC, no stored token). Until the trusted publisher is configured on npmjs.com it falls back to the `NPM_TOKEN` secret. One-time setup, by a package owner:
+
+1. On npmjs.com, open `@betanyc/nyc-charter-laws-rules` → **Settings** → **Trusted Publisher** → **GitHub Actions**.
+2. Fill in exactly (case-sensitive): Organization or user `BetaNYC`; Repository `nyc-charter-laws-rules`; Workflow filename `release.yml` (filename only, not the path); Environment name left blank. Under **Allowed actions**, also allow direct publishing with `npm publish`: new configurations allow only `npm stage publish` by default, and the workflow publishes directly, so without this box the trusted-publishing attempt is refused. Save. npm does not validate these fields when you save them.
+3. After the next release succeeds, set **Settings** → **Publishing access** → "Require two-factor authentication and disallow tokens", then remove this repo's access to the `NPM_TOKEN` secret. A release that still succeeds after that has used trusted publishing. Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
 
 ---
 

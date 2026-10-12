@@ -15,6 +15,31 @@
 # anticipate. Distinct from test.yml (unit tests, per-PR) and differential.yml
 # (nightly cross-engine parser check).
 #
+# Automatic npm releases (issue #26, option 2): when a refresh commits changed
+# data, the same commit bumps the PATCH version (package.json + lock) and adds a
+# dated RELEASES.md entry (scripts/auto-release.js prepare). The "Release if
+# needed" step then pushes the vX.Y.Z tag and dispatches release.yml, the ONLY
+# workflow that publishes to npm. No data change, no release.
+#
+# Why dispatch rather than rely on the tag push: "When you use the repository's
+# GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the
+# exception of workflow_dispatch and repository_dispatch, will not create a new
+# workflow run." (https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
+# "Triggering a workflow from a workflow"). The tag we push with GITHUB_TOKEN
+# therefore does NOT start release.yml's `push: tags` trigger; `gh workflow run
+# release.yml --ref vX.Y.Z` (REST "Create a workflow dispatch event": `ref` "can
+# be a branch or tag name"; token needs Actions: write,
+# https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)
+# does. The dispatched run is a run OF release.yml, which is the workflow
+# filename npm trusted publishing is bound to (see release.yml).
+#
+# Idempotent on rerun: the checkout is `ref: main` (not the original run's SHA),
+# so a rerun after the bump commit landed rebuilds to no diff and only the
+# "Release if needed" step acts. That step re-checks npm, the remote tag and
+# existing release.yml runs, so it never re-tags, never double-dispatches, and
+# goes red (naming the run to rerun) if the release for the current automatic
+# version failed. See RELEASES.md "Automatic releases" for recovery.
+#
 # Auth: the built-in GITHUB_TOKEN is sufficient. `permissions: contents: write`
 # lets the default checkout token push to `main` — NO PAT, NO repository secret,
 # NO deploy key. The AML fetch is public HTTP with no credential.
@@ -35,9 +60,13 @@ on:
         required: false
         default: ""
 
-# Required to push the refreshed index back to main with the built-in token.
+# contents: write — push the refreshed index, the version bump and the tag to
+#   main with the built-in token (main has no branch protection; this job has
+#   always pushed there directly).
+# actions: write — dispatch release.yml (REST "Create a workflow dispatch event").
 permissions:
   contents: write
+  actions: write
 
 # Never let two refreshes overlap (a slow fetch-data must not race a second
 # trigger). cancel-in-progress: false so an in-flight refresh is never killed
@@ -55,6 +84,10 @@ jobs:
       - name: Checkout
         # The committed index is the diff baseline for the commit guard.
         uses: actions/checkout@v4
+        with:
+          # Latest main, not the triggering SHA: a rerun of a failed run must see
+          # a bump commit an earlier attempt already pushed (no double bump).
+          ref: main
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -104,9 +137,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Allow-list of legitimate refresh artifacts. Never `git add -A`, and
-          # never stage package-lock.json (defensive — it no longer churns, but the
-          # manual /mcp-refresh-data playbook excludes it too).
+          # Allow-list of legitimate refresh artifacts. Never `git add -A`.
+          # package.json, package-lock.json and RELEASES.md are added below ONLY
+          # when auto-release.js bumps the version (its own targeted edits); an
+          # incidental `npm ci` lock churn is never staged on a no-release day.
           PATHS=(
             data/index/json
             data/index/markdown
@@ -158,6 +192,19 @@ jobs:
           ')"
           [ -n "$DELTA" ] || DELTA="index version bump"
 
+          # Automatic patch release: bump package.json + lock and add the dated
+          # RELEASES.md entry, in this same commit. Prints the new version, or
+          # nothing (with a warning) when the current version is not on npm yet
+          # — a pending manual release or an unfinished automatic one, which we
+          # must not skip past. Fails the job on any inconsistency (next version
+          # already tagged/published) or if the npm registry cannot be read.
+          RELEASE_VERSION="$(node scripts/auto-release.js prepare --date "$(date -u +%F)")"
+          SUFFIX=""
+          if [ -n "$RELEASE_VERSION" ]; then
+            PATHS+=(package.json package-lock.json RELEASES.md)
+            SUFFIX=" (release v${RELEASE_VERSION})"
+          fi
+
           # Stage only the allow-listed paths.
           git add -- "${PATHS[@]}"
 
@@ -165,7 +212,20 @@ jobs:
           git \
             -c user.name="github-actions[bot]" \
             -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-            commit -m "chore: refresh index $(date +%F) — ${DELTA}"
+            commit -m "chore: refresh index $(date -u +%F) — ${DELTA}${SUFFIX}"
 
           git push origin HEAD:main
           echo "refresh-data: pushed refreshed index to main"
+
+      - name: Release if needed
+        # Runs every day, after the commit step (and only if it succeeded). For
+        # package.json's version: if its RELEASES.md entry is an automatic one
+        # and it is not on npm yet, push the vX.Y.Z tag at HEAD (if missing) and
+        # dispatch release.yml for it, unless a release run for that tag is
+        # already queued/running/succeeded. If every earlier release run for it
+        # failed, this step fails red and names the run to rerun. Manual
+        # releases (no automatic marker) are never touched. On an ordinary
+        # no-change day this is one `npm view` and nothing else.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/auto-release.js ensure
