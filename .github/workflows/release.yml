@@ -1,20 +1,51 @@
-# Tag-triggered npm publish + GitHub Release (fleet release-hygiene rollout).
+# npm publish + GitHub Release. The ONLY workflow in this repo that publishes.
 #
-# Push a tag `vX.Y.Z` that matches package.json's version and this workflow:
-#   1. installs and runs the test suite,
-#   2. guards that the tag matches package.json (fails fast on mismatch),
-#   3. publishes to npm with provenance (needs the NPM_TOKEN repo secret),
-#   4. creates a GitHub Release with auto-generated notes.
+# Two ways in, same job:
+#   - Manual: bump package.json on main, add a RELEASES.md entry, then
+#     `git tag vX.Y.Z && git push origin vX.Y.Z` (push: tags).
+#   - Automatic: refresh-data.yml bumps the patch version when the law text
+#     changes, pushes the tag, and dispatches this workflow on that tag with
+#     `gh workflow run release.yml --ref vX.Y.Z` (workflow_dispatch). A tag
+#     pushed with GITHUB_TOKEN does not trigger `push: tags` — "events triggered
+#     by the GITHUB_TOKEN, with the exception of workflow_dispatch and
+#     repository_dispatch, will not create a new workflow run"
+#     (https://docs.github.com/en/actions/using-workflows/triggering-a-workflow).
 #
-# It never bumps versions and never runs on branches — tags only. To release:
-# bump package.json on main, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
+# Steps: tests -> guard that the run is on a tag matching package.json -> skip
+# publish if that version is already on npm (so a rerun after a half-finished
+# run can still create the GitHub Release) -> npm publish -> GitHub Release.
+# It never bumps versions and never publishes from a branch.
+#
+# npm trusted publishing (OIDC), per https://docs.npmjs.com/trusted-publishers:
+#   - "Trusted publishing requires npm CLI version 11.5.1 or later and Node
+#     version 22.14.0 or higher." Node 22.x's bundled npm is 10.x, so npm is
+#     upgraded below and both versions are checked before publishing.
+#   - Needs `id-token: write` (set below).
+#   - The trusted publisher on npmjs.com names ONE workflow filename
+#     ("Enter only the filename, not the full path"; case-sensitive): release.yml.
+#     Every publish, manual or automatic, runs inside a run of THIS file, so one
+#     configuration covers both. (The docs warn that with workflow_call, the
+#     *calling* workflow's name is what gets checked; we deliberately do not
+#     publish from a reusable workflow.)
+#   - On npmjs.com the trusted publisher must also allow `npm publish` under
+#     "Allowed actions": "npm stage publish is always allowed. Choose whether
+#     this trusted publisher can also publish directly with npm publish".
+#   - "The npm CLI automatically detects OIDC environments and uses them for
+#     authentication before falling back to traditional tokens." So
+#     NODE_AUTH_TOKEN (the NPM_TOKEN org secret) stays as the fallback until the
+#     trusted publisher is configured and proven; then the secret can be dropped
+#     for this repo. Provenance is generated automatically under trusted
+#     publishing; `--provenance` is kept so the token path still attests.
+#   - The docs' release example disables the setup-node package cache ("never
+#     use caching in release builds"), so this workflow does too.
+#
+# Failure is loud: any failed step fails the run red. Recovery: fix the cause,
+# then rerun this workflow for the tag (Actions > Release > the failed run >
+# Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
 #
 # NOTE: this package ships the committed corpus index in `data/index`, so the
 # published tarball is very large (~117 MB unpacked as of v0.1.2). Trimming the
 # `files` array is tracked separately — do not change it here.
-#
-# File naming: release.yml — distinct from test.yml (per-PR unit tests),
-# differential.yml (nightly parser check), and refresh-data.yml (corpus cron).
 
 name: Release
 
@@ -22,17 +53,36 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
+# Least privilege at workflow level; the job grants what it needs. Job-level
+# `permissions` "modify the default permissions granted to the GITHUB_TOKEN"
+# for that job (https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
+# jobs.<job_id>.permissions).
 permissions:
-  contents: write # create the GitHub Release
-  id-token: write # npm --provenance attestation
+  contents: read
+
+# One release per tag at a time; never cancel a publish mid-flight.
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
   release:
     name: Publish to npm + GitHub Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub Release
+      id-token: write # npm trusted publishing (OIDC) + provenance attestation
 
     steps:
+      - name: Require a tag
+        # workflow_dispatch can be started from a branch in the UI; only tags publish.
+        if: github.ref_type != 'tag'
+        run: |
+          echo "::error::Release must run on a vX.Y.Z tag, not ${GITHUB_REF}." >&2
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -40,8 +90,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-          cache: "npm"
           registry-url: "https://registry.npmjs.org"
+
+      - name: Upgrade npm for trusted publishing
+        run: |
+          npm install -g "npm@^11.5.1"
+          node scripts/auto-release.js check-publish-env
 
       - name: Install dependencies
         run: npm ci
@@ -58,12 +112,21 @@ jobs:
             exit 1
           fi
 
+      - name: Check whether this version is already on npm
+        id: published
+        # Fails (red) if the registry cannot be read; never guesses.
+        run: echo "published=$(node scripts/auto-release.js is-published "${GITHUB_REF_NAME#v}")" >> "$GITHUB_OUTPUT"
+
       - name: Publish to npm
+        if: steps.published.outputs.published != 'true'
         run: npm publish --provenance --access public
         env:
+          # Fallback only; OIDC is tried first once the trusted publisher exists.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          # Explicit, though it is also the action's default (github.ref_name).
+          tag_name: ${{ github.ref_name }}
           generate_release_notes: true
