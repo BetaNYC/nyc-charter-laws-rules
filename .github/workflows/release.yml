@@ -55,9 +55,12 @@ on:
       - "v*"
   workflow_dispatch:
 
+# Least privilege at workflow level; the job grants what it needs. Job-level
+# `permissions` "modify the default permissions granted to the GITHUB_TOKEN"
+# for that job (https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
+# jobs.<job_id>.permissions).
 permissions:
-  contents: write # create the GitHub Release
-  id-token: write # npm trusted publishing (OIDC) + provenance attestation
+  contents: read
 
 # One release per tag at a time; never cancel a publish mid-flight.
 concurrency:
@@ -68,6 +71,9 @@ jobs:
   release:
     name: Publish to npm + GitHub Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub Release
+      id-token: write # npm trusted publishing (OIDC) + provenance attestation
 
     steps:
       - name: Require a tag

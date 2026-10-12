@@ -7,7 +7,11 @@
 //
 // Subcommands:
 //
-//   prepare --date YYYY-MM-DD
+//   prepare [--date YYYY-MM-DD] [--soft]
+//     --date defaults to today in New York. --soft (used by refresh-data.yml):
+//     on any failure, leave the version files untouched, emit a ::warning::,
+//     write prepare_failed=true to $GITHUB_OUTPUT and exit 0, so the law data
+//     is still committed; the workflow turns the run red afterwards.
 //     Run AFTER the refresh produced a data change, BEFORE the commit. If the
 //     current package.json version is already on npm, bump the patch version in
 //     package.json + package-lock.json and add a dated RELEASES.md entry naming
@@ -21,7 +25,7 @@
 //   ensure
 //     Run on EVERY refresh, after the commit step. If package.json's version is
 //     an automatic release (its RELEASES.md entry carries AUTO_MARKER) and is not
-//     on npm yet: push the vX.Y.Z tag at HEAD if it is missing, then dispatch
+//     on npm yet: push the vX.Y.Z tag at the bump commit if it is missing, then dispatch
 //     release.yml for that tag, unless a release run for the tag is already
 //     queued, running, or succeeded. If every earlier run for the tag failed, it
 //     exits non-zero so the refresh goes red too, naming the run to rerun. This
@@ -38,7 +42,7 @@
 //     Prints "true" or "false". Exits non-zero if the registry cannot be read,
 //     so a network failure is never mistaken for "not published".
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, appendFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -58,6 +62,24 @@ const CORPUS_LABELS = {
 };
 
 // ---------------------------------------------------------------- pure logic
+
+/** Today's date in New York (RELEASES.md dates are America/New_York). */
+export function newYorkDate(now = new Date()) {
+  // en-CA formats as YYYY-MM-DD.
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+}
+
+/** Suffix refresh-data.yml appends to the bump commit's subject. */
+export function releaseMarker(version) {
+  return `(release v${version})`;
+}
+
+/** First commit (REST "List commits" rows, newest first) whose message carries the marker. */
+export function findBumpCommit(commits, version) {
+  const marker = releaseMarker(version);
+  const hit = (commits || []).find((c) => (c?.commit?.message || "").split("\n")[0].includes(marker));
+  return hit ? hit.sha : null;
+}
 
 /** Parse "X.Y.Z" (no prerelease/build); throws on anything else. */
 export function parseVersion(v) {
@@ -196,8 +218,12 @@ export function decideEnsure({ version, auto, published, remoteTagSha, runs }) {
   // An existing tag is never moved or re-created, even if main has moved on
   // since it was pushed: release.yml publishes what the tag points at and
   // re-checks that its package.json version matches. A missing tag is pushed
-  // at HEAD by the caller.
-  const mine = (runs || []).filter((r) => r.headBranch === tag);
+  // on the bump commit by the caller.
+  // A run belongs to this release if it ran on the tag. Match on the tag name
+  // (head_branch, which is the tag for tag-push runs) OR on the tag's commit
+  // (head_sha), so the check does not depend on how GitHub fills head_branch
+  // for a dispatched run.
+  const mine = (runs || []).filter((r) => r.headBranch === tag || (remoteTagSha && r.headSha === remoteTagSha));
   const active = mine.find((r) => ACTIVE.has(r.status));
   if (active) return { action: "none", tag: false, reason: `release run ${active.databaseId} for ${tag} is ${active.status}` };
   const ok = mine.find((r) => r.status === "completed" && r.conclusion === "success");
@@ -259,16 +285,27 @@ function remoteTagSha(tag) {
   return out ? out.split(/\s+/)[0] : null;
 }
 
-function cmdPrepare(argv) {
-  const i = argv.indexOf("--date");
-  const date = i >= 0 ? argv[i + 1] : null;
-  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error("prepare needs --date YYYY-MM-DD");
+function argValue(argv, flag) {
+  const i = argv.indexOf(flag);
+  return i >= 0 ? argv[i + 1] : null;
+}
 
+/** Append key=value lines to $GITHUB_OUTPUT when running in Actions. */
+function setOutputs(pairs) {
+  const file = process.env.GITHUB_OUTPUT;
+  if (!file) return;
+  const lines = Object.entries(pairs).map(([k, v]) => `${k}=${String(v).replace(/[\r\n]+/g, " ")}`);
+  appendFileSync(file, lines.join("\n") + "\n");
+}
+
+function prepare(date) {
   const pkgPath = join(ROOT, "package.json");
   const lockPath = join(ROOT, "package-lock.json");
   const relPath = join(ROOT, "RELEASES.md");
-  const pkg = readPkg();
+  const pkgText = readFileSync(pkgPath, "utf8");
+  const lockText = readFileSync(lockPath, "utf8");
   const releasesMd = readFileSync(relPath, "utf8");
+  const pkg = JSON.parse(pkgText);
   const published = publishedVersions(pkg.name);
   const next = nextPatch(pkg.version);
 
@@ -280,18 +317,47 @@ function cmdPrepare(argv) {
   });
   if (!d.bump) {
     annotate("warning", d.reason);
-    return;
+    return "";
   }
 
   const prevVersions = JSON.parse(sh("git", ["show", "HEAD:data/index/json/versions.json"]));
   const curVersions = JSON.parse(readFileSync(join(ROOT, "data", "index", "json", "versions.json"), "utf8"));
   const moves = corpusMoves(prevVersions, curVersions);
 
-  writeFileSync(pkgPath, setPackageVersion(readFileSync(pkgPath, "utf8"), pkg.version, d.next));
-  writeFileSync(lockPath, setLockVersion(readFileSync(lockPath, "utf8"), pkg.version, d.next));
-  writeFileSync(relPath, insertReleaseEntry(releasesMd, releaseEntry(d.next, date, moves), d.next));
+  // Compute every new file before writing any, so a validation error can never
+  // leave a half-bumped tree (package.json bumped, lock not).
+  const out = [
+    [pkgPath, setPackageVersion(pkgText, pkg.version, d.next), pkgText],
+    [lockPath, setLockVersion(lockText, pkg.version, d.next), lockText],
+    [relPath, insertReleaseEntry(releasesMd, releaseEntry(d.next, date, moves), d.next), releasesMd],
+  ];
+  try {
+    for (const [path, text] of out) writeFileSync(path, text);
+  } catch (e) {
+    for (const [path, , original] of out) writeFileSync(path, original);
+    throw e;
+  }
   log(`bumped ${pkg.version} -> ${d.next} (${moves.join("; ") || "no currentThrough move"})`);
-  process.stdout.write(d.next + "\n");
+  return d.next;
+}
+
+function cmdPrepare(argv) {
+  const date = argValue(argv, "--date") ?? newYorkDate();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error("--date must be YYYY-MM-DD");
+  const soft = argv.includes("--soft");
+  let version = "";
+  try {
+    version = prepare(date);
+  } catch (e) {
+    if (!soft) throw e;
+    // --soft (refresh-data.yml): the law data must still be committed even when
+    // the release cannot be prepared. Leave the version files untouched, warn
+    // now, and record the failure so a later step turns the run red.
+    annotate("warning", `release not prepared, committing data without a version bump: ${e.message}`);
+    setOutputs({ prepare_failed: "true", prepare_error: e.message });
+    return;
+  }
+  if (version) process.stdout.write(version + "\n");
 }
 
 function cmdEnsure() {
@@ -302,7 +368,6 @@ function cmdEnsure() {
   const published = publishedVersions(pkg.name).includes(pkg.version);
   let runs = [];
   let tagSha = null;
-  const headSha = sh("git", ["rev-parse", "HEAD"]);
   if (auto && !published) {
     tagSha = remoteTagSha(tag);
     runs = JSON.parse(
@@ -319,8 +384,9 @@ function cmdEnsure() {
     return;
   }
   if (d.tag) {
-    log(`pushing tag ${tag} at ${headSha}`);
-    sh("git", ["tag", tag, headSha]);
+    const target = bumpCommitSha(pkg.version);
+    log(`pushing tag ${tag} at ${target}`);
+    sh("git", ["tag", tag, target]);
     sh("git", ["push", "origin", `refs/tags/${tag}`]);
   }
   if (d.action === "dispatch") {
@@ -329,6 +395,27 @@ function cmdEnsure() {
     sh("gh", ["workflow", "run", RELEASE_WORKFLOW, "--ref", tag], { stdio: ["ignore", "inherit", "inherit"] });
     log(`dispatched ${RELEASE_WORKFLOW} on ${tag}`);
   }
+}
+
+/**
+ * The commit that bumped package.json to `version` (its message carries
+ * releaseMarker(version)), so a tag pushed on a later recovery run still lands
+ * on the release commit, not on a later data-only commit. The checkout is
+ * depth 1, so ask GitHub: REST "List commits" with `sha` (start point) and
+ * `path` ("Only commits containing this file path will be returned"),
+ * https://docs.github.com/en/rest/commits/commits#list-commits.
+ * Falls back to HEAD (whose package.json is the same version) with a warning.
+ */
+function bumpCommitSha(version) {
+  const head = sh("git", ["rev-parse", "HEAD"]);
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (repo) {
+    const commits = JSON.parse(sh("gh", ["api", `repos/${repo}/commits?sha=${head}&path=package.json&per_page=30`]));
+    const found = findBumpCommit(commits, version);
+    if (found) return found;
+  }
+  annotate("warning", `bump commit for v${version} not found among recent package.json commits; tagging HEAD ${head}`);
+  return head;
 }
 
 function cmdCheckPublishEnv() {

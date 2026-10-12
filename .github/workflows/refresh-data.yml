@@ -120,6 +120,7 @@ jobs:
         run: npm test
 
       - name: Commit refreshed index if changed
+        id: commit
         # Guard: commit + push iff the pipeline produced a REAL change.
         #
         # The build is now genuinely idempotent — a no-op rebuild leaves every
@@ -193,15 +194,28 @@ jobs:
           [ -n "$DELTA" ] || DELTA="index version bump"
 
           # Automatic patch release: bump package.json + lock and add the dated
-          # RELEASES.md entry, in this same commit. Prints the new version, or
-          # nothing (with a warning) when the current version is not on npm yet
-          # — a pending manual release or an unfinished automatic one, which we
-          # must not skip past. Fails the job on any inconsistency (next version
-          # already tagged/published) or if the npm registry cannot be read.
-          RELEASE_VERSION="$(node scripts/auto-release.js prepare --date "$(date -u +%F)")"
+          # RELEASES.md entry (New York date), in this same commit. Prints the
+          # new version, or nothing (with a warning) when the current version is
+          # not on npm yet — a pending manual release or an unfinished automatic
+          # one, which we must not skip past.
+          #
+          # The law data is committed even if the release cannot be prepared
+          # (registry unreachable, next version already tagged or published,
+          # lockfile mismatch): --soft leaves the version files untouched, warns,
+          # and sets the step output prepare_failed=true, which turns the run red
+          # in the last step AFTER the data has landed. The `||` branch is a
+          # backstop for an unexpected crash of the script itself.
+          RELEASE_VERSION="$(node scripts/auto-release.js prepare --soft)" || {
+            echo "::warning::auto-release prepare crashed; committing data without a version bump"
+            git checkout -- package.json package-lock.json RELEASES.md
+            echo "prepare_failed=true" >> "$GITHUB_OUTPUT"
+            RELEASE_VERSION=""
+          }
           SUFFIX=""
           if [ -n "$RELEASE_VERSION" ]; then
             PATHS+=(package.json package-lock.json RELEASES.md)
+            # Must match releaseMarker() in scripts/auto-release.js: ensure finds
+            # the bump commit by it when it has to tag on a later run.
             SUFFIX=" (release v${RELEASE_VERSION})"
           fi
 
@@ -212,7 +226,7 @@ jobs:
           git \
             -c user.name="github-actions[bot]" \
             -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-            commit -m "chore: refresh index $(date -u +%F) — ${DELTA}${SUFFIX}"
+            commit -m "chore: refresh index $(TZ=America/New_York date +%F) — ${DELTA}${SUFFIX}"
 
           git push origin HEAD:main
           echo "refresh-data: pushed refreshed index to main"
@@ -220,7 +234,7 @@ jobs:
       - name: Release if needed
         # Runs every day, after the commit step (and only if it succeeded). For
         # package.json's version: if its RELEASES.md entry is an automatic one
-        # and it is not on npm yet, push the vX.Y.Z tag at HEAD (if missing) and
+        # and it is not on npm yet, push the vX.Y.Z tag on the bump commit (if missing) and
         # dispatch release.yml for it, unless a release run for that tag is
         # already queued/running/succeeded. If every earlier release run for it
         # failed, this step fails red and names the run to rerun. Manual
@@ -229,3 +243,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/auto-release.js ensure
+
+      - name: Fail if the release could not be prepared
+        # The data was committed above without a version bump; make the run red
+        # so the skipped release is noticed. The warning annotation on the commit
+        # step has the reason. Next refresh with new data will try again.
+        if: steps.commit.outputs.prepare_failed == 'true'
+        run: |
+          echo "::error::New law data was committed, but no npm release was prepared. See the warning on 'Commit refreshed index if changed'." >&2
+          exit 1

@@ -4,7 +4,9 @@
 //
 // Covers the refresh-day sequence (prepare -> commit -> ensure), plus the
 // rerun cases: ensure again while the release is queued (no double dispatch,
-// no re-tag), and prepare again (no double bump).
+// no re-tag), prepare again (no double bump), a tag pushed on a later run
+// landing on the bump commit, and `prepare --soft` never blocking the data
+// commit.
 
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
@@ -17,13 +19,21 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const skip = process.platform === "win32" ? "POSIX shell stubs" : false;
 
-let dir, work, origin, bin, ghLog;
+let dir, work, origin, bin, ghLog, bumpSha;
 
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, {
     cwd: work,
     encoding: "utf8",
-    env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, GH_LOG: ghLog, STUB_DIR: dir, ...opts.env },
+    env: {
+      ...process.env,
+      PATH: `${bin}:${process.env.PATH}`,
+      GH_LOG: ghLog,
+      STUB_DIR: dir,
+      GITHUB_REPOSITORY: "BetaNYC/nyc-charter-laws-rules",
+      GITHUB_OUTPUT: join(dir, "github_output"),
+      ...opts.env,
+    },
   });
   if (opts.check !== false && r.status !== 0) {
     throw new Error(`${cmd} ${args.join(" ")} exited ${r.status}\n${r.stdout}\n${r.stderr}`);
@@ -47,11 +57,12 @@ before(() => {
   // npm stub: `npm view <pkg> versions --json` -> contents of $STUB_DIR/published.json
   writeFileSync(join(bin, "npm"), '#!/bin/sh\n[ "$1" = view ] && exec cat "$STUB_DIR/published.json"\necho "unexpected npm $*" >&2; exit 3\n');
   // gh stub: log every call; `run list` -> $STUB_DIR/runs.json
-  writeFileSync(join(bin, "gh"), '#!/bin/sh\necho "$*" >> "$GH_LOG"\n[ "$1 $2" = "run list" ] && exec cat "$STUB_DIR/runs.json"\nexit 0\n');
+  writeFileSync(join(bin, "gh"), '#!/bin/sh\necho "$*" >> "$GH_LOG"\n[ "$1 $2" = "run list" ] && exec cat "$STUB_DIR/runs.json"\n[ "$1" = api ] && exec cat "$STUB_DIR/commits.json"\nexit 0\n');
   chmodSync(join(bin, "npm"), 0o755);
   chmodSync(join(bin, "gh"), 0o755);
   writeFileSync(join(dir, "published.json"), '["0.2.0","0.3.0"]');
   writeFileSync(join(dir, "runs.json"), "[]");
+  writeFileSync(join(dir, "commits.json"), "[]");
 
   for (const f of ["package.json", "package-lock.json", "RELEASES.md", "scripts/auto-release.js", "data/index/json/versions.json"]) {
     copyFileSync(join(ROOT, f), join(work, f));
@@ -94,9 +105,11 @@ test("refresh day: prepare bumps, ensure tags and dispatches once", { skip }, ()
 
   git("commit", "-qam", "chore: refresh index (release v0.3.1)");
   git("push", "-q", "origin", "main");
+  const head = git("rev-parse", "HEAD");
+  bumpSha = head;
+  writeFileSync(join(dir, "commits.json"), JSON.stringify([{ sha: head, commit: { message: "chore: refresh index 2026-10-13 — x (release v0.3.1)" } }]));
 
   auto(["ensure"]);
-  const head = git("rev-parse", "HEAD");
   assert.equal(spawnSync("git", ["--git-dir", origin, "rev-parse", "refs/tags/v0.3.1"], { encoding: "utf8" }).stdout.trim(), head);
   const calls = readFileSync(ghLog, "utf8").trim().split("\n");
   assert.deepEqual(calls.filter((c) => c.startsWith("workflow run")), ["workflow run release.yml --ref v0.3.1"]);
@@ -124,6 +137,20 @@ test("next refresh while v0.3.1 is still unpublished: prepare does not bump", { 
   assert.equal(readFileSync(join(work, "package.json"), "utf8"), before);
 });
 
+test("tag pushed on a later run lands on the bump commit, not a later data-only commit", { skip }, () => {
+  spawnSync("git", ["--git-dir", origin, "tag", "-d", "v0.3.1"]);
+  writeFileSync(join(dir, "runs.json"), "[]");
+  writeFileSync(join(work, "data/index/json/extra.json"), "{}\n");
+  git("add", "-A");
+  git("commit", "-qm", "chore: refresh index 2026-10-14 — data only");
+  git("push", "-q", "origin", "main");
+  assert.notEqual(git("rev-parse", "HEAD"), bumpSha);
+  git("tag", "-d", "v0.3.1"); // the local tag from the first test
+
+  auto(["ensure"]);
+  assert.equal(spawnSync("git", ["--git-dir", origin, "rev-parse", "refs/tags/v0.3.1"], { encoding: "utf8" }).stdout.trim(), bumpSha);
+});
+
 test("once published: ensure is a no-op and does not call gh", { skip }, () => {
   writeFileSync(join(dir, "published.json"), '["0.2.0","0.3.0","0.3.1"]');
   writeFileSync(ghLog, "");
@@ -136,4 +163,35 @@ test("registry unreadable: prepare fails rather than guessing", { skip }, () => 
   const r = auto(["prepare", "--date", "2026-10-15"], { check: false });
   assert.equal(r.status, 1);
   assert.ok(existsSync(join(work, "package.json")));
+});
+
+test("prepare --soft: registry unreadable -> exit 0, no bump, prepare_failed output", { skip }, () => {
+  writeFileSync(join(dir, "published.json"), "not json");
+  writeFileSync(join(dir, "github_output"), "");
+  const before = ["package.json", "package-lock.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
+  const r = auto(["prepare", "--soft"]);
+  assert.equal(r.status, 0);
+  assert.equal(r.stdout, "");
+  assert.match(r.stderr, /::warning::.*release not prepared/);
+  assert.match(readFileSync(join(dir, "github_output"), "utf8"), /^prepare_failed=true$/m);
+  const after = ["package.json", "package-lock.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
+  assert.deepEqual(after, before);
+});
+
+test("prepare --soft: lockfile version mismatch -> package.json not half-bumped", { skip }, () => {
+  writeFileSync(join(dir, "published.json"), '["0.2.0","0.3.0","0.3.1"]');
+  writeFileSync(join(dir, "github_output"), "");
+  const lockPath = join(work, "package-lock.json");
+  const lock = JSON.parse(readFileSync(lockPath, "utf8"));
+  lock.packages[""].version = "0.0.9";
+  writeFileSync(lockPath, JSON.stringify(lock, null, 2) + "\n");
+  const pkgBefore = readFileSync(join(work, "package.json"), "utf8");
+  const relBefore = readFileSync(join(work, "RELEASES.md"), "utf8");
+
+  const r = auto(["prepare", "--soft"]);
+  assert.equal(r.status, 0);
+  assert.equal(r.stdout, "");
+  assert.match(readFileSync(join(dir, "github_output"), "utf8"), /prepare_failed=true/);
+  assert.equal(readFileSync(join(work, "package.json"), "utf8"), pkgBefore);
+  assert.equal(readFileSync(join(work, "RELEASES.md"), "utf8"), relBefore);
 });

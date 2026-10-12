@@ -24,6 +24,9 @@ import {
   parsePublishedVersions,
   decideEnsure,
   decidePrepare,
+  newYorkDate,
+  releaseMarker,
+  findBumpCommit,
 } from "../scripts/auto-release.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -67,6 +70,25 @@ describe("versions", () => {
     assert.equal(versionAtLeast("22.9.0", "22.14.0"), false);
     assert.equal(versionAtLeast("v22.14.0", "22.14.0"), true);
     assert.equal(versionAtLeast("24.0.0-pre", "22.14.0"), true);
+  });
+});
+
+describe("dates and the bump-commit marker", () => {
+  test("newYorkDate uses America/New_York, not UTC", () => {
+    assert.equal(newYorkDate(new Date("2026-10-12T02:51:55Z")), "2026-10-11"); // v0.3.0's publish time
+    assert.equal(newYorkDate(new Date("2026-10-12T11:00:00Z")), "2026-10-12"); // the refresh cron
+    assert.equal(newYorkDate(new Date("2026-01-15T04:59:00Z")), "2026-01-14"); // EST
+  });
+  test("findBumpCommit matches the marker in the subject, exactly", () => {
+    const commits = [
+      { sha: "c3", commit: { message: "chore: refresh index — data only" } },
+      { sha: "c2", commit: { message: "chore: refresh index 2026-10-13 — x (release v0.3.10)" } },
+      { sha: "c1", commit: { message: `chore: refresh index 2026-10-12 — x ${releaseMarker("0.3.1")}\n\nbody` } },
+    ];
+    assert.equal(findBumpCommit(commits, "0.3.1"), "c1");
+    assert.equal(findBumpCommit(commits, "0.3.10"), "c2");
+    assert.equal(findBumpCommit(commits, "0.3.2"), null);
+    assert.equal(findBumpCommit([], "0.3.1"), null);
   });
 });
 
@@ -217,6 +239,10 @@ describe("decideEnsure", () => {
     const d = decideEnsure({ ...base, remoteTagSha: "abc", runs: [run("completed", "failure", 42), run("completed", "cancelled", 41)] });
     assert.equal(d.action, "fail");
     assert.match(d.reason, /gh run rerun 42/);
+  });
+  test("a dispatched run is matched by the tag's commit even if head_branch differs", () => {
+    const d = decideEnsure({ ...base, remoteTagSha: "abc", runs: [{ databaseId: 5, headBranch: "main", headSha: "abc", status: "in_progress", conclusion: null }] });
+    assert.equal(d.action, "none");
   });
   test("runs for other tags are ignored", () => {
     const d = decideEnsure({ ...base, remoteTagSha: "abc", runs: [run("completed", "failure", 7, "v0.3.0")] });

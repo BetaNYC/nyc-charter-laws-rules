@@ -22,7 +22,7 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 **No API key is required.** The Charter, Administrative Code, and Rules are served from an offline corpus bundled with the package, so this server works out of the box — no signup, no token, no environment variables to set.
 
-**The bundled text is as of the release.** An npm install carries the law text from the day that version was published. When the daily refresh picks up new law text, it also publishes a new patch release automatically (see [Releases](#releases)), so `npx -y @betanyc/nyc-charter-laws-rules` is normally at most a day behind `main`. `get_version` reports the dates you are actually serving. To serve `main`'s index directly, see [Getting current law text](#getting-current-law-text-nyc_laws_index_dir).
+**The bundled text is as of the release.** An npm install carries the law text from the day that version was published. When the daily refresh picks up new law text, it also publishes a new patch release automatically (see [Releases](#releases)), so the law text in `npx -y @betanyc/nyc-charter-laws-rules` is normally at most a day behind `main`'s. Code changes ship with the next release. Automatic releases pause while a hand-bumped version is waiting to be published or a release run has failed. `get_version` reports the dates you are actually serving. To serve `main`'s index directly, see [Getting current law text](#getting-current-law-text-nyc_laws_index_dir).
 
 ---
 
@@ -178,7 +178,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 **Automatic patch releases (law text changed).** When the daily refresh commits new law text, the same commit bumps the patch version (`package.json` and `package-lock.json`) and adds a dated "Automatic data release" entry to [RELEASES.md](RELEASES.md) naming which corpora moved. The job then pushes the `vX.Y.Z` tag and starts `release.yml` on it with `gh workflow run` (a tag pushed by the built-in token does not trigger workflows by itself; `workflow_dispatch` is GitHub's documented exception). Days with no new text produce no release. An automatic release ships `main` as it stands, so code merged since the last release goes out in the next one; bump the minor version by hand first if that code warrants it.
 
-If the current version is not on npm yet (for example you bumped it by hand and have not tagged it), the refresh still commits data but does not bump past your version. If an automatic release fails, its Release run goes red and every following refresh run goes red too, naming the run to rerun, until the version is published. To recover, fix the cause and rerun the failed Release run (Actions → Release → Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
+If the current version is not on npm yet (for example you bumped it by hand and have not tagged it), the refresh still commits data but does not bump past your version. If the release cannot be prepared (for example the npm registry is unreachable), the new law text is still committed without a version bump and the refresh run goes red. If an automatic release fails, its Release run goes red and every following refresh run goes red too, naming the run to rerun, until the version is published. To recover, fix the cause and rerun the failed Release run (Actions → Release → Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
 
 **Manual releases (code changes).**
 
@@ -188,8 +188,11 @@ If the current version is not on npm yet (for example you bumped it by hand and 
 **Authentication.** `release.yml` is set up for [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC, no stored token). Until the trusted publisher is configured on npmjs.com it falls back to the `NPM_TOKEN` secret. One-time setup, by a package owner:
 
 1. On npmjs.com, open `@betanyc/nyc-charter-laws-rules` → **Settings** → **Trusted Publisher** → **GitHub Actions**.
-2. Fill in exactly (case-sensitive): Organization or user `BetaNYC`; Repository `nyc-charter-laws-rules`; Workflow filename `release.yml` (filename only, not the path); Environment name left blank. Under **Allowed actions**, also allow direct publishing with `npm publish`: new configurations allow only `npm stage publish` by default, and the workflow publishes directly, so without this box the trusted-publishing attempt is refused. Save. npm does not validate these fields when you save them.
-3. After the next release succeeds, set **Settings** → **Publishing access** → "Require two-factor authentication and disallow tokens", then remove this repo's access to the `NPM_TOKEN` secret. A release that still succeeds after that has used trusted publishing. Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
+2. Fill in exactly (case-sensitive): Organization or user `BetaNYC`; Repository `nyc-charter-laws-rules`; Workflow filename `release.yml` (filename only, not the path); Environment name left blank. Under **Allowed actions**, also allow direct publishing with `npm publish`: configurations created after September 3, 2026 allow only `npm stage publish` by default, and the workflow publishes directly, so without this box npm rejects the trusted-publishing publish. Save. npm does not validate these fields when you save them.
+3. Set **Settings** → **Publishing access** → "Require two-factor authentication and disallow tokens". npm's docs say trusted publishers keep working under that setting, so the next release can only succeed through trusted publishing: a green Release run after this point is the confirmation. (A success before this step does not prove it, because the workflow falls back to `NPM_TOKEN`, and npm's docs give no way to tell from the run log which one was used.) If that release fails with an authentication error, the trusted publisher is misconfigured. Re-check step 2, or re-allow tokens, then rerun it.
+4. Once a release has succeeded with tokens disallowed, remove this repo's access to the `NPM_TOKEN` secret.
+
+Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
 
 ---
 

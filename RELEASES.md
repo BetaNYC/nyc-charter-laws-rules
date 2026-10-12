@@ -28,6 +28,8 @@ bump to recover. Setup for npm trusted publishing is in the README, "Releases".
 
 ## Format
 
+Dates are New York (America/New_York).
+
 ```markdown
 ## vX.Y.Z — YYYY-MM-DD
 
@@ -36,7 +38,7 @@ bump to recover. Setup for npm trusted publishing is in the README, "Releases".
 
 ---
 
-## v0.3.0 — 2026-10-12
+## v0.3.0 — 2026-10-11
 
 - **Current law text without waiting for a release** ([#26](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/26)). Set `NYC_LAWS_INDEX_DIR` to a directory laid out like `data/index/json/` (for example a sparse clone of this repo kept current with `git pull`) and the server serves that index instead of the one bundled in the package. A set but invalid directory stops the server at startup with a message naming the variable; it never falls back silently. See the README, "Getting current law text."
 - **Bundled text refreshed.** This release ships the index as of its publish date. 0.2.0 carried Charter text through LL 2026/112, Admin Code through LL 2026/116 and Rules effective July 14, 2026.
@@ -45,7 +47,7 @@ bump to recover. Setup for npm trusted publishing is in the README, "Releases".
 - `serverInfo.version` now reports the package version. It was hard-coded `0.1.0` through 0.2.0.
 - Minor rather than patch: a new configuration option, and `search` / `get_section` text output changes visibly for thousands of sections. No tool, parameter or response field was renamed or removed.
 
-## v0.2.0 — 2026-07-22
+## v0.2.0 — 2026-07-21
 
 - Unknown tool parameters are now **rejected instead of silently dropped** ([#19](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/19)). Every advertised `inputSchema` sets `additionalProperties: false`, and every zod object parsing tool arguments is `.strict()`. Previously `search(query="open data", bogus_unknown_param="x")` returned normal § 23-507 results — real, correctly sourced data answering a different question, with nothing in the response signalling that a filter had been dropped. The refusal names the offending key and lists the parameters that tool does accept.
 - Minor rather than patch: tool-call behavior visibly changes for any caller that was passing an undeclared parameter. No declared parameter was renamed or removed.
@@ -60,11 +62,11 @@ bump to recover. Setup for npm trusted publishing is in the README, "Releases".
 - `search` `limit` parameter is validated as an integer between 1 and 50.
 - `engines.node` relaxed from `>=20 <23` to `>=20`: the ceiling was pinned to the CI test matrix (20.x/22.x), not to any API the server uses, and wrongly excluded current Node releases.
 
-## v0.1.2 — 2026-05-26
+## v0.1.2 — 2026-05-25
 
 - Last release published manually, before tag-triggered automation was added.
 
-## v0.1.1 — 2026-05-22
+## v0.1.1 — 2026-05-21
 
 - Published manually.
 
