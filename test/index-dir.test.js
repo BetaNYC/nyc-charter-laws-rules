@@ -21,7 +21,7 @@ import {
   rmSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { join, dirname, relative } from "node:path";
+import { join, dirname, relative, basename } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -106,6 +106,18 @@ describe("NYC_LAWS_INDEX_DIR", () => {
     });
     assert.equal(r.status, 0, r.stderr);
     assert.equal(r.stdout.trim(), MARKER);
+  });
+
+  test("a leading ~/ expands to the home directory", () => {
+    // Point HOME at the fixture's parent so "~/<name>" resolves to the fixture.
+    const r = runCorpus(`console.log(JSON.stringify([c.INDEX_DIR, c.getVersions().charter.currentThrough]));`, {
+      HOME: dirname(fixtureDir),
+      NYC_LAWS_INDEX_DIR: "~/" + basename(fixtureDir),
+    });
+    assert.equal(r.status, 0, r.stderr);
+    const [dir, v] = JSON.parse(r.stdout);
+    assert.equal(dir, fixtureDir);
+    assert.equal(v, MARKER);
   });
 
   test("a directory without versions.json fails at startup, naming the variable", () => {

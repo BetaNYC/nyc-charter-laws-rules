@@ -246,3 +246,27 @@ test("#27: leading/trailing <TAB/> leaves no stray whitespace after normalize", 
   const xml = `<PARA><TAB tab-count="1"/><TAB tab-count="1"/>b.<TAB tab-count="1"/>The appropriations<TAB tab-count="1"/></PARA>`;
   assert.equal(normalize(extractText(parseFirst(xml, "PARA"))), "b. The appropriations");
 });
+
+test("#27 QA: no separator space before , ; or : (Admin Code 0-0-0-158725)", () => {
+  // admin_code.zip, verbatim: "...special flood hazard area<TAB/>, as such term".
+  const xml = `<PARA>located in a special flood hazard area<TAB tab-count="1"/>, as such term is defined</PARA>`;
+  assert.equal(
+    normalize(extractText(parseFirst(xml, "PARA"))),
+    "located in a special flood hazard area, as such term is defined"
+  );
+});
+
+test("#27 QA GUARD: a separator before '.' keeps its space (dot leader)", () => {
+  // admin_code.zip, verbatim table cell: "ditto<LINEBRK/>. . . ." is a dot
+  // leader on its own line, not the end of a sentence.
+  const xml = `<PARA><CELLFORMAT alignment="top">ditto<LINEBRK/>. . . .</CELLFORMAT></PARA>`;
+  assert.equal(normalize(extractText(parseFirst(xml, "PARA"))), "ditto . . . .");
+});
+
+test("#27 QA GUARD: a <TAB/> inside a word in the source stays a space (Rules § 31-01)", () => {
+  // rules.zip XML/0-0-0-29353.xml, RECORD 0-0-0-132089, verbatim: the source
+  // puts a tab inside "map". Known source quirk (RELEASES.md v0.3.0): a
+  // letter|letter exception would re-fuse ~1,200 real word boundaries.
+  const xml = `<PARA><CHARFORMAT bold="1"><TAB tab-count="1"/><TAB tab-count="1"/>Tax ma<TAB tab-count="1"/>p.</CHARFORMAT> &quot;Tax map&quot; means</PARA>`;
+  assert.equal(normalize(extractText(parseFirst(xml, "PARA"))), 'Tax ma p. "Tax map" means');
+});

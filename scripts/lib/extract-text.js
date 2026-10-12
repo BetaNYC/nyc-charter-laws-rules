@@ -105,6 +105,13 @@ function isDigitEnumerationMarker(s) {
   return /^\d+\.$/.test(s.trim());
 }
 
+// <TAB/> and <LINEBRK/>: empty elements that stand for whitespace (issue #27).
+function isSeparator(node) {
+  if (!node || typeof node !== "object") return false;
+  const tag = tagOf(node);
+  return tag === "TAB" || tag === "LINEBRK";
+}
+
 export function makeParser() {
   return new XMLParser(ORDERED_PARSER_OPTIONS);
 }
@@ -140,7 +147,21 @@ export function extractText(node) {
   if (typeof node === "number") return String(node);
 
   if (Array.isArray(node)) {
-    return node.map(extractText).join("");
+    // A separator directly followed by a sibling text node that opens with
+    // , ; or : adds no space: "area<TAB/>, as such" → "area, as such", not
+    // "area , as such". Only the immediate sibling is checked. "." is left out
+    // on purpose: the only "."-after-separator cases in the source are a dot
+    // leader ("ditto<LINEBRK/>. . . .") and a price cell ("$2,900.<TAB/>.50"),
+    // where dropping the space would misstate the source.
+    return node
+      .map((child, i) => {
+        if (isSeparator(child)) {
+          const next = node[i + 1];
+          if (next && "#text" in next && /^[,;:]/.test(String(next["#text"]))) return "";
+        }
+        return extractText(child);
+      })
+      .join("");
   }
 
   if (typeof node === "object") {
@@ -168,7 +189,7 @@ export function extractText(node) {
     // break — and fused sentences across it ("March 1.<LINEBRK/>Example" →
     // "March 1.Example"). Zero-width anchors (<DESTINATION/>, <BOOKMARK/>)
     // still emit nothing: they sit inside words and headings, not between them.
-    if (tag === "TAB" || tag === "LINEBRK") return " ";
+    if (isSeparator(node)) return " ";
     if (tag) return extractText(node[tag]);
   }
   return "";

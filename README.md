@@ -397,7 +397,7 @@ git pull
 }
 ```
 
-- The directory must hold `versions.json`, `charter.json`, `admin_code.json`, and `rules.json`, laid out like `data/index/json/`. A relative path resolves against the server's working directory.
+- The directory must hold `versions.json`, `charter.json`, `admin_code.json`, and `rules.json`, laid out like `data/index/json/`. A leading `~/` expands to your home directory. Any other relative path resolves against the server process's working directory, which your MCP client chooses, so an absolute path is safest.
 - If the variable is set and `versions.json` is not there, the server refuses to start and says why. It never falls back to the bundled index silently. Unset or blank means the bundled index.
 - The server notes the directory it is serving on stderr at startup. Restart it after a `git pull`; the index is read once per process.
 - `get_version` reports the currency dates of whichever index is loaded.

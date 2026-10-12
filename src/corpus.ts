@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "fs";
 import { join, dirname, resolve } from "path";
+import { homedir } from "os";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -21,7 +22,14 @@ export function resolveIndexDir(
 ): string {
   const override = env[INDEX_DIR_ENV]?.trim();
   if (!override) return BUNDLED_INDEX_DIR;
-  const dir = resolve(override);
+  // A leading "~/" is expanded here because MCP clients pass env values
+  // through without a shell. Other relative paths resolve against the
+  // server process's working directory, which the MCP client chooses.
+  const expanded =
+    override === "~" || override.startsWith("~/")
+      ? join(homedir(), override.slice(1))
+      : override;
+  const dir = resolve(expanded);
   if (!existsSync(join(dir, "versions.json"))) {
     throw new Error(
       `${INDEX_DIR_ENV} is set to "${override}", but ${join(dir, "versions.json")} ` +
