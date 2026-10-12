@@ -25,7 +25,8 @@
 //   ensure
 //     Run on EVERY refresh, after the commit step. If package.json's version is
 //     an automatic release (its RELEASES.md entry carries AUTO_MARKER) and is not
-//     on npm yet: push the vX.Y.Z tag at the bump commit if it is missing, then dispatch
+//     on npm yet: create the vX.Y.Z tag on the bump commit via the GitHub API if
+//     it is missing (the checkout is depth 1), then dispatch
 //     release.yml for that tag, unless a release run for the tag is already
 //     queued, running, or succeeded. If every earlier run for the tag failed, it
 //     exits non-zero so the refresh goes red too, naming the run to rerun. This
@@ -42,7 +43,7 @@
 //     Prints "true" or "false". Exits non-zero if the registry cannot be read,
 //     so a network failure is never mistaken for "not published".
 
-import { readFileSync, writeFileSync, appendFileSync } from "node:fs";
+import { readFileSync, writeFileSync, appendFileSync, realpathSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -361,6 +362,10 @@ function cmdPrepare(argv) {
 }
 
 function cmdEnsure() {
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (!repo || !/^[^/\s]+\/[^/\s]+$/.test(repo)) {
+    throw new Error("ensure must run in GitHub Actions: GITHUB_REPOSITORY (owner/repo) is not set");
+  }
   const pkg = readPkg();
   const tag = `v${pkg.version}`;
   const releasesMd = readFileSync(join(ROOT, "RELEASES.md"), "utf8");
@@ -384,10 +389,19 @@ function cmdEnsure() {
     return;
   }
   if (d.tag) {
-    const target = bumpCommitSha(pkg.version);
-    log(`pushing tag ${tag} at ${target}`);
-    sh("git", ["tag", tag, target]);
-    sh("git", ["push", "origin", `refs/tags/${tag}`]);
+    const target = bumpCommitSha(pkg.version, repo);
+    // Create the tag on GitHub, not locally: the checkout is depth 1, so the
+    // bump commit is usually absent here on a recovery run and `git tag` would
+    // fail ("nonexistent object"). REST "Create a reference",
+    // POST /repos/{owner}/{repo}/git/refs with `ref` ("fully qualified
+    // reference") and `sha`; needs Contents: write; 422 if it already exists.
+    // https://docs.github.com/en/rest/git/refs#create-a-reference
+    // A lightweight tag, same as `git tag vX.Y.Z && git push` for a manual
+    // release; release.yml only needs github.ref_name to match package.json.
+    log(`creating tag ${tag} at ${target} via the GitHub API`);
+    sh("gh", ["api", "--method", "POST", `repos/${repo}/git/refs`, "-f", `ref=refs/tags/${tag}`, "-f", `sha=${target}`], {
+      stdio: ["ignore", "ignore", "inherit"],
+    });
   }
   if (d.action === "dispatch") {
     // A tag pushed with GITHUB_TOKEN does not start release.yml's push trigger;
@@ -406,15 +420,16 @@ function cmdEnsure() {
  * https://docs.github.com/en/rest/commits/commits#list-commits.
  * Falls back to HEAD (whose package.json is the same version) with a warning.
  */
-function bumpCommitSha(version) {
+function bumpCommitSha(version, repo) {
   const head = sh("git", ["rev-parse", "HEAD"]);
-  const repo = process.env.GITHUB_REPOSITORY;
-  if (repo) {
+  try {
     const commits = JSON.parse(sh("gh", ["api", `repos/${repo}/commits?sha=${head}&path=package.json&per_page=30`]));
     const found = findBumpCommit(commits, version);
     if (found) return found;
+    annotate("warning", `bump commit for v${version} not found among recent package.json commits; tagging HEAD ${head}`);
+  } catch (e) {
+    annotate("warning", `could not list package.json commits (${e.message}); tagging HEAD ${head}`);
   }
-  annotate("warning", `bump commit for v${version} not found among recent package.json commits; tagging HEAD ${head}`);
   return head;
 }
 
@@ -438,7 +453,14 @@ function cmdIsPublished(argv) {
   process.stdout.write(String(publishedVersions(readPkg().name).includes(v)) + "\n");
 }
 
-const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+// Compare real paths: argv[1] may go through a symlink (e.g. macOS /var -> /private/var).
+const isMain = (() => {
+  try {
+    return Boolean(process.argv[1]) && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1]);
+  } catch {
+    return false;
+  }
+})();
 if (isMain) {
   const [cmd, ...rest] = process.argv.slice(2);
   const cmds = {

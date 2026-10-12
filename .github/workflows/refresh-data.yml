@@ -234,7 +234,7 @@ jobs:
       - name: Release if needed
         # Runs every day, after the commit step (and only if it succeeded). For
         # package.json's version: if its RELEASES.md entry is an automatic one
-        # and it is not on npm yet, push the vX.Y.Z tag on the bump commit (if missing) and
+        # and it is not on npm yet, create the vX.Y.Z tag on the bump commit via the GitHub API (if missing) and
         # dispatch release.yml for it, unless a release run for that tag is
         # already queued/running/succeeded. If every earlier release run for it
         # failed, this step fails red and names the run to rerun. Manual

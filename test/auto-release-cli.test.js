@@ -23,7 +23,7 @@ let dir, work, origin, bin, ghLog, bumpSha;
 
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, {
-    cwd: work,
+    cwd: opts.cwd ?? work,
     encoding: "utf8",
     env: {
       ...process.env,
@@ -32,6 +32,7 @@ function run(cmd, args, opts = {}) {
       STUB_DIR: dir,
       GITHUB_REPOSITORY: "BetaNYC/nyc-charter-laws-rules",
       GITHUB_OUTPUT: join(dir, "github_output"),
+      ORIGIN: origin,
       ...opts.env,
     },
   });
@@ -41,7 +42,7 @@ function run(cmd, args, opts = {}) {
   return r;
 }
 const git = (...a) => run("git", a).stdout.trim();
-const auto = (args, opts) => run(process.execPath, ["scripts/auto-release.js", ...args], opts);
+const auto = (args, opts = {}) => run(process.execPath, [join(opts.cwd ?? work, "scripts/auto-release.js"), ...args], opts);
 
 before(() => {
   if (skip) return;
@@ -57,7 +58,26 @@ before(() => {
   // npm stub: `npm view <pkg> versions --json` -> contents of $STUB_DIR/published.json
   writeFileSync(join(bin, "npm"), '#!/bin/sh\n[ "$1" = view ] && exec cat "$STUB_DIR/published.json"\necho "unexpected npm $*" >&2; exit 3\n');
   // gh stub: log every call; `run list` -> $STUB_DIR/runs.json
-  writeFileSync(join(bin, "gh"), '#!/bin/sh\necho "$*" >> "$GH_LOG"\n[ "$1 $2" = "run list" ] && exec cat "$STUB_DIR/runs.json"\n[ "$1" = api ] && exec cat "$STUB_DIR/commits.json"\nexit 0\n');
+  // gh stub: log every call. `run list` -> runs.json. `api --method POST
+  // .../git/refs -f ref=R -f sha=S` creates R in the bare origin, as GitHub
+  // would server-side (it has every object, unlike a depth-1 checkout). Other
+  // `api` calls -> commits.json, or exit 1 if $STUB_DIR/commits.fail exists.
+  writeFileSync(
+    join(bin, "gh"),
+    [
+      "#!/bin/sh",
+      'echo "$*" >> "$GH_LOG"',
+      '[ "$1 $2" = "run list" ] && exec cat "$STUB_DIR/runs.json"',
+      'if [ "$1 $2 $3" = "api --method POST" ]; then',
+      '  for a in "$@"; do case "$a" in ref=*) R="${a#ref=}";; sha=*) S="${a#sha=}";; esac; done',
+      '  git --git-dir "$ORIGIN" rev-parse -q --verify "$R" >/dev/null && { echo "Reference already exists (HTTP 422)" >&2; exit 1; }',
+      '  exec git --git-dir "$ORIGIN" update-ref "$R" "$S"',
+      "fi",
+      'if [ "$1" = api ]; then [ -e "$STUB_DIR/commits.fail" ] && { echo "HTTP 502" >&2; exit 1; }; exec cat "$STUB_DIR/commits.json"; fi',
+      "exit 0",
+      "",
+    ].join("\n"),
+  );
   chmodSync(join(bin, "npm"), 0o755);
   chmodSync(join(bin, "gh"), 0o755);
   writeFileSync(join(dir, "published.json"), '["0.2.0","0.3.0"]');
@@ -137,18 +157,46 @@ test("next refresh while v0.3.1 is still unpublished: prepare does not bump", { 
   assert.equal(readFileSync(join(work, "package.json"), "utf8"), before);
 });
 
-test("tag pushed on a later run lands on the bump commit, not a later data-only commit", { skip }, () => {
+test("recovery in a depth-1 checkout: tag lands on the bump commit, which is not in the clone", { skip }, () => {
   spawnSync("git", ["--git-dir", origin, "tag", "-d", "v0.3.1"]);
   writeFileSync(join(dir, "runs.json"), "[]");
   writeFileSync(join(work, "data/index/json/extra.json"), "{}\n");
   git("add", "-A");
   git("commit", "-qm", "chore: refresh index 2026-10-14 — data only");
   git("push", "-q", "origin", "main");
-  assert.notEqual(git("rev-parse", "HEAD"), bumpSha);
-  git("tag", "-d", "v0.3.1"); // the local tag from the first test
 
-  auto(["ensure"]);
+  // Same shape as actions/checkout's default (fetch-depth 1).
+  const shallow = join(dir, "shallow");
+  const c = spawnSync("git", ["clone", "-q", "--depth", "1", "--branch", "main", `file://${origin}`, shallow], { encoding: "utf8" });
+  assert.equal(c.status, 0, c.stderr);
+  const sHead = spawnSync("git", ["-C", shallow, "rev-parse", "HEAD"], { encoding: "utf8" }).stdout.trim();
+  assert.notEqual(sHead, bumpSha);
+  assert.notEqual(spawnSync("git", ["-C", shallow, "cat-file", "-e", bumpSha]).status, 0, "bump commit must be absent from the clone");
+
+  writeFileSync(ghLog, "");
+  auto(["ensure"], { cwd: shallow });
   assert.equal(spawnSync("git", ["--git-dir", origin, "rev-parse", "refs/tags/v0.3.1"], { encoding: "utf8" }).stdout.trim(), bumpSha);
+  const calls = readFileSync(ghLog, "utf8");
+  assert.ok(calls.includes(`api --method POST repos/BetaNYC/nyc-charter-laws-rules/git/refs -f ref=refs/tags/v0.3.1 -f sha=${bumpSha}`));
+  assert.ok(calls.includes("workflow run release.yml --ref v0.3.1"));
+});
+
+test("commit lookup fails: ensure warns and tags HEAD instead of throwing", { skip }, () => {
+  spawnSync("git", ["--git-dir", origin, "tag", "-d", "v0.3.1"]);
+  writeFileSync(join(dir, "commits.fail"), "");
+  try {
+    const r = auto(["ensure"]);
+    assert.match(r.stderr, /::warning::.*could not list package\.json commits/);
+    assert.equal(spawnSync("git", ["--git-dir", origin, "rev-parse", "refs/tags/v0.3.1"], { encoding: "utf8" }).stdout.trim(), git("rev-parse", "HEAD"));
+  } finally {
+    rmSync(join(dir, "commits.fail"));
+  }
+});
+
+test("ensure outside GitHub Actions fails fast", { skip }, () => {
+  const r = auto(["ensure"], { check: false, env: { GITHUB_REPOSITORY: "" } });
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /GITHUB_REPOSITORY/);
 });
 
 test("once published: ensure is a no-op and does not call gh", { skip }, () => {
