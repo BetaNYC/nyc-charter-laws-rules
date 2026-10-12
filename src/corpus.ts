@@ -1,9 +1,39 @@
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
+import { existsSync, readFileSync } from "fs";
+import { join, dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const INDEX_DIR = join(__dirname, "..", "data", "index", "json");
+
+// The index shipped inside the package. npm installs carry the text as of the
+// release that bundled it; the daily refresh only updates `main` (issue #26).
+export const BUNDLED_INDEX_DIR = join(__dirname, "..", "data", "index", "json");
+
+// Set this to a directory laid out like the repo's data/index/json/ (for
+// example a sparse clone kept current with `git pull`) to serve that text
+// instead of the bundled copy.
+export const INDEX_DIR_ENV = "NYC_LAWS_INDEX_DIR";
+
+// Resolve the index directory once, at startup. An override that does not hold
+// a versions.json fails loudly here rather than on the first tool call, and is
+// never silently replaced by the bundled index.
+export function resolveIndexDir(
+  env: NodeJS.ProcessEnv = process.env
+): string {
+  const override = env[INDEX_DIR_ENV]?.trim();
+  if (!override) return BUNDLED_INDEX_DIR;
+  const dir = resolve(override);
+  if (!existsSync(join(dir, "versions.json"))) {
+    throw new Error(
+      `${INDEX_DIR_ENV} is set to "${override}", but ${join(dir, "versions.json")} ` +
+        `does not exist. Point it at a directory laid out like data/index/json/ ` +
+        `(versions.json, charter.json, admin_code.json, rules.json), or unset it ` +
+        `to use the index bundled with this package.`
+    );
+  }
+  return dir;
+}
+
+export const INDEX_DIR = resolveIndexDir();
 
 export type Corpus = "charter" | "admin_code" | "rules";
 
@@ -39,7 +69,7 @@ function loadCorpus(corpus: Corpus): Section[] {
     raw = readFileSync(path, "utf8");
   } catch {
     throw new Error(
-      `Index for "${corpus}" not found. Run: npm run build-index`
+      `Index for "${corpus}" not found at ${path}. Run: npm run build-index`
     );
   }
   cache[corpus] = JSON.parse(raw) as Section[];

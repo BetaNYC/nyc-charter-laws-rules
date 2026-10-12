@@ -22,7 +22,15 @@ add an entry below, then push a matching `vX.Y.Z` tag.
 
 ---
 
-## v0.2.0 — unreleased
+## v0.3.0 — unreleased
+
+- **Current law text without waiting for a release** ([#26](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/26)). Set `NYC_LAWS_INDEX_DIR` to a directory laid out like `data/index/json/` (for example a sparse clone of this repo kept current with `git pull`) and the server serves that index instead of the one bundled in the package. A set but invalid directory stops the server at startup with a message naming the variable; it never falls back silently. See the README, "Getting current law text."
+- **Bundled text refreshed.** This release ships the index as of its publish date. 0.2.0 carried Charter text through LL 2026/112, Admin Code through LL 2026/116 and Rules effective July 14, 2026.
+- **Subdivision labels are separated from their text** ([#27](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/27)). `a.There shall be…` is now `a. There shall be…`, and the same for `(1)`, `(a)`, `13-a.`, bullets and table cells. The AML source separates them with an empty `<TAB/>` element (and lines with `<LINEBRK/>`), which the parser had rendered as nothing. Before the fix the issue's pattern matched 333 Charter, 3,122 Admin Code and 192 Rules sections; it now matches none except four Admin Code sections whose source text has no separator at all. Section text changed across all three corpora; ids, citations, headings and section counts did not.
+- `serverInfo.version` now reports the package version. It was hard-coded `0.1.0` through 0.2.0.
+- Minor rather than patch: a new configuration option, and `search` / `get_section` text output changes visibly for thousands of sections. No tool, parameter or response field was renamed or removed.
+
+## v0.2.0 — 2026-07-22
 
 - Unknown tool parameters are now **rejected instead of silently dropped** ([#19](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/19)). Every advertised `inputSchema` sets `additionalProperties: false`, and every zod object parsing tool arguments is `.strict()`. Previously `search(query="open data", bogus_unknown_param="x")` returned normal § 23-507 results — real, correctly sourced data answering a different question, with nothing in the response signalling that a filter had been dropped. The refusal names the offending key and lists the parameters that tool does accept.
 - Minor rather than patch: tool-call behavior visibly changes for any caller that was passing an undeclared parameter. No declared parameter was renamed or removed.
