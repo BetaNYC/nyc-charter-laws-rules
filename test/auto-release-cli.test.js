@@ -94,6 +94,14 @@ before(() => {
   lock.version = "0.3.0";
   lock.packages[""].version = "0.3.0";
   writeFileSync(join(work, "package-lock.json"), JSON.stringify(lock, null, 2) + "\n");
+  // Drop any RELEASES.md entries newer than the pinned 0.3.0, so the fixture
+  // still looks like "0.3.0 is the latest release" after real releases ship.
+  const releases = readFileSync(join(work, "RELEASES.md"), "utf8");
+  const first = releases.search(/^## v\d/m);
+  const pinned = releases.indexOf("## v0.3.0");
+  if (first !== -1 && pinned > first) {
+    writeFileSync(join(work, "RELEASES.md"), releases.slice(0, first) + releases.slice(pinned));
+  }
 
   spawnSync("git", ["init", "-q", "--bare", origin]);
   git("init", "-q", "-b", "main");
