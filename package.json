@@ -50,7 +50,7 @@
     "test:diff": "node --test test/diff/differential.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "adm-zip": "^0.5.17",
     "fast-xml-parser": "^5.8.0",
     "zod": "^3.23.0"
