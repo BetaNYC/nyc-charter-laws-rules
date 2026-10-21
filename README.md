@@ -46,7 +46,7 @@ Exposes 5 tools over MCP:
 
 Keyword search across the NYC Charter, Administrative Code, and Rules. It is keyword matching, not a question-answering engine, so short keyword queries work best: `sidewalk shed` rather than "How long can a sidewalk shed stay up?"
 
-1. **Phrase first.** The whole query is matched as typed (case-insensitive). If any section contains it, those results are returned, relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
+1. **Phrase first.** The whole query is matched as typed (case-insensitive). Quotes around the whole query, straight or curly, are removed first, so `"open data"` and `open data` search the same phrase. If any section contains it, those results are returned, relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
 2. **Terms, if the phrase finds nothing.** Question words and common words (`how`, `what`, `can`, `a`, `the`, `up`, `about`, …) are dropped. The full list is `SEARCH_STOPWORDS` in `src/corpus.ts`. Each remaining term matches at the start of a word, with a trailing plural `s` ignored, so `tanks` finds "tank" and `shed` does not find "established". Sections are ranked by how many terms they contain, then by the same heading > citation > body weights.
 3. **Said out loud.** When step 2 runs, the first line of the response says so and lists the terms:
    - every result contains every term: `No section contains the exact query; showing sections containing all of: building, owners, required, drinking, water, tanks.`

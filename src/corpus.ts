@@ -200,9 +200,24 @@ export interface SearchOutcome {
   allTermResults: number;
 }
 
+// Quotes around the whole query mark it as a phrase; they are not part of it.
+// Strips one surrounding pair of straight or curly quotes, double or single:
+// "open data", “open data”, 'open data', ‘open data’ all become open data.
+// A query holding more than one quoted piece ("open" and "data") is left as
+// typed; an apostrophe inside a word (owner's) does not count as a quote.
+const SURROUNDING_QUOTES = /^\s*["“”'‘’]\s*(.*?)\s*["“”'‘’]\s*$/s;
+export function stripSurroundingQuotes(query: string): string {
+  const m = SURROUNDING_QUOTES.exec(query);
+  if (!m || !m[1]) return query;
+  const inner = m[1];
+  const withoutApostrophes = inner.replace(/(?<=[\p{L}\p{N}])['’](?=[\p{L}\p{N}])/gu, "");
+  return /["“”'‘’]/.test(withoutApostrophes) ? query : inner;
+}
+
 // Search with a fallback for plain-language questions (issue #30).
-//   1. The whole query as a phrase (searchCorpus). If anything matches, that
-//      is the answer, unchanged from earlier releases.
+//   1. The whole query as a phrase (searchCorpus), minus any surrounding
+//      quotes. If anything matches, that is the answer, unchanged from earlier
+//      releases for an unquoted query.
 //   2. Otherwise split it into terms (queryTerms) and rank sections by how
 //      many terms they contain, then by the same heading > citation > body
 //      weights summed over the terms they contain.
@@ -215,7 +230,7 @@ export function searchWithFallback(
   corpus: Corpus | "all" = "all",
   limit = 10
 ): SearchOutcome {
-  const phrase = searchCorpus(query, corpus, limit);
+  const phrase = searchCorpus(stripSurroundingQuotes(query), corpus, limit);
   const terms = queryTerms(query);
   if (phrase.length > 0 || terms.length === 0) {
     return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length };

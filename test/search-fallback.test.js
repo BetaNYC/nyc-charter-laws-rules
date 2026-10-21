@@ -30,6 +30,7 @@ import {
   searchCorpus,
   searchWithFallback,
   queryTerms,
+  stripSurroundingQuotes,
 } from "../dist/corpus.js";
 import { callTool } from "../dist/tools.js";
 
@@ -65,6 +66,24 @@ describe("queryTerms", () => {
   });
 });
 
+describe("stripSurroundingQuotes", () => {
+  test("strips one surrounding pair of straight or curly quotes", () => {
+    for (const q of ['"open data"', "“open data”", "'open data'", "‘open data’", '  "open data"  ']) {
+      assert.equal(stripSurroundingQuotes(q), "open data", q);
+    }
+  });
+
+  test("leaves unquoted, partly quoted and multi-quoted queries as typed", () => {
+    for (const q of ["open data", '"open data', 'say "open" now', '"open" and "data"', '""']) {
+      assert.equal(stripSurroundingQuotes(q), q, q);
+    }
+  });
+
+  test("an apostrophe inside a word does not count as a quote", () => {
+    assert.equal(stripSurroundingQuotes("“owner’s duty”"), "owner’s duty");
+  });
+});
+
 // ---------------------------------------------------------------------------
 // Layer 1: exact behavior against the committed synthetic fixture.
 //
@@ -87,10 +106,14 @@ const FIXTURE_CASES = [
   ["tank question, limit 1", "search", TANK_Q, "all", 1],
   ["no term in common", "search", "Which sidewalk tanks?", "all", 10],
   ["phrase", "search", "sidewalk shed", "all", 10],
+  ["quoted, straight", "search", '"open data"', "all", 10],
+  ["quoted, curly", "search", "“open data”", "all", 10],
+  ["quoted, no phrase match", "search", '"stay shed"', "all", 10],
   ["shed question tool", "tool", SHED_Q, "all", 10],
   ["tank question tool, limit 1", "tool", TANK_Q, "all", 1],
   ["no term in common tool", "tool", "Which sidewalk tanks?", "all", 10],
   ["phrase tool", "tool", "sidewalk shed", "all", 10],
+  ["quoted tool", "tool", '"open data"', "all", 10],
 ];
 
 let fx;
@@ -172,6 +195,21 @@ describe("searchWithFallback (fixture index)", () => {
     assert.deepEqual(r.results, r.phrase);
     assert.deepEqual(r.results, ["admin_code § 9-001", "rules § 1-01", "admin_code § 9-002"]);
   });
+
+  test("a quoted query matches as a phrase, straight or curly quotes", () => {
+    for (const label of ["quoted, straight", "quoted, curly"]) {
+      const r = fx[label];
+      assert.equal(r.mode, "phrase", label);
+      assert.deepEqual(r.results, ["charter § 1"], label);
+      assert.deepEqual(r.phrase, [], `${label}: searchCorpus alone still sees the quotes`);
+    }
+  });
+
+  test("a quoted query with no phrase match falls back to its terms", () => {
+    const r = fx["quoted, no phrase match"];
+    assert.notEqual(r.mode, "phrase");
+    assert.deepEqual(r.terms, ["stay", "shed"]);
+  });
 });
 
 describe("search tool response (fixture index)", () => {
@@ -195,8 +233,8 @@ describe("search tool response (fixture index)", () => {
     assert.doesNotMatch(text, WIDENED);
   });
 
-  test("a phrase match carries no notice", () => {
-    for (const label of ["phrase tool"]) {
+  test("a phrase match, quoted or not, carries no notice", () => {
+    for (const label of ["phrase tool", "quoted tool"]) {
       assert.match(firstLine(fx[label]), RESULT_LINE, label);
       assert.doesNotMatch(fx[label], /No section|matched every term/, label);
     }
