@@ -5,7 +5,8 @@
 //   full-then-compact (default)  full FOOTER on the first response after the
 //                                server starts, COMPACT_FOOTER after that
 //   full                         full FOOTER on every response (0.3.x behavior)
-// An unrecognized value falls back to the default with a warning on stderr.
+// An unrecognized value falls back to full (more disclaimer, never less),
+// with a warning on stderr.
 // Whatever the mode, the server sends FOOTER as its `instructions`.
 //
 // "First response" is per server process, so the in-process tests reset that
@@ -66,9 +67,9 @@ describe("resolveFooterMode", () => {
     );
   });
 
-  test("a typo falls back to the default and returns a warning naming the variable", () => {
+  test("a typo falls back to full and returns a warning naming the variable", () => {
     const r = resolveFooterMode({ [FOOTER_ENV]: "ful" });
-    assert.equal(r.mode, "full-then-compact");
+    assert.equal(r.mode, "full");
     assert.match(r.warning, /NYC_CLR_FOOTER="ful"/);
     assert.match(r.warning, /full-then-compact, full/);
   });
@@ -93,10 +94,10 @@ describe("footer modes in callTool", { skip: !CORPUS_PRESENT && "committed index
     }
   });
 
-  test("a typo behaves like the default", async () => {
+  test("a typo behaves like full", async () => {
     resetFooterState({ [FOOTER_ENV]: "bogus" });
     assert.ok(hasFull(textOf(await callTool("get_version", {}))));
-    assert.ok(hasCompact(textOf(await callTool("get_version", {}))));
+    assert.ok(hasFull(textOf(await callTool("get_version", {}))));
   });
 
   test("not-found, empty and error responses carry a disclaimer", async () => {
@@ -205,10 +206,10 @@ describe("MCP server over stdio", { skip: !CORPUS_PRESENT && "committed index no
     assert.ok(hasFull(second));
   });
 
-  test("a typo warns once on stderr and serves the default", async () => {
+  test("a typo warns once on stderr and serves full", async () => {
     const { first, second, stderr } = await mcpSession({ [FOOTER_ENV]: "compact" });
     assert.equal(stderr.match(/NYC_CLR_FOOTER="compact" is not one of/g)?.length, 1, stderr);
     assert.ok(hasFull(first));
-    assert.ok(hasCompact(second));
+    assert.ok(hasFull(second));
   });
 });

@@ -55,11 +55,12 @@ export function resolveFooterMode(
   if ((FOOTER_MODES as readonly string[]).includes(value)) {
     return { mode: value as FooterMode };
   }
+  // An unrecognized value errs toward more disclaimer, never less (#25).
   return {
-    mode: DEFAULT_FOOTER_MODE,
+    mode: "full",
     warning:
       `nyc-charter-laws-rules: ${FOOTER_ENV}="${raw}" is not one of ` +
-      `${FOOTER_MODES.join(", ")}; using ${DEFAULT_FOOTER_MODE}.`,
+      `${FOOTER_MODES.join(", ")}; using full.`,
   };
 }
 
