@@ -32,7 +32,7 @@ Exposes 5 tools over MCP:
 
 | Tool | Description |
 |---|---|
-| `search` | Search across all three documents by keyword or phrase |
+| `search` | Keyword search across all three documents (short keyword queries work best) |
 | `get_section` | Retrieve a specific section by citation (e.g. `§ 259`, `Chapter 11`) |
 | `list_titles` | List the top-level chapters or titles of a document |
 | `get_title` | Retrieve all sections within a chapter or title |
@@ -44,7 +44,15 @@ Exposes 5 tools over MCP:
 
 ### `search`
 
-Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
+Keyword search across the NYC Charter, Administrative Code, and Rules. It is keyword matching, not a question-answering engine, so short keyword queries work best: `sidewalk shed` rather than "How long can a sidewalk shed stay up?"
+
+1. **Phrase first.** The whole query is matched as typed (case-insensitive). If any section contains it, those results are returned, relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
+2. **Terms, if the phrase finds nothing.** Question words and common words (`how`, `what`, `can`, `a`, `the`, `up`, `about`, …) are dropped. The full list is `SEARCH_STOPWORDS` in `src/corpus.ts`. Each remaining term matches at the start of a word, with a trailing plural `s` ignored, so `tanks` finds "tank" and `shed` does not find "established". Sections are ranked by how many terms they contain, then by the same heading > citation > body weights.
+3. **Said out loud.** When step 2 runs, the first line of the response says so and lists the terms:
+   - every result contains every term: `No section contains the exact query; showing sections containing all of: building, owners, required, drinking, water, tanks.`
+   - partial matches were added: `No section matched every term; showing sections matching some of: …`, or `Only 1 section matched every term (listed first); the rest match some of: long, sidewalk, shed, stay.`
+
+There is no term weighting yet, so a long definitions section that contains every word can outrank the section you want. Ranked full-text search is a separate, later change.
 
 | Parameter | Type | Required | Default | Description |
 |---|---|---|---|---|
@@ -56,6 +64,7 @@ Search across the NYC Charter, Administrative Code, and Rules by keyword or phra
 search("open data")
 search("landlord inspection", corpus="admin_code", limit=20)
 search("board of health", corpus="rules")
+search("How long can a sidewalk shed stay up?")   # term fallback; first line says so
 ```
 
 ---
@@ -146,6 +155,7 @@ npm test
 | `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming that inline labels with no `<TAB/>` after them in the source (`(6)the`) are left untouched. |
 | `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no subdivision label fused to the next word (`a.There`, issue #27), no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
+| `test/search-fallback.test.js` | Plain-language questions (issue #30), against the committed index. Stopword and question-word stripping (`queryTerms`); the issue's two questions finding Rules § 102-07 and Admin Code § 17-194; keyword queries that match as a phrase returning exactly what `searchCorpus` returns; terms matching at a word start only; and the response's first line naming the terms used, with the widened notice only when partial matches are shown. |
 | `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
 | `test/footer-modes.test.js` | Disclaimer footer modes (issue #25). `NYC_CLR_FOOTER` parsing (unset, blank, both modes, a typo falling back to the default with a warning); the default sending the full footer once and the one-line footer after; `full` sending it every time; not-found, empty and error responses carrying a disclaimer; and the invariant that every response in every mode, including an unrecognized one, says "legal advice". Also starts the server over stdio to check `instructions`, the first and second responses, and the single stderr warning. |
 | `test/strict-schema.test.js` | Strict tool schemas (issue #19). Asserts every tool in `TOOLS` (from `dist/tools.js`) advertises `additionalProperties: false`, and that `callTool()` rejects an undeclared parameter with an error naming both the offending key and that tool's accepted keys — rather than silently dropping it and returning unfiltered results. Includes regression guards that valid calls, with and without optional params, still succeed. |

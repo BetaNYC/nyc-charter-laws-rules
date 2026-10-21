@@ -142,6 +142,116 @@ export function searchCorpus(
   return scored.slice(0, limit).map((r) => r.s);
 }
 
+// Words dropped from a query before term matching (issue #30): question words,
+// auxiliary verbs, pronouns, articles and common prepositions. Kept short and
+// explicit so a reader can see exactly what is ignored. Only the term stages
+// use it; a query that matches as a whole phrase is searched exactly as typed.
+export const SEARCH_STOPWORDS: ReadonlySet<string> = new Set([
+  // question words
+  "who", "whom", "whose", "what", "which", "when", "where", "why", "how",
+  // auxiliary and modal verbs
+  "is", "are", "was", "were", "be", "been", "being", "am",
+  "do", "does", "did", "doing", "done",
+  "have", "has", "had", "having",
+  "can", "could", "shall", "should", "will", "would", "may", "might", "must",
+  // pronouns and determiners
+  "i", "me", "my", "we", "us", "our", "you", "your", "he", "him", "his",
+  "she", "her", "it", "its", "they", "them", "their", "there",
+  "this", "that", "these", "those", "a", "an", "the", "any", "some",
+  // prepositions and conjunctions
+  "of", "to", "in", "on", "at", "for", "by", "with", "about", "from", "into",
+  "up", "out", "as", "and", "or", "if", "so", "than", "then",
+]);
+
+// Split a query into search terms: lowercase words (letters, digits, and
+// inner "." "-" "'" so "28-220.1" and "owner's" stay whole), minus stopwords,
+// de-duplicated in query order.
+export function queryTerms(query: string): string[] {
+  const words = query.toLowerCase().match(/[\p{L}\p{N}](?:[\p{L}\p{N}.'’-]*[\p{L}\p{N}])?/gu) ?? [];
+  const terms: string[] = [];
+  for (const w of words) {
+    if (!SEARCH_STOPWORDS.has(w) && !terms.includes(w)) terms.push(w);
+  }
+  return terms;
+}
+
+// A term matches at the start of a word, and a trailing plural "s" is dropped
+// first, so "tanks" matches "tank" and "shed" matches "sheds" but "shed" does
+// not match "established" and "long" does not match "belong".
+function termRegExp(term: string): RegExp {
+  const stem =
+    term.length > 3 && term.endsWith("s") && !term.endsWith("ss")
+      ? term.slice(0, -1)
+      : term;
+  return new RegExp(`(?<![\\p{L}\\p{N}])${escapeRegExp(stem)}`, "iu");
+}
+
+export type SearchMode = "phrase" | "all-terms" | "some-terms";
+
+export interface SearchOutcome {
+  results: Section[];
+  // phrase: the whole query matched as typed (searchCorpus, unchanged).
+  // all-terms: no phrase match; every result contains every term.
+  // some-terms: fewer than `limit` sections contain every term, so sections
+  //   matching only some terms follow them. The caller must say so.
+  mode: SearchMode;
+  terms: string[];
+  // How many of `results` contain every term (all of them unless some-terms).
+  allTermResults: number;
+}
+
+// Search with a fallback for plain-language questions (issue #30).
+//   1. The whole query as a phrase (searchCorpus). If anything matches, that
+//      is the answer, unchanged from earlier releases.
+//   2. Otherwise split it into terms (queryTerms) and rank sections by how
+//      many terms they contain, then by the same heading > citation > body
+//      weights summed over the terms they contain.
+//   3. Sections containing every term come first. If there are fewer of them
+//      than `limit`, sections containing only some terms fill the rest, and
+//      the mode is "some-terms" so the response can say it widened.
+// This is keyword matching, not ranked full-text search: no term weighting.
+export function searchWithFallback(
+  query: string,
+  corpus: Corpus | "all" = "all",
+  limit = 10
+): SearchOutcome {
+  const phrase = searchCorpus(query, corpus, limit);
+  const terms = queryTerms(query);
+  if (phrase.length > 0 || terms.length === 0) {
+    return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length };
+  }
+
+  const corpora: Corpus[] =
+    corpus === "all" ? ["charter", "admin_code", "rules"] : [corpus];
+  const res = terms.map(termRegExp);
+  const scored: { s: Section; matched: number; score: number }[] = [];
+  for (const c of corpora) {
+    for (const s of loadCorpus(c)) {
+      let matched = 0;
+      let score = 0;
+      for (const re of res) {
+        const h = re.test(s.heading);
+        const ci = re.test(s.citation);
+        const t = re.test(s.text);
+        if (h || ci || t) matched++;
+        if (h) score += 100;
+        if (ci) score += 50;
+        if (t) score += 10;
+      }
+      if (matched > 0) scored.push({ s, matched, score });
+    }
+  }
+  scored.sort((a, b) => b.matched - a.matched || b.score - a.score); // stable
+  const top = scored.slice(0, limit);
+  const allTermResults = top.filter((r) => r.matched === terms.length).length;
+  return {
+    results: top.map((r) => r.s),
+    mode: allTermResults === top.length ? "all-terms" : "some-terms",
+    terms,
+    allTermResults,
+  };
+}
+
 // Normalize a citation for comparison: strip "§"/"section" prefixes, lowercase,
 // collapse whitespace. "§ 11-602.1", "Section 11-602.1", "11-602.1" all
 // normalize to "11-602.1"; "Chapter 3" stays "chapter 3".

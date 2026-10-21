@@ -5,11 +5,12 @@
 
 import { z } from "zod";
 import {
-  searchCorpus,
+  searchWithFallback,
   getSection,
   listTitles,
   getTitle,
   getVersions,
+  type SearchMode,
 } from "./corpus.js";
 
 const CAVEAT =
@@ -108,14 +109,37 @@ function parseArgs<T extends z.ZodRawShape>(
   );
 }
 
+// First line of a search response whose query did not match as typed
+// (issue #30). The response must never quietly answer a different question
+// (the principle behind #19), so it says which terms it searched for and,
+// when it widened to partial matches, that it did.
+export function searchNotice(
+  mode: SearchMode,
+  terms: string[],
+  allTermResults: number
+): string | null {
+  const list = terms.join(", ");
+  if (mode === "all-terms") {
+    return `No section contains the exact query; showing sections containing all of: ${list}.`;
+  }
+  if (mode === "some-terms") {
+    if (allTermResults === 0) {
+      return `No section matched every term; showing sections matching some of: ${list}.`;
+    }
+    const n = allTermResults === 1 ? "1 section" : `${allTermResults} sections`;
+    return `Only ${n} matched every term (listed first); the rest match some of: ${list}.`;
+  }
+  return null;
+}
+
 export const TOOLS = [
   {
     name: "search",
-    description: `Search across the NYC Charter, Administrative Code, and Rules of the City of New York by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches. ${CAVEAT}`,
+    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase; results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, those with every term first; the response's first line says when this happened and which terms were used. ${CAVEAT}`,
     inputSchema: {
       type: "object",
       properties: {
-        query: { type: "string", description: "Search term or phrase" },
+        query: { type: "string", description: "Keywords or an exact phrase (short keyword queries work best)" },
         corpus: {
           type: "string",
           enum: ["charter", "admin_code", "rules", "all"],
@@ -199,16 +223,22 @@ export async function callTool(name: string, args: unknown) {
           corpus: z.enum(["charter", "admin_code", "rules", "all"]).optional(),
           limit: z.number().int().min(1).max(50).optional(),
         }, args);
-        const results = searchCorpus(query, corpus ?? "all", limit ?? 10);
+        const { results, mode, terms, allTermResults } = searchWithFallback(
+          query,
+          corpus ?? "all",
+          limit ?? 10
+        );
         if (results.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No results found for "${query}".`) }] };
         }
-        const text = results
+        const notice = searchNotice(mode, terms, allTermResults);
+        const body = results
           .map(
             (s) =>
               `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}\n${s.text.slice(0, 400)}${s.text.length > 400 ? "…" : ""}`
           )
           .join("\n\n---\n\n");
+        const text = notice ? `${notice}\n\n${body}` : body;
         return { content: [{ type: "text", text: withFooter(text) }] };
       }
 
