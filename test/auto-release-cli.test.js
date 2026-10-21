@@ -87,6 +87,11 @@ before(() => {
   for (const f of ["package.json", "package-lock.json", "RELEASES.md", "scripts/auto-release.js", "data/index/json/versions.json"]) {
     copyFileSync(join(ROOT, f), join(work, f));
   }
+  // Pin the Rules starting point too: the daily refresh rebuilds the real
+  // versions.json before the tests run, so it may already have moved.
+  const vFix = JSON.parse(readFileSync(join(work, "data/index/json/versions.json"), "utf8"));
+  vFix.rules.currentThrough = "Current through rules effective October 4, 2026.";
+  writeFileSync(join(work, "data/index/json/versions.json"), JSON.stringify(vFix, null, 2) + "\n");
   // Pin the fixture to 0.3.0 regardless of what the real package.json says.
   const pkg = readFileSync(join(work, "package.json"), "utf8").replace(/"version": "[^"]+"/, '"version": "0.3.0"');
   writeFileSync(join(work, "package.json"), pkg);
