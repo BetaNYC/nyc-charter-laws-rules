@@ -99,6 +99,8 @@ describe("corpus moves (from versions.json)", () => {
   });
   test("only corpora whose currentThrough changed are listed", () => {
     const prev = JSON.parse(readFileSync(join(ROOT, "data/index/json/versions.json"), "utf8"));
+    // Pin the starting point: the refresh rebuilds versions.json before tests run.
+    prev.rules.currentThrough = "Current through rules effective October 4, 2026.";
     const cur = structuredClone(prev);
     cur.rules.currentThrough = "Current through rules effective October 18, 2026.";
     cur.charter.indexedAt = "2099-01-01T00:00:00Z"; // indexedAt alone is not a move

@@ -32,7 +32,7 @@ Exposes 5 tools over MCP:
 
 | Tool | Description |
 |---|---|
-| `search` | Search across all three documents by keyword or phrase |
+| `search` | Keyword search across all three documents (short keyword queries work best) |
 | `get_section` | Retrieve a specific section by citation (e.g. `§ 259`, `Chapter 11`) |
 | `list_titles` | List the top-level chapters or titles of a document |
 | `get_title` | Retrieve all sections within a chapter or title |
@@ -44,7 +44,15 @@ Exposes 5 tools over MCP:
 
 ### `search`
 
-Search across the NYC Charter, Administrative Code, and Rules by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
+Keyword search across the NYC Charter, Administrative Code, and Rules. It is keyword matching, not a question-answering engine, so short keyword queries work best: `sidewalk shed` rather than "How long can a sidewalk shed stay up?"
+
+1. **Phrase first.** The whole query is matched as typed (case-insensitive). Quotes around the whole query, straight or curly, are removed first, so `"open data"` and `open data` search the same phrase. If any section contains it, those results are returned, relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches.
+2. **Terms, if the phrase finds nothing.** Question words and common words (`how`, `what`, `can`, `a`, `the`, `up`, `about`, …) are dropped. The full list is `SEARCH_STOPWORDS` in `src/corpus.ts`. Each remaining term matches at the start of a word, with a trailing plural `s` ignored, so `tanks` finds "tank" and `shed` does not find "established". Sections are ranked by how many terms they contain, then by the same heading > citation > body weights.
+3. **Said out loud.** When step 2 runs, the first line of the response says so and lists the terms:
+   - every result contains every term: `No section contains the exact query; showing sections containing all of: building, owners, required, drinking, water, tanks.`
+   - partial matches were added: `No section matched every term; showing sections matching some of: …`, or `Only 1 section matched every term (listed first); the rest match some of: long, sidewalk, shed, stay.`
+
+There is no term weighting yet, so a long definitions section that contains every word can outrank the section you want. Ranked full-text search is a separate, later change.
 
 | Parameter | Type | Required | Default | Description |
 |---|---|---|---|---|
@@ -56,6 +64,7 @@ Search across the NYC Charter, Administrative Code, and Rules by keyword or phra
 search("open data")
 search("landlord inspection", corpus="admin_code", limit=20)
 search("board of health", corpus="rules")
+search("How long can a sidewalk shed stay up?")   # term fallback; first line says so
 ```
 
 ---
@@ -136,7 +145,7 @@ Rules of NYC:          Current through rules effective July 1, 2026. (8671 secti
 npm test
 ```
 
-`npm test` builds the TypeScript source first (`pretest` script), then runs the full suite with `node --test`. All three test layers run together; the suite completes in under 2 seconds on a laptop.
+`npm test` builds the TypeScript source first (`pretest` script), then runs the full suite with `node --test`. Every test file in the table below runs together. On a laptop the whole run, build included, takes about 4 seconds (measured October 2026).
 
 ### Test layers
 
@@ -144,11 +153,16 @@ npm test
 |---|---|
 | `test/extract-text.test.js` | Unit tests for the `extractText`, `normalize`, `childrenByTag`, `getAttr`, and `tagOf` helpers in `scripts/lib/extract-text.js`. Covers inline-LINK document order (issue #3 regression), entity decoding, ALP-marker stripping, enumeration-marker repair, empty/self-closing elements, deep nesting, whitespace-only text nodes, and helper edge cases. |
 | `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming that inline labels with no `<TAB/>` after them in the source (`(6)the`) are left untouched. |
-| `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (all 22,079 sections across charter, admin\_code, and rules). Asserts: no run-together text, no subdivision label fused to the next word (`a.There`, issue #27), no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
+| `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (every section across charter, admin\_code, and rules). Asserts: no run-together text, no subdivision label fused to the next word (`a.There`, issue #27), no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
+| `test/search-fallback.test.js` | Plain-language questions (issue #30). Unit tests for stopword and question-word stripping (`queryTerms`) and surrounding-quote removal (`stripSurroundingQuotes`). Exact ranks, counts and first-line notices run against a synthetic 8-section index committed at `test/fixtures/search-index/`, served through `NYC_LAWS_INDEX_DIR` in a child process: ranking by terms matched, word-start matching (`shed` is not found in "established"), plural `s`, the all-terms and widened notices, phrase results unchanged, quoted queries matched as phrases. Against the real index only behavior is checked (fallback used, notice first, terms listed, results non-empty), so a daily refresh cannot turn it red. |
 | `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
+| `test/footer-modes.test.js` | Disclaimer footer modes (issue #25). `NYC_CLR_FOOTER` parsing (unset, blank, both modes, a typo falling back to `full` with a warning); the default sending the full footer once and the one-line footer after; `full` sending it every time; not-found, empty and error responses carrying a disclaimer; and the invariant that every response in every mode, including an unrecognized one, says "legal advice". Also starts the server over stdio to check `instructions`, the first and second responses, and the single stderr warning. |
 | `test/strict-schema.test.js` | Strict tool schemas (issue #19). Asserts every tool in `TOOLS` (from `dist/tools.js`) advertises `additionalProperties: false`, and that `callTool()` rejects an undeclared parameter with an error naming both the offending key and that tool's accepted keys — rather than silently dropping it and returning unfiltered results. Includes regression guards that valid calls, with and without optional params, still succeed. |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
+| `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
+| `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
+| `test/auto-release-cli.test.js` | End-to-end runs of `scripts/auto-release.js prepare` and `ensure` against a throwaway git repo with stubbed `npm` and `gh`: version bump, tagging, one release dispatch, and recovery from a depth-1 checkout. The fixture pins the version (0.3.0) and the Rules "current through" date (October 4, 2026), so it does not drift when real releases ship or the law text moves. |
 
 ### Differential test (Layer 4 — occasional cadence)
 
@@ -170,7 +184,7 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
-`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). The "Last index update" block below is stamped by that job.
+`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). Because `npm test` runs **after** the fetch and rebuild, the tests see that day's new data. A test must never assume what `data/index/json/` says today: pin the values it depends on inside the test, or the refresh goes red on exactly the days law text changes and the new text never gets committed. The "Last index update" block below is stamped by that job.
 
 ## Releases
 
@@ -200,19 +214,24 @@ Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHAN
 
 This server is for **research and informational purposes only. It does not provide legal advice.**
 
-Caveats are encoded at three levels so no response can be returned without them:
+Caveats are encoded at four levels so no response can be returned without one:
 
 1. **Tool descriptions** — every tool description includes a caveat line that the AI reads before responding. This ensures the AI naturally carries the disclaimer into any answer it gives.
-2. **Response footer** — every payload returned by the server includes a full disclaimer footer, regardless of which tool was called or what was found.
-3. **`get_version` instruction** — the `get_version` tool description explicitly instructs the AI to call it before answering legal questions, so every response is grounded in the correct version of the law.
+2. **Server instructions** — the full disclaimer below is sent as the server's `instructions` when a client connects, in every footer mode. Some clients pass these to the model and some do not, which is why level 3 never goes away.
+3. **Response footer** — every payload returned by the server ends with a disclaimer, regardless of which tool was called, what was found, or whether the call failed. By default the first response after the server starts carries the full footer below and every later response carries a one-line version (see `NYC_CLR_FOOTER` under Configuration).
+4. **`get_version` instruction** — the `get_version` tool description explicitly instructs the AI to call it before answering legal questions, so every response is grounded in the correct version of the law.
 
-### Footer included on every response
+### Full footer (server instructions, and the first response)
 
-> ⚠️ This information is for research and informational purposes only and does not constitute legal advice. NYC laws and rules are amended frequently — always verify the current text at [codelibrary.amlegal.com](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview) before acting on any information. For the latest rules information, see [rules.cityofnewyork.us](https://rules.cityofnewyork.us). For legal matters, consult a licensed attorney.
+> ⚠️ **This information is for research and informational purposes only and does not constitute legal advice.** NYC laws and rules are amended frequently — always verify the current text at [codelibrary.amlegal.com](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview) before acting on any information. For the latest rules information, see [rules.cityofnewyork.us](https://rules.cityofnewyork.us). For legal matters, consult a licensed attorney.
 >
 > **Official disclaimer from American Legal Publishing:** The Codes and other documents that appear on this site may not yet reflect the most current legislation or rules adopted by the City. In addition, certain textual errors and omissions may temporarily exist, resulting from problems in the source database provided to American Legal and from which this website was created. Although these errors and omissions are being corrected, any user discovering any such error is invited to contact the publisher at NYC.editor@amlegal.com or 800-445-5588 and/or the NYC Law Department at NYCCodeRulesCharter@law.nyc.gov.
 >
-> Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc). Feedback and improvements welcome — [file a GitHub issue](https://github.com/BetaNYC/nyc-charter-laws-rules).
+> Built by [BetaNYC](https://beta.nyc). Feedback and improvements welcome — [file a GitHub issue](https://github.com/BetaNYC/nyc-charter-laws-rules).
+
+### One-line footer (every later response, by default)
+
+> ⚠️ Not legal advice. Verify at https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview.
 
 ---
 
@@ -235,7 +254,7 @@ nyc-charter-laws-rules/
 └── dist/                       ← compiled MCP server (built locally)
 ```
 
-The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets 22,057 sections across all three documents immediately — no build step required to browse or run the server.
+The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets every section of all three documents immediately — no build step required to browse or run the server.
 
 ---
 
@@ -413,6 +432,22 @@ git pull
 - If the variable is set and `versions.json` is not there, the server refuses to start and says why. It never falls back to the bundled index silently. Unset or blank means the bundled index.
 - The server notes the directory it is serving on stderr at startup. Restart it after a `git pull`; the index is read once per process.
 - `get_version` reports the currency dates of whichever index is loaded.
+
+### Disclaimer footer (`NYC_CLR_FOOTER`)
+
+Every tool response ends with a disclaimer. `NYC_CLR_FOOTER` sets how much of it:
+
+| Value | Behavior |
+|---|---|
+| `full-then-compact` (default) | The full footer on the first response after the server starts, then the one-line footer on every response after. |
+| `full` | The full footer on every response, as through 0.3.x. |
+
+- "First response" means the first since this server process started. MCP does not tell a server when a new chat begins, so a client that keeps the server running across chats sends the full footer only once. The full text also goes out as the server's `instructions` on every connection, in both modes.
+- Unset or blank means the default. Any other value means `full` (more disclaimer, never less), and the server prints a warning naming the variable to stderr at startup.
+
+```json
+"env": { "NYC_CLR_FOOTER": "full" }
+```
 
 ---
 

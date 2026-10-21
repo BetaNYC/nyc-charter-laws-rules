@@ -5,17 +5,18 @@
 
 import { z } from "zod";
 import {
-  searchCorpus,
+  searchWithFallback,
   getSection,
   listTitles,
   getTitle,
   getVersions,
+  type SearchMode,
 } from "./corpus.js";
 
 const CAVEAT =
   "For informational purposes only. Not legal advice. Verify against official sources at codelibrary.amlegal.com before relying on any result.";
 
-const FOOTER = `
+export const FOOTER = `
 ---
 ⚠️ **This information is for research and informational purposes only and does not constitute legal advice.** NYC laws and rules are amended frequently — always verify the current text at https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview before acting on any information. For the latest rules information, see https://rules.cityofnewyork.us. For legal matters, consult a licensed attorney.
 
@@ -23,8 +24,64 @@ const FOOTER = `
 
 Built by BetaNYC (https://beta.nyc). Feedback and improvements welcome — file a GitHub issue at https://github.com/BetaNYC/nyc-charter-laws-rules.`.trim();
 
+// One line that rides every response once the full footer has been sent
+// (issue #25). It must keep the words "legal advice": the regression test
+// checks every response in every mode for them.
+export const COMPACT_FOOTER =
+  "⚠️ Not legal advice. Verify at https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview.";
+
+// NYC_CLR_FOOTER chooses how much of the disclaimer each response carries:
+//   full-then-compact (default)  full FOOTER on the first response after the
+//                                server process starts, COMPACT_FOOTER after
+//   full                         full FOOTER on every response (the behavior
+//                                through 0.3.x)
+// MCP tells a server nothing about where a chat begins, so "first" means first
+// in this process's lifetime. The full text also goes out once per connection
+// as the server's `instructions` (index.ts), whatever the mode.
+export const FOOTER_ENV = "NYC_CLR_FOOTER";
+export const FOOTER_MODES = ["full-then-compact", "full"] as const;
+export type FooterMode = (typeof FOOTER_MODES)[number];
+export const DEFAULT_FOOTER_MODE: FooterMode = "full-then-compact";
+
+// An unset or blank value is the default. An unrecognized value falls back to
+// `full` (more disclaimer, never less) and comes back with a warning for
+// index.ts to print to stderr at startup (stdout carries the protocol).
+export function resolveFooterMode(
+  env: NodeJS.ProcessEnv = process.env
+): { mode: FooterMode; warning?: string } {
+  const raw = env[FOOTER_ENV]?.trim();
+  if (!raw) return { mode: DEFAULT_FOOTER_MODE };
+  const value = raw.toLowerCase();
+  if ((FOOTER_MODES as readonly string[]).includes(value)) {
+    return { mode: value as FooterMode };
+  }
+  // An unrecognized value errs toward more disclaimer, never less (#25).
+  return {
+    mode: "full",
+    warning:
+      `nyc-charter-laws-rules: ${FOOTER_ENV}="${raw}" is not one of ` +
+      `${FOOTER_MODES.join(", ")}; using full.`,
+  };
+}
+
+const initialFooter = resolveFooterMode();
+export const FOOTER_WARNING = initialFooter.warning;
+let footerMode: FooterMode = initialFooter.mode;
+let fullFooterSent = false;
+
+// Test hook: re-read the mode from `env` and forget that the full footer has
+// been sent, as if the server process had just started.
+export function resetFooterState(env: NodeJS.ProcessEnv = process.env): void {
+  footerMode = resolveFooterMode(env).mode;
+  fullFooterSent = false;
+}
+
 function withFooter(text: string): string {
-  return `${text}\n\n${FOOTER}`;
+  if (footerMode === "full" || !fullFooterSent) {
+    fullFooterSent = true;
+    return `${text}\n\n${FOOTER}`;
+  }
+  return `${text}\n\n${COMPACT_FOOTER}`;
 }
 
 // Reject unknown keys loudly (issue #19). Zod strips them by default, so an
@@ -53,14 +110,37 @@ function parseArgs<T extends z.ZodRawShape>(
   );
 }
 
+// First line of a search response whose query did not match as typed
+// (issue #30). The response must never quietly answer a different question
+// (the principle behind #19), so it says which terms it searched for and,
+// when it widened to partial matches, that it did.
+export function searchNotice(
+  mode: SearchMode,
+  terms: string[],
+  allTermResults: number
+): string | null {
+  const list = terms.join(", ");
+  if (mode === "all-terms") {
+    return `No section contains the exact query; showing sections containing all of: ${list}.`;
+  }
+  if (mode === "some-terms") {
+    if (allTermResults === 0) {
+      return `No section matched every term; showing sections matching some of: ${list}.`;
+    }
+    const n = allTermResults === 1 ? "1 section" : `${allTermResults} sections`;
+    return `Only ${n} matched every term (listed first); the rest match some of: ${list}.`;
+  }
+  return null;
+}
+
 export const TOOLS = [
   {
     name: "search",
-    description: `Search across the NYC Charter, Administrative Code, and Rules of the City of New York by keyword or phrase. Results are relevance-ranked: heading matches rank above citation matches, which rank above body-text matches, and whole-word matches rank above substring matches. ${CAVEAT}`,
+    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, those with every term first; the response's first line says when this happened and which terms were used. ${CAVEAT}`,
     inputSchema: {
       type: "object",
       properties: {
-        query: { type: "string", description: "Search term or phrase" },
+        query: { type: "string", description: "Keywords or an exact phrase (short keyword queries work best)" },
         corpus: {
           type: "string",
           enum: ["charter", "admin_code", "rules", "all"],
@@ -144,16 +224,22 @@ export async function callTool(name: string, args: unknown) {
           corpus: z.enum(["charter", "admin_code", "rules", "all"]).optional(),
           limit: z.number().int().min(1).max(50).optional(),
         }, args);
-        const results = searchCorpus(query, corpus ?? "all", limit ?? 10);
+        const { results, mode, terms, allTermResults } = searchWithFallback(
+          query,
+          corpus ?? "all",
+          limit ?? 10
+        );
         if (results.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No results found for "${query}".`) }] };
         }
-        const text = results
+        const notice = searchNotice(mode, terms, allTermResults);
+        const body = results
           .map(
             (s) =>
               `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}\n${s.text.slice(0, 400)}${s.text.length > 400 ? "…" : ""}`
           )
           .join("\n\n---\n\n");
+        const text = notice ? `${notice}\n\n${body}` : body;
         return { content: [{ type: "text", text: withFooter(text) }] };
       }
 
@@ -228,12 +314,12 @@ export async function callTool(name: string, args: unknown) {
 
       default:
         return {
-          content: [{ type: "text", text: `Unknown tool: ${name}` }],
+          content: [{ type: "text", text: withFooter(`Unknown tool: ${name}`) }],
           isError: true,
         };
     }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    return { content: [{ type: "text", text: `Error: ${message}` }], isError: true };
+    return { content: [{ type: "text", text: withFooter(`Error: ${message}`) }], isError: true };
   }
 }
