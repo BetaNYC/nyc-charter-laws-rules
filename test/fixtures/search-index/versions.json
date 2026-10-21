@@ -1,0 +1,17 @@
+{
+  "charter": {
+    "currentThrough": "Synthetic search fixture (test/search-fallback.test.js), not law text.",
+    "indexedAt": "2026-01-01T00:00:00.000Z",
+    "sectionCount": 1
+  },
+  "admin_code": {
+    "currentThrough": "Synthetic search fixture (test/search-fallback.test.js), not law text.",
+    "indexedAt": "2026-01-01T00:00:00.000Z",
+    "sectionCount": 5
+  },
+  "rules": {
+    "currentThrough": "Synthetic search fixture (test/search-fallback.test.js), not law text.",
+    "indexedAt": "2026-01-01T00:00:00.000Z",
+    "sectionCount": 2
+  }
+}

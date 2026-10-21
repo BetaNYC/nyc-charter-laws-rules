@@ -1,0 +1,37 @@
+[
+ {
+  "corpus": "admin_code",
+  "id": "fixture-2",
+  "citation": "§ 9-001",
+  "heading": "§ 9-001 Sidewalk shed permits.",
+  "text": "Synthetic fixture text. A sidewalk shed may stay in place no longer than ninety days."
+ },
+ {
+  "corpus": "admin_code",
+  "id": "fixture-3",
+  "citation": "§ 9-002",
+  "heading": "§ 9-002 Scaffolds.",
+  "text": "Synthetic fixture text. A sidewalk shed is a temporary structure."
+ },
+ {
+  "corpus": "admin_code",
+  "id": "fixture-4",
+  "citation": "§ 9-003",
+  "heading": "§ 9-003 Definitions.",
+  "text": "Synthetic fixture text. Terms established here belong to this title."
+ },
+ {
+  "corpus": "admin_code",
+  "id": "fixture-5",
+  "citation": "§ 9-004",
+  "heading": "§ 9-004 Drinking water tanks.",
+  "text": "Synthetic fixture text. Building owners are required to inspect drinking water tanks each year."
+ },
+ {
+  "corpus": "admin_code",
+  "id": "fixture-6",
+  "citation": "§ 9-005",
+  "heading": "§ 9-005 Tank cleaning.",
+  "text": "Synthetic fixture text. Each tank of drinking water shall be cleaned."
+ }
+]
