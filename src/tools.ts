@@ -43,9 +43,9 @@ export const FOOTER_MODES = ["full-then-compact", "full"] as const;
 export type FooterMode = (typeof FOOTER_MODES)[number];
 export const DEFAULT_FOOTER_MODE: FooterMode = "full-then-compact";
 
-// An unset or blank value is the default. An unrecognized value also falls
-// back to the default, and comes back with a warning for index.ts to print to
-// stderr at startup (stdout carries the protocol).
+// An unset or blank value is the default. An unrecognized value falls back to
+// `full` (more disclaimer, never less) and comes back with a warning for
+// index.ts to print to stderr at startup (stdout carries the protocol).
 export function resolveFooterMode(
   env: NodeJS.ProcessEnv = process.env
 ): { mode: FooterMode; warning?: string } {
