@@ -38,6 +38,10 @@ Dates are New York (America/New_York).
 
 ---
 
+## v0.4.1 — 2026-10-31
+
+- Automatic data release. Bundled law text refreshed: Charter LL 2026/147 -> LL 2026/160; Admin Code LL 2026/147 -> LL 2026/160; Rules eff. October 16, 2026 -> eff. October 30, 2026. No code changes beyond what was already merged to `main`.
+
 ## v0.4.0 — 2026-10-21
 
 - **The full disclaimer once, then one line** ([#25](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/25), proposed, designed and measured by [@jpaulgale](https://github.com/jpaulgale)). Every response that returned data, including not-found and empty results, used to end with the full ~1,170-character footer: about a third of all tool-result tokens in a 10-query session. Now the first response after the server starts carries the full footer and every later response ends with `⚠️ Not legal advice. Verify at https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview.` The full text is also sent as the server's `instructions`. Set `NYC_CLR_FOOTER=full` for the old behavior; any unrecognized value uses `full` and prints a warning to stderr. Unknown-tool and error responses, which had none, now carry a disclaimer too. The caveat in each tool description is unchanged. In clients that keep the server running across chats (such as Claude Desktop), most chats will see only the one-line footer. Set `NYC_CLR_FOOTER=full` if your use calls for the full text every time.

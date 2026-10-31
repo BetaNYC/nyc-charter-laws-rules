@@ -492,13 +492,13 @@ The complete, dated record of **every index rebuild** lives in **[CHANGELOG.md](
 The block below is stamped automatically with the most recent rebuild every time `npm run update-changelog` runs — see [CHANGELOG.md](CHANGELOG.md) for the full history.
 
 <!-- LATEST_INDEX_UPDATE:START -->
-**Last index update:** 2026-10-21 — ⬆️ Updated
+**Last index update:** 2026-10-31 — ⬆️ Updated
 
 | Corpus | Current through | Sections |
 |---|---|---|
-| NYC Charter | Current through Local Law 2026/147, enacted September 12, 2026, | 856 |
-| NYC Administrative Code | Current through Local Law 2026/147, enacted September 12, 2026, | 12,616 |
-| Rules of the City of New York | Current through rules effective October 16, 2026. | 8,713 |
+| NYC Charter | Current through Local Law 2026/160, enacted October 24, 2026, | 856 |
+| NYC Administrative Code | Current through Local Law 2026/160, enacted October 24, 2026, | 12,630 |
+| Rules of the City of New York | Current through rules effective October 30, 2026. | 8,733 |
 <!-- LATEST_INDEX_UPDATE:END -->
 
 ### Release history
