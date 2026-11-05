@@ -38,6 +38,10 @@ Dates are New York (America/New_York).
 
 ---
 
+## v0.4.2 — 2026-11-05
+
+- Automatic data release. Bundled law text refreshed: Rules eff. October 30, 2026 -> eff. November 4, 2026. No code changes beyond what was already merged to `main`.
+
 ## v0.4.1 — 2026-10-31
 
 - Automatic data release. Bundled law text refreshed: Charter LL 2026/147 -> LL 2026/160; Admin Code LL 2026/147 -> LL 2026/160; Rules eff. October 16, 2026 -> eff. October 30, 2026. No code changes beyond what was already merged to `main`.
