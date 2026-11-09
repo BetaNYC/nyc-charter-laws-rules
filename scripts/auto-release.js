@@ -14,7 +14,9 @@
 //     is still committed; the workflow turns the run red afterwards.
 //     Run AFTER the refresh produced a data change, BEFORE the commit. If the
 //     current package.json version is already on npm, bump the patch version in
-//     package.json + package-lock.json and add a dated RELEASES.md entry naming
+//     package.json + package-lock.json + server.json (the MCP Registry listing,
+//     whose versions release.yml checks against package.json) and add a dated
+//     RELEASES.md entry naming
 //     which corpora's "current through" moved (versions.json at HEAD vs. the
 //     working tree). Prints the new version on stdout, or nothing when it does
 //     not bump. It does NOT bump when the current version is unpublished: that
@@ -190,6 +192,30 @@ export function setLockVersion(text, from, to) {
   return JSON.stringify(lock, null, indent) + (text.endsWith("\n") ? "\n" : "");
 }
 
+/**
+ * Set the server and package versions in an MCP Registry server.json text,
+ * preserving formatting. release.yml refuses to publish when server.json's
+ * `version` or any `packages[].version` differs from package.json, so an
+ * automatic bump must move them together.
+ */
+export function setServerJsonVersion(text, from, to) {
+  const s = JSON.parse(text);
+  const found = [s.version, ...(s.packages || []).map((p) => p.version)];
+  if (found.some((v) => v !== from)) {
+    throw new Error(`server.json: expected every version to be ${from}, found ${found.join(", ")}`);
+  }
+  const re = new RegExp(`("version":\\s*")${from.replace(/\./g, "\\.")}(")`, "g");
+  const out = text.replace(re, `$1${to}$2`);
+  const o = JSON.parse(out);
+  if (o.version !== to || (o.packages || []).some((p) => p.version !== to)) {
+    throw new Error("server.json: version rewrite failed");
+  }
+  // Nothing but the version fields may change.
+  const strip = (x) => JSON.stringify({ ...x, version: null, packages: (x.packages || []).map((p) => ({ ...p, version: null })) });
+  if (strip(o) !== strip(s)) throw new Error("server.json: version rewrite changed other fields");
+  return out;
+}
+
 /** `npm view <pkg> versions --json` prints a string for one version, an array otherwise. */
 export function parsePublishedVersions(stdout) {
   const v = JSON.parse(stdout);
@@ -302,9 +328,11 @@ function setOutputs(pairs) {
 function prepare(date) {
   const pkgPath = join(ROOT, "package.json");
   const lockPath = join(ROOT, "package-lock.json");
+  const serverPath = join(ROOT, "server.json");
   const relPath = join(ROOT, "RELEASES.md");
   const pkgText = readFileSync(pkgPath, "utf8");
   const lockText = readFileSync(lockPath, "utf8");
+  const serverText = readFileSync(serverPath, "utf8");
   const releasesMd = readFileSync(relPath, "utf8");
   const pkg = JSON.parse(pkgText);
   const published = publishedVersions(pkg.name);
@@ -326,10 +354,11 @@ function prepare(date) {
   const moves = corpusMoves(prevVersions, curVersions);
 
   // Compute every new file before writing any, so a validation error can never
-  // leave a half-bumped tree (package.json bumped, lock not).
+  // leave a half-bumped tree (package.json bumped, lock or server.json not).
   const out = [
     [pkgPath, setPackageVersion(pkgText, pkg.version, d.next), pkgText],
     [lockPath, setLockVersion(lockText, pkg.version, d.next), lockText],
+    [serverPath, setServerJsonVersion(serverText, pkg.version, d.next), serverText],
     [relPath, insertReleaseEntry(releasesMd, releaseEntry(d.next, date, moves), d.next), releasesMd],
   ];
   try {

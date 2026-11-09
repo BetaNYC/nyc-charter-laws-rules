@@ -103,6 +103,17 @@ jobs:
       - name: Run tests
         run: npm test --if-present
 
+      - name: Verify server.json versions match package.json
+        # The MCP Registry listing (publish-mcp.yml) must name the version that
+        # npm gets; scripts/auto-release.js bumps all three files together.
+        run: |
+          # shellcheck disable=SC2016 # the node -e script is single-quoted on purpose
+          node -e '
+            const p = require("./package.json"), s = require("./server.json");
+            const bad = [s.version, ...s.packages.map((x) => x.version)].filter((v) => v !== p.version);
+            if (bad.length || s.name !== p.mcpName) { console.error("server.json is out of step with package.json"); process.exit(1); }
+          '
+
       - name: Verify tag matches package.json version
         run: |
           PKG_VERSION="v$(node -p "require('./package.json').version")"

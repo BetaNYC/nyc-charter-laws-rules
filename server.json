@@ -1,0 +1,39 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.BetaNYC/nyc-charter-laws-rules",
+  "title": "NYC Charter, Laws and Rules",
+  "description": "Search and read the NYC Charter, Administrative Code and Rules of the City of New York",
+  "repository": {
+    "url": "https://github.com/BetaNYC/nyc-charter-laws-rules",
+    "source": "github"
+  },
+  "version": "0.4.4",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@betanyc/nyc-charter-laws-rules",
+      "version": "0.4.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "NYC_LAWS_INDEX_DIR",
+          "description": "Optional. Serve the index in this directory (laid out like data/index/json/) instead of the bundled one",
+          "isRequired": false,
+          "format": "filepath",
+          "isSecret": false
+        },
+        {
+          "name": "NYC_CLR_FOOTER",
+          "description": "Optional. How much legal disclaimer each response carries: full-then-compact (default) or full",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false,
+          "default": "full-then-compact",
+          "choices": ["full-then-compact", "full"]
+        }
+      ]
+    }
+  ]
+}

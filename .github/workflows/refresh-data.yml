@@ -139,7 +139,7 @@ jobs:
           set -euo pipefail
 
           # Allow-list of legitimate refresh artifacts. Never `git add -A`.
-          # package.json, package-lock.json and RELEASES.md are added below ONLY
+          # package.json, package-lock.json, server.json and RELEASES.md are added below ONLY
           # when auto-release.js bumps the version (its own targeted edits); an
           # incidental `npm ci` lock churn is never staged on a no-release day.
           PATHS=(
@@ -207,13 +207,13 @@ jobs:
           # backstop for an unexpected crash of the script itself.
           RELEASE_VERSION="$(node scripts/auto-release.js prepare --soft)" || {
             echo "::warning::auto-release prepare crashed; committing data without a version bump"
-            git checkout -- package.json package-lock.json RELEASES.md
+            git checkout -- package.json package-lock.json server.json RELEASES.md
             echo "prepare_failed=true" >> "$GITHUB_OUTPUT"
             RELEASE_VERSION=""
           }
           SUFFIX=""
           if [ -n "$RELEASE_VERSION" ]; then
-            PATHS+=(package.json package-lock.json RELEASES.md)
+            PATHS+=(package.json package-lock.json server.json RELEASES.md)
             # Must match releaseMarker() in scripts/auto-release.js: ensure finds
             # the bump commit by it when it has to tag on a later run.
             SUFFIX=" (release v${RELEASE_VERSION})"

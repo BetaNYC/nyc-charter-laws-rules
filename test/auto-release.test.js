@@ -21,6 +21,7 @@ import {
   insertReleaseEntry,
   setPackageVersion,
   setLockVersion,
+  setServerJsonVersion,
   parsePublishedVersions,
   decideEnsure,
   decidePrepare,
@@ -167,6 +168,27 @@ describe("package.json / package-lock.json version rewrite", () => {
     const lock = JSON.parse(lockOut);
     assert.equal(lock.version, to);
     assert.equal(lock.packages[""].version, to);
+  });
+  test("server.json: server and package versions move together, nothing else changes (real file)", () => {
+    const text = readFileSync(join(ROOT, "server.json"), "utf8");
+    const from = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")).version;
+    const to = nextPatch(from);
+    const out = setServerJsonVersion(text, from, to);
+    const s = JSON.parse(out);
+    assert.equal(s.version, to);
+    assert.ok(s.packages.length > 0);
+    for (const p of s.packages) assert.equal(p.version, to);
+    assert.equal(setServerJsonVersion(out, to, from), text, "server.json round-trips byte-identically");
+  });
+  test("server.json: a version out of step with package.json fails instead of writing", () => {
+    const split = JSON.stringify({ version: "0.3.0", packages: [{ identifier: "x", version: "0.2.0" }] });
+    assert.throws(() => setServerJsonVersion(split, "0.3.0", "0.3.1"), /expected every version to be 0\.3\.0/);
+    assert.throws(() => setServerJsonVersion('{"version":"0.3.0","packages":[]}', "0.2.0", "0.2.1"));
+  });
+  test("server.json: a field that merely equals the version string is not rewritten", () => {
+    const text = JSON.stringify({ version: "0.3.0", packages: [{ version: "0.3.0", environmentVariables: [{ name: "X", default: "0.3.0" }] }] }, null, 2);
+    const out = JSON.parse(setServerJsonVersion(text, "0.3.0", "0.3.1"));
+    assert.equal(out.packages[0].environmentVariables[0].default, "0.3.0");
   });
   test("a stale 'from' version fails instead of writing", () => {
     assert.throws(() => setPackageVersion('{"version": "0.3.0"}', "0.2.0", "0.2.1"));

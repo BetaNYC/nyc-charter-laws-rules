@@ -84,7 +84,7 @@ before(() => {
   writeFileSync(join(dir, "runs.json"), "[]");
   writeFileSync(join(dir, "commits.json"), "[]");
 
-  for (const f of ["package.json", "package-lock.json", "RELEASES.md", "scripts/auto-release.js", "data/index/json/versions.json"]) {
+  for (const f of ["package.json", "package-lock.json", "server.json", "RELEASES.md", "scripts/auto-release.js", "data/index/json/versions.json"]) {
     copyFileSync(join(ROOT, f), join(work, f));
   }
   // Pin the Rules starting point too: the daily refresh rebuilds the real
@@ -99,6 +99,10 @@ before(() => {
   lock.version = "0.3.0";
   lock.packages[""].version = "0.3.0";
   writeFileSync(join(work, "package-lock.json"), JSON.stringify(lock, null, 2) + "\n");
+  const server = JSON.parse(readFileSync(join(work, "server.json"), "utf8"));
+  server.version = "0.3.0";
+  for (const p of server.packages) p.version = "0.3.0";
+  writeFileSync(join(work, "server.json"), JSON.stringify(server, null, 2) + "\n");
   // Drop any RELEASES.md entries newer than the pinned 0.3.0, so the fixture
   // still looks like "0.3.0 is the latest release" after real releases ship.
   const releases = readFileSync(join(work, "RELEASES.md"), "utf8");
@@ -133,6 +137,9 @@ test("refresh day: prepare bumps, ensure tags and dispatches once", { skip }, ()
   assert.equal(JSON.parse(readFileSync(join(work, "package.json"), "utf8")).version, "0.3.1");
   const lock = JSON.parse(readFileSync(join(work, "package-lock.json"), "utf8"));
   assert.equal(lock.packages[""].version, "0.3.1");
+  // release.yml refuses a server.json out of step with package.json.
+  const server = JSON.parse(readFileSync(join(work, "server.json"), "utf8"));
+  assert.deepEqual([server.version, ...server.packages.map((x) => x.version)], ["0.3.1", "0.3.1"]);
   const rel = readFileSync(join(work, "RELEASES.md"), "utf8");
   assert.match(rel, /## v0\.3\.1 — 2026-10-13\n\n- Automatic data release\. Bundled law text refreshed: Rules eff\. October 4, 2026 -> eff\. October 18, 2026\./);
 
@@ -229,13 +236,13 @@ test("registry unreadable: prepare fails rather than guessing", { skip }, () => 
 test("prepare --soft: registry unreadable -> exit 0, no bump, prepare_failed output", { skip }, () => {
   writeFileSync(join(dir, "published.json"), "not json");
   writeFileSync(join(dir, "github_output"), "");
-  const before = ["package.json", "package-lock.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
+  const before = ["package.json", "package-lock.json", "server.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
   const r = auto(["prepare", "--soft"]);
   assert.equal(r.status, 0);
   assert.equal(r.stdout, "");
   assert.match(r.stderr, /::warning::.*release not prepared/);
   assert.match(readFileSync(join(dir, "github_output"), "utf8"), /^prepare_failed=true$/m);
-  const after = ["package.json", "package-lock.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
+  const after = ["package.json", "package-lock.json", "server.json", "RELEASES.md"].map((f) => readFileSync(join(work, f), "utf8"));
   assert.deepEqual(after, before);
 });
 
@@ -248,6 +255,7 @@ test("prepare --soft: lockfile version mismatch -> package.json not half-bumped"
   writeFileSync(lockPath, JSON.stringify(lock, null, 2) + "\n");
   const pkgBefore = readFileSync(join(work, "package.json"), "utf8");
   const relBefore = readFileSync(join(work, "RELEASES.md"), "utf8");
+  const serverBefore = readFileSync(join(work, "server.json"), "utf8");
 
   const r = auto(["prepare", "--soft"]);
   assert.equal(r.status, 0);
@@ -255,4 +263,5 @@ test("prepare --soft: lockfile version mismatch -> package.json not half-bumped"
   assert.match(readFileSync(join(dir, "github_output"), "utf8"), /prepare_failed=true/);
   assert.equal(readFileSync(join(work, "package.json"), "utf8"), pkgBefore);
   assert.equal(readFileSync(join(work, "RELEASES.md"), "utf8"), relBefore);
+  assert.equal(readFileSync(join(work, "server.json"), "utf8"), serverBefore);
 });
