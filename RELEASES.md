@@ -17,8 +17,9 @@ that publishes to npm. There are two kinds:
   the `vX.Y.Z` tag and starts `release.yml` on it. No new text, no release. The
   entry names which corpora's "current through" line moved. An automatic release
   ships `main` as it stands, including any code merged since the last release.
-- **Manual releases.** Bump `version` in `package.json` on `main`, add an entry
-  below, then push a matching `vX.Y.Z` tag. While a hand-bumped version is
+- **Manual releases.** Bump the version on `main` in `package.json`,
+  `package-lock.json` and `server.json` (both of its `version` fields), add an
+  entry below, then push a matching `vX.Y.Z` tag. While a hand-bumped version is
   unpublished, the refresh does not bump past it.
 
 If a release fails, its run goes red, and every following refresh goes red too
@@ -37,6 +38,10 @@ Dates are New York (America/New_York).
 ```
 
 ---
+
+## v0.4.4 — 2026-11-09
+
+- **Listed in the official MCP Registry** as `io.github.BetaNYC/nyc-charter-laws-rules`. `package.json` now carries `mcpName`, which the registry checks against the published npm package, and `server.json` describes the listing. After this version is on npm, `.github/workflows/publish-mcp.yml` publishes the listing; it runs after every successful Release from now on, automatic data releases included. `glama.json` claims the server on Glama. The automatic release bumps `server.json` along with `package.json`, and `release.yml` refuses to publish when they differ. No change to the server, its tools or the law text.
 
 ## v0.4.3 — 2026-11-07
 

@@ -1,7 +1,8 @@
 {
   "name": "@betanyc/nyc-charter-laws-rules",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "MCP server for NYC Charter, Administrative Code, and Rules of the City of New York",
+  "mcpName": "io.github.BetaNYC/nyc-charter-laws-rules",
   "keywords": [
     "mcp",
     "model-context-protocol",
