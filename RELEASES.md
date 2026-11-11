@@ -39,6 +39,10 @@ Dates are New York (America/New_York).
 
 ---
 
+## v0.4.5 — 2026-11-11
+
+- Automatic data release. Bundled law text refreshed: Charter LL 2026/160 -> LL 2026/163; Admin Code LL 2026/160 -> LL 2026/163; Rules eff. November 4, 2026 -> eff. November 8, 2026. No code changes beyond what was already merged to `main`.
+
 ## v0.4.4 — 2026-11-09
 
 - **Listed in the official MCP Registry** as `io.github.BetaNYC/nyc-charter-laws-rules`. `package.json` now carries `mcpName`, which the registry checks against the published npm package, and `server.json` describes the listing. After this version is on npm, `.github/workflows/publish-mcp.yml` publishes the listing; it runs after every successful Release from now on, automatic data releases included. `glama.json` claims the server on Glama. The automatic release bumps `server.json` along with `package.json`, and `release.yml` refuses to publish when they differ. No change to the server, its tools or the law text.

@@ -7,12 +7,12 @@
     "url": "https://github.com/BetaNYC/nyc-charter-laws-rules",
     "source": "github"
   },
-  "version": "0.4.4",
+  "version": "0.4.5",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@betanyc/nyc-charter-laws-rules",
-      "version": "0.4.4",
+      "version": "0.4.5",
       "transport": {
         "type": "stdio"
       },
