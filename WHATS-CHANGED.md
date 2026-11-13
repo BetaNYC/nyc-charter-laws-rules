@@ -7,11 +7,11 @@ This page lists the changes to nyc-charter-laws-rules that a reader would notice
 
 To report a bug in this server or ask for a new feature, [open an issue on GitHub](https://github.com/BetaNYC/nyc-charter-laws-rules/issues).
 
-## Unreleased: Two tools that explain the server and list what changed
+## 2026-11-13: Two tools that explain the server and list what changed
 
 - **Tags:** MCP
 - **What changed:** Two new tools let your AI assistant answer "what changed in this server?" from this page, and "who built this?" with links to BetaNYC and to the place to report a bug in this server or ask for a new feature. This page is new too. It lists the changes a reader would notice, back to the first release.
-- **MCP version:** [nyc-charter-laws-rules 0.5.0](RELEASES.md)
+- **MCP version:** [nyc-charter-laws-rules 0.5.0](RELEASES.md#v050--2026-11-13)
 - **More detail:** [Release notes](RELEASES.md)
 
 ## 2026-10-31: New law text now reaches the npm package on its own
