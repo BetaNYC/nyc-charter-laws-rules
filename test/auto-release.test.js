@@ -31,7 +31,6 @@ import {
   unreleasedEntry,
   isUndatedRelease,
   whatsChangedProblems,
-  releasedVersionsChangelog,
 } from "../scripts/auto-release.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -340,9 +339,6 @@ describe("RELEASES.md headings", () => {
     assert.equal(isAutoRelease(RELEASES_HAND, "0.5.0"), false);
     const md = insertReleaseEntry(RELEASES_DATED, releaseEntry("0.5.1", "2026-11-14", []), "0.5.1");
     assert.ok(md.indexOf("## v0.5.1") < md.indexOf("## v0.5.0"));
-  });
-  test("releasedVersionsChangelog lists bare versions for whats_changed.py's MCP version check", () => {
-    assert.equal(releasedVersionsChangelog(RELEASES_HAND), "## 0.5.0\n## 0.3.0\n## 0.2.0\n");
   });
 });
 

@@ -5,12 +5,12 @@ This page lists the changes to nyc-charter-laws-rules that a reader would notice
 - **History begins:** 2026-05-21, the first release. Corrections made before this date may be missing.
 - **Data refresh:** Every morning, from American Legal Publishing's bulk files of the Charter, the Administrative Code and the Rules. When the text has changed, a new version of the package is published the same day. Those daily updates are not listed here. [CHANGELOG.md](CHANGELOG.md) lists every one, with the date each document is current through, and [RELEASES.md](RELEASES.md) lists every release.
 
-To report a problem with this server or ask for a feature, [open an issue on GitHub](https://github.com/BetaNYC/nyc-charter-laws-rules/issues).
+To report a bug in this server or ask for a new feature, [open an issue on GitHub](https://github.com/BetaNYC/nyc-charter-laws-rules/issues).
 
 ## Unreleased: Two tools that explain the server and list what changed
 
 - **Tags:** MCP
-- **What changed:** Two new tools let your AI assistant answer "what changed in this server?" from this page, and "who built this?" with links to BetaNYC and to the place to report a problem with the server. This page is new too. It lists the changes a reader would notice, back to the first release.
+- **What changed:** Two new tools let your AI assistant answer "what changed in this server?" from this page, and "who built this?" with links to BetaNYC and to the place to report a bug in this server or ask for a new feature. This page is new too. It lists the changes a reader would notice, back to the first release.
 - **MCP version:** [nyc-charter-laws-rules 0.5.0](RELEASES.md)
 - **More detail:** [Release notes](RELEASES.md)
 

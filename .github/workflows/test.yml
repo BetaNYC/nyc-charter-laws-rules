@@ -50,7 +50,7 @@ jobs:
   # BetaNYC's What's changed standard (betanyc-ai-workspace
   # platform/system/whats-changed-standard.md § 10). check-whats-changed runs
   # scripts/whats_changed.py check (a copy of the workspace's canonical file: never edit it
-  # here) with RELEASES.md's versions for its MCP version check, and checks that an
+  # here; it reads RELEASES.md for its MCP version check), and checks that an
   # "## Unreleased:" entry comes with a hand-bumped, undated "## vX.Y.Z — Unreleased" release.
   # --base-ref adds the append-only check (old entries are never edited) and the version-bump
   # check. The base is the merge base with main, not main's tip: the daily refresh bumps

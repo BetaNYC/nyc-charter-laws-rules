@@ -133,9 +133,8 @@ test("1. hand bump waiting: the refresh commits data without a bump; CI passes; 
 });
 
 test("2. release day: one commit dates both headings; the gate and the append-only check pass", { skip }, () => {
-  // The commit also adds the dated anchor to the entry's MCP version link. whats_changed.py's
-  // append-only check allows only the heading to change, so the release commit carries a
-  // Whats-changed-edit trailer (README, "Releases").
+  // The commit also adds the dated anchor to the entry's MCP version link. whats_changed.py
+  // treats an Unreleased entry as unpublished until it is dated, so no trailer is needed.
   const before = git("rev-parse", "HEAD");
   write(
     "WHATS-CHANGED.md",
@@ -145,11 +144,6 @@ test("2. release day: one commit dates both headings; the gate and the append-on
   );
   write("RELEASES.md", read("RELEASES.md").replace(`## v${V} — Unreleased`, `## v${V} — ${RELEASE_DAY}`));
   git("commit", "-q", "-am", `chore: release v${V}`);
-  const blocked = auto(["check-whats-changed", "--base-ref", before], { check: false });
-  assert.equal(blocked.status, 1, "without the trailer, the new anchor reads as an edit");
-  assert.match(blocked.stdout + blocked.stderr, /old-line-changed/);
-  git("commit", "-q", "--amend", "-m", `chore: release v${V}\n\nWhats-changed-edit: date v${V} and add its RELEASES.md anchor`);
-
   const gate = auto(["check-whats-changed", "--release"], { check: false });
   assert.equal(gate.status, 0, gate.stdout + gate.stderr);
   const ci = auto(["check-whats-changed", "--base-ref", before], { check: false });

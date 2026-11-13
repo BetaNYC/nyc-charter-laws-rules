@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# betanyc-shared: whats_changed.py v1.1.1
-# betanyc-shared-sha256: 1734c0187f171cb47d2cf905e8c7aff656c12c2f2a47f1ebf734e58ca9e8ae79
+# betanyc-shared: whats_changed.py v1.2.0
+# betanyc-shared-sha256: 98bc81a7e152adb0fc6679296a4f7d973ec2c8f06818ce56cc0af94c32f2592d
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -61,7 +61,8 @@ UPDATE_LABEL_RE = re.compile(r"^Update ([^ \t]+)$")
 CONT_RE = re.compile(r"^ {2,}[^ \t]")
 # Link text may not contain brackets: that keeps matching linear on lines full of "[".
 LINK_RE = re.compile(r"\[([^\[\]]+)\]\(([^() \t]+)\)")
-SEMVER_RE = re.compile(r"(?<![0-9A-Za-z.])([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)(?![0-9A-Za-z])")
+# An optional "v" before the version ("v0.4.5") is allowed; it is not part of the version.
+SEMVER_RE = re.compile(r"(?<![0-9A-Za-z.])v?([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)(?![0-9A-Za-z])")
 # Characters GitHub treats as markup or entities in a heading, so its anchor would not match ours.
 TITLE_MARKUP_RE = re.compile(r"[*`\[\]<>&_~#\\]")
 FENCE_RE = re.compile(r"^(```|~~~)")
@@ -506,8 +507,27 @@ def _trailer_present(root: Path, base_ref: str, trailer: str) -> bool:
     return any(line.strip().lower().startswith(trailer.lower() + ":") for line in out.splitlines())
 
 
-def check_mcp_versions(parsed: dict, package_json: Path | None, changelog: Path | None) -> list[dict]:
-    """Check 6: every MCP version named exists in package.json or CHANGELOG.md."""
+# A version heading in CHANGELOG.md or RELEASES.md: "## 1.2.3", "## v1.2.3", "## [1.2.3]",
+# "## [v1.2.3]", each optionally followed by " - date", " — date", " – date" or " — Unreleased".
+VERSION_HEADING_RE = re.compile(
+    r"^#{1,6}[ \t]+\[?v?([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)\]?"
+    r"(?:[ \t]+(?:-|\u2013|\u2014)[ \t]+[^\n]*)?[ \t]*$")
+VERSION_FILES = ("CHANGELOG.md", "RELEASES.md")
+
+
+def versions_in(text: str) -> set[str]:
+    """Every version a CHANGELOG.md or RELEASES.md gives a heading of its own."""
+    found = set()
+    for line in text.splitlines():
+        m = VERSION_HEADING_RE.match(line.rstrip())
+        if m:
+            found.add(m.group(1))
+    return found
+
+
+def check_mcp_versions(parsed: dict, package_json: Path | None, changelogs: list[Path]) -> list[dict]:
+    """Check 6: every MCP version named exists in package.json or a version file (CHANGELOG.md,
+    RELEASES.md). Version files are read with VERSION_HEADING_RE."""
     known: set[str] = set()
     sources = 0
     if package_json and package_json.is_file():
@@ -518,11 +538,10 @@ def check_mcp_versions(parsed: dict, package_json: Path | None, changelog: Path 
                 known.add(v)
         except json.JSONDecodeError:
             return [{"code": "package-json-unreadable", "line": 0}]
-    if changelog and changelog.is_file():
-        sources += 1
-        for line in changelog.read_text(encoding="utf-8").splitlines():
-            if line.startswith("#"):
-                known.update(SEMVER_RE.findall(line))
+    for changelog in changelogs:
+        if changelog.is_file():
+            sources += 1
+            known |= versions_in(changelog.read_text(encoding="utf-8"))
     if not sources:
         return []
     out = []
@@ -535,7 +554,8 @@ def check_mcp_versions(parsed: dict, package_json: Path | None, changelog: Path 
 
 
 def check_append_only(path: Path, text: str, base_ref: str) -> list[dict]:
-    """Check 7: old lines survive in order; lines added inside an old entry are Update lines.
+    """Check 7: old entries survive; their lines survive in order; lines added inside an old dated
+    entry are Update lines. The Unreleased entry is exempt until it has a date.
     Override: a `Whats-changed-edit: <reason>` trailer in base..HEAD, or WHATS_CHANGED_EDIT_OK=1."""
     rel = _repo_rel(path)
     if rel is None:
@@ -553,20 +573,28 @@ def check_append_only(path: Path, text: str, base_ref: str) -> list[dict]:
     new_anchors = {e["anchor"] for e in new_entries}
     old_lines = [ln.rstrip() for ln in old.replace("\r\n", "\n").split("\n")]
     new_lines = [ln.rstrip() for ln in text.replace("\r\n", "\n").split("\n")]
-    # The one change allowed to an old line: at release, "## Unreleased: Title" becomes
-    # "## YYYY-MM-DD: Title" with the same title. Treat the old heading as the dated one.
-    released: dict[str, str] = {}
+    # An "Unreleased:" entry is not published yet, so its whole body may change while it is
+    # Unreleased, including in the commit that gives it a date. It may not disappear: at the new
+    # ref it is still the Unreleased entry, or a newly dated entry with the same title. Everything
+    # else (one Unreleased, first; dates in order and not in the future) is checked by parse().
+    old_anchors = {e["anchor"] for e in old_entries}
+    unreleased_spans: list[tuple[int, int]] = []
+    errors = []
     for oe in old_entries:
-        if oe["unreleased"]:
-            dated = [ne for ne in new_entries if not ne["unreleased"] and ne["title"] == oe["title"]
-                     and ne["date"] and is_real_date(ne["date"])]
-            if dated:
-                released[oe["anchor"]] = dated[0]["anchor"]
-                old_heading = f"## {UNRELEASED}: {oe['title']}"
-                new_heading = f"## {dated[0]['date']}: {oe['title']}"
-                old_lines = [new_heading if ln == old_heading else ln for ln in old_lines]
-    missing = [e for e in old_entries if released.get(e["anchor"], e["anchor"]) not in new_anchors]
-    errors = [{"code": "old-entry-missing", "line": 0, "anchor": e["anchor"]} for e in missing]
+        if not oe["unreleased"]:
+            if oe["anchor"] not in new_anchors:
+                errors.append({"code": "old-entry-missing", "line": 0, "anchor": oe["anchor"]})
+            continue
+        kept = any(ne["unreleased"] for ne in new_entries) or any(
+            not ne["unreleased"] and ne["title"] == oe["title"] and ne["anchor"] not in old_anchors
+            for ne in new_entries)
+        if not kept:
+            errors.append({"code": "old-entry-missing", "line": 0, "anchor": oe["anchor"]})
+        start = oe["line"] - 1
+        end = next((k for k in range(start + 1, len(old_lines)) if old_lines[k].startswith("## ")), len(old_lines))
+        unreleased_spans.append((start, end))
+    if unreleased_spans:
+        old_lines = [ln for k, ln in enumerate(old_lines) if not any(a <= k < b for a, b in unreleased_spans)]
     old_headings = {ln for ln in old_lines if ln.startswith("## ")
                     and (ENTRY_HEADING_RE.match(ln[3:]) or UNRELEASED_HEADING_RE.match(ln[3:]))}
     line_errors: list[dict] = []
@@ -876,7 +904,7 @@ def render_fragment(parsed: dict, link_map: LinkMap, *, with_h1: bool = True, wi
 
 def render_page(parsed: dict, link_map: LinkMap, site_name: str, home_url: str, repo_url: str | None) -> str:
     title = parsed["title"] or "What's changed"
-    issues = f'<a href="{html.escape(repo_url.rstrip("/") + "/issues")}">Report a problem or ask for a feature</a>' \
+    issues = f'<a href="{html.escape(repo_url.rstrip("/") + "/issues")}">Report a bug on this site or ask for a new feature</a>' \
         if repo_url else ""
     return "\n".join([
         "<!DOCTYPE html>",
@@ -1050,7 +1078,7 @@ def cmd_check(a: argparse.Namespace) -> int:
     text, parsed = loaded
     errors = list(parsed["errors"])
     pkg = a.package_json or (a.file.parent / "package.json")
-    chg = a.changelog or (a.file.parent / "CHANGELOG.md")
+    chg = a.changelog or [a.file.parent / name for name in VERSION_FILES]
     errors += check_mcp_versions(parsed, pkg, chg)
     if a.release:
         errors += [{"code": "unreleased-entry", "line": e["line"]} for e in parsed["entries"] if e["unreleased"]]
@@ -1133,9 +1161,10 @@ def build_parser() -> argparse.ArgumentParser:
     c = sub.add_parser("check", help="validate the file")
     common(c)
     c.add_argument("--package-json", type=Path, help="package.json for the MCP version check "
-                   "(default: next to the file, if present)")
-    c.add_argument("--changelog", type=Path, help="CHANGELOG.md for the MCP version check "
-                   "(default: next to the file, if present)")
+                   "(default: CHANGELOG.md and RELEASES.md next to the file, whichever exist)")
+    c.add_argument("--changelog", type=Path, action="append",
+                   help="a version file (CHANGELOG.md or RELEASES.md) for the MCP version check; repeatable "
+                   "(default: CHANGELOG.md and RELEASES.md next to the file, whichever exist)")
     c.add_argument("--base-ref", help="git ref to compare against (append-only and version-bump checks)")
     c.add_argument("--strict", action="store_true", help="warnings fail too")
     c.add_argument("--release", action="store_true",

@@ -40,7 +40,7 @@ Exposes 7 tools over MCP:
 | `get_title` | Retrieve all sections within a chapter or title |
 | `get_version` | Return the currency date for each document — so responses can be grounded in exactly how current the law is |
 | `whats_changed` | What changed in this server, newest first, from [WHATS-CHANGED.md](WHATS-CHANGED.md): new tools and corrections |
-| `about_betanyc` | Who built this server, where its code is, and where to report a problem |
+| `about_betanyc` | Who built this server, where its code is, and where to report a bug in this server or ask for a new feature |
 
 ---
 
@@ -160,7 +160,7 @@ whats_changed(tag="Correction")
 
 ### `about_betanyc`
 
-Who built the server (BetaNYC, a project of the Fund for the City of New York), its version and repository, where to report a bug or ask for a feature, and links to BetaNYC. No parameters.
+Who built the server (BetaNYC, a project of the Fund for the City of New York), its version and repository, where to report a bug in this server or ask for a new feature, and links to BetaNYC. No parameters.
 
 `whats_changed` and `about_betanyc` are the two tools BetaNYC is adding to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace; never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
 
@@ -192,7 +192,7 @@ npm test
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
 | `test/betanyc-tools.test.js` | `whats_changed` and `about_betanyc`: advertised read-only and strict with an `outputSchema`; every entry in this repo's `WHATS-CHANGED.md` valid and returned; filters; bad arguments rejected by name; every Correction carrying advice; the disclaimer on both, without using up the full footer; and both answers accepted by the MCP SDK client over stdio against their output schemas. Depends on no law text and no package version, so a daily refresh cannot turn it red. |
-| `test/whats-changed-release.test.js` | The What's changed release gate end to end, in a throwaway git repo with a stub `npm` (needs `python3`; skips without it): a hand bump waiting for its tag (refresh commits data without a bump, CI passes, the gate fails), release day (both headings dated, gate passes, the `Whats-changed-edit` trailer), the next automatic release (no entry needed, gate passes), and an Unreleased entry beside a published version (refresh commits data, prepares no release, goes red; CI rejects it). |
+| `test/whats-changed-release.test.js` | The What's changed release gate end to end, in a throwaway git repo with a stub `npm` (needs `python3`; skips without it): a hand bump waiting for its tag (refresh commits data without a bump, CI passes, the gate fails), release day (both headings dated in one commit; the gate and the append-only check pass), the next automatic release (no entry needed, gate passes), and an Unreleased entry beside a published version (refresh commits data, prepares no release, goes red; CI rejects it). |
 | `test/auto-release-cli.test.js` | End-to-end runs of `scripts/auto-release.js prepare` and `ensure` against a throwaway git repo with stubbed `npm` and `gh`: version bump, tagging, one release dispatch, and recovery from a depth-1 checkout. The fixture pins the version (0.3.0) and the Rules "current through" date (October 4, 2026), so it does not drift when real releases ship or the law text moves. |
 
 ### Differential test (Layer 4 — occasional cadence)
@@ -234,7 +234,6 @@ If the current version is not on npm yet (for example you bumped it by hand and 
    - `## Unreleased: Title` becomes `## YYYY-MM-DD: Title` in WHATS-CHANGED.md, same title.
    - `## vX.Y.Z — Unreleased` becomes `## vX.Y.Z — YYYY-MM-DD` in RELEASES.md.
    - The entry's MCP version link gains the new RELEASES.md anchor. Compute it, never type it: `python3 -c "import sys; sys.path.insert(0, 'scripts'); import whats_changed as w; print(w.github_slug('vX.Y.Z — YYYY-MM-DD'))"` (for `v0.5.0 — 2026-11-13` it prints `v050--2026-11-13`).
-   - End the commit message with `Whats-changed-edit: date vX.Y.Z and add its RELEASES.md anchor`. The append-only check otherwise reads the new anchor as an edit to an old line.
    - Check: `node scripts/auto-release.js check-whats-changed --release` must pass. It is the same gate `release.yml` runs before `npm publish`.
 3. Tag that commit and push: `git tag vX.Y.Z && git push origin vX.Y.Z` (the tag must match `package.json`, or the workflow fails).
 

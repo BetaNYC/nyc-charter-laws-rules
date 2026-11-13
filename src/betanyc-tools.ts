@@ -1,10 +1,11 @@
-// betanyc-shared: betanyc-tools.ts v1.1.1
-// betanyc-shared-sha256: 500c9d622b2d6ed06d49934a00432fa67401fb6de5cc84ec97ded6633b67706b
+// betanyc-shared: betanyc-tools.ts v1.2.0
+// betanyc-shared-sha256: 869933109eff7fe8caa47cfd02fdfe2ed0f7c585e895b2e6cf96075ac948fede
 // Canonical copy: betanyc-ai-workspace scripts/mcp_shared/betanyc-tools.ts. Do not edit a copy
 // in a server repo; change the canonical file, re-stamp it, and copy it again.
 // Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
 //
-// The two tools every BetaNYC MCP server carries, with identical names, inputs and output:
+// The two tools BetaNYC is adding to each of its MCP servers (the standard requires both), with
+// identical names, inputs and output:
 //   whats_changed   query this server's WHATS-CHANGED.md
 //   about_betanyc   who built this server and how to reach BetaNYC
 //
@@ -19,7 +20,7 @@
 
 import { readFileSync } from "node:fs";
 
-export const SHARED_MODULE_VERSION = "1.1.1";
+export const SHARED_MODULE_VERSION = "1.2.0";
 
 // --------------------------------------------------------------------------- types
 
@@ -87,13 +88,33 @@ export type ToolResult = {
   isError?: boolean;
 };
 
+/** A tool's input or output JSON Schema, typed to match the MCP SDK's `Tool` type
+ * (`@modelcontextprotocol/sdk` 1.29 to 1.32, `types.d.ts` ToolSchema): a literal `type: "object"`,
+ * optional `properties` and `required`, and any other keys. So these definitions can go into a
+ * server's `Tool[]` with no cast and without this file importing the SDK. */
+export type ObjectJsonSchema = {
+  type: "object";
+  properties?: Record<string, object>;
+  required?: string[];
+  [key: string]: unknown;
+};
+
+/** ToolAnnotations as the SDK declares them (all optional). */
+export type ToolAnnotations = {
+  title?: string;
+  readOnlyHint?: boolean;
+  destructiveHint?: boolean;
+  idempotentHint?: boolean;
+  openWorldHint?: boolean;
+};
+
 export interface ToolDefinition {
   name: string;
   title: string;
   description: string;
-  inputSchema: Record<string, unknown>;
-  outputSchema: Record<string, unknown>;
-  annotations: Record<string, unknown>;
+  inputSchema: ObjectJsonSchema;
+  outputSchema: ObjectJsonSchema;
+  annotations: ToolAnnotations;
 }
 
 export interface BetanycServerConfig {
@@ -142,7 +163,8 @@ const UPDATE_LABEL_RE = /^Update ([^ \t]+)$/;
 const CONT_RE = /^ {2,}[^ \t]/;
 // Link text may not contain brackets: that keeps matching linear on lines full of "[".
 const LINK_RE = /\[([^\[\]]+)\]\(([^() \t]+)\)/g;
-const SEMVER_RE = /(?<![0-9A-Za-z.])([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)(?![0-9A-Za-z])/;
+// An optional "v" before the version ("v0.4.5") is allowed; it is not part of the version.
+const SEMVER_RE = /(?<![0-9A-Za-z.])v?([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)(?![0-9A-Za-z])/;
 // Characters GitHub treats as markup or entities in a heading, so its anchor would not match ours.
 const TITLE_MARKUP_RE = /[*`\[\]<>&_~#\\]/;
 const FENCE_RE = /^(```|~~~)/;
@@ -739,7 +761,7 @@ export const ABOUT_BETANYC_TOOL: ToolDefinition = {
   title: "About BetaNYC and this server",
   description:
     "Who built this server and how to reach them: BetaNYC, a project of the Fund for the City of New York. " +
-    "Returns what BetaNYC is, links to its events, newsletter and donation page, where to report a bug or ask for a feature (this server's GitHub issues), and this server's name and version.",
+    "Returns what BetaNYC is, links to its events, newsletter and donation page, where to report a bug in this server or ask for a new feature (this server's GitHub issues), and this server's name and version.",
   inputSchema: { type: "object", properties: {}, additionalProperties: false },
   outputSchema: {
     type: "object",
@@ -870,7 +892,7 @@ export function handleWhatsChanged(config: BetanycServerConfig, args: unknown, t
     const why = loaded.kind === "missing"
       ? `${config.serverName} ${config.version} has no WHATS-CHANGED.md yet, so there is no change history to show.`
       : `${config.serverName} ${config.version} could not read its WHATS-CHANGED.md (${loaded.message}).`;
-    const note = `${why} Release notes for developers: ${repoBase(config.repoUrl)}/releases. Report a problem: ${issues}.`;
+    const note = `${why} Release notes for developers: ${repoBase(config.repoUrl)}/releases. Report a bug in this server or ask for a new feature: ${issues}.`;
     return textResult(note, { ...base, history_begins: null, total_matching: 0, returned: 0, entries: [], note });
   }
 
@@ -966,7 +988,7 @@ export function handleAboutBetanyc(config: BetanycServerConfig, args: unknown): 
     `${BETANYC_ABOUT.about} ${BETANYC_ABOUT.history} More: ${L.about}`,
     `Events and workshops: ${L.events}\nNewsletter: ${L.newsletter}\nJoin the community: ${L.get_involved}`,
     BETANYC_ABOUT.support,
-    `Report a bug or ask for a feature: ${repo}/issues (new issue: ${repo}/issues/new)`,
+    `Report a bug in this server or ask for a new feature: ${repo}/issues (new issue: ${repo}/issues/new)`,
     `What's changed in this server: ${structured.whats_changed}`,
   ].join("\n\n");
   return textResult(text, structured);

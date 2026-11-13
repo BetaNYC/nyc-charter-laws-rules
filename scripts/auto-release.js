@@ -39,8 +39,8 @@
 //     not) converge without double-bumping or re-tagging.
 //
 //   check-whats-changed [--release] [--base-ref REF]
-//     WHATS-CHANGED.md passes scripts/whats_changed.py check (with RELEASES.md's
-//     versions for its MCP version check) and pairs up with RELEASES.md: an
+//     WHATS-CHANGED.md passes scripts/whats_changed.py check and pairs up with
+//     RELEASES.md: an
 //     "## Unreleased:" entry needs a hand-bumped, undated "## vX.Y.Z — Unreleased"
 //     release for package.json's version. --release (release.yml, before npm
 //     publish) fails while either is undated. --base-ref (CI) adds the
@@ -56,10 +56,9 @@
 //     Prints "true" or "false". Exits non-zero if the registry cannot be read,
 //     so a network failure is never mistaken for "not published".
 
-import { readFileSync, writeFileSync, appendFileSync, realpathSync, existsSync, mkdtempSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, appendFileSync, realpathSync, existsSync } from "node:fs";
 import { execFileSync, spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
-import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -416,20 +415,6 @@ function readWhatsChanged() {
   return existsSync(p) ? readFileSync(p, "utf8") : "";
 }
 
-/**
- * RELEASES.md's version headings ("## vX.Y.Z — date") as bare "## X.Y.Z" lines.
- * whats_changed.py's check 6 looks for an entry's MCP version in a changelog's headings, but
- * reads a version only when no letter comes right before it, so "v0.4.5" does not count.
- */
-export function releasedVersionsChangelog(releasesMd) {
-  const out = [];
-  for (const line of String(releasesMd).split("\n")) {
-    const m = /^## v(\d+\.\d+\.\d+)(?![0-9A-Za-z.])/.exec(line);
-    if (m) out.push(`## ${m[1]}`);
-  }
-  return out.join("\n") + "\n";
-}
-
 function readPkg() {
   return JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
 }
@@ -598,8 +583,7 @@ function bumpCommitSha(version, repo) {
 
 /**
  * check-whats-changed [--release] [--base-ref REF]
- * WHATS-CHANGED.md is valid (scripts/whats_changed.py check, with RELEASES.md's versions for
- * check 6) and pairs up with RELEASES.md and package.json (whatsChangedProblems). CI runs it
+ * WHATS-CHANGED.md is valid (scripts/whats_changed.py check) and pairs up with RELEASES.md and package.json (whatsChangedProblems). CI runs it
  * with --base-ref; release.yml runs it with --release before npm publish. Needs python3.
  */
 function cmdCheckWhatsChanged(argv) {
@@ -615,19 +599,13 @@ function cmdCheckWhatsChanged(argv) {
     annotate("error", p);
     failed = true;
   }
-  const tmp = mkdtempSync(join(tmpdir(), "whats-changed-"));
-  try {
-    const versions = join(tmp, "released-versions.md");
-    writeFileSync(versions, releasedVersionsChangelog(releasesMd));
-    const args = [join(ROOT, "scripts", "whats_changed.py"), "check", join(ROOT, "WHATS-CHANGED.md"), "--changelog", versions];
-    if (release) args.push("--release");
-    if (baseRef) args.push("--base-ref", baseRef);
-    const r = spawnSync("python3", args, { cwd: ROOT, stdio: "inherit" });
-    if (r.error) throw new Error(`could not run python3 (${r.error.message}); whats_changed.py needs Python 3`);
-    if (r.status !== 0) failed = true;
-  } finally {
-    rmSync(tmp, { recursive: true, force: true });
-  }
+  // whats_changed.py reads RELEASES.md beside the file for its MCP version check (check 6).
+  const args = [join(ROOT, "scripts", "whats_changed.py"), "check", join(ROOT, "WHATS-CHANGED.md")];
+  if (release) args.push("--release");
+  if (baseRef) args.push("--base-ref", baseRef);
+  const r = spawnSync("python3", args, { cwd: ROOT, stdio: "inherit" });
+  if (r.error) throw new Error(`could not run python3 (${r.error.message}); whats_changed.py needs Python 3`);
+  if (r.status !== 0) failed = true;
   if (failed) {
     process.exitCode = 1;
     return;
