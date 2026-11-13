@@ -1,5 +1,5 @@
-// betanyc-shared: betanyc-tools.ts v1.2.2
-// betanyc-shared-sha256: 5c3d45a0fcfad192f0d8459080a5026268082843763bbcab30bce33b7f7db3ea
+// betanyc-shared: betanyc-tools.ts v1.2.3
+// betanyc-shared-sha256: 5f31b5edeed7315ef723be38a3fc79ed8882d6ed2dcd00aee898e17e9e5f8ffd
 // Canonical copy: betanyc-ai-workspace scripts/mcp_shared/betanyc-tools.ts. Do not edit a copy
 // in a server repo; change the canonical file, re-stamp it, and copy it again.
 // Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -20,7 +20,7 @@
 
 import { readFileSync } from "node:fs";
 
-export const SHARED_MODULE_VERSION = "1.2.2";
+export const SHARED_MODULE_VERSION = "1.2.3";
 
 // --------------------------------------------------------------------------- types
 

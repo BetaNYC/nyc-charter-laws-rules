@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# betanyc-shared: whats_changed.py v1.2.2
-# betanyc-shared-sha256: 1dac565c86f0873b02fe5d3e836f48d9a6b665d27a4a953fed4093251be0fc38
+# betanyc-shared: whats_changed.py v1.2.3
+# betanyc-shared-sha256: 0e1875d7da9de7635f6d155bd22dd24093ae6ba621de5e73954b514cf43e7a89
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -935,10 +935,13 @@ def render_page(parsed: dict, link_map: LinkMap, site_name: str, home_url: str, 
         f"<title>{html.escape(title)} - {html.escape(site_name)}</title>",
         "<style>",
         "body{margin:0;font-family:Poppins,system-ui,sans-serif;color:#414141;background:#fff}",
-        ".wc-skip{position:absolute;left:-999px;top:0;background:#2359a8;color:#fff;padding:.75rem 1rem}",
+        # Every control the page renders is a 44px tap target, the skip link included.
+        ".wc-skip{position:absolute;left:-999px;top:0;background:#2359a8;color:#fff;padding:0 1rem;"
+        "display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box}",
         ".wc-skip:focus{left:0}",
         "header,main,footer{max-width:750px;margin:0 auto;padding:1rem}",
         "header a,footer a{color:#2359a8}",
+        "header nav a{display:inline-flex;align-items:center;min-height:44px}",
         "h1,h2{font-family:Roboto,system-ui,sans-serif}",
         "</style>",
         "</head>",
