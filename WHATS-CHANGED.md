@@ -67,13 +67,21 @@ To report a problem with this server or ask for a feature, [open an issue on Git
 - **MCP version:** [nyc-charter-laws-rules 0.1.3](RELEASES.md#v013--2026-07-06)
 - **More detail:** [The fix](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/16) · [Release notes](RELEASES.md#v013--2026-07-06)
 
-## 2026-07-06: Cross-references in the law text were moved out of place
+## 2026-07-06: A request for Chapter 1 also returned Chapter 10
+
+- **Tags:** MCP, Correction
+- **What changed:** Until July 6, 2026, asking the server for the sections of a chapter or title also matched any chapter or title whose name began the same way, so a request for Chapter 1 also returned sections of Chapter 10, a chapter nobody asked for. Version 0.1.3 matches the whole chapter or title name.
+- **If you used the old numbers:** If you asked for a chapter or title in that period, check which chapter or title each section in the answer came from, and set aside any you did not ask for.
+- **MCP version:** [nyc-charter-laws-rules 0.1.3](RELEASES.md#v013--2026-07-06)
+- **More detail:** [Release notes](RELEASES.md#v013--2026-07-06) · [The fix](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/16)
+
+## 2026-07-06: Law text had cross-references out of place, wrong section numbers, stray codes
 
 - **Tags:** MCP, Data, Correction
-- **What changed:** From May 21 to July 6, 2026, the law text from the server moved the words of a cross-reference to the end of the paragraph and ran the words around it together. In Charter § 292, "established pursuant to section two hundred ninety-eight of this chapter" read "established pursuant to sectionof this chapter". Some numbers in the text were changed too, such as 59E-22 shown as 5.9e-21, and numbered list items ran into the next word, as in "1Each agency".
-- **If you used the old numbers:** If you quoted or cited law text from this server in that period, compare it with the current text or the text on American Legal Publishing's site, above all any sentence that refers to another section. The copy of the text in this repository was fixed on June 3, 2026; the npm package got the fix in version 0.1.3.
+- **What changed:** From May 21 to July 6, 2026, the law text from the server moved the words of a cross-reference to the end of the paragraph, so in Charter § 292 "established pursuant to section two hundred ninety-eight of this chapter" read "established pursuant to sectionof this chapter". Some section numbers inside the text were turned into wrong ones: in Rules § 59E-02, "RCNY § 59E-08" read "RCNY § 5.9e-7". The text also carried leftover formatting codes and American Legal Publishing's editorial markers, and numbered items ran into the next word, so in Charter § 1043 "a. Authority. 1. Each agency" read "a. Authority. [ALP S-054] 1Each agency" with a code for a space before the marker.
+- **If you used the old numbers:** If you quoted or cited law text from this server in that period, compare it with the current text or the text on American Legal Publishing's site. Check every section number cited inside the quoted text, not only the sentences that refer to another section. The copy of the text in this repository was fixed on June 3, 2026; the npm package got the fix in version 0.1.3.
 - **MCP version:** [nyc-charter-laws-rules 0.1.3](RELEASES.md#v013--2026-07-06)
-- **More detail:** [The issue](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/3) · [The fix for cross-references](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/4) · [The fix for numbers and stray characters](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/9)
+- **More detail:** [The issue](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/3) · [The fix for cross-references](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/4) · [The fix for numbers, codes and markers](https://github.com/BetaNYC/nyc-charter-laws-rules/pull/9)
 
 ## 2026-06-17: The law text in this repository is checked every morning
 

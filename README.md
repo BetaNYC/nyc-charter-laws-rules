@@ -162,7 +162,7 @@ whats_changed(tag="Correction")
 
 Who built the server (BetaNYC, a project of the Fund for the City of New York), its version and repository, where to report a bug or ask for a feature, and links to BetaNYC. No parameters.
 
-`whats_changed` and `about_betanyc` are the two tools every BetaNYC MCP server carries. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace; never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
+`whats_changed` and `about_betanyc` are the two tools BetaNYC is adding to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace; never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
 
 ---
 

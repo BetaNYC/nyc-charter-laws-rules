@@ -1,4 +1,4 @@
-// whats_changed and about_betanyc, the two tools every BetaNYC MCP server carries
+// whats_changed and about_betanyc, the two tools BetaNYC is adding to each of its MCP servers
 // (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7). They read this repo's
 // WHATS-CHANGED.md and never touch the network.
 //

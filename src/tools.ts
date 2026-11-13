@@ -16,7 +16,7 @@ import { createBetanycTools } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
- * whats_changed and about_betanyc, the two tools every BetaNYC MCP server carries
+ * whats_changed and about_betanyc, the two tools BetaNYC is adding to each of its MCP servers
  * (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7). betanyc-tools.ts is
  * a copy of the workspace's canonical file: never edit it here. WHATS-CHANGED.md ships in
  * the npm package (package.json `files`), one level above dist/. This repo has no website,
