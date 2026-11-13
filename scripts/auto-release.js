@@ -22,7 +22,10 @@
 //     not bump. It does NOT bump when the current version is unpublished: that
 //     is either a human's pending release (a hand bump on main awaiting its tag)
 //     or an automatic release still in flight, and bumping past it would skip a
-//     version. Fails loudly if the next version is already tagged or published,
+//     version; once a hand release has waited on main more than
+//     HAND_RELEASE_GRACE_DAYS (New York dates), that turns into a failure, so the
+//     paused daily releases are noticed. Fails loudly if the next version is
+//     already tagged or published,
 //     or if WHATS-CHANGED.md has an "## Unreleased:" entry while the current
 //     version is published (an automatic release must neither ship that entry
 //     undated nor be stopped by release.yml's What's changed gate).
@@ -376,12 +379,36 @@ export function whatsChangedProblems({ version, releasesMd, whatsChangedMd, rele
  * Returns { bump: false, reason, warn } or { bump: true, next }.
  * `unreleased` is true when WHATS-CHANGED.md has an "## Unreleased:" entry.
  */
-export function decidePrepare({ version, published, nextTagExists, releasesMd, unreleased = false }) {
+export const HAND_RELEASE_GRACE_DAYS = 2;
+
+/** Whole days from one YYYY-MM-DD to another (calendar days, so DST cannot shift it). */
+export function daysBetween(from, to) {
+  const ms = (d) => Date.UTC(...d.split("-").map((x, i) => Number(x) - (i === 1 ? 1 : 0)));
+  return Math.round((ms(to) - ms(from)) / 86_400_000);
+}
+
+export function decidePrepare({ version, published, nextTagExists, releasesMd, unreleased = false, handBumpDate = null, today = null }) {
   if (!published.includes(version)) {
+    // A hand release waiting for its tag pauses automatic releases, so npm users stop getting
+    // new law text until it ships. Allow a short wait, then go red: the law text is still
+    // committed (--soft), but the run fails so the waiting release is noticed.
+    // handBumpDate: New York date the version reached main (null when unknown).
+    if (!isAutoRelease(releasesMd, version) && handBumpDate && today) {
+      const days = daysBetween(handBumpDate, today);
+      if (days > HAND_RELEASE_GRACE_DAYS) {
+        throw new Error(
+          `v${version} is a hand release that reached main on ${handBumpDate} (${days} days ago) and is still not on npm, so the daily release of new law text is paused. ` +
+            `Release it: date its WHATS-CHANGED.md and RELEASES.md headings in one commit and tag that commit v${version} (README, "Releases"). ` +
+            `New law text is committed meanwhile`,
+        );
+      }
+    }
     return {
       bump: false,
       warn: true,
-      reason: `v${version} is not on npm yet (a pending manual release, or an automatic one still in flight); committing data without a new version`,
+      reason:
+        `v${version} is not on npm yet (a pending manual release, or an automatic one still in flight); committing data without a new version` +
+        (handBumpDate && !isAutoRelease(releasesMd, version) ? ` (on main since ${handBumpDate}; the refresh goes red after ${HAND_RELEASE_GRACE_DAYS} days)` : ""),
     };
   }
   if (unreleased) {
@@ -443,6 +470,34 @@ function setOutputs(pairs) {
   appendFileSync(file, lines.join("\n") + "\n");
 }
 
+/**
+ * New York date on which package.json's current version reached main: the commit date of the
+ * oldest first-parent commit in an unbroken run, back from HEAD, whose package.json has that
+ * version (a merge commit counts on the day it merged). Needs the commit history:
+ * refresh-data.yml checks out with fetch-depth: 0 and filter: blob:none, so the few
+ * package.json blobs read here are fetched on demand. Returns null, with a warning, when the
+ * history is shallow or unreadable; the age check is then skipped, never guessed.
+ */
+function versionReachedMain(version) {
+  try {
+    if (sh("git", ["rev-parse", "--is-shallow-repository"]) === "true") {
+      annotate("warning", "shallow checkout: cannot tell how long the hand release has waited");
+      return null;
+    }
+    const lines = sh("git", ["log", "--first-parent", "--format=%H %cI", "HEAD", "--", "package.json"]).split("\n").filter(Boolean);
+    let when = null;
+    for (const line of lines) {
+      const [sha, iso] = line.split(" ");
+      if (JSON.parse(sh("git", ["show", `${sha}:package.json`])).version !== version) break;
+      when = iso;
+    }
+    return when ? newYorkDate(new Date(when)) : null;
+  } catch (e) {
+    annotate("warning", `cannot tell how long the hand release has waited: ${e.message}`);
+    return null;
+  }
+}
+
 function prepare(date) {
   const pkgPath = join(ROOT, "package.json");
   const lockPath = join(ROOT, "package-lock.json");
@@ -462,6 +517,8 @@ function prepare(date) {
     nextTagExists: remoteTagSha(`v${next}`) !== null,
     releasesMd,
     unreleased: unreleasedEntry(readWhatsChanged()) !== null,
+    handBumpDate: published.includes(pkg.version) ? null : versionReachedMain(pkg.version),
+    today: date,
   });
   if (!d.bump) {
     annotate("warning", d.reason);

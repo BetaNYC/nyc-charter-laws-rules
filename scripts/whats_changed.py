@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# betanyc-shared: whats_changed.py v1.2.0
-# betanyc-shared-sha256: 98bc81a7e152adb0fc6679296a4f7d973ec2c8f06818ce56cc0af94c32f2592d
+# betanyc-shared: whats_changed.py v1.2.1
+# betanyc-shared-sha256: 26db6d4f6b777281093701a7c68b81c22f35f614ee489d04edfe2b5233280b7c
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -509,19 +509,34 @@ def _trailer_present(root: Path, base_ref: str, trailer: str) -> bool:
 
 # A version heading in CHANGELOG.md or RELEASES.md: "## 1.2.3", "## v1.2.3", "## [1.2.3]",
 # "## [v1.2.3]", each optionally followed by " - date", " — date", " – date" or " — Unreleased".
+_VER = r"[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?"
 VERSION_HEADING_RE = re.compile(
-    r"^#{1,6}[ \t]+\[?v?([0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]*[0-9A-Za-z])?)\]?"
+    r"^#{1,6}[ \t]+(?:\[v?(" + _VER + r")\]|v?(" + _VER + r"))"  # brackets balanced or absent
     r"(?:[ \t]+(?:-|\u2013|\u2014)[ \t]+[^\n]*)?[ \t]*$")
 VERSION_FILES = ("CHANGELOG.md", "RELEASES.md")
 
 
 def versions_in(text: str) -> set[str]:
-    """Every version a CHANGELOG.md or RELEASES.md gives a heading of its own."""
+    """Every version a CHANGELOG.md or RELEASES.md gives a heading of its own. Headings inside a
+    code fence or an HTML comment do not count."""
     found = set()
+    in_fence = in_comment = False
     for line in text.splitlines():
+        t = line.strip()
+        if in_comment:
+            in_comment = "-->" not in t
+            continue
+        if FENCE_RE.match(t):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        if t.startswith("<!--"):
+            in_comment = "-->" not in t
+            continue
         m = VERSION_HEADING_RE.match(line.rstrip())
         if m:
-            found.add(m.group(1))
+            found.add(m.group(1) or m.group(2))
     return found
 
 
@@ -574,8 +589,8 @@ def check_append_only(path: Path, text: str, base_ref: str) -> list[dict]:
     old_lines = [ln.rstrip() for ln in old.replace("\r\n", "\n").split("\n")]
     new_lines = [ln.rstrip() for ln in text.replace("\r\n", "\n").split("\n")]
     # An "Unreleased:" entry is not published yet, so its whole body may change while it is
-    # Unreleased, including in the commit that gives it a date. It may not disappear: at the new
-    # ref it is still the Unreleased entry, or a newly dated entry with the same title. Everything
+    # Unreleased, including in the commit that gives it a date. It may not disappear or change
+    # title: at the new ref it is still Unreleased with the same title, or newly dated with it. Everything
     # else (one Unreleased, first; dates in order and not in the future) is checked by parse().
     old_anchors = {e["anchor"] for e in old_entries}
     unreleased_spans: list[tuple[int, int]] = []
@@ -585,9 +600,10 @@ def check_append_only(path: Path, text: str, base_ref: str) -> list[dict]:
             if oe["anchor"] not in new_anchors:
                 errors.append({"code": "old-entry-missing", "line": 0, "anchor": oe["anchor"]})
             continue
-        kept = any(ne["unreleased"] for ne in new_entries) or any(
-            not ne["unreleased"] and ne["title"] == oe["title"] and ne["anchor"] not in old_anchors
-            for ne in new_entries)
+        # Same title either way: still Unreleased, or newly dated. Any other Unreleased entry
+        # (a throwaway "Dummy") does not count.
+        kept = any(ne["title"] == oe["title"] and (ne["unreleased"] or ne["anchor"] not in old_anchors)
+                   for ne in new_entries)
         if not kept:
             errors.append({"code": "old-entry-missing", "line": 0, "anchor": oe["anchor"]})
         start = oe["line"] - 1

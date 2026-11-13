@@ -229,9 +229,9 @@ If the current version is not on npm yet (for example you bumped it by hand and 
 
 **Manual releases (code changes).**
 
-1. In a pull request: bump the version in `package.json`, `package-lock.json` and `server.json` (both `version` fields), add a [RELEASES.md](RELEASES.md) entry headed `## vX.Y.Z — Unreleased`, and, for a change a reader would notice, a [WHATS-CHANGED.md](WHATS-CHANGED.md) entry headed `## Unreleased: Title`, tagged MCP, whose MCP version line links to `RELEASES.md` with no anchor. `release.yml` refuses to publish if `server.json` differs from `package.json`. Once merged, the refresh keeps committing law text but does not release automatically until this version is on npm.
+1. In a pull request: bump the version in `package.json`, `package-lock.json` and `server.json` (both `version` fields), add a [RELEASES.md](RELEASES.md) entry headed `## vX.Y.Z — Unreleased`, and, for a change a reader would notice, a [WHATS-CHANGED.md](WHATS-CHANGED.md) entry headed `## Unreleased: Title`, tagged MCP, whose MCP version line links to `RELEASES.md` with no anchor. `release.yml` refuses to publish if `server.json` differs from `package.json`. Once merged, the refresh keeps committing law text but does not release automatically until this version is on npm, so npm users get no new law text meanwhile. After the hand release has been on `main` for more than two days (New York dates), each refresh run goes red to say so.
 2. On release day, one commit on `main`, with the New York date (`TZ=America/New_York date +%F`):
-   - `## Unreleased: Title` becomes `## YYYY-MM-DD: Title` in WHATS-CHANGED.md, same title.
+   - `## Unreleased: Title` becomes `## YYYY-MM-DD: Title` in WHATS-CHANGED.md. The title must stay the same; the check rejects a changed one.
    - `## vX.Y.Z — Unreleased` becomes `## vX.Y.Z — YYYY-MM-DD` in RELEASES.md.
    - The entry's MCP version link gains the new RELEASES.md anchor. Compute it, never type it: `python3 -c "import sys; sys.path.insert(0, 'scripts'); import whats_changed as w; print(w.github_slug('vX.Y.Z — YYYY-MM-DD'))"` (for `v0.5.0 — 2026-11-13` it prints `v050--2026-11-13`).
    - Check: `node scripts/auto-release.js check-whats-changed --release` must pass. It is the same gate `release.yml` runs before `npm publish`.

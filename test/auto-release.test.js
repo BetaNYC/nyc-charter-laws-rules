@@ -28,6 +28,7 @@ import {
   newYorkDate,
   releaseMarker,
   findBumpCommit,
+  daysBetween,
   unreleasedEntry,
   isUndatedRelease,
   whatsChangedProblems,
@@ -390,5 +391,31 @@ describe("decidePrepare and WHATS-CHANGED.md", () => {
   });
   test("no Unreleased entry -> the automatic bump is unchanged", () => {
     assert.deepEqual(decidePrepare({ version: "0.3.0", published, nextTagExists: false, releasesMd: RELEASES, unreleased: false }), { bump: true, next: "0.3.1" });
+  });
+});
+
+describe("a hand release waiting on main", () => {
+  const published = ["0.2.0", "0.3.0"];
+  const base = { version: "0.5.0", published, nextTagExists: false, releasesMd: RELEASES_HAND };
+  test("daysBetween counts calendar days", () => {
+    assert.equal(daysBetween("2026-11-09", "2026-11-11"), 2);
+    assert.equal(daysBetween("2026-11-09", "2026-11-12"), 3);
+    assert.equal(daysBetween("2026-10-31", "2026-11-02"), 2, "across the end of daylight saving time");
+    assert.equal(daysBetween("2026-02-28", "2026-03-01"), 1);
+  });
+  test("up to two days: no bump, a warning that names the date, the run stays green", () => {
+    const d = decidePrepare({ ...base, handBumpDate: "2026-11-09", today: "2026-11-11" });
+    assert.equal(d.bump, false);
+    assert.match(d.reason, /on main since 2026-11-09; the refresh goes red after 2 days/);
+  });
+  test("more than two days: fail, naming the release to finish", () => {
+    assert.throws(() => decidePrepare({ ...base, handBumpDate: "2026-11-09", today: "2026-11-12" }), /hand release that reached main on 2026-11-09 \(3 days ago\)/);
+  });
+  test("date unknown (shallow checkout): warn only", () => {
+    assert.equal(decidePrepare({ ...base, handBumpDate: null, today: "2026-11-30" }).bump, false);
+  });
+  test("an automatic release still in flight is never failed for its age", () => {
+    const md = insertReleaseEntry(RELEASES, releaseEntry("0.3.1", "2026-10-13", []), "0.3.1");
+    assert.equal(decidePrepare({ version: "0.3.1", published, nextTagExists: false, releasesMd: md, handBumpDate: "2026-10-01", today: "2026-11-30" }).bump, false);
   });
 });

@@ -2,8 +2,9 @@
 // (no network). It walks one hand release and the automatic releases around it:
 //
 //   1. The hand bump is on main, unpublished, with "## Unreleased:" in WHATS-CHANGED.md and
-//      RELEASES.md. The daily refresh commits law text without a version bump, and CI's
-//      check passes; the release gate (check-whats-changed --release) fails.
+//      RELEASES.md. The daily refresh commits law text without a version bump: green for two
+//      days, then red. CI's check passes; the release gate (check-whats-changed --release)
+//      fails.
 //   2. Release day: one commit dates both headings. The gate passes, and the append-only
 //      check accepts the dating.
 //   3. After the publish, the next refresh makes an automatic release with no
@@ -36,7 +37,7 @@ function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, {
     cwd: work,
     encoding: "utf8",
-    env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, STUB_DIR: dir, GITHUB_OUTPUT: join(dir, "github_output") },
+    env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, STUB_DIR: dir, GITHUB_OUTPUT: join(dir, "github_output"), ...opts.env },
   });
   if (opts.check !== false && r.status !== 0) {
     throw new Error(`${cmd} ${args.join(" ")} exited ${r.status}\n${r.stdout}\n${r.stderr}`);
@@ -106,21 +107,36 @@ before(() => {
   git("config", "user.email", "t@example.com");
   git("config", "user.name", "t");
   git("add", "-A");
-  git("commit", "-q", "-m", "hand bump 0.5.0");
+  // The hand bump reached main at noon on November 9 in New York.
+  run("git", ["commit", "-q", "-m", "hand bump 0.5.0"], { env: { GIT_COMMITTER_DATE: "2026-11-09T12:00:00-05:00" } });
 });
 
 after(() => {
   if (dir) rmSync(dir, { recursive: true, force: true });
 });
 
-test("1. hand bump waiting: the refresh commits data without a bump; CI passes; the gate fails", { skip }, () => {
+test("1. hand bump waiting: data without a bump, green for two days, then red; CI passes; the gate fails", { skip }, () => {
+  newLaw("November 11, 2026");
+  writeFileSync(join(dir, "github_output"), "");
+  const p = auto(["prepare", "--soft", "--date", "2026-11-11"]);
+  assert.equal(p.stdout, "", "no new version");
+  assert.match(p.stderr, /v0\.5\.0 is not on npm yet.*on main since 2026-11-09/);
+  assert.equal(readFileSync(join(dir, "github_output"), "utf8"), "", "two days: the run stays green");
+  assert.equal(version(), V);
+  git("commit", "-q", "-am", "chore: refresh index 2026-11-11");
+
+  // Three days on: npm users have had no new law text since the bump, so the run goes red,
+  // and the law text is still committed (prepare --soft exits 0 and changes no version file).
   newLaw("November 12, 2026");
   writeFileSync(join(dir, "github_output"), "");
-  const p = auto(["prepare", "--soft", "--date", "2026-11-12"]);
-  assert.equal(p.stdout, "", "no new version");
-  assert.match(p.stderr, /v0\.5\.0 is not on npm yet/);
-  assert.equal(readFileSync(join(dir, "github_output"), "utf8"), "", "not a failure: the run stays green");
-  assert.equal(version(), V);
+  const files = ["package.json", "package-lock.json", "server.json", "RELEASES.md"].map(read);
+  const late = auto(["prepare", "--soft", "--date", "2026-11-12"]);
+  assert.equal(late.status, 0);
+  assert.equal(late.stdout, "", "no new version");
+  const out = readFileSync(join(dir, "github_output"), "utf8");
+  assert.match(out, /^prepare_failed=true$/m, "more than two days: the refresh goes red");
+  assert.match(out, /prepare_error=v0\.5\.0 is a hand release that reached main on 2026-11-09 \(3 days ago\).*tag that commit v0\.5\.0/);
+  assert.deepEqual(["package.json", "package-lock.json", "server.json", "RELEASES.md"].map(read), files);
   git("commit", "-q", "-am", "chore: refresh index 2026-11-12");
 
   const ci = auto(["check-whats-changed", "--base-ref", "HEAD~1"], { check: false });
