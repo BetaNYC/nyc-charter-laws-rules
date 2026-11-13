@@ -16,6 +16,8 @@ Clone the repo and everything is ready to use. No setup required to browse or qu
 
 Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
+**[What's changed](WHATS-CHANGED.md):** new tools, corrections and other changes a reader would notice, newest first. Daily law text updates are in [CHANGELOG.md](CHANGELOG.md).
+
 ---
 
 ## API key
@@ -28,7 +30,7 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 ## What it does
 
-Exposes 5 tools over MCP:
+Exposes 7 tools over MCP:
 
 | Tool | Description |
 |---|---|
@@ -37,6 +39,8 @@ Exposes 5 tools over MCP:
 | `list_titles` | List the top-level chapters or titles of a document |
 | `get_title` | Retrieve all sections within a chapter or title |
 | `get_version` | Return the currency date for each document — so responses can be grounded in exactly how current the law is |
+| `whats_changed` | What changed in this server, newest first, from [WHATS-CHANGED.md](WHATS-CHANGED.md): new tools and corrections |
+| `about_betanyc` | Who built this server, where its code is, and where to report a bug in this server or ask for a new feature |
 
 ---
 
@@ -137,6 +141,31 @@ Rules of NYC:          Current through rules effective July 1, 2026. (8671 secti
 
 ---
 
+### `whats_changed`
+
+What changed in this server, newest first, from [WHATS-CHANGED.md](WHATS-CHANGED.md), which ships with the package. Covers new tools, corrections and other changes a reader would notice; daily law text updates are not listed (see [CHANGELOG.md](CHANGELOG.md)). Corrections say what to re-check if you used the old answer. Returns text plus `structuredContent` matching the tool's `outputSchema`.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `since` | string | no | `YYYY-MM-DD`: changes on or after this date |
+| `tag` | string | no | `Site`, `Data`, `MCP` or `Correction` (any case) |
+| `limit` | integer | no | 1 to 50, default 10 |
+
+```
+whats_changed()
+whats_changed(tag="Correction")
+```
+
+---
+
+### `about_betanyc`
+
+Who built the server (BetaNYC, a project of the Fund for the City of New York), its version and repository, where to report a bug in this server or ask for a new feature, and links to BetaNYC. No parameters.
+
+`whats_changed` and `about_betanyc` are the two tools BetaNYC is adding to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace; never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
+
+---
+
 ## Testing and CI
 
 ### Running tests
@@ -162,6 +191,8 @@ npm test
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
+| `test/betanyc-tools.test.js` | `whats_changed` and `about_betanyc`: advertised read-only and strict with an `outputSchema`; every entry in this repo's `WHATS-CHANGED.md` valid and returned; filters; bad arguments rejected by name; every Correction carrying advice; the disclaimer on both, without using up the full footer; and both answers accepted by the MCP SDK client over stdio against their output schemas. Depends on no law text and no package version, so a daily refresh cannot turn it red. |
+| `test/whats-changed-release.test.js` | The What's changed release gate end to end, in a throwaway git repo with a stub `npm` (needs `python3`; skips without it): a hand bump waiting for its tag (refresh commits data without a bump, CI passes, the gate fails), release day (both headings dated in one commit; the gate and the append-only check pass), the next automatic release (no entry needed, gate passes), and an Unreleased entry beside a published version (refresh commits data, prepares no release, goes red; CI rejects it). |
 | `test/auto-release-cli.test.js` | End-to-end runs of `scripts/auto-release.js prepare` and `ensure` against a throwaway git repo with stubbed `npm` and `gh`: version bump, tagging, one release dispatch, and recovery from a depth-1 checkout. The fixture pins the version (0.3.0) and the Rules "current through" date (October 4, 2026), so it does not drift when real releases ship or the law text moves. |
 
 ### Differential test (Layer 4 — occasional cadence)
@@ -182,6 +213,8 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 
 `.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x**. The manifest declares `engines.node ">=20"` — a floor only; the server uses no APIs newer than Node 20, so newer Node releases are supported even though CI tests the 20.x/22.x pair. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it.
 
+`.github/workflows/test.yml` also runs a **What's changed** job: `node scripts/auto-release.js check-whats-changed --base-ref <merge base with main>`. It validates `WHATS-CHANGED.md` with `scripts/whats_changed.py` (copied unchanged from BetaNYC's workspace; never edit it here), checks that old entries are only ever added to, that a version bump in a pull request has an entry, and that an `## Unreleased:` entry comes with a hand-bumped, undated release in `RELEASES.md`.
+
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
 `.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). Because `npm test` runs **after** the fetch and rebuild, the tests see that day's new data. A test must never assume what `data/index/json/` says today: pin the values it depends on inside the test, or the refresh goes red on exactly the days law text changes and the new text never gets committed. The "Last index update" block below is stamped by that job.
@@ -196,8 +229,15 @@ If the current version is not on npm yet (for example you bumped it by hand and 
 
 **Manual releases (code changes).**
 
-1. Bump the version in `package.json`, `package-lock.json` and `server.json` on `main` and add an entry to [RELEASES.md](RELEASES.md). `release.yml` refuses to publish if `server.json` differs from `package.json`.
-2. Tag and push: `git tag vX.Y.Z && git push origin vX.Y.Z` (the tag must match `package.json`, or the workflow fails).
+1. In a pull request: bump the version in `package.json`, `package-lock.json` and `server.json` (both `version` fields), add a [RELEASES.md](RELEASES.md) entry headed `## vX.Y.Z — Unreleased`, and, for a change a reader would notice, a [WHATS-CHANGED.md](WHATS-CHANGED.md) entry headed `## Unreleased: Title`, tagged MCP, whose MCP version line links to `RELEASES.md` with no anchor. `release.yml` refuses to publish if `server.json` differs from `package.json`. Once merged, the refresh keeps committing law text but does not release automatically until this version is on npm, so npm users get no new law text meanwhile. After the hand release has been on `main` for more than two days (New York dates), each refresh run goes red to say so.
+2. On release day, one commit on `main`, with the New York date (`TZ=America/New_York date +%F`):
+   - `## Unreleased: Title` becomes `## YYYY-MM-DD: Title` in WHATS-CHANGED.md. The title must stay the same; the check rejects a changed one.
+   - `## vX.Y.Z — Unreleased` becomes `## vX.Y.Z — YYYY-MM-DD` in RELEASES.md.
+   - The entry's MCP version link gains the new RELEASES.md anchor. Compute it, never type it: `python3 -c "import sys; sys.path.insert(0, 'scripts'); import whats_changed as w; print(w.github_slug('vX.Y.Z — YYYY-MM-DD'))"` (for `v0.5.0 — 2026-11-13` it prints `v050--2026-11-13`).
+   - Check: `node scripts/auto-release.js check-whats-changed --release` must pass. It is the same gate `release.yml` runs before `npm publish`.
+3. Tag that commit and push: `git tag vX.Y.Z && git push origin vX.Y.Z` (the tag must match `package.json`, or the workflow fails).
+
+Automatic data releases never get a WHATS-CHANGED.md entry and pass the gate. The refresh does not prepare one while WHATS-CHANGED.md has an Unreleased entry: in the normal flow that entry sits beside an unpublished hand bump, which already pauses automatic releases. If an Unreleased entry ever sits beside a version that is already on npm, the refresh commits the law text without a release and goes red, naming the fix, rather than ship the entry undated.
 
 **Authentication.** `release.yml` is set up for [npm trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC, no stored token). Until the trusted publisher is configured on npmjs.com it falls back to the `NPM_TOKEN` secret. One-time setup, by a package owner:
 
@@ -208,7 +248,7 @@ If the current version is not on npm yet (for example you bumped it by hand and 
 
 **MCP Registry.** After each successful release, `.github/workflows/publish-mcp.yml` lists that version in the [official MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.BetaNYC/nyc-charter-laws-rules`, from `server.json`, using GitHub OIDC (no secret). `glama.json` claims the server on Glama.
 
-Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only.
+Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHANGELOG.md) is machine-generated and tracks corpus data updates only. [WHATS-CHANGED.md](WHATS-CHANGED.md) is the plain-language record of what a reader would notice.
 
 ---
 
@@ -241,8 +281,11 @@ Caveats are encoded at four levels so no response can be returned without one:
 
 ```
 nyc-charter-laws-rules/
-├── src/                        ← MCP server (TypeScript)
+├── WHATS-CHANGED.md            ← what a reader would notice, newest first (ships in the package)
+├── src/                        ← MCP server (TypeScript); betanyc-tools.ts is a shared copy
 ├── scripts/
+│   ├── whats_changed.py        ← checks WHATS-CHANGED.md (shared copy; never edit here)
+│   ├── auto-release.js         ← automatic releases and the What's changed release gate
 │   ├── fetch-data.js           ← downloads bulk XML ZIPs from AML
 │   ├── build-index.js          ← thin CLI: reads ZIPs, writes JSON + Markdown indexes
 │   └── lib/

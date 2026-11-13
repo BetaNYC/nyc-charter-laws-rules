@@ -22,7 +22,13 @@
 //     not bump. It does NOT bump when the current version is unpublished: that
 //     is either a human's pending release (a hand bump on main awaiting its tag)
 //     or an automatic release still in flight, and bumping past it would skip a
-//     version. Fails loudly if the next version is already tagged or published.
+//     version; once a hand release has waited on main more than
+//     HAND_RELEASE_GRACE_DAYS (New York dates), that turns into a failure, so the
+//     paused daily releases are noticed. Fails loudly if the next version is
+//     already tagged or published,
+//     or if WHATS-CHANGED.md has an "## Unreleased:" entry while the current
+//     version is published (an automatic release must neither ship that entry
+//     undated nor be stopped by release.yml's What's changed gate).
 //
 //   ensure
 //     Run on EVERY refresh, after the commit step. If package.json's version is
@@ -35,6 +41,14 @@
 //     makes a rerun of a half-finished refresh (commit pushed, tag or dispatch
 //     not) converge without double-bumping or re-tagging.
 //
+//   check-whats-changed [--release] [--base-ref REF]
+//     WHATS-CHANGED.md passes scripts/whats_changed.py check and pairs up with
+//     RELEASES.md: an
+//     "## Unreleased:" entry needs a hand-bumped, undated "## vX.Y.Z — Unreleased"
+//     release for package.json's version. --release (release.yml, before npm
+//     publish) fails while either is undated. --base-ref (CI) adds the
+//     append-only and version-bump checks. Needs python3.
+//
 //   check-publish-env
 //     Fails unless node >= 22.14.0 and npm >= 11.5.1, the minimums for npm
 //     trusted publishing (https://docs.npmjs.com/trusted-publishers: "Trusted
@@ -45,8 +59,8 @@
 //     Prints "true" or "false". Exits non-zero if the registry cannot be read,
 //     so a network failure is never mistaken for "not published".
 
-import { readFileSync, writeFileSync, appendFileSync, realpathSync } from "node:fs";
-import { execFileSync } from "node:child_process";
+import { readFileSync, writeFileSync, appendFileSync, realpathSync, existsSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -268,17 +282,143 @@ export function decideEnsure({ version, auto, published, remoteTagSha, runs }) {
   return { action: "dispatch", tag: !remoteTagSha, reason: `dispatching ${RELEASE_WORKFLOW} for ${tag}` };
 }
 
+// ------------------------------------------------- WHATS-CHANGED.md (reader-facing record)
+//
+// WHATS-CHANGED.md follows BetaNYC's What's changed standard (betanyc-ai-workspace
+// platform/system/whats-changed-standard.md). A hand release's entry is "## Unreleased: Title"
+// until the release commit dates it, and release.yml refuses to publish while one is left
+// (scripts/whats_changed.py check --release). Automatic data releases never carry an entry:
+// daily law text is listed in CHANGELOG.md, not WHATS-CHANGED.md.
+//
+// So an automatic release must never meet an Unreleased entry. In the normal flow it cannot:
+// the entry comes with a hand version bump, and `prepare` already refuses to bump past an
+// unpublished version. The helpers below enforce the rest: `prepare` refuses to bump when an
+// Unreleased entry sits beside an already-published version, and `check-whats-changed` (CI)
+// rejects that state before it reaches main.
+
+/**
+ * The "## Unreleased: Title" entry of a WHATS-CHANGED.md text, or null. Skips HTML comments
+ * and code fences the way scripts/whats_changed.py does, so a commented-out example is not
+ * an entry. Returns { title, mcpVersion } (mcpVersion is the X.Y.Z in its "MCP version"
+ * line, or null).
+ */
+export function unreleasedEntry(md) {
+  const lines = String(md ?? "").replace(/\r\n?/g, "\n").split("\n");
+  let inComment = false;
+  let inFence = false;
+  let entry = null;
+  for (const raw of lines) {
+    const line = raw.replace(/[ \t ﻿]+$/, "");
+    if (inComment) {
+      if (line.includes("-->")) inComment = false;
+      continue;
+    }
+    if (!inFence && line.replace(/^[ \t ﻿]+/, "").startsWith("<!--")) {
+      if (!line.includes("-->")) inComment = true;
+      continue;
+    }
+    if (/^(```|~~~)/.test(line.trim())) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    if (line.startsWith("## ")) {
+      if (entry) return entry; // the next entry starts; the Unreleased one is complete
+      const m = /^## Unreleased: ([^ \t].*)$/.exec(line);
+      if (m) entry = { title: m[1], mcpVersion: null };
+      continue;
+    }
+    const v = entry && /^- \*\*MCP version:\*\* .*?(?<![0-9A-Za-z.])(\d+\.\d+\.\d+)(?![0-9A-Za-z])/.exec(line);
+    if (v) entry.mcpVersion = v[1];
+  }
+  return entry;
+}
+
+/** RELEASES.md heading of a hand release that is not published yet: "## vX.Y.Z — Unreleased". */
+export function isUndatedRelease(md, version) {
+  const section = findReleaseSection(md, version);
+  return section !== null && /^## v\S+ — Unreleased$/.test(section.split("\n")[0].trimEnd());
+}
+
+/**
+ * Problems with how WHATS-CHANGED.md and RELEASES.md pair up for package.json's version.
+ * Offline, so CI can run it on every pull request. With `release` (release.yml, before
+ * npm publish), nothing may be left undated.
+ */
+export function whatsChangedProblems({ version, releasesMd, whatsChangedMd, release = false }) {
+  const problems = [];
+  const entry = unreleasedEntry(whatsChangedMd);
+  const undated = isUndatedRelease(releasesMd, version);
+  if (entry) {
+    if (release) {
+      problems.push(`WHATS-CHANGED.md still has "## Unreleased: ${entry.title}". Date it in the release commit, then tag that commit.`);
+    }
+    if (entry.mcpVersion !== version) {
+      problems.push(
+        `the Unreleased entry in WHATS-CHANGED.md must have an "MCP version" line naming package.json's version ${version}` +
+          (entry.mcpVersion ? ` (it names ${entry.mcpVersion})` : "") +
+          `. An Unreleased entry belongs to a hand release: bump the version in the same pull request.`,
+      );
+    }
+    if (findReleaseSection(releasesMd, version) === null) {
+      problems.push(`RELEASES.md has no entry for v${version}. Add "## v${version} — Unreleased" with the release notes.`);
+    } else if (isAutoRelease(releasesMd, version)) {
+      problems.push(`v${version} is an automatic data release in RELEASES.md, so it ships without a What's changed entry. Bump the version by hand for the Unreleased entry.`);
+    } else if (!undated && !release) {
+      problems.push(`RELEASES.md dates v${version} but WHATS-CHANGED.md does not. Date both in the release commit.`);
+    }
+  }
+  if (release && undated) {
+    problems.push(`RELEASES.md still says "## v${version} — Unreleased". Date it in the release commit, then tag that commit.`);
+  }
+  return problems;
+}
+
 /**
  * Decide what `prepare` should do.
  * Returns { bump: false, reason, warn } or { bump: true, next }.
+ * `unreleased` is true when WHATS-CHANGED.md has an "## Unreleased:" entry.
  */
-export function decidePrepare({ version, published, nextTagExists, releasesMd }) {
+export const HAND_RELEASE_GRACE_DAYS = 2;
+
+/** Whole days from one YYYY-MM-DD to another (calendar days, so DST cannot shift it). */
+export function daysBetween(from, to) {
+  const ms = (d) => Date.UTC(...d.split("-").map((x, i) => Number(x) - (i === 1 ? 1 : 0)));
+  return Math.round((ms(to) - ms(from)) / 86_400_000);
+}
+
+export function decidePrepare({ version, published, nextTagExists, releasesMd, unreleased = false, handBumpDate = null, today = null }) {
   if (!published.includes(version)) {
+    // A hand release waiting for its tag pauses automatic releases, so npm users stop getting
+    // new law text until it ships. Allow a short wait, then go red: the law text is still
+    // committed (--soft), but the run fails so the waiting release is noticed.
+    // handBumpDate: New York date the version reached main (null when unknown).
+    if (!isAutoRelease(releasesMd, version) && handBumpDate && today) {
+      const days = daysBetween(handBumpDate, today);
+      if (days > HAND_RELEASE_GRACE_DAYS) {
+        throw new Error(
+          `v${version} is a hand release that reached main on ${handBumpDate} (${days} days ago) and is still not on npm, so the daily release of new law text is paused. ` +
+            `Release it: date its WHATS-CHANGED.md and RELEASES.md headings in one commit and tag that commit v${version} (README, "Releases"). ` +
+            `New law text is committed meanwhile`,
+        );
+      }
+    }
     return {
       bump: false,
       warn: true,
-      reason: `v${version} is not on npm yet (a pending manual release, or an automatic one still in flight); committing data without a new version`,
+      reason:
+        `v${version} is not on npm yet (a pending manual release, or an automatic one still in flight); committing data without a new version` +
+        (handBumpDate && !isAutoRelease(releasesMd, version) ? ` (on main since ${handBumpDate}; the refresh goes red after ${HAND_RELEASE_GRACE_DAYS} days)` : ""),
     };
+  }
+  if (unreleased) {
+    // An automatic release would either ship the entry undated or be stopped by release.yml's
+    // What's changed gate. Neither is acceptable, so stop here, loudly: with --soft the law
+    // data is still committed and the refresh goes red, naming the fix.
+    throw new Error(
+      `WHATS-CHANGED.md has an "Unreleased:" entry but v${version} is already on npm. An automatic release would ship that entry undated. ` +
+        `Bump the version by hand for it (RELEASES.md, "Manual releases"), or date it if it was released; until then new law text is committed without a release`,
+    );
   }
   const next = nextPatch(version);
   if (published.includes(next)) throw new Error(`v${next} is already on npm but package.json says ${version}; fix package.json by hand`);
@@ -296,6 +436,11 @@ function sh(cmd, args, opts = {}) {
 
 const log = (msg) => process.stderr.write(`auto-release: ${msg}\n`);
 const annotate = (level, msg) => process.stderr.write(`::${level}::auto-release: ${msg}\n`);
+
+function readWhatsChanged() {
+  const p = join(ROOT, "WHATS-CHANGED.md");
+  return existsSync(p) ? readFileSync(p, "utf8") : "";
+}
 
 function readPkg() {
   return JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
@@ -325,6 +470,34 @@ function setOutputs(pairs) {
   appendFileSync(file, lines.join("\n") + "\n");
 }
 
+/**
+ * New York date on which package.json's current version reached main: the commit date of the
+ * oldest first-parent commit in an unbroken run, back from HEAD, whose package.json has that
+ * version (a merge commit counts on the day it merged). Needs the commit history:
+ * refresh-data.yml checks out with fetch-depth: 0 and filter: blob:none, so the few
+ * package.json blobs read here are fetched on demand. Returns null, with a warning, when the
+ * history is shallow or unreadable; the age check is then skipped, never guessed.
+ */
+function versionReachedMain(version) {
+  try {
+    if (sh("git", ["rev-parse", "--is-shallow-repository"]) === "true") {
+      annotate("warning", "shallow checkout: cannot tell how long the hand release has waited");
+      return null;
+    }
+    const lines = sh("git", ["log", "--first-parent", "--format=%H %cI", "HEAD", "--", "package.json"]).split("\n").filter(Boolean);
+    let when = null;
+    for (const line of lines) {
+      const [sha, iso] = line.split(" ");
+      if (JSON.parse(sh("git", ["show", `${sha}:package.json`])).version !== version) break;
+      when = iso;
+    }
+    return when ? newYorkDate(new Date(when)) : null;
+  } catch (e) {
+    annotate("warning", `cannot tell how long the hand release has waited: ${e.message}`);
+    return null;
+  }
+}
+
 function prepare(date) {
   const pkgPath = join(ROOT, "package.json");
   const lockPath = join(ROOT, "package-lock.json");
@@ -343,6 +516,9 @@ function prepare(date) {
     published,
     nextTagExists: remoteTagSha(`v${next}`) !== null,
     releasesMd,
+    unreleased: unreleasedEntry(readWhatsChanged()) !== null,
+    handBumpDate: published.includes(pkg.version) ? null : versionReachedMain(pkg.version),
+    today: date,
   });
   if (!d.bump) {
     annotate("warning", d.reason);
@@ -462,6 +638,38 @@ function bumpCommitSha(version, repo) {
   return head;
 }
 
+/**
+ * check-whats-changed [--release] [--base-ref REF]
+ * WHATS-CHANGED.md is valid (scripts/whats_changed.py check) and pairs up with RELEASES.md and package.json (whatsChangedProblems). CI runs it
+ * with --base-ref; release.yml runs it with --release before npm publish. Needs python3.
+ */
+function cmdCheckWhatsChanged(argv) {
+  const release = argv.includes("--release");
+  const baseRef = argValue(argv, "--base-ref");
+  if (argv.includes("--base-ref") && !baseRef) throw new Error("--base-ref needs a git ref");
+  const pkg = readPkg();
+  const releasesMd = readFileSync(join(ROOT, "RELEASES.md"), "utf8");
+  const whatsChangedMd = readWhatsChanged();
+  if (!whatsChangedMd) throw new Error("WHATS-CHANGED.md is missing");
+  let failed = false;
+  for (const p of whatsChangedProblems({ version: pkg.version, releasesMd, whatsChangedMd, release })) {
+    annotate("error", p);
+    failed = true;
+  }
+  // whats_changed.py reads RELEASES.md beside the file for its MCP version check (check 6).
+  const args = [join(ROOT, "scripts", "whats_changed.py"), "check", join(ROOT, "WHATS-CHANGED.md")];
+  if (release) args.push("--release");
+  if (baseRef) args.push("--base-ref", baseRef);
+  const r = spawnSync("python3", args, { cwd: ROOT, stdio: "inherit" });
+  if (r.error) throw new Error(`could not run python3 (${r.error.message}); whats_changed.py needs Python 3`);
+  if (r.status !== 0) failed = true;
+  if (failed) {
+    process.exitCode = 1;
+    return;
+  }
+  log(`WHATS-CHANGED.md OK for v${pkg.version}${release ? " (release gate)" : ""}`);
+}
+
 function cmdCheckPublishEnv() {
   const node = process.versions.node;
   const npm = sh("npm", ["--version"]);
@@ -496,6 +704,7 @@ if (isMain) {
     prepare: () => cmdPrepare(rest),
     ensure: cmdEnsure,
     "check-publish-env": cmdCheckPublishEnv,
+    "check-whats-changed": () => cmdCheckWhatsChanged(rest),
     "is-published": () => cmdIsPublished(rest),
   };
   if (!cmds[cmd]) {

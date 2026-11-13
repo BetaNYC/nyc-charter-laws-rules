@@ -11,7 +11,8 @@
 #     repository_dispatch, will not create a new workflow run"
 #     (https://docs.github.com/en/actions/using-workflows/triggering-a-workflow).
 #
-# Steps: tests -> guard that the run is on a tag matching package.json -> skip
+# Steps: tests -> guard that the run is on a tag matching package.json -> the
+# What's changed release gate (no "Unreleased" heading left) -> skip
 # publish if that version is already on npm (so a rerun after a half-finished
 # run can still create the GitHub Release) -> npm publish -> GitHub Release.
 # It never bumps versions and never publishes from a branch.
@@ -122,6 +123,16 @@ jobs:
             echo "Tag $TAG does not match package.json version $PKG_VERSION" >&2
             exit 1
           fi
+
+      # WHATS-CHANGED.md (BetaNYC's What's changed standard): a hand release's entry is
+      # "## Unreleased: Title", and its RELEASES.md heading "## vX.Y.Z — Unreleased", until the
+      # release commit dates both. This fails while either is left, so a release cannot ship
+      # undated. An automatic data release has no WHATS-CHANGED.md entry and passes; the
+      # refresh never prepares one while an Unreleased entry exists (scripts/auto-release.js
+      # decidePrepare), so the gate cannot stop a daily data release in the normal flow.
+      # Runs scripts/whats_changed.py, a copy of the workspace's file: never edit it here.
+      - name: WHATS-CHANGED.md and RELEASES.md have no Unreleased entry
+        run: node scripts/auto-release.js check-whats-changed --release
 
       - name: Check whether this version is already on npm
         id: published

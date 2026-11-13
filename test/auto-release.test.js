@@ -28,6 +28,10 @@ import {
   newYorkDate,
   releaseMarker,
   findBumpCommit,
+  daysBetween,
+  unreleasedEntry,
+  isUndatedRelease,
+  whatsChangedProblems,
 } from "../scripts/auto-release.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -271,5 +275,147 @@ describe("decideEnsure", () => {
   test("runs for other tags are ignored", () => {
     const d = decideEnsure({ ...base, remoteTagSha: "abc", runs: [run("completed", "failure", 7, "v0.3.0")] });
     assert.equal(d.action, "dispatch");
+  });
+});
+
+// WHATS-CHANGED.md and the release paths (BetaNYC's What's changed standard). A hand release
+// carries an "## Unreleased:" entry until its release commit dates it; an automatic data
+// release carries none and must never meet one.
+const WC = (heading, mcp = "0.5.0") => `# What's changed
+
+Intro.
+
+- **History begins:** 2026-05-21.
+
+<!--
+## Unreleased: A commented-out example is not an entry
+-->
+
+\`\`\`
+## Unreleased: Nor is one in a code fence
+\`\`\`
+
+## ${heading}
+
+- **Tags:** MCP
+- **What changed:** Two tools.
+- **MCP version:** [nyc-charter-laws-rules ${mcp}](RELEASES.md)
+
+## 2026-10-21: Older
+
+- **Tags:** MCP
+- **What changed:** Something.
+- **MCP version:** [nyc-charter-laws-rules 0.4.0](RELEASES.md#v040--2026-10-21)
+`;
+const RELEASES_HAND = insertReleaseEntry(RELEASES, "## v0.5.0 — Unreleased\n\n- Two tools.\n", "0.5.0");
+const RELEASES_DATED = insertReleaseEntry(RELEASES, "## v0.5.0 — 2026-11-13\n\n- Two tools.\n", "0.5.0");
+
+describe("unreleasedEntry (WHATS-CHANGED.md)", () => {
+  test("finds the Unreleased entry and its MCP version", () => {
+    assert.deepEqual(unreleasedEntry(WC("Unreleased: Two tools")), { title: "Two tools", mcpVersion: "0.5.0" });
+  });
+  test("a dated file has none; comments and code fences are skipped", () => {
+    assert.equal(unreleasedEntry(WC("2026-11-13: Two tools")), null);
+    assert.equal(unreleasedEntry(""), null);
+    assert.equal(unreleasedEntry(undefined), null);
+  });
+  test("an Unreleased entry with no MCP version line", () => {
+    const md = "# What's changed\n\n## Unreleased: Site only\n\n- **Tags:** Data\n- **What changed:** x\n";
+    assert.deepEqual(unreleasedEntry(md), { title: "Site only", mcpVersion: null });
+  });
+  test("only the Unreleased entry's own MCP version counts", () => {
+    const md = "# W\n\n## Unreleased: A\n\n- **Tags:** Data\n\n## 2026-10-21: B\n\n- **MCP version:** [x 0.4.0](RELEASES.md)\n";
+    assert.equal(unreleasedEntry(md).mcpVersion, null);
+  });
+});
+
+describe("RELEASES.md headings", () => {
+  test("a hand bump is headed '## vX.Y.Z — Unreleased' until release day", () => {
+    assert.equal(isUndatedRelease(RELEASES_HAND, "0.5.0"), true);
+    assert.equal(isUndatedRelease(RELEASES_DATED, "0.5.0"), false);
+    assert.equal(isUndatedRelease(RELEASES, "0.5.0"), false);
+    assert.equal(findReleaseSection(RELEASES_HAND, "0.5.0").startsWith("## v0.5.0 — Unreleased"), true);
+  });
+  test("an undated hand bump does not confuse the automatic-release helpers", () => {
+    assert.equal(isAutoRelease(RELEASES_HAND, "0.5.0"), false);
+    const md = insertReleaseEntry(RELEASES_DATED, releaseEntry("0.5.1", "2026-11-14", []), "0.5.1");
+    assert.ok(md.indexOf("## v0.5.1") < md.indexOf("## v0.5.0"));
+  });
+});
+
+describe("whatsChangedProblems", () => {
+  test("hand-bump pull request: Unreleased in both files, naming package.json's version -> OK", () => {
+    assert.deepEqual(whatsChangedProblems({ version: "0.5.0", releasesMd: RELEASES_HAND, whatsChangedMd: WC("Unreleased: Two tools") }), []);
+  });
+  test("the release gate fails while either file is undated", () => {
+    const p = whatsChangedProblems({ version: "0.5.0", releasesMd: RELEASES_HAND, whatsChangedMd: WC("Unreleased: Two tools"), release: true });
+    assert.equal(p.length, 2);
+    assert.match(p[0], /WHATS-CHANGED\.md still has "## Unreleased: Two tools"/);
+    assert.match(p[1], /RELEASES\.md still says "## v0\.5\.0 — Unreleased"/);
+    const onlyReleases = whatsChangedProblems({ version: "0.5.0", releasesMd: RELEASES_HAND, whatsChangedMd: WC("2026-11-13: Two tools"), release: true });
+    assert.equal(onlyReleases.length, 1);
+  });
+  test("release day: both dated -> the gate passes", () => {
+    assert.deepEqual(whatsChangedProblems({ version: "0.5.0", releasesMd: RELEASES_DATED, whatsChangedMd: WC("2026-11-13: Two tools"), release: true }), []);
+  });
+  test("an automatic release passes the gate: no WHATS-CHANGED.md entry is needed", () => {
+    const md = insertReleaseEntry(RELEASES_DATED, releaseEntry("0.5.1", "2026-11-14", []), "0.5.1");
+    assert.deepEqual(whatsChangedProblems({ version: "0.5.1", releasesMd: md, whatsChangedMd: WC("2026-11-13: Two tools"), release: true }), []);
+  });
+  test("an Unreleased entry without a hand bump is rejected before it reaches main", () => {
+    // package.json is still the published 0.3.0: the entry would ride the next automatic release.
+    const p = whatsChangedProblems({ version: "0.3.0", releasesMd: RELEASES, whatsChangedMd: WC("Unreleased: Two tools") });
+    assert.equal(p.length, 2);
+    assert.match(p[0], /naming package\.json's version 0\.3\.0 \(it names 0\.5\.0\)/);
+    assert.match(p[1], /RELEASES\.md dates v0\.3\.0 but WHATS-CHANGED\.md does not/);
+  });
+  test("an Unreleased entry beside an automatic release, or with no RELEASES.md entry, is rejected", () => {
+    const auto = insertReleaseEntry(RELEASES, releaseEntry("0.3.1", "2026-10-13", []), "0.3.1");
+    assert.match(whatsChangedProblems({ version: "0.3.1", releasesMd: auto, whatsChangedMd: WC("Unreleased: T", "0.3.1") }).join(" "), /automatic data release/);
+    assert.match(whatsChangedProblems({ version: "0.5.0", releasesMd: RELEASES, whatsChangedMd: WC("Unreleased: T") }).join(" "), /RELEASES\.md has no entry for v0\.5\.0/);
+  });
+});
+
+describe("decidePrepare and WHATS-CHANGED.md", () => {
+  const published = ["0.2.0", "0.3.0"];
+  test("hand-bumped version waiting for its tag (its Unreleased entry beside it) -> no bump, warn, no error", () => {
+    const d = decidePrepare({ version: "0.5.0", published, nextTagExists: false, releasesMd: RELEASES_HAND, unreleased: true });
+    assert.equal(d.bump, false);
+    assert.equal(d.warn, true);
+  });
+  test("an Unreleased entry beside a published version -> fail loudly, never ship it undated", () => {
+    assert.throws(
+      () => decidePrepare({ version: "0.3.0", published, nextTagExists: false, releasesMd: RELEASES, unreleased: true }),
+      /WHATS-CHANGED\.md has an "Unreleased:" entry but v0\.3\.0 is already on npm/,
+    );
+  });
+  test("no Unreleased entry -> the automatic bump is unchanged", () => {
+    assert.deepEqual(decidePrepare({ version: "0.3.0", published, nextTagExists: false, releasesMd: RELEASES, unreleased: false }), { bump: true, next: "0.3.1" });
+  });
+});
+
+describe("a hand release waiting on main", () => {
+  const published = ["0.2.0", "0.3.0"];
+  const base = { version: "0.5.0", published, nextTagExists: false, releasesMd: RELEASES_HAND };
+  test("daysBetween counts calendar days", () => {
+    assert.equal(daysBetween("2026-11-09", "2026-11-11"), 2);
+    assert.equal(daysBetween("2026-11-09", "2026-11-12"), 3);
+    assert.equal(daysBetween("2026-10-31", "2026-11-02"), 2, "across the end of daylight saving time");
+    assert.equal(daysBetween("2026-02-28", "2026-03-01"), 1);
+  });
+  test("up to two days: no bump, a warning that names the date, the run stays green", () => {
+    const d = decidePrepare({ ...base, handBumpDate: "2026-11-09", today: "2026-11-11" });
+    assert.equal(d.bump, false);
+    assert.match(d.reason, /on main since 2026-11-09; the refresh goes red after 2 days/);
+  });
+  test("more than two days: fail, naming the release to finish", () => {
+    assert.throws(() => decidePrepare({ ...base, handBumpDate: "2026-11-09", today: "2026-11-12" }), /hand release that reached main on 2026-11-09 \(3 days ago\)/);
+  });
+  test("date unknown (shallow checkout): warn only", () => {
+    assert.equal(decidePrepare({ ...base, handBumpDate: null, today: "2026-11-30" }).bump, false);
+  });
+  test("an automatic release still in flight is never failed for its age", () => {
+    const md = insertReleaseEntry(RELEASES, releaseEntry("0.3.1", "2026-10-13", []), "0.3.1");
+    assert.equal(decidePrepare({ version: "0.3.1", published, nextTagExists: false, releasesMd: md, handBumpDate: "2026-10-01", today: "2026-11-30" }).bump, false);
   });
 });

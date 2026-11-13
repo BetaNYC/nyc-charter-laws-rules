@@ -21,6 +21,18 @@
 # needed" step then pushes the vX.Y.Z tag and dispatches release.yml, the ONLY
 # workflow that publishes to npm. No data change, no release.
 #
+# WHATS-CHANGED.md: automatic releases never add an entry (daily law text is
+# recorded in CHANGELOG.md). prepare does not bump while WHATS-CHANGED.md has an
+# "## Unreleased:" entry: normally that entry sits beside an unpublished hand
+# bump, which already stops the bump; beside a published version, prepare fails
+# under --soft, so the data is committed and the run goes red below. Either way
+# release.yml's What's changed gate never stops, and never ships, an automatic
+# release.
+#
+# A hand release waiting for its tag pauses automatic releases. After it has been
+# on main for more than two days (New York dates), prepare fails under --soft: the
+# law text is still committed and the run goes red, naming the release to finish.
+#
 # Why dispatch rather than rely on the tag push: "When you use the repository's
 # GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the
 # exception of workflow_dispatch and repository_dispatch, will not create a new
@@ -88,6 +100,13 @@ jobs:
           # Latest main, not the triggering SHA: a rerun of a failed run must see
           # a bump commit an earlier attempt already pushed (no double bump).
           ref: main
+          # Full commit history, but file contents only on demand ("Partially clone
+          # against a given filter", actions/checkout v4 action.yml), so the index
+          # history is not downloaded. auto-release.js prepare walks main's commits to
+          # find when a waiting hand release reached main, and turns the run red once
+          # it has waited more than two days (the daily npm release is paused meanwhile).
+          fetch-depth: 0
+          filter: blob:none
 
       - name: Set up Node
         uses: actions/setup-node@v4
