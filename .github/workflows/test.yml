@@ -46,3 +46,34 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  # BetaNYC's What's changed standard (betanyc-ai-workspace
+  # platform/system/whats-changed-standard.md § 10). check-whats-changed runs
+  # scripts/whats_changed.py check (a copy of the workspace's canonical file: never edit it
+  # here) with RELEASES.md's versions for its MCP version check, and checks that an
+  # "## Unreleased:" entry comes with a hand-bumped, undated "## vX.Y.Z — Unreleased" release.
+  # --base-ref adds the append-only check (old entries are never edited) and the version-bump
+  # check. The base is the merge base with main, not main's tip: the daily refresh bumps
+  # main's version on its own, and a branch that started before such a bump has not changed
+  # the version. fetch-depth: 0 so the merge base exists. Built-ins only, so no npm ci.
+  whats-changed:
+    name: What's changed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check WHATS-CHANGED.md
+        run: node scripts/auto-release.js check-whats-changed --base-ref "$(git merge-base HEAD origin/main)"

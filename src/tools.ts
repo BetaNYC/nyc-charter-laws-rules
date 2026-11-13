@@ -12,6 +12,22 @@ import {
   getVersions,
   type SearchMode,
 } from "./corpus.js";
+import { createBetanycTools } from "./betanyc-tools.js";
+import { PACKAGE_VERSION } from "./version.js";
+
+/**
+ * whats_changed and about_betanyc, the two tools every BetaNYC MCP server carries
+ * (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7). betanyc-tools.ts is
+ * a copy of the workspace's canonical file: never edit it here. WHATS-CHANGED.md ships in
+ * the npm package (package.json `files`), one level above dist/. This repo has no website,
+ * so links to an entry go to the file on GitHub.
+ */
+const betanyc = createBetanycTools({
+  serverName: "nyc-charter-laws-rules",
+  version: PACKAGE_VERSION,
+  repoUrl: "https://github.com/BetaNYC/nyc-charter-laws-rules",
+  whatsChangedPath: new URL("../WHATS-CHANGED.md", import.meta.url),
+});
 
 const CAVEAT =
   "For informational purposes only. Not legal advice. Verify against official sources at codelibrary.amlegal.com before relying on any result.";
@@ -74,6 +90,15 @@ let fullFooterSent = false;
 export function resetFooterState(env: NodeJS.ProcessEnv = process.env): void {
   footerMode = resolveFooterMode(env).mode;
   fullFooterSent = false;
+}
+
+// The disclaimer on whats_changed and about_betanyc. They answer about the server, not from
+// the law text, so they do not use up the full footer meant for the first law answer: in
+// the default mode they end with the one-line footer, in `full` mode with the full one. The
+// standard lets a server append to their text but never change their structuredContent
+// (whats-changed-standard.md § 7, "A server's own wrapper").
+export function sharedToolFooter(): string {
+  return footerMode === "full" ? FOOTER : COMPACT_FOOTER;
 }
 
 function withFooter(text: string): string {
@@ -213,9 +238,15 @@ export const TOOLS = [
     description: `Return the currency date for each document — how current the Charter, Administrative Code, and Rules are. Each corpus updates on its own schedule. Always call this tool before answering legal questions so responses are grounded in the correct version of the law. ${CAVEAT}`,
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
+  // What changed in this server, and who built it (BetaNYC standard tools).
+  ...betanyc.tools,
 ];
 
 export async function callTool(name: string, args: unknown) {
+  if (betanyc.handles(name)) {
+    const out = betanyc.call(name, args);
+    return { ...out, content: [{ type: "text" as const, text: `${out.content[0].text}\n\n${sharedToolFooter()}` }] };
+  }
   try {
     switch (name) {
       case "search": {

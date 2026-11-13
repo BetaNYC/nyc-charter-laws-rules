@@ -21,6 +21,14 @@
 # needed" step then pushes the vX.Y.Z tag and dispatches release.yml, the ONLY
 # workflow that publishes to npm. No data change, no release.
 #
+# WHATS-CHANGED.md: automatic releases never add an entry (daily law text is
+# recorded in CHANGELOG.md). prepare does not bump while WHATS-CHANGED.md has an
+# "## Unreleased:" entry: normally that entry sits beside an unpublished hand
+# bump, which already stops the bump; beside a published version, prepare fails
+# under --soft, so the data is committed and the run goes red below. Either way
+# release.yml's What's changed gate never stops, and never ships, an automatic
+# release.
+#
 # Why dispatch rather than rely on the tag push: "When you use the repository's
 # GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the
 # exception of workflow_dispatch and repository_dispatch, will not create a new

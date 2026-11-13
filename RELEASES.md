@@ -19,8 +19,17 @@ that publishes to npm. There are two kinds:
   ships `main` as it stands, including any code merged since the last release.
 - **Manual releases.** Bump the version on `main` in `package.json`,
   `package-lock.json` and `server.json` (both of its `version` fields), add an
-  entry below, then push a matching `vX.Y.Z` tag. While a hand-bumped version is
-  unpublished, the refresh does not bump past it.
+  entry below headed `## vX.Y.Z — Unreleased`, then push a matching `vX.Y.Z`
+  tag. While a hand-bumped version is unpublished, the refresh does not bump
+  past it. A release a reader would notice also adds a `## Unreleased: Title`
+  entry to [WHATS-CHANGED.md](WHATS-CHANGED.md) in the same pull request. On
+  release day, one commit dates both headings (New York date), and the tag goes
+  on that commit; `release.yml` refuses to publish while either still says
+  Unreleased. Steps: README, "Releases".
+
+Automatic data releases never get a WHATS-CHANGED.md entry: daily law text is
+recorded in CHANGELOG.md. The refresh does not release automatically while
+WHATS-CHANGED.md has an Unreleased entry (see `scripts/auto-release.js`).
 
 If a release fails, its run goes red, and every following refresh goes red too
 until the version is published. Fix the cause and rerun the failed Release run
@@ -29,7 +38,8 @@ bump to recover. Setup for npm trusted publishing is in the README, "Releases".
 
 ## Format
 
-Dates are New York (America/New_York).
+Dates are New York (America/New_York). A hand-bumped version is headed
+`## vX.Y.Z — Unreleased` until the release commit gives it the date.
 
 ```markdown
 ## vX.Y.Z — YYYY-MM-DD
@@ -38,6 +48,13 @@ Dates are New York (America/New_York).
 ```
 
 ---
+
+## v0.5.0 — Unreleased
+
+- **Two new tools: `whats_changed` and `about_betanyc`**, the pair every BetaNYC MCP server carries ([betanyc-ai-workspace#1645](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1645)). `whats_changed` answers "what changed in this server?" from the new [WHATS-CHANGED.md](WHATS-CHANGED.md), newest first, with optional `since`, `tag` and `limit`; `about_betanyc` says who built the server, where its code is, and where to report a problem. Both are read-only, never touch the network, and return text plus `structuredContent` matching a declared `outputSchema`. Their text ends with the one-line disclaimer (the full footer with `NYC_CLR_FOOTER=full`) and does not use up the full footer meant for the first law answer.
+- **WHATS-CHANGED.md**, the reader-facing record of changes, backfilled to 0.1.0 and shipped in the package. `src/betanyc-tools.ts` and `scripts/whats_changed.py` are copies of the workspace's canonical files (shared module v1.1.1); never edit them here.
+- **Release checks.** CI runs `node scripts/auto-release.js check-whats-changed --base-ref …` (the shared checker, plus the pairing of WHATS-CHANGED.md and RELEASES.md); `release.yml` runs it with `--release` before `npm publish`. The refresh does not release automatically while WHATS-CHANGED.md has an Unreleased entry.
+- Minor rather than patch: two new tools. No tool, parameter or response field was renamed or removed, and the law text tools answer as before.
 
 ## v0.4.5 — 2026-11-11
 
