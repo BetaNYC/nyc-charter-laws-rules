@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # betanyc-shared: whats_changed.py v1.3.7
-# betanyc-shared-sha256: 738b4fa286c3188d98a3a5071d08940d256b4b6a28f9b2d1705731fdd85d4c62
+# betanyc-shared-sha256: 9f2473aabcaf9afe7e3b0991de406af525a4b5144d235abd6fa411c03f535c24
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -1205,7 +1205,7 @@ DS_SPEC = _obj([
             ("terms_url", _f(U, False)),
             ("credit_line", _f(S, False)),
         ])),
-        ("report_errors", _obj([("upstream_url", _f(U)), ("upstream_email", _f(E, False))])),
+        ("report_errors", _obj([("upstream_url", _f(U)), ("upstream_email", _f(E, False)), ("upstream_name", _f(S, False))])),
         ("tools", _list(_f(T))),
         ("caveats", _list(_f(S))),
         ("corrections", _list(_f(A))),
@@ -1645,7 +1645,7 @@ def error_route(s: dict, issues: str) -> str:
     BetaNYC changed or curated: to BetaNYC first (`issues`), the original records to the
     publisher. Data passed on as published (or only reshaped, or fields left out): the publisher."""
     url = s["report_errors"]["upstream_url"]
-    pub = s["publisher"]["name"]
+    pub = route_name(s)
     if route_is_betanyc(url):
         return f"report errors in this data to {BETANYC_NAME}: {url}"
     if not s["official"] or values_changed(s):
@@ -1654,12 +1654,18 @@ def error_route(s: dict, issues: str) -> str:
     return f"report errors in the data to {pub}: {url}"
 
 
+def route_name(s: dict) -> str:
+    """Who handles reports at upstream_url when it is not BetaNYC's: report_errors.upstream_name
+    when given (someone other than the publisher runs the route), else the publisher (1.3.7)."""
+    return s["report_errors"].get("upstream_name") or s["publisher"]["name"]
+
+
 def upstream_route(s: dict) -> str:
     """The route on the upstream Dataset, which is the publisher's own records."""
     url = s["report_errors"]["upstream_url"]
     if route_is_betanyc(url):
         return f"report errors in this data to {BETANYC_NAME}: {url}"
-    return f"report errors in the data to {s['publisher']['name']}: {url}"
+    return f"report errors in the data to {route_name(s)}: {url}"
 
 
 def values_changed(s: dict) -> bool:
@@ -1668,10 +1674,19 @@ def values_changed(s: dict) -> bool:
     return bool(ch["changed"]) and any(step not in DS_FORMAT_ONLY_STEPS for step in ch["steps"])
 
 
+def publisher_is_betanyc(pub: dict) -> bool:
+    """True when the publisher is BetaNYC itself: the name BetaNYC (any case), or a URL that
+    route_is_betanyc() accepts. Same as publisherIsBetanyc() in the TS module (1.3.7)."""
+    url = pub.get("url")
+    return (pub.get("name") or "").strip(" \t\u00a0\ufeff").lower() == "betanyc" or (isinstance(url, str) and route_is_betanyc(url))
+
+
 def official_wording(s: dict) -> str:
     """What to say about officialness. Same words as officialWording() in the TS module."""
     pub = s["publisher"]["name"]
     if not s["official"]:
+        if publisher_is_betanyc(s["publisher"]):
+            return f"Not an official record: curated by {BETANYC_NAME}."
         return f"Not an official record: curated by {BETANYC_NAME} from material published by {pub}."
     if values_changed(s):
         return (f"Official source: yes. This data is {BETANYC_NAME}'s, derived from it, "
@@ -1713,7 +1728,7 @@ def build_dcat(doc: dict) -> dict:
         t = s["terms"]
         if s["source_url"] not in upstream:
             if s["report_errors"]["upstream_email"]:
-                up_contact = {"@type": "Kind", "fn": s["publisher"]["name"],
+                up_contact = {"@type": "Kind", "fn": route_name(s),
                               "hasEmail": "mailto:" + s["report_errors"]["upstream_email"]}
             else:
                 up_contact = {**contact,
