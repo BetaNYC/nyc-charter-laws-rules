@@ -51,6 +51,10 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
+## v0.5.1 — 2026-11-14
+
+- Automatic data release. Bundled law text refreshed: Charter LL 2026/163 -> LL 2026/164; Admin Code LL 2026/163 -> LL 2026/164; Rules eff. November 8, 2026 -> eff. November 14, 2026. No code changes beyond what was already merged to `main`.
+
 ## v0.5.0 — 2026-11-13
 
 - **Two new tools: `whats_changed` and `about_betanyc`**, the two tools BetaNYC is adding to each of its MCP servers ([betanyc-ai-workspace#1645](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1645)). `whats_changed` answers "what changed in this server?" from the new [WHATS-CHANGED.md](WHATS-CHANGED.md), newest first, with optional `since`, `tag` and `limit`; `about_betanyc` says who built the server, where its code is, and where to report a bug in this server or ask for a new feature. Both are read-only, never touch the network, and return text plus `structuredContent` matching a declared `outputSchema`. Their text ends with the one-line disclaimer (the full footer with `NYC_CLR_FOOTER=full`) and does not use up the full footer meant for the first law answer.
