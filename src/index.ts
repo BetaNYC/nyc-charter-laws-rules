@@ -5,7 +5,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { TOOLS, callTool, FOOTER, FOOTER_WARNING } from "./tools.js";
+import { TOOLS, callTool, FOOTER_WARNING, SERVER_INSTRUCTIONS } from "./tools.js";
 import { INDEX_DIR, INDEX_DIR_ENV } from "./corpus.js";
 import { PACKAGE_VERSION } from "./version.js";
 
@@ -19,7 +19,8 @@ const server = new Server(
     // The full disclaimer, once per connection, in every footer mode (#25).
     // Some clients do not pass instructions to the model, which is why every
     // tool response still carries at least the compact line.
-    instructions: FOOTER,
+    // Then the shared module's instructions: about_data, about_betanyc, whats_changed.
+    instructions: SERVER_INSTRUCTIONS,
   }
 );
 

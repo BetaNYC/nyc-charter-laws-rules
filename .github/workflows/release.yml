@@ -134,6 +134,18 @@ jobs:
       - name: WHATS-CHANGED.md and RELEASES.md have no Unreleased entry
         run: node scripts/auto-release.js check-whats-changed --release
 
+      # DATA-SOURCES.json (BetaNYC's about-data standard § 7): fails on any error in the file,
+      # a tool the built server lists with no source, or the placeholder contact address, so a
+      # release cannot ship a broken about_data. dist/ exists: `npm test` built it above.
+      # Runs scripts/whats_changed.py, a copy of the workspace's file: never edit it here.
+      - name: DATA-SOURCES.json is valid and names a real contact
+        run: |
+          node --input-type=module -e '
+          const { TOOLS } = await import("./dist/tools.js");
+          console.log(JSON.stringify(TOOLS.map((t) => t.name)));
+          ' > "$RUNNER_TEMP/tools.json"
+          python3 scripts/whats_changed.py about-data check DATA-SOURCES.json --release --tools-file "$RUNNER_TEMP/tools.json"
+
       - name: Check whether this version is already on npm
         id: published
         # Fails (red) if the registry cannot be read; never guesses.

@@ -30,7 +30,7 @@ Vibe coded with [Claude](https://claude.ai) by [BetaNYC](https://beta.nyc).
 
 ## What it does
 
-Exposes 7 tools over MCP:
+Exposes 8 tools over MCP:
 
 | Tool | Description |
 |---|---|
@@ -41,6 +41,7 @@ Exposes 7 tools over MCP:
 | `get_version` | Return the currency date for each document — so responses can be grounded in exactly how current the law is |
 | `whats_changed` | What changed in this server, newest first, from [WHATS-CHANGED.md](WHATS-CHANGED.md): new tools and corrections |
 | `about_betanyc` | Who built this server, where its code is, and where to report a bug in this server or ask for a new feature |
+| `about_data` | Where the law text comes from, from [DATA-SOURCES.json](DATA-SOURCES.json): the publisher, whether it is the official text, when this server's index was built, where to check a section and how to report an error |
 
 ---
 
@@ -162,7 +163,24 @@ whats_changed(tag="Correction")
 
 Who built the server (BetaNYC, a project of the Fund for the City of New York), its version and repository, where to report a bug in this server or ask for a new feature, and links to BetaNYC. No parameters.
 
-`whats_changed` and `about_betanyc` are the two tools BetaNYC is adding to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace; never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
+---
+
+### `about_data`
+
+Where the law text comes from, answered from [DATA-SOURCES.json](DATA-SOURCES.json), which ships with the package. There is one source per document (`charter`, `admin-code`, `rules`), each from American Legal Publishing's bulk XML download, the code library the NYC Law Department contracted for. For each it gives the publisher and link, whether it is the official text (the source is; this server's text is not, because the build cleans it, so `figures_official` is `false`), how it reaches this server, what BetaNYC changed, when this server's index was built for that document (read from `versions.json` at run time; `get_version` gives the publisher's own "current through" line), where to check a section, how to report an error in the text or in this server, and the corrections that touched it. Questions about the data go to BetaNYC at lab@beta.nyc. Returns text plus `structuredContent` matching the tool's `outputSchema`.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `topic` | string | no | `charter`, `admin-code`, `rules`, or a tool name such as `search`; `all` or nothing returns every source |
+
+```
+about_data()
+about_data(topic="rules")
+```
+
+`data.json` is a DCAT-US 3.0 catalog generated from DATA-SOURCES.json (`python3 scripts/whats_changed.py about-data catalog DATA-SOURCES.json`); never edit it by hand.
+
+`whats_changed`, `about_betanyc` and `about_data` are the three tools BetaNYC adds to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace (shared module 1.3.7); never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
 
 ---
 
@@ -192,6 +210,7 @@ npm test
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
 | `test/betanyc-tools.test.js` | `whats_changed` and `about_betanyc`: advertised read-only and strict with an `outputSchema`; every entry in this repo's `WHATS-CHANGED.md` valid and returned; filters; bad arguments rejected by name; every Correction carrying advice; the disclaimer on both, without using up the full footer; and both answers accepted by the MCP SDK client over stdio against their output schemas. Depends on no law text and no package version, so a daily refresh cannot turn it red. |
+| `test/about-data.test.js` | `about_data`: every tool has a source in `DATA-SOURCES.json` (`assertEveryToolExplained`, so a new tool cannot ship unexplained); one source per document, from American Legal Publishing, with `figures_official` false because BetaNYC cleans the text; each document's date read from the `versions.json` being served, and "unavailable" when an index has none; BetaNYC's contact address; the disclaimer; and the answer accepted by the MCP SDK client over stdio against its output schema. Depends on no law text and no package version. |
 | `test/whats-changed-release.test.js` | The What's changed release gate end to end, in a throwaway git repo with a stub `npm` (needs `python3`; skips without it): a hand bump waiting for its tag (refresh commits data without a bump, CI passes, the gate fails), release day (both headings dated in one commit; the gate and the append-only check pass), the next automatic release (no entry needed, gate passes), and an Unreleased entry beside a published version (refresh commits data, prepares no release, goes red; CI rejects it). |
 | `test/auto-release-cli.test.js` | End-to-end runs of `scripts/auto-release.js prepare` and `ensure` against a throwaway git repo with stubbed `npm` and `gh`: version bump, tagging, one release dispatch, and recovery from a depth-1 checkout. The fixture pins the version (0.3.0) and the Rules "current through" date (October 4, 2026), so it does not drift when real releases ship or the law text moves. |
 
@@ -214,6 +233,8 @@ The fixtures live in `test/fixtures/diff/xml/` — 44 files selected determinist
 `.github/workflows/test.yml` runs `npm ci && npm run build && npm test` on every pull request and push. Node matrix: **20.x and 22.x**. The manifest declares `engines.node ">=20"` — a floor only; the server uses no APIs newer than Node 20, so newer Node releases are supported even though CI tests the 20.x/22.x pair. Node 18 was dropped because it reached End-of-Life on 2025-04-30; the manifest previously declared `>= 18` but CI never tested it.
 
 `.github/workflows/test.yml` also runs a **What's changed** job: `node scripts/auto-release.js check-whats-changed --base-ref <merge base with main>`. It validates `WHATS-CHANGED.md` with `scripts/whats_changed.py` (copied unchanged from BetaNYC's workspace; never edit it here), checks that old entries are only ever added to, that a version bump in a pull request has an entry, and that an `## Unreleased:` entry comes with a hand-bumped, undated release in `RELEASES.md`.
+
+It also runs an **About data** job: `python3 scripts/whats_changed.py about-data check DATA-SOURCES.json --tools-file <the built server's tool list>` (every tool has a source, the file has no errors), `about-data catalog DATA-SOURCES.json --check` (`data.json` is current), and the JSON Schema and DCAT-US 3.0 validators (`scripts/tests/catalog_validate.py`, with `jsonschema==4.26.0`, `referencing==0.37.0` and `rfc3987==1.3.8` pinned through `uv`). `release.yml` runs `about-data check --release` before `npm publish`.
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
@@ -282,9 +303,12 @@ Caveats are encoded at four levels so no response can be returned without one:
 ```
 nyc-charter-laws-rules/
 ├── WHATS-CHANGED.md            ← what a reader would notice, newest first (ships in the package)
+├── DATA-SOURCES.json           ← where the data comes from, for about_data (ships in the package)
+├── data.json                   ← DCAT-US 3.0 catalog, generated from DATA-SOURCES.json
 ├── src/                        ← MCP server (TypeScript); betanyc-tools.ts is a shared copy
 ├── scripts/
-│   ├── whats_changed.py        ← checks WHATS-CHANGED.md (shared copy; never edit here)
+│   ├── whats_changed.py        ← checks WHATS-CHANGED.md and DATA-SOURCES.json, writes data.json (shared copy; never edit here)
+│   ├── tests/catalog_validate.py, mcp_shared/  ← CI validators for the two (shared copies)
 │   ├── auto-release.js         ← automatic releases and the What's changed release gate
 │   ├── fetch-data.js           ← downloads bulk XML ZIPs from AML
 │   ├── build-index.js          ← thin CLI: reads ZIPs, writes JSON + Markdown indexes
@@ -305,7 +329,7 @@ The JSON and Markdown indexes are committed to the repo. Anyone who clones it ge
 
 ## Data source
 
-All content is sourced from publicly available bulk XML downloads hosted by [American Legal Publishing](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview). No API key required.
+All content is sourced from publicly available bulk XML downloads hosted by [American Legal Publishing](https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview). No API key required. [DATA-SOURCES.json](DATA-SOURCES.json) describes each source (what BetaNYC changes, where to check a section, how to report an error), and the `about_data` tool answers from it.
 
 | Document | Sections | Current Through | Bulk XML source |
 |---|---|---|---|
