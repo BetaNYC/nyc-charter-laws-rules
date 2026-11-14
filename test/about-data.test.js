@@ -52,8 +52,8 @@ test("BetaNYC's text is derived, not the official text: figures_official is fals
   assert.equal(s.official, true, "the code library is the publisher's own record");
   assert.equal(s.figures_official, false, "BetaNYC cleans the text, so it is not the official text");
   assert.deepEqual(s.changed_by_betanyc.steps, ["reshaped", "cleaned"]);
-  assert.match(r.content[0].text, /These figures are BetaNYC's, derived from it/);
-  assert.match(r.content[0].text, /Report an error in these figures to BetaNYC/);
+  assert.match(r.content[0].text, /This data is BetaNYC's, derived from it, not an official American Legal Publishing record/);
+  assert.match(r.content[0].text, /Report an error in this data to BetaNYC/);
 });
 
 test("how current: each document's indexedAt from the versions.json being served", () => {
@@ -75,6 +75,13 @@ test("about_data gives BetaNYC's contact address, lab@beta.nyc", () => {
 test("errors in the law text go to American Legal Publishing's address", () => {
   const s = one(ask({}).structuredContent, "rules");
   assert.equal(s.report_errors.in_the_data_email, "NYC.editor@amlegal.com");
+  assert.equal(s.report_errors.in_the_data_handled_by, "publisher");
+});
+
+test("each source cites the Law Department's own page for the contract with the publisher", () => {
+  for (const s of ask({}).structuredContent.sources) {
+    assert.ok(s.caveats.some((c) => c.includes("https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page")), s.topic);
+  }
 });
 
 test("a tool name works as a topic: search covers all three documents", () => {

@@ -180,7 +180,7 @@ about_data(topic="rules")
 
 `data.json` is a DCAT-US 3.0 catalog generated from DATA-SOURCES.json (`python3 scripts/whats_changed.py about-data catalog DATA-SOURCES.json`); never edit it by hand.
 
-`whats_changed`, `about_betanyc` and `about_data` are the three tools BetaNYC adds to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace (shared module 1.3.6); never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
+`whats_changed`, `about_betanyc` and `about_data` are the three tools BetaNYC adds to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace (shared module 1.3.7); never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
 
 ---
 

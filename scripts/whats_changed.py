@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# betanyc-shared: whats_changed.py v1.3.5
-# betanyc-shared-sha256: 125a173f47d916e0b1c61d2d34935429d399e1ffd7107b0321f8be657e91ba2f
+# betanyc-shared: whats_changed.py v1.3.7
+# betanyc-shared-sha256: 738b4fa286c3188d98a3a5071d08940d256b4b6a28f9b2d1705731fdd85d4c62
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -1620,8 +1620,9 @@ def _url_path(url: str) -> str:
 
 
 def route_is_betanyc(url: str) -> bool:
-    """True when an error-report URL is BetaNYC's own: beta.nyc or any subdomain, or a
-    github.com/BetaNYC (or www.github.com) repo, with no dot segments. Same as routeIsBetanyc()."""
+    """True when an error-report URL is BetaNYC's own: beta.nyc or any subdomain, a
+    github.com/BetaNYC (or www.github.com) repo, or a BetaNYC GitHub Pages site on
+    betanyc.github.io, with no dot segments. Same as routeIsBetanyc()."""
     m = ROUTE_URL_RE.fullmatch(url or "")
     if not m:
         return False
@@ -1630,6 +1631,8 @@ def route_is_betanyc(url: str) -> bool:
     if DOT_SEGMENT_RE.search(path):
         return False
     if host == "beta.nyc" or host.endswith(".beta.nyc"):
+        return True
+    if host == "betanyc.github.io":  # BetaNYC's GitHub Pages sites (1.3.7)
         return True
     if host in ("github.com", "www.github.com"):
         parts = path.split("/")
@@ -1646,7 +1649,7 @@ def error_route(s: dict, issues: str) -> str:
     if route_is_betanyc(url):
         return f"report errors in this data to {BETANYC_NAME}: {url}"
     if not s["official"] or values_changed(s):
-        return (f"report errors in these figures to {BETANYC_NAME}: {issues}; "
+        return (f"report errors in this data to {BETANYC_NAME}: {issues}; "
                 f"errors in the original records to {pub}: {url}")
     return f"report errors in the data to {pub}: {url}"
 
@@ -1671,8 +1674,8 @@ def official_wording(s: dict) -> str:
     if not s["official"]:
         return f"Not an official record: curated by {BETANYC_NAME} from material published by {pub}."
     if values_changed(s):
-        return (f"Official source: yes. These figures are {BETANYC_NAME}'s, derived from it, "
-                f"not an official {pub} report.")
+        return (f"Official source: yes. This data is {BETANYC_NAME}'s, derived from it, "
+                f"not an official {pub} record.")
     if s["changes"]["changed"]:
         steps = s["changes"]["steps"]
         if "fields-removed" in steps and "reshaped" in steps:

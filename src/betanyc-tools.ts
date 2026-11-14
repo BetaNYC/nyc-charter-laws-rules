@@ -1,5 +1,5 @@
-// betanyc-shared: betanyc-tools.ts v1.3.6
-// betanyc-shared-sha256: 517ae41ca046fd9f4611ef228177322ed4795bd5c8e6779e853c6c0b85b07bb0
+// betanyc-shared: betanyc-tools.ts v1.3.7
+// betanyc-shared-sha256: 9dd47521f83a5010cbf85a83def276946fdf679c0c503572e9b6dab361a87dcd
 // Canonical copy: betanyc-ai-workspace scripts/mcp_shared/betanyc-tools.ts. Do not edit a copy
 // in a server repo; change the canonical file, re-stamp it, and copy it again.
 // Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
@@ -23,7 +23,7 @@
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
-export const SHARED_MODULE_VERSION = "1.3.6";
+export const SHARED_MODULE_VERSION = "1.3.7";
 
 // --------------------------------------------------------------------------- types
 
@@ -1813,8 +1813,9 @@ const ROUTE_URL_RE = /^https?:\/\/([A-Za-z0-9.-]+)(?::[0-9]{1,5})?([/?#].*)?$/;
  * never count as BetaNYC's: github.com/BetaNYC/x/../../evil resolves somewhere else. */
 const DOT_SEGMENT_RE = /(?:^|\/)(?:\.|%2e){1,2}(?:\/|$)/i;
 
-/** True when an error-report URL is BetaNYC's own (a BetaNYC repo, its issues, or beta.nyc), so
- * the route is worded as reporting to BetaNYC. Same as route_is_betanyc() in whats_changed.py. */
+/** True when an error-report URL is BetaNYC's own (a BetaNYC repo, its issues, beta.nyc, or a
+ * BetaNYC GitHub Pages site on betanyc.github.io), so the route is worded as reporting to BetaNYC.
+ * Same as route_is_betanyc() in whats_changed.py. */
 export function routeIsBetanyc(url: string): boolean {
   const m = ROUTE_URL_RE.exec(url ?? "");
   if (!m) return false;
@@ -1822,6 +1823,7 @@ export function routeIsBetanyc(url: string): boolean {
   const path = (m[2] ?? "").split(/[?#]/)[0];
   if (DOT_SEGMENT_RE.test(path)) return false;
   if (host === "beta.nyc" || host.endsWith(".beta.nyc")) return true;
+  if (host === "betanyc.github.io") return true; // BetaNYC's GitHub Pages sites (1.3.7)
   if (host === "github.com" || host === "www.github.com") return path.split("/")[1]?.toLowerCase() === "betanyc";
   return false;
 }
@@ -1838,7 +1840,7 @@ export function valuesChanged(changed: boolean, steps: readonly string[]): boole
 /** What to say about officialness. Same words as official_wording() in whats_changed.py. */
 export function officialWording(official: boolean, changed: boolean, publisher: string, steps: readonly string[] = []): string {
   if (!official) return `Not an official record: curated by BetaNYC from material published by ${publisher}.`;
-  if (valuesChanged(changed, steps)) return `Official source: yes. These figures are BetaNYC's, derived from it, not an official ${publisher} report.`;
+  if (valuesChanged(changed, steps)) return `Official source: yes. This data is BetaNYC's, derived from it, not an official ${publisher} record.`;
   if (changed) {
     const removed = steps.includes("fields-removed");
     if (removed && steps.includes("reshaped")) return "Official record: yes, reshaped by BetaNYC with some fields left out (values unchanged).";
@@ -2031,7 +2033,7 @@ function aboutData(config: BetanycServerConfig, args: unknown, now: Date, outcom
     topic === null
       ? `Where the data in ${config.serverName} ${config.version} comes from: ${plural(out.length, "source")}.`
       : `Where the data in ${config.serverName} ${config.version} comes from, for '${topic}'.`,
-    "An official source passed on unchanged is the publisher's record. Where BetaNYC changed it, the figures are BetaNYC's, derived from the official source, not an official report. Where it is BetaNYC's curation, it is not an official record. Say which when you use a figure.",
+    "An official source passed on unchanged is the publisher's record. Where BetaNYC changed it, the data is BetaNYC's, derived from the official source, not an official record. Where it is BetaNYC's curation, it is not an official record. Say which when you use it.",
     `Full list: ${base.source_file}`,
   ];
   const blocks = out.map((s) => {
@@ -2061,7 +2063,7 @@ function aboutData(config: BetanycServerConfig, args: unknown, now: Date, outcom
       (re.in_the_data_handled_by === "betanyc"
         ? `Report an error in this data to BetaNYC: ${re.in_the_data}`
         : re.in_these_figures
-          ? `Report an error in these figures to BetaNYC: ${re.in_these_figures}; an error in the original records to ${s.publisher}: ${re.in_the_data}${email}`
+          ? `Report an error in this data to BetaNYC: ${re.in_these_figures}; an error in the original records to ${s.publisher}: ${re.in_the_data}${email}`
           : `Report an error in the data to ${s.publisher}: ${re.in_the_data}${email}`) +
         `. Report a bug in this server or ask for a new feature: ${re.in_this_server}`,
     );

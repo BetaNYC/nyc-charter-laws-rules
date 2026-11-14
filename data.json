@@ -126,7 +126,7 @@
       "identifier": "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/DATA-SOURCES.json#charter",
       "contactPoint": {
         "@type": "Kind",
-        "fn": "BetaNYC (serves this dataset; report errors in these figures to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
+        "fn": "BetaNYC (serves this dataset; report errors in this data to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
         "hasEmail": "mailto:lab@beta.nyc"
       },
       "publisher": {
@@ -177,9 +177,9 @@
         }
       ],
       "provenance": [
-        "Official source: yes. These figures are BetaNYC's, derived from it, not an official American Legal Publishing report.",
+        "Official source: yes. This data is BetaNYC's, derived from it, not an official American Legal Publishing record.",
         "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
-        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. Deeper structure, such as which sections sit inside which title, is not kept."
+        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
       ],
       "page": [
         {
@@ -208,7 +208,7 @@
         "Credit: Source: New York City Charter, American Legal Publishing code library for the City of New York.",
         "Terms of use: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview"
       ],
-      "scopeNote": "Known gap: Only the current text: no earlier versions of a section. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
+      "scopeNote": "Known gap: Only the current text: no earlier versions of a section. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
       "isReferencedBy": [
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
@@ -223,7 +223,7 @@
       "identifier": "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/DATA-SOURCES.json#admin-code",
       "contactPoint": {
         "@type": "Kind",
-        "fn": "BetaNYC (serves this dataset; report errors in these figures to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
+        "fn": "BetaNYC (serves this dataset; report errors in this data to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
         "hasEmail": "mailto:lab@beta.nyc"
       },
       "publisher": {
@@ -274,9 +274,9 @@
         }
       ],
       "provenance": [
-        "Official source: yes. These figures are BetaNYC's, derived from it, not an official American Legal Publishing report.",
+        "Official source: yes. This data is BetaNYC's, derived from it, not an official American Legal Publishing record.",
         "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
-        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. Deeper structure, such as which sections sit inside which title, is not kept."
+        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
       ],
       "page": [
         {
@@ -305,7 +305,7 @@
         "Credit: Source: New York City Administrative Code, American Legal Publishing code library for the City of New York.",
         "Terms of use: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview"
       ],
-      "scopeNote": "Known gap: Only the current text: no earlier versions of a section. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
+      "scopeNote": "Known gap: Only the current text: no earlier versions of a section. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
       "isReferencedBy": [
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
@@ -320,7 +320,7 @@
       "identifier": "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/DATA-SOURCES.json#rules",
       "contactPoint": {
         "@type": "Kind",
-        "fn": "BetaNYC (serves this dataset; report errors in these figures to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
+        "fn": "BetaNYC (serves this dataset; report errors in this data to BetaNYC: https://github.com/BetaNYC/nyc-charter-laws-rules/issues; errors in the original records to American Legal Publishing: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview)",
         "hasEmail": "mailto:lab@beta.nyc"
       },
       "publisher": {
@@ -371,9 +371,9 @@
         }
       ],
       "provenance": [
-        "Official source: yes. These figures are BetaNYC's, derived from it, not an official American Legal Publishing report.",
+        "Official source: yes. This data is BetaNYC's, derived from it, not an official American Legal Publishing record.",
         "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
-        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. Deeper structure, such as which sections sit inside which title, is not kept."
+        "Changed by BetaNYC: The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
       ],
       "page": [
         {
@@ -402,7 +402,7 @@
         "Credit: Source: Rules of the City of New York, American Legal Publishing code library for the City of New York.",
         "Terms of use: https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview"
       ],
-      "scopeNote": "Known gap: Only the current text: no earlier versions of a rule. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current rules adopted by the City, and may have temporary errors or omissions. Caveat: For the latest rules information, see the City's rules site, https://rules.cityofnewyork.us. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
+      "scopeNote": "Known gap: Only the current text: no earlier versions of a rule. Known gap: The index is flat, so get_title returns chapter and title headings, not every section inside them. Known gap: An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short. Caveat: Not legal advice. American Legal Publishing says its codes may not yet reflect the most current rules adopted by the City, and may have temporary errors or omissions. Caveat: For the latest rules information, see the City's rules site, https://rules.cityofnewyork.us. Caveat: How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download. Caveat: The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page Caveat: The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov.",
       "isReferencedBy": [
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "https://github.com/BetaNYC/nyc-charter-laws-rules/blob/HEAD/WHATS-CHANGED.md#2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
