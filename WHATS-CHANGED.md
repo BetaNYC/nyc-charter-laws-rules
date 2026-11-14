@@ -7,6 +7,14 @@ This page lists the changes to nyc-charter-laws-rules that a reader would notice
 
 To report a bug in this server or ask for a new feature, [open an issue on GitHub](https://github.com/BetaNYC/nyc-charter-laws-rules/issues).
 
+## Unreleased: Ask where the law text comes from
+
+- **Tags:** MCP
+- **What changed:** A new tool, about_data, answers "where does this text come from?" Ask your AI assistant and it can say that the Charter, the Administrative Code and the Rules come from American Legal Publishing's code library for the City, the site the NYC Law Department contracted for. It also says that BetaNYC reformats and cleans up the text, so it is not the official text; when this server last read each document; where to check a section against the official site; and how to report a mistake in the law text or in this server. For questions about the data, write to BetaNYC at lab@beta.nyc.
+- **Who it affects:** Anyone who quotes or cites the law text from this server, such as journalists and community board staff.
+- **MCP version:** [nyc-charter-laws-rules 0.6.0](RELEASES.md)
+- **More detail:** [Where the data comes from](DATA-SOURCES.json) · [Release notes](RELEASES.md)
+
 ## 2026-11-13: Two tools that explain the server and list what changed
 
 - **Tags:** MCP

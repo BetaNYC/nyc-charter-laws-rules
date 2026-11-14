@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-# betanyc-shared: whats_changed.py v1.2.4
-# betanyc-shared-sha256: f33f57f41fd2aac1f6407d67b3e4ba04de6a9069c1a26eca512fcc2353b040c6
+# betanyc-shared: whats_changed.py v1.3.5
+# betanyc-shared-sha256: 125a173f47d916e0b1c61d2d34935429d399e1ffd7107b0321f8be657e91ba2f
 # Canonical copy: betanyc-ai-workspace scripts/whats_changed.py. Do not edit a copy in
 # another repo; change the canonical file, re-stamp it, and copy it again.
 # Drift check: scripts/whats_changed_drift.py. Standard: platform/system/whats-changed-standard.md.
-"""Read, check and render a BetaNYC WHATS-CHANGED.md file. Stdlib only.
+"""Read, check and render a BetaNYC WHATS-CHANGED.md file, and the repo's DATA-SOURCES.json. Stdlib only.
 
 Subcommands:
   check   FILE  validate the file (exit 1 on any error)
   json    FILE  print the canonical parse as JSON (the contract shared with the TS module)
   render  FILE  write the accessible "What's changed" page or fragment
   notice  FILE  write the short correction notice for one page
+  about-data check|json|catalog DATA-SOURCES.json
+                validate the data-sources file, print its canonical parse, or write the
+                DCAT-US 3.0 data.json and Croissant 1.1 croissant.json made from it
 
 Run `python3 whats_changed.py <subcommand> --help` for the options.
 Exit codes: 0 ok, 1 errors found or output stale, 2 usage or I/O problem.
@@ -1027,6 +1030,22 @@ def _replace_between(doc: str, start: str, end: str, body: str) -> str | None:
     return doc[: a + len(start)] + "\n" + body + "\n" + doc[b:]
 
 
+def _atomic_write(target: Path, content: str) -> None:
+    """Write via a temp file in the same folder and rename it into place, so a failure (an
+    unencodable character, a full disk, a read-only folder) never leaves the target truncated.
+    A symlink is written through: the temp file goes beside the link's target and replaces it,
+    so the link itself stays a link."""
+    if target.is_symlink():
+        target = target.resolve()
+    tmp = target.with_name(f".{target.name}.{os.getpid()}.tmp")
+    try:
+        tmp.write_text(content, encoding="utf-8")
+        os.replace(tmp, target)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
+
+
 def _write_or_check(target: Path, content: str, *, into: bool, start: str, end: str, check: bool) -> int:
     if into:
         if not target.is_file():
@@ -1047,12 +1066,1028 @@ def _write_or_check(target: Path, content: str, *, into: bool, start: str, end: 
         print(f"{SCRIPT}: {target} is current")
         return 0
     if current != new:
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(new, encoding="utf-8")
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            _atomic_write(target, new)
+        except OSError as e:
+            why = e.strerror or type(e).__name__
+            print(f"{SCRIPT}: could not write {target}: {why}; the existing file, if any, is unchanged", file=sys.stderr)
+            return 2
         print(f"{SCRIPT}: wrote {target}")
     else:
         print(f"{SCRIPT}: {target} already current")
     return 0
+
+
+# --------------------------------------------------------------------------- about data
+#
+# DATA-SOURCES.json: one file per repo with the facts about where its data comes from. The
+# about_data MCP tool (betanyc-tools.ts) answers from it; `about-data catalog` writes the
+# DCAT-US 3.0 data.json and the Croissant 1.1 croissant.json from it. Both readers validate it the
+# same way (shared fixtures in scripts/mcp_shared/fixtures/data-sources/). Standard:
+# platform/system/about-data-standard.md. JSON Schema: scripts/mcp_shared/data-sources.schema.json.
+
+DS_FORMAT = "betanyc-data-sources/1"
+DS_FILE = "DATA-SOURCES.json"
+DS_MAX_STRING = 5_000
+DS_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+# ASCII only, so both readers agree on every character: a non-ASCII character must be %-encoded.
+DS_URL_RE = re.compile(r"^https?://[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+(?::[0-9]{1,5})?"
+                       r"(?:[/?#][A-Za-z0-9._~:/?#\[\]@!$&'()*+,;=%-]*)?$")
+DS_REPO_RE = re.compile(r"^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+# The DCAT-US 3.0 vcard:hasEmail pattern (definitions/Kind.json), in ASCII, without "mailto:".
+# The leading lookahead rejects a "mailto:" prefix in any case: the catalog adds it.
+DS_EMAIL_RE = re.compile(r"^(?![Mm][Aa][Ii][Ll][Tt][Oo]:)[A-Za-z0-9_~!$&'()*+,;=:.-]+@[A-Za-z0-9_.-]+\.[A-Za-z0-9_.-]+$")
+DS_DATE_RE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+DS_TOOL_RE = re.compile(r"^[A-Za-z0-9_.-]{1,128}$")
+DS_ANCHOR_RE = re.compile(r"^[a-z0-9-]{1,200}$")
+DS_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+DS_MIME_RE = re.compile(r"^[a-z0-9!#$&^_.+-]+/[a-z0-9!#$&^_.+-]+$")
+DS_PATH_RE = re.compile(r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$))[A-Za-z0-9_./-]+$")
+# The template's placeholders: any REPLACE, and the BetaNYC/REPO repo name.
+DS_PLACEHOLDER_RE = re.compile(r"REPLACE|BetaNYC/REPO(?![A-Za-z0-9_-])")
+DS_KEY_SAFE_RE = re.compile(r"[^A-Za-z0-9_$-]")
+# In a Python str every surrogate code point is unpaired (a valid pair decodes to one character).
+DS_SURROGATE_RE = re.compile("[\ud800-\udfff]")
+DS_MAX_DEPTH = 64
+# Package pages and repos are where a server is obtained, not a hosted endpoint.
+DS_NOT_ENDPOINT_RE = re.compile(r"^https?://(?:www\.)?(?:npmjs\.com|github\.com)(?:[/?#]|$)", re.I)
+# BetaNYC's monitored contact address is not decided yet (Noel will name it). Until then every
+# file uses this value, and `about-data check --release` / `catalog --release` refuse it.
+DS_CONTACT_PLACEHOLDER = "contact-not-yet-named@example.invalid"
+# What BetaNYC did to the data. Plain verbs a reader understands; the standard defines each.
+DS_STEPS = ("cleaned", "filtered", "reshaped", "fields-removed", "address-matched", "merged", "counted", "curated")
+# Steps that never change a value the publisher released: reshaped (format or structure) and
+# fields-removed (whole fields left out, such as ZIP codes; every value kept is as published).
+# Every other step changes values: cleaned (fixes or drops records), filtered (drops records, so
+# totals change), address-matched (adds values), merged (adds another source's values), counted
+# (new figures), curated (hand-collected). Only these keep "Official record: yes".
+DS_FORMAT_ONLY_STEPS = ("reshaped", "fields-removed")
+# ISO 19115 maintenance frequency codes, as listed in DCAT-US 3.0 definitions/Dataset.json
+# (accrualPeriodicity, first enum), GSA/dcat-us@4996591.
+DS_FREQUENCIES = ("continual", "daily", "weekly", "fortnightly", "monthly", "quarterly", "biannually",
+                  "annually", "asNeeded", "irregular", "notPlanned", "unknown")
+DS_FRESHNESS = ("live", "file", "hook", "copied")
+# Croissant 1.1 atomic data types (croissant-spec-1.1.md, "DataType"), written without the sc: prefix.
+DS_DATA_TYPES = ("Boolean", "Date", "Time", "DateTime", "Float", "Integer", "Text")
+SHARED_TOOLS = ("whats_changed", "about_betanyc", "about_data")
+
+# A spec node is a tuple: (kind, required, extra). Objects list their fields in order; that order
+# is the order both readers walk the file, so errors come out the same.
+S, U, E, D, B, I, T, A, H = "str", "url", "email", "date", "bool", "id", "tool", "anchor", "sha"
+
+
+def _f(kind, required=True, extra=None):
+    return (kind, required, extra)
+
+
+def _obj(fields, required=True):
+    return ("obj", required, fields)
+
+
+def _list(item, required=False, min_items=0):
+    return ("list", required, (item, min_items))
+
+
+def _enum(values, required=True):
+    return ("enum", required, values)
+
+
+DS_SPEC = _obj([
+    ("$schema", _f(S, False)),
+    ("format", _enum((DS_FORMAT,))),
+    ("server", _obj([
+        ("name", _f(S)),
+        ("title", _f(S)),
+        ("description", _f(S)),
+        ("kind", _enum(("mcp", "site"))),
+        ("repository", _f("repo")),
+        ("homepage", _f(U, False)),
+        ("documentation_url", _f(U, False)),
+        ("endpoint_urls", _list(_f(U))),
+        ("whats_changed_url", _f(U, False)),
+        ("license", _obj([("name", _f(S)), ("url", _f(U))])),
+        ("package_url", _f(U, False)),
+        ("contact_email", _f(E)),
+        ("keywords", _list(_f(S))),
+    ])),
+    ("sources", _list(_obj([
+        ("id", _f(I)),
+        ("title", _f(S)),
+        ("what", _f(S)),
+        ("source_name", _f(S)),
+        ("publisher", _obj([("name", _f(S)), ("url", _f(U, False))])),
+        ("source_url", _f(U)),
+        ("official", _f(B)),
+        ("how_gathered", _f(S)),
+        ("changes", _obj([
+            ("changed", _f(B)),
+            ("steps", _list(_enum(DS_STEPS))),
+            ("detail", _f(S, False)),
+        ])),
+        ("verify_at", _f(U)),
+        ("freshness", _obj([
+            ("kind", _enum(DS_FRESHNESS)),
+            ("path", _f("path", False)),
+            ("field", _f(S, False)),
+            ("key", _f(S, False)),
+        ])),
+        ("update_frequency", _enum(DS_FREQUENCIES, False)),
+        ("coverage", _obj([
+            ("start", _f(D, False)),
+            ("end", _f(D, False)),
+            ("geography", _f(S)),
+            ("known_gaps", _list(_f(S))),
+        ])),
+        ("terms", _obj([
+            ("license_name", _f(S, False)),
+            ("license_url", _f(U, False)),
+            ("terms_url", _f(U, False)),
+            ("credit_line", _f(S, False)),
+        ])),
+        ("report_errors", _obj([("upstream_url", _f(U)), ("upstream_email", _f(E, False))])),
+        ("tools", _list(_f(T))),
+        ("caveats", _list(_f(S))),
+        ("corrections", _list(_f(A))),
+    ]), required=True, min_items=1)),
+    ("published_data", _obj([
+        ("name", _f(S)),
+        ("description", _f(S)),
+        ("url", _f(U)),
+        ("license", _obj([("name", _f(S)), ("url", _f(U))])),
+        ("date_published", _f(D)),
+        ("version", _f(S, False)),
+        ("cite_as", _f(S, False)),
+        ("live", _f(B)),
+        ("files", _list(_obj([
+            ("id", _f(I)),
+            ("name", _f(S)),
+            ("description", _f(S)),
+            ("content_url", _f(U)),
+            ("encoding_format", _f("mime")),
+            ("sha256", _f(H, False)),
+            ("derived_from", _list(_f(I), required=True, min_items=1)),
+            ("fields", _list(_obj([
+                ("name", _f(S)),
+                ("description", _f(S)),
+                ("data_type", _enum(DS_DATA_TYPES)),
+                ("column", _f(S, False)),
+                ("json_path", _f(S, False)),
+            ]), required=True, min_items=1)),
+        ]), required=True, min_items=1)),
+    ], required=False)),
+])
+
+DS_HINTS = {
+    "json-syntax": "the file is not valid JSON",
+    "not-object": "the file must be one JSON object",
+    "unknown-key": "remove the key, or fix its spelling (unknown keys are rejected so a typo cannot hide a fact)",
+    "missing": "add this required field",
+    "wrong-type": "this value has the wrong type",
+    "empty": "this may not be empty",
+    "placeholder": "replace the template's REPLACE text and BetaNYC/REPO",
+    "too-long": f"strings are limited to {DS_MAX_STRING} characters",
+    "control-character": "remove the invisible control character",
+    "bad-url": "use a full http or https URL",
+    "bad-repo": "use https://github.com/<owner>/<repo>",
+    "bad-email": "write a plain address (name@example.org), without mailto:",
+    "bad-date": "write a real date, YYYY-MM-DD",
+    "bad-id": "ids are lowercase letters, digits and single hyphens",
+    "bad-enum": "use one of the listed values",
+    "bad-tool": "tool names are letters, digits, _ . and -",
+    "bad-anchor": "a correction is the anchor of a WHATS-CHANGED.md entry, e.g. 2026-11-09-agency-budget-years-were-shown-one-year-late",
+    "bad-sha256": "64 lowercase hex characters",
+    "bad-mime": "a media type such as text/csv",
+    "bad-path": "a path relative to the package root, with no .. and no leading /",
+    "duplicate-id": "ids must be unique",
+    "reserved-id": "'all' is reserved for the topic filter",
+    "changes-mismatch": "changed true needs steps and detail; changed false needs no steps",
+    "freshness-fields": "live takes no other field; file needs path and field; hook and copied need key",
+    "date-order": "coverage start is after its end",
+    "terms-missing": "give at least one of license_name, license_url or terms_url (write 'None stated by the publisher' if there is none)",
+    "source-conflict": "sources sharing a source_url share one upstream Dataset: source_name, publisher, verify_at, update_frequency, terms and report_errors must all agree",
+    "not-an-endpoint": "endpoint_urls are hosted service URLs only; put an npm or GitHub page in package_url",
+    "id-collision": "two catalog entries would get the same @id; use distinct URLs",
+    "lone-surrogate": "the text has a broken (unpaired) UTF-16 surrogate",
+    "too-deep": f"JSON nested deeper than {DS_MAX_DEPTH} levels",
+    "bad-encoding": "the file is not valid UTF-8",
+    "placeholder-contact": "contact_email is still the placeholder; set BetaNYC's monitored address before release",
+    "unknown-source": "derived_from must name a source id",
+    "field-extract": "give exactly one of column or json_path",
+    "sha256-required": "a file that is not live needs its sha256",
+    "file-too-large": f"the file is limited to {MAX_CHARS} characters",
+    "correction-missing": "no WHATS-CHANGED.md entry has this anchor",
+    "correction-not-correction": "that WHATS-CHANGED.md entry is not tagged Correction",
+    "tool-without-source": "every tool must be listed under some source",
+    "unknown-tool": "this tool is not one of the server's tools",
+}
+
+
+def _ds_key(k: str) -> str:
+    return DS_KEY_SAFE_RE.sub("?", k)[:64]
+
+
+def _ds_is_date(s: str) -> bool:
+    if not DS_DATE_RE.fullmatch(s):
+        return False
+    try:
+        dt.date.fromisoformat(s)
+    except ValueError:
+        return False
+    return True
+
+
+def _ds_empty(kind):
+    return [] if kind == "list" else None
+
+
+def _ds_walk(spec, value, path: str, errors: list[dict]):
+    """Validate one value against its spec node; return the normalized value (None or [] when
+    the value is unusable). Shared semantics with walk() in betanyc-tools.ts."""
+    kind, _required, extra = spec
+    if kind == "obj":
+        if not isinstance(value, dict):
+            errors.append({"code": "wrong-type", "path": path})
+            return None
+        out = {}
+        known = [k for k, _ in extra]
+        for k in value:
+            if k not in known:
+                errors.append({"code": "unknown-key", "path": f"{path}.{_ds_key(k)}" if path else _ds_key(k)})
+        for k, sub in extra:
+            p = f"{path}.{k}" if path else k
+            if k not in value or value[k] is None:
+                if sub[1]:
+                    errors.append({"code": "missing", "path": p})
+                out[k] = _ds_empty(sub[0])
+                continue
+            out[k] = _ds_walk(sub, value[k], p, errors)
+        return out
+    if kind == "list":
+        item, min_items = extra
+        if not isinstance(value, list):
+            errors.append({"code": "wrong-type", "path": path})
+            return []
+        if len(value) < min_items:
+            errors.append({"code": "empty", "path": path})
+        return [_ds_walk(item, v, f"{path}[{i}]", errors) for i, v in enumerate(value)]
+    if kind == "bool":
+        if not isinstance(value, bool):
+            errors.append({"code": "wrong-type", "path": path})
+            return None
+        return value
+    if not isinstance(value, str):
+        errors.append({"code": "wrong-type", "path": path})
+        return None
+    code = None
+    if not value.strip(TRIM):
+        code = "empty"
+    elif len(value) > DS_MAX_STRING:
+        code = "too-long"
+    elif CONTROL_RE.search(value):
+        code = "control-character"
+    elif DS_SURROGATE_RE.search(value):
+        code = "lone-surrogate"
+    elif DS_PLACEHOLDER_RE.search(value):
+        code = "placeholder"
+    elif kind == "enum" and value not in extra:
+        code = "bad-enum"
+    elif kind == "url" and (not DS_URL_RE.fullmatch(value) or DOT_SEGMENT_RE.search(_url_path(value))):
+        code = "bad-url"
+    elif kind == "repo" and not DS_REPO_RE.fullmatch(value):
+        code = "bad-repo"
+    elif kind == "email" and not DS_EMAIL_RE.fullmatch(value):
+        code = "bad-email"
+    elif kind == "date" and not _ds_is_date(value):
+        code = "bad-date"
+    elif kind == "id" and not (len(value) <= 64 and DS_ID_RE.fullmatch(value)):
+        code = "bad-id"
+    elif kind == "tool" and not DS_TOOL_RE.fullmatch(value):
+        code = "bad-tool"
+    elif kind == "anchor" and not DS_ANCHOR_RE.fullmatch(value):
+        code = "bad-anchor"
+    elif kind == "sha" and not DS_SHA256_RE.fullmatch(value):
+        code = "bad-sha256"
+    elif kind == "mime" and not DS_MIME_RE.fullmatch(value):
+        code = "bad-mime"
+    elif kind == "path" and not DS_PATH_RE.fullmatch(value):
+        code = "bad-path"
+    if code:
+        errors.append({"code": code, "path": path})
+        return None
+    return value
+
+
+def _ds_depth_exceeds(value, limit: int) -> bool:
+    """True when arrays and objects nest deeper than `limit`. Iterative, so it cannot recurse."""
+    stack = [(value, 1)]
+    while stack:
+        v, d = stack.pop()
+        if isinstance(v, (dict, list)):
+            if d > limit:
+                return True
+            stack.extend((x, d + 1) for x in (v.values() if isinstance(v, dict) else v))
+    return False
+
+
+def parse_data_sources_bytes(data: bytes) -> dict:
+    """parse_data_sources() for raw file bytes: invalid UTF-8 is a clean error, never a crash."""
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return {"doc": None, "errors": [{"code": "bad-encoding", "path": ""}]}
+    return parse_data_sources(text)
+
+
+def _ds_reject_constant(name: str):
+    raise ValueError(f"{name} is not JSON")
+
+
+def parse_data_sources(text: str) -> dict:
+    """The canonical parse of DATA-SOURCES.json: {"doc": normalized or None, "errors": [...]}.
+    Every source and the published_data block carry "valid" (no error inside it). The doc is
+    None only when the text is not one JSON object. Same output as parseDataSources() in TS."""
+    if len(text) > MAX_CHARS:  # characters (code points), as the TS reader counts them
+        return {"doc": None, "errors": [{"code": "file-too-large", "path": ""}]}
+    if text.startswith("\ufeff"):
+        text = text[1:]
+    try:
+        raw = json.loads(text, parse_constant=_ds_reject_constant)
+    except RecursionError:
+        return {"doc": None, "errors": [{"code": "too-deep", "path": ""}]}
+    except ValueError:
+        return {"doc": None, "errors": [{"code": "json-syntax", "path": ""}]}
+    if _ds_depth_exceeds(raw, DS_MAX_DEPTH):
+        return {"doc": None, "errors": [{"code": "too-deep", "path": ""}]}
+    if not isinstance(raw, dict):
+        return {"doc": None, "errors": [{"code": "not-object", "path": ""}]}
+    errors: list[dict] = []
+    doc = _ds_walk(DS_SPEC, raw, "", errors)
+    doc.pop("$schema", None)
+    server = doc["server"] or {}
+
+    for k, u in enumerate((server or {}).get("endpoint_urls") or []):
+        if u is not None and DS_NOT_ENDPOINT_RE.match(u):
+            errors.append({"code": "not-an-endpoint", "path": f"server.endpoint_urls[{k}]"})
+
+    seen_ids: set[str] = set()
+    by_url: dict[str, tuple] = {}
+    for i, s in enumerate(doc["sources"]):
+        if s is None:
+            continue
+        p = f"sources[{i}]"
+        if s["id"] is not None:
+            if s["id"] == "all":
+                errors.append({"code": "reserved-id", "path": f"{p}.id"})
+            elif s["id"] in seen_ids:
+                errors.append({"code": "duplicate-id", "path": f"{p}.id"})
+            seen_ids.add(s["id"])
+        ch = s["changes"]
+        if ch and ch["changed"] is not None:
+            if ch["changed"] and (not ch["steps"] or ch["detail"] is None):
+                errors.append({"code": "changes-mismatch", "path": f"{p}.changes"})
+            if ch["changed"] is False and ch["steps"]:
+                errors.append({"code": "changes-mismatch", "path": f"{p}.changes"})
+        fr = s["freshness"]
+        if fr and fr["kind"] is not None:
+            want = {"live": (), "file": ("path", "field"), "hook": ("key",), "copied": ("key",)}[fr["kind"]]
+            have = tuple(k for k in ("path", "field", "key") if fr[k] is not None)
+            if have != want:
+                errors.append({"code": "freshness-fields", "path": f"{p}.freshness"})
+        cov = s["coverage"]
+        if cov and cov["start"] and cov["end"] and cov["start"] > cov["end"]:
+            errors.append({"code": "date-order", "path": f"{p}.coverage"})
+        terms = s["terms"]
+        if terms and not (terms["license_name"] or terms["license_url"] or terms["terms_url"]):
+            errors.append({"code": "terms-missing", "path": f"{p}.terms"})
+        if s["source_url"]:
+            # Sources sharing a source_url share one upstream Dataset in data.json, so every
+            # field that reaches it must agree.
+            mine = json.dumps([s["source_name"], s["publisher"], s["verify_at"], s["update_frequency"],
+                               s["terms"], s["report_errors"]], sort_keys=True)
+            prev = by_url.setdefault(s["source_url"], mine)
+            if prev != mine:
+                errors.append({"code": "source-conflict", "path": f"{p}.source_url"})
+
+    pub = doc["published_data"]
+    if isinstance(pub, dict):
+        file_ids: set[str] = set()
+        for j, f in enumerate(pub["files"]):
+            if f is None:
+                continue
+            p = f"published_data.files[{j}]"
+            if f["id"] is not None:
+                if f["id"] in file_ids:
+                    errors.append({"code": "duplicate-id", "path": f"{p}.id"})
+                file_ids.add(f["id"])
+            for k, ref in enumerate(f["derived_from"]):
+                if ref is not None and ref not in seen_ids:
+                    errors.append({"code": "unknown-source", "path": f"{p}.derived_from[{k}]"})
+            if pub["live"] is False and f["sha256"] is None:
+                errors.append({"code": "sha256-required", "path": f"{p}.sha256"})
+            names: set[str] = set()
+            for m, fld in enumerate(f["fields"]):
+                if fld is None:
+                    continue
+                fp = f"{p}.fields[{m}]"
+                if fld["name"] is not None:
+                    if fld["name"] in names:
+                        errors.append({"code": "duplicate-id", "path": f"{fp}.name"})
+                    names.add(fld["name"])
+                if (fld["column"] is None) == (fld["json_path"] is None):
+                    errors.append({"code": "field-extract", "path": fp})
+
+    # Every node with an @id in data.json must have its own: BetaNYC's Organization, BetaNYC's
+    # dataset ids (DATA-SOURCES.json#<id>), a hosted DataService's repository, upstream source
+    # URLs (shared by sources that share an upstream Dataset), publisher Organizations (the same
+    # url must name the same publisher), and the published data's url. Registered in this order;
+    # the later one is the error. Same order and paths as the TS reader.
+    nodes: dict[str, str] = {BETANYC_URL: "org:" + BETANYC_NAME}
+
+    def claim(node_id, key: str, path: str) -> None:
+        if not node_id:
+            return
+        prev = nodes.setdefault(node_id, key)
+        if prev != key:
+            errors.append({"code": "id-collision", "path": path})
+
+    if server and server.get("repository"):
+        for i, s in enumerate(doc["sources"]):
+            if s is not None and s["id"] is not None:
+                claim(f"{server['repository']}/blob/HEAD/{DS_FILE}#{s['id']}", "derived:" + s["id"], f"sources[{i}].id")
+        if server.get("endpoint_urls"):
+            claim(server["repository"], "service", "server.repository")
+    for i, s in enumerate(doc["sources"]):
+        if s is None:
+            continue
+        claim(s["source_url"], "upstream:" + (s["source_url"] or ""), f"sources[{i}].source_url")
+        if s["publisher"] and s["publisher"]["url"]:
+            claim(s["publisher"]["url"], "org:" + (s["publisher"]["name"] or ""), f"sources[{i}].publisher.url")
+    if isinstance(pub, dict):
+        claim(pub["url"], "published", "published_data.url")
+
+    if isinstance(pub, dict):
+        pub["valid"] = not any(e["path"] == "published_data" or e["path"].startswith("published_data.") for e in errors)
+    for i, s in enumerate(doc["sources"]):
+        if s is None:
+            continue
+        pre = f"sources[{i}]"
+        s["valid"] = not any(e["path"] == pre or e["path"].startswith(pre + ".") for e in errors)
+    errors.sort(key=lambda e: (e["path"], e["code"]))
+    return {"doc": _ds_compact(doc), "errors": errors}
+
+
+def _ds_compact(v):
+    """Drop unusable (None) items from every list, after the checks that need their indices."""
+    if isinstance(v, dict):
+        return {k: _ds_compact(x) for k, x in v.items()}
+    if isinstance(v, list):
+        return [_ds_compact(x) for x in v if x is not None]
+    return v
+
+
+def tool_coverage(doc: dict | None, tools: list[str]) -> dict:
+    """Which of the server's tools no source lists, and which listed tools the server does not
+    have. The three shared BetaNYC tools are about BetaNYC, not data, so they need no source."""
+    listed = set()
+    for s in (doc or {}).get("sources", []):
+        listed.update(t for t in s.get("tools", []) if t)
+    have = set(tools)
+    return {
+        "without_source": sorted(t for t in have if t not in listed and t not in SHARED_TOOLS),
+        "unknown": sorted(t for t in listed if t not in have),
+    }
+
+
+def check_corrections(doc: dict, wc_parsed: dict | None) -> list[dict]:
+    """Each source's corrections must be anchors of valid, released entries tagged Correction."""
+    errors: list[dict] = []
+    entries = {e["anchor"]: e for e in (wc_parsed or {}).get("entries", []) if e["valid"] and not e["unreleased"]}
+    for i, s in enumerate(doc["sources"]):
+        for k, anchor in enumerate(s["corrections"]):
+            if anchor is None:
+                continue
+            e = entries.get(anchor)
+            p = f"sources[{i}].corrections[{k}]"
+            if e is None:
+                errors.append({"code": "correction-missing", "path": p})
+            elif "Correction" not in e["tags"]:
+                errors.append({"code": "correction-not-correction", "path": p})
+    return errors
+
+
+def _ds_whats_changed_url(server: dict) -> str:
+    return server.get("whats_changed_url") or f"{server['repository']}/blob/HEAD/WHATS-CHANGED.md"
+
+
+def _ds_source_file_url(server: dict) -> str:
+    return f"{server['repository']}/blob/HEAD/{DS_FILE}"
+
+
+BETANYC_NAME = "BetaNYC"
+BETANYC_URL = "https://www.beta.nyc/"
+FCNY_NAME = "Fund for the City of New York"
+
+
+def _ds_slug(text: str) -> str:
+    """An @id segment: lowercase ASCII letters and digits joined by single hyphens."""
+    out = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return out or "field"
+
+
+def _ds_rights(t: dict, *, credit: bool) -> list[str]:
+    """Terms as rights statements. `license` in DCAT takes a license document (a URL), so a
+    license given only as words, such as "None stated by the publisher", goes here instead. The
+    credit line is BetaNYC's advice to reusers, so it goes only on BetaNYC's own Dataset."""
+    rights = []
+    if t["license_name"]:
+        rights.append(f"License: {t['license_name']}")
+    if credit and t["credit_line"]:
+        rights.append(f"Credit: {t['credit_line']}")
+    if t["terms_url"]:
+        rights.append(f"Terms of use: {t['terms_url']}")
+    return rights
+
+
+ROUTE_URL_RE = re.compile(r"^https?://([A-Za-z0-9.-]+)(?::[0-9]{1,5})?([/?#].*)?$")
+# A "." or ".." path segment, literal or percent-encoded: bad-url in check, and never BetaNYC's.
+DOT_SEGMENT_RE = re.compile(r"(?:^|/)(?:\.|%2e){1,2}(?:/|$)", re.I)
+
+
+def _url_path(url: str) -> str:
+    m = re.match(r"^https?://[^/?#]*([^?#]*)", url)
+    return m.group(1) if m else ""
+
+
+def route_is_betanyc(url: str) -> bool:
+    """True when an error-report URL is BetaNYC's own: beta.nyc or any subdomain, or a
+    github.com/BetaNYC (or www.github.com) repo, with no dot segments. Same as routeIsBetanyc()."""
+    m = ROUTE_URL_RE.fullmatch(url or "")
+    if not m:
+        return False
+    host = m.group(1).lower()
+    path = re.split(r"[?#]", m.group(2) or "")[0]
+    if DOT_SEGMENT_RE.search(path):
+        return False
+    if host == "beta.nyc" or host.endswith(".beta.nyc"):
+        return True
+    if host in ("github.com", "www.github.com"):
+        parts = path.split("/")
+        return len(parts) > 1 and parts[1].lower() == "betanyc"
+    return False
+
+
+def error_route(s: dict, issues: str) -> str:
+    """Where to report an error, worded by who fixes it. BetaNYC's own route: to BetaNYC. Figures
+    BetaNYC changed or curated: to BetaNYC first (`issues`), the original records to the
+    publisher. Data passed on as published (or only reshaped, or fields left out): the publisher."""
+    url = s["report_errors"]["upstream_url"]
+    pub = s["publisher"]["name"]
+    if route_is_betanyc(url):
+        return f"report errors in this data to {BETANYC_NAME}: {url}"
+    if not s["official"] or values_changed(s):
+        return (f"report errors in these figures to {BETANYC_NAME}: {issues}; "
+                f"errors in the original records to {pub}: {url}")
+    return f"report errors in the data to {pub}: {url}"
+
+
+def upstream_route(s: dict) -> str:
+    """The route on the upstream Dataset, which is the publisher's own records."""
+    url = s["report_errors"]["upstream_url"]
+    if route_is_betanyc(url):
+        return f"report errors in this data to {BETANYC_NAME}: {url}"
+    return f"report errors in the data to {s['publisher']['name']}: {url}"
+
+
+def values_changed(s: dict) -> bool:
+    """True when BetaNYC changed any value: any step but `reshaped` (DS_FORMAT_ONLY_STEPS)."""
+    ch = s["changes"]
+    return bool(ch["changed"]) and any(step not in DS_FORMAT_ONLY_STEPS for step in ch["steps"])
+
+
+def official_wording(s: dict) -> str:
+    """What to say about officialness. Same words as officialWording() in the TS module."""
+    pub = s["publisher"]["name"]
+    if not s["official"]:
+        return f"Not an official record: curated by {BETANYC_NAME} from material published by {pub}."
+    if values_changed(s):
+        return (f"Official source: yes. These figures are {BETANYC_NAME}'s, derived from it, "
+                f"not an official {pub} report.")
+    if s["changes"]["changed"]:
+        steps = s["changes"]["steps"]
+        if "fields-removed" in steps and "reshaped" in steps:
+            return f"Official record: yes, reshaped by {BETANYC_NAME} with some fields left out (values unchanged)."
+        if "fields-removed" in steps:
+            return f"Official record: yes, with some fields left out by {BETANYC_NAME} (values unchanged)."
+        return f"Official record: yes, reshaped by {BETANYC_NAME} (values unchanged)."
+    return f"Official record: yes, passed on as {pub} publishes it."
+
+
+def build_dcat(doc: dict) -> dict:
+    """The DCAT-US 3.0 catalog (data.json). Built against GSA/dcat-us jsonschema/definitions at
+    commit 4996591 (2026-10-07); class and field names are that schema's. Mapping:
+      each source             -> a Dataset for the upstream data: publisher = the source's
+                                 publisher, a neutral description, no BetaNYC wording
+      every source             -> a BetaNYC Dataset for the data as this repo serves it, with
+                                 `source` = the upstream Dataset; it carries what BetaNYC changed,
+                                 coverage, gaps, caveats and corrections, and never implies the
+                                 figures are official when BetaNYC changed them
+      published_data           -> a BetaNYC Dataset with one Distribution per file
+      hosted endpoint_urls     -> a DataService. A stdio server run with npx has no endpoint, so
+                                 it gets none; its package page is the catalog's homepage.
+    Freshness on a running server is about_data's job; this file says only how often data updates."""
+    server = doc["server"]
+    contact = {"@type": "Kind", "fn": BETANYC_NAME, "hasEmail": "mailto:" + server["contact_email"]}
+    betanyc_org = {"@type": "Organization", "@id": BETANYC_URL, "name": BETANYC_NAME,
+                   "subOrganizationOf": [{"@type": "Organization", "name": FCNY_NAME}]}
+    wc = _ds_whats_changed_url(server)
+    src_file = _ds_source_file_url(server)
+
+    upstream: dict[str, dict] = {}
+    served: list[dict] = []
+    by_id: dict[str, dict] = {}
+    for s in doc["sources"]:
+        t = s["terms"]
+        if s["source_url"] not in upstream:
+            if s["report_errors"]["upstream_email"]:
+                up_contact = {"@type": "Kind", "fn": s["publisher"]["name"],
+                              "hasEmail": "mailto:" + s["report_errors"]["upstream_email"]}
+            else:
+                up_contact = {**contact,
+                              "fn": f"{BETANYC_NAME} (lists this dataset; {upstream_route(s)})"}
+            pub = {"@type": "Organization", "name": s["publisher"]["name"]}
+            if s["publisher"]["url"]:
+                pub["@id"] = s["publisher"]["url"]
+            up = {
+                "@id": s["source_url"],
+                "@type": "Dataset",
+                "title": s["source_name"],
+                "description": f"{s['source_name']}, published by {s['publisher']['name']}.",
+                "identifier": s["source_url"],
+                "contactPoint": up_contact,
+                "publisher": pub,
+                "landingPage": {"@type": "Document", "title": s["source_name"], "accessURL": s["source_url"]},
+                "page": [{"@type": "Document", "title": "Check a figure at the source", "accessURL": s["verify_at"]}],
+            }
+            if s["update_frequency"]:
+                up["accrualPeriodicity"] = s["update_frequency"]
+            if t["license_url"]:
+                up["license"] = t["license_url"]
+            rights = _ds_rights(t, credit=False)
+            if rights:
+                up["rights"] = rights
+            upstream[s["source_url"]] = up
+        up = upstream[s["source_url"]]
+
+        cov = s["coverage"]
+        ds_id = f"{src_file}#{s['id']}"
+        provenance = [official_wording(s), s["how_gathered"]]
+        if values_changed(s):
+            provenance.append(f"Changed by {BETANYC_NAME}: {s['changes']['detail']}")
+        elif s["changes"]["changed"]:
+            steps = s["changes"]["steps"]
+            label = (f"Reshaped by {BETANYC_NAME}, some fields left out" if "reshaped" in steps and "fields-removed" in steps
+                     else f"Fields left out by {BETANYC_NAME}" if "fields-removed" in steps
+                     else f"Reshaped by {BETANYC_NAME}")
+            provenance.append(f"{label} (values unchanged): {s['changes']['detail']}")
+        issues = f"{server['repository']}/issues"
+        if s["official"] and not values_changed(s) and not route_is_betanyc(s["report_errors"]["upstream_url"]):
+            # Passed on as published: errors in the figures are the publisher's to fix.
+            served_contact = {**contact, "fn": (
+                f"{BETANYC_NAME} (serves this dataset; {error_route(s, issues)}; errors in this server: {issues})")}
+        else:
+            served_contact = {**contact, "fn": f"{BETANYC_NAME} (serves this dataset; {error_route(s, issues)})"}
+        ds = {
+            "@id": ds_id,
+            "@type": "Dataset",
+            "title": f"{s['title']} ({server['title']})",
+            "description": s["what"],
+            "identifier": ds_id,
+            "contactPoint": served_contact,
+            "publisher": betanyc_org,
+            "source": [up],
+            "provenance": provenance,
+            "page": [{"@type": "Document", "title": "Check a figure at the source", "accessURL": s["verify_at"]}],
+        }
+        if cov["start"] or cov["end"]:
+            period = {"@type": "PeriodOfTime"}
+            if cov["start"]:
+                period["startDate"] = cov["start"]
+            if cov["end"]:
+                period["endDate"] = cov["end"]
+            ds["temporal"] = [period]
+        ds["spatial"] = {"@type": "Location", "prefLabel": cov["geography"]}
+        if s["changes"]["steps"]:
+            ds["wasGeneratedBy"] = [{"@type": "Activity", "label": step} for step in s["changes"]["steps"]]
+        if s["update_frequency"]:
+            ds["accrualPeriodicity"] = s["update_frequency"]
+        if t["license_url"]:
+            ds["license"] = t["license_url"]
+        rights = _ds_rights(t, credit=True)
+        if rights:
+            ds["rights"] = rights
+        notes = [f"Known gap: {g}" for g in cov["known_gaps"]] + [f"Caveat: {c}" for c in s["caveats"]]
+        if notes:
+            ds["scopeNote"] = " ".join(notes)
+        refs = [f"{wc}#{a}" for a in s["corrections"]]
+        if refs:
+            ds["isReferencedBy"] = refs
+        by_id[s["id"]] = ds
+        served.append(ds)
+
+    published: list[dict] = []
+    pubd = doc.get("published_data")
+    if pubd:
+        used = []
+        for f in pubd["files"]:
+            for ref in f["derived_from"]:
+                if by_id[ref] not in used:
+                    used.append(by_id[ref])
+        ds = {
+            "@id": pubd["url"],
+            "@type": "Dataset",
+            "title": pubd["name"],
+            "description": pubd["description"],
+            "identifier": pubd["url"],
+            "contactPoint": contact,
+            "publisher": betanyc_org,
+            "landingPage": {"@type": "Document", "title": pubd["name"], "accessURL": pubd["url"]},
+            "license": pubd["license"]["url"],
+            "rights": [f"License: {pubd['license']['name']}"],
+            "issued": pubd["date_published"],
+            "source": used,
+            "distribution": [{
+                "@type": "Distribution",
+                "title": f["name"],
+                "description": f["description"],
+                "downloadURL": f["content_url"],
+                "mediaType": f["encoding_format"],
+                "license": pubd["license"]["url"],
+            } for f in pubd["files"]],
+        }
+        if pubd["version"]:
+            ds["version"] = pubd["version"]
+        published.append(ds)
+
+    catalog = {
+        "@type": "Catalog",
+        "conformsTo": {"@type": "Standard", "title": "DCAT-US 3.0"},
+        "title": f"{server['title']}: data sources",
+        "description": f"Where the data behind {server['title']} comes from, as recorded in its {DS_FILE}. "
+                       "Generated by whats_changed.py about-data catalog; do not edit by hand.",
+        "publisher": {"@type": "Agent", "name": BETANYC_NAME},
+        "homepage": {"@type": "Document", "title": server["title"],
+                     "accessURL": server["homepage"] or server["package_url"] or server["repository"]},
+        "dataset": list(upstream.values()) + served + published,
+    }
+    if server["endpoint_urls"]:
+        svc = {
+            "@id": server["repository"],
+            "@type": "DataService",
+            "title": server["title"],
+            "description": server["description"],
+            "identifier": server["repository"],
+            "endpointURL": server["endpoint_urls"],
+            "endpointDescription": [server["documentation_url"] or f"{server['repository']}#readme"],
+            "contactPoint": [contact],
+            "publisher": {"@type": "Agent", "name": BETANYC_NAME},
+            "license": server["license"]["url"],
+            "servesDataset": served + published,
+        }
+        if server["keywords"]:
+            svc["keyword"] = server["keywords"]
+        catalog["service"] = [svc]
+    return catalog
+
+
+# The JSON-LD @context mlcroissant 1.1.1 treats as standard for Croissant 1.1
+# (mlcroissant/_src/core/rdf.py make_context() with a 1.1 context; dumped 2026-11-12), plus the
+# PROV-O prefix that croissant-spec-1.1.md "Provenance Representation" says to declare.
+CROISSANT_CONTEXT = {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {"@id": "cr:data", "@type": "@json"},
+    "dataType": {"@id": "cr:dataType", "@type": "@vocab"},
+    "dct": "http://purl.org/dc/terms/",
+    "description": {"@container": "@language"},
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {"@id": "cr:examples", "@type": "@json"},
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "name": {"@container": "@language"},
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "prov": "http://www.w3.org/ns/prov#",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+}
+CROISSANT_CONFORMS_TO = "http://mlcommons.org/croissant/1.1"
+
+
+def build_croissant(doc: dict) -> dict | None:
+    """The Croissant 1.1 metadata (croissant.json) for the files BetaNYC itself publishes, or None
+    when the repo publishes none. Built against croissant-spec-1.1.md (mlcommons/croissant@093b32f)
+    and checked with mlcroissant 1.1.1. Provenance uses PROV-O as the spec recommends:
+    prov:wasDerivedFrom the upstream source URLs, prov:wasGeneratedBy one activity per changed source."""
+    pubd = doc.get("published_data")
+    if not pubd:
+        return None
+    by_id = {s["id"]: s for s in doc["sources"]}
+    used = []
+    for f in pubd["files"]:
+        for ref in f["derived_from"]:
+            if by_id[ref] not in used:
+                used.append(by_id[ref])
+    upstream_urls = list(dict.fromkeys(s["source_url"] for s in used))
+    credits = list(dict.fromkeys(s["terms"]["credit_line"] for s in used if s["terms"]["credit_line"]))
+    betanyc = {"@type": "Organization", "name": BETANYC_NAME, "url": BETANYC_URL}
+    out = {
+        "@context": CROISSANT_CONTEXT,
+        "@type": "sc:Dataset",
+        "conformsTo": CROISSANT_CONFORMS_TO,
+        "name": pubd["name"],
+        "description": pubd["description"],
+        "license": pubd["license"]["url"],
+        "url": pubd["url"],
+        "creator": betanyc,
+        "publisher": betanyc,
+        "datePublished": pubd["date_published"],
+        "isLiveDataset": pubd["live"],
+    }
+    if pubd["version"]:
+        out["version"] = pubd["version"]
+    if pubd["cite_as"]:
+        out["citeAs"] = pubd["cite_as"]
+    if credits:
+        out["creditText"] = " ".join(credits)
+    if doc["server"]["keywords"]:
+        out["keywords"] = doc["server"]["keywords"]
+    out["prov:wasDerivedFrom"] = [{"@id": u} for u in upstream_urls]
+    acts = [{"@type": "prov:Activity", "prov:label": f"{s['title']}: {s['changes']['detail']}"}
+            for s in used if s["changes"]["changed"]]
+    if acts:
+        out["prov:wasGeneratedBy"] = acts
+    out["prov:wasAttributedTo"] = {"@type": "prov:Agent", "prov:label": BETANYC_NAME}
+    dist = []
+    record_sets = []
+    for f in pubd["files"]:
+        fo = {
+            "@type": "cr:FileObject",
+            "@id": f["id"],
+            "name": f["name"],
+            "description": f["description"],
+            "contentUrl": f["content_url"],
+            "encodingFormat": f["encoding_format"],
+        }
+        if f["sha256"]:
+            fo["sha256"] = f["sha256"]
+        fo["prov:wasDerivedFrom"] = [{"@id": by_id[r]["source_url"]} for r in dict.fromkeys(f["derived_from"])]
+        dist.append(fo)
+        fields = []
+        used_ids: set[str] = set()
+        for fld in f["fields"]:
+            extract = {"column": fld["column"]} if fld["column"] is not None else {"jsonPath": fld["json_path"]}
+            # mlcroissant rejects an @id with whitespace, even escaped; `name` keeps the column's words.
+            base = _ds_slug(fld["name"])
+            fid, n = base, 2
+            while fid in used_ids:
+                fid, n = f"{base}-{n}", n + 1
+            used_ids.add(fid)
+            fields.append({
+                "@type": "cr:Field",
+                "@id": f"{f['id']}/{fid}",
+                "name": fld["name"],
+                "description": fld["description"],
+                "dataType": f"sc:{fld['data_type']}",
+                "source": {"fileObject": {"@id": f["id"]}, "extract": extract},
+            })
+        record_sets.append({"@type": "cr:RecordSet", "@id": f"{f['id']}-records", "name": f"{f['name']} records",
+                            "field": fields})
+    out["distribution"] = dist
+    out["recordSet"] = record_sets
+    return out
+
+
+def _ds_dump(obj: dict) -> str:
+    return json.dumps(obj, indent=2, ensure_ascii=False) + "\n"
+
+
+def _ds_report(path: Path, errors: list[dict]) -> None:
+    for e in errors:
+        hint = f" ({DS_HINTS[e['code']]})" if e["code"] in DS_HINTS else ""
+        print(f"{path}: error {e['code']} at {e['path'] or '(file)'}{hint}", file=sys.stderr)
+
+
+def _ds_load(path: Path) -> dict | None:
+    try:
+        return parse_data_sources_bytes(path.read_bytes())
+    except FileNotFoundError:
+        print(f"{SCRIPT}: {path} not found", file=sys.stderr)
+        return None
+
+
+def _ds_tools_arg(a: argparse.Namespace) -> list[str] | None:
+    if a.tools_file:
+        text = a.tools_file.read_text(encoding="utf-8")
+        try:
+            data = json.loads(text)
+        except ValueError:
+            data = None
+        if isinstance(data, list):
+            return [x["name"] if isinstance(x, dict) else str(x) for x in data]
+        return [ln.strip() for ln in text.splitlines() if ln.strip()]
+    if a.tools:
+        return [t.strip() for t in a.tools.split(",") if t.strip()]
+    return None
+
+
+def _ds_full_check(a: argparse.Namespace) -> tuple[dict, list[dict]] | None:
+    parsed = _ds_load(a.file)
+    if parsed is None:
+        return None
+    errors = list(parsed["errors"])
+    doc = parsed["doc"]
+    if doc is not None:
+        wc_path = a.whats_changed or (a.file.parent / "WHATS-CHANGED.md")
+        wc = parse(wc_path.read_text(encoding="utf-8")) if wc_path.is_file() else None
+        errors += check_corrections(doc, wc)
+        if getattr(a, "release", False) and (doc.get("server") or {}).get("contact_email") == DS_CONTACT_PLACEHOLDER:
+            errors.append({"code": "placeholder-contact", "path": "server.contact_email"})
+        tools = _ds_tools_arg(a)
+        if tools is not None:
+            cov = tool_coverage(doc, tools)
+            errors += [{"code": "tool-without-source", "path": f"tool {t}"} for t in cov["without_source"]]
+            errors += [{"code": "unknown-tool", "path": f"tool {t}"} for t in cov["unknown"]]
+    return parsed, errors
+
+
+def cmd_about_data_check(a: argparse.Namespace) -> int:
+    got = _ds_full_check(a)
+    if got is None:
+        return 2
+    parsed, errors = got
+    _ds_report(a.file, errors)
+    n = len((parsed["doc"] or {}).get("sources", []))
+    print(f"{SCRIPT}: {a.file}: {n} sources, {len(errors)} errors -> {'FAIL' if errors else 'OK'}")
+    return 1 if errors else 0
+
+
+def cmd_about_data_json(a: argparse.Namespace) -> int:
+    parsed = _ds_load(a.file)
+    if parsed is None:
+        return 2
+    print(json.dumps(parsed, indent=2, ensure_ascii=False))
+    return 0
+
+
+def cmd_about_data_catalog(a: argparse.Namespace) -> int:
+    got = _ds_full_check(a)
+    if got is None:
+        return 2
+    parsed, errors = got
+    if errors:
+        _ds_report(a.file, errors)
+        print(f"{SCRIPT}: refusing to write catalogs from a {DS_FILE} with errors; run `about-data check`",
+              file=sys.stderr)
+        return 1
+    doc = parsed["doc"]
+    rc = 0
+    dcat_out = a.dcat or (a.file.parent / "data.json")
+    rc = max(rc, _write_or_check(dcat_out, _ds_dump(build_dcat(doc)), into=False, start="", end="", check=a.check))
+    croissant = build_croissant(doc)
+    cr_out = a.croissant or (a.file.parent / "croissant.json")
+    if croissant is not None:
+        rc = max(rc, _write_or_check(cr_out, _ds_dump(croissant), into=False, start="", end="", check=a.check))
+    elif cr_out.is_file():
+        print(f"{SCRIPT}: {cr_out} exists but {DS_FILE} has no published_data; remove it", file=sys.stderr)
+        rc = max(rc, 1)
+    return rc
 
 
 def _load(path: Path, today: str | None) -> tuple[str, dict] | None:
@@ -1227,6 +2262,36 @@ def build_parser() -> argparse.ArgumentParser:
     n.add_argument("--into", type=Path, help=f"replace the text between {NOTICE_START} and {NOTICE_END} in this file")
     n.add_argument("--check", action="store_true", help="exit 1 if the file is stale; write nothing")
     n.set_defaults(func=cmd_notice)
+
+    ad = sub.add_parser("about-data", help=f"{DS_FILE}: check it, print it, or write data.json and croissant.json")
+    adsub = ad.add_subparsers(dest="about_cmd", required=True)
+
+    def ds_common(sp, full: bool):
+        sp.add_argument("file", type=Path, help=f"path to {DS_FILE}")
+        if not full:
+            return
+        sp.add_argument("--whats-changed", type=Path,
+                        help="WHATS-CHANGED.md, for the corrections check (default: next to the file, if present)")
+        sp.add_argument("--tools", help="comma-separated tool names: fail if any tool has no source, "
+                        "or a source lists a tool the server lacks")
+        sp.add_argument("--tools-file", type=Path, help="the same, from a file: a JSON list of names or of "
+                        "tool definitions with a name, or one name per line")
+        sp.add_argument("--release", action="store_true", help="release gate: also fail while contact_email "
+                        f"is the placeholder {DS_CONTACT_PLACEHOLDER}")
+
+    adc = adsub.add_parser("check", help=f"validate {DS_FILE} (exit 1 on any error)")
+    ds_common(adc, True)
+    adc.set_defaults(func=cmd_about_data_check)
+    adj = adsub.add_parser("json", help="print the canonical parse (the contract shared with the TS module)")
+    ds_common(adj, False)
+    adj.set_defaults(func=cmd_about_data_json)
+    adk = adsub.add_parser("catalog", help="write data.json (DCAT-US 3.0) and croissant.json (Croissant 1.1)")
+    ds_common(adk, True)
+    adk.add_argument("--dcat", type=Path, help="where to write data.json (default: next to the file)")
+    adk.add_argument("--croissant", type=Path, help="where to write croissant.json (default: next to the file; "
+                     "written only when the file has published_data)")
+    adk.add_argument("--check", action="store_true", help="exit 1 if either output is stale; write nothing")
+    adk.set_defaults(func=cmd_about_data_catalog)
     return p
 
 
