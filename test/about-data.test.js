@@ -52,8 +52,8 @@ test("BetaNYC's text is derived, not the official text: figures_official is fals
   assert.equal(s.official, true, "the code library is the publisher's own record");
   assert.equal(s.figures_official, false, "BetaNYC cleans the text, so it is not the official text");
   assert.deepEqual(s.changed_by_betanyc.steps, ["reshaped", "cleaned"]);
-  assert.match(r.content[0].text, /This data is BetaNYC's, derived from it, not an official American Legal Publishing record/);
-  assert.match(r.content[0].text, /Report an error in this data to BetaNYC/);
+  assert.match(r.content[0].text, /^BetaNYC modified this data: reshaped it and cleaned it\. This copy should not be considered the official record\. Official record: New York City Charter, bulk XML download \(American Legal Publishing\), https:\/\/files\.amlegal\.com\/pdffiles\/NewYorkCity\/Charter\/XML\.zip$/m);
+  assert.match(r.content[0].text, /Report an error in the data to BetaNYC/);
 });
 
 test("how current: each document's indexedAt from the versions.json being served", () => {
@@ -115,7 +115,7 @@ test("about_data ends with the one-line disclaimer, like the other shared tools"
 
 test("the server's instructions tell the AI app to call about_data and about_betanyc", () => {
   assert.match(SERVER_INSTRUCTIONS, /call about_data/);
-  assert.match(SERVER_INSTRUCTIONS, /figures_official/);
+  assert.match(SERVER_INSTRUCTIONS, /Never call data official when BetaNYC modified or produced it/);
   assert.match(SERVER_INSTRUCTIONS, /call about_betanyc/);
 });
 

@@ -191,11 +191,11 @@
             "pattern": "^(?=[\\s\\S]*[^ \\t\\u00a0\\ufeff])[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
           },
           "source_name": {
-            "description": "The source's name as its publisher gives it.",
+            "description": "The name of one dataset or document, as its publisher gives it: at most 160 characters, and no ';' (give each dataset its own source). The produced answer prints it as \"Built from: {source_name} ({publisher})\".",
             "type": "string",
             "minLength": 1,
-            "maxLength": 5000,
-            "pattern": "^(?=[\\s\\S]*[^ \\t\\u00a0\\ufeff])[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+            "maxLength": 160,
+            "pattern": "^(?=[\\s\\S]*[^ \\t\\u00a0\\ufeff])[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f-\\u009f\\u2028\\u2029;]*$"
           },
           "publisher": {
             "description": "Who publishes the source: the City or State agency for official data. BetaNYC's own output is derived from it; the publisher never changes to BetaNYC.",
@@ -203,10 +203,11 @@
             "additionalProperties": false,
             "properties": {
               "name": {
+                "description": "The publisher's full name, with no parentheses: \"Mayor's Office of Management and Budget\", not \"... (OMB)\". The answers print it in parentheses.",
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 5000,
-                "pattern": "^(?=[\\s\\S]*[^ \\t\\u00a0\\ufeff])[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f-\\u009f\\u2028\\u2029]*$"
+                "pattern": "^(?=[\\s\\S]*[^ \\t\\u00a0\\ufeff])[^\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f-\\u009f\\u2028\\u2029()]*$"
               },
               "url": {
                 "type": [
@@ -232,7 +233,7 @@
             }
           },
           "official": {
-            "description": "true when the data is an official record as its publisher released it; false for BetaNYC's curation (hand-checked facts no official source publishes in one place).",
+            "description": "true when the source is an official publisher's record; false when BetaNYC produced it (hand-checked facts no official source publishes in one place). When BetaNYC modified an official source in any way (any step in changes), its copy is not the official record.",
             "type": "boolean"
           },
           "how_gathered": {
@@ -252,7 +253,7 @@
                 "type": "boolean"
               },
               "steps": {
-                "description": "What BetaNYC did: cleaned, filtered (left records out), reshaped (format or structure, values unchanged), fields-removed (whole fields left out, such as ZIP codes; every value kept is as published), address-matched, merged, counted, curated (defined in the standard). Only reshaped and fields-removed keep \"Official record: yes\"; every other step makes the figures BetaNYC's.",
+                "description": "What BetaNYC did: cleaned, filtered (left records out), reshaped (format or structure, values unchanged), fields-removed (whole fields left out, such as ZIP codes; every value kept is as published), address-matched, merged, counted, curated (defined in the standard). Any step at all means BetaNYC modified the data, so its copy is not the official record (from 1.4.0; before, reshaped and fields-removed kept \"Official record: yes\").",
                 "type": "array",
                 "items": {
                   "type": "string",
