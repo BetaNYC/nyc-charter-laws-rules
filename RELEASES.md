@@ -51,6 +51,15 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
+## v0.6.0 — Unreleased
+
+- **New tool: `about_data`**, the third tool BetaNYC adds to each of its MCP servers ([betanyc-ai-workspace#1655](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1655), epic [#1652](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1652)). It answers where the law text comes from, from the new [DATA-SOURCES.json](DATA-SOURCES.json): one source per document (Charter, Administrative Code, Rules), each from American Legal Publishing's bulk XML. It says the source is the code library the NYC Law Department contracted for, and that BetaNYC modified it (the build reshapes and cleans the text), so this copy should not be considered the official record; it names the official record and links to it (`figures_official: false`). It also gives when this server's index was built for each document (the `indexedAt` times in `versions.json`, read at run time), the publisher's error address, the WHATS-CHANGED.md corrections that touched the text, and BetaNYC's contact address, lab@beta.nyc. Optional `topic`: `charter`, `admin-code`, `rules`, or a tool name. Read-only, no network, text plus `structuredContent` matching its `outputSchema`, ending with the one-line disclaimer like the other two shared tools.
+- **`data.json`**, a DCAT-US 3.0 catalog generated from DATA-SOURCES.json by `scripts/whats_changed.py about-data catalog` (never edited by hand). Both files ship in the package.
+- **Server instructions** now add the shared module's lines after the full disclaimer: call `about_data` for where the data comes from, `about_betanyc` for who built the server.
+- **Shared module 1.4.0** ([betanyc-ai-workspace#1672](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1672)). `src/betanyc-tools.ts` and `scripts/whats_changed.py` (both 1.4.0) are copies of the workspace's canonical files, as are the validator kit (`scripts/tests/catalog_validate.py`, `scripts/mcp_shared/`); never edit them here.
+- **Checks.** CI gains an About data job: `about-data check` with the built server's tool list, `about-data catalog --check`, and the JSON Schema and DCAT-US 3.0 validators at pinned versions. `release.yml` runs `about-data check --release` before `npm publish`. A new test fails if any tool has no source.
+- Minor rather than patch: one new tool. No tool, parameter or response field was renamed or removed, and the law text tools answer as before.
+
 ## v0.5.1 — 2026-11-14
 
 - Automatic data release. Bundled law text refreshed: Charter LL 2026/163 -> LL 2026/164; Admin Code LL 2026/163 -> LL 2026/164; Rules eff. November 8, 2026 -> eff. November 14, 2026. No code changes beyond what was already merged to `main`.

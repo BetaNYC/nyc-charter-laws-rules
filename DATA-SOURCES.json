@@ -1,0 +1,220 @@
+{
+  "format": "betanyc-data-sources/1",
+  "server": {
+    "name": "nyc-charter-laws-rules",
+    "title": "NYC Charter, Administrative Code and Rules MCP server",
+    "description": "An MCP server for searching and reading the New York City Charter, the Administrative Code and the Rules of the City of New York. It answers from an index BetaNYC builds from American Legal Publishing's bulk XML downloads, which ships with the package. It is for research only, not legal advice, and not the official text: check the code library before relying on any section.",
+    "kind": "mcp",
+    "repository": "https://github.com/BetaNYC/nyc-charter-laws-rules",
+    "documentation_url": "https://github.com/BetaNYC/nyc-charter-laws-rules#readme",
+    "package_url": "https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules",
+    "license": {
+      "name": "MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    },
+    "contact_email": "lab@beta.nyc",
+    "keywords": [
+      "nyc",
+      "nyc charter",
+      "administrative code",
+      "rules of the city of new york",
+      "municipal law",
+      "open government"
+    ]
+  },
+  "sources": [
+    {
+      "id": "charter",
+      "title": "New York City Charter",
+      "what": "The text of the New York City Charter, one record per section or chapter heading, with its citation and heading.",
+      "source_name": "New York City Charter, bulk XML download",
+      "publisher": {
+        "name": "American Legal Publishing",
+        "url": "https://codelibrary.amlegal.com/"
+      },
+      "source_url": "https://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip",
+      "official": true,
+      "how_gathered": "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
+      "changes": {
+        "changed": true,
+        "steps": [
+          "reshaped",
+          "cleaned"
+        ],
+        "detail": "The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
+      },
+      "verify_at": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1",
+      "freshness": {
+        "kind": "hook",
+        "key": "charter_indexed"
+      },
+      "update_frequency": "unknown",
+      "coverage": {
+        "start": null,
+        "end": null,
+        "geography": "New York City",
+        "known_gaps": [
+          "Only the current text: no earlier versions of a section.",
+          "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+        ]
+      },
+      "terms": {
+        "license_name": "None stated by the publisher",
+        "terms_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "credit_line": "Source: New York City Charter, American Legal Publishing code library for the City of New York."
+      },
+      "report_errors": {
+        "upstream_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "upstream_email": "NYC.editor@amlegal.com"
+      },
+      "tools": [
+        "search",
+        "get_section",
+        "list_titles",
+        "get_title",
+        "get_version"
+      ],
+      "caveats": [
+        "Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions.",
+        "How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download.",
+        "The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page",
+        "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
+      ],
+      "corrections": [
+        "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
+        "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
+        "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"
+      ]
+    },
+    {
+      "id": "admin-code",
+      "title": "New York City Administrative Code",
+      "what": "The text of the New York City Administrative Code, one record per section or title heading, with its citation and heading.",
+      "source_name": "New York City Administrative Code, bulk XML download",
+      "publisher": {
+        "name": "American Legal Publishing",
+        "url": "https://codelibrary.amlegal.com/"
+      },
+      "source_url": "https://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip",
+      "official": true,
+      "how_gathered": "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
+      "changes": {
+        "changed": true,
+        "steps": [
+          "reshaped",
+          "cleaned"
+        ],
+        "detail": "The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
+      },
+      "verify_at": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-1",
+      "freshness": {
+        "kind": "hook",
+        "key": "admin_code_indexed"
+      },
+      "update_frequency": "unknown",
+      "coverage": {
+        "start": null,
+        "end": null,
+        "geography": "New York City",
+        "known_gaps": [
+          "Only the current text: no earlier versions of a section.",
+          "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+        ]
+      },
+      "terms": {
+        "license_name": "None stated by the publisher",
+        "terms_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "credit_line": "Source: New York City Administrative Code, American Legal Publishing code library for the City of New York."
+      },
+      "report_errors": {
+        "upstream_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "upstream_email": "NYC.editor@amlegal.com"
+      },
+      "tools": [
+        "search",
+        "get_section",
+        "list_titles",
+        "get_title",
+        "get_version"
+      ],
+      "caveats": [
+        "Not legal advice. American Legal Publishing says its codes may not yet reflect the most current legislation, and may have temporary errors or omissions.",
+        "How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download.",
+        "The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page",
+        "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
+      ],
+      "corrections": [
+        "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
+        "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
+        "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"
+      ]
+    },
+    {
+      "id": "rules",
+      "title": "Rules of the City of New York",
+      "what": "The text of the Rules of the City of New York, the rules City agencies adopt, one record per section or chapter heading, with its citation and heading.",
+      "source_name": "Rules of the City of New York, bulk XML download",
+      "publisher": {
+        "name": "American Legal Publishing",
+        "url": "https://codelibrary.amlegal.com/"
+      },
+      "source_url": "https://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip",
+      "official": true,
+      "how_gathered": "BetaNYC downloads the bulk XML file from American Legal Publishing's New York City code library, the site the NYC Law Department contracted for the Charter, Administrative Code and Rules, and builds an index from it. A scheduled job refreshes the index daily and publishes a new release when the text changed. The index ships with the npm package, so this server answers without going online.",
+      "changes": {
+        "changed": true,
+        "steps": [
+          "reshaped",
+          "cleaned"
+        ],
+        "detail": "The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
+      },
+      "verify_at": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCrules/0-0-0-1",
+      "freshness": {
+        "kind": "hook",
+        "key": "rules_indexed"
+      },
+      "update_frequency": "unknown",
+      "coverage": {
+        "start": null,
+        "end": null,
+        "geography": "New York City",
+        "known_gaps": [
+          "Only the current text: no earlier versions of a rule.",
+          "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+        ]
+      },
+      "terms": {
+        "license_name": "None stated by the publisher",
+        "terms_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "credit_line": "Source: Rules of the City of New York, American Legal Publishing code library for the City of New York."
+      },
+      "report_errors": {
+        "upstream_url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/overview",
+        "upstream_email": "NYC.editor@amlegal.com"
+      },
+      "tools": [
+        "search",
+        "get_section",
+        "list_titles",
+        "get_title",
+        "get_version"
+      ],
+      "caveats": [
+        "Not legal advice. American Legal Publishing says its codes may not yet reflect the most current rules adopted by the City, and may have temporary errors or omissions.",
+        "For the latest rules information, see the City's rules site, https://rules.cityofnewyork.us.",
+        "How current the text is: get_version gives the publisher's own 'current through' line. The date about_data reports is when BetaNYC built this server's index from the download.",
+        "The NYC Law Department says it contracted with American Legal Publishing Corporation for this site: https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page",
+        "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
+      ],
+      "corrections": [
+        "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
+        "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
+        "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"
+      ]
+    }
+  ]
+}

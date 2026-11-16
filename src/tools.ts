@@ -16,18 +16,35 @@ import { createBetanycTools } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
- * whats_changed and about_betanyc, the two tools BetaNYC is adding to each of its MCP servers
- * (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7). betanyc-tools.ts is
- * a copy of the workspace's canonical file: never edit it here. WHATS-CHANGED.md ships in
- * the npm package (package.json `files`), one level above dist/. This repo has no website,
- * so links to an entry go to the file on GitHub.
+ * whats_changed, about_betanyc and about_data, the three tools BetaNYC adds to each of its MCP
+ * servers (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7 and
+ * about-data-standard.md). betanyc-tools.ts is a copy of the workspace's canonical file: never
+ * edit it here. WHATS-CHANGED.md and DATA-SOURCES.json ship in the npm package (package.json
+ * `files`), one level above dist/. This repo has no website, so links go to GitHub.
+ *
+ * How current each source is comes from the index this server is actually serving: the
+ * `indexedAt` time build-index.js writes into versions.json for each document (hooks below).
+ * A missing or unreadable index makes the hook throw, which about_data reports as unavailable.
+ * `dataSourcesText` is for tests.
  */
-const betanyc = createBetanycTools({
-  serverName: "nyc-charter-laws-rules",
-  version: PACKAGE_VERSION,
-  repoUrl: "https://github.com/BetaNYC/nyc-charter-laws-rules",
-  whatsChangedPath: new URL("../WHATS-CHANGED.md", import.meta.url),
-});
+export function makeBetanycTools(opts: { dataSourcesText?: string } = {}) {
+  return createBetanycTools({
+    serverName: "nyc-charter-laws-rules",
+    version: PACKAGE_VERSION,
+    repoUrl: "https://github.com/BetaNYC/nyc-charter-laws-rules",
+    whatsChangedPath: new URL("../WHATS-CHANGED.md", import.meta.url),
+    dataSourcesPath: new URL("../DATA-SOURCES.json", import.meta.url),
+    ...(opts.dataSourcesText !== undefined ? { dataSourcesText: opts.dataSourcesText } : {}),
+    freshness: {
+      charter_indexed: () => getVersions().charter?.indexedAt ?? null,
+      admin_code_indexed: () => getVersions().admin_code?.indexedAt ?? null,
+      rules_indexed: () => getVersions().rules?.indexedAt ?? null,
+    },
+  });
+}
+
+const betanyc = makeBetanycTools();
+
 
 const CAVEAT =
   "For informational purposes only. Not legal advice. Verify against official sources at codelibrary.amlegal.com before relying on any result.";
@@ -39,6 +56,11 @@ export const FOOTER = `
 **Official disclaimer from American Legal Publishing:** The Codes and other documents that appear on this site may not yet reflect the most current legislation or rules adopted by the City. In addition, certain textual errors and omissions may temporarily exist, resulting from problems in the source database provided to American Legal and from which this website was created. Although these errors and omissions are being corrected, any user discovering any such error is invited to contact the publisher at NYC.editor@amlegal.com or 800-445-5588 and/or the NYC Law Department at NYCCodeRulesCharter@law.nyc.gov.
 
 Built by BetaNYC (https://beta.nyc). Feedback and improvements welcome — file a GitHub issue at https://github.com/BetaNYC/nyc-charter-laws-rules.`.trim();
+
+/** The server's MCP instructions, sent once per connection (index.ts): the full disclaimer
+ * (#25), then the shared module's instructions (call about_data for where the data comes from
+ * and how current it is, about_betanyc for who built the server, whats_changed for fixes). */
+export const SERVER_INSTRUCTIONS = `${FOOTER}\n\n${betanyc.instructions}`;
 
 // One line that rides every response once the full footer has been sent
 // (issue #25). It must keep the words "legal advice": the regression test
@@ -238,7 +260,7 @@ export const TOOLS = [
     description: `Return the currency date for each document — how current the Charter, Administrative Code, and Rules are. Each corpus updates on its own schedule. Always call this tool before answering legal questions so responses are grounded in the correct version of the law. ${CAVEAT}`,
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
-  // What changed in this server, and who built it (BetaNYC standard tools).
+  // What changed in this server, who built it, and where its data comes from (BetaNYC standard tools).
   ...betanyc.tools,
 ];
 

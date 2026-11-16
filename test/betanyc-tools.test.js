@@ -1,6 +1,6 @@
-// whats_changed and about_betanyc, the two tools BetaNYC is adding to each of its MCP servers
+// whats_changed and about_betanyc, two of the three tools BetaNYC adds to each of its MCP servers
 // (betanyc-ai-workspace platform/system/whats-changed-standard.md § 7). They read this repo's
-// WHATS-CHANGED.md and never touch the network.
+// WHATS-CHANGED.md and never touch the network. The third, about_data, is in about-data.test.js.
 //
 // The daily refresh runs this suite before it commits new law text, and an automatic release
 // bumps package.json without a WHATS-CHANGED.md entry. So nothing here may depend on the law
@@ -30,15 +30,15 @@ const unreleased = (whatsChanged.match(/^## Unreleased: /gm) ?? []).length;
 
 const textOf = (r) => r.content.map((c) => c.text).join("\n");
 
-test("both shared tools are advertised, read-only, strict, with an output schema", () => {
-  for (const name of ["whats_changed", "about_betanyc"]) {
+test("all three shared tools are advertised, read-only, strict, with an output schema", () => {
+  for (const name of ["whats_changed", "about_betanyc", "about_data"]) {
     const t = TOOLS.find((x) => x.name === name);
     assert.ok(t, name);
     assert.equal(t.outputSchema.type, "object", name);
     assert.equal(t.annotations.readOnlyHint, true, name);
     assert.equal(t.inputSchema.additionalProperties, false, name);
   }
-  assert.equal(TOOLS.length, 7, "five law tools plus the two shared ones");
+  assert.equal(TOOLS.length, 8, "five law tools plus the three shared ones");
 });
 
 test("whats_changed answers from this repo's WHATS-CHANGED.md, with every entry valid", async () => {
@@ -147,7 +147,7 @@ test("over stdio, the SDK client accepts both answers against their output schem
   await client.connect(transport);
   try {
     const { tools } = await client.listTools();
-    assert.equal(tools.length, 7);
+    assert.equal(tools.length, 8);
     const wc = await client.callTool({ name: "whats_changed", arguments: { limit: 3 } });
     assert.equal(wc.structuredContent.returned, 3);
     const about = await client.callTool({ name: "about_betanyc", arguments: {} });

@@ -7,7 +7,8 @@
 //   full                         full FOOTER on every response (0.3.x behavior)
 // An unrecognized value falls back to full (more disclaimer, never less),
 // with a warning on stderr.
-// Whatever the mode, the server sends FOOTER as its `instructions`.
+// Whatever the mode, the server's `instructions` start with FOOTER (then the shared
+// module's about_data / about_betanyc instructions, SERVER_INSTRUCTIONS).
 //
 // "First response" is per server process, so the in-process tests reset that
 // state with resetFooterState(env); the stdio tests run the real server in a
@@ -30,6 +31,7 @@ import {
   FOOTER,
   COMPACT_FOOTER,
   FOOTER_ENV,
+  SERVER_INSTRUCTIONS,
 } from "../dist/tools.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -193,7 +195,8 @@ function mcpSession(envOverride) {
 describe("MCP server over stdio", { skip: !CORPUS_PRESENT && "committed index not present" }, () => {
   test("default: instructions carry the full footer; full first response, compact second; quiet stderr", async () => {
     const { init, first, second, stderr } = await mcpSession({});
-    assert.equal(init.result.instructions, FOOTER);
+    assert.equal(init.result.instructions, SERVER_INSTRUCTIONS);
+    assert.ok(init.result.instructions.startsWith(FOOTER));
     assert.ok(hasFull(first));
     assert.ok(hasCompact(second));
     assert.doesNotMatch(stderr, /NYC_CLR_FOOTER/);
@@ -201,7 +204,8 @@ describe("MCP server over stdio", { skip: !CORPUS_PRESENT && "committed index no
 
   test("full: instructions still carry the footer; both responses full", async () => {
     const { init, first, second } = await mcpSession({ [FOOTER_ENV]: "full" });
-    assert.equal(init.result.instructions, FOOTER);
+    assert.equal(init.result.instructions, SERVER_INSTRUCTIONS);
+    assert.ok(init.result.instructions.startsWith(FOOTER));
     assert.ok(hasFull(first));
     assert.ok(hasFull(second));
   });
