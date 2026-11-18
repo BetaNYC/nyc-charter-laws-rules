@@ -4,6 +4,7 @@
 // top-level `server.connect(new StdioServerTransport())` side effect.
 
 import { z } from "zod";
+import { toJsonSchemaCompat } from "@modelcontextprotocol/sdk/server/zod-json-schema-compat.js";
 import {
   searchWithFallback,
   getSection,
@@ -12,7 +13,7 @@ import {
   getVersions,
   type SearchMode,
 } from "./corpus.js";
-import { createBetanycTools } from "./betanyc-tools.js";
+import { createBetanycTools, type ObjectJsonSchema } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
@@ -180,85 +181,66 @@ export function searchNotice(
   return null;
 }
 
+// Each tool's parameters, written once (issue #22). parseArgs() validates calls against them
+// and inputSchema() turns them into the JSON Schema that tools/list advertises, so the two
+// cannot drift. Strict on purpose (issue #19): see parseArgs().
+const CORPUS = z.enum(["charter", "admin_code", "rules"]);
+const SHAPES = {
+  search: {
+    query: z.string().describe("Keywords or an exact phrase (short keyword queries work best)"),
+    corpus: z.enum(["charter", "admin_code", "rules", "all"]).optional().describe("Which document to search (default: all)"),
+    limit: z.number().int().min(1).max(50).optional().describe("Max results to return (default 10, max 50)"),
+  },
+  get_section: {
+    citation: z.string().describe("Section citation or heading"),
+    corpus: CORPUS.optional().describe("Which document to look in (default: all three)"),
+  },
+  list_titles: {
+    corpus: CORPUS.describe("Which document to list"),
+  },
+  get_title: {
+    corpus: CORPUS.describe("Which document"),
+    title: z.string().describe("Chapter or title identifier (e.g. 'Chapter 11')"),
+  },
+  get_version: {},
+} satisfies Record<string, z.ZodRawShape>;
+
+// The SDK's own zod-to-JSON-Schema step, with the options McpServer.registerTool uses, so the
+// advertised schema is what registerTool would send. It is always z.object(shape).strict(),
+// never the raw shape: registerTool's raw-shape form strips unknown keys (issue #22).
+export function inputSchema(shape: z.ZodRawShape): ObjectJsonSchema {
+  const { $schema: _drop, ...schema } = toJsonSchemaCompat(z.object(shape).strict(), {
+    strictUnions: true,
+    pipeStrategy: "input",
+  }) as ObjectJsonSchema;
+  return schema as ObjectJsonSchema;
+}
+
 export const TOOLS = [
   {
     name: "search",
     description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, those with every term first; the response's first line says when this happened and which terms were used. ${CAVEAT}`,
-    inputSchema: {
-      type: "object",
-      properties: {
-        query: { type: "string", description: "Keywords or an exact phrase (short keyword queries work best)" },
-        corpus: {
-          type: "string",
-          enum: ["charter", "admin_code", "rules", "all"],
-          description: "Which document to search (default: all)",
-        },
-        limit: {
-          type: "number",
-          description: "Max results to return (default 10, max 50)",
-        },
-      },
-      additionalProperties: false,
-      required: ["query"],
-    },
+    inputSchema: inputSchema(SHAPES.search),
   },
   {
     name: "get_section",
     description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. ${CAVEAT}`,
-    inputSchema: {
-      type: "object",
-      properties: {
-        citation: { type: "string", description: "Section citation or heading" },
-        corpus: {
-          type: "string",
-          enum: ["charter", "admin_code", "rules"],
-          description: "Which document to look in (default: all three)",
-        },
-      },
-      additionalProperties: false,
-      required: ["citation"],
-    },
+    inputSchema: inputSchema(SHAPES.get_section),
   },
   {
     name: "list_titles",
     description: `List the top-level chapters or titles of a document. ${CAVEAT}`,
-    inputSchema: {
-      type: "object",
-      properties: {
-        corpus: {
-          type: "string",
-          enum: ["charter", "admin_code", "rules"],
-          description: "Which document to list",
-        },
-      },
-      additionalProperties: false,
-      required: ["corpus"],
-    },
+    inputSchema: inputSchema(SHAPES.list_titles),
   },
   {
     name: "get_title",
     description: `Retrieve chapter/title records matching an identifier (whole-token match: 'Chapter 1' does not match 'Chapter 10'). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. ${CAVEAT}`,
-    inputSchema: {
-      type: "object",
-      properties: {
-        corpus: {
-          type: "string",
-          enum: ["charter", "admin_code", "rules"],
-          description: "Which document",
-        },
-        title: {
-          type: "string",
-          description: "Chapter or title identifier (e.g. 'Chapter 11')",
-        },
-      },
-      additionalProperties: false,
-      required: ["corpus", "title"],
-    },
+    inputSchema: inputSchema(SHAPES.get_title),
   },
   {
     name: "get_version",
     description: `Return the currency date for each document — how current the Charter, Administrative Code, and Rules are. Each corpus updates on its own schedule. Always call this tool before answering legal questions so responses are grounded in the correct version of the law. ${CAVEAT}`,
-    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+    inputSchema: inputSchema(SHAPES.get_version),
   },
   // What changed in this server, who built it, and where its data comes from (BetaNYC standard tools).
   ...betanyc.tools,
@@ -272,11 +254,7 @@ export async function callTool(name: string, args: unknown) {
   try {
     switch (name) {
       case "search": {
-        const { query, corpus, limit } = parseArgs("search", {
-          query: z.string(),
-          corpus: z.enum(["charter", "admin_code", "rules", "all"]).optional(),
-          limit: z.number().int().min(1).max(50).optional(),
-        }, args);
+        const { query, corpus, limit } = parseArgs("search", SHAPES.search, args);
         const { results, mode, terms, allTermResults } = searchWithFallback(
           query,
           corpus ?? "all",
@@ -297,10 +275,7 @@ export async function callTool(name: string, args: unknown) {
       }
 
       case "get_section": {
-        const { citation, corpus } = parseArgs("get_section", {
-          citation: z.string(),
-          corpus: z.enum(["charter", "admin_code", "rules"]).optional(),
-        }, args);
+        const { citation, corpus } = parseArgs("get_section", SHAPES.get_section, args);
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
           return { content: [{ type: "text", text: withFooter(`Section not found: "${citation}".`) }] };
@@ -326,9 +301,7 @@ export async function callTool(name: string, args: unknown) {
       }
 
       case "list_titles": {
-        const { corpus } = parseArgs("list_titles", {
-          corpus: z.enum(["charter", "admin_code", "rules"]),
-        }, args);
+        const { corpus } = parseArgs("list_titles", SHAPES.list_titles, args);
         const titles = listTitles(corpus);
         if (titles.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No titles found for ${corpus}.`) }] };
@@ -338,10 +311,7 @@ export async function callTool(name: string, args: unknown) {
       }
 
       case "get_title": {
-        const { corpus, title } = parseArgs("get_title", {
-          corpus: z.enum(["charter", "admin_code", "rules"]),
-          title: z.string(),
-        }, args);
+        const { corpus, title } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No sections found for "${title}" in ${corpus}.`) }] };
@@ -353,7 +323,7 @@ export async function callTool(name: string, args: unknown) {
       }
 
       case "get_version": {
-        parseArgs("get_version", {}, args);
+        parseArgs("get_version", SHAPES.get_version, args);
         const versions = getVersions();
         const fmt = (label: string, v?: { currentThrough: string; indexedAt: string; sectionCount: number }) =>
           `${label} ${v?.currentThrough ?? "unknown"} (${v?.sectionCount ?? 0} sections; indexed ${v?.indexedAt ?? "unknown"})`;
