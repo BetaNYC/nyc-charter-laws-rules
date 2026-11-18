@@ -53,7 +53,12 @@ test("does not retry a 404", async () => {
 });
 
 test("a timeout aborts the request", async () => {
-  const hang = (url, init) => new Promise((_, reject) => init.signal.addEventListener("abort", () => reject(init.signal.reason)));
+  // AbortSignal.timeout's timer does not keep Node running, so hold the event loop open
+  // with a timer of our own until the abort fires.
+  const hang = (url, init) => new Promise((_, reject) => {
+    const keepAlive = setTimeout(() => {}, 5000);
+    init.signal.addEventListener("abort", () => { clearTimeout(keepAlive); reject(init.signal.reason); });
+  });
   await assert.rejects(politeFetch("https://example.test/x.zip", { fetchImpl: hang, timeoutMs: 20 }), /TimeoutError|aborted|timed out/i);
 });
 
