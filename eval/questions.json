@@ -1,0 +1,73 @@
+{
+  "_readme": [
+    "Fixed question set, written 2026-11-18 before the first scoring run. Each question has a known right answer in the law text.",
+    "Each step calls one tool with the given args. Checks: `heading` (the answer's text contains this heading text, case-insensitive), `citation_in_top` (one of the first N result citations equals this), `citation_prefix_in_top` (one of the first N starts with this), `contains` (the text contains this), `first_line` (the first line matches this regular expression).",
+    "Invariants checked on every answer: not an error, a 'Source: ... (American Legal Publishing)' line, and the words 'legal advice'.",
+    "Runs offline against the index bundled with the package: `npm run eval`. Results go in eval/runs/."
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "q": "Which Charter section sets up the Independent Budget Office?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "§ 259", "corpus": "charter" }, "check": { "heading": "independent budget office" } }]
+    },
+    {
+      "id": "Q02",
+      "q": "Where is the City Administrative Procedure Act's rulemaking section in the Charter?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "1043", "corpus": "charter" }, "check": { "heading": "rulemaking" } }]
+    },
+    {
+      "id": "Q03",
+      "q": "What does the Charter say about the Uniform Land Use Review Procedure?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "§ 197-c", "corpus": "charter" }, "check": { "heading": "uniform land use review procedure" } }]
+    },
+    {
+      "id": "Q04",
+      "q": "Which Charter section covers civilian complaints against police officers?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "§ 440", "corpus": "charter" }, "check": { "heading": "public complaints against members of the police department" } }]
+    },
+    {
+      "id": "Q05",
+      "q": "Which Charter section sets up community boards?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "§ 2800", "corpus": "charter" }, "check": { "heading": "community boards" } }]
+    },
+    {
+      "id": "Q06",
+      "q": "Which Charter section creates the Office of Administrative Trials and Hearings?",
+      "steps": [{ "tool": "get_section", "args": { "citation": "§ 1048", "corpus": "charter" }, "check": { "heading": "office of administrative trials and hearings" } }]
+    },
+    {
+      "id": "Q07",
+      "q": "What are Chapter 1 and Chapter 2 of the Charter about?",
+      "steps": [
+        { "tool": "get_title", "args": { "corpus": "charter", "title": "Chapter 1" }, "check": { "contains": "Mayor" } },
+        { "tool": "get_title", "args": { "corpus": "charter", "title": "Chapter 2" }, "check": { "contains": "Council" } }
+      ]
+    },
+    {
+      "id": "Q08",
+      "q": "Where is NYC's Open Data Law in the Administrative Code?",
+      "steps": [{ "tool": "search", "args": { "query": "open data", "corpus": "admin_code" }, "check": { "citation_prefix_in_top": { "n": 5, "prefix": "§ 23-50" } } }]
+    },
+    {
+      "id": "Q09",
+      "q": "What is the penalty for a sidewalk shed left up too long?",
+      "steps": [{ "tool": "search", "args": { "query": "sidewalk shed", "corpus": "admin_code" }, "check": { "citation_in_top": { "n": 5, "citation": "§ 28-220.1" } } }]
+    },
+    {
+      "id": "Q10",
+      "q": "How long can a sidewalk shed stay up?",
+      "steps": [{ "tool": "search", "args": { "query": "How long can a sidewalk shed stay up?" }, "check": { "first_line": "^(No section|Only \\d+ sections? matched)", "citation_in_top": { "n": 10, "citation": "§ 28-220.1" } } }]
+    },
+    {
+      "id": "Q11",
+      "q": "Which Charter sections deal with the sinking fund?",
+      "steps": [{ "tool": "search", "args": { "query": "sinking fund", "corpus": "charter", "limit": 25 }, "check": { "citation_in_top": { "n": 25, "citation": "§ 292" } } }]
+    },
+    {
+      "id": "Q12",
+      "q": "How current is the law text this server has?",
+      "steps": [{ "tool": "get_version", "args": {}, "check": { "contains": "Current through Local Law" } }]
+    }
+  ]
+}
