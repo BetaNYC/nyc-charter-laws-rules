@@ -13,7 +13,7 @@ import {
   getVersions,
   type SearchMode,
 } from "./corpus.js";
-import { createBetanycTools, annotateTools, type ObjectJsonSchema } from "./betanyc-tools.js";
+import { createBetanycTools, annotateTools, toolError, type ObjectJsonSchema } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
@@ -146,8 +146,19 @@ function parseArgs<T extends z.ZodRawShape>(
   const bad = parsed.error.issues.flatMap((i) =>
     i.code === "unrecognized_keys" ? i.keys : []
   );
-  if (bad.length === 0) throw parsed.error;
   const accepted = Object.keys(shape);
+  if (bad.length === 0) {
+    // A plain sentence per problem, not zod's JSON (issue #46).
+    const problems = parsed.error.issues.map((i) => {
+      const key = i.path.join(".") || "arguments";
+      if (i.code === "invalid_type" && i.received === "undefined") return `'${key}' is required`;
+      return `'${key}': ${i.message}`;
+    });
+    throw new Error(
+      `${toolName} was called with bad parameters: ${problems.join("; ")}. ` +
+        `Accepted parameters: ${accepted.join(", ") || "none"}. Fix them and call again.`
+    );
+  }
   throw new Error(
     `${toolName} does not accept ${bad.map((k) => `'${k}'`).join(", ")}. ` +
       (accepted.length
@@ -255,6 +266,13 @@ export const TOOLS = annotateTools([
   ...betanyc.tools,
 ], LOCAL);
 
+// Every failure: isError, a plain sentence (stack-frame lines dropped by toolError), and the
+// disclaimer like any other answer (issue #46).
+function failed(message: string) {
+  const r = toolError(message);
+  return { ...r, content: [{ type: "text" as const, text: withFooter(r.content[0].text) }] };
+}
+
 export async function callTool(name: string, args: unknown) {
   if (betanyc.handles(name)) {
     const out = betanyc.call(name, args);
@@ -345,13 +363,9 @@ export async function callTool(name: string, args: unknown) {
       }
 
       default:
-        return {
-          content: [{ type: "text", text: withFooter(`Unknown tool: ${name}`) }],
-          isError: true,
-        };
+        return failed(`There is no tool named '${name}'. Available tools: ${TOOLS.map((t) => t.name).join(", ")}.`);
     }
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return { content: [{ type: "text", text: withFooter(`Error: ${message}`) }], isError: true };
+    return failed(err instanceof Error ? err.message : String(err));
   }
 }
