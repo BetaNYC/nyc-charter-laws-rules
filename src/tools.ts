@@ -13,7 +13,7 @@ import {
   getVersions,
   type SearchMode,
 } from "./corpus.js";
-import { createBetanycTools, type ObjectJsonSchema } from "./betanyc-tools.js";
+import { createBetanycTools, annotateTools, type ObjectJsonSchema } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
@@ -216,35 +216,44 @@ export function inputSchema(shape: z.ZodRawShape): ObjectJsonSchema {
   return schema as ObjectJsonSchema;
 }
 
-export const TOOLS = [
+// Every tool only reads. The five law-text tools answer from the bundled index, never a live
+// API, so openWorldHint is false; the shared tools bring their own annotations (issue #38).
+const LOCAL = { search: false, get_section: false, list_titles: false, get_title: false, get_version: false };
+
+export const TOOLS = annotateTools([
   {
     name: "search",
+    title: "Search the law text",
     description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, those with every term first; the response's first line says when this happened and which terms were used. ${CAVEAT}`,
     inputSchema: inputSchema(SHAPES.search),
   },
   {
     name: "get_section",
+    title: "Get a section",
     description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. ${CAVEAT}`,
     inputSchema: inputSchema(SHAPES.get_section),
   },
   {
     name: "list_titles",
+    title: "List chapters or titles",
     description: `List the top-level chapters or titles of a document. ${CAVEAT}`,
     inputSchema: inputSchema(SHAPES.list_titles),
   },
   {
     name: "get_title",
+    title: "Get a chapter or title",
     description: `Retrieve chapter/title records matching an identifier (whole-token match: 'Chapter 1' does not match 'Chapter 10'). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. ${CAVEAT}`,
     inputSchema: inputSchema(SHAPES.get_title),
   },
   {
     name: "get_version",
+    title: "How current the text is",
     description: `Return the currency date for each document — how current the Charter, Administrative Code, and Rules are. Each corpus updates on its own schedule. Always call this tool before answering legal questions so responses are grounded in the correct version of the law. ${CAVEAT}`,
     inputSchema: inputSchema(SHAPES.get_version),
   },
   // What changed in this server, who built it, and where its data comes from (BetaNYC standard tools).
   ...betanyc.tools,
-];
+], LOCAL);
 
 export async function callTool(name: string, args: unknown) {
   if (betanyc.handles(name)) {
