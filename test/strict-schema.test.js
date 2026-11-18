@@ -49,8 +49,9 @@ describe("schemas generated from zod (issue #22)", () => {
   const EXPECTED = {
     search: { props: ["query", "corpus", "limit"], required: ["query"], corpus: [...DOCS, "all"] },
     get_section: { props: ["citation", "corpus"], required: ["citation"], corpus: DOCS },
-    list_titles: { props: ["corpus"], required: ["corpus"], corpus: DOCS },
-    get_title: { props: ["corpus", "title"], required: ["corpus", "title"], corpus: DOCS },
+    // limit and offset added on purpose for paging (issue #42); both optional.
+    list_titles: { props: ["corpus", "limit", "offset"], required: ["corpus"], corpus: DOCS },
+    get_title: { props: ["corpus", "title", "limit", "offset"], required: ["corpus", "title"], corpus: DOCS },
     get_version: { props: [], required: [] },
   };
 

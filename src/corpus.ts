@@ -115,6 +115,12 @@ export function searchCorpus(
   corpus: Corpus | "all" = "all",
   limit = 10
 ): Section[] {
+  return rankPhrase(query, corpus).slice(0, limit);
+}
+
+// Every section matching the phrase, best first (searchCorpus without the cut), so a
+// response can say how many matched in all (issue #42).
+function rankPhrase(query: string, corpus: Corpus | "all"): Section[] {
   const corpora: Corpus[] =
     corpus === "all" ? ["charter", "admin_code", "rules"] : [corpus];
 
@@ -139,7 +145,7 @@ export function searchCorpus(
   }
 
   scored.sort((a, b) => b.score - a.score); // Array.sort is stable
-  return scored.slice(0, limit).map((r) => r.s);
+  return scored.map((r) => r.s);
 }
 
 // Words dropped from a query before term matching (issue #30): question words,
@@ -198,6 +204,8 @@ export interface SearchOutcome {
   terms: string[];
   // How many of `results` contain every term (all of them unless some-terms).
   allTermResults: number;
+  // How many sections matched in all, before the cut to `limit` (issue #42).
+  total: number;
 }
 
 // Quotes around the whole query mark it as a phrase; they are not part of it.
@@ -230,10 +238,11 @@ export function searchWithFallback(
   corpus: Corpus | "all" = "all",
   limit = 10
 ): SearchOutcome {
-  const phrase = searchCorpus(stripSurroundingQuotes(query), corpus, limit);
+  const phraseAll = rankPhrase(stripSurroundingQuotes(query), corpus);
+  const phrase = phraseAll.slice(0, limit);
   const terms = queryTerms(query);
   if (phrase.length > 0 || terms.length === 0) {
-    return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length };
+    return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length, total: phraseAll.length };
   }
 
   const corpora: Corpus[] =
@@ -264,6 +273,7 @@ export function searchWithFallback(
     mode: allTermResults === top.length ? "all-terms" : "some-terms",
     terms,
     allTermResults,
+    total: scored.length,
   };
 }
 

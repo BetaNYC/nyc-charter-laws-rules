@@ -3,6 +3,7 @@
 // Kept out of index.ts so tests can import TOOLS/callTool without index.ts's
 // top-level `server.connect(new StdioServerTransport())` side effect.
 
+import { readFileSync } from "fs";
 import { z } from "zod";
 import { toJsonSchemaCompat } from "@modelcontextprotocol/sdk/server/zod-json-schema-compat.js";
 import {
@@ -11,9 +12,10 @@ import {
   listTitles,
   getTitle,
   getVersions,
+  type Corpus,
   type SearchMode,
 } from "./corpus.js";
-import { createBetanycTools, annotateTools, toolError, type ObjectJsonSchema } from "./betanyc-tools.js";
+import { createBetanycTools, annotateTools, toolError, provenance, type ObjectJsonSchema } from "./betanyc-tools.js";
 import { PACKAGE_VERSION } from "./version.js";
 
 /**
@@ -192,6 +194,52 @@ export function searchNotice(
   return null;
 }
 
+// Where each document comes from, read from DATA-SOURCES.json (which ships with the package)
+// so the line in each answer says what about_data says (issues #40, #41).
+type DocSource = { id: string; source_name: string; publisher: { name: string }; verify_at: string };
+const SOURCES = Object.fromEntries(
+  (JSON.parse(readFileSync(new URL("../DATA-SOURCES.json", import.meta.url), "utf8")).sources as DocSource[])
+    .map((src) => [src.id.replace(/-/g, "_"), src])
+) as Record<Corpus, DocSource>;
+
+// One line per document an answer came from: the source, its publisher, the date this
+// server's index of it was built (indexedAt in versions.json), and a link to the official
+// code library, where a person can check the text.
+export function sourceLines(corpora: Iterable<Corpus>): string {
+  const versions = getVersions();
+  return [...new Set(corpora)]
+    .map((c) =>
+      provenance({
+        sourceName: SOURCES[c].source_name,
+        publisher: SOURCES[c].publisher.name,
+        sourceUrl: SOURCES[c].verify_at,
+        kind: "snapshot",
+        asOf: versions[c]?.indexedAt ?? null,
+      }).text
+    )
+    .join("\n");
+}
+
+// A body, then its source lines, then the disclaimer.
+function answer(text: string, corpora: Iterable<Corpus>) {
+  return { content: [{ type: "text" as const, text: withFooter(`${text}\n\n${sourceLines(corpora)}`) }] };
+}
+
+// Lists (issue #42): a page of `items` and a line saying which part of how many it is, and
+// how to get the rest. No line when everything fits on the first page.
+export const SNIPPET_CHARS = 400;
+export const MAX_CANDIDATES = 25;
+export function page<T>(items: T[], offset: number, limit: number): { shown: T[]; note: string | null } {
+  const shown = items.slice(offset, offset + limit);
+  if (offset === 0 && shown.length === items.length) return { shown, note: null };
+  if (shown.length === 0) {
+    return { shown, note: `Nothing at offset ${offset}: there are ${items.length} in all. Call again with a smaller offset.` };
+  }
+  const end = offset + shown.length;
+  const more = end < items.length ? ` Call again with offset ${end} for the next ones.` : "";
+  return { shown, note: `Showing ${offset + 1} to ${end} of ${items.length}.${more}` };
+}
+
 // Each tool's parameters, written once (issue #22). parseArgs() validates calls against them
 // and inputSchema() turns them into the JSON Schema that tools/list advertises, so the two
 // cannot drift. Strict on purpose (issue #19): see parseArgs().
@@ -208,10 +256,14 @@ const SHAPES = {
   },
   list_titles: {
     corpus: CORPUS.describe("Which document to list"),
+    limit: z.number().int().min(1).max(1000).optional().describe("Max titles to return (default 200, max 1000)"),
+    offset: z.number().int().min(0).optional().describe("How many to skip, to get the next page (default 0)"),
   },
   get_title: {
     corpus: CORPUS.describe("Which document"),
     title: z.string().describe("Chapter or title identifier (e.g. 'Chapter 11')"),
+    limit: z.number().int().min(1).max(1000).optional().describe("Max records to return (default 200, max 1000)"),
+    offset: z.number().int().min(0).optional().describe("How many to skip, to get the next page (default 0)"),
   },
   get_version: {},
 } satisfies Record<string, z.ZodRawShape>;
@@ -282,23 +334,36 @@ export async function callTool(name: string, args: unknown) {
     switch (name) {
       case "search": {
         const { query, corpus, limit } = parseArgs("search", SHAPES.search, args);
-        const { results, mode, terms, allTermResults } = searchWithFallback(
+        const max = limit ?? 10;
+        const { results, mode, terms, allTermResults, total } = searchWithFallback(
           query,
           corpus ?? "all",
-          limit ?? 10
+          max
         );
         if (results.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No results found for "${query}".`) }] };
         }
         const notice = searchNotice(mode, terms, allTermResults);
+        const count =
+          total > results.length
+            ? `Showing ${results.length} of ${total} matching sections, best first. To see others, ` +
+              (max < 50 ? "raise limit (max 50), " : "") +
+              "narrow the query, or search one corpus."
+            : null;
+        let cut = false;
         const body = results
-          .map(
-            (s) =>
-              `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}\n${s.text.slice(0, 400)}${s.text.length > 400 ? "…" : ""}`
-          )
+          .map((s) => {
+            const long = s.text.length > SNIPPET_CHARS;
+            cut ||= long;
+            return `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}\n${s.text.slice(0, SNIPPET_CHARS)}${long ? "…" : ""}`;
+          })
           .join("\n\n---\n\n");
-        const text = notice ? `${notice}\n\n${body}` : body;
-        return { content: [{ type: "text", text: withFooter(text) }] };
+        const cutNote = cut
+          ? `Snippets are cut at ${SNIPPET_CHARS} characters (marked …); get_section returns a section's full text.`
+          : null;
+        // After the results, so the first line stays the notice (issue #30) and results start on line 3.
+        const text = [notice, body, count, cutNote].filter(Boolean).join("\n\n");
+        return answer(text, results.map((s) => s.corpus));
       }
 
       case "get_section": {
@@ -308,45 +373,41 @@ export async function callTool(name: string, args: unknown) {
           return { content: [{ type: "text", text: withFooter(`Section not found: "${citation}".`) }] };
         }
         if (result.kind === "ambiguous") {
-          const list = result.candidates
+          const { shown, note } = page(result.candidates, 0, MAX_CANDIDATES);
+          const list = shown
             .map((s) => `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}`)
             .join("\n");
-          return {
-            content: [
-              {
-                type: "text",
-                text: withFooter(
-                  `Multiple sections match "${citation}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}`
-                ),
-              },
-            ],
-          };
+          const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.` : "";
+          return answer(
+            `Multiple sections match "${citation}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
+            shown.map((s) => s.corpus)
+          );
         }
         const section = result.section;
         const text = `[${section.corpus.toUpperCase()}] ${section.citation} (matched in corpus: ${section.corpus})\n${section.heading}\n\n${section.text}`;
-        return { content: [{ type: "text", text: withFooter(text) }] };
+        return answer(text, [section.corpus]);
       }
 
       case "list_titles": {
-        const { corpus } = parseArgs("list_titles", SHAPES.list_titles, args);
+        const { corpus, limit, offset } = parseArgs("list_titles", SHAPES.list_titles, args);
         const titles = listTitles(corpus);
         if (titles.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No titles found for ${corpus}.`) }] };
         }
-        const text = titles.map((t) => `${t.citation} — ${t.heading}`).join("\n");
-        return { content: [{ type: "text", text: withFooter(text) }] };
+        const { shown, note } = page(titles, offset ?? 0, limit ?? 200);
+        const text = [note, shown.map((t) => `${t.citation} — ${t.heading}`).join("\n")].filter(Boolean).join("\n\n");
+        return answer(text, [corpus]);
       }
 
       case "get_title": {
-        const { corpus, title } = parseArgs("get_title", SHAPES.get_title, args);
+        const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
           return { content: [{ type: "text", text: withFooter(`No sections found for "${title}" in ${corpus}.`) }] };
         }
-        const text = sections
-          .map((s) => `${s.citation} — ${s.heading}`)
-          .join("\n");
-        return { content: [{ type: "text", text: withFooter(text) }] };
+        const { shown, note } = page(sections, offset ?? 0, limit ?? 200);
+        const text = [note, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].filter(Boolean).join("\n\n");
+        return answer(text, [corpus]);
       }
 
       case "get_version": {
@@ -359,7 +420,7 @@ export async function callTool(name: string, args: unknown) {
           fmt("Administrative Code:  ", versions.admin_code),
           fmt("Rules of NYC:         ", versions.rules),
         ];
-        return { content: [{ type: "text", text: withFooter(lines.join("\n")) }] };
+        return answer(lines.join("\n"), ["charter", "admin_code", "rules"]);
       }
 
       default:

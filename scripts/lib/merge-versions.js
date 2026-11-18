@@ -18,12 +18,17 @@
 // Two corpus entries have the same *content* when the version string and the
 // section count match. (indexedAt is deliberately excluded — it is the field we
 // are stabilizing.)
+//
+// When both carry a `sha256` of the corpus JSON (issue #45), it must match too, so a change
+// to the text alone (same version line, same count) still moves indexedAt. A prior entry
+// without one (written before #45) is compared the old way.
 function sameContent(a, b) {
   return (
     a != null &&
     b != null &&
     a.currentThrough === b.currentThrough &&
-    a.sectionCount === b.sectionCount
+    a.sectionCount === b.sectionCount &&
+    (a.sha256 == null || b.sha256 == null || a.sha256 === b.sha256)
   );
 }
 
@@ -35,7 +40,7 @@ function sameContent(a, b) {
  *        Newly built versions (each with a just-stamped `indexedAt`).
  * @param {Record<string, object>|null} prior
  *        The previously committed versions.json contents, or null on first build.
- * @returns {Record<string, {currentThrough: string, indexedAt: string, sectionCount: number}>}
+ * @returns {Record<string, {currentThrough: string, indexedAt: string, sectionCount: number, sha256?: string}>}
  *        A merged object: unchanged corpora keep their prior `indexedAt`;
  *        changed (or new) corpora keep the fresh `indexedAt`.
  */
@@ -50,6 +55,7 @@ export function mergeVersions(fresh, prior) {
       currentThrough: freshEntry.currentThrough,
       indexedAt,
       sectionCount: freshEntry.sectionCount,
+      ...(freshEntry.sha256 ? { sha256: freshEntry.sha256 } : {}),
     };
   }
   return merged;

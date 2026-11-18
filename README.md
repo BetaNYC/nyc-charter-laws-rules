@@ -47,6 +47,14 @@ Exposes 8 tools over MCP:
 
 ## Tools reference
 
+Every law-text answer ends, before the disclaimer, with one line per document it came from: the source, its publisher, the date this server's index of it was built, and a link to the official code library. For example:
+
+```
+Source: New York City Charter, bulk XML download (American Legal Publishing). As of 2026-11-14T11:05:40.153Z (the date of the copy this server answers from). Link: https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1
+```
+
+Every list says how much of how many it shows when it does not show everything, and how to get the rest.
+
 Every tool only reads, and answers from the index bundled with the package, never a live API. Each says so in its MCP `annotations` (`readOnlyHint: true`, `openWorldHint: false`).
 
 ### `search`
@@ -59,13 +67,15 @@ Keyword search across the NYC Charter, Administrative Code, and Rules. It is key
    - every result contains every term: `No section contains the exact query; showing sections containing all of: building, owners, required, drinking, water, tanks.`
    - partial matches were added: `No section matched every term; showing sections matching some of: …`, or `Only 1 section matched every term (listed first); the rest match some of: long, sidewalk, shed, stay.`
 
+4. **How many.** When more sections matched than `limit`, a line after the results says `Showing 10 of 35 matching sections, best first.` and how to see others. Each snippet is cut at 400 characters, marked `…`, and a line says so; `get_section` returns the full text.
+
 There is no term weighting yet, so a long definitions section that contains every word can outrank the section you want. Ranked full-text search is a separate, later change.
 
 | Parameter | Type | Required | Default | Description |
 |---|---|---|---|---|
 | `query` | string | yes | — | Search term or phrase |
 | `corpus` | string | no | `all` | `charter`, `admin_code`, `rules`, or `all` |
-| `limit` | number | no | 10 | Max results (max 50) |
+| `limit` | integer | no | 10 | Max results (1 to 50) |
 
 ```
 search("open data")
@@ -78,7 +88,7 @@ search("How long can a sidewalk shed stay up?")   # term fallback; first line sa
 
 ### `get_section`
 
-Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned — re-run with the `corpus` parameter.
+Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned — re-run with the `corpus` parameter. The list shows at most 25 matches and says how many there are.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -95,11 +105,13 @@ get_section("Chapter 11", corpus="charter")
 
 ### `list_titles`
 
-List the top-level chapters or titles of a document.
+List the top-level chapters or titles of a document. The Rules have over 700, so the list comes in pages: the first line says `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `corpus` | string | yes | `charter`, `admin_code`, or `rules` |
+| `limit` | integer | no | Max titles to return (default 200, max 1000) |
+| `offset` | integer | no | How many to skip, for the next page (default 0) |
 
 ```
 list_titles("charter")
@@ -116,6 +128,8 @@ Retrieve chapter/title records matching an identifier. Matching is whole-token (
 |---|---|---|---|
 | `corpus` | string | yes | `charter`, `admin_code`, or `rules` |
 | `title` | string | yes | Chapter or title identifier (e.g. `Chapter 11`) |
+| `limit` | integer | no | Max records to return (default 200, max 1000) |
+| `offset` | integer | no | How many to skip, for the next page (default 0) |
 
 ```
 get_title("charter", "Chapter 11")
@@ -212,6 +226,8 @@ npm test
 | `test/tool-size.test.js` | The tools/list JSON plus the server instructions stay under a size budget (`toolListSize`), with a dated note for each raise (issue #44). |
 | `test/errors.test.js` | Every failure (bad parameter values, a missing parameter, an unknown parameter or tool) is `isError` with a plain sentence that names what to fix and lists the accepted parameters, with no zod JSON or stack frames, and keeps the disclaimer (issue #46). |
 | `test/fetch-retry.test.js` | `politeFetch` in `scripts/lib/fetch-retry.js`, the download behind `fetch-data`, against a fake fetch: User-Agent with the package version, a timeout, up to two retries on 429 and 5xx honoring Retry-After, none on a 404 (issue #39). |
+| `test/provenance-lists.test.js` | Every law-text answer has a source line per document (publisher, the `indexedAt` date from `versions.json`, a code-library link) before the disclaimer (issues #40, #41); search says how many matched and that snippets are cut; `list_titles` pages through all of the Rules with `offset`; the `get_section` match list stops at 25 and says how many there are (issue #42). Loose bounds only, against the committed index. |
+| `test/index-checksum.test.js` | Each bundled `data/index/json/<corpus>.json` matches the `sha256` that `build-index.js` recorded in `versions.json`, and `mergeVersions()` keeps it and moves `indexedAt` when only the text changed (issue #45). |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
