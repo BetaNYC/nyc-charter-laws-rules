@@ -177,3 +177,40 @@ test("extractCitation: sentence period does not truncate, decimal dot is kept", 
   assert.equal(extractCitation("§ 11-602. Definitions."), "§ 11-602");
   assert.equal(extractCitation("§ 11-602.1. Application."), "§ 11-602.1");
 });
+
+// Headings with no §, Section, Chapter or Title (the #49 review). They were cut at their first
+// period, so "L.L. 2016/002" became "L" on 1,883 Administrative Code records, "G.1.2" became
+// "G", "1.0" became "1" and "10-1104.1" became "10-1104".
+test("extractCitation: a label with a period inside keeps its whole label", () => {
+  const cases = [
+    ["L.L. 2016/002", "L.L. 2016/002"],
+    ["L.L. 2026/164", "L.L. 2026/164"],
+    ["L.L.  1998/003", "L.L. 1998/003"],
+    ["G.1 General.", "G.1"],
+    ["G.1.2 Certificate of fitness.", "G.1.2"],
+    ["G.3.1.2 Gas turbine rooms.", "G.3.1.2"],
+    ["E.3 Gas meter location.", "E.3"],
+    ["1.0 PURPOSE", "1.0"],
+    ["6.0 INTERPRETATIONS AND SUPPLEMENTAL INFORMATION", "6.0"],
+    ["10-1104.1 Civil cause of action for crimes of violence motivated by gender.", "10-1104.1"],
+  ];
+  for (const [heading, expected] of cases) {
+    assert.equal(extractCitation(heading), expected, heading);
+  }
+});
+
+test("extractCitation: other headings are cut as before", () => {
+  const cases = [
+    ["Article 1. Authority.", "Article 1"],
+    ["A. Glossary and Acronyms", "A"],
+    ["Appendix A: Lease/Commencement of Occupancy Notice for Indoor Allergen Hazards", "Appendix A"],
+    ["Statement of Basis and Purpose", "Statement of Basis and Purpose"],
+    ["D101 Purpose.", "D101 Purpose"],
+    ["Preamble", "Preamble"],
+    ["1985", "1985"],
+    ["SECTION 1 – GENERAL", "SECTION 1 – GENERAL"],
+  ];
+  for (const [heading, expected] of cases) {
+    assert.equal(extractCitation(heading), expected, heading);
+  }
+});

@@ -112,7 +112,27 @@ export function extractCitation(heading) {
   if (chapterMatch) return `Chapter ${chapterMatch[1]}`;
   const titleMatch = heading.match(/[Tt]itle\s+([\d\-]+)/);
   if (titleMatch) return `Title ${titleMatch[1]}`;
-  return heading.split(":")[0].split(".")[0].trim();
+  return fallbackLabel(heading);
+}
+
+// A Local Law appendix record: "L.L. 2016/002" (the 2016 law numbered 2).
+const LOCAL_LAW_LABEL = /^L\.\s?L\.\s*\d{4}\/\d+[A-Za-z]?/;
+// A label with dots inside it: a letter or a section number, then one or more ".digit" parts:
+// "G.1.2", "E.3", "1.0", "10-1104.1". "A. Glossary" is not one (no digit after the dot).
+const DOTTED_LABEL = /^(?:[A-Z]|\d[\dA-Za-z-]*)(?:\.\d[\dA-Za-z-]*)+/;
+
+// The citation for a heading with no §, Section, Chapter or Title: the text before a colon, cut
+// at the first period. A period inside a label is not cut there (#49 review): before, "L.L.
+// 2016/002" became "L" (1,883 Administrative Code records), "G.1.2 Certificate of fitness."
+// became "G", "1.0 PURPOSE" became "1", and "10-1104.1 Civil cause…" became "10-1104". A period
+// that ends a word still cuts: "Article 1. Authority." is "Article 1", "A. Glossary" is "A".
+export function fallbackLabel(heading) {
+  const head = heading.split(":")[0].trim();
+  const localLaw = head.match(LOCAL_LAW_LABEL);
+  if (localLaw) return localLaw[0].replace(/\s+/g, " ");
+  const dotted = head.match(DOTTED_LABEL);
+  if (dotted) return dotted[0];
+  return head.split(".")[0].trim();
 }
 
 // Find the DOCUMENT element in the ordered top-level array (which also holds
