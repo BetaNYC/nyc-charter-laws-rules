@@ -194,29 +194,92 @@ export function searchNotice(
   return null;
 }
 
+// The count line after a search's results (issue #42). For a phrase match, how many sections
+// matched in all. When search fell back to single terms (issue #30), a section with any one
+// term counts as a match, so a plain total would be mostly noise ("Showing 10 of 1526"): say
+// how many contain every term, and separately how many contain only some, and do not point
+// at a higher limit for those weak matches.
+export function searchCountLine(o: {
+  mode: SearchMode;
+  shown: number;
+  allTermResults: number;
+  total: number;
+  allTermTotal: number;
+  limit: number;
+}): string | null {
+  const raise = o.limit < 50 ? "raise limit (max 50), " : "";
+  if (o.mode === "phrase") {
+    return o.total > o.shown
+      ? `Showing ${o.shown} of ${o.total} matching sections, best first. To see others, ${raise}narrow the query, or search one corpus.`
+      : null;
+  }
+  const lines: string[] = [];
+  if (o.allTermTotal > o.allTermResults) {
+    lines.push(
+      `Showing ${o.allTermResults} of ${o.allTermTotal} sections that contain every term, best first. ` +
+        `To see others, ${raise}narrow the query, or search one corpus.`
+    );
+  }
+  const partial = o.total - o.allTermTotal;
+  const shownPartial = o.shown - o.allTermResults;
+  if (partial > 0) {
+    const n = partial === 1 ? "1 other section contains" : `${partial} other sections contain`;
+    lines.push(
+      shownPartial > 0
+        ? `${n} only some of the terms; the ${shownPartial} shown after the full matches are the closest of those. ` +
+            "Matches on only some terms are weak: fewer, more specific keywords find better ones."
+        : `${n} only some of the terms and ${partial === 1 ? "is" : "are"} not shown, as weak matches.`
+    );
+  }
+  return lines.length ? lines.join(" ") : null;
+}
+
 // Where each document comes from, read from DATA-SOURCES.json (which ships with the package)
 // so the line in each answer says what about_data says (issues #40, #41).
-type DocSource = { id: string; source_name: string; publisher: { name: string }; verify_at: string };
+type DocSource = { id: string; title: string; source_name: string; publisher: { name: string }; verify_at: string };
 const SOURCES = Object.fromEntries(
   (JSON.parse(readFileSync(new URL("../DATA-SOURCES.json", import.meta.url), "utf8")).sources as DocSource[])
     .map((src) => [src.id.replace(/-/g, "_"), src])
 ) as Record<Corpus, DocSource>;
 
-// One line per document an answer came from: the source, its publisher, the date this
-// server's index of it was built (indexedAt in versions.json), and a link to the official
-// code library, where a person can check the text.
+const ALL_CORPORA: Corpus[] = ["charter", "admin_code", "rules"];
+
+// "Searched: the New York City Charter and the Administrative Code." for a not-found answer,
+// so it says where the server looked, not only that it found nothing.
+function searchedLine(corpora: Corpus[]): string {
+  const names = corpora.map((c) => `the ${SOURCES[c].title}`);
+  const list = names.length < 3 ? names.join(" and ") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+  return `Searched: ${list}.`;
+}
+
+// The publisher's own "current through" line from the XML (versions.json currentThrough),
+// as the publisher wrote it, minus trailing punctuation. Null when the index has none.
+export function currentThrough(c: Corpus): string | null {
+  const raw = getVersions()[c]?.currentThrough;
+  if (typeof raw !== "string") return null;
+  const line = raw.replace(/\s+/g, " ").trim().replace(/[\s,.;:]+$/, "");
+  return line || null;
+}
+
+// Per document an answer came from: the source, its publisher, the date of this server's copy
+// (indexedAt in versions.json: when the copy was built, which moves only when the text
+// changed), and a link to the official code library, where a person can check the text. Then,
+// on its own labeled line, the publisher's "current through" line, when the index has one. The
+// index holds no date the source was last checked, so none is shown.
 export function sourceLines(corpora: Iterable<Corpus>): string {
   const versions = getVersions();
   return [...new Set(corpora)]
-    .map((c) =>
-      provenance({
+    .map((c) => {
+      const line = provenance({
         sourceName: SOURCES[c].source_name,
         publisher: SOURCES[c].publisher.name,
         sourceUrl: SOURCES[c].verify_at,
         kind: "snapshot",
         asOf: versions[c]?.indexedAt ?? null,
-      }).text
-    )
+      }).text;
+      const through = currentThrough(c);
+      return through ? `${line}\nThe publisher's own "current through" line for it: ${through}.` : line;
+    })
     .join("\n");
 }
 
@@ -335,21 +398,17 @@ export async function callTool(name: string, args: unknown) {
       case "search": {
         const { query, corpus, limit } = parseArgs("search", SHAPES.search, args);
         const max = limit ?? 10;
-        const { results, mode, terms, allTermResults, total } = searchWithFallback(
+        const { results, mode, terms, allTermResults, total, allTermTotal } = searchWithFallback(
           query,
           corpus ?? "all",
           max
         );
         if (results.length === 0) {
-          return { content: [{ type: "text", text: withFooter(`No results found for "${query}".`) }] };
+          const searched = corpus && corpus !== "all" ? [corpus] : ALL_CORPORA;
+          return answer(`No results found for "${query}". ${searchedLine(searched)}`, searched);
         }
         const notice = searchNotice(mode, terms, allTermResults);
-        const count =
-          total > results.length
-            ? `Showing ${results.length} of ${total} matching sections, best first. To see others, ` +
-              (max < 50 ? "raise limit (max 50), " : "") +
-              "narrow the query, or search one corpus."
-            : null;
+        const count = searchCountLine({ mode, shown: results.length, allTermResults, total, allTermTotal, limit: max });
         let cut = false;
         const body = results
           .map((s) => {
@@ -370,7 +429,8 @@ export async function callTool(name: string, args: unknown) {
         const { citation, corpus } = parseArgs("get_section", SHAPES.get_section, args);
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
-          return { content: [{ type: "text", text: withFooter(`Section not found: "${citation}".`) }] };
+          const searched = corpus ? [corpus] : ALL_CORPORA;
+          return answer(`Section not found: "${citation}". ${searchedLine(searched)}`, searched);
         }
         if (result.kind === "ambiguous") {
           const { shown, note } = page(result.candidates, 0, MAX_CANDIDATES);
@@ -392,7 +452,7 @@ export async function callTool(name: string, args: unknown) {
         const { corpus, limit, offset } = parseArgs("list_titles", SHAPES.list_titles, args);
         const titles = listTitles(corpus);
         if (titles.length === 0) {
-          return { content: [{ type: "text", text: withFooter(`No titles found for ${corpus}.`) }] };
+          return answer(`No titles found for ${corpus}. ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(titles, offset ?? 0, limit ?? 200);
         const text = [note, shown.map((t) => `${t.citation} — ${t.heading}`).join("\n")].filter(Boolean).join("\n\n");
@@ -403,7 +463,7 @@ export async function callTool(name: string, args: unknown) {
         const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
-          return { content: [{ type: "text", text: withFooter(`No sections found for "${title}" in ${corpus}.`) }] };
+          return answer(`No sections found for "${title}" in ${corpus}. ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(sections, offset ?? 0, limit ?? 200);
         const text = [note, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].filter(Boolean).join("\n\n");
@@ -420,7 +480,7 @@ export async function callTool(name: string, args: unknown) {
           fmt("Administrative Code:  ", versions.admin_code),
           fmt("Rules of NYC:         ", versions.rules),
         ];
-        return answer(lines.join("\n"), ["charter", "admin_code", "rules"]);
+        return answer(lines.join("\n"), ALL_CORPORA);
       }
 
       default:

@@ -8,8 +8,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { callTool, page } from "../dist/tools.js";
 import { getVersions } from "../dist/corpus.js";
 
@@ -30,6 +31,11 @@ function assertSourced(t, corpora) {
     assert.match(line, /\(American Legal Publishing\)\./);
     assert.ok(line.includes(`As of ${v[c].indexedAt} (the date of the copy`), line);
     assert.match(line, /Link: https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYC\w+\/0-0-0-1$/);
+    // The publisher's own "current through" line, labeled, right after the copy date.
+    const lines = t.split("\n");
+    const next = lines[lines.indexOf(line) + 1];
+    const through = v[c].currentThrough.trim().replace(/[\s,.;:]+$/, "");
+    assert.equal(next, `The publisher's own "current through" line for it: ${through}.`);
   }
   assert.match(t, /legal advice/i, "the disclaimer is still there");
   assert.ok(t.indexOf("Source: ") < t.lastIndexOf("legal advice"), "the source comes before the disclaimer");
@@ -41,6 +47,45 @@ test("every law-text answer names its source and the index date", { skip }, asyn
   assertSourced(await text("get_title", { corpus: "charter", title: "Chapter 1" }), ["charter"]);
   assertSourced(await text("get_version", {}), ["charter", "admin_code", "rules"]);
   assertSourced(await text("search", { query: "sinking fund", corpus: "charter" }), ["charter"]);
+});
+
+test("a not-found answer names where it looked, with the source and dates", { skip }, async () => {
+  const ALL = ["charter", "admin_code", "rules"];
+  const cases = [
+    ["search", { query: "zzqxvj nonexistentword" }, /^No results found for "zzqxvj nonexistentword"\. Searched: the New York City Charter, the New York City Administrative Code and the Rules of the City of New York\./, ALL],
+    ["search", { query: "zzqxvj nonexistentword", corpus: "rules" }, /^No results found for .*\. Searched: the Rules of the City of New York\./, ["rules"]],
+    ["get_section", { citation: "§ 99999-zz" }, /^Section not found: "§ 99999-zz"\. Searched: the New York City Charter, /, ALL],
+    ["get_section", { citation: "§ 99999-zz", corpus: "admin_code" }, /^Section not found: .*\. Searched: the New York City Administrative Code\./, ["admin_code"]],
+    ["get_title", { corpus: "charter", title: "Chapter 9999" }, /^No sections found for "Chapter 9999" in charter\. Searched: the New York City Charter\./, ["charter"]],
+  ];
+  for (const [tool, args, first, corpora] of cases) {
+    const t = await text(tool, args);
+    assert.match(t, first, tool);
+    assertSourced(t, corpora);
+    for (const c of ALL.filter((x) => !corpora.includes(x))) {
+      assert.ok(!t.includes(`/${LINK[c]}/`), `${tool}: no source line for ${c}, which was not searched`);
+    }
+  }
+});
+
+// list_titles never comes back empty on the real index, so this one runs on the synthetic
+// fixture (its headings start with "§", none with "Chapter" or "Title"), in a child process
+// because the index directory is fixed at startup.
+test("list_titles with nothing to list still names the source and dates (fixture index)", () => {
+  const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+  const toolsUrl = pathToFileURL(join(root, "dist", "tools.js")).href;
+  const code = `const t = await import(${JSON.stringify(toolsUrl)});
+    const r = await t.callTool("list_titles", { corpus: "rules" });
+    console.log(JSON.stringify(r));`;
+  const env = { ...process.env, NYC_LAWS_INDEX_DIR: join(root, "test", "fixtures", "search-index") };
+  const out = spawnSync(process.execPath, ["--input-type=module", "-e", code], { env, cwd: root, encoding: "utf8" });
+  assert.equal(out.status, 0, out.stderr);
+  const r = JSON.parse(out.stdout);
+  assert.notEqual(r.isError, true);
+  const t = r.content[0].text;
+  assert.match(t, /^No titles found for rules\. Searched: the Rules of the City of New York\.\n\nSource: Rules of the City of New York, bulk XML download \(American Legal Publishing\)\. As of 2026-01-01T00:00:00\.000Z \(the date of the copy/);
+  assert.match(t, /\nThe publisher's own "current through" line for it: Synthetic search fixture \(test\/search-fallback\.test\.js\), not law text\.\n/);
+  assert.match(t, /legal advice/i);
 });
 
 test("search says how many matched in all, and that snippets are cut", { skip }, async () => {

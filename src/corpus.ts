@@ -204,8 +204,13 @@ export interface SearchOutcome {
   terms: string[];
   // How many of `results` contain every term (all of them unless some-terms).
   allTermResults: number;
-  // How many sections matched in all, before the cut to `limit` (issue #42).
+  // How many sections matched in all, before the cut to `limit` (issue #42). In the term
+  // modes this counts every section with ANY one term, so it is not a count of good
+  // matches: use allTermTotal for that.
   total: number;
+  // How many sections contain every term, before the cut to `limit`. Equals `total` for a
+  // phrase match.
+  allTermTotal: number;
 }
 
 // Quotes around the whole query mark it as a phrase; they are not part of it.
@@ -242,7 +247,14 @@ export function searchWithFallback(
   const phrase = phraseAll.slice(0, limit);
   const terms = queryTerms(query);
   if (phrase.length > 0 || terms.length === 0) {
-    return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length, total: phraseAll.length };
+    return {
+      results: phrase,
+      mode: "phrase",
+      terms,
+      allTermResults: phrase.length,
+      total: phraseAll.length,
+      allTermTotal: phraseAll.length,
+    };
   }
 
   const corpora: Corpus[] =
@@ -265,6 +277,8 @@ export function searchWithFallback(
       if (matched > 0) scored.push({ s, matched, score });
     }
   }
+  // Most terms first, then the heading > citation > body weights. A section with every term
+  // always ranks above one with only some of them.
   scored.sort((a, b) => b.matched - a.matched || b.score - a.score); // stable
   const top = scored.slice(0, limit);
   const allTermResults = top.filter((r) => r.matched === terms.length).length;
@@ -274,6 +288,7 @@ export function searchWithFallback(
     terms,
     allTermResults,
     total: scored.length,
+    allTermTotal: scored.filter((r) => r.matched === terms.length).length,
   };
 }
 

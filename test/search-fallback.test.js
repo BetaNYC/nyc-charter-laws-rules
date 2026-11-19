@@ -32,7 +32,7 @@ import {
   queryTerms,
   stripSurroundingQuotes,
 } from "../dist/corpus.js";
-import { callTool } from "../dist/tools.js";
+import { callTool, searchCountLine } from "../dist/tools.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const FIXTURE = join(ROOT, "test", "fixtures", "search-index");
@@ -111,6 +111,7 @@ const FIXTURE_CASES = [
   ["quoted, no phrase match", "search", '"stay shed"', "all", 10],
   ["shed question tool", "tool", SHED_Q, "all", 10],
   ["tank question tool, limit 1", "tool", TANK_Q, "all", 1],
+  ["shed question tool, limit 2", "tool", SHED_Q, "all", 2],
   ["no term in common tool", "tool", "Which sidewalk tanks?", "all", 10],
   ["phrase tool", "tool", "sidewalk shed", "all", 10],
   ["quoted tool", "tool", '"open data"', "all", 10],
@@ -163,6 +164,21 @@ describe("searchWithFallback (fixture index)", () => {
       "admin_code § 9-002", // 2 terms
       "rules § 1-02", // 1 term
     ]);
+  });
+
+  test("allTermTotal counts sections with every term; total counts sections with any", () => {
+    const r = fx["shed question"];
+    assert.equal(r.total, 4);
+    assert.equal(r.allTermTotal, 1);
+    assert.equal(fx["tank question, limit 1"].allTermTotal, 1);
+    assert.equal(fx["tank question, limit 1"].total, 2);
+    assert.equal(fx["phrase"].allTermTotal, fx["phrase"].total);
+  });
+
+  test("a section with every term ranks above any section with only some", () => {
+    // § 1-01 is a rules section with a heading hit on three terms (score 300+); § 9-001 has
+    // all four. Most terms wins over heading weight.
+    assert.equal(fx["shed question"].results[0], "admin_code § 9-001");
   });
 
   test("a term matches at a word start only: 'established' and 'belong' are not hits", () => {
@@ -233,11 +249,49 @@ describe("search tool response (fixture index)", () => {
     assert.doesNotMatch(text, WIDENED);
   });
 
+  test("fallback count: every-term matches and some-term matches are counted apart", () => {
+    // Before the fix this said "Showing 2 of 4 matching sections ... raise limit": the 4
+    // counted every section with any one term.
+    const text = fx["shed question tool, limit 2"];
+    assert.match(text, /^3 other sections contain only some of the terms; the 1 shown after the full matches are the closest of those\./m);
+    assert.doesNotMatch(text, /matching sections|raise limit/);
+    const tank = fx["tank question tool, limit 1"];
+    assert.match(tank, /^1 other section contains only some of the terms and is not shown, as weak matches\.$/m);
+    assert.doesNotMatch(tank, /matching sections|raise limit/);
+  });
+
   test("a phrase match, quoted or not, carries no notice", () => {
     for (const label of ["phrase tool", "quoted tool"]) {
       assert.match(firstLine(fx[label]), RESULT_LINE, label);
       assert.doesNotMatch(fx[label], /No section|matched every term/, label);
     }
+  });
+});
+
+describe("searchCountLine", () => {
+  const base = { limit: 10 };
+  test("phrase: the plain total, with the limit hint", () => {
+    assert.equal(
+      searchCountLine({ ...base, mode: "phrase", shown: 10, allTermResults: 10, total: 30, allTermTotal: 30 }),
+      "Showing 10 of 30 matching sections, best first. To see others, raise limit (max 50), narrow the query, or search one corpus."
+    );
+    assert.equal(searchCountLine({ ...base, mode: "phrase", shown: 3, allTermResults: 3, total: 3, allTermTotal: 3 }), null);
+  });
+
+  test("terms: more every-term matches than shown get the limit hint; some-term ones never do", () => {
+    const line = searchCountLine({ ...base, mode: "all-terms", shown: 10, allTermResults: 10, total: 1526, allTermTotal: 40 });
+    assert.equal(
+      line,
+      "Showing 10 of 40 sections that contain every term, best first. To see others, raise limit (max 50), narrow the query, or search one corpus. " +
+        "1486 other sections contain only some of the terms and are not shown, as weak matches."
+    );
+    const shed = searchCountLine({ ...base, mode: "some-terms", shown: 10, allTermResults: 1, total: 1526, allTermTotal: 1 });
+    assert.doesNotMatch(shed, /raise limit|1526/);
+    assert.match(shed, /^1525 other sections contain only some of the terms; the 9 shown after the full matches/);
+  });
+
+  test("terms: nothing to add when everything matched every term and all are shown", () => {
+    assert.equal(searchCountLine({ ...base, mode: "all-terms", shown: 4, allTermResults: 4, total: 4, allTermTotal: 4 }), null);
   });
 });
 
@@ -266,6 +320,15 @@ describe("against the committed index", { skip: !CORPUS_PRESENT && "committed in
       assert.ok(line.includes(queryTerms(q).join(", ")), line);
       assert.match(text.split("\n")[2], RESULT_LINE, q);
     }
+  });
+
+  test("the shed question's count is not a total of single-word matches", async () => {
+    const r = searchWithFallback(SHED_Q);
+    assert.ok(r.allTermTotal <= r.total);
+    const text = textOf(await callTool("search", { query: SHED_Q }));
+    assert.doesNotMatch(text, new RegExp(`of ${r.total} matching sections`));
+    if (r.total > r.allTermTotal) assert.match(text, /other sections? contains? only some of the terms/);
+    if (r.allTermTotal <= r.allTermResults) assert.doesNotMatch(text, /raise limit/);
   });
 
   test("a query that matches as a phrase returns what searchCorpus returns", () => {
