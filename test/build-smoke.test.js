@@ -214,3 +214,27 @@ test("extractCitation: other headings are cut as before", () => {
     assert.equal(extractCitation(heading), expected, heading);
   }
 });
+
+// Live check, 2026-11-19: chapter and title labels lost their letters and matched anywhere in
+// the heading. "Chapter 18-A" became "Chapter 18-" (four Charter chapters shared it), "Chapter
+// 19.1" became "Chapter 19", "D305 Light and air (MDL 3, Title 1)." became "Title 1", and a Rules
+// chapter heading that names a section took the section's citation.
+test("extractCitation: a chapter or title keeps its whole number, and only at the start", () => {
+  const cases = [
+    ["Chapter 18-A: Civilian Complaint Review Board", "Chapter 18-A"],
+    ["Chapter 9-a: Community Opportunity", "Chapter 9-a"],
+    ["Chapter 19A: Expansion of the Program", "Chapter 19A"],
+    ["Chapter 19.1: Stormwater Management", "Chapter 19.1"],
+    ["Chapter K1: Modifications to ASME A17.1-2013", "Chapter K1"],
+    ["Chapter 6. Records and Reporting", "Chapter 6"],
+    ["Chapter 11: Independent Budget Office", "Chapter 11"],
+    ["Title 6: Contracts", "Title 6"],
+    ["Chapter 51: Affordable New York Housing Program (§ 421-a)", "Chapter 51"],
+    ["D305 Light and air (MDL 3, Title 1).", "D305 Light and air (MDL 3, Title 1)"],
+    ["Appendix A to Title 62: Criteria for the Location of City Facilities", "Appendix A to Title 62"],
+    ["Appendix to Chapter 10: Division of Labor Services", "Appendix to Chapter 10"],
+  ];
+  for (const [heading, expected] of cases) {
+    assert.equal(extractCitation(heading), expected, heading);
+  }
+});

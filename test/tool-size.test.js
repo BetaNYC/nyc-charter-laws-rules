@@ -11,6 +11,9 @@
 // were never moved out of get_section). Measured 16,711; budget unchanged.
 // Round 2 of the #49 review: shared module 1.5.2, and the search description now says how
 // the word fallback ranks. Measured 16,738; budget unchanged.
+// Live check, 2026-11-19: list_titles and get_title now say how chapters are labeled and that
+// get_title lists a chapter's sections (it returned only the chapter's heading). Measured 17,191;
+// budget unchanged.
 //
 // Requires: npm run build (dist/ must exist). Guaranteed by "pretest".
 

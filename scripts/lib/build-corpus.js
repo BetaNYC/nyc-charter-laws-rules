@@ -95,11 +95,23 @@ export function collectSections(node, corpus, sections) {
 // terminates the token instead of truncating decimal sections.
 const SECTION_NUMBER = String.raw`\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*`;
 
+// A chapter or title number: a section-number token, which may start with one letter ("K1").
+const CHAPTER_NUMBER = String.raw`[A-Za-z]?${SECTION_NUMBER}`;
+// "Chapter 18-A: ..." / "Title 6: ..." at the START of the heading. Checked before "§": a
+// chapter heading can name a section ("Chapter 51: ... Program (§ 421-a)"). Through 0.6.0 the
+// chapter and title patterns were [\d-]+ and matched anywhere in the heading, so "Chapter 18-A"
+// became "Chapter 18-", "Chapter 19.1" "Chapter 19", "D305 Light and air (MDL 3, Title 1)."
+// "Title 1", and 19 Rules chapters whose heading names a section took that section's citation.
+const LEADING_LABEL = new RegExp(`^(chapter|title)\\s+(${CHAPTER_NUMBER})`, "i");
+
 // Pull the citation out of a heading string.
 // e.g. "§ 11-602.1 Application of this subchapter." → "§ 11-602.1"
 // e.g. "Section 259. Independent budget office." → "§ 259"
 // e.g. "Chapter 11: Independent Budget Office" → "Chapter 11"
+// e.g. "Chapter 18-A: Civilian Complaint Review Board" → "Chapter 18-A"
 export function extractCitation(heading) {
+  const leading = heading.match(LEADING_LABEL);
+  if (leading) return `${leading[1].toLowerCase() === "title" ? "Title" : "Chapter"} ${leading[2]}`;
   // "§ 11-602.1 ..." / "§§ 27-2004 ..." (admin code & rules style)
   const symbolMatch = heading.match(new RegExp(`§§?\\s*(${SECTION_NUMBER})`));
   if (symbolMatch) return `§ ${symbolMatch[1]}`;
@@ -108,10 +120,6 @@ export function extractCitation(heading) {
     new RegExp(`[Ss]ection\\s+(${SECTION_NUMBER})`)
   );
   if (sectionMatch) return `§ ${sectionMatch[1]}`;
-  const chapterMatch = heading.match(/[Cc]hapter\s+([\d\-]+)/);
-  if (chapterMatch) return `Chapter ${chapterMatch[1]}`;
-  const titleMatch = heading.match(/[Tt]itle\s+([\d\-]+)/);
-  if (titleMatch) return `Title ${titleMatch[1]}`;
   return fallbackLabel(heading);
 }
 
