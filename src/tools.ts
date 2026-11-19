@@ -11,6 +11,7 @@ import {
   getSection,
   listTitles,
   getTitle,
+  namesTitle,
   getVersions,
   type Corpus,
   type SearchMode,
@@ -390,7 +391,7 @@ const SHAPES = {
   },
   get_title: {
     corpus: CORPUS.describe("Which document"),
-    title: z.string().describe("Chapter or title identifier (e.g. 'Chapter 11')"),
+    title: z.string().describe("A chapter ('Chapter 11'), or in the Administrative Code a title ('Title 6') or both ('Title 3, Chapter 1')"),
     limit: z.number().int().min(1).max(1000).optional().describe("Max records to return (default 200, max 1000)"),
     offset: z.number().int().min(0).optional().describe("How many to skip, to get the next page (default 0)"),
   },
@@ -428,13 +429,13 @@ export const TOOLS = annotateTools([
   {
     name: "list_titles",
     title: "List chapters or titles",
-    description: `List the top-level chapters or titles of a document.`,
+    description: `List a document's chapters in order, each with its heading. Administrative Code chapters show their section range, since several share a number: 'Chapter 1 (§ 3-101 to § 3-196)'. Rules chapters can share a number too (the index does not record Rules titles); their headings tell them apart.`,
     inputSchema: inputSchema(SHAPES.list_titles),
   },
   {
     name: "get_title",
     title: "Get a chapter or title",
-    description: `Retrieve chapter/title records matching an identifier (whole-token match: 'Chapter 1' does not match 'Chapter 10'). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents.`,
+    description: `List a chapter's sections in order: its heading, then each section's citation and heading (get_section gives the text). 'Chapter 70' gives every chapter with that number. Administrative Code only: 'Title 24' gives the chapters whose sections are numbered 24-… (a lettered title such as 16-A shares its parent's numbers), and 'Title 3, Chapter 1' narrows to those numbered 1. Numbers match whole: 'Chapter 1' is not 'Chapter 10' or 'Chapter 1-A'.`,
     inputSchema: inputSchema(SHAPES.get_title),
   },
   {
@@ -523,7 +524,8 @@ export async function callTool(name: string, args: unknown) {
           return answer(`No titles found for ${corpus}. ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(titles, offset ?? 0, limit ?? 200);
-        const text = [note, shown.map((t) => `${t.citation} — ${t.heading}`).join("\n")].filter(Boolean).join("\n\n");
+        const count = note ?? `${titles.length} chapters, in order.`;
+        const text = [count, shown.map((t) => `${t.citation} — ${t.heading}`).join("\n")].join("\n\n");
         return answer(text, [corpus]);
       }
 
@@ -531,10 +533,15 @@ export async function callTool(name: string, args: unknown) {
         const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
-          return answer(`No sections found for "${echo(title)}" in ${corpus}. ${searchedLine([corpus])}`, [corpus]);
+          const hint =
+            corpus !== "admin_code" && namesTitle(title)
+              ? ` Only the Administrative Code is listed by title here (the Charter has no titles, and the index does not record Rules titles); ask for a chapter, which list_titles lists.`
+              : "";
+          return answer(`No sections found for "${echo(title)}" in ${corpus}.${hint} ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(sections, offset ?? 0, limit ?? 200);
-        const text = [note, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].filter(Boolean).join("\n\n");
+        const count = note ?? `${sections.length} records: each chapter's heading, then its sections in order.`;
+        const text = [count, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].join("\n\n");
         return answer(text, [corpus]);
       }
 

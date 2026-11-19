@@ -426,21 +426,149 @@ export function getSection(
   return { kind: "none" };
 }
 
-export function listTitles(corpus: Corpus): { citation: string; heading: string }[] {
-  const sections = loadCorpus(corpus);
-  return sections
-    .filter((s) => s.heading.toLowerCase().startsWith("chapter") || s.heading.toLowerCase().startsWith("title"))
-    .map(({ citation, heading }) => ({ citation, heading }));
+// ---------------------------------------------------------------- chapters and titles
+//
+// The index is flat, but in document order within each source file: every file starts with a
+// chapter record, and the chapter's sections follow it up to the next chapter record
+// (scripts/lib/build-corpus.js collectSections pushes a record before its children). So a
+// chapter is its heading record plus the records after it, up to the next chapter heading.
+//
+// The chapter's number is read from its heading, not its citation. Through 0.6.0 the build cut
+// letters off chapter labels ("Chapter 18-A" became "Chapter 18-"); extractCitation is fixed,
+// but an index built before that fix still carries the cut labels until it is rebuilt.
+//
+// Files come in no particular order, so chapters are sorted: Charter and Rules chapters by
+// number ("Chapter 1" first, "Chapter 18" before "Chapter 18-A"), Administrative Code chapters
+// by their first section (§ 1-101 first). Administrative Code titles are not in the index, but
+// its sections are numbered by title (§ 24-163 is in Title 24), so "Title 24" finds the chapters
+// whose sections are numbered 24-…. A lettered title shares its parent's numbers (Title 16-A's
+// sections are § 16-501 on), so "Title 16" brings 16-A and 16-B too, and several Administrative
+// Code chapters share a number; each is labeled with its section range, which tells them apart.
+// The Charter has no titles, and the index does not record which title a Rules chapter is in.
+
+// Same token as CHAPTER_NUMBER in scripts/lib/build-corpus.js: "18-A", "19A", "19.1", "9-a", "K1".
+const LABEL_NUMBER = String.raw`[A-Za-z]?\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*`;
+const HEADING_LABEL = new RegExp(`^(chapter|title)\\s+(${LABEL_NUMBER})`, "i");
+const TITLE_QUERY = new RegExp(`^(?:title\\s+(${LABEL_NUMBER})\\s*,?\\s*)?(?:chapter\\s+(${LABEL_NUMBER}))?$`, "i");
+const ADMIN_CODE_TITLE = /^§ (\d+[A-Za-z]?)-/;
+
+export interface ChapterGroup {
+  kind: "Chapter" | "Title";
+  number: string;
+  /** Administrative Code only: the title number most of its § sections start with ("24"). */
+  title: string | null;
+  /** "Chapter 18-A"; in the Administrative Code, with its range: "Chapter 1 (§ 3-101 to § 3-120)". */
+  label: string;
+  /** The heading record (its citation replaced by the label), then its sections in order. */
+  records: Section[];
 }
 
-// Whole-token prefix match: "Chapter 1" matches "Chapter 1: ..." but not
-// "Chapter 10". Note: the index is flat (chapter/section records only) — deep
-// hierarchy (all sections *within* a title) is not indexed; Title-level
-// indexing is a tracked feature, not provided here.
+const groupCache: Partial<Record<Corpus, ChapterGroup[]>> = {};
+
+/** Natural order: "1" < "2" < "2-A" < "10"; numbers before letters. */
+export function compareLabels(a: string, b: string): number {
+  const parts = (s: string) => s.toLowerCase().split(/(\d+)/).filter(Boolean);
+  const x = parts(a);
+  const y = parts(b);
+  for (let i = 0; i < Math.min(x.length, y.length); i++) {
+    if (x[i] === y[i]) continue;
+    const xn = /^\d+$/.test(x[i]);
+    const yn = /^\d+$/.test(y[i]);
+    if (xn && yn) return Number(x[i]) - Number(y[i]) || x[i].length - y[i].length;
+    if (xn !== yn) return xn ? -1 : 1;
+    return x[i] < y[i] ? -1 : 1;
+  }
+  return x.length - y.length;
+}
+
+/** The title most of a chapter's § sections are numbered in, or null. */
+function adminCodeTitle(records: Section[]): string | null {
+  const counts = new Map<string, number>();
+  for (const s of records) {
+    const m = ADMIN_CODE_TITLE.exec(s.citation);
+    if (m) counts.set(m[1], (counts.get(m[1]) ?? 0) + 1);
+  }
+  let best: string | null = null;
+  for (const [t, n] of counts) if (best === null || n > counts.get(best)!) best = t;
+  return best;
+}
+
+export function chapterGroups(corpus: Corpus): ChapterGroup[] {
+  if (groupCache[corpus]) return groupCache[corpus]!;
+  const groups: ChapterGroup[] = [];
+  // Records before a file's first chapter heading belong to no chapter (none in the index
+  // today); search and get_section still find them.
+  for (const s of loadCorpus(corpus)) {
+    const m = HEADING_LABEL.exec(s.heading);
+    if (m) {
+      const kind = m[1].toLowerCase() === "title" ? "Title" : "Chapter";
+      groups.push({ kind, number: m[2], title: null, label: "", records: [s] });
+    } else if (groups.length > 0) {
+      groups[groups.length - 1].records.push(s);
+    }
+  }
+  const first = new Map<ChapterGroup, string | null>();
+  for (const g of groups) {
+    g.label = `${g.kind} ${g.number}`;
+    first.set(g, null);
+    if (corpus === "admin_code") {
+      g.title = adminCodeTitle(g.records);
+      const numbered = g.records.slice(1).filter((s) => s.citation.startsWith("§ "));
+      if (numbered.length > 0) {
+        const [a, b] = [numbered[0].citation, numbered[numbered.length - 1].citation];
+        first.set(g, a);
+        g.label += a === b ? ` (${a})` : ` (${a} to ${b})`;
+      }
+    }
+    g.records[0] = { ...g.records[0], citation: g.label };
+  }
+  // Administrative Code: by first section; chapters with no § section go last. Otherwise, and
+  // between those, by kind (Title first) then number. Array.prototype.sort is stable.
+  groups.sort((a, b) => {
+    const fa = first.get(a) ?? null;
+    const fb = first.get(b) ?? null;
+    if (fa !== null || fb !== null) {
+      if (fa === null) return 1;
+      if (fb === null) return -1;
+      return compareLabels(fa, fb);
+    }
+    if (a.kind !== b.kind) return a.kind === "Title" ? -1 : 1;
+    return compareLabels(a.number, b.number);
+  });
+  groupCache[corpus] = groups;
+  return groups;
+}
+
+export function listTitles(corpus: Corpus): { citation: string; heading: string }[] {
+  return chapterGroups(corpus).map((g) => ({ citation: g.label, heading: g.records[0].heading }));
+}
+
+/** True for "Title 6" or "Title 3, Chapter 1": a query that names a title. */
+export function namesTitle(query: string): boolean {
+  return Boolean(TITLE_QUERY.exec(query.trim().replace(/\s+/g, " "))?.[1]);
+}
+
+// "Chapter 70": that chapter's heading, then every record in it. "Title 24" (Administrative
+// Code): every chapter whose sections are numbered 24-…. "Title 3, Chapter 1": only the
+// chapters numbered 1 among those.
+// Numbers match whole ("Chapter 1" is not "Chapter 10" or "Chapter 1-A"), in any case. Anything
+// else ("§ 259", "Preamble") falls back to records whose citation or heading starts with it.
 export function getTitle(corpus: Corpus, title: string): Section[] {
-  const sections = loadCorpus(corpus);
-  const q = title.trim();
+  const q = title.trim().replace(/\s+/g, " ");
   if (!q) return [];
+  const m = TITLE_QUERY.exec(q);
+  if (m && (m[1] || m[2])) {
+    const [, t, c] = m;
+    const same = (a: string | null, b: string) => a !== null && a.toLowerCase() === b.toLowerCase();
+    return chapterGroups(corpus)
+      .filter((g) =>
+        c
+          ? g.kind === "Chapter" && same(g.number, c) && (!t || same(g.title, t))
+          : (g.kind === "Title" && same(g.number, t)) || same(g.title, t),
+      )
+      .flatMap((g) => g.records);
+  }
+  const sections = loadCorpus(corpus);
   // Match at the start of the citation or heading, requiring a token
   // boundary after the query (so "Chapter 1" ≠ "Chapter 10").
   const re = new RegExp(`^${escapeRegExp(q)}(?![\\w.-])`, "i");
