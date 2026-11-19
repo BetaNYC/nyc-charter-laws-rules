@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 // Runs eval/questions.json against the built server (dist/), offline, and prints one line per
-// question. `--save` writes the results to eval/runs/YYYY-MM-DD.json (New York date).
-// Exit 1 if any question fails. Usage: npm run eval [-- --save]
+// question. `--save` writes the results to eval/runs/YYYY-MM-DD.json (New York date), or, when
+// that file exists, YYYY-MM-DD-2.json and so on: an earlier run is never overwritten.
+// `--save=NAME` writes eval/runs/YYYY-MM-DD-NAME.json (same rule). `--note=TEXT` stores TEXT as
+// the run's `note`, written before the results are seen when it says what the run is for.
+// Exit 1 if any question fails. Usage: npm run eval [-- --save[=NAME] [--note=TEXT]]
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { callTool, TOOLS } from "../dist/tools.js";
 import { getVersions } from "../dist/corpus.js";
 
@@ -49,11 +52,20 @@ for (const q of questions) {
 const passed = results.filter((r) => r.pass).length;
 console.log(`\n${passed} of ${results.length} passed`);
 
-if (process.argv.includes("--save")) {
+const arg = (name) => {
+  const a = process.argv.find((x) => x === `--${name}` || x.startsWith(`--${name}=`));
+  return a === undefined ? undefined : a.slice(name.length + 3);
+};
+const save = arg("save");
+if (save !== undefined) {
   const day = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+  const base = save ? `${day}-${save.replace(/[^\w.-]/g, "-")}` : day;
+  let name = `${base}.json`;
+  for (let i = 2; existsSync(new URL(`runs/${name}`, import.meta.url)); i++) name = `${base}-${i}.json`;
   const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
-  const out = { run_at: new Date().toISOString(), version: pkg.version, tools: TOOLS.length, index: getVersions(), passed, total: results.length, results };
-  writeFileSync(new URL(`runs/${day}.json`, import.meta.url), JSON.stringify(out, null, 2) + "\n");
-  console.log(`Saved eval/runs/${day}.json`);
+  const note = arg("note");
+  const out = { ...(note ? { note } : {}), run_at: new Date().toISOString(), version: pkg.version, tools: TOOLS.length, index: getVersions(), passed, total: results.length, results };
+  writeFileSync(new URL(`runs/${name}`, import.meta.url), JSON.stringify(out, null, 2) + "\n", { flag: "wx" });
+  console.log(`Saved eval/runs/${name}`);
 }
 process.exit(passed === results.length ? 0 : 1);
