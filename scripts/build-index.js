@@ -16,6 +16,7 @@
 
 import AdmZip from "adm-zip";
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from "fs";
+import { createHash } from "crypto";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import {
@@ -80,17 +81,17 @@ for (const corpus of CORPORA) {
 
   console.log(`  Indexed ${sections.length} sections from ${fileCount} files`);
 
+  // Write JSON index. Its sha256 goes in versions.json, so a shipped index file can be
+  // checked against the build that made it (issue #45, test/index-checksum.test.js).
+  const json = JSON.stringify(sections, null, 2);
+  writeFileSync(join(JSON_DIR, `${corpus.key}.json`), json);
+
   versions[corpus.key] = {
     currentThrough: version,
     indexedAt: new Date().toISOString(),
     sectionCount: sections.length,
+    sha256: createHash("sha256").update(json).digest("hex"),
   };
-
-  // Write JSON index.
-  writeFileSync(
-    join(JSON_DIR, `${corpus.key}.json`),
-    JSON.stringify(sections, null, 2)
-  );
   console.log(`  Saved data/index/json/${corpus.key}.json`);
 
   // Write Markdown index — one file per corpus, one section per heading.

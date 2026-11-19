@@ -51,7 +51,8 @@
     "update-changelog": "node scripts/update-changelog.js",
     "pretest": "npm run build",
     "test": "node --test test/*.test.js",
-    "test:diff": "node --test test/diff/differential.mjs"
+    "test:diff": "node --test test/diff/differential.mjs",
+    "eval": "npm run build && node eval/run.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

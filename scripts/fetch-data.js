@@ -6,6 +6,7 @@ import { createWriteStream, mkdirSync } from "fs";
 import { pipeline } from "stream/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { politeFetch } from "./lib/fetch-retry.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data", "raw");
@@ -27,13 +28,15 @@ const SOURCES = [
 
 mkdirSync(DATA_DIR, { recursive: true });
 
+// A failed download fails the run (issue #39): carrying on would build an index with a
+// document missing.
 for (const source of SOURCES) {
   console.log(`Downloading ${source.name}...`);
   const dest = join(DATA_DIR, `${source.name}.zip`);
-  const response = await fetch(source.url);
+  const response = await politeFetch(source.url);
   if (!response.ok) {
-    console.error(`Failed to fetch ${source.name}: ${response.status}`);
-    continue;
+    console.error(`Failed to fetch ${source.name}: HTTP ${response.status} from ${source.url}`);
+    process.exit(1);
   }
   await pipeline(response.body, createWriteStream(dest));
   console.log(`  Saved to ${dest}`);

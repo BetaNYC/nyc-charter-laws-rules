@@ -69,31 +69,43 @@ export interface Versions {
 const cache: Partial<Record<Corpus, Section[]>> = {};
 let versionsCache: Versions | null = null;
 
+const CORPUS_NAMES: Record<Corpus, string> = {
+  charter: "New York City Charter",
+  admin_code: "New York City Administrative Code",
+  rules: "Rules of the City of New York",
+};
+
+// A missing or unreadable index file. The message goes to the person asking, so it names the
+// document and what to do, never a path on the server: the path and the cause go to stderr,
+// where the operator sees them (stdout carries the protocol).
+function indexUnavailable(what: string, path: string, err: unknown): Error {
+  const cause = err instanceof Error ? err.message : String(err);
+  console.error(`nyc-charter-laws-rules: cannot read ${path}: ${cause}`);
+  return new Error(
+    `The index for ${what} is missing or unreadable on this server, so it cannot answer from it. ` +
+      `Whoever runs this server should reinstall the package, or rebuild the index with ` +
+      `"npm run build-index"; if ${INDEX_DIR_ENV} is set, check that it points at a complete index.`
+  );
+}
+
+function readIndexJson<T>(what: string, file: string): T {
+  const path = join(INDEX_DIR, file);
+  try {
+    return JSON.parse(readFileSync(path, "utf8")) as T;
+  } catch (err) {
+    throw indexUnavailable(what, path, err);
+  }
+}
+
 function loadCorpus(corpus: Corpus): Section[] {
   if (cache[corpus]) return cache[corpus]!;
-  const path = join(INDEX_DIR, `${corpus}.json`);
-  let raw: string;
-  try {
-    raw = readFileSync(path, "utf8");
-  } catch {
-    throw new Error(
-      `Index for "${corpus}" not found at ${path}. Run: npm run build-index`
-    );
-  }
-  cache[corpus] = JSON.parse(raw) as Section[];
+  cache[corpus] = readIndexJson<Section[]>(`the ${CORPUS_NAMES[corpus]}`, `${corpus}.json`);
   return cache[corpus]!;
 }
 
 function loadVersions(): Versions {
   if (versionsCache) return versionsCache;
-  const path = join(INDEX_DIR, "versions.json");
-  let raw: string;
-  try {
-    raw = readFileSync(path, "utf8");
-  } catch {
-    throw new Error("Version index not found. Run: npm run build-index");
-  }
-  versionsCache = JSON.parse(raw) as Versions;
+  versionsCache = readIndexJson<Versions>("the document dates (versions.json)", "versions.json");
   return versionsCache;
 }
 
@@ -115,6 +127,12 @@ export function searchCorpus(
   corpus: Corpus | "all" = "all",
   limit = 10
 ): Section[] {
+  return rankPhrase(query, corpus).slice(0, limit);
+}
+
+// Every section matching the phrase, best first (searchCorpus without the cut), so a
+// response can say how many matched in all (issue #42).
+function rankPhrase(query: string, corpus: Corpus | "all"): Section[] {
   const corpora: Corpus[] =
     corpus === "all" ? ["charter", "admin_code", "rules"] : [corpus];
 
@@ -139,7 +157,7 @@ export function searchCorpus(
   }
 
   scored.sort((a, b) => b.score - a.score); // Array.sort is stable
-  return scored.slice(0, limit).map((r) => r.s);
+  return scored.map((r) => r.s);
 }
 
 // Words dropped from a query before term matching (issue #30): question words,
@@ -177,7 +195,11 @@ export function queryTerms(query: string): string[] {
 
 // A term matches at the start of a word, and a trailing plural "s" is dropped
 // first, so "tanks" matches "tank" and "shed" matches "sheds" but "shed" does
-// not match "established" and "long" does not match "belong".
+// not match "established" and "long" does not match "belong". There is no
+// check at the end of the word, so "car" also matches "carbon" and "card".
+// That is on purpose: it is also what lets "appoints" find "appointed". Tried in
+// the #49 review: a whole-word check (allowing only a plural s or es) took the
+// eval from 15 to 14 of 17 (Q17, the police commissioner, broke), so it is not used.
 function termRegExp(term: string): RegExp {
   const stem =
     term.length > 3 && term.endsWith("s") && !term.endsWith("ss")
@@ -192,12 +214,19 @@ export interface SearchOutcome {
   results: Section[];
   // phrase: the whole query matched as typed (searchCorpus, unchanged).
   // all-terms: no phrase match; every result contains every term.
-  // some-terms: fewer than `limit` sections contain every term, so sections
-  //   matching only some terms follow them. The caller must say so.
+  // some-terms: at least one returned section lacks a term. The caller must say so.
   mode: SearchMode;
   terms: string[];
-  // How many of `results` contain every term (all of them unless some-terms).
+  // How many of `results` contain every term (all of them unless some-terms). They are not
+  // necessarily the first ones: the word fallback sorts by score alone.
   allTermResults: number;
+  // How many sections matched in all, before the cut to `limit` (issue #42). In the term
+  // modes this counts every section with ANY one term, so it is not a count of good
+  // matches: use allTermTotal for that.
+  total: number;
+  // How many sections contain every term, before the cut to `limit`. Equals `total` for a
+  // phrase match.
+  allTermTotal: number;
 }
 
 // Quotes around the whole query mark it as a phrase; they are not part of it.
@@ -214,49 +243,116 @@ export function stripSurroundingQuotes(query: string): string {
   return /["“”'‘’]/.test(withoutApostrophes) ? query : inner;
 }
 
+// How the word fallback ranks sections (round 2 of the #49 review). Through 0.6.0 a section
+// containing more of the query's words always ranked first, before any weight applied, so a
+// long definitions section that happened to hold every word beat the one section about the
+// question. Now each section gets one score, built from the parts below, and the sort is by
+// that score alone. Plain arithmetic, no dependency.
+
+// A word in the heading or citation counts this many times its weight in the body. Headings
+// name what a section is about; the body of a long section mentions everything.
+export const HEADING_WEIGHT = 3;
+
+// Sections shorter than this many characters are mostly empty headings and "[Repealed]" stubs:
+// their heading can hold every word with nothing behind it. Their score is multiplied by
+// SHORT_SECTION_FACTOR.
+export const SHORT_SECTION_CHARS = 100;
+export const SHORT_SECTION_FACTOR = 0.3;
+
+// Local Law appendix records ("L.L. 2016/002"): the text of an amending law, which repeats
+// words from the sections it changes. They are rarely the answer, so they count half.
+export const LOCAL_LAW_APPENDIX_FACTOR = 0.5;
+export const LOCAL_LAW_APPENDIX_HEADING = /^L\.L\. \d{4}\//;
+
+interface TermHit {
+  s: Section;
+  inHeading: boolean[]; // per term: in the heading or the citation
+  inAny: boolean[]; // per term: anywhere in the section
+}
+
+// One section's score for a word query, given each term's rarity weight (`rarity[i]`, the
+// natural log of sections searched / sections containing term i) and the average text length
+// of the sections searched:
+//   1. Sum the rarity of each term it contains, times HEADING_WEIGHT when the term is in its
+//      heading or citation. A rare word ("idling") counts more than a common one ("city").
+//   2. Divide by 1 + log(1 + length / average length), so a very long section is pushed down
+//      a little, not out: twice the average length divides by about 2.1.
+//   3. Multiply by the share of all the terms' rarity it covers, so a section holding the rare
+//      words beats one holding only the common ones.
+//   4. Apply SHORT_SECTION_FACTOR and LOCAL_LAW_APPENDIX_FACTOR.
+export function termScore(hit: TermHit, rarity: number[], averageLength: number): number {
+  const totalRarity = rarity.reduce((a, b) => a + b, 0);
+  let weight = 0;
+  let covered = 0;
+  hit.inAny.forEach((has, i) => {
+    if (!has) return;
+    weight += rarity[i] * (hit.inHeading[i] ? HEADING_WEIGHT : 1);
+    covered += rarity[i];
+  });
+  let score = weight / (1 + Math.log(1 + hit.s.text.length / Math.max(averageLength, 1)));
+  score *= totalRarity > 0 ? covered / totalRarity : 1;
+  if (hit.s.text.length < SHORT_SECTION_CHARS) score *= SHORT_SECTION_FACTOR;
+  if (LOCAL_LAW_APPENDIX_HEADING.test(hit.s.heading)) score *= LOCAL_LAW_APPENDIX_FACTOR;
+  return score;
+}
+
 // Search with a fallback for plain-language questions (issue #30).
 //   1. The whole query as a phrase (searchCorpus), minus any surrounding
 //      quotes. If anything matches, that is the answer, unchanged from earlier
 //      releases for an unquoted query.
-//   2. Otherwise split it into terms (queryTerms) and rank sections by how
-//      many terms they contain, then by the same heading > citation > body
-//      weights summed over the terms they contain.
-//   3. Sections containing every term come first. If there are fewer of them
-//      than `limit`, sections containing only some terms fill the rest, and
-//      the mode is "some-terms" so the response can say it widened.
-// This is keyword matching, not ranked full-text search: no term weighting.
+//   2. Otherwise split it into terms (queryTerms) and score every section
+//      that contains at least one of them with termScore(): rare words, words
+//      in the heading, and sections of ordinary length count more. Sections
+//      are sorted by that score alone, so one with every term can rank below
+//      one with fewer, rarer terms in its heading.
+//   3. The mode is "all-terms" when every returned section has every term,
+//      else "some-terms"; the counts let the response say how many sections
+//      hold every term, and how many of those it shows.
+// Rarity is counted over the documents searched, so `corpus` can change the order.
 export function searchWithFallback(
   query: string,
   corpus: Corpus | "all" = "all",
   limit = 10
 ): SearchOutcome {
-  const phrase = searchCorpus(stripSurroundingQuotes(query), corpus, limit);
+  const phraseAll = rankPhrase(stripSurroundingQuotes(query), corpus);
+  const phrase = phraseAll.slice(0, limit);
   const terms = queryTerms(query);
   if (phrase.length > 0 || terms.length === 0) {
-    return { results: phrase, mode: "phrase", terms, allTermResults: phrase.length };
+    return {
+      results: phrase,
+      mode: "phrase",
+      terms,
+      allTermResults: phrase.length,
+      total: phraseAll.length,
+      allTermTotal: phraseAll.length,
+    };
   }
 
   const corpora: Corpus[] =
     corpus === "all" ? ["charter", "admin_code", "rules"] : [corpus];
   const res = terms.map(termRegExp);
-  const scored: { s: Section; matched: number; score: number }[] = [];
+  const hits: TermHit[] = [];
+  const containing = terms.map(() => 0); // sections containing each term
+  let searched = 0;
+  let totalLength = 0;
   for (const c of corpora) {
     for (const s of loadCorpus(c)) {
-      let matched = 0;
-      let score = 0;
-      for (const re of res) {
-        const h = re.test(s.heading);
-        const ci = re.test(s.citation);
-        const t = re.test(s.text);
-        if (h || ci || t) matched++;
-        if (h) score += 100;
-        if (ci) score += 50;
-        if (t) score += 10;
-      }
-      if (matched > 0) scored.push({ s, matched, score });
+      searched++;
+      totalLength += s.text.length;
+      const inHeading = res.map((re) => re.test(s.heading) || re.test(s.citation));
+      const inAny = res.map((re, i) => inHeading[i] || re.test(s.text));
+      inAny.forEach((has, i) => { if (has) containing[i]++; });
+      if (inAny.some(Boolean)) hits.push({ s, inHeading, inAny });
     }
   }
-  scored.sort((a, b) => b.matched - a.matched || b.score - a.score); // stable
+  const rarity = containing.map((n) => Math.log(searched / Math.max(n, 1)));
+  const averageLength = totalLength / Math.max(searched, 1);
+  const scored = hits.map((h) => ({
+    s: h.s,
+    matched: h.inAny.filter(Boolean).length,
+    score: termScore(h, rarity, averageLength),
+  }));
+  scored.sort((a, b) => b.score - a.score); // stable: ties keep corpus/document order
   const top = scored.slice(0, limit);
   const allTermResults = top.filter((r) => r.matched === terms.length).length;
   return {
@@ -264,6 +360,8 @@ export function searchWithFallback(
     mode: allTermResults === top.length ? "all-terms" : "some-terms",
     terms,
     allTermResults,
+    total: scored.length,
+    allTermTotal: scored.filter((r) => r.matched === terms.length).length,
   };
 }
 

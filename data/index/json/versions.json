@@ -2,16 +2,19 @@
   "charter": {
     "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
     "indexedAt": "2026-11-14T11:05:40.153Z",
-    "sectionCount": 856
+    "sectionCount": 856,
+    "sha256": "1ef9976cdd1c9efb080f16f9223d1d8fc4b5492965a0387e2ea4de7f8d6fde8a"
   },
   "admin_code": {
     "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
     "indexedAt": "2026-11-14T11:05:47.185Z",
-    "sectionCount": 12654
+    "sectionCount": 12654,
+    "sha256": "35fb7ed7f3dc5ff019313539bcef46aab2215f42abd089852e77830a89a0ce64"
   },
   "rules": {
     "currentThrough": "Current through rules effective November 14, 2026.",
     "indexedAt": "2026-11-14T11:05:52.723Z",
-    "sectionCount": 8733
+    "sectionCount": 8733,
+    "sha256": "6d83fe56c255b45f4e1f63311d53c47f3b6e3a86beb3e72bd82952fa8b808024"
   }
 }
