@@ -381,8 +381,10 @@ export const TOOLS = annotateTools([
   ...betanyc.tools,
 ], LOCAL);
 
-// Every failure: isError, a plain sentence (stack-frame lines dropped by toolError), and the
-// disclaimer like any other answer (issue #46).
+// Every failure: isError, a plain sentence, and the disclaimer like any other answer (issue
+// #46). toolError (shared module 1.5.2) drops only real stack-frame lines ("    at f (x.js:1:2)")
+// from the message, keeps every other line, and caps it at 1,000 characters. It does not shorten
+// a value the caller sent: callers cut those with echo() first.
 function failed(message: string) {
   const r = toolError(message);
   return { ...r, content: [{ type: "text" as const, text: withFooter(r.content[0].text) }] };
