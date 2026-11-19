@@ -174,31 +174,39 @@ function parseArgs<T extends z.ZodRawShape>(
 // First line of a search response whose query did not match as typed
 // (issue #30). The response must never quietly answer a different question
 // (the principle behind #19), so it says which terms it searched for and,
-// when it widened to partial matches, that it did.
+// when it widened to partial matches, that it did. The word fallback sorts by
+// score alone (corpus.ts termScore), so a section with every term is not
+// necessarily listed first: the line says "no section matched every term" only
+// when none in the documents searched does (allTermTotal 0), not when none of
+// them made this page.
 export function searchNotice(
   mode: SearchMode,
   terms: string[],
-  allTermResults: number
+  allTermTotal: number
 ): string | null {
   const list = terms.join(", ");
   if (mode === "all-terms") {
     return `No section contains the exact query; showing sections containing all of: ${list}.`;
   }
   if (mode === "some-terms") {
-    if (allTermResults === 0) {
+    if (allTermTotal === 0) {
       return `No section matched every term; showing sections matching some of: ${list}.`;
     }
-    const n = allTermResults === 1 ? "1 section" : `${allTermResults} sections`;
-    return `Only ${n} matched every term (listed first); the rest match some of: ${list}.`;
+    return `No section contains the exact query; showing the best matches for some or all of: ${list}.`;
   }
   return null;
 }
 
+const sections = (n: number) => (n === 1 ? "1 section" : `${n} sections`);
+const isAre = (n: number) => (n === 1 ? "is" : "are");
+
 // The count line after a search's results (issue #42). For a phrase match, how many sections
 // matched in all. When search fell back to single terms (issue #30), a section with any one
-// term counts as a match, so a plain total would be mostly noise ("Showing 10 of 1526"): say
-// how many contain every term, and separately how many contain only some, and do not point
-// at a higher limit for those weak matches.
+// term counts as a match, so a plain total would be mostly noise ("Showing 10 of 1526"): it
+// says how many contain every term and how many of those are shown, then separately how many
+// contain only some, and does not point at a higher limit for those. It never says the
+// every-term sections come first, or that the others are worse: under the word ranking a section
+// with fewer, rarer terms in its heading can rank above one with every term.
 export function searchCountLine(o: {
   mode: SearchMode;
   shown: number;
@@ -214,21 +222,30 @@ export function searchCountLine(o: {
       : null;
   }
   const lines: string[] = [];
-  if (o.allTermTotal > o.allTermResults) {
-    lines.push(
-      `Showing ${o.allTermResults} of ${o.allTermTotal} sections that contain every term, best first. ` +
-        `To see others, ${raise}narrow the query, or search one corpus.`
-    );
+  const all = o.allTermTotal;
+  const allShown = o.allTermResults;
+  // Every-term matches: said when some are not shown, or when partial matches are shown
+  // beside them (so the reader can tell the two apart).
+  if (all > 0 && (allShown < all || o.mode === "some-terms")) {
+    const contain = all === 1 ? "1 section contains every term" : `${all} sections contain every term`;
+    const which =
+      allShown === all ? (all === 1 ? "it is shown" : "all are shown")
+      : allShown === 0 ? (all === 1 ? "it does not rank in this list" : "none of them ranks in this list")
+      : `${allShown} of them ${isAre(allShown)} shown`;
+    const more = allShown < all ? ` To see more of them, ${raise}narrow the query, or search one corpus.` : "";
+    lines.push(`${contain}; ${which}.${more}`);
   }
-  const partial = o.total - o.allTermTotal;
-  const shownPartial = o.shown - o.allTermResults;
+  const partial = o.total - all;
+  const partialShown = o.shown - allShown;
   if (partial > 0) {
-    const n = partial === 1 ? "1 other section contains" : `${partial} other sections contain`;
+    const who = all === 0
+      ? `${sections(partial)} contain${partial === 1 ? "s" : ""} some of the terms`
+      : `${partial === 1 ? "1 other section contains" : `${partial} other sections contain`} only some of the terms`;
     lines.push(
-      shownPartial > 0
-        ? `${n} only some of the terms; the ${shownPartial} shown after the full matches are the closest of those. ` +
-            "Matches on only some terms are weak: fewer, more specific keywords find better ones."
-        : `${n} only some of the terms and ${partial === 1 ? "is" : "are"} not shown, as weak matches.`
+      partialShown === 0
+        ? `${who} and ${isAre(partial)} not shown.`
+        : `${who}; ${partialShown === partial ? (partial === 1 ? "it is shown" : "all are shown") : `the ${partialShown} shown ${isAre(partialShown)} the best-ranked of those`}. ` +
+            "Fewer, more specific keywords usually find better ones."
     );
   }
   return lines.length ? lines.join(" ") : null;
@@ -350,7 +367,7 @@ export const TOOLS = annotateTools([
   {
     name: "search",
     title: "Search the law text",
-    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, those with every term first; the response's first line says when this happened and which terms were used.`,
+    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, ranked so rare words and words in a heading count most; the response's first line says when this happened and which terms were used.`,
     inputSchema: inputSchema(SHAPES.search),
   },
   {
@@ -409,7 +426,7 @@ export async function callTool(name: string, args: unknown) {
           const searched = corpus && corpus !== "all" ? [corpus] : ALL_CORPORA;
           return answer(`No results found for "${query}". ${searchedLine(searched)}`, searched);
         }
-        const notice = searchNotice(mode, terms, allTermResults);
+        const notice = searchNotice(mode, terms, allTermTotal);
         const count = searchCountLine({ mode, shown: results.length, allTermResults, total, allTermTotal, limit: max });
         let cut = false;
         const body = results

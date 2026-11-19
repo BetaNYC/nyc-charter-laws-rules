@@ -1,5 +1,5 @@
 {
-  "note": "Review fixes (#49), run after the questions and checks were committed (c00ba3a). No check was changed after this run. Q10 failed in the earlier run too (eval/runs/2026-11-18.json). Q13 to Q16 are new plain-language questions and fail: term search has no term weighting, so long definition sections and Local Law appendix records (shown with the citation 'L', a citation the build cuts short) outrank the expected section. Q17, also new, passes.",
+  "note": "Review fixes (#49), run after the questions and checks were committed (c00ba3a). No check was changed after this run. Q10 failed in the earlier run too (eval/runs/2026-11-18.json). Q13 to Q16 are new plain-language questions and fail: term search has no term weighting, so long definition sections and Local Law appendix records (shown with the citation 'L', a citation the build cuts short) outrank the expected section. Q17, also new, passes. Correction added in round 2 (results above unchanged): the cause was not missing weights; the search sorted any section holding more of the question's words first, before its weights applied. See eval/runs/2026-11-18-round2-after.json.",
   "run_at": "2026-11-19T03:05:41.785Z",
   "version": "0.6.0",
   "tools": 8,

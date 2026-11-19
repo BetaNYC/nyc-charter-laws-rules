@@ -1,0 +1,136 @@
+{
+  "note": "Round 2 (#56), after the search ranking change (corpus.ts termScore: rarity, heading 3x, length damping, rarity coverage, short-section and Local Law appendix factors; sort by score alone). Words still match at the start of a word with no end check: a whole-word check was tried and scored 14 of 17 (Q17 broke), so it is not used. Questions and checks unchanged since c00ba3a.",
+  "run_at": "2026-11-19T04:39:44.418Z",
+  "version": "0.6.0",
+  "tools": 8,
+  "index": {
+    "charter": {
+      "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
+      "indexedAt": "2026-11-14T11:05:40.153Z",
+      "sectionCount": 856,
+      "sha256": "1ef9976cdd1c9efb080f16f9223d1d8fc4b5492965a0387e2ea4de7f8d6fde8a"
+    },
+    "admin_code": {
+      "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
+      "indexedAt": "2026-11-14T11:05:47.185Z",
+      "sectionCount": 12654,
+      "sha256": "35fb7ed7f3dc5ff019313539bcef46aab2215f42abd089852e77830a89a0ce64"
+    },
+    "rules": {
+      "currentThrough": "Current through rules effective November 14, 2026.",
+      "indexedAt": "2026-11-14T11:05:52.723Z",
+      "sectionCount": 8733,
+      "sha256": "6d83fe56c255b45f4e1f63311d53c47f3b6e3a86beb3e72bd82952fa8b808024"
+    }
+  },
+  "passed": 15,
+  "total": 17,
+  "results": [
+    {
+      "id": "Q01",
+      "q": "Which Charter section sets up the Independent Budget Office?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q02",
+      "q": "Where is the City Administrative Procedure Act's rulemaking section in the Charter?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q03",
+      "q": "What does the Charter say about the Uniform Land Use Review Procedure?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q04",
+      "q": "Which Charter section covers civilian complaints against police officers?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q05",
+      "q": "Which Charter section sets up community boards?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q06",
+      "q": "Which Charter section creates the Office of Administrative Trials and Hearings?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q07",
+      "q": "What are Chapter 1 and Chapter 2 of the Charter about?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q08",
+      "q": "Where is NYC's Open Data Law in the Administrative Code?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q09",
+      "q": "What is the penalty for a sidewalk shed left up too long?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q10",
+      "q": "How long can a sidewalk shed stay up?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q11",
+      "q": "Which Charter sections deal with the sinking fund?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q12",
+      "q": "How current is the law text this server has?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q13",
+      "q": "Is it illegal to leave my car engine idling?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q14",
+      "q": "How warm does my landlord have to keep my apartment in winter?",
+      "pass": false,
+      "fails": [
+        "search: admin_code § 27-2029 not in top 10: rules § 5-06, rules § 10-06, admin_code § 21-335, rules § 18-45, admin_code § 26-511.1, admin_code § 26-405.1, admin_code § 21-157, rules § 11-04, rules § 7-08, admin_code § 11-707"
+      ]
+    },
+    {
+      "id": "Q15",
+      "q": "Where is smoking banned in NYC?",
+      "pass": false,
+      "fails": [
+        "search: admin_code § 17-503 not in top 10: admin_code § 24-150.1, rules Chapter 23, admin_code § 24-139, rules § 10-03, rules § 3-03, rules § 2-17, rules § 10-21, rules § 310-02, rules § 1-08, rules § 181.17"
+      ]
+    },
+    {
+      "id": "Q16",
+      "q": "How many terms can a city council member serve?",
+      "pass": true,
+      "fails": []
+    },
+    {
+      "id": "Q17",
+      "q": "Who appoints the police commissioner?",
+      "pass": true,
+      "fails": []
+    }
+  ]
+}

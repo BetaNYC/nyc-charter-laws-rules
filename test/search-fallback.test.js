@@ -153,7 +153,10 @@ describe("searchWithFallback (fixture index)", () => {
     assert.equal(fx.dir, FIXTURE);
   });
 
-  test("shed question: ranked by terms matched, then heading > citation > body", () => {
+  // The word fallback sorts by score (corpus.ts termScore; exact factors in
+  // test/search-ranking.test.js). On this fixture the order happens to follow the number of
+  // terms each section holds.
+  test("shed question: ranked by score", () => {
     const r = fx["shed question"];
     assert.equal(r.mode, "some-terms");
     assert.deepEqual(r.terms, ["long", "sidewalk", "shed", "stay"]);
@@ -230,9 +233,10 @@ describe("searchWithFallback (fixture index)", () => {
 
 describe("search tool response (fixture index)", () => {
   test("widened: the notice is the first line and lists the terms", () => {
+    // § 9-001 holds every term, so the line must not say that none does.
     assert.equal(
       firstLine(fx["shed question tool"]),
-      "Only 1 section matched every term (listed first); the rest match some of: long, sidewalk, shed, stay."
+      "No section contains the exact query; showing the best matches for some or all of: long, sidewalk, shed, stay."
     );
     assert.equal(
       firstLine(fx["no term in common tool"]),
@@ -253,11 +257,19 @@ describe("search tool response (fixture index)", () => {
     // Before the fix this said "Showing 2 of 4 matching sections ... raise limit": the 4
     // counted every section with any one term.
     const text = fx["shed question tool, limit 2"];
-    assert.match(text, /^3 other sections contain only some of the terms; the 1 shown after the full matches are the closest of those\./m);
+    assert.match(text, /^1 section contains every term; it is shown\. 3 other sections contain only some of the terms; the 1 shown is the best-ranked of those\./m);
     assert.doesNotMatch(text, /matching sections|raise limit/);
     const tank = fx["tank question tool, limit 1"];
-    assert.match(tank, /^1 other section contains only some of the terms and is not shown, as weak matches\.$/m);
+    assert.match(tank, /^1 other section contains only some of the terms and is not shown\.$/m);
     assert.doesNotMatch(tank, /matching sections|raise limit/);
+  });
+
+  test("no section has every term: no 'other', no 'full matches'", () => {
+    // Before round 2 this read "5 other sections … the 5 shown after the full matches" with no
+    // full matches at all (Q15 on the real index: "619 other sections").
+    const text = fx["no term in common tool"];
+    assert.match(text, /^5 sections contain some of the terms; all are shown\. Fewer, more specific keywords usually find better ones\.$/m);
+    assert.doesNotMatch(text, /other section|full match|contains? every term/);
   });
 
   test("a phrase match, quoted or not, carries no notice", () => {
@@ -282,12 +294,28 @@ describe("searchCountLine", () => {
     const line = searchCountLine({ ...base, mode: "all-terms", shown: 10, allTermResults: 10, total: 1526, allTermTotal: 40 });
     assert.equal(
       line,
-      "Showing 10 of 40 sections that contain every term, best first. To see others, raise limit (max 50), narrow the query, or search one corpus. " +
-        "1486 other sections contain only some of the terms and are not shown, as weak matches."
+      "40 sections contain every term; 10 of them are shown. To see more of them, raise limit (max 50), narrow the query, or search one corpus. " +
+        "1486 other sections contain only some of the terms and are not shown."
     );
     const shed = searchCountLine({ ...base, mode: "some-terms", shown: 10, allTermResults: 1, total: 1526, allTermTotal: 1 });
-    assert.doesNotMatch(shed, /raise limit|1526/);
-    assert.match(shed, /^1525 other sections contain only some of the terms; the 9 shown after the full matches/);
+    assert.doesNotMatch(shed, /raise limit|1526|first|after/);
+    assert.equal(
+      shed,
+      "1 section contains every term; it is shown. 1525 other sections contain only some of the terms; the 9 shown are the best-ranked of those. " +
+        "Fewer, more specific keywords usually find better ones."
+    );
+  });
+
+  test("terms: an every-term section that ranks off the page is still counted", () => {
+    const line = searchCountLine({ ...base, mode: "some-terms", shown: 10, allTermResults: 0, total: 1526, allTermTotal: 1 });
+    assert.match(line, /^1 section contains every term; it does not rank in this list\. To see more of them, raise limit/);
+    const two = searchCountLine({ ...base, mode: "some-terms", shown: 10, allTermResults: 0, total: 1526, allTermTotal: 2 });
+    assert.match(two, /^2 sections contain every term; none of them ranks in this list\./);
+  });
+
+  test("terms: no every-term section at all (Q15)", () => {
+    const line = searchCountLine({ ...base, mode: "some-terms", shown: 10, allTermResults: 0, total: 619, allTermTotal: 0 });
+    assert.equal(line, "619 sections contain some of the terms; the 10 shown are the best-ranked of those. Fewer, more specific keywords usually find better ones.");
   });
 
   test("terms: nothing to add when everything matched every term and all are shown", () => {
@@ -327,7 +355,8 @@ describe("against the committed index", { skip: !CORPUS_PRESENT && "committed in
     assert.ok(r.allTermTotal <= r.total);
     const text = textOf(await callTool("search", { query: SHED_Q }));
     assert.doesNotMatch(text, new RegExp(`of ${r.total} matching sections`));
-    if (r.total > r.allTermTotal) assert.match(text, /other sections? contains? only some of the terms/);
+    if (r.total > r.allTermTotal) assert.match(text, /contains? (only )?some of the terms/);
+    if (r.allTermTotal > 0) assert.doesNotMatch(text, /No section matched every term/);
     if (r.allTermTotal <= r.allTermResults) assert.doesNotMatch(text, /raise limit/);
   });
 
