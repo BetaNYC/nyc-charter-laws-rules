@@ -2,7 +2,7 @@
   "_readme": [
     "Fixed question set, written 2026-11-18 before the first scoring run. Each question has a known right answer in the law text.",
     "Each step calls one tool with the given args. Checks: `heading` (the answer's text contains this heading text, case-insensitive), `citation_in_top` (one of the first N result citations equals this), `citation_prefix_in_top` (one of the first N starts with this), `contains` (the text contains this), `first_line` (the first line matches this regular expression), `contains_all` (the text contains each of these), `section_in_top` (one of the first N results is this citation in this corpus).",
-    "Invariants checked on every answer: not an error, a 'Source: ... (American Legal Publishing)' line, and the words 'legal advice'.",
+    "Invariants checked on every answer: not an error, a source line naming American Legal Publishing ('Source: ... (American Legal Publishing).', or for law text since round 2 of #49 'BetaNYC modified this data: ... Official record: ... (American Legal Publishing), <link>'), and the words 'legal advice'.",
     "Runs offline against the index bundled with the package: `npm run eval`. Results go in eval/runs/.",
     "2026-11-18, review fixes (#49), written and committed before any run of them: Q09 now also checks the penalty amounts in the section's text (it asked about a penalty but only checked a section's rank). Q13 to Q17 are asked the way a person would ask, with no citation and no corpus; each expected section was read in the bundled index first, and each check uses the default limit, n = 10."
   ],

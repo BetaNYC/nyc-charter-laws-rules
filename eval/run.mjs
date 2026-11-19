@@ -33,7 +33,13 @@ function check(text, c) {
   if (c.citation_prefix_in_top && !top(c.citation_prefix_in_top.n).some((x) => x.startsWith(c.citation_prefix_in_top.prefix))) {
     fails.push(`no ${c.citation_prefix_in_top.prefix}… in top ${c.citation_prefix_in_top.n}: ${top(c.citation_prefix_in_top.n).join(", ")}`);
   }
-  if (!/^Source: .*\(American Legal Publishing\)\./m.test(text)) fails.push("no source line");
+  // A source line naming American Legal Publishing: "Source: … (American Legal Publishing)." for
+  // get_version, or, for answers from the law text (round 2 of #49), "BetaNYC modified this
+  // data: … Official record: … (American Legal Publishing), <link>". This check was widened
+  // because the answers changed, not after a run: see eval/runs/2026-11-18-round2-final.json.
+  if (!/^(Source: .*\(American Legal Publishing\)\.|BetaNYC modified this data: .*Official record: .*\(American Legal Publishing\), https:)/m.test(text)) {
+    fails.push("no source line");
+  }
   if (!/legal advice/i.test(text)) fails.push("no disclaimer");
   return fails;
 }

@@ -56,7 +56,8 @@
         "known_gaps": [
           "Only the current text: no earlier versions of a section.",
           "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
-          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short.",
+          "Citations are worked out by BetaNYC from each heading, not given by the publisher, so they can be wrong or cut short. Check a citation against the heading and the official text."
         ]
       },
       "terms": {
@@ -120,7 +121,8 @@
         "known_gaps": [
           "Only the current text: no earlier versions of a section.",
           "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
-          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short.",
+          "Citations are worked out by BetaNYC from each heading, not given by the publisher, so they can be wrong or cut short. Check a citation against the heading and the official text."
         ]
       },
       "terms": {
@@ -184,7 +186,8 @@
         "known_gaps": [
           "Only the current text: no earlier versions of a rule.",
           "The index is flat, so get_title returns chapter and title headings, not every section inside them.",
-          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short."
+          "An XML file that cannot be read during the build is skipped, with a warning in the build log. get_version's section count shows if a document came up short.",
+          "Citations are worked out by BetaNYC from each heading, not given by the publisher, so they can be wrong or cut short. Check a citation against the heading and the official text."
         ]
       },
       "terms": {

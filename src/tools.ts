@@ -279,7 +279,7 @@ export function searchCountLine(o: {
 
 // Where each document comes from, read from DATA-SOURCES.json (which ships with the package)
 // so the line in each answer says what about_data says (issues #40, #41).
-type DocSource = { id: string; title: string; source_name: string; publisher: { name: string }; verify_at: string };
+type DocSource = { id: string; title: string; source_name: string; changes: { changed: boolean }; publisher: { name: string }; verify_at: string };
 const SOURCES = Object.fromEntries(
   (JSON.parse(readFileSync(new URL("../DATA-SOURCES.json", import.meta.url), "utf8")).sources as DocSource[])
     .map((src) => [src.id.replace(/-/g, "_"), src])
@@ -296,44 +296,67 @@ function searchedLine(corpora: Corpus[]): string {
 }
 
 // The publisher's own "current through" line from the XML (versions.json currentThrough),
-// as the publisher wrote it, minus trailing punctuation. Null when the index has none.
+// exactly as the publisher gives it, trailing comma included ("…November 10, 2026,"), as
+// get_version shows it. Only line breaks and runs of spaces become one space, so it stays on
+// one line. Null when the index has none.
 export function currentThrough(c: Corpus): string | null {
   const raw = getVersions()[c]?.currentThrough;
   if (typeof raw !== "string") return null;
-  const line = raw.replace(/\s+/g, " ").trim().replace(/[\s,.;:]+$/, "");
+  const line = raw.replace(/\s+/g, " ").trim();
   return line || null;
 }
 
+// What BetaNYC did to the law text, for the source line of an answer from it (round 2 of the
+// #49 review). about_data says each document was modified (DATA-SOURCES.json `changes`), so
+// the answer says so too, in the shared module's words, instead of naming only the publisher.
+// One line, kept in step with DATA-SOURCES.json's `changes.detail` and `known_gaps`.
+export const CONVERSION_DETAIL =
+  "converted by BetaNYC from the publisher's bulk XML files: line breaks are collapsed, so tables run together; " +
+  "the publisher's editing markers are removed and character codes decoded; " +
+  "citations are worked out by BetaNYC from headings and can be wrong or cut short";
+export const SNIPPET_CHARS = 400;
+export const SNIPPET_DETAIL = `; search snippets are cut at ${SNIPPET_CHARS} characters`;
+
+// "text": an answer from the converted law text (search, get_section, list_titles, get_title).
+// "snippets": the same, with search snippets. "dates": get_version, which reports the index's
+// dates and counts, not law text, so its lines name the source plainly.
+type SourceUse = "text" | "snippets" | "dates";
+
 // Per document an answer came from: the source, its publisher, the date of this server's copy
 // (indexedAt in versions.json: when the copy was built, which moves only when the text
-// changed), and a link to the official code library, where a person can check the text. Then,
-// on its own labeled line, the publisher's "current through" line, when the index has one. The
-// index holds no date the source was last checked, so none is shown.
-export function sourceLines(corpora: Iterable<Corpus>): string {
+// changed), and a link to the official code library, where a person can check the text. For
+// law text, the line first says BetaNYC modified it and how (provenance's changedByBetanyc),
+// and names the publisher's copy as the official record. Then, on its own labeled line, the
+// publisher's "current through" line, when the index has one. The index holds no date the
+// source was last checked, so none is shown.
+export function sourceLines(corpora: Iterable<Corpus>, use: SourceUse = "text"): string {
   const versions = getVersions();
   return [...new Set(corpora)]
     .map((c) => {
+      const modified = use !== "dates" && SOURCES[c].changes.changed;
       const line = provenance({
         sourceName: SOURCES[c].source_name,
         publisher: SOURCES[c].publisher.name,
         sourceUrl: SOURCES[c].verify_at,
         kind: "snapshot",
         asOf: versions[c]?.indexedAt ?? null,
+        ...(modified
+          ? { changedByBetanyc: { kind: "modified-by-betanyc" as const, detail: CONVERSION_DETAIL + (use === "snippets" ? SNIPPET_DETAIL : "") } }
+          : {}),
       }).text;
       const through = currentThrough(c);
-      return through ? `${line}\nThe publisher's own "current through" line for it: ${through}.` : line;
+      return through ? `${line}\nThe publisher's own "current through" line for it, as given: "${through}"` : line;
     })
     .join("\n");
 }
 
 // A body, then its source lines, then the disclaimer.
-function answer(text: string, corpora: Iterable<Corpus>) {
-  return { content: [{ type: "text" as const, text: withFooter(`${text}\n\n${sourceLines(corpora)}`) }] };
+function answer(text: string, corpora: Iterable<Corpus>, use: SourceUse = "text") {
+  return { content: [{ type: "text" as const, text: withFooter(`${text}\n\n${sourceLines(corpora, use)}`) }] };
 }
 
 // Lists (issue #42): a page of `items` and a line saying which part of how many it is, and
 // how to get the rest. No line when everything fits on the first page.
-export const SNIPPET_CHARS = 400;
 export const MAX_CANDIDATES = 25;
 export function page<T>(items: T[], offset: number, limit: number): { shown: T[]; note: string | null } {
   const shown = items.slice(offset, offset + limit);
@@ -467,7 +490,7 @@ export async function callTool(name: string, args: unknown) {
           : null;
         // After the results, so the first line stays the notice (issue #30) and results start on line 3.
         const text = [notice, body, count, cutNote].filter(Boolean).join("\n\n");
-        return answer(text, results.map((s) => s.corpus));
+        return answer(text, results.map((s) => s.corpus), "snippets");
       }
 
       case "get_section": {
@@ -525,7 +548,7 @@ export async function callTool(name: string, args: unknown) {
           fmt("Administrative Code:  ", versions.admin_code),
           fmt("Rules of NYC:         ", versions.rules),
         ];
-        return answer(lines.join("\n"), ALL_CORPORA);
+        return answer(lines.join("\n"), ALL_CORPORA, "dates");
       }
 
       default:

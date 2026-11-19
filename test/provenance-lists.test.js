@@ -7,7 +7,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -23,30 +23,72 @@ const text = async (name, args) => {
 };
 const LINK = { charter: "NYCcharter", admin_code: "NYCadmin", rules: "NYCrules" };
 
-function assertSourced(t, corpora) {
+// The source line's opening for an answer from the law text (round 2 of #49): it says BetaNYC
+// changed the text, as about_data does, so a reader can tell it from the publisher's own copy.
+const MODIFIED =
+  "BetaNYC modified this data: converted by BetaNYC from the publisher's bulk XML files: line breaks are collapsed, so tables run together; " +
+  "the publisher's editing markers are removed and character codes decoded; citations are worked out by BetaNYC from headings and can be wrong or cut short";
+const SNIPPETS = "; search snippets are cut at 400 characters";
+
+// use: "text" (law text), "snippets" (search results), "dates" (get_version: a plain Source line).
+function assertSourced(t, corpora, use = "text") {
   const v = getVersions();
+  const lines = t.split("\n");
   for (const c of corpora) {
-    const line = t.split("\n").find((l) => l.startsWith("Source: ") && l.includes(`/${LINK[c]}/`));
+    const line = lines.find((l) => /^(Source: |BetaNYC modified this data: )/.test(l) && l.includes(`/${LINK[c]}/`));
     assert.ok(line, `no source line for ${c}`);
-    assert.match(line, /\(American Legal Publishing\)\./);
     assert.ok(line.includes(`As of ${v[c].indexedAt} (the date of the copy`), line);
-    assert.match(line, /Link: https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYC\w+\/0-0-0-1$/);
-    // The publisher's own "current through" line, labeled, right after the copy date.
-    const lines = t.split("\n");
+    if (use === "dates") {
+      assert.match(line, /^Source: .*\(American Legal Publishing\)\./);
+      assert.match(line, /Link: https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYC\w+\/0-0-0-1$/);
+    } else {
+      assert.ok(line.startsWith(`${MODIFIED}${use === "snippets" ? SNIPPETS : ""}. This copy should not be considered the official record. `), line);
+      assert.match(line, /Official record: .*\(American Legal Publishing\), https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYC\w+\/0-0-0-1$/);
+    }
+    // The publisher's own "current through" line, exactly as given, right after the copy date.
     const next = lines[lines.indexOf(line) + 1];
-    const through = v[c].currentThrough.trim().replace(/[\s,.;:]+$/, "");
-    assert.equal(next, `The publisher's own "current through" line for it: ${through}.`);
+    assert.equal(next, `The publisher's own "current through" line for it, as given: "${v[c].currentThrough.trim()}"`);
   }
   assert.match(t, /legal advice/i, "the disclaimer is still there");
-  assert.ok(t.indexOf("Source: ") < t.lastIndexOf("legal advice"), "the source comes before the disclaimer");
+  assert.ok(t.search(/^(Source: |BetaNYC modified)/m) < t.lastIndexOf("legal advice"), "the source comes before the disclaimer");
 }
 
 test("every law-text answer names its source and the index date", { skip }, async () => {
   assertSourced(await text("get_section", { citation: "§ 259", corpus: "charter" }), ["charter"]);
   assertSourced(await text("list_titles", { corpus: "admin_code" }), ["admin_code"]);
   assertSourced(await text("get_title", { corpus: "charter", title: "Chapter 1" }), ["charter"]);
-  assertSourced(await text("get_version", {}), ["charter", "admin_code", "rules"]);
-  assertSourced(await text("search", { query: "sinking fund", corpus: "charter" }), ["charter"]);
+  assertSourced(await text("get_version", {}), ["charter", "admin_code", "rules"], "dates");
+  assertSourced(await text("search", { query: "sinking fund", corpus: "charter" }), ["charter"], "snippets");
+});
+
+test("DATA-SOURCES.json lists wrong or cut-short citations as a known gap of every document", () => {
+  const ds = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "DATA-SOURCES.json"), "utf8"));
+  for (const src of ds.sources) {
+    assert.ok(src.coverage.known_gaps.some((g) => /citations .*can be wrong or cut short/i.test(g)), src.id);
+  }
+});
+
+test("the current-through line matches get_version's, character for character", { skip }, async () => {
+  const v = getVersions();
+  const version = await text("get_version", {});
+  const section = await text("get_section", { citation: "§ 259", corpus: "charter" });
+  const raw = v.charter.currentThrough.trim();
+  assert.ok(version.includes(raw), "get_version shows the raw line");
+  assert.ok(section.includes(`as given: "${raw}"`), "and so does every source line");
+});
+
+test("law-text answers say BetaNYC changed the text; get_version's lines do not", { skip }, async () => {
+  for (const [tool, args] of [
+    ["search", { query: "sinking fund", corpus: "charter" }],
+    ["get_section", { citation: "§ 259", corpus: "charter" }],
+    ["list_titles", { corpus: "charter" }],
+    ["get_title", { corpus: "charter", title: "Chapter 1" }],
+  ]) {
+    const t = await text(tool, args);
+    assert.match(t, /^BetaNYC modified this data: /m, tool);
+    assert.doesNotMatch(t, /^Source: /m, `${tool}: no plain Source line`);
+  }
+  assert.doesNotMatch(await text("get_version", {}), /^BetaNYC modified/m);
 });
 
 test("a not-found answer names where it looked, with the source and dates", { skip }, async () => {
@@ -83,8 +125,8 @@ test("list_titles with nothing to list still names the source and dates (fixture
   const r = JSON.parse(out.stdout);
   assert.notEqual(r.isError, true);
   const t = r.content[0].text;
-  assert.match(t, /^No titles found for rules\. Searched: the Rules of the City of New York\.\n\nSource: Rules of the City of New York, bulk XML download \(American Legal Publishing\)\. As of 2026-01-01T00:00:00\.000Z \(the date of the copy/);
-  assert.match(t, /\nThe publisher's own "current through" line for it: Synthetic search fixture \(test\/search-fallback\.test\.js\), not law text\.\n/);
+  assert.match(t, /^No titles found for rules\. Searched: the Rules of the City of New York\.\n\nBetaNYC modified this data: .*\. As of 2026-01-01T00:00:00\.000Z \(the date of the copy this server answers from\)\. Official record: Rules of the City of New York, bulk XML download \(American Legal Publishing\), https:/);
+  assert.match(t, /\nThe publisher's own "current through" line for it, as given: "Synthetic search fixture \(test\/search-fallback\.test\.js\), not law text\."\n/);
   assert.match(t, /legal advice/i);
 });
 
