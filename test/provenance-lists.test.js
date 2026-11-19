@@ -112,6 +112,40 @@ test("list_titles: default 200, says the total, pages with offset to the end", {
   assert.equal(refused.isError, true);
 });
 
+// get_title had no test of its page size or of limit and offset (the #49 review: changing its
+// default from 200 to 100 passed every test). "Chapter" in the Rules matches every chapter
+// record, over 700 today; only loose bounds on the total, since the daily refresh runs this.
+test("get_title: default page of 200, then limit and offset", { skip }, async () => {
+  const records = (t) => t.split("\n").filter((l) => / — /.test(l) && !/^(Source|BetaNYC|The publisher)/.test(l));
+  const first = await text("get_title", { corpus: "rules", title: "Chapter" });
+  const m = /^Showing 1 to 200 of (\d+)\. Call again with offset 200 for the next ones\.$/m.exec(first);
+  assert.ok(m, first.slice(0, 200));
+  const total = Number(m[1]);
+  assert.ok(total > 400, `${total} records`);
+  assert.equal(records(first).length, 200);
+
+  const all = records(await text("get_title", { corpus: "rules", title: "Chapter", limit: 1000 }));
+  assert.equal(all.length, total);
+  assert.deepEqual(records(first), all.slice(0, 200));
+
+  const five = await text("get_title", { corpus: "rules", title: "Chapter", limit: 5 });
+  assert.match(five, /^Showing 1 to 5 of \d+\. Call again with offset 5 for the next ones\.$/m);
+  assert.deepEqual(records(five), all.slice(0, 5));
+
+  const next = await text("get_title", { corpus: "rules", title: "Chapter", offset: 200, limit: 3 });
+  assert.match(next, new RegExp(`^Showing 201 to 203 of ${total}\\. Call again with offset 203 for the next ones\\.$`, "m"));
+  assert.deepEqual(records(next), all.slice(200, 203));
+
+  const last = await text("get_title", { corpus: "rules", title: "Chapter", offset: total - 2 });
+  assert.match(last, new RegExp(`^Showing ${total - 1} to ${total} of ${total}\\.$`, "m"));
+  assert.deepEqual(records(last), all.slice(-2));
+
+  const beyond = await text("get_title", { corpus: "rules", title: "Chapter", offset: total });
+  assert.match(beyond, new RegExp(`Nothing at offset ${total}: there are ${total} in all`));
+  assert.equal((await callTool("get_title", { corpus: "rules", title: "Chapter", limit: 1001 })).isError, true);
+  assert.equal((await callTool("get_title", { corpus: "rules", title: "Chapter", offset: -1 })).isError, true);
+});
+
 test("a short list carries no count line", { skip }, async () => {
   const t = await text("get_title", { corpus: "charter", title: "Chapter 1" });
   assert.doesNotMatch(t, /^Showing /m);
