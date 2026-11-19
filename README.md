@@ -47,11 +47,14 @@ Exposes 8 tools over MCP:
 
 ## Tools reference
 
-Every law-text answer ends, before the disclaimer, with one line per document it came from: the source, its publisher, the date this server's index of it was built, and a link to the official code library. For example:
+Every law-text answer ends, before the disclaimer, with a source line per document it came from: the source, its publisher, the date of this server's copy of it, and a link to the official code library. Under it, labeled, is the publisher's own "current through" line from the same copy. For example:
 
 ```
 Source: New York City Charter, bulk XML download (American Legal Publishing). As of 2026-11-14T11:05:40.153Z (the date of the copy this server answers from). Link: https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1
+The publisher's own "current through" line for it: Current through Local Law 2026/164, enacted November 10, 2026.
 ```
+
+The copy date is `indexedAt` in `versions.json`. It moves only when the text changes, so a copy can be days old and still match the publisher's latest download. The index keeps no date for when the source was last checked, so none is shown. Answers that find nothing ("No results found", "Section not found", "No titles found", "No sections found") say which documents were searched and carry the same lines.
 
 Every list says how much of how many it shows when it does not show everything, and how to get the rest.
 
@@ -67,7 +70,7 @@ Keyword search across the NYC Charter, Administrative Code, and Rules. It is key
    - every result contains every term: `No section contains the exact query; showing sections containing all of: building, owners, required, drinking, water, tanks.`
    - partial matches were added: `No section matched every term; showing sections matching some of: …`, or `Only 1 section matched every term (listed first); the rest match some of: long, sidewalk, shed, stay.`
 
-4. **How many.** When more sections matched than `limit`, a line after the results says `Showing 10 of 35 matching sections, best first.` and how to see others. Each snippet is cut at 400 characters, marked `…`, and a line says so; `get_section` returns the full text.
+4. **How many.** For a phrase match, when more sections matched than `limit`, a line after the results says `Showing 10 of 35 matching sections, best first.` and how to see others. When step 2 ran, sections with every term and sections with only some are counted apart: `Showing 10 of 40 sections that contain every term, best first.` (only when there are more than shown), then, for example, `1525 other sections contain only some of the terms; the 9 shown after the full matches are the closest of those.` Matches on only some terms are weak, so the response does not suggest raising `limit` to see them. Each snippet is cut at 400 characters, marked `…`, and a line says so; `get_section` returns the full text.
 
 There is no term weighting yet, so a long definitions section that contains every word can outrank the section you want. Ranked full-text search is a separate, later change.
 
@@ -105,7 +108,7 @@ get_section("Chapter 11", corpus="charter")
 
 ### `list_titles`
 
-List the top-level chapters or titles of a document. The Rules have over 700, so the list comes in pages: the first line says `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
+List the top-level chapters or titles of a document. Lists longer than 200, such as the Administrative Code (350) and the Rules (over 700), come in pages: the first line says, for example, `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -196,7 +199,7 @@ about_data(topic="rules")
 
 `data.json` is a DCAT-US 3.0 catalog generated from DATA-SOURCES.json (`python3 scripts/whats_changed.py about-data catalog DATA-SOURCES.json`); never edit it by hand.
 
-`whats_changed`, `about_betanyc` and `about_data` are the three tools BetaNYC adds to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace (shared module 1.5.0); never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
+`whats_changed`, `about_betanyc` and `about_data` are the three tools BetaNYC adds to each of its MCP servers. `src/betanyc-tools.ts` is a copy of the canonical file in BetaNYC's workspace (shared module 1.5.1); never edit the copy. Their text ends with the one-line disclaimer (the full one with `NYC_CLR_FOOTER=full`), and they do not use up the full footer meant for the first law answer.
 
 ---
 
@@ -218,7 +221,7 @@ npm test
 | `test/content-leak.test.js` | Regression tests for the content-leak fix (PR-A0): undecoded `&#160;` nbsp entities, `[ALP S-xxx]` editorial markers, and leading-digit run-ons (`1Each`). Includes scope guards confirming that inline labels with no `<TAB/>` after them in the source (`(6)the`) are left untouched. |
 | `test/corpus-invariants.test.js` | Invariant assertions over the committed `data/index/json/*.json` (every section across charter, admin\_code, and rules). Asserts: no run-together text, no subdivision label fused to the next word (`a.There`, issue #27), no leaked XML tags, no undecoded entities, no double spaces, no leading/trailing whitespace, and structural integrity against `versions.json` counts. Collects all violations before asserting, with corpus/id/citation/snippet in the failure message. |
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
-| `test/search-fallback.test.js` | Plain-language questions (issue #30). Unit tests for stopword and question-word stripping (`queryTerms`) and surrounding-quote removal (`stripSurroundingQuotes`). Exact ranks, counts and first-line notices run against a synthetic 8-section index committed at `test/fixtures/search-index/`, served through `NYC_LAWS_INDEX_DIR` in a child process: ranking by terms matched, word-start matching (`shed` is not found in "established"), plural `s`, the all-terms and widened notices, phrase results unchanged, quoted queries matched as phrases. Against the real index only behavior is checked (fallback used, notice first, terms listed, results non-empty), so a daily refresh cannot turn it red. |
+| `test/search-fallback.test.js` | Plain-language questions (issue #30). Unit tests for stopword and question-word stripping (`queryTerms`) and surrounding-quote removal (`stripSurroundingQuotes`). Exact ranks, counts and first-line notices run against a synthetic 8-section index committed at `test/fixtures/search-index/`, served through `NYC_LAWS_INDEX_DIR` in a child process: ranking by terms matched, word-start matching (`shed` is not found in "established"), plural `s`, the all-terms and widened notices, phrase results unchanged, quoted queries matched as phrases, and the count line after a fallback (`searchCountLine`), which counts every-term and some-term matches apart and never suggests a higher `limit` for the weak ones. Against the real index only behavior is checked (fallback used, notice first, terms listed, results non-empty), so a daily refresh cannot turn it red. |
 | `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
 | `test/footer-modes.test.js` | Disclaimer footer modes (issue #25). `NYC_CLR_FOOTER` parsing (unset, blank, both modes, a typo falling back to `full` with a warning); the default sending the full footer once and the one-line footer after; `full` sending it every time; not-found, empty and error responses carrying a disclaimer; and the invariant that every response in every mode, including an unrecognized one, says "legal advice". Also starts the server over stdio to check `instructions`, the first and second responses, and the single stderr warning. |
 | `test/strict-schema.test.js` | Strict tool schemas (issue #19). Asserts every tool in `TOOLS` (from `dist/tools.js`) advertises `additionalProperties: false`, and that `callTool()` rejects an undeclared parameter with an error naming both the offending key and that tool's accepted keys — rather than silently dropping it and returning unfiltered results. Includes regression guards that valid calls, with and without optional params, still succeed. Also checks that the schemas generated from zod (issue #22) keep each tool's parameters, required set, choices and descriptions, and that `search`'s `limit` advertises the 1 to 50 the server enforces. |
@@ -226,7 +229,7 @@ npm test
 | `test/tool-size.test.js` | The tools/list JSON plus the server instructions stay under a size budget (`toolListSize`), with a dated note for each raise (issue #44), and no sentence, such as the disclaimer, is repeated across the law-text tool descriptions (issue #48). |
 | `test/errors.test.js` | Every failure (bad parameter values, a missing parameter, an unknown parameter or tool) is `isError` with a plain sentence that names what to fix and lists the accepted parameters, with no zod JSON or stack frames, and keeps the disclaimer (issue #46). |
 | `test/fetch-retry.test.js` | `politeFetch` in `scripts/lib/fetch-retry.js`, the download behind `fetch-data`, against a fake fetch: User-Agent with the package version, a timeout, up to two retries on 429 and 5xx honoring Retry-After, none on a 404 (issue #39). |
-| `test/provenance-lists.test.js` | Every law-text answer has a source line per document (publisher, the `indexedAt` date from `versions.json`, a code-library link) before the disclaimer (issues #40, #41); search says how many matched and that snippets are cut; `list_titles` pages through all of the Rules with `offset`; the `get_section` match list stops at 25 and says how many there are (issue #42). Loose bounds only, against the committed index. |
+| `test/provenance-lists.test.js` | Every law-text answer has a source line per document (publisher, the `indexedAt` date from `versions.json`, a code-library link) before the disclaimer (issues #40, #41), each followed by the publisher's "current through" line, also on answers that find nothing (with which documents were searched; the empty `list_titles` case runs on the synthetic fixture); search says how many matched and that snippets are cut; `list_titles` pages through all of the Rules with `offset`; the `get_section` match list stops at 25 and says how many there are (issue #42). Loose bounds only, against the committed index. |
 | `test/index-checksum.test.js` | Each bundled `data/index/json/<corpus>.json` matches the `sha256` that `build-index.js` recorded in `versions.json`, and `mergeVersions()` keeps it and moves `indexedAt` when only the text changed (issue #45). |
 | `test/stdout.test.js` | Starts the built server with a bad `NYC_CLR_FOOTER`, makes four calls, and checks that every stdout line is a JSON-RPC 2.0 message and the startup warning went to stderr (issue #47). |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
@@ -304,12 +307,11 @@ Package release history lives in [RELEASES.md](RELEASES.md); [CHANGELOG.md](CHAN
 
 This server is for **research and informational purposes only. It does not provide legal advice.**
 
-Caveats are encoded at four levels so no response can be returned without one:
+Caveats are encoded at three levels so no response can be returned without one:
 
-1. **Tool descriptions** — every tool description includes a caveat line that the AI reads before responding. This ensures the AI naturally carries the disclaimer into any answer it gives.
-2. **Server instructions** — the full disclaimer below is sent as the server's `instructions` when a client connects, in every footer mode. Some clients pass these to the model and some do not, which is why level 3 never goes away.
-3. **Response footer** — every payload returned by the server ends with a disclaimer, regardless of which tool was called, what was found, or whether the call failed. By default the first response after the server starts carries the full footer below and every later response carries a one-line version (see `NYC_CLR_FOOTER` under Configuration).
-4. **`get_version` instruction** — the `get_version` tool description explicitly instructs the AI to call it before answering legal questions, so every response is grounded in the correct version of the law.
+1. **Server instructions** — the full disclaimer below is sent once as the server's `instructions` when a client connects, in every footer mode. Tool descriptions do not repeat it: it went out of them in issue #48, so it is not paid for on every turn. Some clients pass the instructions to the model and some do not, which is why level 2 never goes away.
+2. **Response footer** — every payload returned by the server ends with a disclaimer, regardless of which tool was called, what was found, or whether the call failed. By default the first response after the server starts carries the full footer below and every later response carries a one-line version (see `NYC_CLR_FOOTER` under Configuration).
+3. **`get_version` instruction** — the `get_version` tool description explicitly instructs the AI to call it before answering legal questions, so every response is grounded in the correct version of the law.
 
 ### Full footer (server instructions, and the first response)
 

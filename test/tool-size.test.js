@@ -7,6 +7,8 @@
 // 2026-11-18, later the same day: list_titles and get_title gained limit and offset, and law
 // answers a source line (#42, #40), then the disclaimer sentence repeated in five tool
 // descriptions moved to the instructions alone (#48). Measured 16,711; budget unchanged.
+// Review fixes (#49): shared module 1.5.1; tool descriptions unchanged (the citation hints
+// were never moved out of get_section). Measured 16,711; budget unchanged.
 //
 // Requires: npm run build (dist/ must exist). Guaranteed by "pretest".
 
