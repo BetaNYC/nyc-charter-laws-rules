@@ -36,8 +36,8 @@ Exposes 8 tools over MCP:
 |---|---|
 | `search` | Keyword search across all three documents (short keyword queries work best) |
 | `get_section` | Retrieve a specific section by citation (e.g. `§ 259`, `Chapter 11`) |
-| `list_titles` | List the top-level chapters or titles of a document |
-| `get_title` | Retrieve all sections within a chapter or title |
+| `list_titles` | List the chapters of a document, in order |
+| `get_title` | List the sections in a chapter, or in an Administrative Code title (citation and heading of each) |
 | `get_version` | Return the currency date for each document — so responses can be grounded in exactly how current the law is |
 | `whats_changed` | What changed in this server, newest first, from [WHATS-CHANGED.md](WHATS-CHANGED.md): new tools and corrections |
 | `about_betanyc` | Who built this server, where its code is, and where to report a bug in this server or ask for a new feature |
@@ -120,7 +120,9 @@ get_section("Chapter 11", corpus="charter")
 
 ### `list_titles`
 
-List the top-level chapters or titles of a document. Lists longer than 200, such as the Administrative Code (350) and the Rules (over 700), come in pages: the first line says, for example, `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
+List the chapters of a document, in order, each with its heading. The first line says how many there are (`84 chapters, in order.`); lists longer than 200, such as the Administrative Code (350) and the Rules (over 700), come in pages, and the first line says, for example, `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
+
+Each title of the Administrative Code has its own Chapter 1, so Administrative Code chapters are shown with their section range: `Chapter 1 (§ 3-101 to § 3-196) — Chapter 1: Mayor`, sorted by first section. The index does not record which title a Rules chapter is in, so several Rules chapters share a number; their headings tell them apart. Through 0.6.0 the list came in no order, and lettered chapters showed a cut number (`Chapter 18-` for Charter Chapters 18-A to 18-D).
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -137,18 +139,23 @@ list_titles("rules")
 
 ### `get_title`
 
-Retrieve chapter/title records matching an identifier. Matching is whole-token (`Chapter 1` does not match `Chapter 10`). Note: the index is flat — deep hierarchy (every section nested within a title) is not indexed, so this returns matching chapter/title-level records, not full title contents. Title-level indexing is a tracked future feature.
+List the sections in a chapter: the chapter's heading, then the citation and heading of each section, in order. Use `get_section` for a section's text. Numbers match whole: `Chapter 1` is not `Chapter 10` or `Chapter 1-A`. A number several chapters share (an Administrative Code or Rules `Chapter 1`) gives each of them.
+
+The Administrative Code's titles are not in the index, but its sections are numbered by title (§ 24-163 is in Title 24), so `Title 24` gives every chapter whose sections are numbered 24-…, and `Title 3, Chapter 1` narrows to the chapters numbered 1 among those. A lettered title shares its parent's numbers (Title 16-A's sections are § 16-501 on), so `Title 16` brings Titles 16-A and 16-B too. The Charter has no titles, and the index does not record Rules titles, so ask for a chapter there.
+
+The index is flat: each source file keeps its records in document order, and a chapter is its heading record plus the records after it, up to the next chapter heading. Through 0.6.0 this tool returned only the chapter's heading record, and `Title 6` found nothing.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `corpus` | string | yes | `charter`, `admin_code`, or `rules` |
-| `title` | string | yes | Chapter or title identifier (e.g. `Chapter 11`) |
+| `title` | string | yes | A chapter (`Chapter 11`), or in the Administrative Code a title (`Title 6`) or both (`Title 3, Chapter 1`) |
 | `limit` | integer | no | Max records to return (default 200, max 1000) |
 | `offset` | integer | no | How many to skip, for the next page (default 0) |
 
 ```
 get_title("charter", "Chapter 11")
 get_title("admin_code", "Title 6")
+get_title("admin_code", "Title 3, Chapter 1")
 ```
 
 ---
@@ -235,6 +242,7 @@ npm test
 | `test/mcp-tools.test.js` | In-process tests for the MCP handler functions (`searchCorpus`, `getSection`, `listTitles`, `getTitle`, `getVersions`) imported from `dist/corpus.js`. Grounded in real index data: verifies § 292 text content (the issue-#3 corrected phrase), negative lookups, version presence, and title listing. |
 | `test/search-fallback.test.js` | Plain-language questions (issue #30). Unit tests for stopword and question-word stripping (`queryTerms`) and surrounding-quote removal (`stripSurroundingQuotes`). Exact ranks, counts and first-line notices run against a synthetic 8-section index committed at `test/fixtures/search-index/`, served through `NYC_LAWS_INDEX_DIR` in a child process: ranking, word-start matching (`shed` is not found in "established"), plural `s`, the all-terms and widened notices, phrase results unchanged, quoted queries matched as phrases, and the count line after a fallback (`searchCountLine`), which counts every-term and some-term matches apart and never suggests a higher `limit` for the weak ones. Against the real index only behavior is checked (fallback used, notice first, terms listed, results non-empty), so a daily refresh cannot turn it red. |
 | `test/search-ranking.test.js` | How the word fallback ranks (round 2 of #49): `termScore` one factor at a time (heading 3 times, rare over common words, long sections pushed down a little, short stubs 0.3, Local Law appendix records 0.5), and on a synthetic index at `test/fixtures/ranking-index/` a short section about the question outranks a long definitions section holding every word. The notice and count lines never say no section has every term when one does, even off the page. Phrase search and `get_section` lookups on the round-1 fixture return exactly what the 0.6.0 code returned (recorded). |
+| `test/chapters.test.js` | `list_titles` and `get_title` (live check of 0.6.0): Charter chapters once each, in order, with whole numbers (`Chapter 18-A` to `18-D`, not `Chapter 18-`); Administrative Code chapters told apart by section range; `get_title` lists a chapter's sections (Charter Chapter 70, Chapter 1 from § 3 to § 20-w), `Title 6` and `Title 24` give the Administrative Code chapters numbered 6-… and 24-…, `Title 3, Chapter 1` narrows to the Mayor's chapter, a Rules title says to ask for a chapter, and other queries still match by prefix. Holds on an index built before or after the label fix. |
 | `test/echo-and-paths.test.js` | A missing or unreadable index file (through a broken `NYC_LAWS_INDEX_DIR`) names the document, never the path, and writes the path to stderr; `echo()` cuts what the caller sent to one line of at most 100 characters, for a 5,000-character query, citation, title, parameter name, corpus value and tool name, and for fake stack-trace lines. |
 | `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
 | `test/footer-modes.test.js` | Disclaimer footer modes (issue #25). `NYC_CLR_FOOTER` parsing (unset, blank, both modes, a typo falling back to `full` with a warning); the default sending the full footer once and the one-line footer after; `full` sending it every time; not-found, empty and error responses carrying a disclaimer; and the invariant that every response in every mode, including an unrecognized one, says "legal advice". Also starts the server over stdio to check `instructions`, the first and second responses, and the single stderr warning. |
@@ -246,7 +254,7 @@ npm test
 | `test/provenance-lists.test.js` | Every law-text answer has a source line per document (publisher, the `indexedAt` date from `versions.json`, a code-library link) before the disclaimer (issues #40, #41), that says BetaNYC converted the text for the four law-text tools and stays a plain `Source:` line for `get_version`, each followed by the publisher's "current through" line exactly as `get_version` shows it, also on answers that find nothing (with which documents were searched; the empty `list_titles` case runs on the synthetic fixture); search says how many matched and that snippets are cut; `list_titles` pages through all of the Rules with `offset`; `get_title` pages by 200 by default and honors `limit` and `offset`; the `get_section` match list stops at 25 and says how many there are (issue #42). DATA-SOURCES.json lists wrong or cut-short citations as a known gap. Loose bounds only, against the committed index. |
 | `test/index-checksum.test.js` | Each bundled `data/index/json/<corpus>.json` matches the `sha256` that `build-index.js` recorded in `versions.json`, and `mergeVersions()` keeps it and moves `indexedAt` when only the text changed (issue #45). |
 | `test/stdout.test.js` | Starts the built server with a bad `NYC_CLR_FOOTER`, makes four calls, and checks that every stdout line is a JSON-RPC 2.0 message and the startup warning went to stderr (issue #47). |
-| `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`; a label with a period inside, such as `L.L. 2016/002`, `G.1.2` or `10-1104.1`, kept whole), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
+| `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`; a label with a period inside, such as `L.L. 2016/002`, `G.1.2` or `10-1104.1`, kept whole; a chapter's whole number, such as `Chapter 18-A` or `Chapter 19.1`, read only at the start of the heading), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
 | `test/betanyc-tools.test.js` | `whats_changed` and `about_betanyc`: advertised read-only and strict with an `outputSchema`; every entry in this repo's `WHATS-CHANGED.md` valid and returned; filters; bad arguments rejected by name; every Correction carrying advice; the disclaimer on both, without using up the full footer; and both answers accepted by the MCP SDK client over stdio against their output schemas. Depends on no law text and no package version, so a daily refresh cannot turn it red. |
@@ -590,8 +598,8 @@ Every tool response ends with a disclaimer. `NYC_CLR_FOOTER` sets how much of it
 ### Browse the Rules on a subject area
 
 ```
-1. list_titles("rules")                   → find the relevant title
-2. get_title("rules", "Title 15")         → see all sections in that title
+1. list_titles("rules")                   → find the relevant chapter by its heading
+2. get_title("rules", "Chapter 900")      → its sections (Fire Protection Systems)
 3. search("fire safety", corpus="rules")  → keyword search within rules
 ```
 
