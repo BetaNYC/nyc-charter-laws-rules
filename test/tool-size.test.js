@@ -9,6 +9,8 @@
 // descriptions moved to the instructions alone (#48). Measured 16,711; budget unchanged.
 // Review fixes (#49): shared module 1.5.1; tool descriptions unchanged (the citation hints
 // were never moved out of get_section). Measured 16,711; budget unchanged.
+// Round 2 of the #49 review: shared module 1.5.2, and the search description now says how
+// the word fallback ranks. Measured 16,738; budget unchanged.
 //
 // Requires: npm run build (dist/ must exist). Guaranteed by "pretest".
 
