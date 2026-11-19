@@ -9,12 +9,20 @@ import { getVersions } from "../dist/corpus.js";
 
 const { questions } = JSON.parse(readFileSync(new URL("questions.json", import.meta.url), "utf8"));
 const citations = (text) => [...text.matchAll(/^\[(?:CHARTER|ADMIN_CODE|RULES)\] (.+?) — /gm)].map((m) => m[1]);
+// The same, with the corpus: "admin_code § 24-163".
+const sections = (text) => [...text.matchAll(/^\[(CHARTER|ADMIN_CODE|RULES)\] (.+?) — /gm)].map((m) => `${m[1].toLowerCase()} ${m[2]}`);
 
 function check(text, c) {
   const fails = [];
   const top = (n) => citations(text).slice(0, n);
   if (c.heading && !text.toLowerCase().includes(c.heading.toLowerCase())) fails.push(`heading "${c.heading}" not found`);
   if (c.contains && !text.includes(c.contains)) fails.push(`"${c.contains}" not found`);
+  for (const s of c.contains_all ?? []) if (!text.includes(s)) fails.push(`"${s}" not found`);
+  if (c.section_in_top) {
+    const { n, corpus, citation } = c.section_in_top;
+    const got = sections(text).slice(0, n);
+    if (!got.includes(`${corpus} ${citation}`)) fails.push(`${corpus} ${citation} not in top ${n}: ${got.join(", ")}`);
+  }
   if (c.first_line && !new RegExp(c.first_line).test(text.split("\n")[0])) fails.push(`first line: ${text.split("\n")[0].slice(0, 80)}`);
   if (c.citation_in_top && !top(c.citation_in_top.n).includes(c.citation_in_top.citation)) {
     fails.push(`${c.citation_in_top.citation} not in top ${c.citation_in_top.n}: ${top(c.citation_in_top.n).join(", ")}`);

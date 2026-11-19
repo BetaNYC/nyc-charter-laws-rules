@@ -1,9 +1,10 @@
 {
   "_readme": [
     "Fixed question set, written 2026-11-18 before the first scoring run. Each question has a known right answer in the law text.",
-    "Each step calls one tool with the given args. Checks: `heading` (the answer's text contains this heading text, case-insensitive), `citation_in_top` (one of the first N result citations equals this), `citation_prefix_in_top` (one of the first N starts with this), `contains` (the text contains this), `first_line` (the first line matches this regular expression).",
+    "Each step calls one tool with the given args. Checks: `heading` (the answer's text contains this heading text, case-insensitive), `citation_in_top` (one of the first N result citations equals this), `citation_prefix_in_top` (one of the first N starts with this), `contains` (the text contains this), `first_line` (the first line matches this regular expression), `contains_all` (the text contains each of these), `section_in_top` (one of the first N results is this citation in this corpus).",
     "Invariants checked on every answer: not an error, a 'Source: ... (American Legal Publishing)' line, and the words 'legal advice'.",
-    "Runs offline against the index bundled with the package: `npm run eval`. Results go in eval/runs/."
+    "Runs offline against the index bundled with the package: `npm run eval`. Results go in eval/runs/.",
+    "2026-11-18, review fixes (#49), written and committed before any run of them: Q09 now also checks the penalty amounts in the section's text (it asked about a penalty but only checked a section's rank). Q13 to Q17 are asked the way a person would ask, with no citation and no corpus; each expected section was read in the bundled index first, and each check uses the default limit, n = 10."
   ],
   "questions": [
     {
@@ -52,7 +53,10 @@
     {
       "id": "Q09",
       "q": "What is the penalty for a sidewalk shed left up too long?",
-      "steps": [{ "tool": "search", "args": { "query": "sidewalk shed", "corpus": "admin_code" }, "check": { "citation_in_top": { "n": 5, "citation": "§ 28-220.1" } } }]
+      "steps": [
+        { "tool": "search", "args": { "query": "sidewalk shed", "corpus": "admin_code" }, "check": { "citation_in_top": { "n": 5, "citation": "§ 28-220.1" }, "heading": "penalty for sidewalk sheds" } },
+        { "tool": "get_section", "args": { "citation": "§ 28-220.1", "corpus": "admin_code" }, "check": { "contains_all": ["$10 per linear foot", "$100 per linear foot", "$200 per linear foot", "$6,000 per month"] } }
+      ]
     },
     {
       "id": "Q10",
@@ -68,6 +72,31 @@
       "id": "Q12",
       "q": "How current is the law text this server has?",
       "steps": [{ "tool": "get_version", "args": {}, "check": { "contains": "Current through Local Law" } }]
+    },
+    {
+      "id": "Q13",
+      "q": "Is it illegal to leave my car engine idling?",
+      "steps": [{ "tool": "search", "args": { "query": "Is it illegal to leave my car engine idling?" }, "check": { "section_in_top": { "n": 10, "corpus": "admin_code", "citation": "§ 24-163" } } }]
+    },
+    {
+      "id": "Q14",
+      "q": "How warm does my landlord have to keep my apartment in winter?",
+      "steps": [{ "tool": "search", "args": { "query": "How warm does my landlord have to keep my apartment in winter?" }, "check": { "section_in_top": { "n": 10, "corpus": "admin_code", "citation": "§ 27-2029" } } }]
+    },
+    {
+      "id": "Q15",
+      "q": "Where is smoking banned in NYC?",
+      "steps": [{ "tool": "search", "args": { "query": "Where is smoking banned in NYC?" }, "check": { "section_in_top": { "n": 10, "corpus": "admin_code", "citation": "§ 17-503" } } }]
+    },
+    {
+      "id": "Q16",
+      "q": "How many terms can a city council member serve?",
+      "steps": [{ "tool": "search", "args": { "query": "How many terms can a city council member serve?" }, "check": { "section_in_top": { "n": 10, "corpus": "charter", "citation": "§ 1138" } } }]
+    },
+    {
+      "id": "Q17",
+      "q": "Who appoints the police commissioner?",
+      "steps": [{ "tool": "search", "args": { "query": "Who appoints the police commissioner?" }, "check": { "section_in_top": { "n": 10, "corpus": "charter", "citation": "§ 431" } } }]
     }
   ]
 }
