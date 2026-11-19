@@ -51,7 +51,7 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
-## v0.6.0 — Unreleased
+## v0.6.0 — 2026-11-19
 
 - **New tool: `about_data`**, the third tool BetaNYC adds to each of its MCP servers ([betanyc-ai-workspace#1655](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1655), epic [#1652](https://github.com/BetaNYC/betanyc-ai-workspace/issues/1652)). It answers where the law text comes from, from the new [DATA-SOURCES.json](DATA-SOURCES.json): one source per document (Charter, Administrative Code, Rules), each from American Legal Publishing's bulk XML. It says the source is the code library the NYC Law Department contracted for, and that BetaNYC modified it (the build reshapes and cleans the text), so this copy should not be considered the official record; it names the official record and links to it (`figures_official: false`). It also gives when this server's index was built for each document (the `indexedAt` times in `versions.json`, read at run time), the publisher's error address, the WHATS-CHANGED.md corrections that touched the text, and BetaNYC's contact address, lab@beta.nyc. Optional `topic`: `charter`, `admin-code`, `rules`, or a tool name. Read-only, no network, text plus `structuredContent` matching its `outputSchema`, ending with the one-line disclaimer like the other two shared tools.
 - **`data.json`**, a DCAT-US 3.0 catalog generated from DATA-SOURCES.json by `scripts/whats_changed.py about-data catalog` (never edited by hand). Both files ship in the package.
