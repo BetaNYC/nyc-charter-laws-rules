@@ -69,31 +69,43 @@ export interface Versions {
 const cache: Partial<Record<Corpus, Section[]>> = {};
 let versionsCache: Versions | null = null;
 
+const CORPUS_NAMES: Record<Corpus, string> = {
+  charter: "New York City Charter",
+  admin_code: "New York City Administrative Code",
+  rules: "Rules of the City of New York",
+};
+
+// A missing or unreadable index file. The message goes to the person asking, so it names the
+// document and what to do, never a path on the server: the path and the cause go to stderr,
+// where the operator sees them (stdout carries the protocol).
+function indexUnavailable(what: string, path: string, err: unknown): Error {
+  const cause = err instanceof Error ? err.message : String(err);
+  console.error(`nyc-charter-laws-rules: cannot read ${path}: ${cause}`);
+  return new Error(
+    `The index for ${what} is missing or unreadable on this server, so it cannot answer from it. ` +
+      `Whoever runs this server should reinstall the package, or rebuild the index with ` +
+      `"npm run build-index"; if ${INDEX_DIR_ENV} is set, check that it points at a complete index.`
+  );
+}
+
+function readIndexJson<T>(what: string, file: string): T {
+  const path = join(INDEX_DIR, file);
+  try {
+    return JSON.parse(readFileSync(path, "utf8")) as T;
+  } catch (err) {
+    throw indexUnavailable(what, path, err);
+  }
+}
+
 function loadCorpus(corpus: Corpus): Section[] {
   if (cache[corpus]) return cache[corpus]!;
-  const path = join(INDEX_DIR, `${corpus}.json`);
-  let raw: string;
-  try {
-    raw = readFileSync(path, "utf8");
-  } catch {
-    throw new Error(
-      `Index for "${corpus}" not found at ${path}. Run: npm run build-index`
-    );
-  }
-  cache[corpus] = JSON.parse(raw) as Section[];
+  cache[corpus] = readIndexJson<Section[]>(`the ${CORPUS_NAMES[corpus]}`, `${corpus}.json`);
   return cache[corpus]!;
 }
 
 function loadVersions(): Versions {
   if (versionsCache) return versionsCache;
-  const path = join(INDEX_DIR, "versions.json");
-  let raw: string;
-  try {
-    raw = readFileSync(path, "utf8");
-  } catch {
-    throw new Error("Version index not found. Run: npm run build-index");
-  }
-  versionsCache = JSON.parse(raw) as Versions;
+  versionsCache = readIndexJson<Versions>("the document dates (versions.json)", "versions.json");
   return versionsCache;
 }
 

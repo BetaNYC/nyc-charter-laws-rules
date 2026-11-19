@@ -134,6 +134,25 @@ function withFooter(text: string): string {
   return `${text}\n\n${COMPACT_FOOTER}`;
 }
 
+// Anything the caller sent that an answer repeats back (a query, a citation, a key or tool
+// name) goes through echo() first: one line, at most ECHO_MAX characters, ending "…" when cut.
+// Before this a 5,000-character query, or one carrying fake stack-trace lines, came back
+// whole. The first non-empty line is kept; control and format characters become spaces.
+export const ECHO_MAX = 100;
+export function echo(value: unknown, max = ECHO_MAX): string {
+  const text = typeof value === "string" ? value : String(value);
+  const lines = text
+    .split(/\r\n|[\n\r\u2028\u2029]/)
+    .map((l) => l.replace(/[\p{Cc}\p{Cf}]/gu, " ").replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const out = (lines[0] ?? "") + (lines.length > 1 ? " …" : "");
+  const cp = [...out];
+  return cp.length > max ? `${cp.slice(0, max - 1).join("").trimEnd()}…` : out;
+}
+
+// At most this many unknown parameter names are listed back; the rest are counted.
+const MAX_ECHOED_KEYS = 5;
+
 // Reject unknown keys loudly (issue #19). Zod strips them by default, so an
 // invented parameter used to be dropped and the tool answered a different
 // question with real, correctly formatted data. The message names the offending
@@ -151,18 +170,25 @@ function parseArgs<T extends z.ZodRawShape>(
   const accepted = Object.keys(shape);
   if (bad.length === 0) {
     // A plain sentence per problem, not zod's JSON (issue #46).
+    // zod's enum message ends with the value received, which can be any length: that case is
+    // written here, with the value through echo(). Other messages hold no caller text.
     const problems = parsed.error.issues.map((i) => {
-      const key = i.path.join(".") || "arguments";
+      const key = echo(i.path.join(".") || "arguments");
       if (i.code === "invalid_type" && i.received === "undefined") return `'${key}' is required`;
-      return `'${key}': ${i.message}`;
+      if (i.code === "invalid_enum_value") {
+        return `'${key}' must be one of ${i.options.map((o) => `'${String(o)}'`).join(", ")}, not '${echo(i.received)}'`;
+      }
+      return `'${key}': ${echo(i.message)}`;
     });
     throw new Error(
       `${toolName} was called with bad parameters: ${problems.join("; ")}. ` +
         `Accepted parameters: ${accepted.join(", ") || "none"}. Fix them and call again.`
     );
   }
+  const named = bad.slice(0, MAX_ECHOED_KEYS).map((k) => `'${echo(k)}'`).join(", ");
+  const others = bad.length > MAX_ECHOED_KEYS ? ` and ${bad.length - MAX_ECHOED_KEYS} more` : "";
   throw new Error(
-    `${toolName} does not accept ${bad.map((k) => `'${k}'`).join(", ")}. ` +
+    `${toolName} does not accept ${named}${others}. ` +
       (accepted.length
         ? `Accepted parameters: ${accepted.join(", ")}. `
         : `${toolName} takes no parameters. `) +
@@ -184,7 +210,7 @@ export function searchNotice(
   terms: string[],
   allTermTotal: number
 ): string | null {
-  const list = terms.join(", ");
+  const list = echo(terms.join(", "));
   if (mode === "all-terms") {
     return `No section contains the exact query; showing sections containing all of: ${list}.`;
   }
@@ -424,7 +450,7 @@ export async function callTool(name: string, args: unknown) {
         );
         if (results.length === 0) {
           const searched = corpus && corpus !== "all" ? [corpus] : ALL_CORPORA;
-          return answer(`No results found for "${query}". ${searchedLine(searched)}`, searched);
+          return answer(`No results found for "${echo(query)}". ${searchedLine(searched)}`, searched);
         }
         const notice = searchNotice(mode, terms, allTermTotal);
         const count = searchCountLine({ mode, shown: results.length, allTermResults, total, allTermTotal, limit: max });
@@ -449,7 +475,7 @@ export async function callTool(name: string, args: unknown) {
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
           const searched = corpus ? [corpus] : ALL_CORPORA;
-          return answer(`Section not found: "${citation}". ${searchedLine(searched)}`, searched);
+          return answer(`Section not found: "${echo(citation)}". ${searchedLine(searched)}`, searched);
         }
         if (result.kind === "ambiguous") {
           const { shown, note } = page(result.candidates, 0, MAX_CANDIDATES);
@@ -458,7 +484,7 @@ export async function callTool(name: string, args: unknown) {
             .join("\n");
           const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.` : "";
           return answer(
-            `Multiple sections match "${citation}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
+            `Multiple sections match "${echo(citation)}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
             shown.map((s) => s.corpus)
           );
         }
@@ -482,7 +508,7 @@ export async function callTool(name: string, args: unknown) {
         const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
-          return answer(`No sections found for "${title}" in ${corpus}. ${searchedLine([corpus])}`, [corpus]);
+          return answer(`No sections found for "${echo(title)}" in ${corpus}. ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(sections, offset ?? 0, limit ?? 200);
         const text = [note, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].filter(Boolean).join("\n\n");
@@ -503,7 +529,7 @@ export async function callTool(name: string, args: unknown) {
       }
 
       default:
-        return failed(`There is no tool named '${name}'. Available tools: ${TOOLS.map((t) => t.name).join(", ")}.`);
+        return failed(`There is no tool named '${echo(name)}'. Available tools: ${TOOLS.map((t) => t.name).join(", ")}.`);
     }
   } catch (err) {
     return failed(err instanceof Error ? err.message : String(err));
