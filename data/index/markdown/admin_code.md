@@ -6168,7 +6168,7 @@ a. Except as otherwise provided in this section and this chapter, any person who
 
 ## Chapter 4-G: Food Donation Web Portal
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-G
 
 _No text extracted._
 
@@ -12032,7 +12032,7 @@ This subchapter shall not: 1. Apply to the deactivation of any contracted delive
 
 ## Chapter 4-C: Unlawful Removal and Acceptance of Recyclable Material
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-C
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 2013/056.
 
@@ -34976,7 +34976,7 @@ Any civil penalties recovered by the corporation counsel pursuant to this chapte
 
 ## Chapter 4-D: Acceptance of Recyclable Containers in Bulk Using Motor Vehicles
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-D
 
 _No text extracted._
 
@@ -37696,7 +37696,7 @@ No later than the third year after the effective date of this title and every th
 
 ## Chapter 4-B: Recycling Program for Plastic Carryout Bags and Film Plastic [Repealed]
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-B
 
 _No text extracted._
 
@@ -38224,7 +38224,7 @@ Enactment date: 12/28/2006 Int. No. 486-A By the Speaker (Council Member Quinn) 
 
 ## Chapter 4-A: Electronic Equipment Collection, Recycling and Reuse
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-A
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 2008/013.
 
@@ -38608,7 +38608,7 @@ a. Definitions. For purposes of this section, the following terms have the follo
 
 ## Chapter 9-a: Community Opportunity to Purchase
 
-**Citation:** Chapter 9-
+**Citation:** Chapter 9-a
 
 _No text extracted._
 
@@ -40816,7 +40816,7 @@ a. No action shall be commenced to recover damages under section 3-318 until at 
 
 ## Chapter 23-C: Wireless Communications Surcharge
 
-**Citation:** Chapter 23-
+**Citation:** Chapter 23-C
 
 _No text extracted._
 
@@ -43480,7 +43480,7 @@ a. The executive director of the office for economic development shall not issue
 
 ## Chapter 1-B: Other Public Markets
 
-**Citation:** Chapter 1-
+**Citation:** Chapter 1-B
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 1997/028.
 
@@ -47128,7 +47128,7 @@ Enactment date: 12/24/1991 Int. No. 797-A By Council Members Cerullo III, O'Dono
 
 ## Chapter 23-B: Wireless Communications Service Surcharge
 
-**Citation:** Chapter 23-
+**Citation:** Chapter 23-B
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 2002/015 .
 
@@ -51472,7 +51472,7 @@ Enactment date: 12/22/1987 Int. No. 908-A By Council Member McCaffrey; also Coun
 
 ## Chapter 6-B: Relocation and Employment Assistance Program
 
-**Citation:** Chapter 6-
+**Citation:** Chapter 6-B
 
 _No text extracted._
 
@@ -53240,7 +53240,7 @@ The provisions of section 5-329 of this subchapter shall be construed to have ap
 
 ## Chapter 23-A: Enhanced 911 Telephone Surcharge
 
-**Citation:** Chapter 23-
+**Citation:** Chapter 23-A
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 1991/094.
 
@@ -58088,7 +58088,7 @@ _No text extracted._
 
 ## Chapter 5-A: Cannabis Enforcement
 
-**Citation:** Chapter 5-
+**Citation:** Chapter 5-A
 
 _No text extracted._
 
@@ -61888,7 +61888,7 @@ At the start of each school year, the chancellor shall ensure that each high sch
 
 ## Chapter 6-E: Relocation Assistance Credit per Employee
 
-**Citation:** Chapter 6-
+**Citation:** Chapter 6-E
 
 _No text extracted._
 
@@ -61912,7 +61912,7 @@ When used in this chapter, the following terms shall have the following meanings
 
 ## Chapter 5-A: Water Pollution Control
 
-**Citation:** Chapter 5-
+**Citation:** Chapter 5-A
 
 _No text extracted._
 
@@ -66608,7 +66608,7 @@ _No text extracted._
 
 ## D305 Light and air (MDL 3, Title 1).
 
-**Citation:** Title 1
+**Citation:** D305 Light and air (MDL 3, Title 1)
 
 _No text extracted._
 
@@ -66616,7 +66616,7 @@ _No text extracted._
 
 ## D306 Fire protection and safety (MDL 3, Title 2).
 
-**Citation:** Title 2
+**Citation:** D306 Fire protection and safety (MDL 3, Title 2)
 
 _No text extracted._
 
@@ -66624,7 +66624,7 @@ _No text extracted._
 
 ## D307 Sanitation and health (MDL 3, Title 3).
 
-**Citation:** Title 3
+**Citation:** D307 Sanitation and health (MDL 3, Title 3)
 
 _No text extracted._
 
@@ -66736,7 +66736,7 @@ Alterations, additions, repairs, and changes of occupancy of a multiple dwelling
 
 ## D702 Light and air (MDL 7 Title 1).
 
-**Citation:** Title 1
+**Citation:** D702 Light and air (MDL 7 Title 1)
 
 _No text extracted._
 
@@ -66744,7 +66744,7 @@ _No text extracted._
 
 ## D703 Fire protection (MDL 7 Title 2).
 
-**Citation:** Title 2
+**Citation:** D703 Fire protection (MDL 7 Title 2)
 
 _No text extracted._
 
@@ -66760,7 +66760,7 @@ _No text extracted._
 
 ## D705 Sanitation (MDL Article 7 Title 3).
 
-**Citation:** Title 3
+**Citation:** D705 Sanitation (MDL Article 7 Title 3)
 
 _No text extracted._
 
@@ -76560,7 +76560,7 @@ For the purpose of adjusting the reductions heretofore or hereafter made in the 
 
 ## Chapter 4-E: Recovery for Refrigerants
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-E
 
 _No text extracted._
 
@@ -76624,7 +76624,7 @@ If any provision of this local law shall be adjudged to be unconstitutional or i
 
 ## Chapter 4-F: Paper Carryout Bag Reduction Fee
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-F
 
 Editor's note: Chapter 4-F was repealed and replaced in its entirety by L.L. 2019/100, 5/19/2019, eff. 3/1/2020. For related unconsolidated provisions, see Appendix A at L.L. 2019/100.
 
@@ -76656,7 +76656,7 @@ a. Pursuant to subdivision 3 of section 27-2805 of the environmental conservatio
 
 ## Chapter 4-H: Reduced Permitted Capacity at Solid Waste Transfer Stations
 
-**Citation:** Chapter 4-
+**Citation:** Chapter 4-H
 
 _No text extracted._
 
@@ -84248,7 +84248,7 @@ a. Where the city purchases furniture for use in city facilities, the city shall
 
 ## Chapter 1-A: Fulton Fish Market Distribution Area and Other Seafood Distribution Areas
 
-**Citation:** Chapter 1-
+**Citation:** Chapter 1-A
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 1995/050.
 
@@ -84640,7 +84640,7 @@ a. Definitions. For the purposes of this section, the following terms have the f
 
 ## Chapter 6-A: Rebate of Amount of Local Sales Tax Paid on Sales of Energy
 
-**Citation:** Chapter 6-
+**Citation:** Chapter 6-A
 
 Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 1987/049.
 
@@ -84672,7 +84672,7 @@ Editor's note: For related unconsolidated provisions, see Appendix A at L.L. 198
 
 ## Chapter 6-C: Lower Manhattan Relocation and Employment Assistance Program
 
-**Citation:** Chapter 6-
+**Citation:** Chapter 6-C
 
 _No text extracted._
 
@@ -84696,7 +84696,7 @@ When used in this chapter the following terms shall have the following meanings:
 
 ## Chapter 6-D: Industrial Business Zones
 
-**Citation:** Chapter 6-
+**Citation:** Chapter 6-D
 
 _No text extracted._
 

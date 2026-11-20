@@ -600,7 +600,7 @@ _No text extracted._
 
 ## Chapter 51: Affordable New York Housing Program Rules and Eligibility Requirements Pursuant to Real Property Tax Law § 421-a(16)
 
-**Citation:** § 421-a
+**Citation:** Chapter 51
 
 _No text extracted._
 
@@ -6944,7 +6944,7 @@ DSS/HRA will treat information concerning current and former applicants and part
 
 ## Appendix A to Title 62: Criteria for the Location of City Facilities*
 
-**Citation:** Title 62
+**Citation:** Appendix A to Title 62
 
 * Adopted by the City Planning Commission on December 3, 1990 is the Criteria for the location of City Facilities. Set forth herein for the sake of convenient public access to such materials and in order to increase public familiarity and awareness of such rules, adoption of the rules is not governed by the City Administrative Procedure Act.
 
@@ -13008,7 +13008,7 @@ New York City Department of Environmental Protection hearings regarding the fitn
 
 ## Chapter 12: Rules for the Processing of Applications for FRESH Certifications Pursuant to Section 63-30 of the Zoning Resolution of the City of New York
 
-**Citation:** § 63-30
+**Citation:** Chapter 12
 
 _No text extracted._
 
@@ -13616,7 +13616,7 @@ With respect to the rebate that is authorized by Administrative Code § 11-240 f
 
 ## Chapter 61: Public Hearings Held Pursuant to Administrative Code § 24-110
 
-**Citation:** § 24-110
+**Citation:** Chapter 61
 
 _No text extracted._
 
@@ -14656,7 +14656,7 @@ The following basic resolution is included as part of the history of this Depart
 
 ## Chapter 19A: Expansion of the Full-Term Mobile Food Vendor Permit Waiting List [Repealed]
 
-**Citation:** Chapter 19
+**Citation:** Chapter 19A
 
 (Repealed City Record 10/12/2022, eff. 11/11/2022)
 
@@ -21608,7 +21608,7 @@ _No text extracted._
 
 ## Appendix A to 28 RCNY Chapter 61: Industrial Air Quality Checklist
 
-**Citation:** Chapter 61
+**Citation:** Appendix A to 28 RCNY Chapter 61
 
 To determine the potential for exceedance of the New York State Department of Environmental Conservation (DEC) Division of Air Resources Guidelines for Evaluation and Control of Ambient Air Contaminants (DAR-1) guidelines at a developable site resulting from industrial emissions, emissions from industrial sources within 400 feet of the development site shall be determined from emission limits in permits issued by the New York City Department of Environmental Protection (DEP) or for unpermitted sources, from the estimated emission limits provided by the lead agency and for Title V or state facility-permitted sources within 1,000 feet of the development site, from the emissions limits in the DEC Title V or state facility permits. For purposes of this Appendix, industrial sources means air emission sources (direct and fugitive emissions) that have or should have an existing or expired DEP Clean Air Tracking System industrial permit, concrete batching plants, or material handling facilities. The emissions from any existing industrial or state permitted source or emission assumptions for any unpermitted industrial source must first be converted into grams/second. This converted emission rate must then be multiplied by the value in the table below corresponding to the minimum distance between the industrial source and the building containing the new dwelling units to determine if the National Ambient Air Quality Standards (including the background concentrations) and AGC/SGC values in the DAR-1 guidelines are exceeded. Values are provided for 1-hour and annual averages to enable the comparison of pollutant levels to SGCs (1-hour averaging period) or AGCs (annual averaging period). Distance from Source 1-Hour Averaging Period (ug/m 3 ) 3-Hour Averaging Period (ug/m 3 ) 8-Hour Averaging Period (ug/m 3 ) 24-Hour Averaging Period (ug/m 3 ) Annual Averaging Period (ug/m 3 ) 30 ft 124,848 61,874 46,700 38,284 5,251 60 ft 31,284 15,479 12,721 10,292 1,386 90 ft 13,936 6,884 6,098 4,858 645 120 ft 7,857 4,028 3,658 2,877 378 150 ft 5,038 2,721 2,476 1,926 252 180 ft 3,507 1,982 1,808 1,393 181 210 ft 2,599 1,520 1,390 1,063 138 240 ft 2,038 1,211 1,109 844 110 270 ft 1,684 992 910 692 90 300 ft 1,449 831 764 580 75 330 ft 1,282 714 653 496 64 360 ft 1,153 631 566 431 56 400 ft 1,015 559 477 364 47 (Added City Record 5/3/2024, eff. 6/2/2024)
 
@@ -21952,7 +21952,7 @@ The amendments made by the rules that added this section shall not apply to init
 
 ## Chapter 6: Rules for the Processing of Plans Pursuant to Section 197-a of the Charter
 
-**Citation:** § 197-a
+**Citation:** Chapter 6
 
 _No text extracted._
 
@@ -22032,7 +22032,7 @@ _No text extracted._
 
 ## Chapter 62: Tax Abatement Pursuant to Administrative Code § 11-243.2
 
-**Citation:** § 11-243.2
+**Citation:** Chapter 62
 
 _No text extracted._
 
@@ -27280,7 +27280,7 @@ A certificate of operation for a stationary reciprocating compression ignition c
 
 ## Chapter 64: Affordable Housing from Commercial Conversions Tax Incentives Benefits Program Pursuant to Section 467-m of the Real Property Tax Law
 
-**Citation:** § 467-m
+**Citation:** Chapter 64
 
 _No text extracted._
 
@@ -27360,7 +27360,7 @@ No Eligible Multiple Dwelling that is operated as a Hotel shall be eligible for 
 
 ## Chapter 63: Affordable Neighborhoods for New Yorkers Tax Incentive Benefits Pursuant to Real Property Tax Law Section 485-x
 
-**Citation:** § 485-x
+**Citation:** Chapter 63
 
 _No text extracted._
 
@@ -34336,7 +34336,7 @@ For the purpose of this chapter, the meaning of terms shall be as follows (unles
 
 ## Chapter 19.1: Stormwater Management for Water Pollution Control
 
-**Citation:** Chapter 19
+**Citation:** Chapter 19.1
 
 (Title amended City Record 1/2/2024, eff. 2/1/2024)
 
@@ -41040,7 +41040,7 @@ Application for refund or transfer of over and double payments of taxes, water c
 
 ## Chapter 37: Change of Tentative Assessments Pursuant to Section 1512 of the Charter
 
-**Citation:** § 1512
+**Citation:** Chapter 37
 
 _No text extracted._
 
@@ -44840,7 +44840,7 @@ _No text extracted._
 
 ## Chapter 6: Tax Exemption Pursuant to § 421-a(1) Through § 421-a(15) of the Real Property Tax Law and §§ 11-245, 11-245.1 and 11-245.1-b* of the Administrative Code of the City of New York
 
-**Citation:** § 421-a
+**Citation:** Chapter 6
 
 This chapter covers applications for tax exemption pursuant to § 421-a of the Real Property Tax Law by multiple dwellings that (1) commence construction on or before June 15, 2015, (2) commence construction after June 15, 2015 and on or before December 31, 2015 that receive their first temporary or permanent certificate of occupancy covering all residential areas on or before December 31, 2019, and (3) for either (1) or (2) above, do not make an election pursuant to Real Property Tax Law § 421-a(16)(R). For all other applications for tax exemption for new construction or eligible conversion pursuant to § 421-a of the Real Property Tax Law, see Chapter 51 of this title. For applications for extended benefit tax exemption pursuant to § 421-a(17) of the Real Property Tax Law, see Chapter 49 of this title. (Amended City Record 9/26/2017, eff. 10/26/2017) * Editor's note: New York City Administrative Code § 11-245.1-b was effective from December 28, 2007, to December 28, 2010.
 
@@ -44928,7 +44928,7 @@ Except as otherwise specifically provided therein, the amendments to this chapte
 
 ## Chapter 7: Partial Tax Exemption for Private Dwellings Pursuant to § 421-b of the Real Property Tax Law
 
-**Citation:** § 421-b
+**Citation:** Chapter 7
 
 _No text extracted._
 
@@ -45632,7 +45632,7 @@ The notices in 28 RCNY § 16-01 above: (a) shall read: Key to heating system are
 
 ## Chapter 17: Rules Pertaining to Objections to Charges Enforced as Tax Liens Pursuant to §§ 27-2144, 27-2153(q), 27-2091, 27-2115(f)(8), 27-2115(k), 28-215.1.1 and 28-216.11 of the Administrative Code
 
-**Citation:** § 27-2144
+**Citation:** Chapter 17
 
 _No text extracted._
 
@@ -46696,7 +46696,7 @@ _No text extracted._
 
 ## Chapter 31: Tax Exemptions Under Section 420-c of the Real Property Tax Law
 
-**Citation:** § 420-c
+**Citation:** Chapter 31
 
 _No text extracted._
 
@@ -47560,7 +47560,7 @@ The Department may take such actions as it determines are necessary to address t
 
 ## Chapter 50: Building Service Employees Prevailing Wage Requirements and Construction Workers Minimum Average Hourly Wage Requirements in Certain Buildings Receiving Benefits Pursuant to Real Property Tax Law §§ 421-a, 467-m and 485-x
 
-**Citation:** § 421-a
+**Citation:** Chapter 50
 
 _No text extracted._
 
@@ -54608,7 +54608,7 @@ _No text extracted._
 
 ## Chapter 18: Seizure of Bicycles Pursuant to Administrative Code § 19-176
 
-**Citation:** § 19-176
+**Citation:** Chapter 18
 
 _No text extracted._
 
@@ -56520,7 +56520,7 @@ _No text extracted._
 
 ## Appendix A to 43 RCNY Chapter 6: Industrial Air Quality Checklist
 
-**Citation:** Chapter 6
+**Citation:** Appendix A to 43 RCNY Chapter 6
 
 To determine the potential for exceedance of the New York State Department of Environmental Conservation (DEC) Division of Air Resources Guidelines for Evaluation and Control of Ambient Air Contaminants (DAR-1) guidelines at a developable site resulting from industrial emissions, emissions from industrial sources within 400 feet of the development site shall be determined from emission limits in permits issued by the New York City Department of Environmental Protection (DEP) or for unpermitted sources, from the estimated emission limits provided by the lead agency and for Title V or state facility-permitted sources within 1,000 feet of the development site, from the emissions limits in the DEC Title V or state facility permits. For purposes of this Appendix, industrial sources means air emission sources (direct and fugitive emissions) that have or should have an existing or expired DEP Clean Air Tracking System industrial permit, concrete batching plants, or material handling facilities. The emissions from any existing industrial or state permitted source or emission assumptions for any unpermitted industrial source must first be converted into grams/second. This converted emission rate must then be multiplied by the value in the table below corresponding to the minimum distance between the industrial source and the building containing the new dwelling units to determine if the National Ambient Air Quality Standards (including background concentrations) and AGC/SGC values in the DAR-1 guidelines are exceeded. Values are provided for 1-hour and annual averages to enable the comparison of pollutant levels to SGCs (1-hour averaging period) or AGCs (annual averaging period). Distance from Source 1-Hour Averaging Period (ug/m 3 ) 3-Hour Averaging Period (ug/m 3 ) 8-Hour Averaging Period (ug/m 3 ) 24-Hour Averaging Period (ug/m 3 ) Annual Averaging Period (ug/m 3 ) 30 ft 124,848 61,874 46,700 38,284 5,251 60 ft 31,284 15,479 12,721 10,292 1,386 90 ft 13,936 6,884 6,098 4,858 645 120 ft 7,857 4,028 3,658 2,877 378 150 ft 5,038 2,721 2,476 1,926 252 180 ft 3,507 1,982 1,808 1,393 181 210 ft 2,599 1,520 1,390 1,063 138 240 ft 2,038 1,211 1,109 844 110 270 ft 1,684 992 910 692 90 300 ft 1,449 831 764 580 75 330 ft 1,282 714 653 496 64 360 ft 1,153 631 566 431 56 400 ft 1,015 559 477 364 47 (Added City Record 5/2/2024, eff. 6/1/2024)
 
@@ -58712,7 +58712,7 @@ This subchapter applies solely to cases brought by the New York City Department 
 
 ## Chapter 3: Rules of Practice Applicable to Proceedings Brought Before the Environmental Control Board Pursuant to Section 1049-a of the New York City Charter and Provisions of the New York City Administrative Code or New York State Law
 
-**Citation:** § 1049-a
+**Citation:** Chapter 3
 
 _No text extracted._
 
@@ -62680,7 +62680,7 @@ Notwithstanding any other provision of these rules the following shall not be co
 
 ## Chapter 8: Rules for the Processing of Applications for Permitted Parking Pursuant to Section 93-82 of the Zoning Resolution
 
-**Citation:** § 93-82
+**Citation:** Chapter 8
 
 _No text extracted._
 
@@ -62720,7 +62720,7 @@ These rules of procedure are established for the review of applications for cert
 
 ## Chapter 9: Rules for the Processing of Applications for Certification to Allow a Limited Increase in Street Wall Width Pursuant to § 132-51 of the Zoning Resolution
 
-**Citation:** § 132-51
+**Citation:** Chapter 9
 
 _No text extracted._
 
@@ -64320,7 +64320,7 @@ ATTACHMENT A: CON EDISON ELECTRIC SERVICE PSC No. 2 Retail Access Rate Schedule 
 
 ## Chapter 5-A: New York City Lower Manhattan Energy Program
 
-**Citation:** Chapter 5-
+**Citation:** Chapter 5-A
 
 _No text extracted._
 
@@ -66264,7 +66264,7 @@ These rules apply to any building for which (i) an administrator is appointed pu
 
 ## Chapter 32: Tax Exemption and Tax Abatement Under Section 421-g of the Real Property Tax Law
 
-**Citation:** § 421-g
+**Citation:** Chapter 32
 
 _No text extracted._
 
@@ -66640,7 +66640,7 @@ Editor's note: renumbered as 6 RCNY Chapter 7, Subchapter D. See City Record 8/2
 
 ## Chapter 49: Eligibility Requirements Pursuant to Real Property Tax Law Section 421-a(17)
 
-**Citation:** § 421-a
+**Citation:** Chapter 49
 
 _No text extracted._
 
@@ -69776,7 +69776,7 @@ _No text extracted._
 
 ## Appendix to Chapter 10: Division of Labor Services and Equal Employment Opportunity Compliance Executive Order No. 50
 
-**Citation:** Chapter 10
+**Citation:** Appendix to Chapter 10
 
 APRIL 25, 1980 BUREAU OF LABOR SERVICES By the power vested in me as Mayor of the City of New York, it is hereby ordered: § 1. Purpose. It is the purpose of this Order to ensure equal employment opportunity in City Contracting. § 2. Bureau Continued. The Bureau of Labor Services shall continue to serve such purposes and to have such responsibilities as restated by this Order. § 3. Definitions. Whenever used in this Executive Order, the following terms shall have the following meanings: (a) Bureau means the Bureau of Labor Services; (b) client services shall have the meaning set forth in the Procurement Policy Board Rules of the City of New York (9 RCNY § 1-01(e)). (c) construction project means any construction, reconstruction, rehabilitation, alteration, conversion, extension, improvement, repair or demolition of real property contracted by the City; (d) contract means any written agreement, purchase order or instrument whereby the City is committed to expend or does expend funds in return for work, labor, services, supplies, equipment, materials, or any combination of the foregoing: (i) Unless otherwise required by law, the term "contract" shall include any City grant, loan, guarantee or other City assistance for a construction project. (ii) The term "contract" shall not include: (A) contracts for financial or other assistance between the City and a government or government agency; (B) contracts, resolutions, indentures, declarations of trust, or other instruments authorizing or relating to the authorization, issuance, award, and sale of bonds, certificates of indebtedness, notes, or other fiscal obligations of the City, or consisting thereof; or (C) employment by the City of its officers and employees which is subject to the equal employment opportunity requirements of applicable law. (e) contracting agency means any administration, board, bureau, commission, department, or other governmental agency of the City of New York, or any official thereof, authorized on behalf of the City to provide for, enter into, award, or administer contracts. (f) contractor means a person, including a vendor, who is a party or a proposed party to a contract with a contracting agency, first-level subcontractors of supply and service contractors, and all levels of subcontractors of construction; (g) Director means the Director of the Bureau of Labor Services; (h) economically disadvantaged person means a person who, or a member of a family which, is considered economically disadvantaged under applicable law; (i) employment report means a report filed by a contractor containing information as to the employment practices, policies, programs, employment statistics and collective bargaining agreements, if any, of the contractor in such form as the Office may direct by regulation; (j) equal employment opportunity means the treatment of all employees and applicants for employment without unlawful discrimination as to race, creed, color, national origin, sex, age, disability, marital status, sexual orientation or citizenship status in all employment decisions, including but not limited to recruitment, hiring, compensation, training and apprenticeship, promotion, upgrading, demotion, downgrading, transfer, lay-off and termination, and all other terms and conditions of employment (k) trainee means an economically disadvantaged person who qualifies for and receives training in one of the construction trades pursuant to a program other than apprenticeship programs, approved by the Office and, where required by law, the State Department of Labor and the United States Department of Labor, Office of Apprenticeship and Training; § 4. Responsibilities of Bureau. The responsibilities of the Bureau shall be as follows: (a) To implement, monitor compliance with, and enforce this Order and programs established pursuant to City, State and Federal law requiring contractors to provide equal employment opportunity; (b) To implement, monitor compliance with, and enforce on-the-job training requirements on construction projects; (c) To monitor compliance by contractors with State and Federal prevailing wage requirements where required; (d) To advise and assist contractors and labor unions with respect to their obligations to provide equal employment opportunity; (e) To advise and assist persons in the private sector with respect to employment problems; (f) To establish advisory committees, including representatives of employers, labor unions, community organizations and others concerned with the enforcement of this Order; and (g) To serve as the City's principal liaison to Federal, State and local contract compliance agencies. § 5. Contract Provisions. (a) Equal Employment Opportunity. A contracting agency shall include in every contract to which it becomes a party such provisions requiring the contractor to ensure equal employment opportunity as the Bureau may direct, consistent with this Order. (b) On-the-Job Training. A contracting agency shall include in every contract concerning a construction project to which it becomes a party such provisions requiring the contractor to provide on-the-job training for economically disadvantaged persons as the Bureau may direct by regulation. (c) Subcontractors. A contracting agency shall include in every contract to which it becomes a party such provisions requiring the contractor not to discriminate unlawfully in the selection of subcontractors as the Bureau may direct by regulation. § 6. Employment Reports. (a) Submission Requirements. No contracting agency shall enter into a contract with any contractor unless such contractor's employment report is first submitted to the Bureau for its review. Unless otherwise required by law, an employment report shall not be required for the following: (i) A construction contract in the amount of less than $1 million; a construction subcontract in the amount of less than $750,000; or a supply and service contract in the amount of $50,000 or less or of more than $50,000 in which the contractor employs fewer than 50 employees at the facility or facilities involved in the contract; (ii) An emergency contract or other exempt contract except as the Bureau may direct by regulation; (iii) A contract with a contractor who has received a certificate of compliance with the equal employment opportunity requirements of applicable law from the Bureau within the preceding thirty-six months, or an appropriate agency of the State of New York or of the United States within the preceding thirty-six months, except as the Bureau may direct by regulation; and (iv) A contract for client services, as defined in section three above; except that nothing in this section shall prevent the Director in the Director’s sole discretion from requiring an employment report from a client services agency that has contracted with the City if the Director believes that the client services agency is in violation of the equal employment requirements of City, State or Federal law. (b) Bureau Review. The Bureau shall review all employment reports to determine whether contractors are in compliance with the equal employment opportunity requirements of City, State and Federal law and the provisions of this Order. The contracting agency shall transmit the employment report to the Bureau within ten business days after the selection of a proposed contractor. A contracting agency may thereafter award a contract unless the Bureau gives prior written notice to the contracting agency and the contractor as follows: (i) If the Bureau notifies the contracting agency and the contractor within five business days after the receipt by the Bureau of the employment report that the contractor has failed to submit a complete employment report, the Director may require the contracting agency to disapprove the contractor unless such deficiency is corrected in a timely manner; (ii) If the Bureau notifies the contracting agency and the contractor within fifteen business days of the receipt by the Bureau of the completed employment report that the Bureau has found reason to believe that the contractor is not in substantial compliance with applicable legal requirements and the provisions of this Order, the Bureau shall promptly take such action as may be necessary to remedy the contractor's noncompliance as provided by this Order. Provided that a contracting agency may award a requirements contract or an open market purchase agreement prior to review by the Bureau of the contractor's employment report, but may not make a purchase order against such contract or agreement until it has first transmitted such contractor's employment report to the Bureau and the Bureau has completed its review in the manner provided by this section. (c) Employment Program. The Bureau may require a contractor to adopt and adhere to a program designed to ensure equal employment opportunity. (d) Periodic Reports. Contractors shall file periodic employment reports after the award of a contract in such form and frequency as the Bureau may direct by regulation to determine whether such contractors are in compliance with applicable legal requirements and the provisions of this Order. § 7. Training programs. The Bureau shall monitor the recruitment, training and placement of economically disadvantaged persons in on-the-job training programs on construction projects. Contracting agencies shall require contractors to make a good faith effort to achieve the ratio of one trainee to four journey-level employees of each craft on each construction project. (a) The Bureau shall determine the number of trainees and hours of training required by each contractor or subcontractor for each construction project. (b) In the event that a contractor fails to make a good faith effort to train the required number of individuals for the required amount of hours, the Bureau, after consultation with the contracting agency, shall direct such agency to reduce the contractor's compensation by an amount equal to the amount of wages and fringe benefits which the contractor failed to pay to trainees. (c) On-the-job training of economically disadvantaged persons shall be required on all construction contracts covered by the submission requirements of this Order § 8. Compliance Investigations and Hearings. The Bureau shall conduct such investigations and hold such hearings as may be necessary to determine whether contractors are in compliance with the equal employment opportunity requirements of City, State and Federal law and the provisions of this Order. (a) Voluntary compliance. The Bureau shall seek to obtain the voluntary compliance of contractors and labor unions with applicable legal requirements and the provisions of this Order. (b) Noncompliance. Upon receiving a complaint or at its own instance, the Bureau shall determine whether there is reason to believe a contractor is not in compliance with applicable legal requirements and the provisions of this Order. (c) Hearings. The Bureau shall hold a hearing on prior written notice to a contractor and the contracting agency before any adverse determination is made with respect to such contractor's employment practices or imposing any sanction or remedy for noncompliance with applicable legal requirements and the provisions of this Order. The hearing shall be held before a City hearing officer, or such other person designated by the Director, who shall submit a report containing findings of fact and recommendations to the Director. Based on the record as a whole, the Director shall determine whether a contractor has failed to comply with applicable legal requirements or the provisions of this Order and the appropriate sanctions for noncompliance. (d) Notices. The Bureau shall give prior notice of any hearing and shall provide a copy of any hearing report and determination of the Director under paragraph (c) of this section to the contracting agency, the Corporation Counsel and the Comptroller. The Bureau shall notify appropriate City, State and Federal agencies of violations of law and may, with the approval of the Corporation Counsel, initiate proceedings in such agencies. § 9. Sanctions and Remedies. After making a determination that a contractor is not complying with applicable legal requirements and the provisions of this Order, the Director may direct that such sanctions as may be permitted by law or contractual provisions be imposed, including the disapproval; of a proposed contractor, the suspension or termination of a contract and the reduction of a contractor's compensation, except as follows: (a) Within five business days of the issuance of a determination by the Director under § 8(c), a contracting agency head may file with the Director written objections to the sanctions to be imposed. Where such objections have been filed, the Director and the contracting agency head shall jointly determine the appropriate sanctions to be imposed. (b) In lieu of any of the foregoing sanctions, the Director may require a contractor to adopt and adhere to a program to ensure equal employment opportunity. § 10. Public Agencies. Any administration, board, bureau, commission, department or other public agency, not subject to this Order, which imposes by rule, regulation or order equal employment opportunity requirements, may, with the consent of the Mayor, delegate such responsibilities to the Bureau as may be consistent with this Order. § 11. Confidentiality. To the extent permitted by law and consistent with the proper discharge of the Bureau's responsibilities under this Order, all information provided by a contractor to the Bureau shall be confidential. § 12. Regulations. The Bureau shall promulgate such regulations, subject to the approval of the Mayor, as may be necessary to discharge its responsibilities under this Order, including regulations increasing the dollar amounts and number of employees referred to in this Order. Any regulations of the Bureau establishing terms and conditions for contractors shall be approved as to form by the Corporation Counsel. Nothing contained herein shall be construed to bar any religious or denominational institution or organization, or any organization operated for charitable or educational purposes, which is operated, supervised or controlled by or in connection with a religious organization, from limiting employment or giving preference to persons of the same religion or denomination or from making such selection as is calculated by such organization to promote the religious principles for which it is established or maintained. The regulations shall set forth this exemption for religiously-sponsored organizations and provide for the discharge of the Bureau's responsibilities in a manner consistent with such exemption. § 13. Annual Report. The Bureau shall submit an annual report to the Mayor concerning its responsibilities under this Order. § 14. Separability. If any provision of this Order or the application thereof is held invalid, the remainder of this Order and the application thereof to other persons or circumstances shall not be affected by such holding and shall remain in full force and effect. § 15. Revocation of Prior Orders. Executive Orders No. 71 (1968), No. 20 (1970), No. 23 (1970), No. 27 (1970), No. 31 (1971), No. 74 (1973), No. 7 (1974), and No. 80 (1977) are hereby revoked and the first paragraph of Section 2 of Executive Order No. 4 (1978) is hereby deleted. Nothing in this Order shall be deemed to relieve any person of any obligation not inconsistent with this Order assumed or imposed pursuant to an Order superseded by this Order. § 16. Effective Date. This Order shall take effect immediately. (Amended City Record 10/31/2023, eff. 11/30/2023)
 

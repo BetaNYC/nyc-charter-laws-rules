@@ -624,7 +624,7 @@ The commissioner shall have power to erect, operate, supply and maintain, subjec
 
 ## Chapter 18-A: Civilian Complaint Review Board
 
-**Citation:** Chapter 18-
+**Citation:** Chapter 18-A
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/001.
 
@@ -648,7 +648,7 @@ a. Definitions. As used in this section, the following terms have the following 
 
 ## Chapter 18-D: Sale, Purchase and Possession of Weapons
 
-**Citation:** Chapter 18-
+**Citation:** Chapter 18-D
 
 _No text extracted._
 
@@ -824,7 +824,7 @@ Notwithstanding any inconsistent provision of any general, special or local law,
 
 ## Chapter 19-A: Emergency Management Department
 
-**Citation:** Chapter 19-
+**Citation:** Chapter 19-A
 
 _No text extracted._
 
@@ -864,7 +864,7 @@ a. The department shall be the lead agency in the coordination and facilitation 
 
 ## Chapter 21-A: New York City Sports Commission
 
-**Citation:** Chapter 21-
+**Citation:** Chapter 21-A
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.
 
@@ -904,7 +904,7 @@ a. The director shall have the power to perform the following functions relating
 
 ## Chapter 24-A: Department of Homeless Services
 
-**Citation:** Chapter 24-
+**Citation:** Chapter 24-A
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/051 and L.L. 1995/075.
 
@@ -1600,7 +1600,7 @@ On the written petition of any person, an agency may issue a written declaratory
 
 ## Chapter 45-A: Office of Administrative Trials and Hearings
 
-**Citation:** Chapter 45-
+**Citation:** Chapter 45-A
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/049.
 
@@ -2656,7 +2656,7 @@ The commissioner may provide that on any city-sponsored, authorized or assisted 
 
 ## Chapter 2-A: Districting Commission
 
-**Citation:** Chapter 2-
+**Citation:** Chapter 2-A
 
 _No text extracted._
 
@@ -3504,7 +3504,7 @@ The office of management and budget shall, no later than ten days following the 
 
 ## Chapter 18-B: Independent Police Investigation and Audit Board
 
-**Citation:** Chapter 18-
+**Citation:** Chapter 18-B
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1995/013 and L.L. 1997/091.
 
@@ -4376,7 +4376,7 @@ The boroughs of the city are continued as existing at the time of the adoption o
 
 ## Chapter 46-A: Voting by Lawful Permanent Residents and Persons Authorized to Work in the United States
 
-**Citation:** Chapter 46-
+**Citation:** Chapter 46-A
 
 _No text extracted._
 
@@ -4608,7 +4608,7 @@ Editor's note: For related unconsolidated provisions, see Administrative Code Ap
 
 ## Chapter 50-A: Qualification for Elected Office
 
-**Citation:** Chapter 50-
+**Citation:** Chapter 50-A
 
 _No text extracted._
 
@@ -4824,7 +4824,7 @@ a. The failure of any party to appear for a conference or hearing without having
 
 ## Chapter 18-C: Public Safety
 
-**Citation:** Chapter 18-
+**Citation:** Chapter 18-C
 
 _No text extracted._
 
@@ -5136,7 +5136,7 @@ a. Definitions. For purposes of this section, the term “homeowner” means a n
 
 ## Chapter 24-B: Administration for Children's Services
 
-**Citation:** Chapter 24-
+**Citation:** Chapter 24-B
 
 _No text extracted._
 
@@ -5232,7 +5232,7 @@ a. There shall be a veterans' advisory board consisting of 13 members, 11 of who
 
 ## Chapter 13-A: Office of Economic and Financial Opportunity [Repealed]
 
-**Citation:** Chapter 13-
+**Citation:** Chapter 13-A
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.
 
@@ -5240,7 +5240,7 @@ Editor's note: For related unconsolidated provisions, see Administrative Code Ap
 
 ## Chapter 13-B: Office of Labor Services [Repealed]
 
-**Citation:** Chapter 13-
+**Citation:** Chapter 13-B
 
 Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.
 

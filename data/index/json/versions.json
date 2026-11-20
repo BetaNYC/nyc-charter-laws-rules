@@ -1,20 +1,20 @@
 {
   "charter": {
     "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
-    "indexedAt": "2026-11-14T11:05:40.153Z",
+    "indexedAt": "2026-11-20T11:07:10.227Z",
     "sectionCount": 856,
-    "sha256": "1ef9976cdd1c9efb080f16f9223d1d8fc4b5492965a0387e2ea4de7f8d6fde8a"
+    "sha256": "acb840486f04aa94dd260f0a2c2b494c97db1ec43513c02ce8c3037868d07191"
   },
   "admin_code": {
     "currentThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
-    "indexedAt": "2026-11-19T11:07:25.196Z",
+    "indexedAt": "2026-11-20T11:07:22.472Z",
     "sectionCount": 12654,
-    "sha256": "1a9a85edf8a0e049ad4f2434fd7f1be1df067531439716cc2db9896f2327ff4d"
+    "sha256": "77cb0bbab8c119e9e6faebb2fcc4d5bfd70d8a99834ccf2861cf3d2a195c8568"
   },
   "rules": {
     "currentThrough": "Current through rules effective November 14, 2026.",
-    "indexedAt": "2026-11-14T11:05:52.723Z",
+    "indexedAt": "2026-11-20T11:07:31.928Z",
     "sectionCount": 8733,
-    "sha256": "6d83fe56c255b45f4e1f63311d53c47f3b6e3a86beb3e72bd82952fa8b808024"
+    "sha256": "30cb4e80aed41689cd2a9da81eacd80bb931de82610979f444ae7c66ac80ec57"
   }
 }
