@@ -51,6 +51,10 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
+## v0.6.2 — 2026-11-22
+
+- Automatic data release. Bundled law text refreshed: Charter LL 2026/164 -> LL 2026/165; Admin Code LL 2026/164 -> LL 2026/165. No code changes beyond what was already merged to `main`.
+
 ## v0.6.1 — 2026-11-20
 
 - Automatic data release. Bundled law text refreshed; no corpus's "current through" line moved. No code changes beyond what was already merged to `main`.

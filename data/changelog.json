@@ -1,6 +1,37 @@
 {
   "entries": [
     {
+      "date": "2026-11-22",
+      "indexBuiltAt": "2026-11-22T11:05:58.238Z",
+      "changed": true,
+      "corpora": {
+        "charter": {
+          "label": "NYC Charter",
+          "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
+          "sectionCount": 856,
+          "indexedAt": "2026-11-22T11:05:49.061Z",
+          "previousThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
+          "changed": true
+        },
+        "admin_code": {
+          "label": "NYC Administrative Code",
+          "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
+          "sectionCount": 12655,
+          "indexedAt": "2026-11-22T11:05:58.238Z",
+          "previousThrough": "Current through Local Law 2026/164, enacted November 10, 2026,",
+          "changed": true
+        },
+        "rules": {
+          "label": "Rules of the City of New York",
+          "currentThrough": "Current through rules effective November 14, 2026.",
+          "sectionCount": 8733,
+          "indexedAt": "2026-11-20T11:07:31.928Z",
+          "previousThrough": "Current through rules effective November 14, 2026.",
+          "changed": false
+        }
+      }
+    },
+    {
       "date": "2026-11-20",
       "indexBuiltAt": "2026-11-20T11:07:31.928Z",
       "changed": false,
