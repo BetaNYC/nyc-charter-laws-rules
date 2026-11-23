@@ -175,7 +175,9 @@ function collectDestinations(node, recordId, out) {
 
 // "Title 72: Office of Emergency Management" → "Title 72"; "Subchapter 1: [No Title]" →
 // "Subchapter 1". The level's own word and number, read from the start of its heading.
-const GROUP_LABEL = /^([A-Za-z]+)\s+([A-Za-z]?\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*)/;
+// A level may be numbered with a single capital letter instead ("Subchapter A: General
+// Provisions", "Appendix A"), when the letter ends the heading or a colon or period follows it.
+const GROUP_LABEL = /^([A-Za-z]+)\s+([A-Za-z]?\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*|[A-Z](?=[:.]|$))/;
 export function groupLabel(heading) {
   const m = GROUP_LABEL.exec(heading);
   return m ? `${m[1][0].toUpperCase()}${m[1].slice(1).toLowerCase()} ${m[2]}` : null;
@@ -307,12 +309,22 @@ export function createStructureCollector(corpus) {
         return s;
       });
       const usedGroups = new Set(entries.flatMap((e) => e.parents));
+      const targets = out.flatMap((s) => (s.links ?? []).map((l) => l.to));
+      const own = collector.resolver();
+      const linkStats = {
+        links: targets.length,
+        unresolved: targets.filter((t) => t.resolved === false).length,
+        ambiguous: targets.filter((t) => t.ambiguous).length,
+        ambiguousIds: own.ambiguousIds.size,
+        ambiguousNames: own.ambiguousNames.size,
+      };
       return {
         format: STRUCTURE_FORMAT,
         corpus,
         indexSha256,
         sectionCount: sections.length,
         titleStats,
+        linkStats,
         groups: Object.fromEntries(
           [...groups].filter(([id]) => usedGroups.has(id)).map(([id, g]) => [id, { level: g.level, label: g.label, heading: g.heading }])
         ),
@@ -334,16 +346,30 @@ export function createStructureCollector(corpus) {
         if (groups.has(d.record) || titleIds.has(d.record)) return { id: d.record, group: true };
         return null;
       };
+      // The publisher reuses some anchor ids and names on more than one record (July 2026: the
+      // Rules' § 2-01.1 carries § 2-01's id and name). A link to one of those could mean either
+      // record, so it is ambiguous and left unresolved, never pointed at whichever was read
+      // last. Every <DESTINATION> counts, including ones on records no target can be made of.
+      const recordsOf = (key) => {
+        const m = new Map();
+        for (const d of destinations) {
+          const k = d[key];
+          if (!m.has(k)) m.set(k, new Set());
+          m.get(k).add(d.record);
+        }
+        return new Set([...m].filter(([, rs]) => rs.size > 1).map(([k]) => k));
+      };
+      const ambiguousIds = recordsOf("id");
+      const ambiguousNames = recordsOf("name");
       const byId = new Map();
       const byName = new Map();
       for (const d of destinations) {
         const w = where(d);
         if (!w) continue;
-        byId.set(d.id, w);
-        // A name used twice is ambiguous: keep neither (counted in the PR, 2026-11-22).
-        byName.set(d.name, byName.has(d.name) ? null : w);
+        if (!ambiguousIds.has(d.id) && !byId.has(d.id)) byId.set(d.id, w);
+        if (!ambiguousNames.has(d.name) && !byName.has(d.name)) byName.set(d.name, w);
       }
-      resolved = { byId, byName };
+      resolved = { byId, byName, ambiguousIds, ambiguousNames };
       return resolved;
     },
   };
@@ -362,14 +388,22 @@ function countTag(node, tag) {
   return (t === tag ? 1 : 0) + countTag(node[t], tag);
 }
 
-function resolveTarget(t, resolvers) {
+// A link's target in the corpus it names. A link that carries an anchor id is found by that
+// id, and by its name only when the id is not found at all; an id or name the publisher put on
+// two records is `ambiguous` and stays unresolved.
+export function resolveTarget(t, resolvers) {
   if (t.kind !== "section") return t;
   const out = { corpus: t.corpus, name: t.name };
   const r = t.corpus ? resolvers[t.corpus] : null;
   if (!r) return { ...out, resolved: false };
-  const hit = (t.destination && t.destination !== "0-0-0-0" && r.byId.get(t.destination)) || r.byName.get(t.name) || null;
-  if (!hit) return { ...out, resolved: false };
-  return { ...out, ...hit };
+  if (t.destination && t.destination !== "0-0-0-0") {
+    if (r.ambiguousIds.has(t.destination)) return { ...out, resolved: false, ambiguous: true };
+    const hit = r.byId.get(t.destination);
+    if (hit) return { ...out, ...hit };
+  }
+  if (r.ambiguousNames.has(t.name)) return { ...out, resolved: false, ambiguous: true };
+  const hit = r.byName.get(t.name);
+  return hit ? { ...out, ...hit } : { ...out, resolved: false };
 }
 
 // A file that starts at a Chapter has no Title record around it: the publisher puts a Title's

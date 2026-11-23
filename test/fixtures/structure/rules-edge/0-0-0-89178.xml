@@ -1,0 +1,1066 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-89178" number="106483" version="3">
+			<HEADING>Chapter 2: Uniform Land Use Review Procedure (ULURP)</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-12469" name="T62C002"/>Chapter 2: Uniform Land Use Review Procedure (ULURP)</PARA>
+		</RECORD>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" style-id="0-0-0-480" level-depth="3" toc-section="false">
+			<LEVEL style-name="Subtitle" style-name-escaped="Subtitle" style-id="0-0-0-15301" level-depth="4" toc-section="false">
+				<LEVEL style-name="Part" style-name-escaped="Part" style-id="0-0-0-483" level-depth="5" toc-section="false">
+					<LEVEL style-name="Subpart" style-name-escaped="Subpart" style-id="0-0-0-15960" level-depth="6" toc-section="false">
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89179" number="106484" version="3">
+								<HEADING>§ 2-01 Actions Subject to Procedure.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12471" name="T62C002_2-01"/>§ 2-01 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Actions Subject to Procedure.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89180" number="106485" version="3">
+									<PARA>The land use review procedure which is set out herein shall govern the following actions:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89181" number="106486" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>changes in the City Map pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="198" destination-id="0-0-0-0">198</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="199" destination-id="0-0-0-0">199</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89182" number="106487" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>approval of a map of a subdivision or the platting of land into streets, avenues or public places pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="202" destination-id="0-0-0-0">202</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89183" number="106488" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>designations of zoning districts under the Zoning Resolution, including conversion from one land use to another land use pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89184" number="106489" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>adoption of special permits within the jurisdiction of the City Planning Commission (hereafter: &quot;the Commission&quot;) under the Zoning Resolution pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89185" number="106490" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>selection of sites for capital projects pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="218" destination-id="0-0-0-0">218</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89186" number="106491" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(f)<TAB tab-count="1"/>granting of revocable consents pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="364" destination-id="0-0-0-0">364</LINK> of the Charter, requests for proposals and other solicitations for franchise pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="363" destination-id="0-0-0-0">363</LINK> of the Charter and major concessions as defined pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="374" destination-id="0-0-0-0">374</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89187" number="106492" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(g)<TAB tab-count="1"/>authorization of improvements in real property, the costs of which are payable other than by the City pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="220" destination-id="0-0-0-0">220</LINK> of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89188" number="106493" version="888">
+									<PARA>
+										<TAB tab-count="1"/>(h)<TAB tab-count="1"/>approval of housing or urban renewal plans and projects pursuant to City, State or Federal laws;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89189" number="106494" version="888">
+									<PARA>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>approval of sanitary or waterfront landfills pursuant to applicable Charter provisions or other provisions of law;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89190" number="106495" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(j)<TAB tab-count="1"/>approval of sale, lease (other than lease of space for office uses), exchange or other disposition of real property of the City and, sale or lease of land under water pursuant to Section 1602, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="Chapter 15" destination-id="0-0-0-0">Chapter 15</LINK> of the Charter or other applicable provisions of law;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89191" number="106496" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(k)<TAB tab-count="1"/>acquisitions by the city of real property (other than acquisition of office space for office use or a building for office use), including acquisition by purchase, condemnation, exchange or lease and including the acquisition of land under water pursuant to Section 1602, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="Chapter 15" destination-id="0-0-0-0">Chapter 15</LINK> of the Charter, or other applicable provisions of law;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89192" number="106497" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>for purposes of review by a community board or, where appropriate, by community boards and a borough board, the granting by the Board of Standards and Appeals of a variance of the Zoning Resolution pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="668" destination-id="0-0-0-0">668</LINK>(2) of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89193" number="106498" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(m)<TAB tab-count="1"/>for purposes of review by a community board or, where appropriate, by community boards and a borough board, the granting by the Board of Standards and Appeals of a special permit assigned to its jurisdiction under the Zoning Resolution pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="668" destination-id="0-0-0-0">668</LINK>(2) of the Charter;</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89194" number="106499" version="888">
+									<PARA>
+										<TAB tab-count="1"/>(n)<TAB tab-count="1"/>such other matters involving the use, development or improvement of property as proposed by the Commission and enacted by the City Council pursuant to local law.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89195" number="106500" version="1750">
+								<HEADING>§ 2-01.1 Zoning Resolution Amendments Adopted Pursuant to Section 200 of the Charter or Section 201 of the Charter.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12471" name="T62C002_2-01"/>§ 2-01.1 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Zoning Resolution Amendments Adopted Pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> of the Charter or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK>
+									</CHARFORMAT> of the Charter<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89196" number="106501" version="1750">
+									<PARA>Applications to amend the Zoning Resolution pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter and actions to amend the Zoning Resolution initiated by the Commission pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> of the Charter, which concern revisions to the text of the Zoning Resolution, shall be subject to the provisions of subdivisions (b), (c), (d) and (g) of 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK> and subdivision (c) of 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89197" number="106502" version="3">
+								<HEADING>§ 2-02 Applications.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12473" name="T62C002_2-02"/>§ 2-02 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applications.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89198" number="106503" version="2512">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Applications: general provisions.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89227" number="106504" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Presentation of application.</CHARFORMAT> A request for any action shall be submitted to the Department of City Planning. The application must be submitted as provided for in the instructions on the Department of City Planning&apos;s website. This includes the submission of forms requesting information required for the &quot;doing business database&quot; established by Local Law 34 for the year 2007, and must include all of the information and documents required by such instructions and forms. For purposes of the acquisition of property by the City, pursuant to 62 RCNY §§ <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-01" destination-id="0-0-0-12471">2-01</LINK>(e) and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-01" destination-id="0-0-0-12471">2-01</LINK>(k), the applicant shall be the requesting agency and the Department of Citywide Administrative Services. For purposes of the approval of housing or urban renewal plans and projects or amendments thereof pursuant to City, State or Federal laws in accordance with 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-01" destination-id="0-0-0-12471">2-01</LINK>(h), the applicant shall be the New York City Department of Housing Preservation and Development or the New York City Housing Authority, as appropriate, or their designees. The Department may not consider the application as filed unless it includes all required components and shall not consider the application as filed unless the required fee has been paid or is paid concurrently with the submission of the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105515" number="106505" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Initial Review.</CHARFORMAT> The Department of City Planning shall, within five (5) days, review each application to ensure that all required forms, documents and other exhibits supplied have been submitted and prepared as required by the instructions. If any of the documentation is missing or has been improperly prepared, the applicant will be notified that the submitted application has been rejected, along with a listing of its deficiencies If the documentation is in order, the Department shall assign a docket number and shall transmit a Notice of Receipt of the application to all the appropriate Department divisions and other agencies which review such application, and to the community board(s), Borough President(s), borough board (when appropriate), the City Council and the applicant in accordance with 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(b). Such Notice of Receipt, when sent to the community board(s), Borough President(s), borough boards and City Council shall include a copy of the application form and all documents included therewith. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105514" number="106506" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Substantive Review.</CHARFORMAT> The application form, documents and other exhibits shall be subject to review by the appropriate divisions of the Department in order to ensure that the requirements for completeness in 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(5) have been met prior to certification of the application into ULURP. The Department may request any additional documents, maps, plans, drawings or information necessary to complete or organize the submission, or to clarify its substance and the land use issues attendant to it. The Department of City Planning shall refer such additional application documents or amendments within five (5) days to each affected borough president, community board or borough board, and to the City Council. Not later than sixty (60) days after the Notice of Receipt has been sent, the Department of City Planning shall notify the applicant of any deficiencies or errors in the application, documents and other exhibits, and shall make any requests for revised or supplementary documents and exhibits. The applicant is expected to respond within a reasonable time. Upon receipt of the corrected, revised or supplementary material, the Department of City Planning shall review it within no more than sixty (60) days and make any additional request for further corrections or supplements if needed. If the applicant fails to respond within sixty (60) days after the receipt of a request for revisions, corrections or supplement, the Department of City Planning shall give notice to the applicant that the application will be deemed withdrawn. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105513" number="106507" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Appeal for Certification.</CHARFORMAT> At any time after one hundred and eighty (180) days have elapsed from the date of the Notice of Receipt of any application, the applicant may appeal in writing to the Commission to certify the application as complete. The affected Borough President may also appeal in writing if the Borough President finds that the application is consistent with the land use policy or strategic policy statement of the borough formulated pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="82" destination-id="0-0-0-0">82</LINK>, subsection 14 of the Charter. Upon receipt of such an appeal, the Commission shall refer it to the Department of City Planning and the Office of Environmental Coordination or lead agency for an evaluation of the completeness of the application, which shall include an identification of all material requested by the Department of City Planning and the environmental review staff or lead agency but not yet provided by the applicant. If the Commission determines that all pertinent information has been supplied in accordance with the criteria of 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(5) below, it shall certify the application as complete. If the Commission determines that pertinent information has not been supplied, such information shall be listed by the Department of City Planning and the environmental review staff and sent by the Commission to the applicant within thirty (30) days of receipt of the appeal. When the applicant has responded, either by supplying all the information so requested, or by explaining why such information should not be required in order to certify the application, the Commission shall consider the evaluation and the applicant&apos;s response and either certify the application as complete in accordance with 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(5) or deny the appeal. A denial by the Commission shall state the information that must still be supplied or clearly state the reason for denial. Such determination shall be made not later than sixty (60) days from the date the appeal is received. If the appeal is one which has been made by the affected Borough President, and the land use proposed in the application is consistent with the land use policy or strategic policy statement of the affected Borough President, then a vote of five members shall be sufficient to certify the application as complete in accordance with 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(5) below. In all other instances, a majority vote of the Commission is necessary to certify an application. A denial of the appeal shall mean that the application remains incomplete, and the Department of City Planning and the environmental review staff shall continue with timely review of the application until all the information required for completeness has been provided at which time certification shall take place. If such review continues for an additional one hundred and eighty (180) days or more beyond the denial, the applicant may again appeal to the Commission under the procedure outlined above to certify the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105512" number="106508" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Certification of Completeness.</CHARFORMAT> The Department or the Commission shall certify the application as complete when compliance has been achieved with all of the following: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105511" number="106509" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>The standard application form, including for any application certified on or after April 14, 2008, forms requesting information required for the &quot;doing business database&quot; established pursuant to Local Law 34 for the year 2007, has been completed in its entirety with all requested information presented in clear language. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105510" number="106510" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>All accompanying documents, maps, plans, drawings, and other information are properly organized and presented in clear language and understandable graphic form. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105509" number="106511" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>The information supplied on the application form and accompanying documents is fully sufficient to address all issues of jurisdiction and substance which are required to be addressed for the category of action as defined in the Charter, statutes, Zoning Resolution, Administrative Code or other law or regulation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105508" number="106512" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>All reviews by necessary and related agencies of the State and City have been completed and any required reports, certifications, sign-offs or other such agency actions required by law or regulation prior to ULURP have been secured, or a written waiver of the agency presented. If any such agency does not respond within sixty (60) days, it will be deemed to have waived its review and action as applicable law permits. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105507" number="106513" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(v)<TAB tab-count="1"/>A determination has been made whether the action is subject to City or State Environmental Quality Review, and if so subject, the lead agency has issued either: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105506" number="106514" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(A)<TAB tab-count="1"/>a Negative or Conditional Negative Declaration; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105505" number="106515" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(B)<TAB tab-count="1"/>a Notice of Acceptance of a Draft Environmental Impact Statement. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105504" number="106516" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(vi)<TAB tab-count="1"/>Notification of any proposed (E) designation has been submitted to the Department of City Planning as required pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(e) hereof. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105503" number="106517" version="820">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Referrals: general provisions.</CHARFORMAT> Except as provided in 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(c) hereof, within nine (9) calendar days after the certification by the Department of City Planning, or by the Commission if certification occurs pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(4) above, that a submission is a complete application, the Department of City Planning shall make the following referrals: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105502" number="106518" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>any application relating to a proposal which occupies or would occupy land located in only one community district shall be referred to the community board for such district; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105501" number="106519" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>any application relating to a proposal which occupies or would occupy land located in two or more community districts shall be referred to the community board for each such district and to the borough board for the appropriate borough; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105500" number="106520" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>any application relating to a proposal which occupies or would occupy land located in a joint interest area not included within a community district shall be referred to the community board for each community district bounding such area and to the borough board for the appropriate borough; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105499" number="106521" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>all applications shall be referred to the Borough President of the borough in question; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105498" number="106522" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>all applications shall be referred to the City Council. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105497" number="106523" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Charter Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> applications.</CHARFORMAT> A request for an amendment to the Zoning Map or the text of the Zoning Resolution by a taxpayer, community board, borough board, Borough President, the Mayor or the Land Use Committee of the Council pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter, shall be filed with the Department. Applications for special permits pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter may be filed by any person or agency. Such requests shall be subject to the application and certification procedure of 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a) hereof and shall be referred pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(b) hereof. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105496" number="106524" version="820">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Withdrawals.</CHARFORMAT> An applicant may at any time file with the Commission a statement that its application is withdrawn. If withdrawal occurs after filings have occurred pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK>(h)(4), the applicant shall also file a statement of withdrawal with the City Council. Upon the filing of such a statement, the application in question shall be void and no further processing of such application under this uniform land use review procedure shall be undertaken by a community board, Borough President, borough board or the Commission. The Commission shall promptly give notice of such withdrawal to the board or boards, to the Borough President to which the application was referred pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(b) and to the Council, if filings pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK>(h)(4) have not occurred. The request to which the application relates may thereafter be advanced only in connection with a new application certified as complete pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a) herein and processed according to this uniform land use review procedure. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105495" number="106525" version="820">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Notification of proposed (E) designation.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105494" number="106526" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>If an application for an amendment to the Zoning Map or text of the zoning resolution pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-c" destination-id="0-0-0-0">197-c</LINK> or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> and Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter, respectively, includes an (E) designation with respect to potential hazardous materials, air quality or noise on any tax lot or zoning lot pursuant to § 11-15 of the Zoning Resolution of the City of New York, at the time the application is referred pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(b) hereof, the owner or owners of any such tax lot or zoning lot, with the exception of the applicant, shall be notified of the proposed (E) designation. Such notification shall be by the lead agency, as defined in 6 New York Code of Rules and Regulations, Part 617, as amended, and 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C005_5-02" destination-id="0-0-0-12519">5-02</LINK>, as amended. If the lead agency is other than the Commission, no such application shall be certified as complete pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-02" destination-id="0-0-0-12473">2-02</LINK>(a)(5) hereof until such other lead agency shall have submitted any notification of a proposed (E) designation, in the form and addressed to the parties required by this Section to the Department of City Planning, who shall send such notification as provided by this Section. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105517" number="106527" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Such notification shall be by first-class mail and shall be made to the person(s) or entity(ies) identified in the official records of the City of New York as the fee owners of such tax lot or zoning lot and shall be sent to the address or addresses indicated in such records. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105493" number="106528" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The notification shall include or refer to the Department of City Planning&apos;s website for: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105492" number="106529" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>a description of the existing zoning and the proposed rezoning for the properties that will include the (E) designation; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105491" number="106530" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>notice to the property owner of the right to attend and testify at any public hearing relating to the proposed Zoning Map amendment; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105490" number="106531" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>the phone numbers for a contact person at the lead agency, or if the lead agency is the Commission, a contact person or persons at the Department of City Planning; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105489" number="106532" version="820">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>§ 11-15 of the Zoning Resolution of the City of New York or its successor. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105486" number="106533" version="820">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89228" number="106534" version="820">
+								<HEADING>§ 2-03 Community Board Actions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12475" name="T62C002_2-03"/>§ 2-03 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Community Board Actions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-105535" number="106535" version="821">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General provisions.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105545" number="106536" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Except as provided below, within sixty (60) calendar days after a community board&apos;s receipt of a complete application referred by the Department of City Planning, the Board of Standards and Appeals or the Commission, the community board shall hold a public hearing and adopt and submit as provided herein a written recommendation concerning such application. For purposes of this paragraph (1), a community board shall be deemed to have received an application nine (9) calendar days after the date of certification. The Department of City Planning shall transmit a certified application to the community board, making it available to the community board within (8) days from the date of certification. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105544" number="106537" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Where the negative vote of the community board was adopted without a public hearing, without a quorum or at a meeting conducted after its 60-day period for review, such non-complying negative vote shall not serve the purpose of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-d" destination-id="0-0-0-0">197-d</LINK>(b)(2) of the Charter. The Commission may note the noncompliance and any other deficiency in compliance with this chapter in its report. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105543" number="106538" version="821">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Waivers of hearings and recommendations.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105542" number="106539" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Leases.</CHARFORMAT> In the case of a proposed lease of property of the City which in the judgment of the community board does not involve a substantial land use interest, such board may waive the holding of a public hearing and preparation of a written recommendation. In such case the community board shall submit to the Department a written waiver of its right to hold a public hearing and to submit recommendations to the City Planning Commission and affected Borough President. When a written waiver of the community board&apos;s right to hold a hearing and submit a recommendation is received by the Department of City Planning the community board&apos;s period of review shall be deemed ended and the Borough President&apos;s time period begun. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105541" number="106540" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Franchises.</CHARFORMAT> In the case of Request for Proposal or other solicitation for a franchise which in the judgment of the community board does not involve a substantial land use interest, such community board may submit a written waiver to the Commission of the right to hold a public hearing and the preparation of a written recommendation. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105540" number="106541" version="821">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Notice of hearing.</CHARFORMAT> Notice of the time, place and subject of a public hearing to be held by a community board on an application shall be given as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105539" number="106542" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>by publication in The City Record for the five (5) days of publication immediately preceding and including the date of the public hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105538" number="106543" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>by publication in the Comprehensive City Planning Calendar distributed not less than five (5) calendar days prior to the date of public hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105537" number="106544" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>to the applicant ten (10) days prior to the date of hearing (with such notice also forwarded to the Department of City Planning); <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105534" number="106545" version="1732">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>for all actions that result in acquisition of property by the City, other than by lease, whether by condemnation or otherwise, the applicant shall notify the owner or owners of the property in question by mail to the last known address of such owner or owners, as shown on the City&apos;s tax records, not later than five (5) days prior to the date of hearing. An affidavit attesting to the mailing and a copy of the notice shall be submitted to the Department of City Planning prior to the Commission&apos;s public hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105533" number="106546" version="1730">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Community boards are also encouraged to publicize hearings by publication in local newspapers, posting notices in prominent locations, and other appropriate means. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105532" number="106547" version="821">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Conduct of public hearing.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105531" number="106548" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Location.</CHARFORMAT> A community board public hearing shall be held at a convenient place of public assembly chosen by the board and located within its community district. If in the community board&apos;s judgment there is no suitable and convenient place within the community district, the hearing shall be held at a centrally located place of public assembly within the borough. This provision is not intended to affect the requirement of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="2800" destination-id="0-0-0-0">2800</LINK>(h) of the Charter stating a community board&apos;s obligation to meet at least monthly (except during July and August) within its district. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105530" number="106549" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General character.</CHARFORMAT> Hearings shall be legislative type hearings, without sworn testimony or strict rules of evidence. Only members of a community board and persons expressly authorized by the chairperson may question a speaker. All persons appearing and wishing to speak shall be given the opportunity to speak. A community board hearing shall be conducted in accordance with by-laws adopted by the community board. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105529" number="106550" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Quorum.</CHARFORMAT> A public hearing shall require a quorum of 20% of the appointed members of the community board, but in no event fewer than seven such members. The minutes of a meeting at which a public hearing was held shall include a record of the individual members present. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105528" number="106551" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Record.</CHARFORMAT> The record of a public hearing shall consist of but not be limited to a list of speaker&apos;s names and affiliations (if any), a notation of each speaker&apos;s own indication, on a form provided for that purpose, of support or opposition to the application, and any exhibits or written statements offered by speakers. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105527" number="106552" version="822">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Public attendance at meetings of a community board or its committees.</CHARFORMAT> The public may attend all meetings of a community board or its committee at which an application for an action subject to this Chapter is to be considered or acted upon in a preliminary or final manner. A community board may close a meeting or committee meeting to the public only as provided in the New York State Open Meetings Law (Public Officers Law, §§ 100 – 111). <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105526" number="106553" version="821">
+									<PARA>
+										<TAB tab-count="1"/>(f)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Recommendations and waivers.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105525" number="106554" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Quorum.</CHARFORMAT> The adoption of a community board recommendation, or the waiver of a public hearing and recommendation by a community board, shall require a quorum of a majority of the appointed members of the board. The minutes of a meeting at which a recommendation or waiver was adopted shall record the individual members present. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105524" number="106555" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Vote.</CHARFORMAT> The adoption of a community board recommendation or the waiver of a public hearing and recommendation shall be by a public vote which results in approval by a majority of the appointed members present during the presence of a quorum, at a duly called meeting. The vote shall be taken in accordance with the by-laws of the community board. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105523" number="106556" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Content.</CHARFORMAT> A community board recommendation shall be in writing via a form provided by the Department of City Planning and shall include a description of the application, the time and place of the public hearing on the application, the time and place of the meeting at which the recommendation was adopted and the vote by which the recommendation was adopted. The community board may include in its submission the reasons for the vote and any conditions attached to its vote. The community board may state that its conditional approval shall be considered a negative recommendation for purposes of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-d" destination-id="0-0-0-0">197-d</LINK>(b)(2) of the Charter if conditions that it considers essential to minimize land use or environmental impacts are not adopted by the Commission. The City Planning Commission shall give consideration only to those conditions which are related to land use and environmental aspects of the application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105522" number="106557" version="821">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Submission.</CHARFORMAT> A community board shall submit its recommendation or waiver promptly after adoption, to the Commission, to the Borough President, to the applicant and, in the case of an application referred to two or more community boards and a borough board, to such borough board. If a community board fails to act within the time limits for review the application shall be deemed referred to the next level of review at the completion of the community board&apos;s time period. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105521" number="106558" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(g)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Requests for review of action not in a community district.</CHARFORMAT> A community board or borough board may obtain the filed application and supporting documents for any action subject to ULURP which is not located within the district boundaries of such community board or borough board. Such community board or borough board may request review of such applications by writing, either to the Calendar Office of the Commission, or requesting through the Department&apos;s website, and it shall state the basis for the board&apos;s judgment that the application may significantly affect the welfare of the district or borough served by such board. Thereafter, the community board or borough board may schedule a public hearing on the application, such hearing and notice thereof to be in conformance with 62 RCNY §§ <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-03" destination-id="0-0-0-12475">2-03</LINK>(c), <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-03" destination-id="0-0-0-12475">2-03</LINK>(d), <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-05" destination-id="0-0-0-12479">2-05</LINK>(c) and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-05" destination-id="0-0-0-12479">2-05</LINK>(d) and may submit a written recommendation to the Commission. The Commission may receive such recommendation at any time prior to its final action on the application; however, it shall have no authority to extend the review period defined in Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-c" destination-id="0-0-0-0">197-c</LINK> of the Charter nor shall a review by a second community board pursuant to this subparagraph (g) require that the application be reviewed by the borough board. A Borough President may similarly obtain a filed application and supporting documents for and request review of any action subject to ULURP which is not located within the boundaries of the borough. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105518" number="106559" version="821">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89253" number="106560" version="821">
+								<HEADING>§ 2-04 Borough President Actions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12477" name="T62C002_2-04"/>§ 2-04 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Borough President Actions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89254" number="106561" version="3">
+									<PARA>A Borough President may submit a written recommendation on an application, or waive the right to submit a recommendation to the City Planning Commission. Such recommendation or waiver shall be submitted on the form provided not later than 30 days after the receipt of a recommendation or waiver by the City Planning Commission and the Borough President from an affected community board, by the latest to respond of all affected community boards or if any affected community board shall fail to act within the time period, thirty (30) days after the expiration of the time allowed for such community board(s) to act.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89255" number="106562" version="3">
+								<HEADING>§ 2-05 Borough Board Actions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12479" name="T62C002_2-05"/>§ 2-05 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Borough Board Actions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89272" number="106563" version="823">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General provisions.</CHARFORMAT> Except as provided below in 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-05" destination-id="0-0-0-12479">2-05</LINK>(b), an affected borough board may conduct a public hearing on an application and submit a written recommendation to the Commission. Such recommendation or waiver shall be submitted on the form provided not later than thirty (30) days after the filing of a recommendation or waiver with the Borough President by the last to respond of all affected community boards, or if any affected community board shall fail to act within the time period, thirty (30) days after the expiration of the time allowed for such community boards to act. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105564" number="106564" version="823">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Notice of hearing.</CHARFORMAT> Notice of the time, place and subject of a public hearing to be held by a borough board for all applications subject to this land use review procedure shall be given as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105563" number="106565" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>by publication in The City Record for the five (5) days of publication immediately preceding and including the date of the public hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105562" number="106566" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>by publication in the Comprehensive City Planning Calendar distributed not less than five (5) calendar days prior to the date of hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105561" number="106567" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>to the applicant ten (10) days prior to the date of hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105560" number="106568" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>for all actions resulting in acquisition of property by the City, other than by lease, whether by condemnation or otherwise, the applicant shall notify the owner or owners of the property in question by mail to the last known address of such owner or owners, as shown on the City&apos;s tax records, not later than five (5) days prior to the date of hearing. An affidavit attesting to the mailing and a copy of the notice shall be submitted to the Department of City Planning prior to the Commission&apos;s public hearing.&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105559" number="106569" version="823">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Conduct of hearing.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105558" number="106570" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Location.</CHARFORMAT> A borough board public hearing shall be held at a convenient place of public assembly chosen by the board and located within the borough. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105557" number="106571" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General character.</CHARFORMAT> Hearings shall be legislative type hearings, without sworn testimony or strict rules of evidence. Only members of a borough board or persons expressly authorized by the chairperson may question a speaker. All persons appearing and wishing to speak shall be given the opportunity to speak. A borough board&apos;s hearing shall be conducted in accordance with by-laws adopted by such borough board. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105556" number="106572" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Quorum.</CHARFORMAT> A public hearing shall require a quorum of a majority of the borough board&apos;s members who are entitled to vote on the application in question. Pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="85" destination-id="0-0-0-0">85</LINK> of the Charter, community board members of the borough board may only vote on issues that directly affect the community district represented by such members. The minutes of the meeting at which a public hearing was held shall record the individual members present. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105555" number="106573" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Record.</CHARFORMAT> The record of a public hearing shall consist of a list of speakers&apos; names and affiliations if any, a notation of each speaker&apos;s own indication, on the form provided for that purpose, of support or opposition to the application and any exhibits or written statements offered by speakers. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105554" number="106574" version="823">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Public attendance at meetings.</CHARFORMAT> The public may attend all meetings of a borough board at which an application for an action subject to this Chapter is to be considered or acted upon in a preliminary or final manner. A borough board may close a meeting to the public only as provided in the New York State Open Meetings Law (Public Officers Law, §§ 100 – 111). <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105553" number="106575" version="823">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Recommendations and waivers.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105552" number="106576" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Quorum.</CHARFORMAT> The adoption of a borough board recommendation or the waiver of a public hearing and recommendation by a borough board shall require a quorum of a majority of the borough board&apos;s members entitled to vote on the application in question. Pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="85" destination-id="0-0-0-0">85</LINK> of the Charter, community board members of the borough board may only vote on issues that directly affect the community district represented by such member. The minutes of a meeting at which a recommendation or waiver was adopted shall record the individual members present. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105551" number="106577" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Vote.</CHARFORMAT> Adoption of a recommendation shall be by a public roll call vote which results in approval by a majority of the members entitled to vote on the application in question present during the presence of a quorum, at a duly called meeting. Pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="85" destination-id="0-0-0-0">85</LINK> of the Charter, community board members of the borough board may only vote on issues that directly affect the community district represented by such member. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105550" number="106578" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Content.</CHARFORMAT> A borough board recommendation shall be in writing on a form provided by the Department of City Planning and shall include a description of the application, the time and place of public hearing, the time and place of the meeting at which the recommendation was adopted and the votes of individual borough board members. The borough board may include in its submission the reasons for its vote and any conditions to the vote. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105549" number="106579" version="823">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Submission.</CHARFORMAT> A borough board shall submit its recommendation or waiver on the form promptly after adoption to the Commission and to the applicant. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105546" number="106580" version="823">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89273" number="106581" version="823">
+								<HEADING>§ 2-06 City Planning Commission Actions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12481" name="T62C002_2-06"/>§ 2-06 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">City Planning Commission Actions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-105592" number="106582" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General provisions.</CHARFORMAT> The Commission shall hold a public hearing on all applications made pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-c" destination-id="0-0-0-0">197-c</LINK> of the Charter not later than sixty (60) calendar days after the expiration of the time allowed for the filing of a recommendation or waiver with it by an affected Borough President. Following its hearing and within its applicable sixty (60) day period, the Commission shall approve, approve with modifications or disapprove such application and file its decision pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-05" destination-id="0-0-0-12479">2-05</LINK>(h)(4) below. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105609" number="106583" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Zoning text amendments pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter.</CHARFORMAT> The Commission shall hold a public hearing on an application for a zoning text amendment pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter. Such hearing shall be conducted in accordance with 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK>(f). <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105608" number="106584" version="824">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Modification of application.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105607" number="106585" version="1750">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>The Commission may propose a modification of an application, including an application for a zoning text amendment pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter, which meets the criteria of 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK>(g) below. Such proposed modification may be based upon a recommendation from an applicant, community board, borough board, Borough President or other source. Where a modification is proposed, the Commission shall hold a public hearing on the application as referred to a community board or boards and on the proposed modification. Promptly upon its decision to schedule a proposed modification for public hearing, the Commission shall refer the proposed modification to the community board or community boards, borough board, and the affected Borough President to which the application was earlier referred, for such action as such board or boards or Borough President deem appropriate. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105606" number="106586" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>The above provision shall not limit the Commission&apos;s ability to make a minor modification of an application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105605" number="106587" version="1751">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Notice of hearing.</CHARFORMAT> Notice of the time, place and subject of a public hearing by the Commission for all applications subject to this uniform land use review procedure, including applications for zoning text amendments pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> and Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter and modified applications pursuant to 62 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-06" destination-id="0-0-0-12481">2-06</LINK>(c)(1) shall be given as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105604" number="106588" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>by publication in The City Record beginning not less than ten (10) calendar days immediately prior to the date of hearing and continuing until the day prior to the hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105603" number="106589" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>by publication in the Comprehensive City Planning Calendar distributed not less than ten (10) calendar days prior to the date of hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105602" number="106590" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>by transmitting notice to the concerned community board or community boards Borough President and borough board and to the applicant not less than ten (10) calendar days prior to the date of hearing; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105600" number="106591" version="1731">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>for all actions that result in acquisition of property by the City, other than by lease, whether by condemnation or otherwise, the applicant shall notify the owner or owners of the property in question by mail to the last known address of such owner or owners, as shown on the City&apos;s tax records, not later than five (5) days prior to the date of hearing. An affidavit attesting to the mailing and a copy of the notice shall be submitted to the Department of City Planning prior to the Commission&apos;s public hearing. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105599" number="106592" version="824">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Posting of notices for hearings on the disposition of occupied city-owned residential buildings.</CHARFORMAT> For any application involving disposition of a city-owned residential building, which at the time of application is occupied by tenants, the applicant shall post notice of the Commission public hearing as discussed below: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105598" number="106593" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>at least eight (8) days prior to the Commission public hearing a notice, on a form provided by the Department of City Planning, shall be posted by the applicant in the building subject to the application, informing the tenants of the proposed action and the right of the public to appear at the Commission hearing and testify; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105597" number="106594" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>such notice shall be posted in common public space on the ground floor of the building accessible to all building tenants; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105596" number="106595" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>the applicant will file with the Department of City Planning an affidavit attesting to the posting of the notice and date and specific location where the notice was posted. The affidavit shall be signed by the person posting the notice. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105595" number="106596" version="824">
+									<PARA>
+										<TAB tab-count="1"/>(f)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Conduct of hearing.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105594" number="106597" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Location.</CHARFORMAT> Commission public hearings shall be held at 120 Broadway, New York, New York, unless otherwise ordered by the Chair. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105593" number="106598" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">General Character.</CHARFORMAT> Hearings shall be legislative type hearings, without sworn testimony, strict rules of evidence or opportunity for speakers to cross-examine one another. Only members of the Commission may question a speaker (except at a joint Commission / CEQR hearing at which officers of the lead agency and the office of Environmental Coordination may also ask questions). All persons filling out an appearance form shall be given the opportunity to speak. The chairperson may prescribe a uniform limited time for each speaker. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105591" number="106599" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Quorum.</CHARFORMAT> A public hearing shall require a quorum of a majority of the members of the Commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105590" number="106600" version="824">
+									<PARA>
+										<TAB tab-count="1"/>(g)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commission actions.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105589" number="106601" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Scope of action.</CHARFORMAT> The Commission shall approve, approve with modifications or disapprove each application. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105588" number="106602" version="2493">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Vote.</CHARFORMAT> The Commission shall act by the affirmative roll call vote of at least seven (7) members at a public meeting, except that pursuant to subdivision h of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-c" destination-id="0-0-0-0">197-c</LINK> of the Charter approval or approval with modifications of an application relating to a new city facility for site selection for capital projects, the sale, lease (other than the lease of office space), exchange or other disposition of the real property of the City, including sale or lease of land under water pursuant to Section 1602, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="Chapter 15" destination-id="0-0-0-0">Chapter 15</LINK> of the Charter or other applicable provisions of law; or acquisitions by the City of real property (other than the acquisition of office space for office use or a building for office use), including acquisition by purchase, condemnation, exchange or lease and including the acquisition of land under water pursuant to Section 1602, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="Chapter 15" destination-id="0-0-0-0">Chapter 15</LINK> of the Charter and other applicable provisions of law, shall require the affirmative vote of nine members of the Commission if the affected Borough President: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105587" number="106603" version="1751">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>recommends against approval of such application pursuant to subdivision g of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-c" destination-id="0-0-0-0">197-c</LINK> of the Charter; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105586" number="106604" version="1751">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>has proposed an alternative location in the same borough for such new facility pursuant to subdivision f or g of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="204" destination-id="0-0-0-0">204</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105585" number="106605" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commission report.</CHARFORMAT> A report of the Commission shall be written with respect to each application subject to this procedure on which a vote has been taken. The report shall include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105584" number="106606" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>a description of the certified application; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105583" number="106607" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>a summary of testimony at all Commission public hearings held on the application; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105582" number="106608" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>all community board, Borough President or borough board written recommendations concerning the application; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105581" number="106609" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>the consideration leading to the Commission&apos;s action, including reasons for approval and any modification of the application and reasons for rejection by the Commission of community board, Borough President or borough board recommendations; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105580" number="106610" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(v)<TAB tab-count="1"/>any findings and consideration with respect to environmental impacts as required by the State Environmental Quality Review Act and regulations; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105579" number="106611" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(vi)<TAB tab-count="1"/>the action of the Commission, including any modification of the application; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105578" number="106612" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(vii)<TAB tab-count="1"/>the votes of individual Commissioners; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105577" number="106613" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(viii)<TAB tab-count="1"/>any dissenting opinions. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105576" number="106614" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Filing of decisions of the Commission.</CHARFORMAT> The City Planning Commission shall file its decision with the affected Borough President and with the City Council. All filings with the Council shall include all associated community board, Borough President or borough board recommendations. The Commission shall transmit any decision to the applicant and to the community board or community boards, and borough board to which the application was referred. Filings with the City Council and Borough President shall be completed within the Commission&apos;s sixty (60) day time period. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105575" number="106615" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Review of Council modifications.</CHARFORMAT> The Commission shall receive from the City Council during its fifty (50) day period for review the text of any proposed modification to the Commission&apos;s prior approval of an action. Upon receipt the Commission shall have fifteen (15) days to review and to determine: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105574" number="106616" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>in consultation with the Office of Environmental Coordination and lead agency as necessary, whether the modification may result in any significant adverse environmental effects which were not previously addressed; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105573" number="106617" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>whether the modification requires the initiation of a new application. In making this determination, the Commission shall consider whether the proposed modification: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105572" number="106618" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(A)<TAB tab-count="1"/>increases the height, bulk, envelope or floor area of any building or buildings, decreases open space, or alters conditions or major elements of a site plan in actions (such as a zoning special permit) which require the approval or limitation of these elements; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105571" number="106619" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(B)<TAB tab-count="1"/>increases the lot size or geographic area to be covered by the action; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105570" number="106620" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(C)<TAB tab-count="1"/>makes necessary additional waivers, permits, approvals, authorizations or certifications under sections of the Zoning Resolution, or other laws or regulations not previously acted upon in the application; or <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105569" number="106621" version="824">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(D)<TAB tab-count="1"/>adds new regulations or deletes or reduces existing regulations or zoning restrictions that were not part of the subject matter of the earlier hearings at the community board or Commission. If the Commission has determined that no additional review is necessary and that, either, no significant environmental impacts will result or that possible environmental impacts can be addressed in the time remaining for Commission and Council review, it shall so report to the Council. The Commission may also transmit any comment or recommendation with respect to the substance of the modification, and any proposed further amendment to the modification which it deems as necessary or appropriate. If the Commission has determined that the proposed modification will require a supplementary environmental review or the initiation of a new application, it shall so advise the Council in a written statement which includes the reasons for its determination. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105568" number="106622" version="1751">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(6)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Zoning Resolution text amendments pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter.</CHARFORMAT> Applications for amendments to the text of the Zoning Resolution pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="200" destination-id="0-0-0-0">200</LINK> or Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="201" destination-id="0-0-0-0">201</LINK> of the Charter shall be subject to the provisions of this paragraph (g). <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105565" number="106623" version="824">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89315" number="106624" version="823">
+								<HEADING>§ 2-07 Borough President Initiation of City Council Review.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12483" name="T62C002_2-07"/>§ 2-07 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Borough President Initiation of City Council Review.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89316" number="106625" version="1751">
+									<PARA>In the case of an application not subject to mandatory council review pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="197-d" destination-id="0-0-0-0">197-d</LINK>(b)(1) of the Charter, which receives an unfavorable recommendation by both an affected community board and affected Borough President and either a favorable vote or favorable vote with modification by the Commission, such application shall be subject to council review and action if the affected Borough President shall file, within five (5) days of receiving the report of the Commission, a written objection to the Commission&apos;s vote with the Council and the Commission.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89317" number="106626" version="3">
+								<HEADING>§ 2-08 Board of Standards and Appeals.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12485" name="T62C002_2-08"/>§ 2-08 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Board of Standards and Appeals.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89322" number="106627" version="825">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Variance and special permit applications.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105616" number="106628" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Filing and referral.</CHARFORMAT> An application for a variance of the Zoning Resolution or for a special permit which under the Zoning Resolution is within the jurisdiction of the Board of Standards and Appeals shall be filed with the Board of Standards and Appeals. In accordance with the rules of Practice and Procedures (Chapter 1 of the Board of Standards and Appeals rules), the Board of Standards and Appeals shall refer the application to the community board within which district the site is located or, in the case of an application involving a site located within two or more community districts, to the community boards for such districts and to the borough board for the appropriate borough. The Commission, as a party to a proceeding to vary the Zoning Resolution, shall be provided all materials in such proceeding by the Board of Standards and Appeals. Upon the filing with a community board, or with two or more community boards and a borough board, of an application for a variance or a special permit under the jurisdiction of the Board of Standards and Appeals, such community board or community boards and borough board shall review such application pursuant to 62 RCNY §§ <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-03" destination-id="0-0-0-12475">2-03</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T62C002_2-05" destination-id="0-0-0-12479">2-05</LINK> herein. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105615" number="106629" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Community board waiver or recommendation.</CHARFORMAT> In the case of an application to vary the Zoning Resolution or for a special permit under the jurisdiction of the Board of Standards and Appeals, a community board may waive in writing the holding of a public hearing and the adoption of a written recommendation. The community board recommendation or waiver shall be referred to the Board of Standards and Appeals, the Commission and, in the case of an application which was referred to two or more community boards and a borough board, to such borough board. Upon action by or expiration of time to act on an application for each concerned community board and when appropriate, action by or expiration of time to act for an affected borough board, the Board of Standards and Appeals may proceed to review the application and to make a decision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105614" number="106630" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Borough board review.</CHARFORMAT> In the case of an application to vary the Zoning Resolution or for a special permit pursuant to the Zoning Resolution under the jurisdiction of the Board of Standards and Appeals, a borough board may waive in writing the holding of a public hearing and the adoption of a written recommendation. After action by or expiration of time to act for all affected community boards if subject to borough board review, and upon receipt of a waiver or recommendation from a borough board or expiration of the thirty (30) day time limit for borough board review, the Board of Standards and Appeals may proceed to review the application and to make a decision. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105613" number="106631" version="825">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">City Planning Commission review.</CHARFORMAT> Appearance in Variance Proceeding – In the case of an application to the Board of Standards and Appeals for a variance of the Zoning Resolution, the Commission may appear before the Board of Standards and Appeals and be heard as a party in the variance proceeding if, in the Commission&apos;s judgment, granting the relief requested in such application would violate the requirements of the Zoning Resolution which relate to the granting of variances. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105610" number="106632" version="825">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89323" number="106633" version="825">
+								<HEADING>§ 2-09 Administrative Provisions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12487" name="T62C002_2-09"/>§ 2-09 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Administrative Provisions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89333" number="106634" version="825">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Referrals and filings.</CHARFORMAT> Unless otherwise provided herein, any referrals and filings required under this chapter shall be directed to the entities below as follows: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105627" number="106635" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>if to the Commission, then through the Department of City Planning&apos;s website or, alternatively, to the Land Use Review Division, Department of City Planning, 120 Broadway, 31st Floor, New York, New York 10271; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105626" number="106636" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>if to a community board, then to the chairperson of such community board at its office or, if there is no office or if no office address is provided to the Land Use Review Division, Department of City Planning, then to such board c/o the Borough President of the borough in question; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105625" number="106637" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>if to a borough board, then to such borough board c/o the Borough President of the borough in question; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105624" number="106638" version="1378">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>if to the Board of Standards and Appeals, then to the Executive Director of the Board of Standards and Appeals, 250 Broadway, 29th Floor, New York, New York 10007; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105623" number="106639" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>if to the City Council then to the Office of the Speaker City Council, City Hall, New York, New York. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105622" number="106640" version="825">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Time provisions.</CHARFORMAT>&#160;<HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105621" number="106641" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Expiration dates.</CHARFORMAT> Where the expiration of a time period set forth herein falls on a Saturday, Sunday or legal holiday, the expiration date shall be deemed extended until the next working day. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105620" number="106642" version="825">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Determination.</CHARFORMAT> All time periods specified in these regulations shall be calendar days. The commencement and end of time periods shall be recorded and officially calculated and determined by the Director of City Planning. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-105617" number="106643" version="825">
+									<PARA>(Amended City Record 3/21/2018, eff. 4/20/2018) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-024]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-89334" number="106644" version="825">
+								<HEADING>§ 2-10 Interpretation and Amendment of Regulations.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-12489" name="T62C002_2-10"/>§ 2-10 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Interpretation and Amendment of Regulations.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-89335" number="106645" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Interpretation. </CHARFORMAT>This chapter shall be interpreted in accordance with the ordinary meaning of the language herein, and any ambiguities arising herefrom shall be referred to and definitively interpreted in written opinions by the Director of City Planning.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89336" number="106646" version="1751">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Amendments.</CHARFORMAT> The Commission from time to time may amend these regulations, in accordance with the City Administrative Procedure Act, <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="Chapter 45" destination-id="0-0-0-0">Chapter 45</LINK> of the Charter.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-89337" number="106647" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commission Rules of Procedure. </CHARFORMAT>These regulations shall supplement and, where there is inconsistency, supersede the rules of Practice and Procedure of the City Planning Commission.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+					</LEVEL>
+				</LEVEL>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

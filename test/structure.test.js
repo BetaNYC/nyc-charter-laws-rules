@@ -7,6 +7,10 @@
 //     (Current through rules effective July 1, 2026): Title 72 Chapter 1 and Title 73 Chapter 1,
 //     each inside its Title record; Title 73 Chapter 2 and Title 42 Chapter 2, with no Title
 //     record around them (the publisher puts a Title's record only in its first chapter's file).
+//   - test/fixtures/structure/rules-edge/: 2 Rules files from the same download. 0-0-0-89178.xml
+//     (Title 62 Chapter 2, ULURP), where § 2-01.1 carries § 2-01's anchor id and name, and
+//     § 2-02 links to that id. 0-0-0-153879.xml (§ 40-05), whose text has a micro sign (U+00B5)
+//     that Unicode NFKC would turn into a Greek mu.
 //
 // Offline: no network, no data/raw, no dependence on today's date.
 
@@ -25,6 +29,7 @@ import {
   normalizeTitleKey,
   infobaseCorpus,
   groupLabel,
+  resolveTarget,
 } from "../scripts/lib/build-structure.js";
 import { renderSection, bodyBlocks } from "../scripts/lib/render-section.js";
 import { corpusMarkdown } from "../scripts/lib/serialize-markdown.js";
@@ -33,6 +38,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const CHARTER_XML = join(__dirname, "fixtures", "diff", "xml");
 const RULES_XML = join(__dirname, "fixtures", "structure", "rules");
+const RULES_EDGE_XML = join(__dirname, "fixtures", "structure", "rules-edge");
 
 const sha = (s) => createHash("sha256").update(s).digest("hex");
 
@@ -58,6 +64,7 @@ function build(dir, corpus) {
 
 const charter = build(CHARTER_XML, "charter");
 const rules = build(RULES_XML, "rules");
+const rulesEdge = build(RULES_EDGE_XML, "rules");
 
 // What has to hold for any structure file: it lines up with the index record by record, and
 // each section's blocks cut its `text` into its paragraphs, so joining them gives `text` back.
@@ -111,6 +118,7 @@ test("the sections are the same with and without the structure hooks", () => {
 test("every structure entry slices its section's text exactly", () => {
   checkStructure(charter.sections, charter.structure);
   checkStructure(rules.sections, rules.structure);
+  checkStructure(rulesEdge.sections, rulesEdge.structure);
   assert.ok(charter.structure.sections.every((s) => !s.flat), "no Charter fixture section fell back to one block");
   assert.ok(charter.structure.sections.every((s) => !s.unplacedLinks), "every Charter fixture link was placed");
 });
@@ -196,6 +204,48 @@ test("label, key and file-name helpers", () => {
   assert.equal(infobaseCorpus("L:\\NY\\New York City\\Folio\\Working\\Rules.NFO"), "rules");
   assert.equal(groupLabel("Title 16-A: [Commercial Waste Removal]"), "Title 16-A");
   assert.equal(groupLabel("Subchapter 1: [No Title]"), "Subchapter 1");
+  // Letter-numbered levels, as the Rules head them.
+  assert.equal(groupLabel("Subchapter A: Scope and Application"), "Subchapter A");
+  assert.equal(groupLabel("Appendix A"), "Appendix A");
+  assert.equal(groupLabel("Appendix A to Title 62: Criteria for the Location of City Facilities*"), null);
+  assert.equal(groupLabel("THE RULES OF THE CITY OF NEW YORK"), null);
+});
+
+test("an anchor id or name the publisher put on two records leaves the link unresolved, not pointed at either", () => {
+  // In 0-0-0-89178.xml, § 2-01 and § 2-01.1 both carry <DESTINATION id="0-0-0-12471"
+  // name="T62C002_2-01">. Before this guard the links in § 2-02 went to whichever was read last.
+  const i = rulesEdge.sections.findIndex((s) => s.citation === "§ 2-02");
+  const links = rulesEdge.structure.sections[i].links.filter((l) => l.to.name === "T62C002_2-01");
+  assert.ok(links.length >= 1, "§ 2-02 links to § 2-01");
+  for (const l of links) {
+    assert.equal(rulesEdge.sections[i].text.slice(l.start, l.end), "2-01");
+    assert.deepEqual(l.to, { corpus: "rules", name: "T62C002_2-01", resolved: false, ambiguous: true });
+  }
+  assert.equal(rulesEdge.structure.linkStats.ambiguousIds, 1);
+  assert.equal(rulesEdge.structure.linkStats.ambiguousNames, 1);
+  // The same by name alone (a link from another document has no id): ambiguous too.
+  const collector = createStructureCollector("rules");
+  const sections = [];
+  for (const f of xmlFiles(RULES_EDGE_XML)) collectSectionsFromXml(readFileSync(join(RULES_EDGE_XML, f), "utf8"), "rules", sections, null, collector.forFile());
+  const r = { rules: collector.resolver() };
+  assert.deepEqual(resolveTarget({ kind: "section", corpus: "rules", name: "T62C002_2-01" }, r), { corpus: "rules", name: "T62C002_2-01", resolved: false, ambiguous: true });
+  assert.deepEqual(resolveTarget({ kind: "section", corpus: "rules", destination: "0-0-0-12471", name: "anything" }, r), { corpus: "rules", name: "anything", resolved: false, ambiguous: true });
+  // A name on one record still resolves.
+  const s202 = rulesEdge.sections[i];
+  const own = resolveTarget({ kind: "section", corpus: "rules", name: "T62C002_2-02" }, r);
+  assert.equal(own.id, s202.id);
+});
+
+test("block text is the index's text byte for byte (no Unicode normalization)", () => {
+  const i = rulesEdge.sections.findIndex((s) => s.citation === "§ 40-05");
+  const section = rulesEdge.sections[i];
+  assert.notEqual(section.text.normalize("NFKC"), section.text, "the fixture has a character NFKC changes");
+  assert.ok(!rulesEdge.structure.sections[i].flat);
+  const blocks = bodyBlocks(renderSection(section, rulesEdge.structure.sections[i]));
+  const micro = blocks.filter((b) => b.text.includes("\u00B5g/m"));
+  assert.ok(micro.length >= 1, "the micro sign survives in a block");
+  assert.ok(blocks.every((b) => !b.text.includes("\u03BC")), "and is not turned into a Greek mu");
+  assert.equal(blocks.map((b) => b.text).join(" "), section.text);
 });
 
 test("the structure file is valid JSON, one section per line", () => {
@@ -209,9 +259,14 @@ test("the structure file is valid JSON, one section per line", () => {
 // The committed structure, when there is one, must belong to the committed index: same sha256,
 // same records, and its blocks must cut the index's text exactly. It is built by
 // `npm run build-index` and committed by the daily refresh (.github/workflows/refresh-data.yml).
+// The tests skip only while data/structure/ does not exist at all; once it does, a missing
+// file fails.
+const STRUCTURE_DIR = join(ROOT, "data", "structure");
+const noStructure = existsSync(STRUCTURE_DIR) ? false : "data/structure/ is not built yet";
 for (const corpus of ["charter", "admin_code", "rules"]) {
-  const path = join(ROOT, "data", "structure", `${corpus}.json`);
-  test(`committed data/structure/${corpus}.json belongs to the committed index`, { skip: existsSync(path) ? false : `data/structure/${corpus}.json is not built yet` }, () => {
+  const path = join(STRUCTURE_DIR, `${corpus}.json`);
+  test(`committed data/structure/${corpus}.json belongs to the committed index`, { skip: noStructure }, () => {
+    assert.ok(existsSync(path), `data/structure/ exists but ${corpus}.json is missing`);
     const indexText = readFileSync(join(ROOT, "data", "index", "json", `${corpus}.json`), "utf8");
     const versions = JSON.parse(readFileSync(join(ROOT, "data", "index", "json", "versions.json"), "utf8"));
     const structure = JSON.parse(readFileSync(path, "utf8"));

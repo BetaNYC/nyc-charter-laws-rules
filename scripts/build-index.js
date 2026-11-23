@@ -126,10 +126,12 @@ for (const [key, b] of Object.entries(built)) {
   const structure = b.structure.finish(b.sections, b.sha256, others);
   writeFileSync(join(STRUCTURE_DIR, `${key}.json`), structureJson(structure));
   const flat = structure.sections.filter((s) => s.flat).length;
-  const links = structure.sections.reduce((n, s) => n + (s.links?.length ?? 0), 0);
+  const ls = structure.linkStats;
   console.log(
     `\n${key}: saved data/structure/${key}.json (${structure.sections.length} sections, ` +
-      `${links} links, ${flat} kept as one block; titles ${JSON.stringify(structure.titleStats)})`
+      `${flat} kept as one block; titles ${JSON.stringify(structure.titleStats)})\n` +
+      `  links: ${ls.links}, ${ls.unresolved} unresolved, of which ${ls.ambiguous} ambiguous; ` +
+      `anchor ids on more than one record: ${ls.ambiguousIds}; anchor names on more than one record: ${ls.ambiguousNames}`
   );
 
   // Markdown index: one file per corpus, one section per heading, written from the blocks.

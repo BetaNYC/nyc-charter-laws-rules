@@ -256,7 +256,7 @@ npm test
 | `test/index-checksum.test.js` | Each bundled `data/index/json/<corpus>.json` matches the `sha256` that `build-index.js` recorded in `versions.json`, and `mergeVersions()` keeps it and moves `indexedAt` when only the text changed (issue #45). |
 | `test/stdout.test.js` | Starts the built server with a bad `NYC_CLR_FOOTER`, makes four calls, and checks that every stdout line is a JSON-RPC 2.0 message and the startup warning went to stderr (issue #47). |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`; a label with a period inside, such as `L.L. 2016/002`, `G.1.2` or `10-1104.1`, kept whole; a chapter's whole number, such as `Chapter 18-A` or `Chapter 19.1`, read only at the start of the heading), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
-| `test/structure.test.js` | The site structure (issue #61), on American Legal's own XML: the 44 Charter fixtures in `test/fixtures/diff/xml/` and 4 Rules files in `test/fixtures/structure/rules/`. The structure hooks leave the index alone (the fixtures' JSON and Markdown hash to what v0.6.2 wrote, pinned in the test); every block is a slice of its section's `text` and the blocks joined with one space are the `text`; Charter § 1133 keeps labels, depths and anchors (`(b)(1)`); a label repeated in one section gets `(a)(1)-2`; a Charter link resolves to its section and a link into a document not built keeps its name; a Rules chapter with no Title record around it takes its title from the publisher's key (#59), and one with no match is left without a title. When `data/structure/` is committed, each file must carry the sha256 of the committed index JSON and `versions.json`, and slice its text exactly. |
+| `test/structure.test.js` | The site structure (issue #61), on American Legal's own XML: the 44 Charter fixtures in `test/fixtures/diff/xml/` 4 Rules files in `test/fixtures/structure/rules/` and 2 in `test/fixtures/structure/rules-edge/`. The structure hooks leave the index alone (the fixtures' JSON and Markdown hash to what v0.6.2 wrote, pinned in the test); every block is a slice of its section's `text` and the blocks joined with one space are the `text`; Charter § 1133 keeps labels, depths and anchors (`(b)(1)`); a label repeated in one section gets `(a)(1)-2`; a Charter link resolves to its section and a link into a document not built keeps its name; a Rules chapter with no Title record around it takes its title from the publisher's key (#59), and one with no match is left without a title; a link to an anchor id or name the publisher put on two records is left unresolved and marked `ambiguous` (Rules § 2-01 and § 2-01.1); block text is the index's text byte for byte, with no Unicode normalization (the micro sign in Rules § 40-05). When `data/structure/` is present, each file must carry the sha256 of the committed index JSON and `versions.json`, and slice its text exactly. |
 | `test/markdown-parity.test.js` | Rebuilds each committed `data/index/markdown/<corpus>.md` from the committed JSON (and the committed structure, when there is one) with `scripts/lib/serialize-markdown.js`, and compares every byte, for every section of all three documents. |
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
@@ -380,9 +380,9 @@ nyc-charter-laws-rules/
 │       └── serialize-markdown.js ← the Markdown index, written from renderSection's blocks
 ├── data/
 │   ├── raw/                    ← downloaded ZIPs (gitignored — build locally)
-│   └── index/
-│       ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json
-│       └── markdown/           ← committed: charter.md, admin_code.md, rules.md
+│   ├── index/
+│   │   ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json
+│   │   └── markdown/           ← committed: charter.md, admin_code.md, rules.md
 │   └── structure/              ← site structure per document (committed by the daily refresh; not in the npm package)
 └── dist/                       ← compiled MCP server (built locally)
 ```
@@ -405,13 +405,24 @@ AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm 
 
 ### Site structure (`data/structure/`)
 
-The index's `text` is flat: subdivisions run together, and cross-references are plain words. `build-index` also writes `data/structure/<corpus>.json` for the website (epic #68), from the same XML in the same run. The MCP server does not read it, and it is not in the npm package. Per section, in index order:
+The index's `text` is flat. Its subdivisions run together, and its cross-references are plain words. `build-index` also writes `data/structure/<corpus>.json` for the website (epic #68), from the same XML in the same run. The MCP server does not read it, and it is not in the npm package.
+
+BetaNYC builds this file from American Legal Publishing's bulk XML. The anchors, link targets and titles taken from the publisher's chapter key are worked out by BetaNYC and can be wrong. It is not an official record.
+
+Per section, in index order:
 
 - `parents`: the Title, Chapter, Subchapter, Article and so on that the section sits in, outermost first, each named in `groups` with its heading. A chapter file that has no Title record around it (the publisher puts a Title's record only in its first chapter's file) takes its title from the publisher's anchor name for the chapter (`T03C007` is Title 3, Chapter 7). When nothing matches, the chapter has no title rather than a guessed one; `titleStats` counts each case.
 - `blocks`: the paragraphs of `text`, each a `start`/`end` slice of it. A subdivision has its `label` as printed (`a.`, `(1)`), its `depth` (the publisher's indentation) and an `anchor` built from its labels (`(b)(1)`), with `-2` added when the law repeats a label in one section. Editor's notes are `note` blocks.
-- `links`: each cross-reference as a `start`/`end` slice of `text` and its target: a section (`corpus`, `id`, and `anchor` when it points into a subdivision), a web address, or, when the target is not found, the publisher's name for it with `resolved: false`.
+- `links`: each cross-reference as a `start`/`end` slice of `text` and its target, one of:
+  - a section: `corpus`, the publisher's `name` for the target, its `id`, and `anchor` when it points into a subdivision;
+  - a Title or Chapter heading that is not a section: `corpus`, `name`, `id` and `group: true`;
+  - a web address: `kind: "web"` and `url`;
+  - an attached file: `kind: "file"` and `file`;
+  - or, when the target is not found, `corpus` and `name` with `resolved: false`. When the publisher put the target's anchor id or name on more than one record, the link is not pointed at either: it also has `ambiguous: true`. `linkStats` counts these.
 
-The text is not repeated: every offset points into `text` in `data/index/json/<corpus>.json`, and the file records that file's `sha256` (`indexSha256`, the same as `versions.json`). A structure file built from other text fails `test/structure.test.js`. `scripts/lib/render-section.js` turns a section and its entry into blocks; the Markdown index is written from them, with the body joined back into one paragraph, so its bytes do not change.
+Known limits. Depth is the publisher's indentation. In the July 2026 build, 13 sections have labels with no indentation, and in 3 of them (Rules § 5000-02, § 5-08 and § 113-07) letters and numbers sit at one depth, so they get anchors like `(1)` and `(1)-2` instead of `(c)(1)`. History lines ("(Am. L.L. ...)") are ordinary text blocks, because the XML does not mark them.
+
+The text is not repeated. Every offset points into `text` in `data/index/json/<corpus>.json`, and the file records that file's `sha256` (`indexSha256`, the same as `versions.json`). A structure file built from other text fails `test/structure.test.js`. `scripts/lib/render-section.js` turns a section and its entry into blocks; the Markdown index is written from them, with the body joined back into one paragraph, so its bytes do not change.
 
 ---
 
