@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-134038" number="114457" version="2533">
+			<HEADING>Chapter 2: Procedures and Criteria for the Citywide Participatory Budgeting Program</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-17622" name="T73C002"/>Chapter 2: Procedures and Criteria for the Citywide Participatory Budgeting Program</PARA>
+		</RECORD>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" style-id="0-0-0-480" level-depth="3" toc-section="false">
+			<LEVEL style-name="Subtitle" style-name-escaped="Subtitle" style-id="0-0-0-15301" level-depth="4" toc-section="false">
+				<LEVEL style-name="Part" style-name-escaped="Part" style-id="0-0-0-483" level-depth="5" toc-section="false">
+					<LEVEL style-name="Subpart" style-name-escaped="Subpart" style-id="0-0-0-15960" level-depth="6" toc-section="false">
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-134044" number="114458" version="2533">
+								<HEADING>§ 2-01 Purpose and scope.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-17616" name="T73C002_2-01"/>§ 2-01 Purpose and scope.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-134039" number="114459" version="2533">
+									<PARA>These rules set forth the procedures and criteria for the citywide participatory budgeting program authorized pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="225-a" destination-id="0-0-0-0">225-a</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter. Such rules shall apply unless the executive and adopted budgets enumerate local projects that were selected after a timely participatory budgeting process pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="225-a" destination-id="0-0-0-0">225-a</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-134037" number="114460" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-134043" number="114461" version="2533">
+								<HEADING>§ 2-02 Definitions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-17618" name="T73C002_2-02"/>§ 2-02 Definitions.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-134036" number="114462" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Borough ballot.</CHARFORMAT> The term “borough ballot” means a ballot, approved by the Commission, that lists and briefly describes each local project in a specific borough or, if approved by the Commission, an alternative, specified geographic area. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139350" number="114463" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Capital project.</CHARFORMAT> The term “capital project” has the meaning as such term is defined in Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="210" destination-id="0-0-0-0">210</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139349" number="114464" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">City poverty measure.</CHARFORMAT> The term “city poverty measure” means the citywide poverty rate as calculated by the mayor’s office for economic opportunity or successor office or agency. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139348" number="114465" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Citywide participatory budgeting.</CHARFORMAT> The term “citywide participatory budgeting” refers to the program established in Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="225-a" destination-id="0-0-0-0">225-a</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139347" number="114466" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Commission.</CHARFORMAT> The term “commission” means the New York city civic engagement commission or the chair acting on behalf of the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139346" number="114467" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Digital platform.</CHARFORMAT> The term “digital platform” means an online platform used by the Commission to enable city residents to submit, comment on and vote for local projects. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139345" number="114468" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Expense project.</CHARFORMAT> The term “expense project” means a project that may be funded with amounts appropriated in the expense budget and is not a capital project. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139344" number="114469" version="2533">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Local project.</CHARFORMAT> The term “local project” means a project that is eligible to be placed on a borough ballot and funded pursuant to Sections <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="225-a" destination-id="0-0-0-0">225-a</LINK> and <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter and this chapter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-134042" number="114470" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139342" number="114471" version="2533">
+								<HEADING>§ 2-03 Project Eligibility Requirements.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-17620" name="T73C002_2-03"/>§ 2-03 Project Eligibility Requirements.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-134033" number="114472" version="2533">
+									<PARA>To be eligible for placement on a borough ballot, a local project must satisfy all of the following criteria: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139354" number="114473" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The project must be an expense project; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139353" number="114474" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The total cost of the project must not exceed the amount determined by the Commission to be available for such project and must be sufficient to complete such project; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139352" number="114475" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The project must be completed within a single city fiscal year; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139351" number="114476" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The project shall address the needs of immigrant communities, individuals with limited English proficiency, people with disabilities, youth, students, seniors, veterans, groups or categories of residents that have been historically underrepresented or underserved by city government or another community need identified through the idea generation process as set forth in 73 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T73C002_2-05" destination-id="0-0-0-18092">2-05</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-126978" number="114477" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139377" number="114478" version="2533">
+								<HEADING>§ 2-04 Target Funding Allocation.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-18090" name="T73C002_2-04"/>§ 2-04 Target Funding Allocation.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-139385" number="114479" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>To the extent practicable, the Commission will calculate target funding allocations for each borough which targets may be adjusted as necessary. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139384" number="114480" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>Target borough allocations will be calculated using a weighted average of borough population and the percentage of the borough population below the poverty guidelines, as set by the city poverty measure. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139383" number="114481" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139389" number="114482" version="2533">
+								<HEADING>§ 2-05 Idea Generation.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-18092" name="T73C002_2-05"/>§ 2-05 Idea Generation.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-139382" number="114483" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The Commission will solicit ideas from the public for local projects to be funded pursuant to this chapter. Ideas may be submitted to the Commission by individuals or organizations. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139381" number="114484" version="2974">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The Commission may convene a borough committee for each borough comprised of residents who make recommendations for local projects to be placed on the borough ballot. Recommendations of such borough committees have no binding effect on the Commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139380" number="114485" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The Commission will conduct outreach to residents to inform them of examples of local projects, and options for voting for local projects on the borough ballot in person and through the digital platform. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139379" number="114486" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139388" number="114487" version="2533">
+								<HEADING>§ 2-06 Ballot Selection Criteria.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-18094" name="T73C002_2-06"/>§ 2-06 Ballot Selection Criteria.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-139378" number="114488" version="2533">
+									<PARA>The Commission will select, from among the proposals submitted pursuant to 73 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T73C002_2-05" destination-id="0-0-0-18092">2-05</LINK>, local projects to be placed on the borough ballot for each borough. In making its selection, the Commission will consider the following factors: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139376" number="114489" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The number of people served by the local project; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139375" number="114490" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The geographic distribution of local projects; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139374" number="114491" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The extent to which a local project fulfills an unmet need or gap in service or augments existing programming; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139373" number="114492" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>The extent to which a local project serves one or more of the groups identified in subdivision (d) of 73 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T73C002_2-03" destination-id="0-0-0-17620">2-03</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139372" number="114493" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139387" number="114494" version="2533">
+								<HEADING>§ 2-07 Voting Process.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-18096" name="T73C002_2-07"/>§ 2-07 Voting Process.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-139371" number="114495" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>Any resident of the city of New York 11 years of age or older is eligible to vote for local projects, subject to the following restrictions for the protection of children: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139370" number="114496" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Children under the age of 13 may not register an account on the digital platform. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139369" number="114497" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Children ages 13 through 17 may not register an account on the digital platform unless they receive parental or guardian consent to register such account. This paragraph does not apply to a child who is a legally emancipated adult. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139368" number="114498" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The following voting procedures apply: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139367" number="114499" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>A resident may cast votes only for local projects located within their borough of residence or, if approved by the Commission, within an alternative geographical unit; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139366" number="114500" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A resident may cast only one borough ballot; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139365" number="114501" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>A resident may vote for multiple local projects on the borough ballot. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139364" number="114502" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>A borough ballot may be cast online via the digital platform or in person. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139363" number="114503" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-139386" number="114504" version="2533">
+								<HEADING>§ 2-08 Final Selection Process.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-18098" name="T73C002_2-08"/>§ 2-08 Final Selection Process.</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-139362" number="114505" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>The Commission will tabulate the total number of votes cast for each local project. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139360" number="114506" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>The Commission retains the final authority to select which local projects that were placed on the borough ballots receive funding from the Commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139359" number="114507" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>In making such selection, the Commission must consider which local projects received the largest number of votes in each borough and the factors identified in 73 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T73C002_2-06" destination-id="0-0-0-18094">2-06</LINK>. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139358" number="114508" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>For a local project that requires the use of city personnel or property or the substantial participation or cooperation of one or more city agencies, the Commission shall obtain the concurrence of the affected agency or agencies before making a final determination to select such local project. For a local project that relates to an area of expertise of a city agency, the Commission will inform such agency of such project’s selection. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139357" number="114509" version="2533">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>The aggregate cost of all local projects selected by the Commission for funding shall not exceed the total amounts appropriated for local projects.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-139356" number="114510" version="2533">
+									<PARA>(Added City Record 6/30/2023, eff. 7/30/2023) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-087]</HIGHLIGHTER>
+									</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+					</LEVEL>
+				</LEVEL>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

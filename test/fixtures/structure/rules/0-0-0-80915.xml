@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-80915" number="93531" version="3">
+			<HEADING>Chapter 2: Adjudications</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-10773" name="T42C002"/>Chapter 2: Adjudications</PARA>
+		</RECORD>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" style-id="0-0-0-480" level-depth="3" toc-section="false">
+			<LEVEL style-name="Subtitle" style-name-escaped="Subtitle" style-id="0-0-0-15301" level-depth="4" toc-section="false">
+				<LEVEL style-name="Part" style-name-escaped="Part" style-id="0-0-0-483" level-depth="5" toc-section="false">
+					<LEVEL style-name="Subpart" style-name-escaped="Subpart" style-id="0-0-0-15960" level-depth="6" toc-section="false">
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-80916" number="93532" version="1956">
+								<HEADING>§ 2-01 Fitness and Discipline Adjudications of Department of Probation Employees.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-10775" name="T42C002_2-01"/>§ 2-01 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Fitness and Discipline Adjudications of Department of Probation Employees.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-80917" number="93533" version="3">
+									<PARA>New York City Department of Probation adjudications regarding the fitness and discipline of agency employees will be conducted by the Office of Administrative Trials and Hearings. After conducting an adjudication and analyzing all testimony and other evidence, the hearing officer shall make written proposed findings of fact and recommend decisions, which shall be reviewed and finally determined by the Commissioner of the Department of Probation.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+					</LEVEL>
+				</LEVEL>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>
