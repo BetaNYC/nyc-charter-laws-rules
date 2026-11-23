@@ -51,6 +51,11 @@ input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); o
    10.21:1 on white; the template's --line was 2.75:1 on the strip), and border and ring are
    2px, so the focused field shows 4px of --focus. */
 nys-textinput { --nys-color-neutral-400: var(--ink); --nys-border-width-sm: 2px; }
+/* The hint inside the box ("Try § 259 ...") is placeholder text, which NYSDS colors from
+   --nys-color-text-weaker, falling back on --nys-color-neutral-500 (set above to the template's
+   --line: 3.03:1 on the white field). The template's ink, mixed 80% with white: about 5.7:1 on
+   the white field (test/site measures it), and still lighter than typed text (10.21:1). */
+nys-textinput { --nys-color-text-weaker: color-mix(in srgb, var(--ink) 80%, var(--white)); }
 
 /* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
 .disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }

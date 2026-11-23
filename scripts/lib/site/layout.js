@@ -16,7 +16,8 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
  * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav): after <main> in the page, drawn on the left
  * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
  * @param {boolean} [p.noindex]
- * @param {boolean} [p.searchStrip=true]  the search box under the top bar
+ * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
+ *   2026-11-23). Every page reaches search through the top bar's Search link.
  * @param {object[]} [p.jsonLd]
  * @param {string[]} [p.headExtra] more <head> lines (Pagefind filters and metadata)
  * @param {string[]} [p.scripts]   extra module scripts
@@ -51,7 +52,7 @@ export function page(p) {
   const body = [
     `<a class="skip" href="#main">Skip to main content</a>`,
     topBar(p.nav, p.navPage === true),
-    p.searchStrip === false ? "" : searchStrip(p.site),
+    p.searchStrip === true ? searchStrip(p.site) : "",
     // The side list comes after <main> in the page, and law.css draws it in the left column on
     // a wide screen. So the law text comes first everywhere: to a screen reader, to the
     // keyboard (no Tab through 86 chapters to reach it) and on a phone, where the list folds
@@ -85,10 +86,14 @@ function topBar(current, isPage) {
 </header>`;
 }
 
-/** The search box under the top bar. Without JavaScript it shows a link to the contents. */
+/**
+ * The search box: on the home page (the strip) and the search page. Its hint is placeholder
+ * text inside the box, not a line of its own; the visible label stays its name. Without
+ * JavaScript it shows a link to the contents.
+ */
 export function searchForm({ contentsPath, id, handler }) {
   return `<form class="jump" action="/search" method="get" role="search" aria-label="Go to a section or search"${handler ? ` data-handler="${handler}"` : ""}>
-  <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" description="Try &quot;§ 259&quot;, &quot;259&quot; or &quot;budget office&quot;"></nys-textinput>
+  <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" placeholder="Try &quot;§ 259&quot;, &quot;259&quot; or &quot;budget office&quot;"></nys-textinput>
   <nys-button type="submit" variant="filled" label="Go"></nys-button>
 </form>
 <noscript><p class="nojs">Search needs JavaScript. <a href="${contentsPath}">Browse the Charter's contents</a> instead.</p></noscript>`;

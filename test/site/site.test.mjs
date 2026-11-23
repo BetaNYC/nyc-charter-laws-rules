@@ -69,8 +69,9 @@ test("agents on the page: every control on a section page has its own name", asy
     const { page, ctx, problems } = await open(s.path, { width });
     const { controls } = await assertNamedControls(page, `${s.path} at ${width}px`);
     const names = controls.map((x) => x.name);
-    for (const n of ["Copy link", "Copy citation", "Print", "Go"]) assert.ok(names.includes(n), `${n} at ${width}px`);
-    assert.ok(names.some((n) => n.startsWith("Go to a section, or search the words")), "search box");
+    for (const n of ["Copy link", "Copy citation", "Print"]) assert.ok(names.includes(n), `${n} at ${width}px`);
+    // No search box on a law page (Noel, 2026-11-23): the top bar's Search link goes to it.
+    assert.ok(!names.includes("Go") && !names.some((n) => n.startsWith("Go to a section")), `no search box at ${width}px`);
     if (width === 390) {
       assert.ok(names.includes("Charter chapters"), "the side list's button");
       assert.ok(names.includes("Menu"), "menu button");
@@ -151,7 +152,7 @@ test("reflow: no page scrolls sideways at 320px (WCAG 1.4.10)", async () => {
 });
 
 test("forced colors: a focused search box shows a ring around the field", async () => {
-  const { page, ctx } = await open("/charter/");
+  const { page, ctx } = await open("/");
   await page.emulateMedia({ forcedColors: "active", colorScheme: "dark" });
   const box = page.getByRole("searchbox", { name: /Go to a section/ });
   const host = page.locator("nys-textinput#q");
@@ -174,7 +175,7 @@ function contrast(a, b) {
 }
 
 test("search field: border 3:1 on its own background, focus ring at least 2px and 3:1", async () => {
-  for (const path of ["/charter/", "/search"]) {
+  for (const path of ["/", "/search"]) {
     const { page, ctx } = await open(path);
     const host = page.locator("nys-textinput").first();
     const read = () =>
@@ -238,21 +239,24 @@ test("section text and the bottom box read with JavaScript off", async () => {
   assert.equal((await page.locator(`p[data-block="0"]`).innerText()).replace(/\s+/g, " ").trim(), s.text.slice(first.start, first.end));
   await page.getByText("This is BetaNYC's copy, for research.").waitFor({ state: "visible" });
   await page.getByRole("link", { name: "Read the full disclaimer" }).waitFor({ state: "visible" });
-  await page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
+  // No search box on a law page, so no "search needs JavaScript" line either; the footer links to the contents.
+  await page.getByRole("link", { name: "the Charter's contents" }).waitFor({ state: "visible" });
   // The breadcrumbs and the table of contents are plain lists.
   await page.getByRole("link", { name: s.chapter.citation, exact: true }).waitFor({ state: "visible" });
   assert.ok(await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().isVisible());
   await ctx.close();
-  const search = await open("/search?q=office", { js: false });
-  await search.page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
-  await search.ctx.close();
+  for (const path of ["/search?q=office", "/"]) {
+    const other = await open(path, { js: false });
+    await other.page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
+    await other.ctx.close();
+  }
 });
 
 test("jump: a citation goes straight to its page; a shared number shows a short list", async () => {
   const s = site.book.sections.find((x) => !site.book.shared.some((sh) => sh.sections.includes(x)) && /^§ \d+$/.test(x.citation));
   const n = s.citation.slice(2);
   for (const typed of [s.citation, n, `charter ${n}`]) {
-    const { page, ctx, problems } = await open("/charter/");
+    const { page, ctx, problems } = await open("/");
     const box = page.getByRole("searchbox", { name: /Go to a section/ });
     await box.fill(typed);
     await Promise.all([page.waitForURL(`${base}${s.path}`), box.press("Enter")]);
@@ -466,6 +470,70 @@ test("the law text is in the body font, on screen and in print", async () => {
   const print = await fonts();
   assert.equal(print.law, print.body, "print");
   await ctx.close();
+});
+
+// Noel, 2026-11-23 (option A): the search box only on the home page and the search page.
+test("search box: only on the home and search pages, named, with its hint as placeholder text", async () => {
+  const s = sectionWithParts();
+  const without = [["contents", "/charter/"], ["chapter", s.chapter.path], ["section", s.path], ["shared number", site.book.shared[0].path], ["about", "/about"], ["404", "/charter/sections/no-such-section"]];
+  for (const [kind, path] of without) {
+    const { page, ctx } = await open(path);
+    assert.equal(await page.locator("nys-textinput, form.jump, .find").count(), 0, `${kind}: no search box`);
+    assert.equal(await page.getByRole("searchbox").count(), 0, `${kind}: no searchbox in the tree`);
+    // Search is still one link away, in the top bar.
+    assert.equal(await page.locator("#site-menu").getByRole("link", { name: "Search", exact: true }).getAttribute("href"), "/search", kind);
+    await ctx.close();
+  }
+  // In the phone menu too.
+  {
+    const { page, ctx } = await open(s.path, { width: 390 });
+    await page.getByRole("button", { name: "Menu" }).click();
+    await page.locator("#site-menu").getByRole("link", { name: "Search", exact: true }).waitFor({ state: "visible" });
+    await ctx.close();
+  }
+  for (const path of ["/", "/search"]) {
+    const { page, ctx } = await open(path);
+    const box = page.getByRole("searchbox");
+    assert.equal(await box.count(), 1, `${path}: one search box`);
+    assert.equal(await page.getByRole("searchbox", { name: "Go to a section, or search the words", exact: true }).count(), 1, `${path}: named by its label, not its placeholder`);
+    const r = await page.locator("nys-textinput").evaluate((h) => {
+      const input = h.shadowRoot.querySelector("input");
+      // Any CSS color as "rgb(r, g, b)", through a canvas (Chromium reports color-mix() results as color(srgb ...)).
+      const rgb = (c) => {
+        const cx = Object.assign(document.createElement("canvas"), { width: 1, height: 1 }).getContext("2d");
+        cx.fillStyle = c;
+        cx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = cx.getImageData(0, 0, 1, 1).data;
+        return `rgb(${r}, ${g}, ${b})`;
+      };
+      // The background behind the text: the nearest painted box, across the shadow boundary.
+      let el = input;
+      let bg = "rgba(0, 0, 0, 0)";
+      while (el && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
+        bg = getComputedStyle(el).backgroundColor;
+        el = el.parentElement ?? el.getRootNode().host;
+      }
+      return { placeholder: input.placeholder, color: rgb(getComputedStyle(input, "::placeholder").color), typed: rgb(getComputedStyle(input).color), bg: rgb(bg), description: h.shadowRoot.textContent.includes("Try ") };
+    });
+    assert.equal(r.placeholder, 'Try "§ 259", "259" or "budget office"');
+    assert.equal(r.description, false, `${path}: no separate hint line`);
+    const ratio = contrast(r.color, r.bg);
+    assert.ok(ratio >= 4.5, `${path}: placeholder ${r.color} on ${r.bg} is ${ratio.toFixed(2)}:1`);
+    assert.notEqual(r.color, r.typed, `${path}: placeholder lighter than typed text`);
+    console.log(`# ${path}: placeholder ${ratio.toFixed(2)}:1 on ${r.bg}`);
+    await ctx.close();
+  }
+  // The search page still takes ?q= and jumps a citation.
+  {
+    const target = site.book.sections.find((x) => !site.book.shared.some((sh) => sh.sections.includes(x)) && /^§ \d+$/.test(x.citation));
+    const { page, ctx, problems } = await open(`/search?q=${encodeURIComponent("budget")}`);
+    await page.getByRole("status").filter({ hasText: "results for" }).waitFor();
+    const box = page.getByRole("searchbox", { name: /Go to a section/ });
+    await box.fill(target.citation);
+    await Promise.all([page.waitForURL(`${base}${target.path}`), box.press("Enter")]);
+    assert.deepEqual(problems, []);
+    await ctx.close();
+  }
 });
 
 test("nothing loads from outside the site", () => {

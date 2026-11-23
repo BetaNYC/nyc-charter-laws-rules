@@ -308,7 +308,7 @@ export function homePage(book, site) {
 </ul>
 <p>The Administrative Code and the Rules of the City of New York come later.</p>
 <h2 id="how">How to use it</h2>
-<p>Type a section number, like <code>§ 259</code> or <code>259</code>, in the box at the top to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
+<p>Type a section number, like <code>§ 259</code> or <code>259</code>, in the box at the top of this page or on the <a href="/search">search page</a> to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
 <h2 id="data">The data and the MCP server</h2>
 <p>The same text is in BetaNYC's <a href="${REPO_URL}">nyc-charter-laws-rules</a> repository, as JSON and Markdown you can download, and AI assistants can read it through BetaNYC's MCP server. Please download the data rather than copying pages one at a time.</p>`;
   return {
@@ -320,6 +320,7 @@ export function homePage(book, site) {
       title: `${SITE_NAME}: the NYC Charter, section by section`,
       description: describe("Read New York City's Charter one section at a time, with links between sections and search."),
       main,
+      searchStrip: true,
       site,
       jsonLd: [{ "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, url: SITE_BASE + "/" }],
     }),
@@ -354,7 +355,6 @@ export function searchPage(book, site) {
       nav: "search",
       navPage: true,
       noindex: true,
-      searchStrip: false,
       site,
       scripts: ["/assets/search.js"],
     }),

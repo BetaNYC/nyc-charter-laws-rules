@@ -404,6 +404,22 @@ test("side list over the full Charter: all its chapters on a section page (full 
   console.log(`# full Charter: ${book.chapters.length} chapters in the side list; ${Buffer.byteLength(chapterNav(book, { chapter: s.chapter, section: s }))} bytes on ${s.fullCitation}'s page`);
 });
 
+test("the search box is on the home page and the search page only, its hint as placeholder text", () => {
+  const withBox = htmlFiles().filter((f) => read(relative(site.outDir, f)).includes("<nys-textinput")).map((f) => relative(site.outDir, f)).sort();
+  assert.deepEqual(withBox, ["index.html", "search.html"]);
+  assert.equal((read("index.html").match(/<div class="find"/g) ?? []).length, 1, "the strip on the home page");
+  assert.doesNotMatch(read("search.html"), /<div class="find"/, "the search page has its own box, not the strip");
+  for (const rel of withBox) {
+    const tag = /<nys-textinput[^>]*>/.exec(read(rel))[0];
+    assert.match(tag, / label="Go to a section, or search the words"/, `${rel}: a visible label is its name`);
+    assert.match(tag, / placeholder="Try &quot;§ 259&quot;, &quot;259&quot; or &quot;budget office&quot;"/, rel);
+    assert.doesNotMatch(tag, / description=/, `${rel}: no separate hint line`);
+    assert.match(read(rel), /<noscript><p class="nojs">Search needs JavaScript. <a href="\/charter\/">Browse the Charter's contents<\/a> instead.<\/p><\/noscript>/, rel);
+  }
+  // Every page keeps the top bar's Search link.
+  for (const f of htmlFiles()) assert.match(read(relative(site.outDir, f)), /<li><a href="\/search"(?: aria-current="page")?>Search<\/a><\/li>/, relative(site.outDir, f));
+});
+
 test("the law text uses the template's body font, not a second family", () => {
   const css = readFileSync(join(ROOT, "site", "assets", "law.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
   assert.doesNotMatch(css, /--font-law|Georgia|Times New Roman|\bserif\b/);
