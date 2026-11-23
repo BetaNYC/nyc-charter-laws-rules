@@ -151,7 +151,7 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
 export function chapterPage(c, book, site) {
   const crumbs = [HOME, { name: book.book.label, path: `/${book.book.slug}/` }, { name: c.citation, path: c.path }];
   const list = c.sections.length
-    ? `<h2 id="sections">Sections in ${escapeHtml(c.citation)}</h2>
+    ? `<h2 id="sections" data-pagefind-ignore>Sections in ${escapeHtml(c.citation)}</h2>
 <ol class="contents" data-pagefind-ignore="all">
 ${c.sections.map((x) => `<li><a href="${escapeHtml(x.path)}">${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`).join("\n")}
 </ol>`

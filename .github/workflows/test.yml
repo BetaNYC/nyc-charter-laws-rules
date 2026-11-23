@@ -47,6 +47,37 @@ jobs:
       - name: Run tests
         run: npm test
 
+  # The Charter site (issue #62): npm run test:site builds the site from the test fixtures,
+  # with its Pagefind index, and reads it in headless Chromium (accessibility tree, JavaScript
+  # off, search). When data/structure/ is committed (the daily refresh does that), it also
+  # builds the whole Charter site, to catch a build that only fails on the full text. Nothing
+  # is deployed: the site goes to _site/, which is git-ignored.
+  site:
+    name: Charter site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci && npm run build
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser tests
+        run: npm run test:site
+
+      - name: Build the whole Charter site
+        if: hashFiles('data/structure/charter.json') != ''
+        run: npm run build-site
+
   # BetaNYC's What's changed standard (betanyc-ai-workspace
   # platform/system/whats-changed-standard.md § 10). check-whats-changed runs
   # scripts/whats_changed.py check (a copy of the workspace's canonical file: never edit it
