@@ -17,7 +17,11 @@ import { escapeHtml } from "./html.js";
  * @param {Array} blocks         renderSection's body blocks (bodyBlocks(renderSection(...)))
  * @param {object} ctx
  * @param {string} ctx.fullCitation   "NYC Charter § 259", for subdivision names
- * @param {(to: object) => string|null} ctx.linkFor  where a cross-reference goes, or null
+ * @param {(to: object) => ({href: string, label?: string}|string|null)} ctx.linkFor
+ *        where a cross-reference goes, or null for plain text. `label` names the target
+ *        ("NYC Charter § 8"); when the linked words are not already that name, the link's
+ *        accessible name is "<words>, <label>", so "eight" linking to Chapter 8 and "eight"
+ *        linking to § 8 do not share a name (an agent tells links apart by name).
  */
 export function bodyHtml(blocks, { fullCitation, linkFor }) {
   return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor })).join("\n");
@@ -48,13 +52,16 @@ function blockHtml(b, n, { fullCitation, linkFor }) {
   let last = labelEnd;
   for (const l of links) {
     if (l.start < last) continue; // overlapping marks: keep the first
-    const href = linkFor(l.to);
-    if (!href) continue;
+    const target = linkFor(l.to);
+    if (!target) continue;
+    const { href, label } = typeof target === "string" ? { href: target } : target;
     const external = /^https?:\/\//i.test(href);
+    const words = b.text.slice(l.start, l.end).trim();
+    const name = label && words !== label ? ` aria-label="${escapeHtml(`${words}, ${label}`)}"` : "";
     spans.push({
       start: l.start,
       end: l.end,
-      open: `<a class="${external ? "external" : "xref"}" href="${escapeHtml(href)}">`,
+      open: `<a class="${external ? "external" : "xref"}" href="${escapeHtml(href)}"${name}>`,
     });
     last = l.end;
   }

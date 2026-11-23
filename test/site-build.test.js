@@ -17,7 +17,7 @@ import { join, relative } from "node:path";
 import { tmpdir } from "node:os";
 import { buildFixtureSite, buildFixtureData, writeFixtureData, ROOT, FIXED_NOW } from "./site/fixture-site.mjs";
 import { buildSite, currentThroughLine, BUILD_MARKER } from "../scripts/lib/site/build.js";
-import { loadBook, chapterOrderKey, sectionSlug, chapterSlug, shortHeading, linkHref } from "../scripts/lib/site/model.js";
+import { loadBook, chapterOrderKey, sectionSlug, chapterSlug, shortHeading, linkHref, linkTarget } from "../scripts/lib/site/model.js";
 import { readFooter, disclaimerParagraphs, plainParagraph } from "../scripts/lib/site/disclaimer.js";
 import { newYorkDay, newYorkLongDate, newYorkIso } from "../scripts/lib/site/clock.js";
 import { readBlocks, bodyHtml } from "../scripts/lib/site/render-html.js";
@@ -168,6 +168,14 @@ test("linkHref leaves unresolved, ambiguous and other-book links as plain text",
   assert.equal(linkHref({ kind: "web", url: "https://legistar.council.nyc.gov/x" }, site.book, s), "https://legistar.council.nyc.gov/x");
   assert.equal(linkHref({ kind: "web", url: "javascript:alert(1)" }, site.book, s), null);
   assert.equal(linkHref({ kind: "file", file: "a.pdf" }, site.book, s), null);
+  assert.deepEqual(linkTarget({ corpus: "charter", id: t.id, anchor: "(a)" }, site.book, s), { href: `${t.path}#(a)`, label: `${t.fullCitation}(a)` });
+  // A link's name says where it goes when its words do not (Charter § 1152 links "eight" to
+  // both Chapter 8 and § 8).
+  const html = bodyHtml([{ type: "text", text: "chapter eight or section eight", links: [{ start: 8, end: 13, to: { corpus: "charter", id: s.id } }, { start: 25, end: 30, to: { corpus: "charter", id: t.id } }] }], {
+    fullCitation: "NYC Charter § 1",
+    linkFor: (to) => linkTarget(to, site.book, null),
+  });
+  assert.ok(html.includes(`aria-label="eight, ${escapeHtml(s.fullCitation)}"`) && html.includes(`aria-label="eight, ${escapeHtml(t.fullCitation)}"`), html);
 });
 
 test("every page has the bottom box: current through, the bold line, the disclaimer link", () => {
@@ -252,7 +260,7 @@ test("Markdown and HTML show the same blocks for every Charter section (full ind
   const full = fullCharter();
   const book = loadBook({ corpus: "charter", indexJsonText: full.text, structure: full.structure, versions: full.versions });
   for (const r of book.ordered) {
-    const html = bodyHtml(bodyBlocks(renderSection(r, r.structure)), { fullCitation: r.fullCitation, linkFor: (to) => linkHref(to, book, r) });
+    const html = bodyHtml(bodyBlocks(renderSection(r, r.structure)), { fullCitation: r.fullCitation, linkFor: (to) => linkTarget(to, book, r) });
     assertSameBlocks(r, r.structure, html, r.citation);
   }
   assert.equal(book.ordered.length, full.versions.charter.sectionCount);

@@ -7,7 +7,7 @@
 
 import { renderSection, bodyBlocks } from "../render-section.js";
 import { bodyHtml } from "./render-html.js";
-import { linkHref } from "./model.js";
+import { linkTarget } from "./model.js";
 import { page, breadcrumbs, breadcrumbJsonLd, searchForm } from "./layout.js";
 import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
@@ -80,7 +80,7 @@ function lawText(record, book) {
   if (!blocks.length) return "";
   const html = bodyHtml(blocks, {
     fullCitation: record.fullCitation,
-    linkFor: (to) => linkHref(to, book, record),
+    linkFor: (to) => linkTarget(to, book, record),
   });
   return `<div class="law">\n${html}\n</div>`;
 }
@@ -105,7 +105,7 @@ export function sectionPage(s, book, site) {
     { name: s.citation, path: s.path },
   ];
   const toc = `<div class="toc" data-pagefind-ignore="all">
-<nys-verticalnav heading="${escapeHtml(`${s.chapter.citation}: ${s.chapter.title}`)}" headingLevel="h2">
+<nys-verticalnav heading="${escapeHtml(`Sections in ${s.chapter.citation}`)}" headingLevel="h2">
 <ul>
 ${s.chapter.sections
   .map((x) => `<li><a href="${escapeHtml(x.path)}"${x === s ? ` aria-current="page"` : ""}>${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`)

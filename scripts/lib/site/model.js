@@ -190,3 +190,12 @@ export function linkHref(to, book, current) {
   if (target === current) return frag || null;
   return target.path + frag;
 }
+
+/** A cross-reference's address and the name of what it points at ("NYC Charter § 8(a)"), or null. */
+export function linkTarget(to, book, current) {
+  const href = linkHref(to, book, current);
+  if (!href) return null;
+  if (to.kind === "web") return { href };
+  const target = book.byId.get(to.id);
+  return { href, label: `${target.fullCitation}${to.anchor ?? ""}` };
+}

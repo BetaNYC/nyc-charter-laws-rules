@@ -116,7 +116,7 @@ function footer(site) {
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
-    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules">nyc-charter-laws-rules</a>.</p>
+    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
     <p class="small">Browse: <a href="${site.contentsPath}">the Charter's contents</a>. Source: American Legal Publishing. BetaNYC modified this text; see <a href="/about">About this copy</a>. The code is MIT licensed; the license covers the code, not the publisher's text.</p>
   </div>
 </footer>`;
