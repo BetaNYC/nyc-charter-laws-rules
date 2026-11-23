@@ -4,3 +4,4 @@ dist/
 data/raw/
 .DS_Store
 __pycache__/
+_site/

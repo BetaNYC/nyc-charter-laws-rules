@@ -1,0 +1,151 @@
+/* The law site's own styles (issue #62), on top of BetaNYC's Pages template (site.css).
+   This file names no colors: every color is one of the template's variables, so site.css
+   stays the one file that names a color. test/site-build.test.js checks that. */
+
+/* NYSDS parts take their colors and type from the template. The seven --nys-color-theme*
+   tokens are the ones NYSDS's themes set (NYSDS themes guide, 1.23.2); the others are the
+   tokens the parts used here fall back on. */
+:root {
+  --nys-color-theme-faint: var(--bg-blue-lt);
+  --nys-color-theme-weaker: var(--bg-blue);
+  --nys-color-theme-weak: var(--blue-2);
+  --nys-color-theme-mid: var(--blue);
+  --nys-color-theme: var(--blue);
+  --nys-color-theme-strong: var(--blue-dark);
+  --nys-color-theme-stronger: var(--blue-dark);
+  --nys-color-text: var(--ink);
+  --nys-color-ink: var(--ink);
+  --nys-color-text-weak: var(--ink);
+  --nys-color-link: var(--blue);
+  --nys-color-link-strong: var(--blue-dark);
+  --nys-color-link-strongest: var(--blue-dark);
+  --nys-color-focus: var(--focus);
+  --nys-color-focus-reverse: var(--blue-2);
+  --nys-color-surface: var(--white);
+  --nys-color-surface-raised: var(--bg-blue-lt);
+  --nys-color-white: var(--white);
+  --nys-color-text-reverse: var(--white);
+  --nys-color-ink-reverse: var(--white);
+  --nys-color-neutral-400: var(--line);
+  --nys-color-neutral-500: var(--line);
+  --nys-color-neutral-600: var(--ink);
+  --nys-font-family-ui: var(--font-body);
+  --nys-font-family-body: var(--font-body);
+  --nys-font-family-sans: var(--font-body);
+  --nys-font-family-heading: var(--font-head);
+  --font-law: Georgia, "Times New Roman", serif;
+}
+
+/* The template's focus ring covers links, buttons and summaries; plain form fields get it too.
+   NYSDS's fields draw their own ring inside their shadow root from --nys-color-focus (set above
+   from the template's --focus). In forced colors that ring is 1px and looks like the field's
+   border, so the field as a whole gets the template's ring there. */
+input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media (forced-colors: active) {
+  nys-textinput:focus-within { outline: 3px solid var(--focus); outline-offset: 4px; }
+}
+
+/* NYSDS's text field takes its border color from --nys-color-neutral-400 and both its border
+   and its focus ring width from --nys-border-width-sm (NYSDS 1.23.2: --_nys-textinput-border-color,
+   --_nys-textinput-border-width, --_nys-textinput-outline-width). Set here on the field only,
+   so no other part changes: the border is the template's ink (9.25:1 on the blue search strip,
+   10.21:1 on white; the template's --line was 2.75:1 on the strip), and border and ring are
+   2px, so the focused field shows 4px of --focus. */
+nys-textinput { --nys-color-neutral-400: var(--ink); --nys-border-width-sm: 2px; }
+
+/* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
+.disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
+
+.wrap.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; padding-top: 20px; max-width: 1120px; }
+@media (max-width: 860px) { .wrap.layout { grid-template-columns: 1fr; gap: 8px; } }
+main { min-width: 0; }
+
+/* Search strip under the top bar. */
+.find { background: var(--bg-blue); border-bottom: 1px solid var(--line-soft); }
+.find .wrap { padding-top: .6rem; padding-bottom: .6rem; }
+form.jump { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: flex-end; margin: 0; }
+form.jump nys-textinput { flex: 1 1 18rem; max-width: 34rem; }
+.nojs { margin: .4rem 0; font-size: 15px; }
+
+/* Breadcrumbs read as a plain list until NYSDS defines the element (and with JavaScript off). */
+.crumbs { display: block; margin: 16px 0 12px; font-size: 15px; }
+nys-breadcrumbs:not(:defined) ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; list-style: none; margin: 0; padding: 0; }
+nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5rem; }
+
+/* Table of contents beside the text. */
+.toc { padding-top: 16px; }
+@media (min-width: 861px) { .toc { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow-y: auto; } }
+nys-verticalnav:not(:defined) { display: block; }
+nys-verticalnav:not(:defined)::before { content: attr(heading); display: block; font: 700 16px/1.3 var(--font-head); color: var(--blue); margin-bottom: .4rem; }
+nys-verticalnav:not(:defined) ul { list-style: none; margin: 0; padding: 0; font-size: 15px; line-height: 1.4; }
+nys-verticalnav:not(:defined) li { margin: 0 0 .35rem; }
+nys-verticalnav:not(:defined) a[aria-current] { font-weight: 700; color: var(--ink); }
+
+/* The law text. */
+h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
+h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
+.tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 20px; }
+.copy-status { margin: 0; font-size: 14px; }
+.law { font: 18px/1.7 var(--font-law); max-width: 72ch; }
+.law p { margin: 0 0 16px; scroll-margin-top: 16px; }
+.law [data-depth="2"] { margin-left: 1.6em; }
+.law [data-depth="3"] { margin-left: 3.2em; }
+.law [data-depth="4"] { margin-left: 4.8em; }
+.law [data-depth="5"] { margin-left: 6.4em; }
+.law [data-depth="6"], .law [data-depth="7"], .law [data-depth="8"] { margin-left: 8em; }
+@media (max-width: 620px) {
+  .law [data-depth="2"] { margin-left: .8em; }
+  .law [data-depth="3"] { margin-left: 1.6em; }
+  .law [data-depth="4"], .law [data-depth="5"], .law [data-depth="6"], .law [data-depth="7"], .law [data-depth="8"] { margin-left: 2.4em; }
+}
+.law a.num { font-weight: 700; text-decoration: none; }
+.law a.num:hover { text-decoration: underline; }
+.law a.xref { text-decoration-style: dotted; text-underline-offset: 2px; }
+.law p:target { background: var(--bg-blue); outline: 2px solid var(--blue); outline-offset: 4px; }
+.law .ednote { font: 15px/1.6 var(--font-body); border-left: 4px solid var(--line-soft); padding-left: 12px; }
+.source { max-width: 72ch; }
+.source p { margin: 0 0 8px; }
+.source p:last-child { margin: 0; }
+
+.pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }
+.pager a { text-decoration: none; display: block; padding: .4rem 0; max-width: 32ch; }
+.pager small { display: block; color: var(--ink); font-size: 13px; }
+.pager .next { text-align: right; margin-left: auto; }
+
+ol.contents, ul.contents { padding-left: 1.4em; }
+ol.contents li, ul.contents li { margin: 0 0 .4rem; }
+.count { font-size: 14px; }
+.hero-law { padding: 24px 0 8px; }
+
+/* The one box at the bottom of every page. */
+.copy-box { margin-top: 40px; }
+.copy-box p { margin: 0 0 10px; }
+.copy-box p:last-child { margin: 0; }
+.copy-box .lead { font-size: 16px; }
+
+/* Search results. */
+.results-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; margin-top: 12px; }
+.results-layout:has(.filters[hidden]) { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 760px) { .results-layout { grid-template-columns: 1fr; } }
+.filters-h { font-size: 17px; margin: 0 0 8px; }
+.filters nys-checkboxgroup { display: block; margin-bottom: 16px; }
+.summary { font-weight: 600; min-height: 1.6em; }
+ol.hits { list-style: none; padding: 0; margin: 0; }
+.hit { border-bottom: 1px solid var(--line-soft); padding: 14px 0; }
+.hit h2 { font-size: 19px; margin: 2px 0 6px; }
+.hit .where { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
+.badge { font-weight: 700; color: var(--blue); }
+.hit .snip { margin: 0 0 6px; }
+.hit mark { background: var(--blue-2); color: var(--ink); }
+.subs { margin: 4px 0 0; padding-left: 1.2em; font-size: 15px; }
+#pick { margin: 12px 0 20px; }
+
+@media print {
+  .site-bar, .menu-btn, .find, .toc, .tools, .pager, .crumbs, footer, nys-backtotop, .skip { display: none !important; }
+  .wrap.layout { display: block; }
+  .law { max-width: none; font-size: 12pt; }
+  .law a { color: inherit; text-decoration: none; }
+  .copy-box { break-inside: avoid; }
+  /* On paper, the official text and the source still need their addresses. */
+  .source a[href^="http"]::after, .copy-box a[href^="http"]::after { content: " (" attr(href) ")"; overflow-wrap: anywhere; word-break: break-all; }
+}
