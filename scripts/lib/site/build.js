@@ -101,11 +101,18 @@ function folderStats(dir) {
   return { files, bytes };
 }
 
-/** The Charter's entry in DATA-SOURCES.json: where the official text is, and the credit line. */
+/**
+ * The Charter's entry in DATA-SOURCES.json: where the official text is, and the credit line.
+ * verify_at is the book's first record at American Legal Publishing (".../NYCcharter/0-0-0-1");
+ * officialBase is the same address without that id, so a law page can link to its own record
+ * there (copy review S2).
+ */
 export function sourceFacts(dataSources, corpus) {
   const s = dataSources.sources?.find((x) => x.id === corpus);
   if (!s?.verify_at || !s?.terms?.credit_line) throw new Error(`DATA-SOURCES.json has no verify_at or credit line for ${corpus}`);
-  return { officialUrl: s.verify_at, creditLine: s.terms.credit_line };
+  const m = /^(https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/[A-Za-z]+\/)\d+(?:-\d+)*$/.exec(s.verify_at);
+  if (!m) throw new Error(`DATA-SOURCES.json verify_at for ${corpus} is not a record at American Legal Publishing: ${s.verify_at}`);
+  return { officialUrl: s.verify_at, officialBase: m[1], creditLine: s.terms.credit_line };
 }
 
 /**
@@ -140,7 +147,7 @@ export async function buildSite(o = {}) {
     versions: JSON.parse(readFileSync(need[1], "utf8")),
     structure: JSON.parse(readFileSync(need[2], "utf8")),
   });
-  const { officialUrl, creditLine } = sourceFacts(JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8")), corpus);
+  const { officialUrl, officialBase, creditLine } = sourceFacts(JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8")), corpus);
   const paragraphs = disclaimerParagraphs(readFooter(join(ROOT, "src", "tools.ts")));
   const site = {
     currentThrough: currentThroughLine(book.version.currentThrough),
@@ -148,6 +155,7 @@ export async function buildSite(o = {}) {
     // (scripts/lib/merge-versions.js keeps it when a rebuild changes nothing). Not a download date.
     copyChangedOn: newYorkLongDate(book.version.indexedAt),
     officialUrl,
+    officialBase,
     officialName: book.book.official,
     creditLine,
     contentsPath: `/${book.book.slug}/`,

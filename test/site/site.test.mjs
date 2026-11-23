@@ -401,6 +401,9 @@ test("side list on a phone: one named button, closed, above the breadcrumbs, one
   assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
   assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
   assert.equal(await page.locator(".toc-h").isVisible(), false, "the button is the heading on a phone");
+  // With scripts the fold is open and its summary gone: NYSDS's button is the one control.
+  assert.equal(await page.locator(".toc details").getAttribute("open"), "");
+  assert.equal(await page.locator(".toc summary").isVisible(), false, "no summary beside the button");
   // The button is above the breadcrumbs, the heading and the law text (Noel, 2026-11-23).
   const top = async (loc) => (await loc.boundingBox()).y;
   const buttonTop = await top(button);
@@ -418,7 +421,7 @@ test("side list on a phone: one named button, closed, above the breadcrumbs, one
   await ctx.close();
 });
 
-test("side list with JavaScript off: a plain list of every chapter, the current one open", async () => {
+test("side list with JavaScript off: a plain list of every chapter, the current one open; folded on a phone", async () => {
   const s = sectionWithParts();
   for (const width of [1200, 390]) {
     const { page, ctx } = await open(s.path, { width, js: false });
@@ -426,8 +429,38 @@ test("side list with JavaScript off: a plain list of every chapter, the current 
     const top = await page.locator(".toc nys-verticalnav > ul > li > a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
     assert.deepEqual(top, site.book.chapters.map((c) => c.path), `${width}px: every chapter`);
     assert.equal(await links.count(), site.book.chapters.length + s.chapter.sections.length);
+    const summary = page.locator(".toc summary");
+    if (width === 390) {
+      // Code review S3: closed, one line named like the list, which opens to the same list.
+      assert.ok(await summary.isVisible(), "the fold's summary");
+      assert.equal((await summary.innerText()).trim(), "Charter chapters");
+      assert.equal(await page.locator('.toc a[aria-current="page"]').isVisible(), false, "closed by default");
+      await summary.click();
+      assert.equal(await page.locator(".toc-h").isVisible(), false, "the summary names it; no second heading");
+    } else {
+      assert.equal(await summary.isVisible(), false, "no fold on a wide screen");
+      assert.ok(await page.getByRole("heading", { name: "Charter chapters", level: 2 }).isVisible(), "the heading");
+    }
     assert.ok(await page.locator('.toc a[aria-current="page"]').isVisible(), `${width}px: current section shown`);
     assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).getAttribute("aria-current"), "true");
+    await ctx.close();
+  }
+});
+
+// Code review S3: with the whole list open, a phone with JavaScript off reached the law text
+// about 5,000px down. Folded, the heading and the text start within the first screen.
+test("phone, JavaScript off: the section's heading and text start near the top", async () => {
+  const s = sectionWithParts();
+  for (const path of [s.path, s.chapter.path]) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(base + path);
+    const r = await page.evaluate(() => ({
+      h1: document.querySelector("h1").getBoundingClientRect().top + scrollY,
+      law: (document.querySelector(".law p, .contents li") ?? document.querySelector("main p")).getBoundingClientRect().top + scrollY,
+    }));
+    assert.ok(r.h1 < 400, `${path}: the heading starts at ${r.h1}px`);
+    assert.ok(r.law < 844, `${path}: the text starts at ${r.law}px, past the first screen`);
     await ctx.close();
   }
 });
@@ -447,20 +480,56 @@ test("skip link: straight to the law text, past the side list", async () => {
   await ctx.close();
 });
 
-test("side list scrolls itself, not the page, to the open chapter", async () => {
+// Where a link sits in the side list: in view means below the sticky heading and above the list's bottom edge.
+function placeInList(href) {
+  const toc = document.querySelector(".toc");
+  const a = (href ? toc.querySelector(`a[href="${href}"]`) : document.activeElement).getBoundingClientRect();
+  const t = toc.getBoundingClientRect();
+  const h = toc.querySelector(".toc-h").getBoundingClientRect();
+  return { pageY: window.scrollY, inView: a.top >= h.bottom - 0.5 && a.bottom <= t.bottom + 0.5, covered: Math.max(0, Math.min(a.bottom, h.bottom) - a.top) };
+}
+
+test("side list scrolls itself, not the page, to the reader's own section, or else the open chapter", async () => {
   // A short window, so the list scrolls even with the fixtures' chapters.
-  const s = site.book.sections.filter((x) => x.chapter === site.book.chapters.at(-1)).at(0) ?? site.book.sections.at(-1);
+  const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const cases = [
+    // Code review S1: the last section of the fixtures' longest chapter (Chapter 10, 36 sections),
+    // so the chapter link is in view while the section link is far below it.
+    { path: deepest.sections.at(-1).path, own: deepest.sections.at(-1).path, label: `${deepest.sections.at(-1).citation}, last of ${deepest.sections.length} in ${deepest.citation}` },
+    { path: site.book.chapters.at(-1).path, own: site.book.chapters.at(-1).path, label: "the last chapter's own page" },
+  ];
+  assert.ok(deepest.sections.length >= 30, `${deepest.citation} has ${deepest.sections.length} sections`);
+  for (const c of cases) {
+    const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
+    const page = await ctx.newPage();
+    await page.goto(base + c.path, { waitUntil: "networkidle" });
+    await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
+    await page.waitForTimeout(100);
+    const r = await page.evaluate(placeInList, c.own);
+    assert.equal(r.pageY, 0, `${c.label}: the page did not scroll`);
+    assert.ok(r.inView, `${c.label}: the reader's own link is in view, below the heading (${JSON.stringify(r)})`);
+    await ctx.close();
+  }
+});
+
+// Code review S2 (WCAG 2.4.11): moving focus up the list scrolls each link to the top of the
+// list, where the "Charter chapters" heading stays; scroll-padding keeps the link below it.
+test("side list: a focused link never hides under the sticky heading (Shift+Tab up the list)", async () => {
+  const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const s = deepest.sections.at(-1);
   const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
   const page = await ctx.newPage();
   await page.goto(base + s.path, { waitUntil: "networkidle" });
   await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
-  const r = await page.evaluate((path) => {
-    const toc = document.querySelector(".toc");
-    const a = toc.querySelector(`a[href="${path}"]`).getBoundingClientRect();
-    const t = toc.getBoundingClientRect();
-    return { pageY: window.scrollY, inView: a.top >= t.top && a.bottom <= t.bottom };
-  }, s.chapter.path);
-  assert.deepEqual(r, { pageY: 0, inView: true });
+  await page.locator('.toc a[aria-current="page"]').focus();
+  let steps = 0;
+  for (; steps < 80; steps++) {
+    await page.keyboard.press("Shift+Tab");
+    if (!(await page.evaluate(() => document.activeElement?.closest(".toc") && document.activeElement.tagName === "A"))) break;
+    const r = await page.evaluate(placeInList, null);
+    assert.ok(r.inView && r.covered === 0, `Shift+Tab ${steps + 1}: "${await page.evaluate(() => document.activeElement.textContent)}" is covered by ${r.covered}px`);
+  }
+  assert.ok(steps > deepest.sections.length, `walked ${steps} links up the list`);
   await ctx.close();
 });
 
@@ -535,7 +604,7 @@ test("search box: only on the home and search pages, named, with its hint as pla
       }
       return { placeholder: input.placeholder, color: rgb(getComputedStyle(input, "::placeholder").color), typed: rgb(getComputedStyle(input).color), bg: rgb(bg), description: h.shadowRoot.textContent.includes("Try ") };
     });
-    assert.equal(r.placeholder, 'Try "§ 259", "259" or "budget office"');
+    assert.equal(r.placeholder, 'Try "§ 259", "259", or "budget office"');
     assert.equal(r.description, false, `${path}: no separate hint line`);
     const ratio = contrast(r.color, r.bg);
     assert.ok(ratio >= 4.5, `${path}: placeholder ${r.color} on ${r.bg} is ${ratio.toFixed(2)}:1`);
