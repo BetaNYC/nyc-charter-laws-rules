@@ -13,7 +13,7 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./co
  * @param {string} p.title         <title>
  * @param {string} p.description   meta description
  * @param {string} p.main          the inside of <main>
- * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav), before <main>, on the left
+ * @param {string} [p.aside]       the contents tree (pages.js contentsTree), before <main>, on the left
  * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
  * @param {boolean} [p.noindex]
  * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
@@ -26,6 +26,7 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./co
  * @param {string[]} [p.scripts]   extra module scripts
  * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialBase, officialName, contentsPath }
  * @param {boolean} [p.navPage]  the top-bar link is this page itself (aria-current="page"), not just its section
+ * @param {boolean} [p.backToTop=true] NYSDS's back-to-top button in the footer (a chapter page has its own "Back to contents")
  */
 export function page(p) {
   const canonical = absoluteUrl(p.path);
@@ -56,14 +57,15 @@ export function page(p) {
     `<a class="skip" href="#main">Skip to main content</a>`,
     topBar(p.nav, p.navPage === true),
     p.searchStrip === true ? searchStrip(p.site) : "",
-    // The side list comes before <main> (Noel, 2026-11-23: people expect navigation at the
-    // top). On a phone it is one closed button above the breadcrumbs; the skip link jumps
-    // past it to the law text.
+    // The contents tree comes before <main> (Noel, 2026-11-23: people expect navigation at the
+    // top), and the skip link jumps past it to the law text. "☰ Contents" sits at the top of the
+    // page's column: it brings the tree back on a wide screen after "Hide", and opens it on a
+    // phone. law.js shows it; without JavaScript the tree's own fold does that job.
     p.aside
-      ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
+      ? `<div class="wrap layout">\n${p.aside}\n<div class="main-col">\n${contentsButton()}\n<main id="main">\n${p.main}\n</main>\n</div>\n</div>`
       : `<main id="main">\n<div class="wrap">\n${p.main}\n</div>\n</main>`,
     p.bottomBox === false ? "" : bottomBox(p.site),
-    footer(p.site, { sourceBox: p.sourceBox === true }),
+    footer(p.site, { sourceBox: p.sourceBox === true, backToTop: p.backToTop !== false }),
   ];
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n${head.join("\n")}\n</head>\n<body>\n${body.join("\n")}\n</body>\n</html>\n`;
 }
@@ -86,6 +88,11 @@ function topBar(current, isPage) {
     </nav>
   </div>
 </header>`;
+}
+
+/** "☰ Contents": shows the contents tree (pages.js contentsTree). Hidden until law.js wires it. */
+export function contentsButton() {
+  return `<button type="button" class="contents-open" aria-controls="contents" aria-expanded="false" hidden><span aria-hidden="true">&#9776;</span>Contents</button>`;
 }
 
 /**
@@ -138,9 +145,8 @@ export function bottomBox(site) {
 
 // The "comes from American Legal Publishing, and BetaNYC modified it" line is left off law
 // pages, whose source box says the same thing (copy review S2). The MIT line stays everywhere.
-function footer(site, { sourceBox = false } = {}) {
-  return `<footer data-pagefind-ignore="all">
-  <nys-backtotop></nys-backtotop>
+function footer(site, { sourceBox = false, backToTop = true } = {}) {
+  return `<footer data-pagefind-ignore="all">${backToTop ? "\n  <nys-backtotop></nys-backtotop>" : ""}
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>

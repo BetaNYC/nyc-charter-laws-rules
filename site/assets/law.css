@@ -60,15 +60,21 @@ nys-textinput { --nys-color-text-weaker: color-mix(in srgb, var(--ink) 80%, var(
 /* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
 .disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
 
-/* Two columns on a wide screen: the side list of chapters on the left, the page on the right.
-   One column below 1024px, the width where NYSDS folds the list behind its button, which then
-   sits above the breadcrumbs. */
-.wrap.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; padding-top: 20px; max-width: 1120px; }
-.wrap.layout > main { grid-column: 2; grid-row: 1; }
+/* Two columns at 900px and wider (law.js WIDE): the contents tree on the left, the page on the
+   right. "Hide" folds the tree away (html.contents-hidden, law.js), and the page takes the
+   whole width. One column below 900px, where the tree opens above the page. */
+.wrap.layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 40px; padding-top: 20px; max-width: 1160px; }
+.wrap.layout > .main-col { grid-column: 2; grid-row: 1; min-width: 0; }
 .wrap.layout > .toc { grid-column: 1; grid-row: 1; }
-@media (max-width: 1023px) {
+@media (min-width: 900px) {
+  html.contents-ready.contents-hidden .wrap.layout { grid-template-columns: minmax(0, 1fr); }
+  html.contents-ready.contents-hidden .wrap.layout > .main-col { grid-column: 1; }
+  html.contents-ready.contents-hidden .toc { display: none; }
+}
+@media (max-width: 899.98px) {
   .wrap.layout { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .wrap.layout > main, .wrap.layout > .toc { grid-column: auto; grid-row: auto; }
+  .wrap.layout > .main-col, .wrap.layout > .toc { grid-column: auto; grid-row: auto; }
+  html.contents-ready:not(.contents-shown) .toc { display: none; }
 }
 main { min-width: 0; }
 
@@ -88,48 +94,92 @@ nys-breadcrumbs.crumbs { --_nys-breadcrumbs-padding: 0; }
 nys-breadcrumbs:not(:defined) ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; list-style: none; margin: 0; padding: 0; }
 nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5rem; }
 
-/* The side list: every chapter, the open one showing its sections (pages.js chapterNav).
-   With scripts, NYSDS's vertical navigation draws it (and folds it behind one button below
-   1024px); these rules make the list compact and mark the open chapter. Without scripts the
-   same rules draw the plain list. */
-.toc { padding-top: 16px; }
-/* scroll-padding-top keeps a focused link clear of the sticky heading below (code review S2,
-   WCAG 2.4.11): the heading is 46px (16px + 8px padding, 17px at 1.3), plus 6px for the focus
-   ring (3px, offset 2px). */
-@media (min-width: 1024px) { .toc { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow-y: auto; padding-top: 0; scroll-padding-top: 52px; } }
-.toc ul { list-style: none; margin: 0; padding: 0; }
-.toc nys-verticalnav ul a { display: block; padding: 4px 8px 4px 12px; font-size: 15px; line-height: 1.4; font-weight: 400; color: var(--ink); text-decoration: none; }
-.toc nys-verticalnav ul a:hover { text-decoration: underline; }
-.toc nys-verticalnav a[aria-current="true"] { font-weight: 700; color: var(--blue); }
-.toc nys-verticalnav ul li.open > ul { border-left: 2px solid var(--line-soft); margin-left: 12px; }
-.toc nys-verticalnav ul li.open > ul a { padding-left: 14px; }
-/* The list's heading, in the template's heading style. It stays in view while the list scrolls.
-   Below 1024px, with scripts, NYSDS's button carries the same name, so the heading is hidden. */
-.toc .toc-h { font: 700 17px/1.3 var(--font-head); color: var(--blue); margin: 0; padding: 16px 8px 8px 12px; background: var(--white); position: sticky; top: 0; z-index: 1; }
-@media (max-width: 1023px) {
-  nys-verticalnav:defined .toc-h { display: none; }
-  .toc { padding-top: 8px; }
+/* The contents tree (pages.js contentsTree, Noel 2026-11-23, after American Legal Publishing's
+   code library): every chapter as an underlined link, the open chapter showing its sections, a
+   disclosure triangle before each chapter (law.js), the reader's own page marked. On a wide
+   screen it is a column that scrolls on its own, under a heading that stays in view. */
+.toc { font: 15px/1.45 var(--font-body); }
+@media (min-width: 900px) {
+  /* scroll-padding-top keeps a focused link or button clear of the sticky heading row
+     (WCAG 2.4.11): the row is 40px (the 28px Hide button plus 4px and 8px padding), plus 6px
+     for the focus ring (3px, offset 2px), plus 6px to spare. If the row's padding or the
+     button's size changes, change this too; law.js's showOpenChapter measures the row itself. */
+  .toc { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow-y: auto; padding-right: 14px; border-right: 1px solid var(--line-soft); scroll-padding-top: 52px; }
 }
-nys-verticalnav:not(:defined) { display: block; }
-/* The fold around the list (pages.js chapterNav, code review S3). It is closed in the HTML, so
-   with JavaScript off a phone shows one "Charter chapters" line, not every chapter, before the
-   law text, and with scripts the space it holds before NYSDS loads is about a button's height.
-   law.js opens it, and once NYSDS draws the list (with its own button on a phone) the summary
-   goes. On a wide screen the list shows whether the fold is open or not. */
-.toc-fold > summary { font: 700 17px/1.3 var(--font-head); color: var(--blue); padding: 10px 12px; border: 2px solid var(--blue); cursor: pointer; }
-.toc-fold[open]:has(> nys-verticalnav:defined) > summary { display: none; }
-@media (max-width: 1023px) {
-  .toc-fold[open] > summary { margin-bottom: 8px; }
-  nys-verticalnav:not(:defined) .toc-h { display: none; }
-}
+.contents-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0 8px; background: var(--white); position: sticky; top: 0; z-index: 1; }
+.contents-top h2 { font: 700 18px/1.2 var(--font-head); color: var(--blue); margin: 0; }
+.contents-nav .book { margin: 2px 0 6px; font-weight: 700; }
+.contents-nav .book a { display: inline-block; padding: 2px 0; }
+.tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+/* A chapter: [triangle] [link], its sections under the link. The first column is kept with
+   JavaScript off too, so the links line up whether or not the buttons are there. */
+.tree > li { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: start; }
+.tree > li > a, .tree > li > ul { grid-column: 2; }
+.tree > li > .tw { grid-column: 1; grid-row: 1; }
+.tree > li > ul { margin: 2px 0 8px; border-left: 2px solid var(--line-soft); padding-left: 10px; }
+.tree a { display: block; padding: 3px 0; color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.tree a:hover { text-decoration-thickness: 2px; }
+/* The reader's own page: bold, a bar on the left (a border, so it shows in forced colors), a
+   light fill, no underline. The open chapter on a section page: bold. */
+.tree a[aria-current="page"] { font-weight: 700; text-decoration: none; background: var(--bg-blue); border-left: 4px solid var(--blue); padding-left: 8px; margin-left: -12px; }
+.tree > li > a[aria-current="page"] { margin-left: 0; padding-left: 6px; }
+.tree a[aria-current="true"] { font-weight: 700; }
+.tree .load-error { padding: 3px 0; }
+.tw { width: 26px; height: 28px; display: flex; align-items: center; justify-content: center; padding: 0; background: none; border: 0; color: var(--ink); cursor: pointer; }
+.tw svg { width: 12px; height: 12px; transition: transform .15s; }
+.tw[aria-expanded="true"] svg { transform: rotate(90deg); }
+.tw[aria-busy="true"] { cursor: progress; }
+@media (prefers-reduced-motion: reduce) { .tw svg { transition: none; } }
+
+/* "Hide", "☰ Contents", and the no-JavaScript fold's summary, which looks like "☰ Contents". */
+.contents-hide, .contents-open, .contents-summary { font: 600 15px/1 var(--font-body); color: var(--blue); background: var(--white); border: 2px solid var(--blue); border-radius: 6px; padding: 6px 12px; min-height: 32px; cursor: pointer; }
+.contents-hide { font-size: 14px; padding: 5px 10px; min-height: 28px; border-width: 1px; }
+.contents-open { display: none; align-items: center; gap: .35em; margin: 0 0 4px; }
+.contents-hide:hover, .contents-open:hover, .contents-summary:hover { background: var(--bg-blue); }
+/* "☰ Contents" shows when the tree does not: after "Hide" on a wide screen; on a phone until it is opened. */
+@media (min-width: 900px) { html.contents-ready.contents-hidden .contents-open { display: inline-flex; } }
+@media (max-width: 899.98px) { html.contents-ready:not(.contents-shown) .contents-open { display: inline-flex; } }
+.main-col > .contents-open + main .crumbs { margin-top: 8px; }
+
+/* The fold (JavaScript off): its summary on a phone, closed, so the law text starts near the top.
+   On a wide screen the tree shows whether the fold is open or not; a browser without
+   ::details-content shows the summary, and the reader opens it. With scripts law.js opens the
+   fold and the summary goes: "☰ Contents" and "Hide" do its job. */
+.contents-summary { display: inline-block; list-style: none; margin: 8px 0 4px; }
+.contents-summary::-webkit-details-marker { display: none; }
+.contents-fold[open] > .contents-summary { margin-bottom: 8px; }
+html.contents-ready .contents-summary { display: none; }
 @supports selector(::details-content) {
-  @media (min-width: 1024px) {
-    .toc-fold > summary { display: none; }
-    .toc-fold::details-content { content-visibility: visible; }
+  @media (min-width: 900px) {
+    .contents-summary { display: none; }
+    .contents-fold::details-content { content-visibility: visible; }
   }
 }
-nys-verticalnav:not(:defined) a[aria-current="page"] { font-weight: 700; color: var(--blue); border-left: 4px solid var(--blue); background: var(--bg-blue-lt); }
-@media (min-width: 1024px) { nys-verticalnav:not(:defined) { border-right: 2px solid var(--line-soft); } }
+
+/* A chapter page (pages.js chapterPage): the jump list of its sections, then, at 900px and
+   wider, every section's full text; below 900px only the jump list, whose links go to each
+   section's own page. */
+.jump h2 { margin-top: 20px; }
+.jump ol.contents li { margin: 0 0 .25rem; }
+/* A long chapter's list in two columns on a wide screen, read down the first column, then the second. */
+@media (min-width: 1100px) { .jump ol.contents { columns: 2; column-gap: 32px; } .jump ol.contents li { break-inside: avoid; } }
+@media (max-width: 899.98px) { .chapter-text { display: none; } }
+.chapter-section { border-top: 1px solid var(--line-soft); margin-top: 24px; padding-top: 12px; scroll-margin-top: 16px; }
+.chapter-section h2 { font: 700 21px/1.3 var(--font-head); margin: 0 0 4px; }
+.sec-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 0 0 10px; font-size: 15px; }
+.sec-tools a { display: inline-block; padding: 2px 0; }
+.copy-cite { font: 600 14px/1 var(--font-body); color: var(--blue); background: var(--white); border: 1px solid var(--blue); border-radius: 6px; padding: 5px 10px; min-height: 28px; cursor: pointer; }
+.copy-cite:hover { background: var(--bg-blue); }
+.sec-tools .copy-status { font-size: 14px; }
+.sec-tools .copy-status:empty { display: none; }
+/* "Back to contents" stays at the bottom of the window while the chapter's text scrolls, and
+   ends up after the last section. It sits at the right edge, over the text's empty margin when
+   the window is wide; scroll-padding-bottom keeps whatever takes focus above it (WCAG 2.4.11),
+   and the box around it lets clicks through to anything beside it. */
+.back-wrap { position: sticky; bottom: 0; display: flex; justify-content: flex-end; padding: 12px 0 16px; pointer-events: none; }
+.back-to-contents { pointer-events: auto; display: inline-block; font-weight: 600; text-decoration: none; color: var(--blue); background: var(--white); border: 2px solid var(--blue); border-radius: 6px; padding: 8px 14px; }
+.back-to-contents:hover { background: var(--bg-blue); }
+@media (min-width: 900px) { html:has(.chapter-text) { scroll-padding-bottom: 80px; } }
 
 /* The law text. */
 h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
@@ -155,7 +205,11 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
 .law a.num:hover { text-decoration: underline; }
 .law a.xref { text-decoration-style: dotted; text-underline-offset: 2px; }
 .law p:target { background: var(--bg-blue); outline: 2px solid var(--blue); outline-offset: 4px; }
-.law .ednote { font: 15px/1.6 var(--font-body); border-left: 4px solid var(--line-soft); padding-left: 12px; }
+/* Notes, wherever law text appears (Noel, 2026-11-23). The amendment history line, quieter and
+   set off by a rule; an editor's note in a gray box, its "Editor's note:" in bold (render-html.js).
+   The words are the publisher's, unchanged. */
+.law .history { font: 15px/1.6 var(--font-body); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 12px; }
+.law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
 .source { max-width: 72ch; }
 .source p { margin: 0 0 8px; }
 .source p:last-child { margin: 0; }
@@ -194,8 +248,10 @@ ol.hits { list-style: none; padding: 0; margin: 0; }
 #pick { margin: 12px 0 20px; }
 
 @media print {
-  .site-bar, .menu-btn, .find, .toc, .tools, .pager, .crumbs, footer, nys-backtotop, .skip { display: none !important; }
+  .site-bar, .menu-btn, .find, .toc, .contents-open, .tools, .sec-tools, .back-wrap, .pager, .crumbs, footer, nys-backtotop, .skip { display: none !important; }
   .wrap.layout { display: block; }
+  /* A printed chapter page has every section's text, whatever the paper's width. */
+  .chapter-text { display: block !important; }
   .law { max-width: none; font-size: 12pt; }
   .law a { color: inherit; text-decoration: none; }
   .copy-box { break-inside: avoid; }
