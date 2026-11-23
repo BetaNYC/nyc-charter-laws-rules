@@ -45,6 +45,10 @@
 # does. The dispatched run is a run OF release.yml, which is the workflow
 # filename npm trusted publishing is bound to (see release.yml).
 #
+# The website (issue #64): when the commit step pushed (new law text, or the site
+# structure alone), the last step dispatches deploy-site.yml on main, for the same
+# GITHUB_TOKEN reason. No commit, no deploy.
+#
 # Idempotent on rerun: the checkout is `ref: main` (not the original run's SHA),
 # so a rerun after the bump commit landed rebuilds to no diff and only the
 # "Release if needed" step acts. That step re-checks npm, the remote tag and
@@ -188,6 +192,7 @@ jobs:
                 -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
                 commit -m "chore: refresh site structure $(TZ=America/New_York date +%F)"
               git push origin HEAD:main
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
               echo "refresh-data: pushed the site structure to main (no index change, no release)"
               exit 0
             fi
@@ -268,6 +273,7 @@ jobs:
             commit -m "chore: refresh index $(TZ=America/New_York date +%F) — ${DELTA}${SUFFIX}"
 
           git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
           echo "refresh-data: pushed refreshed index to main"
 
       - name: Release if needed
@@ -291,3 +297,17 @@ jobs:
         run: |
           echo "::error::New law data was committed, but no npm release was prepared. See the warning on 'Commit refreshed index if changed'." >&2
           exit 1
+
+      - name: Deploy the website if this run committed
+        # The push above used GITHUB_TOKEN, so it does not start deploy-site.yml's `push`
+        # trigger ("events triggered by the GITHUB_TOKEN will not create a new workflow run",
+        # except workflow_dispatch and repository_dispatch:
+        # https://docs.github.com/en/actions/concepts/security/github_token). Dispatch it
+        # instead, as "Release if needed" does for release.yml; `actions: write` above covers it.
+        # Last, and `!cancelled()`, so it runs whenever the commit step pushed, even if the
+        # release steps went red, and a failed dispatch can never block a release.
+        if: ${{ !cancelled() && steps.commit.outputs.pushed == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run deploy-site.yml --ref main -f reason="daily refresh ${{ github.run_id }}"

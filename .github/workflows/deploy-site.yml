@@ -1,0 +1,144 @@
+# Build the BetaNYC Law Reader and deploy it to GitHub Pages (issue #64, epic #68).
+#
+# The HTML is built here, fresh, on every run, from the committed data/index/ and
+# data/structure/, and is never committed (epic #68, decision 5). The build fetches nothing.
+#
+# What starts a run:
+#   1. A push to main that changes the site code, the data it reads, or this file (the
+#      `paths` list below). test/deploy-workflow.test.js checks that every file the build
+#      imports or reads is on that list.
+#   2. workflow_dispatch: by hand from the Actions tab, or `gh workflow run deploy-site.yml
+#      --ref main`.
+#   3. The daily refresh, but only on a day it committed something. refresh-data.yml pushes
+#      with the built-in GITHUB_TOKEN, and "events triggered by the GITHUB_TOKEN will not
+#      create a new workflow run", except that "workflow_dispatch and repository_dispatch
+#      events always create workflow runs" (https://docs.github.com/en/actions/concepts/security/github_token,
+#      "When GITHUB_TOKEN triggers workflow runs"). So its push never reaches trigger 1, and
+#      its last step dispatches this workflow instead, only when its commit step pushed.
+#      A `workflow_run` trigger was not used: it would fire on every refresh, including the
+#      days nothing changed, and not on a run that committed law text and then went red over
+#      the release.
+#
+# Only main deploys: the build job is skipped on any other ref, and the github-pages
+# environment allows only main (repo Settings > Environments). Permissions and the
+# environment follow GitHub's docs: "The job must have a minimum of `pages: write` and
+# `id-token: write` permissions" (https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+# and actions/deploy-pages v5.0.1's README.
+#
+# Custom domain: law.beta.nyc is set in the repo's Pages settings. With a custom Actions
+# workflow "no CNAME file is created, and any existing CNAME file is ignored and is not
+# required" (https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+#
+# Hidden files: upload-pages-artifact v4+ leaves out dotfiles by default. The build writes
+# two, _site/.law-reader-build (its own marker) and _site/.nojekyll; neither is needed on
+# Pages, since an Actions deployment does not run Jekyll.
+
+name: Deploy Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/index/**"
+      - "data/structure/**"
+      - "scripts/build-site.js"
+      - "scripts/lib/site/**"
+      - "scripts/lib/render-section.js"
+      - "site/**"
+      - "src/tools.ts"
+      - "DATA-SOURCES.json"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy-site.yml"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual run (optional)"
+        required: false
+        default: ""
+
+# Least privilege at workflow level; the deploy job adds what Pages needs.
+permissions:
+  contents: read
+
+# One deployment at a time. Not cancelled mid-flight; a run queued behind it replaces any
+# older queued one, so the newest commit is what ends up live.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build the site
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # Same as refresh-data.yml and the site job in test.yml.
+          node-version: "22.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        # The whole unit suite (pretest builds the TypeScript), site-build tests included.
+        # The browser tests (npm run test:site) run in test.yml on every push; they read
+        # fixtures, so new law text cannot change their result.
+        run: npm test
+
+      - name: Build the site
+        # Exits 1, and so stops the run before anything deploys, if data/structure/ is
+        # missing, was built from other text than the index, or disagrees with versions.json.
+        run: npm run build-site
+
+      - name: Check the build
+        run: |
+          set -euo pipefail
+          for f in index.html about.html 404.html search.html redirects.json sitemap.xml robots.txt pagefind/pagefind.js; do
+            test -s "_site/$f" || { echo "::error::_site/$f is missing or empty" >&2; exit 1; }
+          done
+          echo "deploy-site: $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site/
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Smoke check the live site
+        # A failure turns the run red. It cannot undo the deployment.
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          base="${PAGE_URL%/}"
+          for path in / /about; do
+            code="$(curl -sSL -o /dev/null -w '%{http_code}' --retry 5 --retry-all-errors --retry-delay 10 --max-time 30 "${base}${path}")" || code="curl failed"
+            echo "deploy-site: ${base}${path} -> ${code}"
+            [ "$code" = "200" ] || { echo "::error::${base}${path} answered ${code}, not 200" >&2; exit 1; }
+          done
