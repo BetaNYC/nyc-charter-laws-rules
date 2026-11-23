@@ -11,6 +11,9 @@ export const SITE_SHORT_NAME = "Law Reader";
 
 export const REPO_URL = "https://github.com/BetaNYC/nyc-charter-laws-rules";
 
+/** The MCP server on npm, which gives AI assistants the same text. */
+export const NPM_URL = "https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules";
+
 /**
  * The books on the site. Only the Charter is built in Phase 2; the Administrative Code and the
  * Rules follow in Phase 5 (#65). `label` starts page titles ("NYC Charter § 259: ..."); `name`

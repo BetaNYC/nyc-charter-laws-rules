@@ -28,6 +28,9 @@ import { renderSection, bodyBlocks } from "../scripts/lib/render-section.js";
 import { sectionMarkdown } from "../scripts/lib/serialize-markdown.js";
 import { parseQuery, lookup, citationKeys, jumpTarget, pageUrl } from "../site/assets/jump.js";
 import { redirectFor } from "../site/assets/not-found.js";
+import { chapterNav, chapterName, chapterNavName, sectionPage, officialRecordUrl } from "../scripts/lib/site/pages.js";
+import { currentLine } from "../scripts/lib/site/layout.js";
+import { sourceFacts } from "../scripts/lib/site/build.js";
 
 let site;
 before(async () => {
@@ -183,28 +186,87 @@ test("linkHref leaves unresolved, ambiguous and other-book links as plain text",
   assert.ok(html.includes(`aria-label="eight, ${escapeHtml(s.fullCitation)}"`) && html.includes(`aria-label="eight, ${escapeHtml(t.fullCitation)}"`), html);
 });
 
-test("every page has the bottom box: current through, the bold line, the disclaimer link", () => {
-  const line = currentThroughLine(site.data.versions.charter.currentThrough);
-  assert.equal(line, "Current through Local Law 2026/086, enacted April 25, 2026.");
+test("every page but About has the bottom box: current through, the bold line, the disclaimer link", () => {
+  assert.equal(currentThroughLine(site.data.versions.charter.currentThrough), "Current through Local Law 2026/086, enacted April 25, 2026.");
+  // Each claim names its owner (copy review S1): "current through" is the publisher's, the date is BetaNYC's.
+  const line = escapeHtml("American Legal Publishing's text is current through Local Law 2026/086, enacted April 25, 2026. BetaNYC's copy last changed on November 22, 2026.");
+  assert.equal(escapeHtml(currentLine({ currentThrough: currentThroughLine(site.data.versions.charter.currentThrough), copyChangedOn: "November 22, 2026" })), line);
+  assert.throws(() => currentLine({ currentThrough: "Updated through rule 5.", copyChangedOn: "today" }), /does not start "Current through"/);
+  // The About page ends with the full disclaimer and its own "How current it is", so it has no box.
+  const about = read("about.html");
+  assert.ok(!about.includes("copy-box"), "about.html: no bottom box");
+  assert.ok(about.includes(`<h2 id="current">How current it is</h2>\n<p>${line} That date changes`), "about.html: current through, in its own section");
   for (const f of htmlFiles()) {
     const html = readFileSync(f, "utf8");
     const rel = relative(site.outDir, f);
+    if (rel === "about.html") continue;
     const box = /<aside class="warnbox copy-box" aria-label="About this copy">([\s\S]*?)<\/aside>/.exec(html)?.[1];
     assert.ok(box, `${rel}: bottom box`);
-    assert.ok(box.includes(line), `${rel}: current through`);
-    assert.ok(box.includes("BetaNYC&#39;s copy of the text last changed on November 22, 2026.") || box.includes("BetaNYC's copy of the text last changed on November 22, 2026."), `${rel}: the date the copy last changed (indexedAt, New York time)`);
+    assert.ok(box.includes(`<p class="current">${line}</p>`), `${rel}: current through, the publisher's, and the date the copy last changed (indexedAt, New York time)`);
+    assert.doesNotMatch(box, /<p class="current">Current through/, `${rel}: not stated as BetaNYC's own claim`);
     assert.ok(
       box.includes(
         "<strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. The official Charter is at <a href=\"https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1\">American Legal Publishing</a>.</strong>"
       ),
       `${rel}: bold line`
     );
-    assert.match(box, /<a href="\/about">/, `${rel}: disclaimer link`);
+    assert.match(box, /<a href="\/about#disclaimer">Read the full disclaimer<\/a>/, `${rel}: disclaimer link`);
     // Plain HTML, outside any web component, after the main content, and nothing at the top.
     assert.ok(html.indexOf("copy-box") > html.indexOf("</main>"), `${rel}: box after main`);
     assert.ok(!/<nys-[a-z]+[^>]*>[^]*copy-box/.test(html.slice(html.lastIndexOf("</main>"), html.indexOf("copy-box"))), `${rel}: box inside a component`);
     assert.ok(!html.slice(0, html.indexOf("<main")).includes("not legal advice"), `${rel}: no warning at the top`);
   }
+});
+
+// Copy review S2, 2026-11-23: a law page says where its text comes from once, in its source box,
+// whose link opens that record's own page at American Legal Publishing.
+test("law pages: the source box links to the record's own page at American Legal; the footer does not repeat it", () => {
+  const facts = sourceFacts(JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8")), "charter");
+  assert.equal(facts.officialUrl, "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1");
+  assert.equal(facts.officialBase, "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/");
+  assert.throws(() => sourceFacts({ sources: [{ id: "charter", verify_at: "https://example.com/x", terms: { credit_line: "c" } }] }, "charter"), /not a record at American Legal Publishing/);
+  const modified = /The text comes from American Legal Publishing, and BetaNYC modified it \(<a href="\/about#changes">how BetaNYC changed it<\/a>\)\. /;
+  const mit = "Our code is MIT licensed; the license does not cover the publisher&#39;s text.";
+  const lawFiles = new Set(site.book.ordered.map((r) => fileForPath(r.path)));
+  for (const r of site.book.ordered) {
+    const html = read(fileForPath(r.path));
+    const box = /<div class="note source"[^>]*>([\s\S]*?)<\/div>/.exec(html)?.[1];
+    assert.ok(box, `${r.path}: source box`);
+    const href = `https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/${r.id}`;
+    assert.equal(officialRecordUrl(r, { officialBase: facts.officialBase }), href);
+    assert.ok(box.includes(`<a href="${href}">Official text at American Legal Publishing</a>`), `${r.path}: its own page at American Legal`);
+    assert.match(box, /<strong>BetaNYC modified this\.<\/strong>/, `${r.path}: modified, in the source box`);
+    const footer = html.slice(html.indexOf("<footer"));
+    assert.doesNotMatch(footer, modified, `${r.path}: the footer does not repeat the source`);
+    assert.ok(footer.includes(`<p class="small">${mit.replace("&#39;", "'")}</p>`), `${r.path}: the MIT line stays`);
+    // The bottom box's bold line is unchanged and still names the book's official copy.
+    assert.ok(html.includes(`The official Charter is at <a href="${facts.officialUrl}">American Legal Publishing</a>.</strong>`), `${r.path}: bold line`);
+  }
+  for (const f of htmlFiles()) {
+    const rel = relative(site.outDir, f);
+    if (lawFiles.has(rel)) continue;
+    const html = read(rel);
+    assert.doesNotMatch(html, /<div class="note source"/, `${rel}: no source box`);
+    assert.match(html.slice(html.indexOf("<footer")), modified, `${rel}: the footer says where the text comes from`);
+  }
+});
+
+test("footer: the download link lands on the data files", () => {
+  for (const f of htmlFiles()) {
+    const html = read(relative(site.outDir, f));
+    assert.match(html, /Download the text as JSON and Markdown <a href="https:\/\/github\.com\/BetaNYC\/nyc-charter-laws-rules\/tree\/main\/data\/index">from GitHub<\/a>/, relative(site.outDir, f));
+  }
+});
+
+test("the chapter pager names chapters the way the lists do", () => {
+  const [first, second] = site.book.chapters;
+  assert.equal(first.title, first.citation, "the fixtures open with a chapter whose title is its citation (Introductory)");
+  const html = read(fileForPath(second.path));
+  const pager = /<nav class="pager"[\s\S]*?<\/nav>/.exec(html)[0];
+  assert.ok(pager.includes(`<small>Previous</small> ${escapeHtml(chapterName(first))}</a>`), pager);
+  assert.doesNotMatch(pager, new RegExp(`${first.citation}: ${first.title}`), "no repeated label");
+  const next = /<a class="next"[^>]*><small>Next<\/small> ([^<]*)<\/a>/.exec(read(fileForPath(first.path)))[1];
+  assert.equal(unescapeHtml(next), chapterName(second));
 });
 
 test("the disclaimer page's text is the MCP's FOOTER, without its Built-by line", async () => {
@@ -220,9 +282,55 @@ test("the disclaimer page's text is the MCP's FOOTER, without its Built-by line"
   assert.deepEqual(shown, expected);
   assert.deepEqual(paras.map(plainParagraph), expected);
   assert.match(block, /<a href="mailto:NYC\.editor@amlegal\.com">NYC\.editor@amlegal\.com<\/a>/);
-  assert.ok(html.includes("This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com."));
+  assert.ok(html.includes("<p>BetaNYC's MCP server ends its answers with the disclaimer below. The paragraph that starts “Official disclaimer from American Legal Publishing” is the publisher's, written for its own site, codelibrary.amlegal.com, so “this site” in it means theirs.</p>"));
+  // The paragraph the lead-in names is in the disclaimer it introduces.
+  assert.ok(expected.some((p) => p.startsWith("Official disclaimer from American Legal Publishing")), "the lead-in names a paragraph that is there");
   // A FOOTER whose last paragraph is not the Built-by line stops the build.
   assert.throws(() => disclaimerParagraphs("---\n**A.** one\n\nTwo, a new last paragraph."), /no longer starts "Built by BetaNYC"/);
+});
+
+test("the About page: its sections in order, a jump list that resolves, the disclaimer last, lab@beta.nyc", () => {
+  const html = read("about.html");
+  const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+  assert.match(main, /<h1>About BetaNYC Law Reader<\/h1>/);
+  assert.match(html, /<title>About \| BetaNYC Law Reader<\/title>/);
+  const ids = [...main.matchAll(/<h2 id="([^"]+)">/g)].map((m) => m[1]).filter((id) => id !== "on-this-page");
+  assert.deepEqual(ids, ["why", "history", "changes", "current", "built-by", "ai", "licenses", "mistakes", "support", "disclaimer"]);
+  const jumps = [...main.matchAll(/<li><a href="#([^"]+)">/g)].map((m) => m[1]);
+  assert.deepEqual(jumps, ids, "the jump list names every section, in order");
+  // No warning at the top: the bold line opens the Disclaimer section, the last thing in main.
+  assert.doesNotMatch(main.slice(0, main.indexOf('<h2 id="disclaimer">')), /not legal advice/);
+  const tail = main.slice(main.indexOf('<h2 id="disclaimer">'));
+  assert.match(tail, /^<h2 id="disclaimer">Disclaimer<\/h2>\n<p><strong>This is BetaNYC's copy, for research\. It is not the official text and not legal advice\./);
+  // The history: the 2013 People's Roadmap, BetaNYC's testimony and statement, and the Council's record of Local Law 37 of 2014.
+  for (const href of [
+    "https://nycroadmap.us/index.html#31",
+    "https://github.com/openlawdc/dc-decoded",
+    "https://www.beta.nyc/2014/06/11/betanycs-support-of-three-bills-that-would-put/",
+    "https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=1681066&amp;GUID=0AA72ECF-4B97-41D0-B3B2-965B7AFC0F24",
+    "https://www.beta.nyc/2014/08/07/betanycs-statement-on-the-signing-of-nycs/",
+    "https://www.beta.nyc/2026/05/21/new-nyc-digital-democracy-tools-for-ai/",
+  ]) assert.ok(main.includes(`href="${href}"`), href);
+  assert.match(main, /<a href="mailto:lab@beta\.nyc">lab@beta\.nyc<\/a>/);
+  assert.doesNotMatch(html, /hello@beta\.nyc/, "hello@beta.nyc is not a BetaNYC address");
+  assert.match(main, /href="https:\/\/www\.beta\.nyc\/about\/ai-policy\/"/);
+  assert.match(main, /href="https:\/\/beta\.nyc\/donate\/"/);
+  // The footer's "modified" note points at the section that says how, and that section says "modified" first.
+  assert.match(html, /The text comes from American Legal Publishing, and BetaNYC modified it \(<a href="\/about#changes">how BetaNYC changed it<\/a>\)\./);
+  assert.match(main, /<h2 id="changes">What BetaNYC changed<\/h2>\n<p>BetaNYC modified the text\. We split each section into its parts \(a, b, \(1\), \(2\)…\), give/);
+  // Copy review, 2026-11-23: who the roadmap was for, what BetaNYC testified for, whose duty § 7-111 is,
+  // who asks to hear about mistakes, and the licenses in short sentences.
+  for (const text of [
+    "The People's Roadmap to a Digital New York City</a> for the City's incoming leaders.",
+    "testified before the Council</a> in support of Intro 149,",
+    "requires the City's Law Department to publish the Charter, the Administrative Code, and the Rules on its website",
+    "If the mistake is in the publisher's text itself, American Legal Publishing's disclaimer asks readers to tell the publisher at <a href=\"mailto:NYC.editor@amlegal.com\">NYC.editor@amlegal.com</a> or the NYC Law Department at <a href=\"mailto:NYCCodeRulesCharter@law.nyc.gov\">NYCCodeRulesCharter@law.nyc.gov</a>.",
+    "This is not a New York State site; we use the design system as a library.",
+    "DOMPurify, which the design system includes, carries its notice in <a href=\"/assets/nysds/nysds.js\">nysds.js</a>.",
+  ]) assert.ok(main.includes(text), text);
+  // The serial comma in the site's own copy (copy review S5).
+  for (const text of ["community boards, and the agencies", "advocates, and students", "read, search, and cite", "the Rules, and the Administrative Code", "the Administrative Code, and the Rules", "contents, and search controls", "wrong, missing, or out of date", "(Apache License 2.0), and Lit"]) assert.ok(main.includes(text), text);
+  assert.doesNotMatch(main, /\.\.\.\)|for the incoming mayor|gives the same disclaimer|Its second paragraph/);
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).
@@ -303,9 +411,44 @@ test("structured data uses only properties schema.org defines", () => {
   assert.equal(leg.legislationIdentifier, s.fullCitation);
   assert.equal(leg.url, SITE_BASE + s.path);
   const crumbs = lds.find((x) => x["@type"] === "BreadcrumbList").itemListElement;
-  assert.deepEqual(crumbs.map((c) => c.name), ["Law Reader", "NYC Charter", s.chapter.citation, s.citation]);
+  assert.deepEqual(crumbs.map((c) => c.name), ["Home", "NYC Charter", s.chapter.citation, s.citation]);
+  assert.equal(crumbs[0].item, `${SITE_BASE}/`);
   assert.equal(crumbs.at(-1).item, undefined);
+  // The structured data names the same crumbs the page shows (Noel, 2026-11-23: "Home", not "Law Reader").
+  const shown = [.../<nys-breadcrumbs[^>]*>([\s\S]*?)<\/nys-breadcrumbs>/.exec(html)[1].matchAll(/<li>(?:<a href="([^"]+)">|<span aria-current="page">)([^<]*)</g)].map((m) => ({ name: unescapeHtml(m[2]), path: m[1] }));
+  assert.deepEqual(shown.map((c) => c.name), crumbs.map((c) => c.name));
+  assert.deepEqual(shown[0], { name: "Home", path: "/" });
+  for (const [i, c] of shown.entries()) if (c.path) assert.equal(crumbs[i].item, SITE_BASE + c.path);
   assert.equal(crumbs[1].item, `${SITE_BASE}/charter/`);
+});
+
+// Noel, 2026-11-23: the first crumb is "Home" ("Law Reader" confused people). Every page with
+// breadcrumbs, in the page and, on every indexed page, in its structured data.
+test("breadcrumbs: \"Home\" first on every page that has them, in the page and the structured data", () => {
+  let n = 0;
+  for (const f of htmlFiles()) {
+    const rel = relative(site.outDir, f);
+    const html = read(rel);
+    const trail = /<nys-breadcrumbs[^>]*>([\s\S]*?)<\/nys-breadcrumbs>/.exec(html)?.[1];
+    if (!trail) {
+      assert.ok(["index.html", "404.html"].includes(rel), `${rel}: no breadcrumbs`);
+      continue;
+    }
+    const shown = [...trail.matchAll(/<li>(?:<a href="([^"]+)">|<span aria-current="page">)([^<]*)</g)].map((m) => ({ name: unescapeHtml(m[2]), path: m[1] }));
+    assert.deepEqual(shown[0], { name: "Home", path: "/" }, rel);
+    const lds = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    const crumbs = lds.find((x) => x["@type"] === "BreadcrumbList")?.itemListElement;
+    // The search page is noindex, so it carries no structured data; every indexed page does.
+    if (!crumbs && /<meta name="robots" content="noindex">/.test(html)) {
+      n++;
+      continue;
+    }
+    assert.ok(crumbs, `${rel}: BreadcrumbList`);
+    assert.deepEqual(crumbs.map((c) => c.name), shown.map((c) => c.name), `${rel}: the structured data names the crumbs the page shows`);
+    assert.equal(crumbs[0].item, `${SITE_BASE}/`, rel);
+    n++;
+  }
+  assert.equal(n, htmlFiles().length - 2, "every page but the home page and the 404 page has breadcrumbs");
 });
 
 test("sitemaps, robots.txt and noindex", () => {
@@ -338,9 +481,130 @@ test("contents and chapter pages are plain HTML link lists", () => {
   const s = site.book.sections[0];
   assert.match(read(fileForPath(s.path)), /<a href="\/charter\/" aria-current="true">Charter<\/a>/);
   assert.match(contents, /<a href="\/charter\/" aria-current="page">Charter<\/a>/);
-  assert.match(read("about.html"), /<a href="\/about" aria-current="page">About this copy<\/a>/);
+  assert.match(read("about.html"), /<a href="\/about" aria-current="page">About<\/a>/);
   // The home page and every page's footer link to the contents.
   assert.ok(read("index.html").includes(`href="/charter/"`));
+});
+
+// The side list of chapters (Noel, 2026-11-23): one list per Charter page, every chapter in it,
+// one chapter open. Read from the HTML as the browser gets it with JavaScript off.
+function sideList(html) {
+  const lists = html.match(/<div class="toc"[\s\S]*?<\/nys-verticalnav>\n<\/details>\n<\/div>/g) ?? [];
+  if (lists.length !== 1) return { count: lists.length };
+  const list = lists[0];
+  const top = list.replace(/<ul>\n(?:<li><a [^>]*>[^<]*<\/a><\/li>\n?)+<\/ul>\n(?=<\/li>)/, "");
+  return {
+    count: 1,
+    list,
+    chapters: [...top.matchAll(/<li(?: class="open")?><a href="([^"]+)"/g)].map((m) => m[1]),
+    open: [...list.matchAll(/<li class="open"><a href="([^"]+)" aria-current="([^"]+)">/g)].map((m) => ({ path: m[1], current: m[2] })),
+    pageLinks: [...list.matchAll(/<a href="([^"]+)" aria-current="page">/g)].map((m) => m[1]),
+  };
+}
+
+test("side list: every chapter on every chapter, section and shared-number page, with one chapter open", () => {
+  const all = site.book.chapters.map((c) => c.path);
+  const check = (rel, { chapter, section }) => {
+    const html = read(rel);
+    const l = sideList(html);
+    assert.equal(l.count, 1, `${rel}: one side list`);
+    assert.deepEqual(l.chapters, all, `${rel}: every chapter, in order`);
+    assert.match(l.list, new RegExp(`<nys-verticalnav heading="${chapterNavName(site.book)}" headingLevel="h2">\n<h2 slot="header" class="toc-h">${chapterNavName(site.book)}</h2>`), `${rel}: a visible heading on a wide screen, a button with the same name on a phone`);
+    // In a fold that is closed in the HTML (code review S3: with JavaScript off a phone shows one line, not every chapter).
+    assert.match(l.list, new RegExp(`^<div class="toc" data-pagefind-ignore="all">\n<details class="toc-fold">\n<summary class="toc-summary">${chapterNavName(site.book)}</summary>\n<nys-verticalnav `), `${rel}: the fold, closed, named like the list`);
+    if (!chapter) {
+      assert.deepEqual(l.open, [], `${rel}: nothing open`);
+      assert.deepEqual(l.pageLinks, [], `${rel}: no current link`);
+      return;
+    }
+    assert.deepEqual(l.open, [{ path: chapter.path, current: section ? "true" : "page" }], `${rel}: its chapter open and current`);
+    assert.deepEqual(l.pageLinks, [section ? section.path : chapter.path], `${rel}: aria-current="page" on this page's own link`);
+    for (const s of chapter.sections) assert.ok(l.list.includes(`<a href="${s.path}"`), `${rel}: lists ${s.citation}`);
+    // Only the open chapter shows its sections.
+    const shown = [...l.list.matchAll(/href="(\/charter\/sections\/[^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(shown, chapter.sections.map((s) => s.path), `${rel}: only its own chapter's sections`);
+    // The list comes before the law text (Noel, 2026-11-23: navigation at the top), outside main,
+    // so the skip link to #main passes it.
+    assert.ok(html.indexOf('<div class="toc"') < html.indexOf('<main id="main">'), `${rel}: the list before main`);
+    assert.ok(html.indexOf('<a class="skip" href="#main">') < html.indexOf('<div class="toc"'), `${rel}: the skip link before the list`);
+  };
+  for (const s of site.book.sections) check(fileForPath(s.path), { chapter: s.chapter, section: s });
+  for (const c of site.book.chapters) check(fileForPath(c.path), { chapter: c });
+  for (const sh of site.book.shared) check(fileForPath(sh.path), {});
+  // The contents page is that list already; the other pages are not in a book.
+  for (const rel of ["charter/index.html", "index.html", "search.html", "about.html", "404.html"]) assert.equal(sideList(read(rel)).count, 0, rel);
+  assert.equal(chapterName({ citation: "Preamble", title: "Preamble" }), "Preamble");
+  assert.equal(chapterName({ citation: "Chapter 2-A", title: "Districting Commission" }), "Chapter 2-A: Districting Commission");
+});
+
+test("side list over the full Charter: all its chapters on a section page (full index)", { skip: fullCharter() ? false : "data/structure/charter.json not present or not built from this index" }, () => {
+  const full = fullCharter();
+  const book = loadBook({ corpus: "charter", indexJsonText: full.text, structure: full.structure, versions: full.versions });
+  const s = book.sections.find((x) => x.citation === "§ 259") ?? book.sections[0];
+  const facts = { currentThrough: "Current through Local Law 1.", copyChangedOn: "today", officialUrl: "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1", officialBase: "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/", officialName: "The official Charter", creditLine: "Source.", contentsPath: "/charter/" };
+  const l = sideList(sectionPage(s, book, facts).html);
+  assert.equal(l.count, 1);
+  assert.deepEqual(l.chapters, book.chapters.map((c) => c.path));
+  assert.equal(new Set(l.chapters).size, book.chapters.length);
+  console.log(`# full Charter: ${book.chapters.length} chapters in the side list; ${Buffer.byteLength(chapterNav(book, { chapter: s.chapter, section: s }))} bytes on ${s.fullCitation}'s page`);
+});
+
+test("the search box is on the home page and the search page only, its hint as placeholder text", () => {
+  const withBox = htmlFiles().filter((f) => read(relative(site.outDir, f)).includes("<nys-textinput")).map((f) => relative(site.outDir, f)).sort();
+  assert.deepEqual(withBox, ["index.html", "search.html"]);
+  assert.equal((read("index.html").match(/<div class="find"/g) ?? []).length, 1, "the strip on the home page");
+  assert.doesNotMatch(read("search.html"), /<div class="find"/, "the search page has its own box, not the strip");
+  for (const rel of withBox) {
+    const tag = /<nys-textinput[^>]*>/.exec(read(rel))[0];
+    assert.match(tag, / label="Go to a section, or search the words"/, `${rel}: a visible label is its name`);
+    assert.match(tag, / placeholder="Try &quot;§ 259&quot;, &quot;259&quot;, or &quot;budget office&quot;"/, rel);
+    assert.doesNotMatch(tag, / description=/, `${rel}: no separate hint line`);
+    assert.match(read(rel), /<noscript><p class="nojs">Search needs JavaScript. <a href="\/charter\/">Browse the Charter's contents<\/a> instead.<\/p><\/noscript>/, rel);
+  }
+  // Every page keeps the top bar's Search link.
+  for (const f of htmlFiles()) assert.match(read(relative(site.outDir, f)), /<li><a href="\/search"(?: aria-current="page")?>Search<\/a><\/li>/, relative(site.outDir, f));
+});
+
+// Every font family a stylesheet names, as [declaration, problem]: font-family (and any custom
+// property named for a font family) must be exactly the template's var(--font-body) or
+// var(--font-head), or inherit; a font shorthand must end with one of them after its size
+// (code review S4: the old check passed a single bare family such as Arial or system-ui).
+const TEMPLATE_FAMILY = /^(?:var\(--font-(?:body|head)\)|inherit)$/;
+function fontFamilyProblems(cssText) {
+  const css = cssText.replace(/\/\*[\s\S]*?\*\//g, "");
+  const out = [];
+  for (const m of css.matchAll(/(?:^|[\s;{])((?:--[\w-]*font-family[\w-]*|font-family|font)\s*:\s*([^;}]*))/g)) {
+    const [decl, value] = [m[1].trim(), m[2].trim().replace(/\s*!important$/, "")];
+    if (/^font\s*:/.test(decl)) {
+      if (value === "inherit") continue;
+      // [style] [weight] size[/line-height] family: the family is what follows the size.
+      const sm = /(?:^|\s)[\d.]+(?:px|em|rem|%|pt|vh|vw|ch)(?:\/[\d.]+(?:px|em|rem|%)?)?\s+(.+)$/.exec(value);
+      if (!sm || !TEMPLATE_FAMILY.test(sm[1].trim())) out.push([decl, "font shorthand without one of the template's families"]);
+    } else if (!TEMPLATE_FAMILY.test(value)) out.push([decl, "a family that is not the template's"]);
+  }
+  return out;
+}
+
+test("the law text uses the template's body font, not a second family", () => {
+  const css = readFileSync(join(ROOT, "site", "assets", "law.css"), "utf8");
+  assert.doesNotMatch(css.replace(/\/\*[\s\S]*?\*\//g, ""), /--font-law|Georgia|Times New Roman|\bserif\b/);
+  assert.match(css, /\.law \{ font: 18px\/1\.7 var\(--font-body\);/);
+  // Every font family in law.css is one of the template's.
+  assert.deepEqual(fontFamilyProblems(css), []);
+  // The check catches any other family, alone or in a list, in a font-family or a font shorthand.
+  for (const bad of [
+    ".law { font-family: Arial; }",
+    ".x { font-family: system-ui; }",
+    ".law { font: 18px/1.7 Georgia; }",
+    ".law { font: 700 17px/1.3 Inter, var(--font-head); }",
+    '.law { font-family: "Inter", sans-serif; }',
+    ".x { font-family: var(--font-body), sans-serif; }",
+    ":root { --nys-font-family-ui: Helvetica; }",
+    ".x { font: 16px var(--font-mono); }",
+  ]) assert.equal(fontFamilyProblems(bad).length, 1, bad);
+  for (const good of [".x { font-family: var(--font-body); }", ".x { font: 700 17px/1.3 var(--font-head); }", ".x { font-weight: 700; font-size: 15px; }", ":root { --nys-font-family-ui: var(--font-body); }", ".x { font-family: inherit; }"]) {
+    assert.deepEqual(fontFamilyProblems(good), [], good);
+  }
 });
 
 test("Pagefind markup: every law page is a search body with filters; other pages are not", () => {
