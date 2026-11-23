@@ -20,7 +20,8 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
  * @param {object[]} [p.jsonLd]
  * @param {string[]} [p.headExtra] more <head> lines (Pagefind filters and metadata)
  * @param {string[]} [p.scripts]   extra module scripts
- * @param {object} p.site          { currentThrough, copiedOn, officialUrl, officialName, contentsPath }
+ * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialName, contentsPath }
+ * @param {boolean} [p.navPage]  the top-bar link is this page itself (aria-current="page"), not just its section
  */
 export function page(p) {
   const canonical = absoluteUrl(p.path);
@@ -49,7 +50,7 @@ export function page(p) {
 
   const body = [
     `<a class="skip" href="#main">Skip to main content</a>`,
-    topBar(p.nav),
+    topBar(p.nav, p.navPage === true),
     p.searchStrip === false ? "" : searchStrip(p.site),
     p.aside
       ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
@@ -60,9 +61,10 @@ export function page(p) {
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n${head.join("\n")}\n</head>\n<body>\n${body.join("\n")}\n</body>\n</html>\n`;
 }
 
-function topBar(current) {
+// The current part of the site gets aria-current="true"; "page" only on that link's own page.
+function topBar(current, isPage) {
   const link = (key, href, text) =>
-    `<li><a href="${href}"${current === key ? ` aria-current="page"` : ""}>${text}</a></li>`;
+    `<li><a href="${href}"${current === key ? ` aria-current="${isPage ? "page" : "true"}"` : ""}>${text}</a></li>`;
   return `<header class="site-bar">
   <div class="wrap">
     <a class="home" href="/"><img src="/assets/betanyc-wordmark-white.svg" alt="BetaNYC" width="78" height="26"><span>${escapeHtml(SITE_SHORT_NAME)}</span></a>
@@ -103,7 +105,7 @@ ${searchForm({ contentsPath: site.contentsPath, id: "q" })}
 export function bottomBox(site) {
   return `<div class="wrap" data-pagefind-ignore="all">
 <aside class="warnbox copy-box" aria-label="About this copy">
-<p class="current">${escapeHtml(site.currentThrough)} BetaNYC copied this text from American Legal Publishing on ${escapeHtml(site.copiedOn)}.</p>
+<p class="current">${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}.</p>
 <p class="lead"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>
 <p><a href="/about">Read the full disclaimer</a></p>
 </aside>

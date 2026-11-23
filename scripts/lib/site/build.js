@@ -144,7 +144,9 @@ export async function buildSite(o = {}) {
   const paragraphs = disclaimerParagraphs(readFooter(join(ROOT, "src", "tools.ts")));
   const site = {
     currentThrough: currentThroughLine(book.version.currentThrough),
-    copiedOn: newYorkLongDate(book.version.indexedAt),
+    // versions.json's indexedAt: when BetaNYC's index last picked up a change in the text
+    // (scripts/lib/merge-versions.js keeps it when a rebuild changes nothing). Not a download date.
+    copyChangedOn: newYorkLongDate(book.version.indexedAt),
     officialUrl,
     officialName: book.book.official,
     creditLine,

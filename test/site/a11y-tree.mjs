@@ -63,3 +63,34 @@ export function linkProblems(nodes) {
   const conflicting = [...byName].filter(([, urls]) => urls.size > 1).map(([k, urls]) => `${k}: ${[...urls].join(" | ")}`);
   return { links, unnamed, conflicting };
 }
+
+/**
+ * Focusable elements the browser gives no role or no name, read from Chromium's own
+ * accessibility computation (element.computedRole / computedName, which the browser exposes
+ * when launched with --enable-blink-features=ComputedAccessibilityInfo). It walks open shadow
+ * roots too, so it sees inside NYSDS parts, and catches a `<span tabindex="0">` that the
+ * aria-snapshot role list would never look for. Hidden and inert elements are skipped: they
+ * cannot take focus.
+ */
+export async function focusableProblems(page) {
+  return page.evaluate(() => {
+    if (!("computedRole" in Element.prototype)) throw new Error("launch Chromium with --enable-blink-features=ComputedAccessibilityInfo");
+    const bad = [];
+    const visit = (root) => {
+      for (const el of root.querySelectorAll("*")) {
+        if (el.shadowRoot) visit(el.shadowRoot);
+        if (el.tabIndex < 0 || el.disabled || el.closest("[inert]")) continue;
+        if (!el.checkVisibility({ visibilityProperty: true })) continue;
+        const role = el.computedRole ?? "";
+        const name = (el.computedName ?? "").trim();
+        if (!role || role === "generic" || role === "none" || role === "presentation" || !name) {
+          bad.push(`${el.tagName.toLowerCase()} role="${role}" name="${name}": ${el.outerHTML.slice(0, 80)}`);
+        }
+      }
+    };
+    visit(document);
+    return bad;
+  });
+}
+
+export const CHROMIUM_ARGS = ["--enable-blink-features=ComputedAccessibilityInfo"];

@@ -104,6 +104,8 @@ test("every page has a unique title, description and canonical, and no page repe
     assert.ok(title && desc && canon, `${rel}: title, description and canonical`);
     assert.ok(title.endsWith(` | ${SITE_NAME}`) || rel === "index.html", `${rel}: site name at the end of the title`);
     assert.ok(canon.startsWith(SITE_BASE + "/"), `${rel}: absolute canonical`);
+    assert.ok(unescapeHtml(desc).length <= 160, `${rel}: description is ${unescapeHtml(desc).length} characters`);
+    assert.ok(unescapeHtml(desc).endsWith("BetaNYC's copy for research, not the official text."), `${rel}: description ends with the research note`);
     for (const [m, v] of [[titles, title], [descs, desc], [canons, canon]]) {
       assert.ok(!m.has(v), `${rel} repeats ${v} from ${m.get(v)}`);
       m.set(v, rel);
@@ -131,8 +133,11 @@ test("every American Legal id in redirects.json lands on a page; every link and 
     assert.ok(existsSync(join(site.outDir, fileForPath(path))), `${id} → ${path} has no page`);
     assert.equal(redirectFor(`/charter/${id}`, redirects), path);
     assert.equal(redirectFor(`/NYCcharter/${id}`, redirects), path);
+    // An old path with the id on the end still lands, even if the number stops being shared.
+    assert.equal(redirectFor(`/charter/sections/530-${id}`, redirects), path);
   }
   assert.equal(redirectFor("/charter/sections/9999", redirects), null);
+  assert.equal(redirectFor("/charter/sections/530-0-0-0-999999999", redirects), null);
 
   const idsOn = new Map();
   const ids = (path) => {
@@ -187,7 +192,7 @@ test("every page has the bottom box: current through, the bold line, the disclai
     const box = /<aside class="warnbox copy-box" aria-label="About this copy">([\s\S]*?)<\/aside>/.exec(html)?.[1];
     assert.ok(box, `${rel}: bottom box`);
     assert.ok(box.includes(line), `${rel}: current through`);
-    assert.ok(box.includes("on November 22, 2026."), `${rel}: the date the text was copied, New York time`);
+    assert.ok(box.includes("BetaNYC&#39;s copy of the text last changed on November 22, 2026.") || box.includes("BetaNYC's copy of the text last changed on November 22, 2026."), `${rel}: the date the copy last changed (indexedAt, New York time)`);
     assert.ok(
       box.includes(
         "<strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. The official Charter is at <a href=\"https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1\">American Legal Publishing</a>.</strong>"
@@ -215,6 +220,9 @@ test("the disclaimer page's text is the MCP's FOOTER, without its Built-by line"
   assert.deepEqual(shown, expected);
   assert.deepEqual(paras.map(plainParagraph), expected);
   assert.match(block, /<a href="mailto:NYC\.editor@amlegal\.com">NYC\.editor@amlegal\.com<\/a>/);
+  assert.ok(html.includes("This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com."));
+  // A FOOTER whose last paragraph is not the Built-by line stops the build.
+  assert.throws(() => disclaimerParagraphs("---\n**A.** one\n\nTwo, a new last paragraph."), /no longer starts "Built by BetaNYC"/);
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).
@@ -326,6 +334,11 @@ test("contents and chapter pages are plain HTML link lists", () => {
     const html = read(fileForPath(c.path));
     for (const s of c.sections) assert.ok(html.includes(`<li><a href="${s.path}">`), `${c.citation} lists ${s.citation}`);
   }
+  // The top bar: "true" for the part of the site, "page" only on the page itself.
+  const s = site.book.sections[0];
+  assert.match(read(fileForPath(s.path)), /<a href="\/charter\/" aria-current="true">Charter<\/a>/);
+  assert.match(contents, /<a href="\/charter\/" aria-current="page">Charter<\/a>/);
+  assert.match(read("about.html"), /<a href="\/about" aria-current="page">About this copy<\/a>/);
   // The home page and every page's footer link to the contents.
   assert.ok(read("index.html").includes(`href="/charter/"`));
 });

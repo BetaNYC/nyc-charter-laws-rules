@@ -20,6 +20,7 @@
   --nys-color-link-strong: var(--blue-dark);
   --nys-color-link-strongest: var(--blue-dark);
   --nys-color-focus: var(--focus);
+  --nys-color-focus-reverse: var(--blue-2);
   --nys-color-surface: var(--white);
   --nys-color-surface-raised: var(--bg-blue-lt);
   --nys-color-white: var(--white);
@@ -35,8 +36,17 @@
   --font-law: Georgia, "Times New Roman", serif;
 }
 
-/* The template's focus ring covers links, buttons and summaries; form fields get it too. */
+/* The template's focus ring covers links, buttons and summaries; plain form fields get it too.
+   NYSDS's fields draw their own ring inside their shadow root from --nys-color-focus (set above
+   from the template's --focus). In forced colors that ring is 1px and looks like the field's
+   border, so the field as a whole gets the template's ring there. */
 input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media (forced-colors: active) {
+  nys-textinput:focus-within { outline: 3px solid var(--focus); outline-offset: 4px; }
+}
+
+/* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
+.disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
 
 .wrap.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; padding-top: 20px; max-width: 1120px; }
 @media (max-width: 860px) { .wrap.layout { grid-template-columns: 1fr; gap: 8px; } }

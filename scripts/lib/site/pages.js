@@ -25,21 +25,32 @@ function titleOf(text) {
   return `${text} | ${SITE_NAME}`;
 }
 
-// A sentence or so of the law's own words, cut at a word, for a description.
-function snippet(text, max = 120) {
-  const t = String(text ?? "").replace(/\s+/g, " ").trim();
-  if (t.length <= max) return t;
-  const cut = t.slice(0, max);
-  return cut.slice(0, Math.max(cut.lastIndexOf(" "), 40)).replace(/[,;:]$/, "") + "…";
-}
+/** Search engines show about this many characters of a description; every description fits. */
+export const DESCRIPTION_MAX = 160;
 
 const FOR_RESEARCH = "BetaNYC's copy for research, not the official text.";
 
-/** The meta description for a law page: citation, heading, chapter, the opening words, the note. */
+// Text cut at a word so that it is at most `max` characters, "…" included.
+function cutAtWord(text, max) {
+  const t = String(text ?? "").replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  const at = cut.lastIndexOf(" ");
+  return (at > max / 3 ? cut.slice(0, at) : cut).replace(/[\s,;:.]+$/, "") + "…";
+}
+
+/** A description: the lead, cut at a word if it must be, then the research note. At most 160 characters. */
+export function describe(lead) {
+  return `${cutAtWord(lead, DESCRIPTION_MAX - FOR_RESEARCH.length - 1)} ${FOR_RESEARCH}`;
+}
+
+/** The meta description for a law page: citation, heading, chapter, then the opening words if they fit. */
 export function lawDescription(record) {
-  const where = record.chapter ? ` in ${record.chapter.citation} (${record.chapter.title})` : "";
-  const opening = snippet(record.text);
-  return `${record.fullCitation}, ${record.title}${where}.${opening ? ` "${opening}"` : ""} ${FOR_RESEARCH}`;
+  const room = DESCRIPTION_MAX - FOR_RESEARCH.length - 1;
+  const where = record.chapter ? ` in ${record.chapter.citation}` : "";
+  const base = `${record.fullCitation}, ${record.title}${where}.`;
+  if (base.length >= room - 20 || !record.text) return describe(base);
+  return describe(`${base} "${cutAtWord(record.text, room - base.length - 3)}"`);
 }
 
 function legislationJsonLd(record, book, site) {
@@ -179,7 +190,7 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
     html: page({
       path: c.path,
       title: titleOf(c.title === c.citation ? `${book.book.label}: ${c.title}` : `${book.book.label} ${c.citation}: ${c.title}`),
-      description: `${book.book.label} ${c.citation}${c.title === c.citation ? "" : `, ${c.title}`}: ${c.sections.length} section${c.sections.length === 1 ? "" : "s"}. ${FOR_RESEARCH}`,
+      description: describe(`${book.book.label} ${c.citation}${c.title === c.citation ? "" : `, ${c.title}`}: ${c.sections.length} section${c.sections.length === 1 ? "" : "s"}.`),
       main,
       nav: book.book.slug,
       site,
@@ -207,7 +218,7 @@ export function sharedNumberPage(sh, book, site) {
     html: page({
       path: sh.path,
       title: titleOf(`${book.book.label} ${sh.citation}: ${sh.sections.length} sections share this number`),
-      description: `${book.book.label} has ${sh.sections.length} sections numbered ${sh.citation}: ${sh.sections.map((s) => s.title).join("; ")}. ${FOR_RESEARCH}`,
+      description: describe(`${book.book.label} has ${sh.sections.length} sections numbered ${sh.citation}: ${sh.sections.map((s) => s.title).join("; ")}.`),
       main,
       nav: book.book.slug,
       site,
@@ -238,9 +249,10 @@ export function contentsPage(book, site) {
     html: page({
       path,
       title: titleOf(`${book.book.name}: contents`),
-      description: `Every chapter and section of the ${book.book.name}, one page each, with links between sections. ${FOR_RESEARCH}`,
+      description: describe(`Every chapter and section of the ${book.book.name}, one page each, with links between sections.`),
       main,
       nav: book.book.slug,
+      navPage: true,
       site,
       jsonLd: [breadcrumbJsonLd(crumbs)],
     }),
@@ -269,7 +281,7 @@ export function homePage(book, site) {
     html: page({
       path: "/",
       title: `${SITE_NAME}: the NYC Charter, section by section`,
-      description: `Read New York City's Charter one section at a time, with links between sections and search. ${FOR_RESEARCH}`,
+      description: describe("Read New York City's Charter one section at a time, with links between sections and search."),
       main,
       site,
       jsonLd: [{ "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, url: SITE_BASE + "/" }],
@@ -300,9 +312,10 @@ export function searchPage(book, site) {
     html: page({
       path: "/search",
       title: titleOf("Search"),
-      description: `Search the ${book.book.name} by section number or by words. ${FOR_RESEARCH}`,
+      description: describe(`Search the ${book.book.name} by section number or by words.`),
       main,
       nav: "search",
+      navPage: true,
       noindex: true,
       searchStrip: false,
       site,
@@ -318,15 +331,16 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     `<h1>About this copy</h1>`,
     `<p class="lede"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
     `<h2 id="disclaimer">Disclaimer</h2>`,
+    `<p>This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com.</p>`,
     `<div class="disclaimer">`,
     ...paragraphs.map((p) => `<p>${paragraphHtml(p)}</p>`),
     `</div>`,
     `<h2 id="changes">What BetaNYC changed</h2>`,
     `<p>American Legal Publishing publishes the ${escapeHtml(book.book.name)} for the City of New York. BetaNYC downloads its bulk XML file and builds this site from it. We split each section into its parts (a, b, (1), (2)...), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. References into the Administrative Code and the Rules are plain text until those books are on this site.</p>`,
     `<h2 id="current">How current it is</h2>`,
-    `<p>${escapeHtml(site.currentThrough)} BetaNYC copied this text from American Legal Publishing on ${escapeHtml(site.copiedOn)}. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
+    `<p>${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}: that is the date BetaNYC's index last picked up a change in American Legal Publishing's files. The index keeps no date for when the files were last checked, so none is shown. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
     `<h2 id="software">Software</h2>`,
-    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, contents and search controls are from the <a href="https://designsystem.ny.gov/">New York State Design System</a>, used as a library on a site that is not a New York State site; its notice, which covers the State's own work (CC0), Google's Material Icons (Apache License 2.0) and Lit (BSD 3-Clause), is in <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>). This site's code is <a href="${REPO_URL}">on GitHub</a> under the MIT license.</p>`,
+    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, contents and search controls are from the <a href="https://designsystem.ny.gov/">New York State Design System</a>, used as a library on a site that is not a New York State site; its notice, which covers the State's own work (CC0), Google's Material Icons (Apache License 2.0) and Lit (BSD 3-Clause), is in <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>, and DOMPurify, which NYSDS includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>). This site's code is <a href="${REPO_URL}">on GitHub</a> under the MIT license.</p>`,
   ].join("\n");
   return {
     path: "/about",
@@ -335,9 +349,10 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     html: page({
       path: "/about",
       title: titleOf("About this copy"),
-      description: `Where the ${book.book.name} on this site comes from, how BetaNYC changed it, and the full disclaimer. ${FOR_RESEARCH}`,
+      description: describe(`Where the ${book.book.name} on this site comes from, how BetaNYC changed it, and the full disclaimer.`),
       main,
       nav: "about",
+      navPage: true,
       site,
       jsonLd: [breadcrumbJsonLd(crumbs)],
     }),
@@ -355,7 +370,7 @@ export function notFoundPage(book, site) {
     html: page({
       path: "/404",
       title: titleOf("Page not found"),
-      description: `This page does not exist. ${FOR_RESEARCH}`,
+      description: describe("This page does not exist."),
       main,
       noindex: true,
       site,

@@ -20,14 +20,14 @@ export function readFooter(toolsTsPath) {
  * ("Built by BetaNYC...") left out, because the page footer already says who built the site.
  */
 export function disclaimerParagraphs(footer) {
-  const paras = footer.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
-  const out = [];
-  for (let p of paras) {
-    p = p.replace(/^---\s*\n?/, "").trim();
-    if (!p) continue;
-    if (p.startsWith("Built by BetaNYC")) continue;
-    out.push(p);
+  const paras = footer.split(/\n\s*\n/).map((p) => p.replace(/^---\s*\n?/, "").trim()).filter(Boolean);
+  // The last paragraph must be the "Built by BetaNYC" line this page leaves out. If FOOTER
+  // changes shape, stop the build so a person decides what the page should show.
+  const last = paras[paras.length - 1] ?? "";
+  if (!last.startsWith("Built by BetaNYC")) {
+    throw new Error(`FOOTER's last paragraph no longer starts "Built by BetaNYC" ("${last.slice(0, 40)}..."); check scripts/lib/site/disclaimer.js`);
   }
+  const out = paras.slice(0, -1).filter((p) => !p.startsWith("Built by BetaNYC"));
   if (out.length === 0) throw new Error("FOOTER has no disclaimer paragraphs");
   return out;
 }

@@ -103,9 +103,10 @@ export function sitemaps(books, otherPaths) {
 
 /**
  * robots.txt: every crawler may read every page (epic #68 decision 8: search, AI-answer and
- * AI-training crawlers are welcome). The named agents are the ones American Legal Publishing
- * and DC Council block or leave unnamed (BetaNYC's 2026-11-22 search study); naming them says
- * on purpose that they are welcome here too. A crawler with no group of its own follows `*`.
+ * AI-training crawlers are welcome). The named agents include ones American Legal Publishing
+ * (https://codelibrary.amlegal.com/robots.txt) and DC Council's code site
+ * (https://code.dccouncil.gov/robots.txt) disallow; naming them says on purpose that they are
+ * welcome here. A crawler with no group of its own follows `*`.
  */
 export const WELCOMED_CRAWLERS = [
   "Googlebot",

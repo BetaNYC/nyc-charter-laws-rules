@@ -10,7 +10,7 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { buildFixtureSite } from "./fixture-site.mjs";
 import { startServer } from "../../scripts/lib/site/serve.js";
-import { parseSnapshot, controlProblems, linkProblems } from "./a11y-tree.mjs";
+import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 
 let site, server, base, browser;
 const outside = [];
@@ -18,7 +18,7 @@ const outside = [];
 before(async () => {
   site = await buildFixtureSite({ search: true });
   ({ server, url: base } = await startServer(site.outDir));
-  browser = await chromium.launch();
+  browser = await chromium.launch({ args: CHROMIUM_ARGS });
 });
 
 after(async () => {
@@ -48,6 +48,7 @@ async function open(path, { width = 1200, js = true, ctxOpts = {} } = {}) {
 const sectionWithParts = () => site.book.sections.find((s) => s.structure.blocks.filter((b) => b.anchor).length >= 2 && s.chapter.sections.length > 1);
 
 async function assertNamedControls(page, label) {
+  assert.deepEqual(await focusableProblems(page), [], `${label}: focusable elements with no role or no name`);
   const nodes = parseSnapshot(await page.locator("body").ariaSnapshot());
   const c = controlProblems(nodes);
   assert.deepEqual(c.unnamed, [], `${label}: controls with no name`);
@@ -102,15 +103,74 @@ test("agents on the page: the contents page and the search page", async () => {
   }
 });
 
+// One page of every kind. The search page is checked with results, filters and paging showing.
+function pageTypes() {
+  const s = sectionWithParts();
+  return [
+    ["home", "/"],
+    ["contents", "/charter/"],
+    ["chapter", s.chapter.path],
+    ["section", s.path],
+    ["shared number", site.book.shared[0].path],
+    ["search", "/search?q=the"],
+    ["about", "/about"],
+    ["404", "/charter/sections/no-such-section"],
+  ];
+}
+
+async function settle(page, path) {
+  if (path.startsWith("/search")) await page.getByRole("status").filter({ hasText: "results for" }).waitFor();
+}
+
+test("agents on the page: every page type, at desktop and phone width", async () => {
+  for (const [kind, path] of pageTypes()) {
+    for (const width of [1200, 390]) {
+      const { page, ctx, problems } = await open(path, { width });
+      await settle(page, path);
+      await assertNamedControls(page, `${kind} (${path}) at ${width}px`);
+      // The 404 page is itself served with status 404, which Chromium logs; nothing else may fail.
+      const real = kind === "404" ? problems.filter((x) => !/status of 404/.test(x)) : problems;
+      assert.deepEqual(real, [], `${kind} at ${width}px`);
+      await ctx.close();
+    }
+  }
+});
+
+test("reflow: no page scrolls sideways at 320px (WCAG 1.4.10)", async () => {
+  for (const [kind, path] of pageTypes()) {
+    const { page, ctx } = await open(path, { width: 320 });
+    await settle(page, path);
+    const [sw, cw] = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+    assert.ok(sw <= cw, `${kind} (${path}) is ${sw - cw}px wider than the screen`);
+    await ctx.close();
+  }
+});
+
+test("forced colors: a focused search box shows a ring around the field", async () => {
+  const { page, ctx } = await open("/charter/");
+  await page.emulateMedia({ forcedColors: "active", colorScheme: "dark" });
+  const box = page.getByRole("searchbox", { name: /Go to a section/ });
+  const host = page.locator("nys-textinput#q");
+  assert.equal(await host.evaluate((e) => getComputedStyle(e).outlineStyle), "none");
+  await box.focus();
+  const [style, width] = await host.evaluate((e) => [getComputedStyle(e).outlineStyle, getComputedStyle(e).outlineWidth]);
+  assert.equal(style, "solid");
+  assert.equal(width, "3px");
+  await ctx.close();
+});
+
 test("the name check fails on a missing or repeated name", async () => {
   const { page, ctx } = await open("/charter/");
   await page.evaluate(() => {
     const m = document.querySelector("main");
-    m.insertAdjacentHTML("beforeend", `<button type="button">Search again</button><button type="button">Search again</button><button type="button"></button>`);
+    m.insertAdjacentHTML("beforeend", `<button type="button">Search again</button><button type="button">Search again</button><button type="button"></button><span tabindex="0">Focus me</span>`);
   });
   const c = controlProblems(parseSnapshot(await page.locator("body").ariaSnapshot()));
   assert.equal(c.duplicates.length, 1);
   assert.equal(c.unnamed.length, 1);
+  const f = await focusableProblems(page);
+  assert.equal(f.length, 2, f.join("\n"));
+  assert.ok(f.some((x) => x.startsWith("span")) && f.some((x) => x.startsWith("button")));
   await ctx.close();
 });
 
