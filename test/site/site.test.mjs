@@ -69,13 +69,18 @@ test("agents on the page: every control on a section page has its own name", asy
     const { page, ctx, problems } = await open(s.path, { width });
     const { controls } = await assertNamedControls(page, `${s.path} at ${width}px`);
     const names = controls.map((x) => x.name);
-    for (const n of ["Copy link", "Copy citation", "Print", "Go"]) assert.ok(names.includes(n), `${n} at ${width}px`);
-    assert.ok(names.some((n) => n.startsWith("Go to a section, or search the words")), "search box");
+    for (const n of ["Copy link", "Copy citation", "Print"]) assert.ok(names.includes(n), `${n} at ${width}px`);
+    // No search box on a law page (Noel, 2026-11-23): the top bar's Search link goes to it.
+    assert.ok(!names.includes("Go") && !names.some((n) => n.startsWith("Go to a section")), `no search box at ${width}px`);
     if (width === 390) {
-      assert.ok(names.includes(`Sections in ${s.chapter.citation}`), "table-of-contents toggle");
+      assert.ok(names.includes("Charter chapters"), "the side list's button");
       assert.ok(names.includes("Menu"), "menu button");
-      await page.getByRole("button", { name: `Sections in ${s.chapter.citation}` }).click();
+      await page.getByRole("button", { name: "Charter chapters" }).click();
       await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().waitFor();
+      // Open, the list's links still have their own names.
+      await assertNamedControls(page, `${s.path} at ${width}px, side list open`);
+    } else {
+      assert.ok(!names.includes("Charter chapters"), "no button on a wide screen");
     }
     assert.deepEqual(problems, []);
     await ctx.close();
@@ -147,7 +152,7 @@ test("reflow: no page scrolls sideways at 320px (WCAG 1.4.10)", async () => {
 });
 
 test("forced colors: a focused search box shows a ring around the field", async () => {
-  const { page, ctx } = await open("/charter/");
+  const { page, ctx } = await open("/");
   await page.emulateMedia({ forcedColors: "active", colorScheme: "dark" });
   const box = page.getByRole("searchbox", { name: /Go to a section/ });
   const host = page.locator("nys-textinput#q");
@@ -170,7 +175,7 @@ function contrast(a, b) {
 }
 
 test("search field: border 3:1 on its own background, focus ring at least 2px and 3:1", async () => {
-  for (const path of ["/charter/", "/search"]) {
+  for (const path of ["/", "/search"]) {
     const { page, ctx } = await open(path);
     const host = page.locator("nys-textinput").first();
     const read = () =>
@@ -234,21 +239,24 @@ test("section text and the bottom box read with JavaScript off", async () => {
   assert.equal((await page.locator(`p[data-block="0"]`).innerText()).replace(/\s+/g, " ").trim(), s.text.slice(first.start, first.end));
   await page.getByText("This is BetaNYC's copy, for research.").waitFor({ state: "visible" });
   await page.getByRole("link", { name: "Read the full disclaimer" }).waitFor({ state: "visible" });
-  await page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
+  // No search box on a law page, so no "search needs JavaScript" line either; the top bar links to the contents.
+  await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Charter", exact: true }).waitFor({ state: "visible" });
   // The breadcrumbs and the table of contents are plain lists.
   await page.getByRole("link", { name: s.chapter.citation, exact: true }).waitFor({ state: "visible" });
   assert.ok(await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().isVisible());
   await ctx.close();
-  const search = await open("/search?q=office", { js: false });
-  await search.page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
-  await search.ctx.close();
+  for (const path of ["/search?q=office", "/"]) {
+    const other = await open(path, { js: false });
+    await other.page.getByRole("link", { name: "Browse the Charter's contents" }).waitFor({ state: "visible" });
+    await other.ctx.close();
+  }
 });
 
 test("jump: a citation goes straight to its page; a shared number shows a short list", async () => {
   const s = site.book.sections.find((x) => !site.book.shared.some((sh) => sh.sections.includes(x)) && /^§ \d+$/.test(x.citation));
   const n = s.citation.slice(2);
   for (const typed of [s.citation, n, `charter ${n}`]) {
-    const { page, ctx, problems } = await open("/charter/");
+    const { page, ctx, problems } = await open("/");
     const box = page.getByRole("searchbox", { name: /Go to a section/ });
     await box.fill(typed);
     await Promise.all([page.waitForURL(`${base}${s.path}`), box.press("Enter")]);
@@ -332,6 +340,325 @@ test("an American Legal id in the address lands on its page", async () => {
   await page.goto(`${base}/charter/sections/does-not-exist`);
   await page.getByRole("heading", { name: "Page not found" }).waitFor();
   await ctx.close();
+});
+
+// Noel, 2026-11-23: the side list shows the whole Charter, with the reader's chapter open.
+test("side list: every chapter, the current one open, the current section marked", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 1200 });
+  const nav = page.getByRole("navigation", { name: "Charter chapters" });
+  assert.equal(await nav.count(), 1, "one side list, named");
+  // A visible heading and no fold on a wide screen (Noel, 2026-11-23: say what the list is).
+  const heading = page.getByRole("heading", { name: "Charter chapters", level: 2 });
+  assert.equal(await heading.count(), 1);
+  assert.ok(await heading.isVisible());
+  // In the template's heading font and blue.
+  const [font, color, headFont, blue] = await heading.evaluate((h) => {
+    const probe = document.createElement("span");
+    probe.style.cssText = "font-family: var(--font-head); color: var(--blue)";
+    document.body.appendChild(probe);
+    const p = getComputedStyle(probe);
+    const out = [getComputedStyle(h).fontFamily, getComputedStyle(h).color, p.fontFamily, p.color];
+    probe.remove();
+    return out;
+  });
+  assert.deepEqual([font, color], [headFont, blue]);
+  assert.equal(await page.getByRole("button", { name: "Charter chapters" }).count(), 0);
+  // The links are NYSDS's slotted children, so they are found under .toc, not under the <nav> in its shadow root.
+  for (const c of site.book.chapters) {
+    const name = c.title === c.citation ? c.title : `${c.citation}: ${c.title}`;
+    assert.equal(await page.locator(".toc").getByRole("link", { name, exact: true }).getAttribute("href"), c.path, name);
+  }
+  const chapterLink = page.locator(`.toc a[href="${s.chapter.path}"]`);
+  assert.equal(await chapterLink.getAttribute("aria-current"), "true");
+  const own = page.locator('.toc a[aria-current="page"]');
+  assert.equal(await own.count(), 1);
+  assert.equal(await own.getAttribute("href"), s.path);
+  assert.ok(await own.isVisible());
+  // Only the open chapter shows its sections.
+  const sectionLinks = await page.locator('.toc a[href^="/charter/sections/"]').evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+  assert.deepEqual(sectionLinks, s.chapter.sections.map((x) => x.path));
+  // The open chapter is marked by more than color: bold.
+  assert.equal(await chapterLink.evaluate((a) => getComputedStyle(a).fontWeight), "700");
+  assert.deepEqual(problems, []);
+  await ctx.close();
+  // A chapter page: the same list, with that chapter open and current.
+  {
+    const { page, ctx } = await open(s.chapter.path, { width: 1200 });
+    const own = page.locator('.toc a[aria-current="page"]');
+    assert.equal(await own.count(), 1);
+    assert.equal(await own.getAttribute("href"), s.chapter.path);
+    assert.equal(await page.locator('.toc a[href^="/charter/sections/"]').count(), s.chapter.sections.length);
+    await ctx.close();
+  }
+});
+
+test("side list on a phone: one named button, closed, above the breadcrumbs, one tab stop", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 390 });
+  const button = page.getByRole("button", { name: "Charter chapters" });
+  assert.equal(await button.count(), 1);
+  assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
+  assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
+  assert.equal(await page.locator(".toc-h").isVisible(), false, "the button is the heading on a phone");
+  // With scripts the fold is open and its summary gone: NYSDS's button is the one control.
+  assert.equal(await page.locator(".toc details").getAttribute("open"), "");
+  assert.equal(await page.locator(".toc summary").isVisible(), false, "no summary beside the button");
+  // The button is above the breadcrumbs, the heading and the law text (Noel, 2026-11-23).
+  const top = async (loc) => (await loc.boundingBox()).y;
+  const buttonTop = await top(button);
+  for (const sel of [".crumbs", "h1", ".law"]) assert.ok(buttonTop < (await top(page.locator(sel).first())), `button above ${sel}`);
+  // One tab stop: from the menu button, Tab lands on it, and the next Tab is the first crumb.
+  await page.getByRole("button", { name: "Menu" }).focus();
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => { let a = document.activeElement; while (a?.shadowRoot?.activeElement) a = a.shadowRoot.activeElement; return a?.getAttribute("aria-expanded") !== null && a?.textContent.trim(); }), "Charter chapters");
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Home");
+  await button.click();
+  assert.equal(await button.getAttribute("aria-expanded"), "true");
+  await page.locator('.toc a[aria-current="page"]').waitFor({ state: "visible" });
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("side list with JavaScript off: a plain list of every chapter, the current one open; folded on a phone", async () => {
+  const s = sectionWithParts();
+  for (const width of [1200, 390]) {
+    const { page, ctx } = await open(s.path, { width, js: false });
+    const links = page.locator(".toc a");
+    const top = await page.locator(".toc nys-verticalnav > ul > li > a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+    assert.deepEqual(top, site.book.chapters.map((c) => c.path), `${width}px: every chapter`);
+    assert.equal(await links.count(), site.book.chapters.length + s.chapter.sections.length);
+    const summary = page.locator(".toc summary");
+    if (width === 390) {
+      // Code review S3: closed, one line named like the list, which opens to the same list.
+      assert.ok(await summary.isVisible(), "the fold's summary");
+      assert.equal((await summary.innerText()).trim(), "Charter chapters");
+      assert.equal(await page.locator('.toc a[aria-current="page"]').isVisible(), false, "closed by default");
+      await summary.click();
+      assert.equal(await page.locator(".toc-h").isVisible(), false, "the summary names it; no second heading");
+    } else {
+      assert.equal(await summary.isVisible(), false, "no fold on a wide screen");
+      assert.ok(await page.getByRole("heading", { name: "Charter chapters", level: 2 }).isVisible(), "the heading");
+    }
+    assert.ok(await page.locator('.toc a[aria-current="page"]').isVisible(), `${width}px: current section shown`);
+    assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).getAttribute("aria-current"), "true");
+    await ctx.close();
+  }
+});
+
+// Code review S3: with the whole list open, a phone with JavaScript off reached the law text
+// about 5,000px down. Folded, the heading and the text start within the first screen.
+test("phone, JavaScript off: the section's heading and text start near the top", async () => {
+  const s = sectionWithParts();
+  for (const path of [s.path, s.chapter.path]) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(base + path);
+    const r = await page.evaluate(() => ({
+      h1: document.querySelector("h1").getBoundingClientRect().top + scrollY,
+      law: (document.querySelector(".law p, .contents li") ?? document.querySelector("main p")).getBoundingClientRect().top + scrollY,
+    }));
+    assert.ok(r.h1 < 400, `${path}: the heading starts at ${r.h1}px`);
+    assert.ok(r.law < 844, `${path}: the text starts at ${r.law}px, past the first screen`);
+    await ctx.close();
+  }
+});
+
+test("skip link: straight to the law text, past the side list", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path, { width: 1200 });
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Skip to main content");
+  await page.keyboard.press("Enter");
+  assert.equal(new URL(page.url()).hash, "#main");
+  await page.keyboard.press("Tab");
+  const where = await page.evaluate(() => ({ inMain: !!document.activeElement?.closest("main"), inList: !!document.activeElement?.closest(".toc") }));
+  assert.deepEqual(where, { inMain: true, inList: false });
+  // In the page the list comes before main (navigation at the top); the skip link passes it.
+  assert.ok(await page.evaluate(() => document.querySelector(".toc").compareDocumentPosition(document.querySelector("main")) & Node.DOCUMENT_POSITION_FOLLOWING));
+  await ctx.close();
+});
+
+// Where a link sits in the side list: in view means below the sticky heading and above the list's bottom edge.
+function placeInList(href) {
+  const toc = document.querySelector(".toc");
+  const a = (href ? toc.querySelector(`a[href="${href}"]`) : document.activeElement).getBoundingClientRect();
+  const t = toc.getBoundingClientRect();
+  const h = toc.querySelector(".toc-h").getBoundingClientRect();
+  return { pageY: window.scrollY, inView: a.top >= h.bottom - 0.5 && a.bottom <= t.bottom + 0.5, covered: Math.max(0, Math.min(a.bottom, h.bottom) - a.top) };
+}
+
+test("side list scrolls itself, not the page, to the reader's own section, or else the open chapter", async () => {
+  // A short window, so the list scrolls even with the fixtures' chapters.
+  const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const cases = [
+    // Code review S1: the last section of the fixtures' longest chapter (Chapter 10, 36 sections),
+    // so the chapter link is in view while the section link is far below it.
+    { path: deepest.sections.at(-1).path, own: deepest.sections.at(-1).path, label: `${deepest.sections.at(-1).citation}, last of ${deepest.sections.length} in ${deepest.citation}` },
+    { path: site.book.chapters.at(-1).path, own: site.book.chapters.at(-1).path, label: "the last chapter's own page" },
+  ];
+  assert.ok(deepest.sections.length >= 30, `${deepest.citation} has ${deepest.sections.length} sections`);
+  for (const c of cases) {
+    const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
+    const page = await ctx.newPage();
+    await page.goto(base + c.path, { waitUntil: "networkidle" });
+    await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
+    await page.waitForTimeout(100);
+    const r = await page.evaluate(placeInList, c.own);
+    assert.equal(r.pageY, 0, `${c.label}: the page did not scroll`);
+    assert.ok(r.inView, `${c.label}: the reader's own link is in view, below the heading (${JSON.stringify(r)})`);
+    await ctx.close();
+  }
+});
+
+// Code review S2 (WCAG 2.4.11): moving focus up the list scrolls each link to the top of the
+// list, where the "Charter chapters" heading stays; scroll-padding keeps the link below it.
+test("side list: a focused link never hides under the sticky heading (Shift+Tab up the list)", async () => {
+  const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const s = deepest.sections.at(-1);
+  const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
+  const page = await ctx.newPage();
+  await page.goto(base + s.path, { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
+  await page.locator('.toc a[aria-current="page"]').focus();
+  let steps = 0;
+  for (; steps < 80; steps++) {
+    await page.keyboard.press("Shift+Tab");
+    if (!(await page.evaluate(() => document.activeElement?.closest(".toc") && document.activeElement.tagName === "A"))) break;
+    const r = await page.evaluate(placeInList, null);
+    assert.ok(r.inView && r.covered === 0, `Shift+Tab ${steps + 1}: "${await page.evaluate(() => document.activeElement.textContent)}" is covered by ${r.covered}px`);
+  }
+  assert.ok(steps > deepest.sections.length, `walked ${steps} links up the list`);
+  await ctx.close();
+});
+
+test("the law text is in the body font, on screen and in print", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path);
+  const fonts = () => page.evaluate(() => ({ law: getComputedStyle(document.querySelector(".law p")).fontFamily, body: getComputedStyle(document.body).fontFamily, list: getComputedStyle(document.querySelector(".toc a")).fontFamily }));
+  const screen = await fonts();
+  assert.equal(screen.law, screen.body);
+  assert.equal(screen.list, screen.body);
+  assert.doesNotMatch(screen.law, /Georgia|Times|(?:^|, )serif$/);
+  // Lines stay readable: no more than about 75 characters, and a line height of at least 1.5.
+  const m = await page.evaluate(() => {
+    const p = document.querySelector(".law");
+    const cs = getComputedStyle(p);
+    const probe = document.createElement("span");
+    probe.textContent = "0".repeat(100);
+    probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap";
+    p.appendChild(probe);
+    const ch = probe.getBoundingClientRect().width / 100;
+    probe.remove();
+    return { chars: p.getBoundingClientRect().width / ch, lineHeight: parseFloat(cs.lineHeight) / parseFloat(cs.fontSize) };
+  });
+  assert.ok(m.chars <= 75, `${m.chars.toFixed(1)} characters a line`);
+  assert.ok(m.lineHeight >= 1.5, `line height ${m.lineHeight}`);
+  await page.emulateMedia({ media: "print" });
+  const print = await fonts();
+  assert.equal(print.law, print.body, "print");
+  await ctx.close();
+});
+
+// Noel, 2026-11-23 (option A): the search box only on the home page and the search page.
+test("search box: only on the home and search pages, named, with its hint as placeholder text", async () => {
+  const s = sectionWithParts();
+  const without = [["contents", "/charter/"], ["chapter", s.chapter.path], ["section", s.path], ["shared number", site.book.shared[0].path], ["about", "/about"], ["404", "/charter/sections/no-such-section"]];
+  for (const [kind, path] of without) {
+    const { page, ctx } = await open(path);
+    assert.equal(await page.locator("nys-textinput, form.jump, .find").count(), 0, `${kind}: no search box`);
+    assert.equal(await page.getByRole("searchbox").count(), 0, `${kind}: no searchbox in the tree`);
+    // Search is still one link away, in the top bar.
+    assert.equal(await page.locator("#site-menu").getByRole("link", { name: "Search", exact: true }).getAttribute("href"), "/search", kind);
+    await ctx.close();
+  }
+  // In the phone menu too.
+  {
+    const { page, ctx } = await open(s.path, { width: 390 });
+    await page.getByRole("button", { name: "Menu" }).click();
+    await page.locator("#site-menu").getByRole("link", { name: "Search", exact: true }).waitFor({ state: "visible" });
+    await ctx.close();
+  }
+  for (const path of ["/", "/search"]) {
+    const { page, ctx } = await open(path);
+    const box = page.getByRole("searchbox");
+    assert.equal(await box.count(), 1, `${path}: one search box`);
+    assert.equal(await page.getByRole("searchbox", { name: "Go to a section, or search the words", exact: true }).count(), 1, `${path}: named by its label, not its placeholder`);
+    const r = await page.locator("nys-textinput").evaluate((h) => {
+      const input = h.shadowRoot.querySelector("input");
+      // Any CSS color as "rgb(r, g, b)", through a canvas (Chromium reports color-mix() results as color(srgb ...)).
+      const rgb = (c) => {
+        const cx = Object.assign(document.createElement("canvas"), { width: 1, height: 1 }).getContext("2d");
+        cx.fillStyle = c;
+        cx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = cx.getImageData(0, 0, 1, 1).data;
+        return `rgb(${r}, ${g}, ${b})`;
+      };
+      // The background behind the text: the nearest painted box, across the shadow boundary.
+      let el = input;
+      let bg = "rgba(0, 0, 0, 0)";
+      while (el && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
+        bg = getComputedStyle(el).backgroundColor;
+        el = el.parentElement ?? el.getRootNode().host;
+      }
+      return { placeholder: input.placeholder, color: rgb(getComputedStyle(input, "::placeholder").color), typed: rgb(getComputedStyle(input).color), bg: rgb(bg), description: h.shadowRoot.textContent.includes("Try ") };
+    });
+    assert.equal(r.placeholder, 'Try "§ 259", "259", or "budget office"');
+    assert.equal(r.description, false, `${path}: no separate hint line`);
+    const ratio = contrast(r.color, r.bg);
+    assert.ok(ratio >= 4.5, `${path}: placeholder ${r.color} on ${r.bg} is ${ratio.toFixed(2)}:1`);
+    assert.notEqual(r.color, r.typed, `${path}: placeholder lighter than typed text`);
+    console.log(`# ${path}: placeholder ${ratio.toFixed(2)}:1 on ${r.bg}`);
+    await ctx.close();
+  }
+  // The search page still takes ?q= and jumps a citation.
+  {
+    const target = site.book.sections.find((x) => !site.book.shared.some((sh) => sh.sections.includes(x)) && /^§ \d+$/.test(x.citation));
+    const { page, ctx, problems } = await open(`/search?q=${encodeURIComponent("budget")}`);
+    await page.getByRole("status").filter({ hasText: "results for" }).waitFor();
+    const box = page.getByRole("searchbox", { name: /Go to a section/ });
+    await box.fill(target.citation);
+    await Promise.all([page.waitForURL(`${base}${target.path}`), box.press("Enter")]);
+    assert.deepEqual(problems, []);
+    await ctx.close();
+  }
+});
+
+// Noel, 2026-11-23: the first crumb is "Home", and the trail lines up with the heading.
+test("breadcrumbs: Home first, flush with the heading", async () => {
+  const s = sectionWithParts();
+  for (const [path, width, js] of [[s.path, 1280, true], [s.path, 1920, true], [s.path, 1024, true], [s.path, 390, true], [s.chapter.path, 1440, true], [s.path, 1280, false]]) {
+    const { page, ctx } = await open(path, { width, js });
+    const first = page.locator(".crumbs a").first();
+    assert.equal(await first.textContent(), "Home", `${path} at ${width}px`);
+    assert.equal(await first.getAttribute("href"), "/");
+    const [crumbLeft, headingLeft] = await page.evaluate(() => {
+      const a = document.querySelector(".crumbs a");
+      const r = document.createRange();
+      r.selectNodeContents(a);
+      return [r.getBoundingClientRect().left, document.querySelector("h1").getBoundingClientRect().left];
+    });
+    assert.ok(Math.abs(crumbLeft - headingLeft) < 1, `${path} at ${width}px${js ? "" : ", JavaScript off"}: crumbs at ${crumbLeft}px, heading at ${headingLeft}px`);
+    await ctx.close();
+  }
+});
+
+test("reflow: no law page scrolls sideways, from 320px to 1920px", async () => {
+  const s = sectionWithParts();
+  const pages = [s.path, s.chapter.path, site.book.chapters[0].path, site.book.shared[0].path];
+  for (const width of [320, 390, 1024, 1280, 1440, 1920]) {
+    for (const path of pages) {
+      const { page, ctx } = await open(path, { width });
+      const r = await page.evaluate(() => {
+        const law = document.querySelector(".law, main");
+        return { sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, lawRight: law.getBoundingClientRect().right };
+      });
+      assert.ok(r.sw <= r.cw, `${path} at ${width}px is ${r.sw - r.cw}px wider than the window`);
+      assert.ok(r.lawRight <= r.cw - 16, `${path} at ${width}px: the text runs to ${r.lawRight}px of ${r.cw}px`);
+      await ctx.close();
+    }
+  }
 });
 
 test("nothing loads from outside the site", () => {

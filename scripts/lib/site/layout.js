@@ -4,7 +4,7 @@
 // the search.
 
 import { escapeHtml, jsonForScript } from "./html.js";
-import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
+import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
 
 /**
  * A whole page.
@@ -13,14 +13,18 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
  * @param {string} p.title         <title>
  * @param {string} p.description   meta description
  * @param {string} p.main          the inside of <main>
- * @param {string} [p.aside]       a column before <main> (the section's table of contents)
+ * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav), before <main>, on the left
  * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
  * @param {boolean} [p.noindex]
- * @param {boolean} [p.searchStrip=true]  the search box under the top bar
+ * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
+ *   2026-11-23). Every page reaches search through the top bar's Search link.
+ * @param {boolean} [p.bottomBox=true] the box at the bottom (About leaves it off: it ends with the full disclaimer)
+ * @param {boolean} [p.sourceBox=false] the page has a source box (law pages), which already says where the
+ *   text comes from and that BetaNYC modified it, so the footer does not say it again
  * @param {object[]} [p.jsonLd]
  * @param {string[]} [p.headExtra] more <head> lines (Pagefind filters and metadata)
  * @param {string[]} [p.scripts]   extra module scripts
- * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialName, contentsPath }
+ * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialBase, officialName, contentsPath }
  * @param {boolean} [p.navPage]  the top-bar link is this page itself (aria-current="page"), not just its section
  */
 export function page(p) {
@@ -51,12 +55,15 @@ export function page(p) {
   const body = [
     `<a class="skip" href="#main">Skip to main content</a>`,
     topBar(p.nav, p.navPage === true),
-    p.searchStrip === false ? "" : searchStrip(p.site),
+    p.searchStrip === true ? searchStrip(p.site) : "",
+    // The side list comes before <main> (Noel, 2026-11-23: people expect navigation at the
+    // top). On a phone it is one closed button above the breadcrumbs; the skip link jumps
+    // past it to the law text.
     p.aside
       ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
       : `<main id="main">\n<div class="wrap">\n${p.main}\n</div>\n</main>`,
-    bottomBox(p.site),
-    footer(p.site),
+    p.bottomBox === false ? "" : bottomBox(p.site),
+    footer(p.site, { sourceBox: p.sourceBox === true }),
   ];
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n${head.join("\n")}\n</head>\n<body>\n${body.join("\n")}\n</body>\n</html>\n`;
 }
@@ -73,7 +80,7 @@ function topBar(current, isPage) {
       <ul>
         ${link("charter", "/charter/", "Charter")}
         ${link("search", "/search", "Search")}
-        ${link("about", "/about", "About this copy")}
+        ${link("about", "/about", "About")}
         <li><a href="${REPO_URL}">GitHub</a></li>
       </ul>
     </nav>
@@ -81,10 +88,14 @@ function topBar(current, isPage) {
 </header>`;
 }
 
-/** The search box under the top bar. Without JavaScript it shows a link to the contents. */
+/**
+ * The search box: on the home page (the strip) and the search page. Its hint is placeholder
+ * text inside the box, not a line of its own; the visible label stays its name. Without
+ * JavaScript it shows a link to the contents.
+ */
 export function searchForm({ contentsPath, id, handler }) {
   return `<form class="jump" action="/search" method="get" role="search" aria-label="Go to a section or search"${handler ? ` data-handler="${handler}"` : ""}>
-  <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" description="Try &quot;§ 259&quot;, &quot;259&quot; or &quot;budget office&quot;"></nys-textinput>
+  <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" placeholder="Try &quot;§ 259&quot;, &quot;259&quot;, or &quot;budget office&quot;"></nys-textinput>
   <nys-button type="submit" variant="filled" label="Go"></nys-button>
 </form>
 <noscript><p class="nojs">Search needs JavaScript. <a href="${contentsPath}">Browse the Charter's contents</a> instead.</p></noscript>`;
@@ -99,27 +110,42 @@ ${searchForm({ contentsPath: site.contentsPath, id: "q" })}
 }
 
 /**
+ * How current the text is, as two claims with their owners (copy review S1): the "current
+ * through" line is American Legal Publishing's, from versions.json; the date BetaNYC's copy
+ * last changed is BetaNYC's own (indexedAt). site.currentThrough is the publisher's line
+ * ("Current through Local Law 2026/165, enacted November 19, 2026."); a line that does not
+ * start "Current through" stops the build, so a person decides how to word it.
+ */
+export function currentLine(site) {
+  const t = String(site.currentThrough ?? "");
+  if (!/^Current through /.test(t)) throw new Error(`the publisher's line does not start "Current through": "${t.slice(0, 60)}"`);
+  return `American Legal Publishing's text is c${t.slice(1)} BetaNYC's copy last changed on ${site.copyChangedOn}.`;
+}
+
+/**
  * The one warning on the page, at the bottom, in plain HTML (the template's .warnbox): how
  * current the text is, the bold "BetaNYC's copy" line, and a link to the full disclaimer.
  */
 export function bottomBox(site) {
   return `<div class="wrap" data-pagefind-ignore="all">
 <aside class="warnbox copy-box" aria-label="About this copy">
-<p class="current">${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}.</p>
+<p class="current">${escapeHtml(currentLine(site))}</p>
 <p class="lead"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>
-<p><a href="/about">Read the full disclaimer</a></p>
+<p><a href="/about#disclaimer">Read the full disclaimer</a></p>
 </aside>
 </div>`;
 }
 
-function footer(site) {
+// The "comes from American Legal Publishing, and BetaNYC modified it" line is left off law
+// pages, whose source box says the same thing (copy review S2). The MIT line stays everywhere.
+function footer(site, { sourceBox = false } = {}) {
   return `<footer data-pagefind-ignore="all">
   <nys-backtotop></nys-backtotop>
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
-    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
-    <p class="small">Browse: <a href="${site.contentsPath}">the Charter's contents</a>. Source: American Legal Publishing. BetaNYC modified this text; see <a href="/about">About this copy</a>. The code is MIT licensed; the license covers the code, not the publisher's text.</p>
+    <p>Want all of it? Download the text as JSON and Markdown <a href="${REPO_URL}/tree/main/data/index">from GitHub</a> instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
+    <p class="small">${sourceBox ? "" : `The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). `}Our code is MIT licensed; the license does not cover the publisher's text.</p>
   </div>
 </footer>`;
 }

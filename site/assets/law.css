@@ -33,7 +33,6 @@
   --nys-font-family-body: var(--font-body);
   --nys-font-family-sans: var(--font-body);
   --nys-font-family-heading: var(--font-head);
-  --font-law: Georgia, "Times New Roman", serif;
 }
 
 /* The template's focus ring covers links, buttons and summaries; plain form fields get it too.
@@ -52,12 +51,25 @@ input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); o
    10.21:1 on white; the template's --line was 2.75:1 on the strip), and border and ring are
    2px, so the focused field shows 4px of --focus. */
 nys-textinput { --nys-color-neutral-400: var(--ink); --nys-border-width-sm: 2px; }
+/* The hint inside the box ("Try § 259 ...") is placeholder text, which NYSDS colors from
+   --nys-color-text-weaker, falling back on --nys-color-neutral-500 (set above to the template's
+   --line: 3.03:1 on the white field). The template's ink, mixed 80% with white: about 5.7:1 on
+   the white field (test/site measures it), and still lighter than typed text (10.21:1). */
+nys-textinput { --nys-color-text-weaker: color-mix(in srgb, var(--ink) 80%, var(--white)); }
 
 /* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
 .disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
 
+/* Two columns on a wide screen: the side list of chapters on the left, the page on the right.
+   One column below 1024px, the width where NYSDS folds the list behind its button, which then
+   sits above the breadcrumbs. */
 .wrap.layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; padding-top: 20px; max-width: 1120px; }
-@media (max-width: 860px) { .wrap.layout { grid-template-columns: 1fr; gap: 8px; } }
+.wrap.layout > main { grid-column: 2; grid-row: 1; }
+.wrap.layout > .toc { grid-column: 1; grid-row: 1; }
+@media (max-width: 1023px) {
+  .wrap.layout { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .wrap.layout > main, .wrap.layout > .toc { grid-column: auto; grid-row: auto; }
+}
 main { min-width: 0; }
 
 /* Search strip under the top bar. */
@@ -69,24 +81,65 @@ form.jump nys-textinput { flex: 1 1 18rem; max-width: 34rem; }
 
 /* Breadcrumbs read as a plain list until NYSDS defines the element (and with JavaScript off). */
 .crumbs { display: block; margin: 16px 0 12px; font-size: 15px; }
+/* NYSDS pads the trail from its own page grid (12px 20px, up to 12px 64px at 1280px wide, through
+   its --_nys-breadcrumbs-padding; the one documented property, --nys-max-width--content, sets only
+   the width). This site's column is already padded, so the trail lines up with the heading. */
+nys-breadcrumbs.crumbs { --_nys-breadcrumbs-padding: 0; }
 nys-breadcrumbs:not(:defined) ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; list-style: none; margin: 0; padding: 0; }
 nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5rem; }
 
-/* Table of contents beside the text. */
+/* The side list: every chapter, the open one showing its sections (pages.js chapterNav).
+   With scripts, NYSDS's vertical navigation draws it (and folds it behind one button below
+   1024px); these rules make the list compact and mark the open chapter. Without scripts the
+   same rules draw the plain list. */
 .toc { padding-top: 16px; }
-@media (min-width: 861px) { .toc { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow-y: auto; } }
+/* scroll-padding-top keeps a focused link clear of the sticky heading below (code review S2,
+   WCAG 2.4.11): the heading is 46px (16px + 8px padding, 17px at 1.3), plus 6px for the focus
+   ring (3px, offset 2px). */
+@media (min-width: 1024px) { .toc { position: sticky; top: 12px; align-self: start; max-height: calc(100vh - 24px); overflow-y: auto; padding-top: 0; scroll-padding-top: 52px; } }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc nys-verticalnav ul a { display: block; padding: 4px 8px 4px 12px; font-size: 15px; line-height: 1.4; font-weight: 400; color: var(--ink); text-decoration: none; }
+.toc nys-verticalnav ul a:hover { text-decoration: underline; }
+.toc nys-verticalnav a[aria-current="true"] { font-weight: 700; color: var(--blue); }
+.toc nys-verticalnav ul li.open > ul { border-left: 2px solid var(--line-soft); margin-left: 12px; }
+.toc nys-verticalnav ul li.open > ul a { padding-left: 14px; }
+/* The list's heading, in the template's heading style. It stays in view while the list scrolls.
+   Below 1024px, with scripts, NYSDS's button carries the same name, so the heading is hidden. */
+.toc .toc-h { font: 700 17px/1.3 var(--font-head); color: var(--blue); margin: 0; padding: 16px 8px 8px 12px; background: var(--white); position: sticky; top: 0; z-index: 1; }
+@media (max-width: 1023px) {
+  nys-verticalnav:defined .toc-h { display: none; }
+  .toc { padding-top: 8px; }
+}
 nys-verticalnav:not(:defined) { display: block; }
-nys-verticalnav:not(:defined)::before { content: attr(heading); display: block; font: 700 16px/1.3 var(--font-head); color: var(--blue); margin-bottom: .4rem; }
-nys-verticalnav:not(:defined) ul { list-style: none; margin: 0; padding: 0; font-size: 15px; line-height: 1.4; }
-nys-verticalnav:not(:defined) li { margin: 0 0 .35rem; }
-nys-verticalnav:not(:defined) a[aria-current] { font-weight: 700; color: var(--ink); }
+/* The fold around the list (pages.js chapterNav, code review S3). It is closed in the HTML, so
+   with JavaScript off a phone shows one "Charter chapters" line, not every chapter, before the
+   law text, and with scripts the space it holds before NYSDS loads is about a button's height.
+   law.js opens it, and once NYSDS draws the list (with its own button on a phone) the summary
+   goes. On a wide screen the list shows whether the fold is open or not. */
+.toc-fold > summary { font: 700 17px/1.3 var(--font-head); color: var(--blue); padding: 10px 12px; border: 2px solid var(--blue); cursor: pointer; }
+.toc-fold[open]:has(> nys-verticalnav:defined) > summary { display: none; }
+@media (max-width: 1023px) {
+  .toc-fold[open] > summary { margin-bottom: 8px; }
+  nys-verticalnav:not(:defined) .toc-h { display: none; }
+}
+@supports selector(::details-content) {
+  @media (min-width: 1024px) {
+    .toc-fold > summary { display: none; }
+    .toc-fold::details-content { content-visibility: visible; }
+  }
+}
+nys-verticalnav:not(:defined) a[aria-current="page"] { font-weight: 700; color: var(--blue); border-left: 4px solid var(--blue); background: var(--bg-blue-lt); }
+@media (min-width: 1024px) { nys-verticalnav:not(:defined) { border-right: 2px solid var(--line-soft); } }
 
 /* The law text. */
 h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
 h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
 .tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 20px; }
 .copy-status { margin: 0; font-size: 14px; }
-.law { font: 18px/1.7 var(--font-law); max-width: 72ch; }
+/* The law text is in the template's body font, like the rest of the page (Noel, 2026-11-23:
+   a second family clashed). 18px with a 1.7 line height and lines of at most 70 characters
+   keeps long legal text readable. */
+.law { font: 18px/1.7 var(--font-body); max-width: 70ch; }
 .law p { margin: 0 0 16px; scroll-margin-top: 16px; }
 .law [data-depth="2"] { margin-left: 1.6em; }
 .law [data-depth="3"] { margin-left: 3.2em; }
