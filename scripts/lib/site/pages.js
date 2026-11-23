@@ -13,7 +13,8 @@ import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
 import { SITE_NAME, SITE_BASE, REPO_URL, absoluteUrl } from "./config.js";
 
-const HOME = { name: "Law Reader", path: "/" };
+// The first crumb (Noel, 2026-11-23: "Law Reader" confused people).
+const HOME = { name: "Home", path: "/" };
 
 function fileFor(path) {
   if (path === "/") return "index.html";
@@ -120,8 +121,9 @@ export function chapterNavName(book) {
 /**
  * The side list on the book's pages: every chapter, as a link to its page, with one chapter
  * open to show its sections. A plain nested list, so it reads with JavaScript off; NYSDS's
- * vertical navigation wraps it when scripts run. NYSDS gives it no visible heading on a wide
- * screen and folds it behind one button (named by `heading`) below 1024px.
+ * vertical navigation wraps it when scripts run. Its heading is our own <h2> in NYSDS's
+ * `header` slot, so it takes the template's heading style; below 1024px NYSDS folds the list
+ * behind one button named by `heading` (the same words), and law.css hides the <h2> there.
  *
  * The open chapter's link is aria-current="true" (the part of the site the reader is in), or
  * "page" on the chapter's own page; the section's own link is aria-current="page".
@@ -143,7 +145,8 @@ export function chapterNav(book, { chapter = null, section = null } = {}) {
     return `<li class="open"><a href="${escapeHtml(c.path)}" aria-current="${current}">${escapeHtml(chapterName(c))}</a>${sections}</li>`;
   };
   return `<div class="toc" data-pagefind-ignore="all">
-<nys-verticalnav heading="${escapeHtml(chapterNavName(book))}" hideHeading headingLevel="h2">
+<nys-verticalnav heading="${escapeHtml(chapterNavName(book))}" headingLevel="h2">
+<h2 slot="header" class="toc-h">${escapeHtml(chapterNavName(book))}</h2>
 <ul>
 ${book.chapters.map(item).join("\n")}
 </ul>

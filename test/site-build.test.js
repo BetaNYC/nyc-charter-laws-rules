@@ -304,8 +304,14 @@ test("structured data uses only properties schema.org defines", () => {
   assert.equal(leg.legislationIdentifier, s.fullCitation);
   assert.equal(leg.url, SITE_BASE + s.path);
   const crumbs = lds.find((x) => x["@type"] === "BreadcrumbList").itemListElement;
-  assert.deepEqual(crumbs.map((c) => c.name), ["Law Reader", "NYC Charter", s.chapter.citation, s.citation]);
+  assert.deepEqual(crumbs.map((c) => c.name), ["Home", "NYC Charter", s.chapter.citation, s.citation]);
+  assert.equal(crumbs[0].item, `${SITE_BASE}/`);
   assert.equal(crumbs.at(-1).item, undefined);
+  // The structured data names the same crumbs the page shows (Noel, 2026-11-23: "Home", not "Law Reader").
+  const shown = [.../<nys-breadcrumbs[^>]*>([\s\S]*?)<\/nys-breadcrumbs>/.exec(html)[1].matchAll(/<li>(?:<a href="([^"]+)">|<span aria-current="page">)([^<]*)</g)].map((m) => ({ name: unescapeHtml(m[2]), path: m[1] }));
+  assert.deepEqual(shown.map((c) => c.name), crumbs.map((c) => c.name));
+  assert.deepEqual(shown[0], { name: "Home", path: "/" });
+  for (const [i, c] of shown.entries()) if (c.path) assert.equal(crumbs[i].item, SITE_BASE + c.path);
   assert.equal(crumbs[1].item, `${SITE_BASE}/charter/`);
 });
 
@@ -367,7 +373,7 @@ test("side list: every chapter on every chapter, section and shared-number page,
     const l = sideList(html);
     assert.equal(l.count, 1, `${rel}: one side list`);
     assert.deepEqual(l.chapters, all, `${rel}: every chapter, in order`);
-    assert.match(l.list, new RegExp(`<nys-verticalnav heading="${chapterNavName(site.book)}" hideHeading headingLevel="h2">`), `${rel}: no visible heading on a wide screen, a named button on a phone`);
+    assert.match(l.list, new RegExp(`<nys-verticalnav heading="${chapterNavName(site.book)}" headingLevel="h2">\n<h2 slot="header" class="toc-h">${chapterNavName(site.book)}</h2>`), `${rel}: a visible heading on a wide screen, a button with the same name on a phone`);
     if (!chapter) {
       assert.deepEqual(l.open, [], `${rel}: nothing open`);
       assert.deepEqual(l.pageLinks, [], `${rel}: no current link`);
@@ -379,9 +385,10 @@ test("side list: every chapter on every chapter, section and shared-number page,
     // Only the open chapter shows its sections.
     const shown = [...l.list.matchAll(/href="(\/charter\/sections\/[^"]+)"/g)].map((m) => m[1]);
     assert.deepEqual(shown, chapter.sections.map((s) => s.path), `${rel}: only its own chapter's sections`);
-    // The list comes after the law text, so the keyboard and screen readers reach the text first.
-    assert.ok(html.indexOf('<main id="main">') < html.indexOf('<div class="toc"'), `${rel}: main before the list`);
-    assert.ok(html.indexOf("</main>") < html.indexOf('<div class="toc"'), `${rel}: the list is outside main`);
+    // The list comes before the law text (Noel, 2026-11-23: navigation at the top), outside main,
+    // so the skip link to #main passes it.
+    assert.ok(html.indexOf('<div class="toc"') < html.indexOf('<main id="main">'), `${rel}: the list before main`);
+    assert.ok(html.indexOf('<a class="skip" href="#main">') < html.indexOf('<div class="toc"'), `${rel}: the skip link before the list`);
   };
   for (const s of site.book.sections) check(fileForPath(s.path), { chapter: s.chapter, section: s });
   for (const c of site.book.chapters) check(fileForPath(c.path), { chapter: c });

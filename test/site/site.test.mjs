@@ -348,8 +348,21 @@ test("side list: every chapter, the current one open, the current section marked
   const { page, ctx, problems } = await open(s.path, { width: 1200 });
   const nav = page.getByRole("navigation", { name: "Charter chapters" });
   assert.equal(await nav.count(), 1, "one side list, named");
-  // No heading and no fold on a wide screen.
-  assert.equal(await page.getByRole("heading", { name: "Charter chapters" }).count(), 0);
+  // A visible heading and no fold on a wide screen (Noel, 2026-11-23: say what the list is).
+  const heading = page.getByRole("heading", { name: "Charter chapters", level: 2 });
+  assert.equal(await heading.count(), 1);
+  assert.ok(await heading.isVisible());
+  // In the template's heading font and blue.
+  const [font, color, headFont, blue] = await heading.evaluate((h) => {
+    const probe = document.createElement("span");
+    probe.style.cssText = "font-family: var(--font-head); color: var(--blue)";
+    document.body.appendChild(probe);
+    const p = getComputedStyle(probe);
+    const out = [getComputedStyle(h).fontFamily, getComputedStyle(h).color, p.fontFamily, p.color];
+    probe.remove();
+    return out;
+  });
+  assert.deepEqual([font, color], [headFont, blue]);
   assert.equal(await page.getByRole("button", { name: "Charter chapters" }).count(), 0);
   // The links are NYSDS's slotted children, so they are found under .toc, not under the <nav> in its shadow root.
   for (const c of site.book.chapters) {
@@ -380,17 +393,24 @@ test("side list: every chapter, the current one open, the current section marked
   }
 });
 
-test("side list on a phone: one named button, closed, below the law text", async () => {
+test("side list on a phone: one named button, closed, above the breadcrumbs, one tab stop", async () => {
   const s = sectionWithParts();
   const { page, ctx, problems } = await open(s.path, { width: 390 });
   const button = page.getByRole("button", { name: "Charter chapters" });
   assert.equal(await button.count(), 1);
   assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
   assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
-  // The law text is above the button.
-  const lawTop = (await page.locator(".law").boundingBox()).y;
-  const buttonTop = (await button.boundingBox()).y;
-  assert.ok(lawTop < buttonTop, `law text at ${lawTop}px, button at ${buttonTop}px`);
+  assert.equal(await page.locator(".toc-h").isVisible(), false, "the button is the heading on a phone");
+  // The button is above the breadcrumbs, the heading and the law text (Noel, 2026-11-23).
+  const top = async (loc) => (await loc.boundingBox()).y;
+  const buttonTop = await top(button);
+  for (const sel of [".crumbs", "h1", ".law"]) assert.ok(buttonTop < (await top(page.locator(sel).first())), `button above ${sel}`);
+  // One tab stop: from the menu button, Tab lands on it, and the next Tab is the first crumb.
+  await page.getByRole("button", { name: "Menu" }).focus();
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => { let a = document.activeElement; while (a?.shadowRoot?.activeElement) a = a.shadowRoot.activeElement; return a?.getAttribute("aria-expanded") !== null && a?.textContent.trim(); }), "Charter chapters");
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Home");
   await button.click();
   assert.equal(await button.getAttribute("aria-expanded"), "true");
   await page.locator('.toc a[aria-current="page"]').waitFor({ state: "visible" });
@@ -412,7 +432,7 @@ test("side list with JavaScript off: a plain list of every chapter, the current 
   }
 });
 
-test("skip link: straight to the law text, and the side list does not come first", async () => {
+test("skip link: straight to the law text, past the side list", async () => {
   const s = sectionWithParts();
   const { page, ctx } = await open(s.path, { width: 1200 });
   await page.keyboard.press("Tab");
@@ -422,8 +442,8 @@ test("skip link: straight to the law text, and the side list does not come first
   await page.keyboard.press("Tab");
   const where = await page.evaluate(() => ({ inMain: !!document.activeElement?.closest("main"), inList: !!document.activeElement?.closest(".toc") }));
   assert.deepEqual(where, { inMain: true, inList: false });
-  // In the page, the list comes after main, so Tab reaches every link in the text first.
-  assert.ok(await page.evaluate(() => document.querySelector("main").compareDocumentPosition(document.querySelector(".toc")) & Node.DOCUMENT_POSITION_FOLLOWING));
+  // In the page the list comes before main (navigation at the top); the skip link passes it.
+  assert.ok(await page.evaluate(() => document.querySelector(".toc").compareDocumentPosition(document.querySelector("main")) & Node.DOCUMENT_POSITION_FOLLOWING));
   await ctx.close();
 });
 
@@ -533,6 +553,42 @@ test("search box: only on the home and search pages, named, with its hint as pla
     await Promise.all([page.waitForURL(`${base}${target.path}`), box.press("Enter")]);
     assert.deepEqual(problems, []);
     await ctx.close();
+  }
+});
+
+// Noel, 2026-11-23: the first crumb is "Home", and the trail lines up with the heading.
+test("breadcrumbs: Home first, flush with the heading", async () => {
+  const s = sectionWithParts();
+  for (const [path, width, js] of [[s.path, 1280, true], [s.path, 1920, true], [s.path, 1024, true], [s.path, 390, true], [s.chapter.path, 1440, true], [s.path, 1280, false]]) {
+    const { page, ctx } = await open(path, { width, js });
+    const first = page.locator(".crumbs a").first();
+    assert.equal(await first.textContent(), "Home", `${path} at ${width}px`);
+    assert.equal(await first.getAttribute("href"), "/");
+    const [crumbLeft, headingLeft] = await page.evaluate(() => {
+      const a = document.querySelector(".crumbs a");
+      const r = document.createRange();
+      r.selectNodeContents(a);
+      return [r.getBoundingClientRect().left, document.querySelector("h1").getBoundingClientRect().left];
+    });
+    assert.ok(Math.abs(crumbLeft - headingLeft) < 1, `${path} at ${width}px${js ? "" : ", JavaScript off"}: crumbs at ${crumbLeft}px, heading at ${headingLeft}px`);
+    await ctx.close();
+  }
+});
+
+test("reflow: no law page scrolls sideways, from 320px to 1920px", async () => {
+  const s = sectionWithParts();
+  const pages = [s.path, s.chapter.path, site.book.chapters[0].path, site.book.shared[0].path];
+  for (const width of [320, 390, 1024, 1280, 1440, 1920]) {
+    for (const path of pages) {
+      const { page, ctx } = await open(path, { width });
+      const r = await page.evaluate(() => {
+        const law = document.querySelector(".law, main");
+        return { sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, lawRight: law.getBoundingClientRect().right };
+      });
+      assert.ok(r.sw <= r.cw, `${path} at ${width}px is ${r.sw - r.cw}px wider than the window`);
+      assert.ok(r.lawRight <= r.cw - 16, `${path} at ${width}px: the text runs to ${r.lawRight}px of ${r.cw}px`);
+      await ctx.close();
+    }
   }
 });
 

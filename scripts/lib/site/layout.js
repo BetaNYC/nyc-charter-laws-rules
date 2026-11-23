@@ -13,7 +13,7 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
  * @param {string} p.title         <title>
  * @param {string} p.description   meta description
  * @param {string} p.main          the inside of <main>
- * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav): after <main> in the page, drawn on the left
+ * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav), before <main>, on the left
  * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
  * @param {boolean} [p.noindex]
  * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
@@ -53,12 +53,11 @@ export function page(p) {
     `<a class="skip" href="#main">Skip to main content</a>`,
     topBar(p.nav, p.navPage === true),
     p.searchStrip === true ? searchStrip(p.site) : "",
-    // The side list comes after <main> in the page, and law.css draws it in the left column on
-    // a wide screen. So the law text comes first everywhere: to a screen reader, to the
-    // keyboard (no Tab through 86 chapters to reach it) and on a phone, where the list folds
-    // behind one button below the text.
+    // The side list comes before <main> (Noel, 2026-11-23: people expect navigation at the
+    // top). On a phone it is one closed button above the breadcrumbs; the skip link jumps
+    // past it to the law text.
     p.aside
-      ? `<div class="wrap layout">\n<main id="main">\n${p.main}\n</main>\n${p.aside}\n</div>`
+      ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
       : `<main id="main">\n<div class="wrap">\n${p.main}\n</div>\n</main>`,
     bottomBox(p.site),
     footer(p.site),
