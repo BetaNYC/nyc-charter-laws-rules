@@ -41,7 +41,14 @@ export function extractVersion(xml) {
 
 // Walk the LEVEL tree and collect sections.
 // `node` is an ordered element object (DOCUMENT, then each LEVEL as we recurse).
-export function collectSections(node, corpus, sections) {
+//
+// `onSection` (optional, issue #61) is called once per indexed section, right after it is
+// pushed, with what the site structure needs and the index drops: the LEVEL style, the heading
+// RECORD, the body RECORDs whose PARAs make up `text`, and the enclosing LEVELs that carry a
+// heading (outermost first). It is only told about a section: it cannot change one, so the
+// index is the same with or without it (test/structure.test.js checks this byte for byte).
+// `ancestors` is the recursion's own state; callers leave it out.
+export function collectSections(node, corpus, sections, onSection = null, ancestors = []) {
   if (!node) return;
 
   const levels = childrenByTag(node, "LEVEL");
@@ -61,11 +68,13 @@ export function collectSections(node, corpus, sections) {
       ) {
         // Collect body text from child Normal Level records.
         const bodyParts = [];
+        const bodyRecords = [];
         const childLevels = childrenByTag(level, "LEVEL");
         for (const child of childLevels) {
           if ((getAttr(child, "style-name") || "") === "Normal Level") {
             const childRecords = childrenByTag(child, "RECORD");
             for (const cr of childRecords) {
+              bodyRecords.push(cr);
               const paras = childrenByTag(cr, "PARA");
               bodyParts.push(...paras.map((p) => normalize(extractText(p))));
             }
@@ -73,18 +82,30 @@ export function collectSections(node, corpus, sections) {
         }
 
         const citation = extractCitation(heading);
-        sections.push({
+        const section = {
           corpus,
           id: getAttr(record, "id") || "",
           citation,
           heading,
           text: normalize(bodyParts.join(" ")),
-        });
+        };
+        sections.push(section);
+        if (onSection) {
+          onSection(section, { level: styleName, record, bodyRecords, ancestors });
+        }
       }
     }
 
-    // Recurse into nested levels.
-    collectSections(level, corpus, sections);
+    // Recurse into nested levels. A LEVEL that is not body text and has a heading is an
+    // ancestor of what it holds (a Title, Chapter, Subchapter, Article...).
+    let inner = ancestors;
+    if (onSection && styleName !== "Normal Level") {
+      for (const record of records) {
+        const heading = normalize(childrenByTag(record, "HEADING").map(extractText).join(""));
+        if (heading) inner = [...inner, { level: styleName, record, heading }];
+      }
+    }
+    collectSections(level, corpus, sections, onSection, inner);
   }
 }
 
@@ -156,7 +177,10 @@ export function findDocument(parsed) {
 // a warning and continues) rather than thrown, preserving today's resilience.
 // Returns true if the file was parsed (whether or not it yielded sections),
 // false if it was skipped due to a parse error.
-export function collectSectionsFromXml(xml, corpusKey, sections, onError) {
+//
+// `hooks` (optional, issue #61): { onDocument(documentNode), onSection(section, info) }, used by
+// scripts/lib/build-structure.js to record the structure the index drops. See collectSections.
+export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks = null) {
   const cleaned = xml.replace(/^﻿/, ""); // strip BOM
   let parsed;
   try {
@@ -165,7 +189,9 @@ export function collectSectionsFromXml(xml, corpusKey, sections, onError) {
     if (onError) onError(e);
     return false;
   }
-  collectSections(findDocument(parsed), corpusKey, sections);
+  const doc = findDocument(parsed);
+  if (hooks?.onDocument && doc) hooks.onDocument(doc);
+  collectSections(doc, corpusKey, sections, hooks?.onSection ?? null);
   return true;
 }
 

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Title" style-name-escaped="Title" style-id="0-0-0-474" level-depth="1" toc-section="false">
+		<RECORD id="0-0-0-139825" number="114421" version="2561">
+			<HEADING>Title 73: Civic Engagement Commission</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-16940" name="Title 73"/>Title 73: Civic Engagement Commission</PARA>
+		</RECORD>
+		<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+			<RECORD id="0-0-0-126980" number="114422" version="2256">
+				<HEADING>Chapter 1: Poll Site Language Assistance Program</HEADING>
+				<PARA>
+					<DESTINATION id="0-0-0-16942" name="T73C001"/>Chapter 1: Poll Site Language Assistance Program</PARA>
+			</RECORD>
+			<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" style-id="0-0-0-480" level-depth="3" toc-section="false">
+				<LEVEL style-name="Subtitle" style-name-escaped="Subtitle" style-id="0-0-0-15301" level-depth="4" toc-section="false">
+					<LEVEL style-name="Part" style-name-escaped="Part" style-id="0-0-0-483" level-depth="5" toc-section="false">
+						<LEVEL style-name="Subpart" style-name-escaped="Subpart" style-id="0-0-0-15960" level-depth="6" toc-section="false">
+							<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+								<RECORD id="0-0-0-127012" number="114423" version="1958">
+									<HEADING>§ 1-01. Scope of Rules.</HEADING>
+									<PARA>
+										<DESTINATION id="0-0-0-16944" name="T73C001_1-01"/>§ 1-01. Scope of Rules.</PARA>
+								</RECORD>
+								<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+									<RECORD id="0-0-0-127011" number="114424" version="1753">
+										<PARA>This chapter sets forth standards and procedures governing the poll site language assistance program established pursuant to Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127010" number="114425" version="1729">
+										<PARA>(Added City Record 8/19/2020, eff. 9/18/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+								</LEVEL>
+							</LEVEL>
+							<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+								<RECORD id="0-0-0-127014" number="114426" version="1729">
+									<HEADING>§ 1-02. Definitions.</HEADING>
+									<PARA>
+										<DESTINATION id="0-0-0-16946" name="T73C001_1-02"/>§ 1-02. Definitions.</PARA>
+								</RECORD>
+								<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+									<RECORD id="0-0-0-127009" number="114427" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Board of elections.</CHARFORMAT> The term &quot;board of elections&quot; means the board of elections in the city of New York. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127008" number="114428" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Chair.</CHARFORMAT> The term &quot;chair&quot; means the chair of the New York city civic engagement commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127007" number="114429" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Charter.</CHARFORMAT> The term &quot;Charter&quot; means the New York City Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127006" number="114430" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Commission.</CHARFORMAT> The term &quot;commission&quot; means the New York city civic engagement commission or the chair acting on behalf of the commission. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127005" number="114431" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Electioneering.</CHARFORMAT> The term &quot;electioneering&quot; means any words, communications, actions, or general course of conduct that seeks to further the success or failure of a particular candidate, party, ticket, or ballot question or intended to persuade or induce a voter to vote or refrain from voting for any particular candidate, party, ticket, or ballot question. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127004" number="114432" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Interpreter.</CHARFORMAT> The term &quot;interpreter&quot; means any individual providing language assistance under the program for voters casting a ballot at polling places or other language assistance services pursuant to paragraph 5 of subdivision b of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127003" number="114433" version="2502">
+										<PARA>
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Program.</CHARFORMAT> The term &quot;program&quot; means the poll site language assistance program established pursuant to paragraph 4 of subdivision a of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127002" number="114434" version="1729">
+										<PARA>(Added City Record 8/19/2020, eff. 9/18/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+								</LEVEL>
+							</LEVEL>
+							<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+								<RECORD id="0-0-0-127013" number="114435" version="1729">
+									<HEADING>§ 1-03. Interpreters.</HEADING>
+									<PARA>
+										<DESTINATION id="0-0-0-16948" name="T73C001_1-03"/>§ 1-03. Interpreters.</PARA>
+								</RECORD>
+								<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+									<RECORD id="0-0-0-127001" number="114436" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Standards of conduct.</CHARFORMAT> Interpreters must comply with the following standards of conduct: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-127000" number="114437" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Comply with all lawful orders from staff of the board of elections, including, but not limited to, making an oath or signing an affirmation as required by section 8-306 of the New York state election law; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126999" number="114438" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Do not engage in electioneering in the polling place, within one hundred feet of the polling place, or while assisting voters telephonically; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126998" number="114439" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Do not place a mark on any ballot, or do any other act in connection with a ballot with the intent that it may be identified as a ballot cast by a particular voter; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126997" number="114440" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Do not directly or indirectly reveal to any person the name of any particular candidate, party, ticket, or ballot question voted for by a voter; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126996" number="114441" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Do not directly or indirectly reveal to any person or make public any aggregate totals for any particular candidate, party, ticket, or ballot question voted for by a voter; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126995" number="114442" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(6)<TAB tab-count="1"/>Display identification provided by the Commission while performing duties under the program; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126994" number="114443" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(7)<TAB tab-count="1"/>Comply with all applicable laws, including articles 8 and 17 of the New York state election law; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126993" number="114444" version="2497">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(8)<TAB tab-count="1"/>Comply with the following ethical standards for professional interpreters adapted from the National Council on Healthcare Interpreter Certification&apos;s code of ethics for healthcare interpreters: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126992" number="114445" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(i)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Confidentiality.</CHARFORMAT> The interpreter will regard all information obtained during the performance of their professional duties as confidential. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126991" number="114446" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Impartiality.</CHARFORMAT> The interpreter will perform their duties in an impartial way, refraining from advising, counseling, or conveying personal biases or beliefs. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126990" number="114447" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Accuracy.</CHARFORMAT> The interpreter will strive to relay all information accurately in the course of their professional duties, preserving the spirit of the original message, taking into consideration its cultural context. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126989" number="114448" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(iv)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Professionalism.</CHARFORMAT> The interpreter will at all times act in a professional and ethical manner, maintaining the boundaries of the professional role, and abstaining from personal involvement. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126988" number="114449" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(v)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Respect.</CHARFORMAT> The interpreter will at all times treat persons served with dignity, courtesy and respect. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126987" number="114450" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Minimum qualifications.</CHARFORMAT> The commission shall ensure all interpreters have written and spoken fluency in English and the language to be served. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126986" number="114451" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Training requirements.</CHARFORMAT> The commission shall ensure that all interpreters receive at least one training prior to each election event. Such training must, at a minimum, include: <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126985" number="114452" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Ethical guidance for interpreters that will include the standards of conduct set forth in subdivision a of this section; <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126984" number="114453" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A process for tracking the number of voters the interpreters served; and <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126983" number="114454" version="1729">
+										<PARA>
+											<TAB tab-count="1"/>
+											<TAB tab-count="1"/>(3)<TAB tab-count="1"/>A protocol for collecting and reporting public complaints regarding the program. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126982" number="114455" version="1753">
+										<PARA>
+											<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+											<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Additional services.</CHARFORMAT> If the commission engages in partnerships with other city agencies pursuant to paragraph 5 of subdivision b of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="3202" destination-id="0-0-0-0">3202</LINK> of the Charter to provide language assistance services to voters outside polling places, including but not limited to services for absentee voters, such services must substantially comply with the provisions of this chapter. <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+									<RECORD id="0-0-0-126979" number="114456" version="2256">
+										<PARA>(Added City Record 8/19/2020, eff. 9/18/2020) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-053]</HIGHLIGHTER>
+										</PARA>
+									</RECORD>
+								</LEVEL>
+							</LEVEL>
+						</LEVEL>
+					</LEVEL>
+				</LEVEL>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>
