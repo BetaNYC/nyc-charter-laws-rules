@@ -49,10 +49,13 @@
     "fetch-data": "node scripts/fetch-data.js",
     "build-index": "node scripts/build-index.js",
     "update-changelog": "node scripts/update-changelog.js",
+    "build-site": "node scripts/build-site.js",
+    "serve-site": "node scripts/serve-site.js",
     "pretest": "npm run build",
     "test": "node --test test/*.test.js",
     "test:diff": "node --test test/diff/differential.mjs",
-    "eval": "npm run build && node eval/run.mjs"
+    "eval": "npm run build && node eval/run.mjs",
+    "test:site": "node --test test/site/*.test.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
@@ -61,7 +64,10 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@nysds/components": "^1.23.2",
     "@types/node": "^22.0.0",
+    "pagefind": "^1.6.0",
+    "playwright": "^1.65.1",
     "typescript": "^5.5.0"
   },
   "engines": {

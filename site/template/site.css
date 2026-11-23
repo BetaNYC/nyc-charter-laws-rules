@@ -1,0 +1,155 @@
+/* BetaNYC GitHub Pages template.
+   Colors and type follow BetaNYC's brand guide (BetaNYC Blue #2359a8, body #414141,
+   Poppins for body and display, Roboto for headings). The page loads no web fonts:
+   Poppins and Roboto are used when the reader has them, and a system font otherwise.
+   Copy this file as is. Put anything page-specific in a <style> block or its own file,
+   so this file can be updated across sites. */
+
+:root {
+  --blue: #2359a8;          /* BetaNYC Blue: headings, links, buttons */
+  --blue-2: #b8d6ff;        /* secondary blue: hover, light fills */
+  --blue-dark: #1b4785;     /* hover on blue buttons */
+  --bg-blue: #eef4ff;       /* soft blue background */
+  --bg-blue-lt: #f9faff;
+  --ink: #414141;           /* body text */
+  --line: #949494;          /* borders */
+  --line-soft: #d0d7de;
+  --light: #f1f1f1;
+  --white: #ffffff;
+  --good: #1a7f4b;
+  --warn: #9a5b00;
+  --bad: #b3261e;
+  --focus: #2359a8;         /* focus ring: 6.85:1 on white; the blue bar uses --blue-2 */
+  --font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-head: "Roboto", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--ink); background: var(--white); }
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.site-bar a:focus-visible, .site-bar button:focus-visible { outline-color: var(--blue-2); } /* 4.6:1 on the bar */
+img, svg { max-width: 100%; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: .5rem; background: var(--white); padding: .25rem .5rem; z-index: 100; }
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+
+/* Top bar: the BetaNYC wordmark, the site name, and a few links. */
+.site-bar { background: var(--blue); color: var(--white); }
+.site-bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.25rem; padding-top: .7rem; padding-bottom: .7rem; }
+.site-bar a { color: var(--white); }
+.site-bar .home { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; }
+.site-bar .home img { height: 26px; width: auto; display: block; }
+/* Forced colors (Windows Contrast themes) turn the bar white, and the white
+   wordmark would vanish. Keep a blue box behind it. */
+@media (forced-colors: active) {
+  .site-bar .home img { forced-color-adjust: none; background: #2359a8; padding: 3px 6px; box-sizing: content-box; }
+}
+.site-bar .home span { border-left: 1px solid rgba(255,255,255,.55); padding-left: .7rem; }
+.site-bar nav { margin-left: auto; font-size: .95rem; }
+.site-bar nav ul { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; list-style: none; margin: 0; padding: 0; }
+.site-bar nav a { font-weight: 600; text-decoration: none; }
+.site-bar nav a:hover, .site-bar nav a[aria-current=page] { text-decoration: underline; }
+
+/* Menu button (burger) on the right, below 782px (the brand guide's tablet
+   breakpoint). nav.js shows it and adds .js to the bar; without the script the
+   button stays hidden and the links wrap under the name. */
+.menu-btn { display: none; margin-left: auto; align-items: center; gap: .5rem; min-height: 44px; padding: 0 .85rem; background: transparent; color: var(--white); border: 1px solid var(--white); border-radius: 0; font: 700 15px var(--font-head); cursor: pointer; }
+.menu-btn:hover { background: var(--blue-dark); }
+.menu-btn svg { width: 20px; height: 20px; }
+@media (max-width: 781px) {
+  .site-bar.js .home { flex: 1 1 10rem; min-width: 0; }
+  .site-bar.js .menu-btn { display: inline-flex; }
+  .site-bar.js nav { display: none; }
+  .site-bar.js nav.open { display: block; flex-basis: 100%; margin: .4rem 0 0; padding: .25rem 0 .5rem; border-top: 1px solid var(--blue-2); }
+  .site-bar.js nav ul { flex-direction: column; gap: 0; }
+  .site-bar.js nav a { display: flex; align-items: center; min-height: 44px; }
+}
+/* The smallest phones: keep the name and the Menu button on one row. */
+@media (max-width: 360px) {
+  .site-bar .home { gap: .5rem; }
+  .site-bar .home span { font-size: .95rem; padding-left: .5rem; }
+  .site-bar.js .menu-btn { padding: 0 .6rem; }
+}
+
+/* Opening section: what this is and why it exists, before anything else. */
+.hero { background: var(--bg-blue); border-bottom: 1px solid var(--line); padding: 48px 0 36px; }
+.tag { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+.lede { font-size: clamp(17px, 2.3vmin, 21px); max-width: 62ch; }
+.hero-meta { font-size: 14px; margin-top: 18px; }
+
+h1, h2, h3 { color: var(--blue); line-height: 1.2; }
+h1 { font-family: var(--font-body); font-weight: 700; font-size: clamp(30px, 5vmin, 46px); margin: 0 0 12px; }
+h2 { font-family: var(--font-head); font-weight: 700; font-size: clamp(22px, 3.4vmin, 31px); margin: 56px 0 8px; }
+h3 { font-family: var(--font-head); font-weight: 700; font-size: clamp(17px, 2.2vmin, 21px); margin: 28px 0 6px; }
+h2 .anchor, h3 .anchor { font-size: .7em; margin-left: .35em; text-decoration: none; opacity: 0; }
+h2:hover .anchor, h3:hover .anchor, .anchor:focus { opacity: .7; }
+p { margin: 0 0 16px; }
+main { padding-bottom: 24px; }
+
+code, kbd { font-family: var(--font-mono); font-size: .88em; background: var(--bg-blue); padding: .05rem .3rem; border-radius: 3px; }
+pre { background: var(--light); border: 1px solid var(--line-soft); border-radius: 3px; padding: 13px 15px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+
+table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 16px 0; }
+th, td { border: 1px solid var(--line-soft); padding: 8px 11px; text-align: left; vertical-align: top; }
+th { background: var(--bg-blue); color: var(--blue); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+/* A wide table scrolls inside its own box on a phone instead of widening the page. */
+.table-scroll { overflow-x: auto; margin: 16px 0; }
+.table-scroll table { margin: 0; }
+
+.button { display: inline-block; background: var(--blue); color: var(--white); padding: .5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: 600; border: 2px solid var(--blue); font: inherit; cursor: pointer; }
+.button:hover { background: var(--blue-dark); }
+.button.secondary { background: var(--white); color: var(--blue); }
+.button.secondary:hover { background: var(--blue-2); }
+
+.note { border: 1px solid var(--line-soft); border-left: 4px solid var(--blue); background: var(--bg-blue-lt); padding: 14px 16px; margin: 20px 0; font-size: 15px; }
+.warnbox { border: 1px solid var(--warn); border-left: 4px solid var(--warn); background: #fff8ee; padding: 14px 16px; margin: 20px 0; font-size: 15px; }
+
+/* Stat tiles: a few numbers that sum up the page. */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 24px 0; }
+.stat { border: 1px solid var(--line-soft); border-radius: 4px; padding: 14px 16px; background: var(--white); }
+.stat .n { font-family: var(--font-head); font-weight: 700; font-size: 30px; color: var(--blue); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .l { font-size: 14px; }
+
+/* A figure that can be shared: a title, the chart, a caption with its source, and a
+   "Copy link" button. See assets/share.js. */
+.figure { border: 1px solid var(--line-soft); border-radius: 4px; margin: 24px 0; background: var(--white); }
+.figure-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--bg-blue-lt); border-bottom: 1px solid var(--line-soft); }
+.figure-head h3 { margin: 0; }
+.figure-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 15px; }
+.figure-controls select { font: inherit; font-size: 15px; padding: 4px 6px; border: 1px solid var(--line); border-radius: 3px; background: var(--white); color: var(--ink); max-width: 100%; }
+.figure-body { padding: 16px; overflow-x: auto; }
+.figure-caption { padding: 0 16px 14px; font-size: 14px; }
+.copy-link { font: inherit; font-size: 14px; font-weight: 600; color: var(--blue); background: var(--white); border: 1px solid var(--blue); border-radius: 3px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+.copy-link:hover { background: var(--blue-2); }
+.copy-link[data-copied] { color: var(--good); border-color: var(--good); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; margin: 0 0 10px; padding: 0; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.legend .sw { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
+
+.tooltip { position: fixed; pointer-events: none; z-index: 200; background: var(--white); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; font-size: 13px; line-height: 1.45; box-shadow: 0 2px 8px rgba(0,0,0,.12); max-width: 260px; }
+.tooltip[hidden] { display: none; }
+
+footer { background: var(--bg-blue); border-top: 1px solid var(--line); margin-top: 64px; padding: 30px 0; font-size: 14px; }
+footer .wordmark { height: 30px; width: auto; display: block; margin-bottom: 12px; }
+footer p { margin: 0 0 10px; }
+.small { font-size: 14px; }
+
+@media (max-width: 620px) {
+  .site-bar nav { margin-left: 0; }
+  .hero { padding: 32px 0 26px; }
+  h2 { margin-top: 40px; }
+}
+
+@media print {
+  .site-bar, .menu-btn, .copy-link, .figure-controls select { display: none; }
+  .hero, footer { background: none; }
+}
