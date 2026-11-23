@@ -159,6 +159,58 @@ test("forced colors: a focused search box shows a ring around the field", async 
   await ctx.close();
 });
 
+// WCAG relative luminance and contrast, from computed "rgb(r, g, b)" colors.
+function contrast(a, b) {
+  const lum = (c) => {
+    const [r, g, bl] = c.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number).map((x) => x / 255).map((x) => (x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+  };
+  const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+  return (x + 0.05) / (y + 0.05);
+}
+
+test("search field: border 3:1 on its own background, focus ring at least 2px and 3:1", async () => {
+  for (const path of ["/charter/", "/search"]) {
+    const { page, ctx } = await open(path);
+    const host = page.locator("nys-textinput").first();
+    const read = () =>
+      host.evaluate((h) => {
+        const input = h.shadowRoot.querySelector("input");
+        const s = getComputedStyle(input);
+        // The background the field sits on: the nearest ancestor with a painted background.
+        let el = h;
+        let bg = "rgba(0, 0, 0, 0)";
+        while (el && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
+          bg = getComputedStyle(el).backgroundColor;
+          el = el.parentElement;
+        }
+        return { border: s.borderTopColor, borderWidth: parseFloat(s.borderTopWidth), outline: s.outlineColor, outlineWidth: parseFloat(s.outlineWidth), outlineStyle: s.outlineStyle, fieldBg: getComputedStyle(input).backgroundColor, pageBg: bg };
+      });
+    const rest = await read();
+    const borderRatio = contrast(rest.border, rest.pageBg);
+    assert.ok(borderRatio >= 3, `${path}: field border ${rest.border} on ${rest.pageBg} is ${borderRatio.toFixed(2)}:1`);
+    await page.getByRole("searchbox", { name: /Go to a section/ }).focus();
+    const f = await read();
+    assert.ok(f.outlineWidth >= 2 && f.outlineStyle !== "none", `${path}: focus ring ${f.outlineWidth}px`);
+    for (const bg of [f.pageBg, "rgb(255, 255, 255)"]) assert.ok(contrast(f.outline, bg) >= 3, `${path}: focus ring ${f.outline} on ${bg}`);
+    console.log(`# ${path}: border ${borderRatio.toFixed(2)}:1 on ${rest.pageBg}; focus ring ${f.outlineWidth}px + ${f.borderWidth}px border, ${contrast(f.outline, f.pageBg).toFixed(2)}:1`);
+    await ctx.close();
+  }
+});
+
+test("print: the official text and the source show their addresses", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path);
+  await page.emulateMedia({ media: "print" });
+  for (const sel of [".source a[href^='http']", ".copy-box a[href^='http']"]) {
+    const [href, after] = await page.locator(sel).first().evaluate((a) => [a.href, getComputedStyle(a, "::after").content]);
+    assert.ok(after.includes(href.replace(/\/$/, "")), `${sel}: printed ${after}`);
+  }
+  await page.emulateMedia({ media: "screen" });
+  assert.equal(await page.locator(".source a[href^='http']").first().evaluate((a) => getComputedStyle(a, "::after").content), "none");
+  await ctx.close();
+});
+
 test("the name check fails on a missing or repeated name", async () => {
   const { page, ctx } = await open("/charter/");
   await page.evaluate(() => {

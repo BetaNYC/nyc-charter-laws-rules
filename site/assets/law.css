@@ -45,6 +45,14 @@ input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); o
   nys-textinput:focus-within { outline: 3px solid var(--focus); outline-offset: 4px; }
 }
 
+/* NYSDS's text field takes its border color from --nys-color-neutral-400 and both its border
+   and its focus ring width from --nys-border-width-sm (NYSDS 1.23.2: --_nys-textinput-border-color,
+   --_nys-textinput-border-width, --_nys-textinput-outline-width). Set here on the field only,
+   so no other part changes: the border is the template's ink (9.25:1 on the blue search strip,
+   10.21:1 on white; the template's --line was 2.75:1 on the strip), and border and ring are
+   2px, so the focused field shows 4px of --focus. */
+nys-textinput { --nys-color-neutral-400: var(--ink); --nys-border-width-sm: 2px; }
+
 /* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
 .disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
 
@@ -138,4 +146,6 @@ ol.hits { list-style: none; padding: 0; margin: 0; }
   .law { max-width: none; font-size: 12pt; }
   .law a { color: inherit; text-decoration: none; }
   .copy-box { break-inside: avoid; }
+  /* On paper, the official text and the source still need their addresses. */
+  .source a[href^="http"]::after, .copy-box a[href^="http"]::after { content: " (" attr(href) ")"; overflow-wrap: anywhere; word-break: break-all; }
 }
