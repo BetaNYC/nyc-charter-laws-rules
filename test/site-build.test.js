@@ -28,6 +28,7 @@ import { renderSection, bodyBlocks } from "../scripts/lib/render-section.js";
 import { sectionMarkdown } from "../scripts/lib/serialize-markdown.js";
 import { parseQuery, lookup, citationKeys, jumpTarget, pageUrl } from "../site/assets/jump.js";
 import { redirectFor } from "../site/assets/not-found.js";
+import { chapterNav, chapterName, chapterNavName, sectionPage } from "../scripts/lib/site/pages.js";
 
 let site;
 before(async () => {
@@ -341,6 +342,76 @@ test("contents and chapter pages are plain HTML link lists", () => {
   assert.match(read("about.html"), /<a href="\/about" aria-current="page">About this copy<\/a>/);
   // The home page and every page's footer link to the contents.
   assert.ok(read("index.html").includes(`href="/charter/"`));
+});
+
+// The side list of chapters (Noel, 2026-11-23): one list per Charter page, every chapter in it,
+// one chapter open. Read from the HTML as the browser gets it with JavaScript off.
+function sideList(html) {
+  const lists = html.match(/<div class="toc"[\s\S]*?<\/nys-verticalnav>\n<\/div>/g) ?? [];
+  if (lists.length !== 1) return { count: lists.length };
+  const list = lists[0];
+  const top = list.replace(/<ul>\n(?:<li><a [^>]*>[^<]*<\/a><\/li>\n?)+<\/ul>\n(?=<\/li>)/, "");
+  return {
+    count: 1,
+    list,
+    chapters: [...top.matchAll(/<li(?: class="open")?><a href="([^"]+)"/g)].map((m) => m[1]),
+    open: [...list.matchAll(/<li class="open"><a href="([^"]+)" aria-current="([^"]+)">/g)].map((m) => ({ path: m[1], current: m[2] })),
+    pageLinks: [...list.matchAll(/<a href="([^"]+)" aria-current="page">/g)].map((m) => m[1]),
+  };
+}
+
+test("side list: every chapter on every chapter, section and shared-number page, with one chapter open", () => {
+  const all = site.book.chapters.map((c) => c.path);
+  const check = (rel, { chapter, section }) => {
+    const html = read(rel);
+    const l = sideList(html);
+    assert.equal(l.count, 1, `${rel}: one side list`);
+    assert.deepEqual(l.chapters, all, `${rel}: every chapter, in order`);
+    assert.match(l.list, new RegExp(`<nys-verticalnav heading="${chapterNavName(site.book)}" hideHeading headingLevel="h2">`), `${rel}: no visible heading on a wide screen, a named button on a phone`);
+    if (!chapter) {
+      assert.deepEqual(l.open, [], `${rel}: nothing open`);
+      assert.deepEqual(l.pageLinks, [], `${rel}: no current link`);
+      return;
+    }
+    assert.deepEqual(l.open, [{ path: chapter.path, current: section ? "true" : "page" }], `${rel}: its chapter open and current`);
+    assert.deepEqual(l.pageLinks, [section ? section.path : chapter.path], `${rel}: aria-current="page" on this page's own link`);
+    for (const s of chapter.sections) assert.ok(l.list.includes(`<a href="${s.path}"`), `${rel}: lists ${s.citation}`);
+    // Only the open chapter shows its sections.
+    const shown = [...l.list.matchAll(/href="(\/charter\/sections\/[^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(shown, chapter.sections.map((s) => s.path), `${rel}: only its own chapter's sections`);
+    // The list comes after the law text, so the keyboard and screen readers reach the text first.
+    assert.ok(html.indexOf('<main id="main">') < html.indexOf('<div class="toc"'), `${rel}: main before the list`);
+    assert.ok(html.indexOf("</main>") < html.indexOf('<div class="toc"'), `${rel}: the list is outside main`);
+  };
+  for (const s of site.book.sections) check(fileForPath(s.path), { chapter: s.chapter, section: s });
+  for (const c of site.book.chapters) check(fileForPath(c.path), { chapter: c });
+  for (const sh of site.book.shared) check(fileForPath(sh.path), {});
+  // The contents page is that list already; the other pages are not in a book.
+  for (const rel of ["charter/index.html", "index.html", "search.html", "about.html", "404.html"]) assert.equal(sideList(read(rel)).count, 0, rel);
+  assert.equal(chapterName({ citation: "Preamble", title: "Preamble" }), "Preamble");
+  assert.equal(chapterName({ citation: "Chapter 2-A", title: "Districting Commission" }), "Chapter 2-A: Districting Commission");
+});
+
+test("side list over the full Charter: all its chapters on a section page (full index)", { skip: fullCharter() ? false : "data/structure/charter.json not present or not built from this index" }, () => {
+  const full = fullCharter();
+  const book = loadBook({ corpus: "charter", indexJsonText: full.text, structure: full.structure, versions: full.versions });
+  const s = book.sections.find((x) => x.citation === "§ 259") ?? book.sections[0];
+  const facts = { currentThrough: "Current through.", copyChangedOn: "today", officialUrl: "https://codelibrary.amlegal.com/", officialName: "The official Charter", creditLine: "Source.", contentsPath: "/charter/" };
+  const l = sideList(sectionPage(s, book, facts).html);
+  assert.equal(l.count, 1);
+  assert.deepEqual(l.chapters, book.chapters.map((c) => c.path));
+  assert.equal(new Set(l.chapters).size, book.chapters.length);
+  console.log(`# full Charter: ${book.chapters.length} chapters in the side list; ${Buffer.byteLength(chapterNav(book, { chapter: s.chapter, section: s }))} bytes on ${s.fullCitation}'s page`);
+});
+
+test("the law text uses the template's body font, not a second family", () => {
+  const css = readFileSync(join(ROOT, "site", "assets", "law.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  assert.doesNotMatch(css, /--font-law|Georgia|Times New Roman|\bserif\b/);
+  assert.match(css, /\.law \{ font: 18px\/1\.7 var\(--font-body\);/);
+  // Every font family in law.css is one of the template's.
+  for (const m of css.matchAll(/font(?:-family)?:[^;]*?(var\(--[a-z-]+\))?;/g)) {
+    if (/font-family|font:/.test(m[0]) && /[a-z]"|,/.test(m[0].replace(/var\([^)]*\)/g, ""))) assert.fail(`a font named outside the template: ${m[0]}`);
+  }
 });
 
 test("Pagefind markup: every law page is a search body with filters; other pages are not", () => {

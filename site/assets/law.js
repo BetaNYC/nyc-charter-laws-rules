@@ -3,6 +3,8 @@
 //   - The search box: a citation ("§ 259") goes straight to its page; anything else goes to
 //     the search page.
 //   - Copy link, Copy citation and Print on law pages.
+//   - The side list of chapters, when it scrolls on its own (a wide screen), starts scrolled
+//     to the open chapter rather than to the Preamble.
 import { lookup, jumpTarget } from "./jump.js";
 
 let citations = null;
@@ -80,5 +82,16 @@ function wireTools() {
   tools.querySelector(".tool-print")?.addEventListener("click", () => window.print());
 }
 
+/** Scroll the side list, and only the side list, so the open chapter sits a quarter of the way down it. */
+export function showOpenChapter(toc = document.querySelector(".toc")) {
+  const open = toc?.querySelector('li.open > a, a[aria-current="page"]');
+  if (!open || toc.scrollHeight <= toc.clientHeight + 1) return false;
+  const offset = open.getBoundingClientRect().top - toc.getBoundingClientRect().top;
+  if (offset >= 0 && offset < toc.clientHeight / 2) return false;
+  toc.scrollTop += offset - Math.round(toc.clientHeight / 4);
+  return true;
+}
+
 wireForms();
 wireTools();
+if (document.querySelector(".toc")) customElements.whenDefined("nys-verticalnav").then(() => requestAnimationFrame(() => showOpenChapter()));

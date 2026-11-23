@@ -107,6 +107,50 @@ function h1(record) {
   return `<h1><span class="cite">${escapeHtml(record.fullCitation)}</span> <span class="heading">${escapeHtml(record.title)}</span></h1>`;
 }
 
+/** A chapter's name in lists: "Chapter 2-A: Council", or just "Preamble" when that is all it has. */
+export function chapterName(c) {
+  return c.title === c.citation ? c.title : `${c.citation}: ${c.title}`;
+}
+
+/** The side list's name: the phone button's label and the name of its navigation landmark. */
+export function chapterNavName(book) {
+  return `${book.book.short} chapters`;
+}
+
+/**
+ * The side list on the book's pages: every chapter, as a link to its page, with one chapter
+ * open to show its sections. A plain nested list, so it reads with JavaScript off; NYSDS's
+ * vertical navigation wraps it when scripts run. NYSDS gives it no visible heading on a wide
+ * screen and folds it behind one button (named by `heading`) below 1024px.
+ *
+ * The open chapter's link is aria-current="true" (the part of the site the reader is in), or
+ * "page" on the chapter's own page; the section's own link is aria-current="page".
+ *
+ * @param {object} book
+ * @param {object} [at]
+ * @param {object} [at.chapter]  the chapter to open
+ * @param {object} [at.section]  the section this page shows
+ */
+export function chapterNav(book, { chapter = null, section = null } = {}) {
+  const item = (c) => {
+    if (c !== chapter) return `<li><a href="${escapeHtml(c.path)}">${escapeHtml(chapterName(c))}</a></li>`;
+    const current = section ? "true" : "page";
+    const sections = c.sections.length
+      ? `\n<ul>\n${c.sections
+          .map((x) => `<li><a href="${escapeHtml(x.path)}"${x === section ? ` aria-current="page"` : ""}>${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`)
+          .join("\n")}\n</ul>\n`
+      : "";
+    return `<li class="open"><a href="${escapeHtml(c.path)}" aria-current="${current}">${escapeHtml(chapterName(c))}</a>${sections}</li>`;
+  };
+  return `<div class="toc" data-pagefind-ignore="all">
+<nys-verticalnav heading="${escapeHtml(chapterNavName(book))}" hideHeading headingLevel="h2">
+<ul>
+${book.chapters.map(item).join("\n")}
+</ul>
+</nys-verticalnav>
+</div>`;
+}
+
 /** A section's page. */
 export function sectionPage(s, book, site) {
   const crumbs = [
@@ -115,16 +159,7 @@ export function sectionPage(s, book, site) {
     { name: s.chapter.citation, path: s.chapter.path },
     { name: s.citation, path: s.path },
   ];
-  const toc = `<div class="toc" data-pagefind-ignore="all">
-<nys-verticalnav heading="${escapeHtml(`Sections in ${s.chapter.citation}`)}" headingLevel="h2">
-<ul>
-${s.chapter.sections
-  .map((x) => `<li><a href="${escapeHtml(x.path)}"${x === s ? ` aria-current="page"` : ""}>${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`)
-  .join("\n")}
-<li><a href="/${book.book.slug}/">All ${escapeHtml(book.book.short)} chapters</a></li>
-</ul>
-</nys-verticalnav>
-</div>`;
+  const toc = chapterNav(book, { chapter: s.chapter, section: s });
   const pager = `<nav class="pager" aria-label="Previous and next section" data-pagefind-ignore="all">
 ${s.prev ? `<a class="prev" href="${escapeHtml(s.prev.path)}"><small>Previous</small> ${escapeHtml(`${s.prev.citation}. ${s.prev.title}`)}</a>` : ""}
 ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small> ${escapeHtml(`${s.next.citation}. ${s.next.title}`)}</a>` : ""}
@@ -192,6 +227,7 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
       title: titleOf(c.title === c.citation ? `${book.book.label}: ${c.title}` : `${book.book.label} ${c.citation}: ${c.title}`),
       description: describe(`${book.book.label} ${c.citation}${c.title === c.citation ? "" : `, ${c.title}`}: ${c.sections.length} section${c.sections.length === 1 ? "" : "s"}.`),
       main,
+      aside: chapterNav(book, { chapter: c }),
       nav: book.book.slug,
       site,
       headExtra: pagefindHead(c, book, "Chapter"),
@@ -220,6 +256,7 @@ export function sharedNumberPage(sh, book, site) {
       title: titleOf(`${book.book.label} ${sh.citation}: ${sh.sections.length} sections share this number`),
       description: describe(`${book.book.label} has ${sh.sections.length} sections numbered ${sh.citation}: ${sh.sections.map((s) => s.title).join("; ")}.`),
       main,
+      aside: chapterNav(book),
       nav: book.book.slug,
       site,
       jsonLd: [breadcrumbJsonLd(crumbs)],
@@ -227,7 +264,7 @@ export function sharedNumberPage(sh, book, site) {
   };
 }
 
-/** The book's contents: a plain list of its chapters. */
+/** The book's contents: a plain list of its chapters. It has no side list: the page is that list. */
 export function contentsPage(book, site) {
   const path = `/${book.book.slug}/`;
   const crumbs = [HOME, { name: book.book.label, path }];
@@ -238,7 +275,7 @@ export function contentsPage(book, site) {
     `<ol class="contents chapters">`,
     ...book.chapters.map(
       (c) =>
-        `<li><a href="${escapeHtml(c.path)}">${escapeHtml(c.title === c.citation ? c.title : `${c.citation}: ${c.title}`)}</a> <span class="count">(${c.sections.length} section${c.sections.length === 1 ? "" : "s"})</span></li>`
+        `<li><a href="${escapeHtml(c.path)}">${escapeHtml(chapterName(c))}</a> <span class="count">(${c.sections.length} section${c.sections.length === 1 ? "" : "s"})</span></li>`
     ),
     `</ol>`,
   ].join("\n");

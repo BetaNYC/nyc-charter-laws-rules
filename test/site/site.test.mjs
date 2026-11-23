@@ -72,10 +72,14 @@ test("agents on the page: every control on a section page has its own name", asy
     for (const n of ["Copy link", "Copy citation", "Print", "Go"]) assert.ok(names.includes(n), `${n} at ${width}px`);
     assert.ok(names.some((n) => n.startsWith("Go to a section, or search the words")), "search box");
     if (width === 390) {
-      assert.ok(names.includes(`Sections in ${s.chapter.citation}`), "table-of-contents toggle");
+      assert.ok(names.includes("Charter chapters"), "the side list's button");
       assert.ok(names.includes("Menu"), "menu button");
-      await page.getByRole("button", { name: `Sections in ${s.chapter.citation}` }).click();
+      await page.getByRole("button", { name: "Charter chapters" }).click();
       await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().waitFor();
+      // Open, the list's links still have their own names.
+      await assertNamedControls(page, `${s.path} at ${width}px, side list open`);
+    } else {
+      assert.ok(!names.includes("Charter chapters"), "no button on a wide screen");
     }
     assert.deepEqual(problems, []);
     await ctx.close();
@@ -331,6 +335,136 @@ test("an American Legal id in the address lands on its page", async () => {
   await page.waitForURL(`${base}${s.path}`);
   await page.goto(`${base}/charter/sections/does-not-exist`);
   await page.getByRole("heading", { name: "Page not found" }).waitFor();
+  await ctx.close();
+});
+
+// Noel, 2026-11-23: the side list shows the whole Charter, with the reader's chapter open.
+test("side list: every chapter, the current one open, the current section marked", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 1200 });
+  const nav = page.getByRole("navigation", { name: "Charter chapters" });
+  assert.equal(await nav.count(), 1, "one side list, named");
+  // No heading and no fold on a wide screen.
+  assert.equal(await page.getByRole("heading", { name: "Charter chapters" }).count(), 0);
+  assert.equal(await page.getByRole("button", { name: "Charter chapters" }).count(), 0);
+  // The links are NYSDS's slotted children, so they are found under .toc, not under the <nav> in its shadow root.
+  for (const c of site.book.chapters) {
+    const name = c.title === c.citation ? c.title : `${c.citation}: ${c.title}`;
+    assert.equal(await page.locator(".toc").getByRole("link", { name, exact: true }).getAttribute("href"), c.path, name);
+  }
+  const chapterLink = page.locator(`.toc a[href="${s.chapter.path}"]`);
+  assert.equal(await chapterLink.getAttribute("aria-current"), "true");
+  const own = page.locator('.toc a[aria-current="page"]');
+  assert.equal(await own.count(), 1);
+  assert.equal(await own.getAttribute("href"), s.path);
+  assert.ok(await own.isVisible());
+  // Only the open chapter shows its sections.
+  const sectionLinks = await page.locator('.toc a[href^="/charter/sections/"]').evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+  assert.deepEqual(sectionLinks, s.chapter.sections.map((x) => x.path));
+  // The open chapter is marked by more than color: bold.
+  assert.equal(await chapterLink.evaluate((a) => getComputedStyle(a).fontWeight), "700");
+  assert.deepEqual(problems, []);
+  await ctx.close();
+  // A chapter page: the same list, with that chapter open and current.
+  {
+    const { page, ctx } = await open(s.chapter.path, { width: 1200 });
+    const own = page.locator('.toc a[aria-current="page"]');
+    assert.equal(await own.count(), 1);
+    assert.equal(await own.getAttribute("href"), s.chapter.path);
+    assert.equal(await page.locator('.toc a[href^="/charter/sections/"]').count(), s.chapter.sections.length);
+    await ctx.close();
+  }
+});
+
+test("side list on a phone: one named button, closed, below the law text", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 390 });
+  const button = page.getByRole("button", { name: "Charter chapters" });
+  assert.equal(await button.count(), 1);
+  assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
+  assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
+  // The law text is above the button.
+  const lawTop = (await page.locator(".law").boundingBox()).y;
+  const buttonTop = (await button.boundingBox()).y;
+  assert.ok(lawTop < buttonTop, `law text at ${lawTop}px, button at ${buttonTop}px`);
+  await button.click();
+  assert.equal(await button.getAttribute("aria-expanded"), "true");
+  await page.locator('.toc a[aria-current="page"]').waitFor({ state: "visible" });
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("side list with JavaScript off: a plain list of every chapter, the current one open", async () => {
+  const s = sectionWithParts();
+  for (const width of [1200, 390]) {
+    const { page, ctx } = await open(s.path, { width, js: false });
+    const links = page.locator(".toc a");
+    const top = await page.locator(".toc nys-verticalnav > ul > li > a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+    assert.deepEqual(top, site.book.chapters.map((c) => c.path), `${width}px: every chapter`);
+    assert.equal(await links.count(), site.book.chapters.length + s.chapter.sections.length);
+    assert.ok(await page.locator('.toc a[aria-current="page"]').isVisible(), `${width}px: current section shown`);
+    assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).getAttribute("aria-current"), "true");
+    await ctx.close();
+  }
+});
+
+test("skip link: straight to the law text, and the side list does not come first", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path, { width: 1200 });
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Skip to main content");
+  await page.keyboard.press("Enter");
+  assert.equal(new URL(page.url()).hash, "#main");
+  await page.keyboard.press("Tab");
+  const where = await page.evaluate(() => ({ inMain: !!document.activeElement?.closest("main"), inList: !!document.activeElement?.closest(".toc") }));
+  assert.deepEqual(where, { inMain: true, inList: false });
+  // In the page, the list comes after main, so Tab reaches every link in the text first.
+  assert.ok(await page.evaluate(() => document.querySelector("main").compareDocumentPosition(document.querySelector(".toc")) & Node.DOCUMENT_POSITION_FOLLOWING));
+  await ctx.close();
+});
+
+test("side list scrolls itself, not the page, to the open chapter", async () => {
+  // A short window, so the list scrolls even with the fixtures' chapters.
+  const s = site.book.sections.filter((x) => x.chapter === site.book.chapters.at(-1)).at(0) ?? site.book.sections.at(-1);
+  const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
+  const page = await ctx.newPage();
+  await page.goto(base + s.path, { waitUntil: "networkidle" });
+  await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
+  const r = await page.evaluate((path) => {
+    const toc = document.querySelector(".toc");
+    const a = toc.querySelector(`a[href="${path}"]`).getBoundingClientRect();
+    const t = toc.getBoundingClientRect();
+    return { pageY: window.scrollY, inView: a.top >= t.top && a.bottom <= t.bottom };
+  }, s.chapter.path);
+  assert.deepEqual(r, { pageY: 0, inView: true });
+  await ctx.close();
+});
+
+test("the law text is in the body font, on screen and in print", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path);
+  const fonts = () => page.evaluate(() => ({ law: getComputedStyle(document.querySelector(".law p")).fontFamily, body: getComputedStyle(document.body).fontFamily, list: getComputedStyle(document.querySelector(".toc a")).fontFamily }));
+  const screen = await fonts();
+  assert.equal(screen.law, screen.body);
+  assert.equal(screen.list, screen.body);
+  assert.doesNotMatch(screen.law, /Georgia|Times|(?:^|, )serif$/);
+  // Lines stay readable: no more than about 75 characters, and a line height of at least 1.5.
+  const m = await page.evaluate(() => {
+    const p = document.querySelector(".law");
+    const cs = getComputedStyle(p);
+    const probe = document.createElement("span");
+    probe.textContent = "0".repeat(100);
+    probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap";
+    p.appendChild(probe);
+    const ch = probe.getBoundingClientRect().width / 100;
+    probe.remove();
+    return { chars: p.getBoundingClientRect().width / ch, lineHeight: parseFloat(cs.lineHeight) / parseFloat(cs.fontSize) };
+  });
+  assert.ok(m.chars <= 75, `${m.chars.toFixed(1)} characters a line`);
+  assert.ok(m.lineHeight >= 1.5, `line height ${m.lineHeight}`);
+  await page.emulateMedia({ media: "print" });
+  const print = await fonts();
+  assert.equal(print.law, print.body, "print");
   await ctx.close();
 });
 
