@@ -184,12 +184,17 @@ test("linkHref leaves unresolved, ambiguous and other-book links as plain text",
   assert.ok(html.includes(`aria-label="eight, ${escapeHtml(s.fullCitation)}"`) && html.includes(`aria-label="eight, ${escapeHtml(t.fullCitation)}"`), html);
 });
 
-test("every page has the bottom box: current through, the bold line, the disclaimer link", () => {
+test("every page but About has the bottom box: current through, the bold line, the disclaimer link", () => {
   const line = currentThroughLine(site.data.versions.charter.currentThrough);
   assert.equal(line, "Current through Local Law 2026/086, enacted April 25, 2026.");
+  // The About page ends with the full disclaimer and its own "How current it is", so it has no box.
+  const about = read("about.html");
+  assert.ok(!about.includes("copy-box"), "about.html: no bottom box");
+  assert.ok(about.includes(line), "about.html: current through, in its own section");
   for (const f of htmlFiles()) {
     const html = readFileSync(f, "utf8");
     const rel = relative(site.outDir, f);
+    if (rel === "about.html") continue;
     const box = /<aside class="warnbox copy-box" aria-label="About this copy">([\s\S]*?)<\/aside>/.exec(html)?.[1];
     assert.ok(box, `${rel}: bottom box`);
     assert.ok(box.includes(line), `${rel}: current through`);
@@ -221,7 +226,7 @@ test("the disclaimer page's text is the MCP's FOOTER, without its Built-by line"
   assert.deepEqual(shown, expected);
   assert.deepEqual(paras.map(plainParagraph), expected);
   assert.match(block, /<a href="mailto:NYC\.editor@amlegal\.com">NYC\.editor@amlegal\.com<\/a>/);
-  assert.ok(html.includes("This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com."));
+  assert.ok(html.includes("BetaNYC's MCP server gives the same disclaimer. Its second paragraph is American Legal Publishing's, written for its own site, codelibrary.amlegal.com."));
   // A FOOTER whose last paragraph is not the Built-by line stops the build.
   assert.throws(() => disclaimerParagraphs("---\n**A.** one\n\nTwo, a new last paragraph."), /no longer starts "Built by BetaNYC"/);
 });
@@ -232,17 +237,28 @@ test("the About page: its sections in order, a jump list that resolves, the disc
   assert.match(main, /<h1>About BetaNYC Law Reader<\/h1>/);
   assert.match(html, /<title>About \| BetaNYC Law Reader<\/title>/);
   const ids = [...main.matchAll(/<h2 id="([^"]+)">/g)].map((m) => m[1]).filter((id) => id !== "on-this-page");
-  assert.deepEqual(ids, ["why", "changes", "current", "built-by", "ai", "licenses", "mistakes", "support", "disclaimer"]);
+  assert.deepEqual(ids, ["why", "history", "changes", "current", "built-by", "ai", "licenses", "mistakes", "support", "disclaimer"]);
   const jumps = [...main.matchAll(/<li><a href="#([^"]+)">/g)].map((m) => m[1]);
   assert.deepEqual(jumps, ids, "the jump list names every section, in order");
-  // The disclaimer block is the last thing in main.
-  assert.ok(main.indexOf('<div class="disclaimer">') > main.indexOf('<h2 id="support">'));
+  // No warning at the top: the bold line opens the Disclaimer section, the last thing in main.
+  assert.doesNotMatch(main.slice(0, main.indexOf('<h2 id="disclaimer">')), /not legal advice/);
+  const tail = main.slice(main.indexOf('<h2 id="disclaimer">'));
+  assert.match(tail, /^<h2 id="disclaimer">Disclaimer<\/h2>\n<p><strong>This is BetaNYC's copy, for research\. It is not the official text and not legal advice\./);
+  // The history: the 2013 People's Roadmap, BetaNYC's testimony and statement, and the Council's record of Local Law 37 of 2014.
+  for (const href of [
+    "https://nycroadmap.us/index.html#31",
+    "https://github.com/openlawdc/dc-decoded",
+    "https://www.beta.nyc/2014/06/11/betanycs-support-of-three-bills-that-would-put/",
+    "https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=1681066&amp;GUID=0AA72ECF-4B97-41D0-B3B2-965B7AFC0F24",
+    "https://www.beta.nyc/2014/08/07/betanycs-statement-on-the-signing-of-nycs/",
+    "https://www.beta.nyc/2026/05/21/new-nyc-digital-democracy-tools-for-ai/",
+  ]) assert.ok(main.includes(`href="${href}"`), href);
   assert.match(main, /<a href="mailto:lab@beta\.nyc">lab@beta\.nyc<\/a>/);
   assert.doesNotMatch(html, /hello@beta\.nyc/, "hello@beta.nyc is not a BetaNYC address");
   assert.match(main, /href="https:\/\/www\.beta\.nyc\/about\/ai-policy\/"/);
   assert.match(main, /href="https:\/\/beta\.nyc\/donate\/"/);
   // The footer's "modified" note points at the section that says how.
-  assert.match(html, /BetaNYC modified this text; see <a href="\/about#changes">how BetaNYC changed it<\/a>\./);
+  assert.match(html, /The text comes from American Legal Publishing, and BetaNYC modified it \(<a href="\/about#changes">how BetaNYC changed it<\/a>\)\./);
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).

@@ -239,8 +239,8 @@ test("section text and the bottom box read with JavaScript off", async () => {
   assert.equal((await page.locator(`p[data-block="0"]`).innerText()).replace(/\s+/g, " ").trim(), s.text.slice(first.start, first.end));
   await page.getByText("This is BetaNYC's copy, for research.").waitFor({ state: "visible" });
   await page.getByRole("link", { name: "Read the full disclaimer" }).waitFor({ state: "visible" });
-  // No search box on a law page, so no "search needs JavaScript" line either; the footer links to the contents.
-  await page.getByRole("link", { name: "the Charter's contents" }).waitFor({ state: "visible" });
+  // No search box on a law page, so no "search needs JavaScript" line either; the top bar links to the contents.
+  await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Charter", exact: true }).waitFor({ state: "visible" });
   // The breadcrumbs and the table of contents are plain lists.
   await page.getByRole("link", { name: s.chapter.citation, exact: true }).waitFor({ state: "visible" });
   assert.ok(await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().isVisible());

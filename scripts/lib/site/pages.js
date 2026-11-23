@@ -82,8 +82,8 @@ function pagefindHead(record, book, kind) {
 function sourceBox(record, site) {
   return `<div class="note source" data-pagefind-ignore="all">
 <p>${escapeHtml(site.creditLine)} <a href="${escapeHtml(site.officialUrl)}">Official text at American Legal Publishing</a>.</p>
-<p><strong>BetaNYC modified this.</strong> We built this page from American Legal Publishing's bulk XML: we split the text into its parts, added links between sections, and removed the publisher's editing marks. Check the official text before you rely on it.</p>
-<p>American Legal's id for this text: <code>${escapeHtml(record.id)}</code>. Links that use it still land here.</p>
+<p><strong>BetaNYC modified this.</strong> We built this page from American Legal Publishing's bulk XML: we split the text into its parts, added links between sections, and removed the publisher's editing marks.</p>
+<p>Links that use American Legal's id for this text, <code>${escapeHtml(record.id)}</code>, still land here.</p>
 </div>`;
 }
 
@@ -274,7 +274,7 @@ export function contentsPage(book, site) {
   const main = [
     breadcrumbs(crumbs),
     `<h1>${escapeHtml(book.book.name)}</h1>`,
-    `<p class="lede">The ${escapeHtml(book.book.short)}'s ${book.chapters.length} chapters and ${book.sections.length} sections, in order. ${escapeHtml(site.currentThrough)}</p>`,
+    `<p class="lede">The ${escapeHtml(book.book.short)}'s ${book.chapters.length} chapters and ${book.sections.length} sections, in order.</p>`,
     `<ol class="contents chapters">`,
     ...book.chapters.map(
       (c) =>
@@ -307,13 +307,12 @@ export function homePage(book, site) {
 </section>
 <h2 id="books">What is here</h2>
 <ul class="contents">
-<li><a href="/${book.book.slug}/">${escapeHtml(book.book.name)}</a>: ${book.chapters.length} chapters, ${book.sections.length} sections. ${escapeHtml(site.currentThrough)}</li>
+<li><a href="/${book.book.slug}/">${escapeHtml(book.book.name)}</a>: ${book.chapters.length} chapters, ${book.sections.length} sections.</li>
 </ul>
-<p>The Administrative Code and the Rules of the City of New York come later.</p>
+<p>We are now working to parse and display the Administrative Code and the Rules of the City of New York.</p>
 <h2 id="how">How to use it</h2>
-<p>Type a section number, like <code>§ 259</code> or <code>259</code>, in the box at the top of this page or on the <a href="/search">search page</a> to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
-<h2 id="data">The data and the MCP server</h2>
-<p>The same text is in BetaNYC's <a href="${REPO_URL}">nyc-charter-laws-rules</a> repository, as JSON and Markdown you can download, and AI assistants can read it through BetaNYC's MCP server. Please download the data rather than copying pages one at a time.</p>`;
+<p>Type a section number, like <code>§ 259</code> or <code>259</code>, in the box above or on the <a href="/search">search page</a> to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
+`;
   return {
     path: "/",
     file: "index.html",
@@ -369,6 +368,7 @@ export function searchPage(book, site) {
 const CONTACT_EMAIL = "lab@beta.nyc";
 const ABOUT_SECTIONS = [
   ["why", "Why this exists"],
+  ["history", "How the law got online"],
   ["changes", "What BetaNYC changed"],
   ["current", "How current it is"],
   ["built-by", "Built by BetaNYC"],
@@ -380,6 +380,17 @@ const ABOUT_SECTIONS = [
 ];
 export const ABOUT_TITLE = `About ${SITE_NAME}`;
 
+// BetaNYC's part in getting the City's laws online, from beta.nyc and the Council's record
+// (read 2026-11-23). Intro 149 became Local Law 37 of 2014, Administrative Code § 7-111.
+const HISTORY = {
+  roadmap: "https://nycroadmap.us/index.html#31",
+  dcDecoded: "https://github.com/openlawdc/dc-decoded",
+  testimony: "https://www.beta.nyc/2014/06/11/betanycs-support-of-three-bills-that-would-put/",
+  law: "https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=1681066&GUID=0AA72ECF-4B97-41D0-B3B2-965B7AFC0F24",
+  statement: "https://www.beta.nyc/2014/08/07/betanycs-statement-on-the-signing-of-nycs/",
+  mcp: "https://www.beta.nyc/2026/05/21/new-nyc-digital-democracy-tools-for-ai/",
+};
+
 export function aboutPage(book, site, { paragraphs, metadata }) {
   const crumbs = [HOME, { name: "About", path: "/about" }];
   const h2 = (id) => `<h2 id="${id}">${escapeHtml(ABOUT_SECTIONS.find(([k]) => k === id)[1])}</h2>`;
@@ -388,17 +399,20 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
   const main = [
     breadcrumbs(crumbs),
     `<h1>${escapeHtml(ABOUT_TITLE)}</h1>`,
-    `<p class="lede"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
     `<nav class="on-this-page" aria-labelledby="on-this-page"><h2 id="on-this-page">On this page</h2><ul>`,
     ...ABOUT_SECTIONS.map(([id, text]) => `<li><a href="#${id}">${escapeHtml(text)}</a></li>`),
     `</ul></nav>`,
     h2("why"),
     `<p>The ${name} sets up the City's government: the Council, the Mayor, the Comptroller, the Public Advocate, the borough presidents, community boards and the agencies. Reporters, Council staff, community board members, advocates and students all end up reading it.</p>`,
-    `<p>We built this site so the ${escapeHtml(book.book.short)} is easy to read, search and cite. Every section, and every lettered or numbered part of a section, has its own link you can paste into an email or testimony. Search finds a section by its number or by its words. The whole text is free to <a href="${REPO_URL}">download from GitHub</a>, and AI assistants can read it through BetaNYC's MCP server, so their answers can point back to the law itself.</p>`,
+    `<p>We built this site so the ${escapeHtml(book.book.short)} is easy to read, search and cite. Every section, and every lettered or numbered part of a section, has its own link you can paste into an email or testimony. Search finds a section by its number or by its words.</p>`,
+    h2("history"),
+    `<p>At the end of 2013, BetaNYC and its community wrote <a href="${escapeHtml(HISTORY.roadmap)}">The People's Roadmap to a Digital New York City</a> for the incoming mayor. It asked the City to put the Charter, the Rules and the Administrative Code online with open tools, like <a href="${escapeHtml(HISTORY.dcDecoded)}">DC Decoded</a> in Washington, D.C. It also asked the City to publish its records in machine-readable formats.</p>`,
+    `<p>In June 2014, BetaNYC <a href="${escapeHtml(HISTORY.testimony)}">testified before the Council</a> for Intro 149, the bill to put the City's laws online, and asked that it require bulk downloads in machine-readable formats. Mayor de Blasio signed it on August 7, 2014, as <a href="${escapeHtml(HISTORY.law)}">Local Law 37 of 2014</a>, and <a href="${escapeHtml(HISTORY.statement)}">we welcomed it</a> the same day. The law, now section 7-111 of the Administrative Code, requires the City to publish the Charter, the Administrative Code and the Rules on its website, searchable, in formats that can be downloaded in bulk, and updated within four weeks of a change.</p>`,
+    `<p>American Legal Publishing publishes that compilation for the City and offers it as bulk XML files. In May 2026, BetaNYC built <a href="${escapeHtml(HISTORY.mcp)}">an MCP server</a> from those files so AI assistants can quote the law and name the section they quote. This site puts the same text in front of people.</p>`,
     h2("changes"),
     `<p>American Legal Publishing publishes the ${name} for the City of New York. BetaNYC downloads its bulk XML file and builds this site from it. We split each section into its parts (a, b, (1), (2)...), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. References into the Administrative Code and the Rules are plain text until those books are on this site.</p>`,
     h2("current"),
-    `<p>${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}. That is the date BetaNYC's index last changed, from a change in American Legal Publishing's files or in how BetaNYC builds the index. The index keeps no date for when the files were last checked, so none is shown. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
+    `<p>${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}. That date changes when American Legal Publishing's files change or when BetaNYC changes how it reads them. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
     h2("built-by"),
     `<p>BetaNYC is New York's civic organization dedicated to improving lives through public interest technology, open data, and civic design. We build tools, train the public, and advocate for a more transparent, accountable, and participatory city government. BetaNYC is a project of the Fund for the City of New York.</p>`,
     `<p>Related work:</p>`,
@@ -420,7 +434,8 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     h2("support"),
     `<p>This site is free and has no ads. If it helps your work, please <a href="https://beta.nyc/donate/">support BetaNYC</a>.</p>`,
     h2("disclaimer"),
-    `<p>This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com.</p>`,
+    `<p><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
+    `<p>BetaNYC's MCP server gives the same disclaimer. Its second paragraph is American Legal Publishing's, written for its own site, codelibrary.amlegal.com.</p>`,
     `<div class="disclaimer">`,
     ...paragraphs.map((p) => `<p>${paragraphHtml(p)}</p>`),
     `</div>`,
@@ -436,6 +451,8 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
       main,
       nav: "about",
       navPage: true,
+      // The page ends with the full disclaimer, so the bottom box, which links to it, is left off.
+      bottomBox: false,
       site,
       jsonLd: [breadcrumbJsonLd(crumbs)],
     }),

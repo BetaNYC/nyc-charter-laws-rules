@@ -59,7 +59,7 @@ export function page(p) {
     p.aside
       ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
       : `<main id="main">\n<div class="wrap">\n${p.main}\n</div>\n</main>`,
-    bottomBox(p.site),
+    p.bottomBox === false ? "" : bottomBox(p.site),
     footer(p.site),
   ];
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n${head.join("\n")}\n</head>\n<body>\n${body.join("\n")}\n</body>\n</html>\n`;
@@ -126,8 +126,8 @@ function footer(site) {
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
-    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
-    <p class="small">Browse: <a href="${site.contentsPath}">the Charter's contents</a>. Source: American Legal Publishing. BetaNYC modified this text; see <a href="/about#changes">how BetaNYC changed it</a>. The code is MIT licensed; the license covers the code, not the publisher's text.</p>
+    <p>Want all of it? Download the text as JSON and Markdown <a href="${REPO_URL}">from GitHub</a> instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
+    <p class="small">The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). Our code is MIT licensed; the license does not cover the publisher's text.</p>
   </div>
 </footer>`;
 }
