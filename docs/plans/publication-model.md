@@ -6,7 +6,20 @@
 **Repo:** `BetaNYC/nyc-charter-laws-rules` @ `0.2.0`
 **Proposed branch:** `feature/publication-model`
 **Owner:** Noel
-**Status:** draft — awaiting review
+**Status:** draft — awaiting review. Its front half is being built under epic #68 (2026-11-22); see "Status, 2026-11-22" below.
+
+---
+
+## Status, 2026-11-22 (epic #68, issue #61)
+
+Epic #68 builds a website from the index and splits this plan's Phase 1 across its own phases. What #61 (Phase 1 there) did, and where it differs from this plan:
+
+- **Phase 0 is moot.** Half A of PR #15 is already on `main` in other forms (the lib's `collectSectionsFromXml` loop, `extractVersion` over raw XML, no `depth` parameter, no `createGunzip`, no `--stamp-only`, index reads in try/catch, `sameContent` not exported). Nothing was cherry-picked.
+- **`renderSection` exists** (`scripts/lib/render-section.js`), and the Markdown writer moved onto it (`scripts/lib/serialize-markdown.js`) with byte-identical output (`test/markdown-parity.test.js`, `test/structure.test.js`).
+- **The structure lives beside the index, not in it.** `data/structure/<corpus>.json` holds subdivisions (label, depth, anchor), link targets, and chapter and title names, as offsets into the index's `text`, bound to the index JSON by sha256. The index JSON the MCP reads is unchanged, so `versions.json`, `indexedAt` and every answer stay the same. It is outside `data/index/`, so it does not ship in the npm package.
+- **Real cross-reference links are captured**, which this plan had left out: `<LINK>` targets are resolved to section ids at build time.
+- **The HTML writer, the per-section pages and the MD/HTML block-order test** are #62. The epic decided the HTML is built in the deploy workflow and never committed, which replaces this plan's committed `data/index/html/`.
+- Provenance and publication branches remain this plan's back half (#66 in the epic).
 
 ---
 

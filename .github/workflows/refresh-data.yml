@@ -168,10 +168,29 @@ jobs:
             CHANGELOG.md
             README.md
           )
+          # The site structure (issue #61), built by build-index beside the index. It is
+          # not in the npm package (package.json `files` has data/index, not data/structure),
+          # so a change to it alone needs no release. `git status --porcelain` rather than
+          # `git diff`: the first build creates these files, and git diff does not see
+          # untracked files.
+          SITE_PATHS=(data/structure)
+          site_changed() { [ -n "$(git status --porcelain -- "${SITE_PATHS[@]}")" ]; }
 
           # The build is idempotent, so a no-op rebuild leaves the allow-list
           # byte-identical. Commit iff anything in it actually changed.
           if git diff --quiet -- "${PATHS[@]}"; then
+            if site_changed; then
+              # Only the site structure changed: its first build after #61 merges, or a
+              # change to the structure code. Commit it with no version bump and no release.
+              git add -- "${SITE_PATHS[@]}"
+              git \
+                -c user.name="github-actions[bot]" \
+                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                commit -m "chore: refresh site structure $(TZ=America/New_York date +%F)"
+              git push origin HEAD:main
+              echo "refresh-data: pushed the site structure to main (no index change, no release)"
+              exit 0
+            fi
             echo "refresh-data: no change after rebuild — skipping commit"
             exit 0
           fi
@@ -238,7 +257,8 @@ jobs:
             SUFFIX=" (release v${RELEASE_VERSION})"
           fi
 
-          # Stage only the allow-listed paths.
+          # Stage only the allow-listed paths, and the site structure built with them.
+          PATHS+=("${SITE_PATHS[@]}")
           git add -- "${PATHS[@]}"
 
           # Commit as github-actions[bot] with identity set inline (no global config).

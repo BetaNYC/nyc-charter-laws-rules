@@ -11,6 +11,7 @@ This repo includes:
 - **Scripts** to fetch and parse the latest bulk XML from American Legal Publishing
 - A committed **JSON index** (`data/index/json/`) for machine use
 - A committed **Markdown index** (`data/index/markdown/`) for human browsing — readable directly on GitHub
+- A **site structure** (`data/structure/`) for the coming law website: each section's subdivisions, cross-reference targets, and chapter and title names, built with the index (see [Site structure](#site-structure-datastructure)). It is not in the npm package.
 
 Clone the repo and everything is ready to use. No setup required to browse or query the current index. Run `npm run fetch-data && npm run build-index` only when you want to refresh from AML.
 
@@ -255,6 +256,8 @@ npm test
 | `test/index-checksum.test.js` | Each bundled `data/index/json/<corpus>.json` matches the `sha256` that `build-index.js` recorded in `versions.json`, and `mergeVersions()` keeps it and moves `indexedAt` when only the text changed (issue #45). |
 | `test/stdout.test.js` | Starts the built server with a bad `NYC_CLR_FOOTER`, makes four calls, and checks that every stdout line is a JSON-RPC 2.0 message and the startup warning went to stderr (issue #47). |
 | `test/build-smoke.test.js` | Build pipeline smoke test (Layer 5a). Feeds tiny hand-authored AML-shaped XML fixtures to the pure builder `buildSectionsFromXml` in `scripts/lib/build-corpus.js` — no multi-MB ZIPs. Asserts correct section shape, citation derivation (`Section 292.` → `§ 292`; a label with a period inside, such as `L.L. 2016/002`, `G.1.2` or `10-1104.1`, kept whole; a chapter's whole number, such as `Chapter 18-A` or `Chapter 19.1`, read only at the start of the heading), clean text (no tags/entities/edge whitespace), document-order LINK extraction, and that non-qualifying records (wrong style-name, too-short heading) are filtered out. |
+| `test/structure.test.js` | The site structure (issue #61), on American Legal's own XML: the 44 Charter fixtures in `test/fixtures/diff/xml/` and 4 Rules files in `test/fixtures/structure/rules/`. The structure hooks leave the index alone (the fixtures' JSON and Markdown hash to what v0.6.2 wrote, pinned in the test); every block is a slice of its section's `text` and the blocks joined with one space are the `text`; Charter § 1133 keeps labels, depths and anchors (`(b)(1)`); a label repeated in one section gets `(a)(1)-2`; a Charter link resolves to its section and a link into a document not built keeps its name; a Rules chapter with no Title record around it takes its title from the publisher's key (#59), and one with no match is left without a title. When `data/structure/` is committed, each file must carry the sha256 of the committed index JSON and `versions.json`, and slice its text exactly. |
+| `test/markdown-parity.test.js` | Rebuilds each committed `data/index/markdown/<corpus>.md` from the committed JSON (and the committed structure, when there is one) with `scripts/lib/serialize-markdown.js`, and compares every byte, for every section of all three documents. |
 | `test/build-idempotence.test.js` | A rebuild with no source change must leave every tracked output byte-identical. Unit tests for `mergeVersions()` in `scripts/lib/merge-versions.js` (an unchanged corpus keeps its prior `indexedAt`; a changed `currentThrough` or `sectionCount` adopts the fresh one; re-merging is a fixed point), plus two runs of `scripts/update-changelog.js` against a temporary tree, asserting the second leaves `versions.json`, `changelog.json`, `CHANGELOG.md` and `README.md` unchanged. ZIP-free, so it runs in CI. |
 | `test/auto-release.test.js` | Unit tests for the pure helpers in `scripts/auto-release.js`: finding the bump commit, shortening AML "current through" lines, listing which corpora moved, and the release-entry text. Starting values are pinned in the test, not read from live data. |
 | `test/betanyc-tools.test.js` | `whats_changed` and `about_betanyc`: advertised read-only and strict with an `outputSchema`; every entry in this repo's `WHATS-CHANGED.md` valid and returned; filters; bad arguments rejected by name; every Correction carrying advice; the disclaimer on both, without using up the full footer; and both answers accepted by the MCP SDK client over stdio against their output schemas. Depends on no law text and no package version, so a daily refresh cannot turn it red. |
@@ -296,7 +299,7 @@ It also runs an **About data** job: `python3 scripts/whats_changed.py about-data
 
 `.github/workflows/differential.yml` runs `npm run test:diff` on **manual dispatch** (`workflow_dispatch`) and **nightly at 03:00 UTC**. It is intentionally off the per-PR/per-push path. Python matrix: **3.11 and 3.12** (covers the team's 3.11–3.14 spread; harness uses stdlib-only APIs compatible with 3.8+).
 
-`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). Because `npm test` runs **after** the fetch and rebuild, the tests see that day's new data. A test must never assume what `data/index/json/` says today: pin the values it depends on inside the test, or the refresh goes red on exactly the days law text changes and the new text never gets committed. The "Last index update" block below is stamped by that job.
+`.github/workflows/refresh-data.yml` refreshes the corpus index from AML **daily at 11:00 UTC** (07:00 EDT / 06:00 EST) and on manual `workflow_dispatch`. It runs the full pipeline (`fetch-data` → `build-index` → `update-changelog` → `npm test`) and commits the refreshed index back to `main` with the built-in `GITHUB_TOKEN` **only when the corpus version actually advances** — a no-op rebuild produces no commit. A commit with new law text also bumps the patch version and triggers an npm release (see [Releases](#releases)). The [site structure](#site-structure-datastructure) is committed with it; a change to the structure alone (its first build, or a change to the structure code) is committed by itself, with no version bump and no release, since it is not in the package. Because `npm test` runs **after** the fetch and rebuild, the tests see that day's new data. A test must never assume what `data/index/json/` says today: pin the values it depends on inside the test, or the refresh goes red on exactly the days law text changes and the new text never gets committed. The "Last index update" block below is stamped by that job.
 
 ## Releases
 
@@ -368,15 +371,19 @@ nyc-charter-laws-rules/
 │   ├── tests/catalog_validate.py, mcp_shared/  ← CI validators for the two (shared copies)
 │   ├── auto-release.js         ← automatic releases and the What's changed release gate
 │   ├── fetch-data.js           ← downloads bulk XML ZIPs from AML
-│   ├── build-index.js          ← thin CLI: reads ZIPs, writes JSON + Markdown indexes
+│   ├── build-index.js          ← thin CLI: reads ZIPs, writes JSON + Markdown indexes and the site structure
 │   └── lib/
 │       ├── extract-text.js     ← ordered-tree text-extraction helpers
-│       └── build-corpus.js     ← pure section builder (buildSectionsFromXml), unit-tested
+│       ├── build-corpus.js     ← pure section builder (buildSectionsFromXml), unit-tested
+│       ├── build-structure.js  ← site structure: subdivisions, links, chapter and title names
+│       ├── render-section.js   ← renderSection: a section as ordered, typed blocks
+│       └── serialize-markdown.js ← the Markdown index, written from renderSection's blocks
 ├── data/
 │   ├── raw/                    ← downloaded ZIPs (gitignored — build locally)
 │   └── index/
 │       ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json
 │       └── markdown/           ← committed: charter.md, admin_code.md, rules.md
+│   └── structure/              ← site structure per document (committed by the daily refresh; not in the npm package)
 └── dist/                       ← compiled MCP server (built locally)
 ```
 
@@ -395,6 +402,16 @@ All content is sourced from publicly available bulk XML downloads hosted by [Ame
 | Rules of the City of New York | 8,645 | Rules effective through May 20, 2026 | `http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip` |
 
 AML publishes updated ZIPs as new local laws and rules are adopted. Re-run `npm run fetch-data && npm run build-index` to refresh the index and commit the updated files.
+
+### Site structure (`data/structure/`)
+
+The index's `text` is flat: subdivisions run together, and cross-references are plain words. `build-index` also writes `data/structure/<corpus>.json` for the website (epic #68), from the same XML in the same run. The MCP server does not read it, and it is not in the npm package. Per section, in index order:
+
+- `parents`: the Title, Chapter, Subchapter, Article and so on that the section sits in, outermost first, each named in `groups` with its heading. A chapter file that has no Title record around it (the publisher puts a Title's record only in its first chapter's file) takes its title from the publisher's anchor name for the chapter (`T03C007` is Title 3, Chapter 7). When nothing matches, the chapter has no title rather than a guessed one; `titleStats` counts each case.
+- `blocks`: the paragraphs of `text`, each a `start`/`end` slice of it. A subdivision has its `label` as printed (`a.`, `(1)`), its `depth` (the publisher's indentation) and an `anchor` built from its labels (`(b)(1)`), with `-2` added when the law repeats a label in one section. Editor's notes are `note` blocks.
+- `links`: each cross-reference as a `start`/`end` slice of `text` and its target: a section (`corpus`, `id`, and `anchor` when it points into a subdivision), a web address, or, when the target is not found, the publisher's name for it with `resolved: false`.
+
+The text is not repeated: every offset points into `text` in `data/index/json/<corpus>.json`, and the file records that file's `sha256` (`indexSha256`, the same as `versions.json`). A structure file built from other text fails `test/structure.test.js`. `scripts/lib/render-section.js` turns a section and its entry into blocks; the Markdown index is written from them, with the body joined back into one paragraph, so its bytes do not change.
 
 ---
 
@@ -479,7 +496,7 @@ Run this when AML publishes a new version of the Charter, Admin Code, or Rules:
 
 ```bash
 npm run fetch-data    # downloads ~50MB of bulk XML ZIPs into data/raw/
-npm run build-index   # parses XML, writes data/index/json/ and data/index/markdown/
+npm run build-index   # parses XML, writes data/index/json/, data/index/markdown/ and data/structure/
 ```
 
 `fetch-data` sends a User-Agent naming this package and version, gives each download 120 seconds (they are several megabytes each), and retries a 429 or 5xx answer up to twice, honoring Retry-After (`scripts/lib/fetch-retry.js`). If any of the three downloads fails, it stops with an error, so no index is built with a document missing.
