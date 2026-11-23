@@ -200,7 +200,7 @@ test("every page has the bottom box: current through, the bold line, the disclai
       ),
       `${rel}: bold line`
     );
-    assert.match(box, /<a href="\/about">/, `${rel}: disclaimer link`);
+    assert.match(box, /<a href="\/about#disclaimer">Read the full disclaimer<\/a>/, `${rel}: disclaimer link`);
     // Plain HTML, outside any web component, after the main content, and nothing at the top.
     assert.ok(html.indexOf("copy-box") > html.indexOf("</main>"), `${rel}: box after main`);
     assert.ok(!/<nys-[a-z]+[^>]*>[^]*copy-box/.test(html.slice(html.lastIndexOf("</main>"), html.indexOf("copy-box"))), `${rel}: box inside a component`);
@@ -224,6 +224,25 @@ test("the disclaimer page's text is the MCP's FOOTER, without its Built-by line"
   assert.ok(html.includes("This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com."));
   // A FOOTER whose last paragraph is not the Built-by line stops the build.
   assert.throws(() => disclaimerParagraphs("---\n**A.** one\n\nTwo, a new last paragraph."), /no longer starts "Built by BetaNYC"/);
+});
+
+test("the About page: its sections in order, a jump list that resolves, the disclaimer last, lab@beta.nyc", () => {
+  const html = read("about.html");
+  const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+  assert.match(main, /<h1>About BetaNYC Law Reader<\/h1>/);
+  assert.match(html, /<title>About \| BetaNYC Law Reader<\/title>/);
+  const ids = [...main.matchAll(/<h2 id="([^"]+)">/g)].map((m) => m[1]).filter((id) => id !== "on-this-page");
+  assert.deepEqual(ids, ["why", "changes", "current", "built-by", "ai", "licenses", "mistakes", "support", "disclaimer"]);
+  const jumps = [...main.matchAll(/<li><a href="#([^"]+)">/g)].map((m) => m[1]);
+  assert.deepEqual(jumps, ids, "the jump list names every section, in order");
+  // The disclaimer block is the last thing in main.
+  assert.ok(main.indexOf('<div class="disclaimer">') > main.indexOf('<h2 id="support">'));
+  assert.match(main, /<a href="mailto:lab@beta\.nyc">lab@beta\.nyc<\/a>/);
+  assert.doesNotMatch(html, /hello@beta\.nyc/, "hello@beta.nyc is not a BetaNYC address");
+  assert.match(main, /href="https:\/\/www\.beta\.nyc\/about\/ai-policy\/"/);
+  assert.match(main, /href="https:\/\/beta\.nyc\/donate\/"/);
+  // The footer's "modified" note points at the section that says how.
+  assert.match(html, /BetaNYC modified this text; see <a href="\/about#changes">how BetaNYC changed it<\/a>\./);
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).
@@ -345,7 +364,7 @@ test("contents and chapter pages are plain HTML link lists", () => {
   const s = site.book.sections[0];
   assert.match(read(fileForPath(s.path)), /<a href="\/charter\/" aria-current="true">Charter<\/a>/);
   assert.match(contents, /<a href="\/charter\/" aria-current="page">Charter<\/a>/);
-  assert.match(read("about.html"), /<a href="\/about" aria-current="page">About this copy<\/a>/);
+  assert.match(read("about.html"), /<a href="\/about" aria-current="page">About<\/a>/);
   // The home page and every page's footer link to the contents.
   assert.ok(read("index.html").includes(`href="/charter/"`));
 });

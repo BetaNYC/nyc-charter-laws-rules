@@ -11,7 +11,7 @@ import { linkTarget } from "./model.js";
 import { page, breadcrumbs, breadcrumbJsonLd, searchForm } from "./layout.js";
 import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
-import { SITE_NAME, SITE_BASE, REPO_URL, absoluteUrl } from "./config.js";
+import { SITE_NAME, SITE_BASE, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
 
 // The first crumb (Noel, 2026-11-23: "Law Reader" confused people).
 const HOME = { name: "Home", path: "/" };
@@ -364,23 +364,66 @@ export function searchPage(book, site) {
   };
 }
 
+// The About page, modeled on BetaNYC's Grounding AI with NY Open Data site (Noel, 2026-11-23).
+// The disclaimer comes last; the bottom box on every page links straight to it (#disclaimer).
+const CONTACT_EMAIL = "lab@beta.nyc";
+const ABOUT_SECTIONS = [
+  ["why", "Why this exists"],
+  ["changes", "What BetaNYC changed"],
+  ["current", "How current it is"],
+  ["built-by", "Built by BetaNYC"],
+  ["ai", "How we use AI"],
+  ["licenses", "Licenses"],
+  ["mistakes", "Found a mistake?"],
+  ["support", "Support our work"],
+  ["disclaimer", "Disclaimer"],
+];
+export const ABOUT_TITLE = `About ${SITE_NAME}`;
+
 export function aboutPage(book, site, { paragraphs, metadata }) {
-  const crumbs = [HOME, { name: "About this copy", path: "/about" }];
+  const crumbs = [HOME, { name: "About", path: "/about" }];
+  const h2 = (id) => `<h2 id="${id}">${escapeHtml(ABOUT_SECTIONS.find(([k]) => k === id)[1])}</h2>`;
+  const mail = `<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`;
+  const name = escapeHtml(book.book.name);
   const main = [
     breadcrumbs(crumbs),
-    `<h1>About this copy</h1>`,
+    `<h1>${escapeHtml(ABOUT_TITLE)}</h1>`,
     `<p class="lede"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
-    `<h2 id="disclaimer">Disclaimer</h2>`,
+    `<nav class="on-this-page" aria-labelledby="on-this-page"><h2 id="on-this-page">On this page</h2><ul>`,
+    ...ABOUT_SECTIONS.map(([id, text]) => `<li><a href="#${id}">${escapeHtml(text)}</a></li>`),
+    `</ul></nav>`,
+    h2("why"),
+    `<p>The ${name} sets up the City's government: the Council, the Mayor, the Comptroller, the Public Advocate, the borough presidents, community boards and the agencies. Reporters, Council staff, community board members, advocates and students all end up reading it.</p>`,
+    `<p>We built this site so the ${escapeHtml(book.book.short)} is easy to read, search and cite. Every section, and every lettered or numbered part of a section, has its own link you can paste into an email or testimony. Search finds a section by its number or by its words. The whole text is free to <a href="${REPO_URL}">download from GitHub</a>, and AI assistants can read it through BetaNYC's MCP server, so their answers can point back to the law itself.</p>`,
+    h2("changes"),
+    `<p>American Legal Publishing publishes the ${name} for the City of New York. BetaNYC downloads its bulk XML file and builds this site from it. We split each section into its parts (a, b, (1), (2)...), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. References into the Administrative Code and the Rules are plain text until those books are on this site.</p>`,
+    h2("current"),
+    `<p>${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}. That is the date BetaNYC's index last changed, from a change in American Legal Publishing's files or in how BetaNYC builds the index. The index keeps no date for when the files were last checked, so none is shown. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
+    h2("built-by"),
+    `<p>BetaNYC is New York's civic organization dedicated to improving lives through public interest technology, open data, and civic design. We build tools, train the public, and advocate for a more transparent, accountable, and participatory city government. BetaNYC is a project of the Fund for the City of New York.</p>`,
+    `<p>Related work:</p>`,
+    `<ul>`,
+    `<li><a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules</a>, the MCP server that gives AI assistants the Charter, the Administrative Code and the Rules of the City of New York.</li>`,
+    `<li><a href="https://www.beta.nyc/featured-tools/ai-tools-for-nyc-democracy/">All our AI tools for NYC's democracy</a>.</li>`,
+    `<li><a href="https://betanyc.github.io/grounding-ai-with-ny-open-data/">Grounding AI with NY Open Data</a>, our guide to connecting AI assistants to City and State records.</li>`,
+    `<li><a href="https://www.beta.nyc/betabuilders/">Join BetaBuilders</a>, our volunteer community.</li>`,
+    `</ul>`,
+    h2("ai"),
+    `<p>We built this site's code with AI coding assistants, directed and reviewed by BetaNYC staff. No AI model writes or changes the law's text. Every word in a section comes from American Legal Publishing's files, and the changes listed under "What BetaNYC changed" are made by ordinary code that runs the same way every time.</p>`,
+    `<p>Read <a href="https://www.beta.nyc/about/ai-policy/">BetaNYC's AI policy</a>. Questions: ${mail}.</p>`,
+    h2("licenses"),
+    `<p>This site's code is <a href="${REPO_URL}">on GitHub</a> under the MIT license. That license covers our code, not American Legal Publishing's text.</p>`,
+    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, contents and search controls are from the <a href="https://designsystem.ny.gov/">New York State Design System</a>, used as a library on a site that is not a New York State site; its notice, which covers the State's own work (CC0), Google's Material Icons (Apache License 2.0) and Lit (BSD 3-Clause), is in <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>, and DOMPurify, which NYSDS includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>).</p>`,
+    h2("mistakes"),
+    `<p>If a section is wrong, missing or out of date here, <a href="${REPO_URL}/issues">open an issue on GitHub</a> or email ${mail}. Tell us the section number and what looks wrong. Fixes to the code are welcome as pull requests.</p>`,
+    `<p>If the mistake is in the publisher's text itself, American Legal Publishing asks to hear about it at <a href="mailto:NYC.editor@amlegal.com">NYC.editor@amlegal.com</a>, and the NYC Law Department at <a href="mailto:NYCCodeRulesCharter@law.nyc.gov">NYCCodeRulesCharter@law.nyc.gov</a>.</p>`,
+    h2("support"),
+    `<p>This site is free and has no ads. If it helps your work, please <a href="https://beta.nyc/donate/">support BetaNYC</a>.</p>`,
+    h2("disclaimer"),
     `<p>This is the disclaimer BetaNYC's MCP server gives. Its second paragraph is American Legal Publishing's disclaimer for its own site, codelibrary.amlegal.com.</p>`,
     `<div class="disclaimer">`,
     ...paragraphs.map((p) => `<p>${paragraphHtml(p)}</p>`),
     `</div>`,
-    `<h2 id="changes">What BetaNYC changed</h2>`,
-    `<p>American Legal Publishing publishes the ${escapeHtml(book.book.name)} for the City of New York. BetaNYC downloads its bulk XML file and builds this site from it. We split each section into its parts (a, b, (1), (2)...), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. References into the Administrative Code and the Rules are plain text until those books are on this site.</p>`,
-    `<h2 id="current">How current it is</h2>`,
-    `<p>${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}. That is the date BetaNYC's index last changed, from a change in American Legal Publishing's files or in how BetaNYC builds the index. The index keeps no date for when the files were last checked, so none is shown. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
-    `<h2 id="software">Software</h2>`,
-    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, contents and search controls are from the <a href="https://designsystem.ny.gov/">New York State Design System</a>, used as a library on a site that is not a New York State site; its notice, which covers the State's own work (CC0), Google's Material Icons (Apache License 2.0) and Lit (BSD 3-Clause), is in <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>, and DOMPurify, which NYSDS includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>). This site's code is <a href="${REPO_URL}">on GitHub</a> under the MIT license.</p>`,
   ].join("\n");
   return {
     path: "/about",
@@ -388,8 +431,8 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     kind: "about",
     html: page({
       path: "/about",
-      title: titleOf("About this copy"),
-      description: describe(`Where the ${book.book.name} on this site comes from, how BetaNYC changed it, and the full disclaimer.`),
+      title: titleOf("About"),
+      description: describe(`Who built ${SITE_NAME}, where its copy of the ${book.book.name} comes from, how BetaNYC changed it, and the full disclaimer.`),
       main,
       nav: "about",
       navPage: true,

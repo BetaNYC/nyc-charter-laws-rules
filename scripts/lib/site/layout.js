@@ -4,7 +4,7 @@
 // the search.
 
 import { escapeHtml, jsonForScript } from "./html.js";
-import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, absoluteUrl } from "./config.js";
+import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
 
 /**
  * A whole page.
@@ -77,7 +77,7 @@ function topBar(current, isPage) {
       <ul>
         ${link("charter", "/charter/", "Charter")}
         ${link("search", "/search", "Search")}
-        ${link("about", "/about", "About this copy")}
+        ${link("about", "/about", "About")}
         <li><a href="${REPO_URL}">GitHub</a></li>
       </ul>
     </nav>
@@ -115,7 +115,7 @@ export function bottomBox(site) {
 <aside class="warnbox copy-box" aria-label="About this copy">
 <p class="current">${escapeHtml(site.currentThrough)} BetaNYC's copy of the text last changed on ${escapeHtml(site.copyChangedOn)}.</p>
 <p class="lead"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>
-<p><a href="/about">Read the full disclaimer</a></p>
+<p><a href="/about#disclaimer">Read the full disclaimer</a></p>
 </aside>
 </div>`;
 }
@@ -126,8 +126,8 @@ function footer(site) {
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
-    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
-    <p class="small">Browse: <a href="${site.contentsPath}">the Charter's contents</a>. Source: American Legal Publishing. BetaNYC modified this text; see <a href="/about">About this copy</a>. The code is MIT licensed; the license covers the code, not the publisher's text.</p>
+    <p>Want all of it? Download the data from GitHub instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
+    <p class="small">Browse: <a href="${site.contentsPath}">the Charter's contents</a>. Source: American Legal Publishing. BetaNYC modified this text; see <a href="/about#changes">how BetaNYC changed it</a>. The code is MIT licensed; the license covers the code, not the publisher's text.</p>
   </div>
 </footer>`;
 }
