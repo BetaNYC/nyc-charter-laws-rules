@@ -58,7 +58,7 @@ nys-textinput { --nys-color-neutral-400: var(--ink); --nys-border-width-sm: 2px;
 nys-textinput { --nys-color-text-weaker: color-mix(in srgb, var(--ink) 80%, var(--white)); }
 
 /* Long addresses wrap instead of widening the page on a phone (WCAG 1.4.10). */
-.disclaimer a, .copy-box a, .source a, footer a, main p a { overflow-wrap: anywhere; }
+.disclaimer a, .copy-box a, footer a, main p a { overflow-wrap: anywhere; }
 
 /* Two columns at 900px and wider (law.js WIDE): the contents tree on the left, the page on the
    right. "Hide" folds the tree away (html.contents-hidden, law.js), and the page takes the
@@ -132,13 +132,20 @@ nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5
 @media (prefers-reduced-motion: reduce) { .tw svg { transition: none; } }
 
 /* "Hide", "☰ Contents", and the no-JavaScript fold's summary, which looks like "☰ Contents". */
-.contents-hide, .contents-open, .contents-summary { font: 600 15px/1 var(--font-body); color: var(--blue); background: var(--white); border: 2px solid var(--blue); border-radius: 6px; padding: 6px 12px; min-height: 32px; cursor: pointer; }
+.contents-hide, .contents-summary { font: 600 15px/1 var(--font-body); color: var(--blue); background: var(--white); border: 2px solid var(--blue); border-radius: 6px; padding: 6px 12px; min-height: 32px; cursor: pointer; }
 .contents-hide { font-size: 14px; padding: 5px 10px; min-height: 28px; border-width: 1px; }
-.contents-open { display: none; align-items: center; gap: .35em; margin: 0 0 4px; }
-.contents-hide:hover, .contents-open:hover, .contents-summary:hover { background: var(--bg-blue); }
+.contents-hide:hover, .contents-summary:hover { background: var(--bg-blue); }
+/* "☰ Contents" is a "you are here" bar, full width, with the reader's chapter, so it does not
+   look like the top bar's Menu button (Noel, 2026-11-23). */
+.contents-open { display: none; width: 100%; align-items: center; gap: 8px; margin: 0 0 6px; padding: 10px 12px; min-height: 44px; text-align: left; font: 400 15px/1.3 var(--font-body); color: var(--ink); background: var(--bg-blue); border: 1px solid var(--line-soft); border-left: 4px solid var(--blue); border-radius: 4px; cursor: pointer; }
+.contents-open .cb-icon { width: 16px; height: 16px; flex: none; color: var(--blue); }
+.contents-open .contents-word { font-weight: 700; color: var(--blue); flex: none; }
+.contents-open .contents-here { min-width: 0; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding-left: 8px; border-left: 1px solid var(--line); }
+.contents-open .cb-chev { width: 14px; height: 14px; flex: none; margin-left: auto; color: var(--blue); }
+.contents-open:hover .contents-word { text-decoration: underline; text-underline-offset: 2px; }
 /* "☰ Contents" shows when the tree does not: after "Hide" on a wide screen; on a phone until it is opened. */
-@media (min-width: 900px) { html.contents-ready.contents-hidden .contents-open { display: inline-flex; } }
-@media (max-width: 899.98px) { html.contents-ready:not(.contents-shown) .contents-open { display: inline-flex; } }
+@media (min-width: 900px) { html.contents-ready.contents-hidden .contents-open { display: flex; } }
+@media (max-width: 899.98px) { html.contents-ready:not(.contents-shown) .contents-open { display: flex; } }
 .main-col > .contents-open + main .crumbs { margin-top: 8px; }
 
 /* The fold (JavaScript off): its summary on a phone, closed, so the law text starts near the top.
@@ -184,7 +191,17 @@ html.contents-ready .contents-summary { display: none; }
 /* The law text. */
 h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
 h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
-.tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 20px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 20px; }
+/* Copy link, Copy citation, Print: small chips (Noel, 2026-11-23), quieter than the outlined
+   buttons they replaced, so the title leads and they do not look like Menu or Contents. NYSDS's
+   ghost button, recolored through its public --nys-button-* properties; the height, padding and
+   radius use its private --_nys-button-* ones, which hold for the pinned NYSDS version. */
+.tools nys-button {
+  --nys-button-color: var(--blue); --nys-button-color--hover: var(--blue); --nys-button-color--active: var(--blue);
+  --nys-button-background-color: var(--bg-blue); --nys-button-background-color--hover: var(--white); --nys-button-background-color--active: var(--white);
+  --nys-button-border-color: var(--line-soft); --nys-button-border-color--hover: var(--blue); --nys-button-border-color--active: var(--blue);
+  --_nys-button-height: 32px; --_nys-button-padding--y: 4px; --_nys-button-padding--x: 12px; --_nys-button-border-width: 1px; --_nys-button-border-radius: 999px; --_nys-button-font-size: 15px;
+}
 .copy-status { margin: 0; font-size: 14px; }
 /* The law text is in the template's body font, like the rest of the page (Noel, 2026-11-23:
    a second family clashed). 18px with a 1.7 line height and lines of at most 70 characters
@@ -210,9 +227,6 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
    The words are the publisher's, unchanged. */
 .law .history { font: 15px/1.6 var(--font-body); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 12px; }
 .law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
-.source { max-width: 72ch; }
-.source p { margin: 0 0 8px; }
-.source p:last-child { margin: 0; }
 
 .pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }
 .pager a { text-decoration: none; display: block; padding: .4rem 0; max-width: 32ch; }
@@ -255,6 +269,6 @@ ol.hits { list-style: none; padding: 0; margin: 0; }
   .law { max-width: none; font-size: 12pt; }
   .law a { color: inherit; text-decoration: none; }
   .copy-box { break-inside: avoid; }
-  /* On paper, the official text and the source still need their addresses. */
-  .source a[href^="http"]::after, .copy-box a[href^="http"]::after { content: " (" attr(href) ")"; overflow-wrap: anywhere; word-break: break-all; }
+  /* On paper, the official text still needs its address. */
+  .copy-box a[href^="http"]::after { content: " (" attr(href) ")"; overflow-wrap: anywhere; word-break: break-all; }
 }

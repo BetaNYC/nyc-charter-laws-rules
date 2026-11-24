@@ -13,6 +13,9 @@ import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { chapterName } from "../../scripts/lib/site/pages.js";
 
+/** "☰ Contents", the bar above the breadcrumbs: its name is "Contents", then the reader's chapter. */
+const CONTENTS_BUTTON = /^Contents(, |$)/;
+
 let site, server, base, browser;
 const outside = [];
 
@@ -74,17 +77,17 @@ test("agents on the page: every control on a section page has its own name", asy
     // No search box on a law page (Noel, 2026-11-23): the top bar's Search link goes to it.
     assert.ok(!names.includes("Go") && !names.some((n) => n.startsWith("Go to a section")), `no search box at ${width}px`);
     if (width === 390) {
-      assert.ok(names.includes("Contents"), "the Contents button");
+      assert.ok(names.includes(`Contents, ${chapterName(s.chapter)}`), "the Contents bar, naming the chapter");
       assert.ok(names.includes("Menu"), "menu button");
       assert.ok(!names.includes("Hide contents"), "the tree is closed");
-      await page.getByRole("button", { name: "Contents", exact: true }).click();
+      await page.getByRole("button", { name: CONTENTS_BUTTON }).click();
       await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().waitFor();
       // Open, every control still has its own name: one button per chapter, named for it.
       const open = (await assertNamedControls(page, `${s.path} at ${width}px, tree open`)).controls.map((x) => x.name);
       assert.ok(open.includes("Hide contents"));
       for (const c of site.book.chapters.filter((x) => x.sections.length)) assert.ok(open.includes(`Sections in ${chapterName(c)}`), `${c.citation}'s button`);
     } else {
-      assert.ok(!names.includes("Contents"), "no Contents button while the tree shows");
+      assert.ok(!names.some((n) => CONTENTS_BUTTON.test(n)), "no Contents button while the tree shows");
       assert.ok(names.includes("Hide contents"), "Hide");
       assert.ok(names.includes(`Sections in ${chapterName(s.chapter)}`), "the open chapter's button");
     }
@@ -211,16 +214,15 @@ test("search field: border 3:1 on its own background, focus ring at least 2px an
   }
 });
 
-test("print: the official text and the source show their addresses", async () => {
+test("print: the official text shows its address", async () => {
   const s = sectionWithParts();
   const { page, ctx } = await open(s.path);
   await page.emulateMedia({ media: "print" });
-  for (const sel of [".source a[href^='http']", ".copy-box a[href^='http']"]) {
-    const [href, after] = await page.locator(sel).first().evaluate((a) => [a.href, getComputedStyle(a, "::after").content]);
-    assert.ok(after.includes(href.replace(/\/$/, "")), `${sel}: printed ${after}`);
-  }
+  const sel = ".copy-box a[href^='http']";
+  const [href, after] = await page.locator(sel).first().evaluate((a) => [a.href, getComputedStyle(a, "::after").content]);
+  assert.ok(after.includes(href.replace(/\/$/, "")), `${sel}: printed ${after}`);
   await page.emulateMedia({ media: "screen" });
-  assert.equal(await page.locator(".source a[href^='http']").first().evaluate((a) => getComputedStyle(a, "::after").content), "none");
+  assert.equal(await page.locator(sel).first().evaluate((a) => getComputedStyle(a, "::after").content), "none");
   await ctx.close();
 });
 
@@ -245,7 +247,7 @@ test("section text and the bottom box read with JavaScript off", async () => {
   const first = s.structure.blocks[0];
   await assert.doesNotReject(page.locator(`p[data-block="0"]`).waitFor({ state: "visible" }));
   assert.equal((await page.locator(`p[data-block="0"]`).innerText()).replace(/\s+/g, " ").trim(), s.text.slice(first.start, first.end));
-  await page.getByText("This is BetaNYC's copy, for research.").waitFor({ state: "visible" });
+  await page.getByText("BetaNYC modified this text. It is not legal advice.").waitFor({ state: "visible" });
   await page.getByRole("link", { name: "Read the full disclaimer" }).waitFor({ state: "visible" });
   // No search box on a law page, so no "search needs JavaScript" line either; the top bar links to the contents.
   await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Charter", exact: true }).waitFor({ state: "visible" });
@@ -464,7 +466,7 @@ test("Hide and Contents: the tree folds away on a wide screen, is remembered, an
   const s = sectionWithParts();
   const { page, ctx, problems } = await open(s.path, { width: 1200 });
   const hide = page.getByRole("button", { name: "Hide contents", exact: true });
-  const show = page.getByRole("button", { name: "Contents", exact: true });
+  const show = page.getByRole("button", { name: CONTENTS_BUTTON });
   assert.equal(await show.count(), 0, "no Contents button while the tree shows");
   const textWidth = () => page.locator("main").evaluate((m) => m.getBoundingClientRect().width);
   const before = await textWidth();
@@ -488,8 +490,9 @@ test("Hide and Contents: the tree folds away on a wide screen, is remembered, an
 test("contents on a phone: one Contents button, closed, above the breadcrumbs, one tab stop", async () => {
   const s = sectionWithParts();
   const { page, ctx, problems } = await open(s.path, { width: 390 });
-  const button = page.getByRole("button", { name: "Contents", exact: true });
+  const button = page.getByRole("button", { name: CONTENTS_BUTTON });
   assert.equal(await button.count(), 1);
+  assert.equal(await page.getByRole("button", { name: `Contents, ${chapterName(s.chapter)}`, exact: true }).count(), 1, "a \"you are here\" bar naming the chapter");
   assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
   assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
   // With scripts the fold is open and its summary gone: the button is the one control.
@@ -928,4 +931,23 @@ test("reflow: no law page scrolls sideways, from 320px to 1920px", async () => {
 
 test("nothing loads from outside the site", () => {
   assert.deepEqual([...new Set(outside)], []);
+});
+
+// Noel, 2026-11-23: Copy link, Copy citation and Print are small chips, a soft fill and a thin
+// border, quieter than the title and unlike Menu and the Contents bar; still at least 24px to tap.
+test("the page tools are small chips, at least 24px tall, unlike the Menu button", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 390 });
+  const menu = await page.locator(".menu-btn").evaluate((b) => getComputedStyle(b).borderRadius);
+  for (const name of ["Copy link", "Copy citation", "Print"]) {
+    const b = page.getByRole("button", { name, exact: true });
+    const box = await b.boundingBox();
+    assert.ok(box.height >= 24 && box.height <= 40, `${name}: ${box.height}px tall`);
+    const [radius, width] = await b.evaluate((el) => { const cs = getComputedStyle(el); return [cs.borderTopLeftRadius, cs.borderTopWidth]; });
+    assert.ok(parseFloat(radius) >= box.height / 2 - 1, `${name}: rounded like a chip (${radius})`);
+    assert.equal(width, "1px", `${name}: a thin border`);
+    assert.notEqual(radius, menu, `${name}: not shaped like Menu`);
+  }
+  assert.deepEqual(problems, []);
+  await ctx.close();
 });

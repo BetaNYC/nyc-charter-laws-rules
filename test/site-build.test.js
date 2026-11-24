@@ -204,11 +204,14 @@ test("every page but About has the bottom box: current through, the bold line, t
     assert.ok(box, `${rel}: bottom box`);
     assert.ok(box.includes(`<p class="current">${line}</p>`), `${rel}: current through, the publisher's, and the date the copy last changed (indexedAt, New York time)`);
     assert.doesNotMatch(box, /<p class="current">Current through/, `${rel}: not stated as BetaNYC's own claim`);
-    assert.ok(
-      box.includes(
-        "<strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. The official Charter is at <a href=\"https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1\">American Legal Publishing</a>.</strong>"
-      ),
-      `${rel}: bold line`
+    // Two paragraphs (Noel, 2026-11-23): how current, then the bold warning, how BetaNYC changed the
+    // text, where the official text is, and the disclaimer link. No "BetaNYC's copy, for research".
+    assert.equal(box.match(/<p[ >]/g).length, 2, `${rel}: two paragraphs`);
+    assert.doesNotMatch(box, /for research|not the official text/, `${rel}: no "BetaNYC's copy, for research" line`);
+    assert.match(
+      box,
+      /<p class="lead"><strong>BetaNYC modified (?:this text|the law text on this site)\. It is not legal advice\.<\/strong> We built it from American Legal Publishing's bulk XML, split it into its parts, added links between sections, and removed the publisher's editing marks\. (?:The official Charter|The official text of NYC Charter [^<]+) is at <a href="https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYCcharter\/[^"]+">American Legal Publishing<\/a>\. <a href="\/about#disclaimer">Read the full disclaimer<\/a><\/p>/,
+      `${rel}: second paragraph`
     );
     assert.match(box, /<a href="\/about#disclaimer">Read the full disclaimer<\/a>/, `${rel}: disclaimer link`);
     // Plain HTML, outside any web component, after the main content, and nothing at the top.
@@ -218,9 +221,10 @@ test("every page but About has the bottom box: current through, the bold line, t
   }
 });
 
-// Copy review S2, 2026-11-23: a law page says where its text comes from once, in its source box,
-// whose link opens that record's own page at American Legal Publishing.
-test("law pages: the source box links to the record's own page at American Legal; the footer does not repeat it", () => {
+// Copy review S2, 2026-11-23: a page says where its text comes from once. Noel, 2026-11-23: one
+// warning, at the bottom, so that is the bottom box, and there is no box right after the text.
+// The footer's source sentence is only on About, which has no box.
+test("law pages: one box, at the bottom, linking to the record's own page at American Legal; the footer does not repeat it", () => {
   const facts = sourceFacts(JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8")), "charter");
   assert.equal(facts.officialUrl, "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1");
   assert.equal(facts.officialBase, "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/");
@@ -230,24 +234,31 @@ test("law pages: the source box links to the record's own page at American Legal
   const lawFiles = new Set(site.book.ordered.map((r) => fileForPath(r.path)));
   for (const r of site.book.ordered) {
     const html = read(fileForPath(r.path));
-    const box = /<div class="note source"[^>]*>([\s\S]*?)<\/div>/.exec(html)?.[1];
-    assert.ok(box, `${r.path}: source box`);
+    assert.doesNotMatch(html, /class="note source"/, `${r.path}: no box after the text`);
+    assert.equal(html.split("warnbox").length - 1, 1, `${r.path}: one warning box`);
+    const box = /<aside class="warnbox copy-box" aria-label="About this copy">([\s\S]*?)<\/aside>/.exec(html)?.[1];
+    assert.ok(box, `${r.path}: bottom box`);
     const href = `https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/${r.id}`;
     assert.equal(officialRecordUrl(r, { officialBase: facts.officialBase }), href);
-    assert.ok(box.includes(`<a href="${href}">Official text at American Legal Publishing</a>`), `${r.path}: its own page at American Legal`);
-    assert.match(box, /<strong>BetaNYC modified this\.<\/strong>/, `${r.path}: modified, in the source box`);
+    assert.ok(box.includes(`<strong>BetaNYC modified this text. It is not legal advice.</strong>`), `${r.path}: modified, in the bottom box`);
+    assert.ok(box.includes(` The official text of ${r.fullCitation} is at <a href="${href}">American Legal Publishing</a>. `), `${r.path}: its own page at American Legal`);
     const footer = html.slice(html.indexOf("<footer"));
     assert.doesNotMatch(footer, modified, `${r.path}: the footer does not repeat the source`);
     assert.ok(footer.includes(`<p class="small">${mit.replace("&#39;", "'")}</p>`), `${r.path}: the MIT line stays`);
-    // The bottom box's bold line is unchanged and still names the book's official copy.
-    assert.ok(html.includes(`The official Charter is at <a href="${facts.officialUrl}">American Legal Publishing</a>.</strong>`), `${r.path}: bold line`);
   }
   for (const f of htmlFiles()) {
     const rel = relative(site.outDir, f);
     if (lawFiles.has(rel)) continue;
     const html = read(rel);
-    assert.doesNotMatch(html, /<div class="note source"/, `${rel}: no source box`);
-    assert.match(html.slice(html.indexOf("<footer")), modified, `${rel}: the footer says where the text comes from`);
+    assert.doesNotMatch(html, /class="note source"/, `${rel}: no box after the text`);
+    const footer = html.slice(html.indexOf("<footer"));
+    if (rel === "about.html") {
+      assert.match(footer, modified, `${rel}: no bottom box, so the footer says where the text comes from`);
+      continue;
+    }
+    assert.ok(html.includes(`<strong>BetaNYC modified the law text on this site. It is not legal advice.</strong>`), `${rel}: modified, in the bottom box`);
+    assert.ok(html.includes(` The official Charter is at <a href="${facts.officialUrl}">American Legal Publishing</a>. `), `${rel}: the box names the book`);
+    assert.doesNotMatch(footer, modified, `${rel}: the footer does not repeat the box`);
   }
 });
 
@@ -515,8 +526,15 @@ test("contents tree: every chapter on every chapter, section and shared-number p
     assert.match(l.list, /^<div class="toc" data-pagefind-ignore="all">\n<details class="contents-fold">\n<summary class="contents-summary"><span aria-hidden="true">&#9776; <\/span>Contents<\/summary>\n<nav /, `${rel}: the fold, closed`);
     // The disclosure buttons are law.js's: none in the HTML, so with JavaScript off there is nothing to press that does nothing.
     assert.doesNotMatch(l.list, /class="tw"|aria-expanded/, `${rel}: no disclosure buttons in the HTML`);
-    // "☰ Contents", hidden until law.js wires it, at the top of the page's column.
-    assert.ok(html.includes(`<div class="main-col">\n<button type="button" class="contents-open" aria-controls="contents" aria-expanded="false" hidden><span aria-hidden="true">&#9776;</span>Contents</button>\n<main id="main">`), `${rel}: the Contents button`);
+    // "☰ Contents", hidden until law.js wires it, at the top of the page's column: a "you are here"
+    // bar that names the reader's chapter (Noel, 2026-11-23), its name starting "Contents".
+    const bar = /<div class="main-col">\n(<button type="button" class="contents-open" aria-controls="contents" aria-expanded="false"(?: aria-label="[^"]*")? hidden>[\s\S]*?<\/button>)\n<main id="main">/.exec(html)?.[1];
+    assert.ok(bar, `${rel}: the Contents button`);
+    assert.match(bar, /^<button[^>]*><svg class="cb-icon" aria-hidden="true"[^>]*>[\s\S]*?<\/svg><span class="contents-word">Contents<\/span>/, `${rel}: the bar starts "Contents"`);
+    if (chapter) {
+      assert.ok(bar.includes(`Contents</span> <span class="contents-here">${escapeHtml(chapterName(chapter))}</span>`), `${rel}: the bar names ${chapter.citation}`);
+      assert.ok(bar.includes(` aria-label="${escapeHtml(`Contents, ${chapterName(chapter)}`)}"`), `${rel}: its name, the words on the bar in order`);
+    } else assert.doesNotMatch(bar, /contents-here|aria-label/, `${rel}: no chapter on the bar`);
     // A chapter with no sections is marked, so law.js gives it no button.
     for (const c of site.book.chapters) if (!c.sections.length && c !== chapter) assert.ok(l.list.includes(`<li class="empty"><a href="${c.path}">`), `${rel}: ${c.citation} marked empty`);
     if (!chapter) {

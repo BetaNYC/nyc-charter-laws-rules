@@ -84,12 +84,9 @@ export function officialRecordUrl(record, site) {
   return `${site.officialBase}${encodeURIComponent(record.id)}`;
 }
 
-function sourceBox(record, site) {
-  return `<div class="note source" data-pagefind-ignore="all">
-<p>${escapeHtml(site.creditLine)} <a href="${escapeHtml(officialRecordUrl(record, site))}">Official text at American Legal Publishing</a>.</p>
-<p><strong>BetaNYC modified this.</strong> We built this page from American Legal Publishing's bulk XML: we split the text into its parts, added links between sections, and removed the publisher's editing marks.</p>
-<p>Links that use American Legal's id for this text, <code>${escapeHtml(record.id)}</code>, still land here.</p>
-</div>`;
+/** What a law page's bottom box needs: the record's citation and its own page at American Legal. */
+function lawRecord(record, site) {
+  return { citation: record.fullCitation, url: officialRecordUrl(record, site) };
 }
 
 function lawText(record, book) {
@@ -103,9 +100,9 @@ function lawText(record, book) {
 }
 
 const TOOLS = `<div class="tools" data-pagefind-ignore="all">
-<nys-button class="tool-link" variant="outline" size="sm" label="Copy link"></nys-button>
-<nys-button class="tool-cite" variant="outline" size="sm" label="Copy citation"></nys-button>
-<nys-button class="tool-print" variant="outline" size="sm" label="Print"></nys-button>
+<nys-button class="tool-link" variant="ghost" size="sm" label="Copy link"></nys-button>
+<nys-button class="tool-cite" variant="ghost" size="sm" label="Copy citation"></nys-button>
+<nys-button class="tool-print" variant="ghost" size="sm" label="Print"></nys-button>
 <p class="copy-status" role="status"></p>
 </div>`;
 
@@ -208,7 +205,6 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
     TOOLS,
     lawText(s, book) || `<p class="empty">American Legal Publishing's file has no text for this section.</p>`,
     `</article>`,
-    sourceBox(s, site),
     pager,
   ].join("\n");
   return {
@@ -222,8 +218,9 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
       description: lawDescription(s),
       main,
       aside: toc,
+      here: chapterName(s.chapter),
       nav: book.book.slug,
-      sourceBox: true,
+      lawRecord: lawRecord(s, site),
       site,
       headExtra: pagefindHead(s, book, "Section"),
       jsonLd: [legislationJsonLd(s, book, site), breadcrumbJsonLd(crumbs)],
@@ -308,7 +305,6 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
     list,
     text,
     `</article>`,
-    sourceBox(c, site),
     pager,
   ].join("\n");
   return {
@@ -322,8 +318,9 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
       description: describe(`${book.book.label} ${c.citation}${c.title === c.citation ? "" : `, ${c.title}`}: ${c.sections.length} section${c.sections.length === 1 ? "" : "s"}.`),
       main,
       aside: contentsTree(book, { chapter: c }),
+      here: chapterName(c),
       nav: book.book.slug,
-      sourceBox: true,
+      lawRecord: lawRecord(c, site),
       // "Back to contents" does that job here, and two floating buttons would crowd the corner.
       backToTop: c.sections.length === 0,
       site,
