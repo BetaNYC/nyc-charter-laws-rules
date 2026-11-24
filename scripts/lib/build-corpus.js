@@ -77,47 +77,224 @@ function hasLink(node) {
 export function readBody(level) {
   const parts = [];
   const unread = [];
-  const paraPart = (para, record, subsection, kind = "para") => {
-    const part = { kind, text: normalize(extractText(para)), para, record };
-    if (subsection) part.subsection = subsection;
-    return part;
-  };
-  const normalLevel = (child, subsection) => {
-    for (const record of childrenByTag(child, "RECORD")) {
-      for (const para of childrenByTag(record, "PARA")) parts.push(paraPart(para, record, subsection));
-    }
-  };
-  for (const child of childrenByTag(level, "LEVEL")) {
-    const style = styleOf(child);
-    if (style === "Normal Level") {
-      normalLevel(child, null);
-    } else if (style === "Subsection") {
-      for (const record of childrenByTag(child, "RECORD")) {
-        const heading = headingOf(record);
-        const paras = childrenByTag(record, "PARA").filter((p) => normalize(extractText(p)));
-        const said = normalize(paras.map((p) => normalize(extractText(p))).join(" "));
-        const headingPart = { kind: "subheading", text: heading, record, subsection: child };
-        if (!said) {
-          if (heading) parts.push(headingPart);
-        } else if (heading && squash(heading).startsWith(squash(said)) && !hasLink(paras)) {
-          // The same characters, or the HEADING says more ("705.2 ABS plastic." over a PARA
-          // of "705.2"): the HEADING alone, so the number is not said twice.
-          parts.push(headingPart);
-        } else if (!heading || squash(said).startsWith(squash(heading))) {
-          parts.push(paraPart(paras[0], record, child, "subheading"));
-          for (const p of paras.slice(1)) parts.push(paraPart(p, record, child));
-        } else {
-          parts.push(headingPart);
-          for (const p of paras) parts.push(paraPart(p, record, child));
-        }
-      }
-      for (const inner of childrenByTag(child, "LEVEL")) {
-        if (styleOf(inner) === "Normal Level") normalLevel(inner, child);
-        else unread.push(inner);
-      }
+  for (const child of childrenByTag(level, "LEVEL")) readBodyLevel(child, parts, unread);
+  return { parts, unread };
+}
+
+// One child level of a body, for readBody and readGroupBody: a "Normal Level" or a "Subsection"
+// is read into `parts` (see readBody); any other level is left alone. Returns true when read.
+function readBodyLevel(child, parts, unread) {
+  const style = styleOf(child);
+  if (style === "Normal Level") {
+    readNormalLevel(child, null, parts);
+    return true;
+  }
+  if (style !== "Subsection") return false;
+  for (const record of childrenByTag(child, "RECORD")) {
+    const heading = headingOf(record);
+    const paras = childrenByTag(record, "PARA").filter((p) => normalize(extractText(p)));
+    const said = normalize(paras.map((p) => normalize(extractText(p))).join(" "));
+    const headingPart = { kind: "subheading", text: heading, record, subsection: child };
+    if (!said) {
+      if (heading) parts.push(headingPart);
+    } else if (heading && squash(heading).startsWith(squash(said)) && !hasLink(paras)) {
+      // The same characters, or the HEADING says more ("705.2 ABS plastic." over a PARA
+      // of "705.2"): the HEADING alone, so the number is not said twice.
+      parts.push(headingPart);
+    } else if (!heading || squash(said).startsWith(squash(heading))) {
+      parts.push(paraPart(paras[0], record, child, "subheading"));
+      for (const p of paras.slice(1)) parts.push(paraPart(p, record, child));
+    } else {
+      parts.push(headingPart);
+      for (const p of paras) parts.push(paraPart(p, record, child));
     }
   }
-  return { parts, unread };
+  for (const inner of childrenByTag(child, "LEVEL")) {
+    if (styleOf(inner) === "Normal Level") readNormalLevel(inner, child, parts);
+    else unread.push(inner);
+  }
+  return true;
+}
+
+function paraPart(para, record, subsection, kind = "para") {
+  const part = { kind, text: normalize(extractText(para)), para, record };
+  if (subsection) part.subsection = subsection;
+  return part;
+}
+
+function readNormalLevel(level, subsection, parts) {
+  for (const record of childrenByTag(level, "RECORD")) {
+    for (const para of childrenByTag(record, "PARA")) parts.push(paraPart(para, record, subsection));
+  }
+}
+
+// A record's heading (issue #78). The HEADING, unless the record's own PARA says more: when the
+// HEADING is empty (Building Code § BC 602, whose PARA is "Section BC 602: Construction
+// Classification"), or when the PARA starts with the HEADING and goes on ("§ 21-905" over a PARA
+// of "§ 21-905 Demographic data of the juvenile justice system."), the PARA is the heading. In
+// July 2026 those are the only two Section or Chapter records whose PARA says anything their
+// HEADING does not; every other PARA repeats its HEADING, and is left out of the index for that.
+export function recordHeading(record) {
+  const heading = headingOf(record);
+  const para = normalize(childrenByTag(record, "PARA").map((p) => normalize(extractText(p))).join(" "));
+  if (!para) return heading;
+  if (!heading) return para;
+  if (para.length > heading.length && para.startsWith(heading) && /^[\s.:;,]/.test(para.slice(heading.length))) return para;
+  return heading;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Group records (issue #78). The publisher's group levels (Subchapter, Article, Part, Appendix,
+// Subarticle...) normally hold sections, but some hold text of their own, in "Normal Level"
+// children: the Title 27 Building Code Reference Standards (RS 2-1 to RS 19-3), the Rules'
+// appendices and schedules, the Water Board's rate schedule, editor's notes. A group level that
+// holds text of its own is indexed as a record, after the levels around it and before the
+// sections inside it, in document order:
+//   - id: its RECORD's id; heading: its heading (recordHeading); level: its style ("Appendix").
+//     (A chapter record's level is "Chapter"; only a section inside a chapter has none.)
+//   - text: readGroupBody. Its own "Normal Level" and "Subsection" children as a section's body
+//     (readBody); the body of any level with no RECORD inside it (the Health Code's Board of
+//     Health resolutions sit in a "Section" level with no RECORD, under "Resolutions"); and a
+//     child group level whose heading has no number and that holds no section (the "CONTENTS"
+//     of a reference standard), as a subheading and its own body. A Section, a Chapter, and a
+//     group level with a number or with sections inside are indexed on their own, so a group
+//     record never takes text another record has.
+//   - citation: groupCitation.
+// A Title is not a group record: the index has no Title records. The text held at Title level
+// is front matter in each document's root file, and editor's notes and amendment lines on a
+// title (July 2026: 7 in the Administrative Code, 4 in the Rules). npm run audit:coverage counts it.
+
+const NOT_GROUP = new Set(["", "Section", "Chapter", "Subsection", "Normal Level", "Title"]);
+export const isGroupStyle = (style) => !NOT_GROUP.has(style);
+
+// The words a group heading's label starts with, and the number after it: "Subchapter 3",
+// "Appendix A-1", "Appendix 18-A", "Part I", "RULE I", "Chapter D5", "Schedule A",
+// "Subchapter 14.1", "Appendix 1A".
+const GROUP_WORDS = new Set([
+  "appendix", "article", "chapter", "exhibit", "form", "part", "regulation", "rule", "schedule",
+  "section", "subarticle", "subchapter", "subpart", "subtitle", "table", "title",
+]);
+const DASH = "[-\u2013\u2014]";
+const GROUP_NUMBER = [
+  `\\d[\\dA-Za-z]*(?:(?:\\.|${DASH})[\\dA-Za-z]+)*`, // 3, 14.1, 18-A, 1A
+  `[A-Za-z]{1,2}\\d[\\dA-Za-z]*(?:(?:\\.|${DASH})[\\dA-Za-z]+)*`, // D5
+  `[A-Z]${DASH}\\d+[A-Za-z]?`, // A-1
+  "[IVXLC]+", // I, II
+  "[A-Z]", // A
+].join("|");
+const GROUP_LABEL = new RegExp(`^([A-Za-z]+)\\s+(${GROUP_NUMBER})(?=$|[\\s:.,;*()\\[\\]]|${DASH})`);
+// "REFERENCE STANDARD RS 18–1", "REFERENCE STANDARD RS 5–1C MISCELLANEOUS...", and twice without
+// the "RS" ("REFERENCE STANDARD 10–5B"). A bracketed letter is part of the number ("RS 15–8[A]").
+const REFERENCE_STANDARD = new RegExp(
+  `^REFERENCE STANDARD\\s+(?:RS\\s*)?(\\d+(?:\\s*${DASH}\\s*\\d+[A-Za-z]?)?(?:\\[[A-Za-z]\\])?)(?=$|[\\s:.,;*])`,
+  "i"
+);
+
+/**
+ * The label a group heading starts with, or null when it has none: "REFERENCE STANDARD RS 18–1"
+ * → "RS 18-1" (the code's own name for a reference standard), "Appendix A-1: Standards for..."
+ * → "Appendix A-1", "RULE I - DEFINITIONS" → "Rule I", "CHAPTER 1 – GENERAL" → "Chapter 1".
+ * Dashes become hyphens, so "RS 18-1" can be typed. "CONTENTS", "Introduction" and
+ * "Resolutions" have none.
+ */
+export function groupLabel(heading) {
+  const h = String(heading ?? "").trim();
+  const rs = REFERENCE_STANDARD.exec(h);
+  if (rs) return { label: `RS ${rs[1].replace(new RegExp(`\\s*${DASH}\\s*`), "-")}`, standard: true };
+  const m = GROUP_LABEL.exec(h);
+  if (!m || !GROUP_WORDS.has(m[1].toLowerCase())) return null;
+  const word = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
+  return { label: `${word} ${m[2].replace(new RegExp(DASH, "g"), "-")}`, standard: false };
+}
+
+/**
+ * A group record's citation (issue #78, review fix): the numbered levels above it, then its own
+ * label, as a chapter carries its title: "Title 20, Chapter 2, Subchapter 3", "Title 15, Chapter
+ * 42, Appendix A, Part I", "Title 27, Chapter 1, Subchapter 4, Article 8". Each publisher's
+ * number repeats from chapter to chapter (ten Administrative Code chapters have a "Subchapter
+ * 3"), so the label alone would name ten records. `chain` is those numbered levels, outermost
+ * first (collectSections keeps it). A reference standard's number is the code's own name for it
+ * and unique in it, so it stands alone ("RS 18-1"), and the levels inside one are named from it
+ * ("RS 13-1, Chapter 1"). A heading with no label goes after the chain whole ("Title 15, Chapter
+ * 20, Appendix"), without a closing period. Only where the publisher repeats a number inside one
+ * chapter (its "two subchapters designated as Subchapter 3") do two records share a citation.
+ */
+export function groupCitation(heading, chain = []) {
+  const l = groupLabel(heading);
+  if (l?.standard) return l.label;
+  const own = l ? l.label : heading.replace(/\.$/, "").trim();
+  return [...chain, own].join(", ");
+}
+
+// The label a level adds to the chain its group records are named from, or null.
+function chainLabel(style, heading) {
+  if (style === "Title") {
+    const m = heading.match(LEADING_LABEL);
+    return m && m[1].toLowerCase() === "title" ? `Title ${m[2]}` : null;
+  }
+  return groupLabel(heading);
+}
+
+// "T20C002" (Administrative Code, Title 20, Chapter 2), "T16-bC001", "T03C007" (Rules): the
+// title the publisher's anchor name gives a chapter, for a chapter file with no Title record
+// around it (as build-structure.js assignTitles reads it). "20", "16-B", "3"; or null.
+const CHAPTER_ANCHOR = /^T(\d+(?:-?[A-Za-z])?)(?:C|App)/i;
+function anchorTitle(node) {
+  if (Array.isArray(node)) {
+    for (const n of node) {
+      const t = anchorTitle(n);
+      if (t) return t;
+    }
+    return null;
+  }
+  if (!node || typeof node !== "object" || "#text" in node) return null;
+  const tag = tagOf(node);
+  if (tag === "DESTINATION") {
+    const m = CHAPTER_ANCHOR.exec(getAttr(node, "name"));
+    if (m) return m[1].replace(/^0+(?=\d)/, "").toUpperCase();
+  }
+  return tag ? anchorTitle(node[tag]) : null;
+}
+
+// A level indexed on its own: a Section or Chapter with a RECORD.
+const indexedOnItsOwn = (level) => ["Section", "Chapter"].includes(styleOf(level)) && childrenByTag(level, "RECORD").length > 0;
+// The RECORD that names a level: its first with a heading.
+const namingRecord = (level) => childrenByTag(level, "RECORD").find((r) => recordHeading(r)) ?? null;
+
+function holdsIndexed(level) {
+  return childrenByTag(level, "LEVEL").some((c) => indexedOnItsOwn(c) || holdsIndexed(c));
+}
+
+/**
+ * A group level's own body (see "Group records" above): { parts, unread, merged }. `merged` holds
+ * the child group levels read into it, which are not indexed again. A part read from a merged
+ * level's heading is { kind: "subheading", text, record } with no PARA.
+ */
+export function readGroupBody(level) {
+  const parts = [];
+  const unread = [];
+  const merged = [];
+  const walk = (node) => {
+    for (const child of childrenByTag(node, "LEVEL")) {
+      if (readBodyLevel(child, parts, unread)) continue;
+      if (indexedOnItsOwn(child)) continue;
+      const record = namingRecord(child);
+      if (!record) {
+        // No RECORD: not a level of its own (a wrapper the publisher puts around Sections, or the
+        // Health Code's "Section" around its resolutions). Its body is this level's.
+        walk(child);
+        continue;
+      }
+      const heading = recordHeading(record);
+      if (isGroupStyle(styleOf(child)) && !groupLabel(heading) && !holdsIndexed(child)) {
+        merged.push(child);
+        parts.push({ kind: "subheading", text: heading, record });
+        walk(child);
+      }
+    }
+  };
+  walk(level);
+  return { parts, unread, merged };
 }
 
 // Walk the LEVEL tree and collect sections.
@@ -130,42 +307,76 @@ export function readBody(level) {
 // the section's own LEVEL (`levelNode`). It is only told about a section: it cannot change one,
 // so the index is the same with or without it (test/structure.test.js checks this byte for byte).
 // `ancestors` is the recursion's own state; callers leave it out.
-export function collectSections(node, corpus, sections, onSection = null, ancestors = []) {
+export function collectSections(node, corpus, sections, onSection = null, ancestors = [], state = { merged: new WeakSet(), chain: [], inChapter: false }) {
   if (!node) return;
 
   const levels = childrenByTag(node, "LEVEL");
   for (const level of levels) {
     const styleName = getAttr(level, "style-name") || "";
     const records = childrenByTag(level, "RECORD");
+    // What the levels inside this one are named from (groupCitation), and whether they sit in a chapter.
+    let chain = state.chain;
+    let inChapter = state.inChapter;
 
-    for (const record of records) {
-      const headingNodes = childrenByTag(record, "HEADING");
-      const heading = normalize(headingNodes.map(extractText).join(""));
-      if (!heading) continue;
+    if (styleName === "Section" || styleName === "Chapter") {
+      for (const record of records) {
+        const heading = recordHeading(record);
+        if (!heading) continue;
 
-      // Only index Chapter and Section level records with real headings.
-      if (
-        (styleName === "Section" || styleName === "Chapter") &&
-        heading.length > 3
-      ) {
-        // The body, in document order: Normal Level paragraphs, and each Subsection's heading
-        // line and paragraphs (readBody). A section with no Subsection gets exactly the text it
-        // always had: its Normal Level PARAs, in order, joined with one space.
-        const { parts, unread } = readBody(level);
+        // Only index Chapter and Section level records with real headings.
+        if (heading.length > 3) {
+          // The body, in document order: Normal Level paragraphs, and each Subsection's heading
+          // line and paragraphs (readBody). A section with no Subsection gets exactly the text it
+          // always had: its Normal Level PARAs, in order, joined with one space.
+          const { parts, unread } = readBody(level);
 
-        const citation = extractCitation(heading);
-        const section = {
-          corpus,
-          id: getAttr(record, "id") || "",
-          citation,
-          heading,
-          text: normalize(parts.map((p) => p.text).join(" ")),
-        };
+          const citation = extractCitation(heading);
+          const section = {
+            corpus,
+            id: getAttr(record, "id") || "",
+            citation,
+            heading,
+            text: normalize(parts.map((p) => p.text).join(" ")),
+          };
+          // `level` (review of #78): left out only for a section inside a chapter, nearly every
+          // record. A chapter says so, and so does a section with no chapter around it in its
+          // file (the Administrative Code's Title 31), so get_title can tell where a chapter
+          // ends even when its heading has no number (src/corpus.ts chapterGroups).
+          if (styleName === "Chapter") section.level = "Chapter";
+          else if (!state.inChapter) section.level = "Section";
+          sections.push(section);
+          if (onSection) {
+            onSection(section, { level: styleName, record, parts, unread, ancestors, levelNode: level });
+          }
+          if (styleName === "Chapter" && !inChapter) {
+            const title = state.chain.find((c) => c.startsWith("Title ")) ?? (anchorTitle(record) ? `Title ${anchorTitle(record)}` : null);
+            chain = [...(title ? [title] : []), citation];
+            inChapter = true;
+          }
+        }
+      }
+    } else if (isGroupStyle(styleName) && !state.merged.has(level)) {
+      // A group level with text of its own (issue #78): see "Group records" above.
+      const record = namingRecord(level);
+      const { parts, unread, merged } = record ? readGroupBody(level) : { parts: [] };
+      const text = normalize(parts.map((p) => p.text).join(" "));
+      if (record && text) {
+        for (const m of merged) state.merged.add(m);
+        const heading = recordHeading(record);
+        const section = { corpus, id: getAttr(record, "id") || "", citation: groupCitation(heading, state.chain), heading, text, level: styleName };
         sections.push(section);
         if (onSection) {
           onSection(section, { level: styleName, record, parts, unread, ancestors, levelNode: level });
         }
       }
+    }
+    // A numbered level names what is inside it: a title, or a group level ("Subchapter 4"),
+    // whether or not it is a record. A reference standard starts the chain over.
+    if (styleName === "Title" || isGroupStyle(styleName)) {
+      const record = namingRecord(level);
+      const label = record ? chainLabel(styleName, recordHeading(record)) : null;
+      if (label?.standard) chain = [label.label];
+      else if (label) chain = styleName === "Title" ? [label] : [...chain, label.label];
     }
 
     // Recurse into nested levels. A LEVEL that is not body text and has a heading is an
@@ -177,7 +388,7 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
         if (heading) inner = [...inner, { level: styleName, record, heading }];
       }
     }
-    collectSections(level, corpus, sections, onSection, inner);
+    collectSections(level, corpus, sections, onSection, inner, { merged: state.merged, chain, inChapter });
   }
 }
 

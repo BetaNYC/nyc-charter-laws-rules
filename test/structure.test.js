@@ -102,7 +102,15 @@ test("the hooks do not change the index: the fixtures' JSON and Markdown are byt
   const md = corpusMarkdown({ corpus: "charter", version: charter.version, sections: charter.sections, structure: charter.structure });
   assert.equal(charter.sections.length, 426);
   assert.equal(charter.version, "Current through Local Law 2026/086, enacted April 25, 2026,");
-  assert.equal(sha(charter.json), "4b59d641629a356f6778395b8abc51edd9ef98d222ab71d828dab79e5529a9a1");
+  // Issue #78 (review) added one field, `level`, to chapter records (and to a section in no
+  // chapter, none in these fixtures), so get_title can tell where a chapter ends. Every other
+  // byte is e3ee2e2's: the JSON without it is the pinned file.
+  const withoutLevel = JSON.stringify(charter.sections.map(({ level, ...s }) => s), null, 2);
+  assert.equal(sha(withoutLevel), "4b59d641629a356f6778395b8abc51edd9ef98d222ab71d828dab79e5529a9a1");
+  // No other value is allowed: a section in a chapter carries no `level` (#78 re-review: `level`
+  // on the wrong records left the hash above unchanged).
+  assert.ok(charter.sections.every((s) => s.level === undefined || s.level === "Chapter"), "level is \"Chapter\" or absent");
+  assert.ok(charter.sections.every((s) => (s.level === "Chapter") === /^(Chapter \S+|Preamble|Introductory)$/.test(s.citation)), "level is on the chapter records, and only there");
   assert.equal(sha(md), "1725ff3e725d1cb79d66c131666284d4a3309b8a52b7fdb60a46dbfea2885c07");
   // And the same Markdown without the structure (the body from `text` alone).
   assert.equal(sha(corpusMarkdown({ corpus: "charter", version: charter.version, sections: charter.sections })), sha(md));

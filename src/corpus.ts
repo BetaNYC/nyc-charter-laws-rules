@@ -51,6 +51,14 @@ export interface Section {
   citation: string;
   heading: string;
   text: string;
+  /**
+   * The publisher's level for the record (issue #78), left out for a section inside a chapter,
+   * nearly every record: "Chapter" for a chapter; "Section" for a section with no chapter around
+   * it; or a group level such as "Appendix", "Part", "Subchapter" or "Article" for text held
+   * outside a section (the Title 27 Building Code Reference Standards, the Rules' appendices and
+   * schedules, editor's notes). Absent on every record of an index built before 0.6.3.
+   */
+  level?: string;
 }
 
 export interface CorpusVersion {
@@ -432,6 +440,8 @@ export function getSection(
 // chapter record, and the chapter's sections follow it up to the next chapter record
 // (scripts/lib/build-corpus.js collectSections pushes a record before its children). So a
 // chapter is its heading record plus the records after it, up to the next chapter heading.
+// The records for text outside a section (issue #78: an appendix, a reference standard, a
+// subchapter's note) sit among them in document order, so they are listed in their chapter.
 //
 // The chapter's number is read from its heading, not its citation. Through 0.6.0 the build cut
 // letters off chapter labels ("Chapter 18-A" became "Chapter 18-"); extractCitation is fixed,
@@ -496,15 +506,30 @@ function adminCodeTitle(records: Section[]): string | null {
 export function chapterGroups(corpus: Corpus): ChapterGroup[] {
   if (groupCache[corpus]) return groupCache[corpus]!;
   const groups: ChapterGroup[] = [];
-  // Records before a file's first chapter heading belong to no chapter (none in the index
-  // today); search and get_section still find them.
+  // Where a chapter ends (review of #78). The index has no file boundaries, and through 0.6.2 a
+  // record went into whichever chapter came before it, from any file: the Health Code (a chapter
+  // headed "New York City Health Code", with no number) and its sections sat in Rules Chapter
+  // 21, the Administrative Code's local laws by year in Title 5's Chapter 1, and so on. An index
+  // built since #78 gives every record but a section inside a chapter a `level`, so:
+  //   - a chapter record with "Chapter N" or "Title N" opens a chapter;
+  //   - a chapter record with no number ("Preamble", "2016", "New York City Health Code") ends
+  //     the chapter before it, and its records belong to no chapter here, as does a section with
+  //     no chapter around it (level "Section": the Administrative Code's Title 31);
+  //   - a group record (an appendix, a reference standard, a note) is in the chapter around it,
+  //     even when its heading reads like one ("CHAPTER 1 – GENERAL" in RS 13-1).
+  // search and get_section still find the records in no chapter. An older index has no `level`:
+  // there a heading opens a chapter as before, and every other record joins the one before it.
+  let current: ChapterGroup | null = null;
   for (const s of loadCorpus(corpus)) {
-    const m = HEADING_LABEL.exec(s.heading);
+    const m = s.level && s.level !== "Chapter" ? null : HEADING_LABEL.exec(s.heading);
     if (m) {
       const kind = m[1].toLowerCase() === "title" ? "Title" : "Chapter";
-      groups.push({ kind, number: m[2], title: null, label: "", records: [s] });
-    } else if (groups.length > 0) {
-      groups[groups.length - 1].records.push(s);
+      current = { kind, number: m[2], title: null, label: "", records: [s] };
+      groups.push(current);
+    } else if (s.level === "Chapter" || s.level === "Section") {
+      current = null;
+    } else if (current) {
+      current.records.push(s);
     }
   }
   const first = new Map<ChapterGroup, string | null>();

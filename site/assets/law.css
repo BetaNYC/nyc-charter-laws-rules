@@ -235,8 +235,15 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
    The words are the publisher's, unchanged. */
 .law .history { font: 15px/1.6 var(--font-body); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 12px; }
 /* A subsection's heading line inside a section's text (issue #76): h2 on a section page, h3 in a
-   chapter page's copy. One look for both, between the copy's h2 (21px) and the text (18px). */
-.law .subhead { font: 700 19px/1.4 var(--font-head); margin: 28px 0 8px; scroll-margin-top: 16px; }
+   chapter page's copy. One look for both, between the copy's h2 (21px) and the text (18px).
+   Set off by space and a light rule so a long section doesn't read as one block (Noel,
+   2026-11-24, on FC 102). */
+.law .subhead { font: 700 19px/1.4 var(--font-head); margin: 44px 0 10px; padding-top: 20px; border-top: 1px solid var(--line-soft); scroll-margin-top: 16px; }
+/* A paragraph the publisher set wholly in bold that reads as a heading line (render-html.js
+   isBoldLine, Noel 2026-11-24 on RS 18-1): the subheading's look, kept a paragraph. Right after a
+   subheading, or first in the text, no second rule. */
+.law .boldline { font: 700 19px/1.4 var(--font-head); margin: 44px 0 10px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+.law .subhead + .boldline, .law > .boldline:first-child { margin-top: 12px; padding-top: 0; border-top: 0; }
 .law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
 
 .pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }

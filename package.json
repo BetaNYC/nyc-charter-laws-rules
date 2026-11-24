@@ -48,6 +48,7 @@
     "prepare": "npm run build",
     "fetch-data": "node scripts/fetch-data.js",
     "build-index": "node scripts/build-index.js",
+    "audit:coverage": "node scripts/audit-coverage.js",
     "update-changelog": "node scripts/update-changelog.js",
     "build-site": "node scripts/build-site.js",
     "serve-site": "node scripts/serve-site.js",

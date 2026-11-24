@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Hand-made for the bold and italic runs (issue #78 follow-up), in the shape of American Legal
+  Publishing's XML (Title 27's reference standard RS 18-1 and ordinary definitions). Not the
+  publisher's text. Each PARA is one case for paraFormatting and isBoldLine.
+-->
+<DOCUMENT source-infobase-name="Admin">
+  <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+    <RECORD id="0-0-0-100" number="100" version="1">
+      <HEADING>Chapter 1: Building Code</HEADING>
+      <PARA><DESTINATION id="0-0-0-101" name="T27C001"/>Chapter 1: Building Code</PARA>
+    </RECORD>
+    <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-110" number="110" version="1">
+        <HEADING>§ 27-101 Formatting.</HEADING>
+        <PARA><DESTINATION id="0-0-0-111" name="27-101"/>§ 27-101 Formatting.</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <!-- 0: wholly italic. -->
+        <RECORD id="0-0-0-120" number="120" version="1">
+          <PARA>
+            <CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Wherever in such Code reference is made to the standard, substitute this code.</CHARFORMAT>
+          </PARA>
+        </RECORD>
+        <!-- 1: a bold lead-in. -->
+        <RECORD id="0-0-0-121" number="121" version="1">
+          <PARA>
+            <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Modifications.—</CHARFORMAT>The provisions shall be subject to the following modifications.</PARA>
+        </RECORD>
+        <!-- 2: wholly bold and short, text follows: a heading line. -->
+        <RECORD id="0-0-0-122" number="122" version="1">
+          <PARA>
+            <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Introduction–Section 3—Definitions:</CHARFORMAT>
+          </PARA>
+        </RECORD>
+        <!-- 3: a label, then a bold lead-in that starts with tabs, an italic word, and a link in bold. -->
+        <RECORD id="0-0-0-123" number="123" version="1">
+          <PARA>
+            <TAB tab-count="1"/>(i)<TAB tab-count="1"/><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+              <TAB tab-count="1"/>Designated level.—</CHARFORMAT>The [main] <CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">street</CHARFORMAT> floor, as in <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">section <LINK type="Jump" destination-id="0-0-0-111" destination-name="27-101">27-101</LINK> of</CHARFORMAT> this code.</PARA>
+        </RECORD>
+        <!-- 4: bold and italic at once, and a bold run with only spaces in it. -->
+        <RECORD id="0-0-0-124" number="124" version="1">
+          <PARA>Both <CHARFORMAT bold="1" italic="1" underline="0" strike-out="0" hidden="0">bold and italic</CHARFORMAT> here.<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+            </CHARFORMAT></PARA>
+        </RECORD>
+        <!-- 5, 6: two bold lines in a row: a list, not headings. -->
+        <RECORD id="0-0-0-125" number="125" version="1">
+          <PARA><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">382.10 DELETED.</CHARFORMAT></PARA>
+        </RECORD>
+        <RECORD id="0-0-0-126" number="126" version="1">
+          <PARA><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">382.15 DELETED.</CHARFORMAT></PARA>
+        </RECORD>
+        <!-- 7: a bold note line, text after it: stays a bold paragraph. -->
+        <RECORD id="0-0-0-127" number="127" version="1">
+          <PARA><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Exceptions:</CHARFORMAT></PARA>
+        </RECORD>
+        <!-- 8: plain text; 9: an editor's note whose lead the publisher set in bold. -->
+        <RECORD id="0-0-0-128" number="128" version="1">
+          <PARA>Plain text after the exceptions line.</PARA>
+        </RECORD>
+        <RECORD id="0-0-0-129" number="129" version="1">
+          <PARA style-name="EdNote"><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Editor's note:</CHARFORMAT> For related provisions, see Appendix A.</PARA>
+        </RECORD>
+        <!-- 10: wholly bold, ends the section: plain bold. -->
+        <RECORD id="0-0-0-130" number="130" version="1">
+          <PARA><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">100.1d Multiple Hoistways.</CHARFORMAT></PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+</DOCUMENT>

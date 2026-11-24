@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Hand-made for issue #78, in the shape of American Legal Publishing's Rules of the City of New
+  York XML. Not the publisher's text:
+    - an appendix held at Subchapter level, whose parts are a subtitle down (the Water Board's
+      rate schedule): an unnumbered "Introduction", numbered parts, and a part with sections;
+    - a schedule held at Subchapter level;
+    - Board of Health resolutions: Subsections of a Section level with no RECORD;
+    - a section in another chapter cited "Schedule A", like the group record above;
+    - a chapter with no number (the Health Code's shape) after a numbered one.
+-->
+<DOCUMENT source-infobase-name="Rules">
+  <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+    <RECORD id="0-0-0-400" number="400" version="1">
+      <HEADING>Chapter 42: Water and Sewer Rates</HEADING>
+      <PARA><DESTINATION id="0-0-0-401" name="T15C042"/>Chapter 42: Water and Sewer Rates</PARA>
+    </RECORD>
+    <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-410" number="410" version="1">
+        <HEADING>§ 42-01 Rates.</HEADING>
+        <PARA>§ 42-01 Rates.</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-411" number="411" version="1">
+          <PARA>Rates are set out in <LINK type="Jump" destination-id="0-0-0-0" destination-name="T15C042SA">Schedule A</LINK>.</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+    <LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-420" number="420" version="1">
+        <HEADING>Schedule A</HEADING>
+        <PARA><DESTINATION id="0-0-0-421" name="T15C042SA"/>Schedule A</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-422" number="422" version="1">
+          <PARA>Citation Violation Description First Violation</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+    <LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-430" number="430" version="1">
+        <HEADING>Appendix A: New York City Water Board – Water and Wastewater Rate Schedule</HEADING>
+        <PARA>Appendix A: New York City Water Board – Water and Wastewater Rate Schedule</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-431" number="431" version="1">
+          <PARA>Effective: July 1, 2025.</PARA>
+        </RECORD>
+      </LEVEL>
+      <LEVEL style-name="Subtitle" style-name-escaped="Subtitle" level-depth="4" toc-section="true">
+        <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+          <RECORD id="0-0-0-440" number="440" version="1">
+            <HEADING>Introduction</HEADING>
+            <PARA>Introduction</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-441" number="441" version="1">
+              <PARA>This Rate Schedule sets forth the rates of the Water Board.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+          <RECORD id="0-0-0-450" number="450" version="1">
+            <HEADING>Part I – Definitions</HEADING>
+            <PARA>Part I – Definitions</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-451" number="451" version="1">
+              <PARA>“Access” means the ability to inspect a meter.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+          <RECORD id="0-0-0-460" number="460" version="1">
+            <HEADING>Part II – Water Rates and Charges</HEADING>
+            <PARA>Part II – Water Rates and Charges</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-461" number="461" version="1">
+              <PARA>Charges for water are computed from the meter.</PARA>
+            </RECORD>
+          </LEVEL>
+          <LEVEL style-name="Subpart" style-name-escaped="Subpart" level-depth="6" toc-section="true">
+            <LEVEL style-name="Section" style-name-escaped="Section" level-depth="7" toc-section="true">
+              <RECORD id="0-0-0-462" number="462" version="1">
+                <HEADING>Section 1. Metered Water Rates</HEADING>
+                <PARA>Section 1. Metered Water Rates</PARA>
+              </RECORD>
+              <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                <RECORD id="0-0-0-463" number="463" version="1">
+                  <PARA>The metered rate is set each year.</PARA>
+                </RECORD>
+              </LEVEL>
+            </LEVEL>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+    </LEVEL>
+    <!-- The resolutions: no RECORD on their Section. -->
+    <LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-500" number="500" version="1">
+        <HEADING>Resolutions</HEADING>
+        <PARA>Resolutions</PARA>
+      </RECORD>
+      <LEVEL style-name="Subtitle" style-name-escaped="Subtitle" level-depth="4" toc-section="true">
+        <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+          <LEVEL style-name="Subpart" style-name-escaped="Subpart" level-depth="6" toc-section="true">
+            <LEVEL style-name="Section" style-name-escaped="Section" level-depth="7" toc-section="true">
+              <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="8" toc-section="true">
+                <RECORD id="0-0-0-510" number="510" version="1">
+                  <HEADING>Resolution Dated: July 5,1962</HEADING>
+                  <PARA>Resolution Dated: July 5,1962</PARA>
+                </RECORD>
+                <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                  <RECORD id="0-0-0-511" number="511" version="1">
+                    <PARA>Whereas, the Board of Health has received reports on the water lines.</PARA>
+                  </RECORD>
+                </LEVEL>
+              </LEVEL>
+              <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="8" toc-section="true">
+                <RECORD id="0-0-0-520" number="520" version="1">
+                  <HEADING>Resolution Dated: January 21,1964</HEADING>
+                  <PARA>Resolution Dated: January 21,1964</PARA>
+                </RECORD>
+                <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                  <RECORD id="0-0-0-521" number="521" version="1">
+                    <PARA>Resolved, that the Board declares the condition a nuisance.</PARA>
+                  </RECORD>
+                </LEVEL>
+              </LEVEL>
+            </LEVEL>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+  <!-- Another chapter, whose section is cited "Schedule A" too: a group record named "Schedule A"
+       must not make that citation name two records. -->
+  <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+    <RECORD id="0-0-0-600" number="600" version="1">
+      <HEADING>Chapter 43: Grants</HEADING>
+      <PARA><DESTINATION id="0-0-0-601" name="T15C043"/>Chapter 43: Grants</PARA>
+    </RECORD>
+    <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-610" number="610" version="1">
+        <HEADING>Schedule A: Grant Awards and Award Limits</HEADING>
+        <PARA>Schedule A: Grant Awards and Award Limits</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-611" number="611" version="1">
+          <PARA>Grants are awarded up to the limits below.</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+  <!-- A chapter with no number (the Health Code's shape): it and what is in it belong to no
+       numbered chapter, not to Chapter 43 before it. -->
+  <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+    <RECORD id="0-0-0-700" number="700" version="1">
+      <HEADING>New York City Health Code</HEADING>
+      <PARA><DESTINATION id="0-0-0-701" name="T024Health Code Title I"/>New York City Health Code</PARA>
+    </RECORD>
+    <LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-710" number="710" version="1">
+        <HEADING>Introductory Notes</HEADING>
+        <PARA>Introductory Notes</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-711" number="711" version="1">
+          <PARA>The Department of Health is headed by the Commissioner.</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+    <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+      <RECORD id="0-0-0-720" number="720" version="1">
+        <HEADING>§ 1.01 Short title.</HEADING>
+        <PARA>§ 1.01 Short title.</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-721" number="721" version="1">
+          <PARA>This code shall be known as the Health Code.</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+</DOCUMENT>

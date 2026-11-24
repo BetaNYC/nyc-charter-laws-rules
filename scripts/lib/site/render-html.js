@@ -16,8 +16,11 @@
 // A part's citation (search titles, link names, Copy citation in law.js) is jump.js
 // citeWithAnchor: "NYC Charter § 259" + "(b)(1)", and "… Section FC 102" + "102.4(1)" →
 // "… Section FC 102.4(1)".
+// The publisher's bold and italic runs (block `marks`) are <strong> and <em>, split around links
+// so tags nest; a paragraph wholly in bold that reads as a heading line also gets class
+// "boldline" (isBoldLine), the subheading's look, as a <p>.
 // The text inside each <p> or <hN>, with tags removed and entities decoded, is the block's text exactly:
-// the history class and the <strong> change how the words look, never the words.
+// the history class, <strong> and <em> change how the words look, never the words.
 // Cross-references become links when linkFor returns an address, and stay plain text otherwise.
 //
 // A chapter page shows its sections' text a second time (pages.js chapterPage). That copy is
@@ -72,7 +75,7 @@ function ednoteLead(b) {
  */
 export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2 }) {
   const caseNotes = anchorCaseNotes(blocks);
-  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor) })).join("\n");
+  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor), next: blocks[n + 1] ?? null })).join("\n");
 }
 
 /**
@@ -101,7 +104,64 @@ export function anchorCaseNotes(blocks) {
 }
 
 
-function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote }) {
+/** True when the publisher set every character of a block's text in bold (structure `marks`). */
+export function wholeBold(b) {
+  const marks = (b?.marks ?? []).filter(([, , look]) => look.includes("b"));
+  if (!marks.length) return false;
+  const bold = marks.reduce((n, [x, y]) => n + b.text.slice(x, y).replace(/\s/g, "").length, 0);
+  return bold === b.text.replace(/\s/g, "").length;
+}
+
+/**
+ * A bold line that reads as a heading (Noel, 2026-11-24, on RS 18-1: "Introduction–Section
+ * 3—Definitions:", "100.1d Multiple Hoistways."): a paragraph the publisher set wholly in bold,
+ * at most 100 characters, that is not a note ("NOTE:", "Exceptions:"), and that text not wholly
+ * in bold follows. It gets the subheading's look (spacing and a thin rule), not a heading
+ * element: the XML does not mark it as a level, and in the July 2026 files such lines are also
+ * table captions, defined terms ("Commercial vehicle.") and lines said twice in one section, so a
+ * heading would put noise and guessed levels in a screen reader's outline. Runs of bold lines
+ * ("382.10 DELETED." after "382.5 DELETED.") and a bold line that ends its section stay plain bold.
+ */
+export const BOLD_LINE_MAX = 100;
+export function isBoldLine(b, next) {
+  if (!b || (b.type !== "text" && b.type !== "subdivision")) return false;
+  if (b.text.length > BOLD_LINE_MAX || /^(notes?|exceptions?)\b/i.test(b.text) || !wholeBold(b)) return false;
+  return Boolean(next) && next.type !== "subheading" && !wholeBold(next);
+}
+
+/**
+ * The HTML for text[a, z): escaped, with the publisher's bold and italic runs (block `marks`) as
+ * <strong> and <em>. `bold: false` leaves bold out where the element is bold already (a heading,
+ * the <strong> "Editor's note:").
+ */
+function formatted(text, a, z, marks = [], { bold = true } = {}) {
+  if (a >= z) return "";
+  const cuts = new Set([a, z]);
+  for (const [x, y] of marks) {
+    if (x > a && x < z) cuts.add(x);
+    if (y > a && y < z) cuts.add(y);
+  }
+  const points = [...cuts].sort((p, q) => p - q);
+  const pieces = [];
+  for (let i = 0; i < points.length - 1; i++) {
+    const [s, e] = [points[i], points[i + 1]];
+    const look = marks.find(([x, y]) => x <= s && y >= e)?.[2] ?? "";
+    const key = `${bold && look.includes("b") ? "b" : ""}${look.includes("i") ? "i" : ""}`;
+    const last = pieces.at(-1);
+    if (last && last.key === key) last.end = e;
+    else pieces.push({ key, start: s, end: e });
+  }
+  return pieces
+    .map(({ key, start, end }) => {
+      let h = escapeHtml(text.slice(start, end));
+      if (key.includes("i")) h = `<em>${h}</em>`;
+      if (key.includes("b")) h = `<strong>${h}</strong>`;
+      return h;
+    })
+    .join("");
+}
+
+function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote, next = null }) {
   const attrs = [];
   let cls = "txt";
   let tag = "p";
@@ -111,6 +171,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel
   } else if (b.type === "subdivision") cls = "sub";
   else if (b.type === "note") cls = "ednote";
   else if (isHistoryLine(b)) cls = "txt history";
+  if (isBoldLine(b, next)) cls += " boldline";
   attrs.push(`class="${cls}"`);
   if (b.depth) attrs.push(`data-depth="${Math.min(Number(b.depth), 8)}"`);
   const id = b.anchor ? (copyOf ? copyId(copyOf, b.anchor) : b.anchor) : null;
@@ -133,7 +194,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel
   let last = labelEnd;
   const lead = ednoteLead(b);
   if (lead && !links.some((l) => l.start < lead.end)) {
-    spans.push({ start: lead.start, end: lead.end, open: "<strong>", close: "</strong>" });
+    spans.push({ start: lead.start, end: lead.end, open: "<strong>", close: "</strong>", strong: true });
     last = lead.end;
   }
   for (const l of links) {
@@ -151,13 +212,16 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel
     });
     last = l.end;
   }
+  // A heading is bold already: only italics inside it.
+  const marks = b.marks ?? [];
+  const bold = b.type !== "subheading";
   let html = "";
   let at = 0;
   for (const s of spans) {
-    html += escapeHtml(b.text.slice(at, s.start)) + s.open + escapeHtml(b.text.slice(s.start, s.end)) + (s.close ?? "</a>");
+    html += formatted(b.text, at, s.start, marks, { bold }) + s.open + formatted(b.text, s.start, s.end, marks, { bold: bold && !s.strong }) + (s.close ?? "</a>");
     at = s.end;
   }
-  html += escapeHtml(b.text.slice(at));
+  html += formatted(b.text, at, b.text.length, marks, { bold });
   return `<${tag} ${attrs.join(" ")}>${html}</${tag}>`;
 }
 

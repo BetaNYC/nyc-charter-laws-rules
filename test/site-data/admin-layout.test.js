@@ -339,3 +339,44 @@ test("subsections: an h2 on the section page, an h3 in its copy; no page's headi
   t.diagnostic(`${n(withSub.length)} sections with ${n(shown)} subheadings, on ${n(holders.size)} chapter, part or title pages`);
   assert.deepEqual(problems.slice(0, 20), [], `${problems.length} problems`);
 });
+
+// Issue #78: text held by a group level (the Title 27 reference standards, editor's notes on a
+// subchapter or article) is an index record of its own. On data built before #78 there are none,
+// and nothing to check. Nothing here pins today's numbers.
+test("group records: the index and structure agree on them; each has a page in its chapter with its text", { skip }, (t) => {
+  const site = SITE();
+  const groups = book.records.filter((r) => r.level !== "Section" && r.level !== "Chapter");
+  const problems = [];
+  // The MCP server reads `level` from the index (src/corpus.ts chapterGroups): left out only for
+  // a section inside a chapter; otherwise the structure's level. An index built before #78 has
+  // none at all, and nothing to check.
+  if (real.index.some((r) => r.level)) {
+    for (const [i, r] of real.index.entries()) {
+      const s = real.structure.sections[i];
+      const inChapter = s.parents.some((p) => book.byId.get(p)?.level === "Chapter");
+      const want = s.level === "Section" && inChapter ? undefined : s.level;
+      if (r.level !== want) problems.push(`${r.citation} (${r.id}): index level ${r.level}, want ${want}`);
+    }
+  }
+  for (const r of groups) {
+    if (!r.path || !r.chapter) problems.push(`${r.citation} (${r.id}) has no page or holder`);
+    if (r.title && r.title === r.citation) problems.push(`${r.citation}: its title repeats its citation`);
+    const html = adminSectionPage(r, book, site).html;
+    const words = r.text.split(" ").slice(0, 8).join(" ");
+    if (!unescapeHtml(html.replace(/<[^>]+>/g, "")).replace(/\s+/g, " ").includes(words)) problems.push(`${r.path}: its text is not on its page`);
+  }
+  t.diagnostic(`${n(groups.length)} group records`);
+  assert.deepEqual(problems.slice(0, 20), [], `${problems.length} problems`);
+});
+
+// Issue #78 review: a record for text outside a section must never make a citation that named
+// one record name two. Structural, in all three books (get_section searches all three by
+// default): no group record shares its citation with a section or chapter record.
+test("group records: no group record's citation is a section's or chapter's, in any book", { skip }, () => {
+  const norm = (x) => x.toLowerCase().replace(/§§?\s*/g, "").replace(/^section\s+/, "").replace(/\s+/g, " ").trim();
+  const all = ["charter", "admin_code", "rules"].flatMap((c) => JSON.parse(readFileSync(join(INDEX, `${c}.json`), "utf8")));
+  const isGroup = (r) => r.level && r.level !== "Chapter" && r.level !== "Section";
+  const taken = new Set(all.filter((r) => !isGroup(r)).map((r) => norm(r.citation)));
+  const clash = all.filter((r) => isGroup(r) && taken.has(norm(r.citation))).map((r) => `${r.corpus} ${r.id} "${r.citation}"`);
+  assert.deepEqual(clash.slice(0, 20), [], `${clash.length} group records share a section's or chapter's citation`);
+});
