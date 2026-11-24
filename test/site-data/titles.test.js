@@ -12,7 +12,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getSection, fullCitation, getTitle } from "../../dist/corpus.js";
+import { getSection, fullCitation, getTitle, listTitles } from "../../dist/corpus.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const INDEX = join(ROOT, "data", "index", "json");
@@ -91,5 +91,23 @@ test("Administrative Code: 'Title 16' is Title 16's chapters, and each lettered 
     assert.ok(getTitle("admin_code", `Title ${parent}`).every((s) => s.titleNumber === parent), `Title ${parent} holds only its own records`);
     const own = getTitle("admin_code", `Title ${t}`);
     assert.ok(own.length > 0 && own.every((s) => s.titleNumber === t), `Title ${t}`);
+  }
+});
+
+test("get_title 'Title N' gives exactly the records with that title, for every title; list_titles lists every chapter", { skip }, () => {
+  // Review of #59: Rules chapters with no number (the Health Code, the Rent Guidelines Board's
+  // orders, appendices) were in no chapter, so "Title 24" left the Health Code out and "Title 30"
+  // found nothing.
+  for (const [corpus, book] of [["rules", rules], ["admin_code", admin]]) {
+    const byTitle = new Map();
+    for (const s of book) if (s.titleNumber) byTitle.set(s.titleNumber, [...(byTitle.get(s.titleNumber) ?? []), s.id]);
+    for (const [t, want] of byTitle) {
+      const got = getTitle(corpus, `Title ${t}`).map((s) => s.id);
+      assert.equal(new Set(got).size, got.length, `${corpus} Title ${t}: no record twice`);
+      assert.deepEqual([...got].sort(), [...want].sort(), `${corpus} Title ${t}`);
+    }
+    const listed = new Set(listTitles(corpus).map((e) => e.heading));
+    const chapters = book.filter((s) => s.level === "Chapter" && s.titleNumber);
+    assert.deepEqual(chapters.filter((s) => !listed.has(s.heading)).map((s) => `${s.id} ${s.heading}`).slice(0, 10), [], `${corpus}: every titled chapter record is in list_titles`);
   }
 });

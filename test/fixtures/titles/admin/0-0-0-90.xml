@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-90" number="90" version="1">
+		<HEADING>Title 31: Department of Veterans' Services</HEADING>
+		<PARA><DESTINATION id="0-0-0-990" name="T31"/>Title 31: Department of Veterans' Services</PARA>
+	</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-91" number="91" version="1">
+				<HEADING>§ 31-101 Definitions.</HEADING>
+				<PARA><DESTINATION id="0-0-0-991" name="T31_31-101"/>§ 31-101 Definitions.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-92" number="92" version="1">
+					<PARA>Veterans text.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+</LEVEL>
+</DOCUMENT>

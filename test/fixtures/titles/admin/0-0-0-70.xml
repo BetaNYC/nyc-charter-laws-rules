@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-70" number="70" version="1">
+			<HEADING>Chapter 2: Housing Maintenance Code</HEADING>
+			<PARA><DESTINATION id="0-0-0-970" name="T27C002"/>Chapter 2: Housing Maintenance Code</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-71" number="71" version="1">
+				<HEADING>§ 27-2056.14 Inspections by Department of Health and Mental Hygiene and removal of health code violations by Department of Housing Preservation and Development.</HEADING>
+				<PARA><DESTINATION id="0-0-0-971" name="T27C002_27-2056.14"/>§ 27-2056.14 Inspections by Department of Health and Mental Hygiene and removal of health code violations by Department of Housing Preservation and Development.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-72" number="72" version="1">
+					<PARA>Inspection text.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

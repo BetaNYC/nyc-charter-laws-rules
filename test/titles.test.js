@@ -50,6 +50,7 @@ function build(dir, corpus) {
 }
 const rules = build(join(FIX, "titles", "rules"), "rules");
 const admin = build(join(FIX, "titles", "admin"), "admin_code");
+const charterFix = build(join(FIX, "titles", "charter"), "charter");
 const row = (s) => [s.id, s.titleNumber ?? null, s.titleHeading ?? null];
 const strip = (sections) => JSON.stringify(sections.map(({ titleNumber, titleHeading, ...s }) => s), null, 2);
 
@@ -88,14 +89,16 @@ describe("the build records each record's title", () => {
       "0-0-0-110": ["62", plan], "0-0-0-111": ["62", null],
       // Its anchor says Title 24, though record order puts it after Title 62: the anchor wins.
       "0-0-0-120": ["24", doh], "0-0-0-121": ["24", null],
+      "0-0-0-131": ["48", "Title 48: Office of Administrative Trials and Hearings"], "0-0-0-132": ["48", null],
     });
-    assert.deepEqual(rules.stats, { fromFile: 18, byOrder: 6, none: 0, disagree: 2 }, "the two records of the Title 24 chapter after Title 62 disagree");
+    assert.deepEqual(rules.stats, { fromFile: 20, byOrder: 6, none: 0, disagree: 2 }, "the two records of the Title 24 chapter after Title 62 disagree");
   });
 
   test("Administrative Code: lettered titles are their own, and the local laws in Appendix A have none", () => {
     assert.deepEqual(admin.sections.map(row), [
       ["0-0-0-11", "16", "Title 16: Sanitation"],
       ["0-0-0-12", "16", null],
+      ["0-0-0-14", "16", null],
       ["0-0-0-21", "16-A", "Title 16-A: [Commercial Waste Removal]"],
       ["0-0-0-22", "16-A", null],
       // Title 16-B's record is not in these fixtures: the chapter's anchor gives the number, and
@@ -108,14 +111,26 @@ describe("the build records each record's title", () => {
       // No Title level and no anchor; record order puts it after Appendix A.
       ["0-0-0-50", null, null],
       ["0-0-0-51", null, null],
+      ["0-0-0-61", "17", "Title 17: Health"],
+      ["0-0-0-62", "17", null],
+      // Title 27's record is not in these fixtures (as 16-B above): the anchor wins over order.
+      ["0-0-0-70", "27", null],
+      ["0-0-0-71", "27", null],
+      ["0-0-0-81", "20", "Title 20: Consumer and Worker Protection"],
+      ["0-0-0-82", "20", null],
+      ["0-0-0-84", "20", null],
+      ["0-0-0-86", "20", null],
+      ["0-0-0-88", "20", null],
+      // A section in no chapter, inside its Title level (the real Title 31 has no chapters).
+      ["0-0-0-91", "31", null],
     ]);
-    assert.deepEqual(admin.stats, { fromFile: 6, byOrder: 0, none: 4, disagree: 2 });
+    assert.deepEqual(admin.stats, { fromFile: 17, byOrder: 0, none: 4, disagree: 4 });
   });
 
   test("the Charter has no titles", () => {
     const charter = buildSectionsFromXml(xmlOf(join(FIX, "diff", "xml")), "charter");
     assert.ok(charter.length > 0);
-    assert.ok(charter.every((s) => !("titleNumber" in s) && !("titleHeading" in s)));
+    for (const c of [charter, charterFix.sections]) assert.ok(c.every((s) => !("titleNumber" in s) && !("titleHeading" in s)));
   });
 
   test("the title fields come last in each record, and only titleHeading on chapter records", () => {
@@ -172,7 +187,15 @@ describe("citations that name a title", () => {
     assert.deepEqual(p("Title 15, Chapter 18"), { title: "15", rules: false, healthCode: false, rest: "Chapter 18" });
     assert.deepEqual(p("title 16-a § 16-501"), { title: "16-A", rules: false, healthCode: false, rest: "§ 16-501" });
     assert.deepEqual(p("24 RCNY Health Code § 81.08"), { title: "24", rules: true, healthCode: true, rest: "§ 81.08", named: "Health Code § 81.08" });
-    assert.deepEqual(p("Health Code § 81.08"), { rules: true, healthCode: true, rest: "§ 81.08", named: "Health Code § 81.08" });
+    assert.deepEqual(p("Health Code § 81.08"), { rules: false, healthCode: true, rest: "§ 81.08", named: "Health Code § 81.08" });
+    assert.deepEqual(p("Health Code 81.08"), { rules: false, healthCode: true, rest: "81.08", named: "Health Code 81.08" });
+    assert.deepEqual(p("Health Code Article 81"), { rules: false, healthCode: true, rest: "Article 81", named: "Health Code Article 81" });
+    assert.deepEqual(p("New York City Health Code, Title IV, Part B"), { rules: false, healthCode: true, rest: "Title IV, Part B", named: "New York City Health Code, Title IV, Part B" });
+    // Title 24 named: anything after the Health Code's name is in it.
+    assert.deepEqual(p("Title 24, Health Code, Resolutions"), { title: "24", rules: false, healthCode: true, rest: "Resolutions", named: "Health Code, Resolutions" });
+    // Words after "Health Code" that are not a citation (review of #59): looked up as typed.
+    for (const q of ["Health code.", "health code violations", "Health Code Lead Abatement Penalty Schedule", "health code to be observed"]) assert.equal(p(q), null, q);
+    assert.deepEqual(p("15 RCNY Health Code to be observed"), { title: "15", rules: true, healthCode: false, rest: "Health Code to be observed" });
     // The Health Code's name alone is the rest: it is the chapter record's citation.
     assert.deepEqual(p("Title 24, New York City Health Code"), { title: "24", rules: false, healthCode: false, rest: "New York City Health Code" });
     assert.deepEqual(p("RCNY § 1-01"), { rules: true, healthCode: false, rest: "§ 1-01" });
@@ -188,7 +211,7 @@ describe("citations that name a title", () => {
 function runServer(body, { titled = true } = {}) {
   const dir = mkdtempSync(join(tmpdir(), "titles-index-"));
   try {
-    const books = { charter: "[]", admin_code: titled ? admin.json : strip(admin.sections), rules: titled ? rules.json : strip(rules.sections) };
+    const books = { charter: charterFix.json, admin_code: titled ? admin.json : strip(admin.sections), rules: titled ? rules.json : strip(rules.sections) };
     for (const [corpus, json] of Object.entries(books)) writeFileSync(join(dir, `${corpus}.json`), json);
     const v = (json) => ({ currentThrough: "test", indexedAt: "2026-11-24T00:00:00Z", sectionCount: JSON.parse(json).length });
     writeFileSync(join(dir, "versions.json"), JSON.stringify(Object.fromEntries(Object.entries(books).map(([k, j]) => [k, v(j)]))));
@@ -210,8 +233,7 @@ function runServer(body, { titled = true } = {}) {
   }
 }
 
-describe("get_section, get_title and list_titles with titles", () => {
-  const out = runServer(`
+const titledOut = runServer(`
     for (const q of ["15 RCNY § 1-01", "15 RCNY 1-01", "Title 15 § 1-01", "Title 15, § 1-01", "15 R.C.N.Y. § 1-01", "15 RCNY § 1–01", "Title 15 RCNY § 1-01",
                      "§ 1-01", "§ 1–01", "24 RCNY Health Code § 81.08", "Health Code § 81.08", "24 RCNY § 81.08", "Title 38-A § 1-01", "38a RCNY § 1-01",
                      "Title 30, Notice", "Title 30, Apartment & Loft Order #49 (2017), Notice", "62 RCNY § 6-01", "Title 62, Chapter 5, § 6-01", "Title 62 Chapter 6 § 6-01",
@@ -232,7 +254,31 @@ describe("get_section, get_title and list_titles with titles", () => {
     out["tool chapter 1"] = await body("get_title", { corpus: "rules", title: "Chapter 1", limit: 3, offset: 2 });
     out["tool no title"] = await body("get_title", { corpus: "rules", title: "Title 99" });
     out["tool search"] = await body("search", { query: "Water supply text", corpus: "rules" });
-  `);
+    // Review of #59: words that start with "Health Code" are not a Health Code citation.
+    out["hc charter"] = cite("Health code.", "charter");
+    out["hc all"] = cite("Health code.");
+    out["hc violations"] = cite("health code violations", "admin_code");
+    out["hc penalty"] = cite("Health Code Lead Abatement Penalty Schedule");
+    out["hc observed"] = cite("health code to be observed");
+    // An RCNY citation is the Rules only.
+    out["rcny admin"] = c.getSection("16 RCNY § 16-101", "admin_code");
+    out["rcny admin chapter"] = cite("16 RCNY Chapter 1", "admin_code");
+    out["rcny all"] = cite("16 RCNY § 16-101");
+    out["tool rcny admin"] = await body("get_section", { citation: "16 RCNY § 16-101", corpus: "admin_code" });
+    // A citation that already names its title and chapter is not named again.
+    out["full subchapter"] = ["0-0-0-82", "0-0-0-86"].map((id) => c.fullCitation(c.getSection("Title 20, Chapter 4, Subchapter 3", "admin_code").candidates.find((x) => x.id === id)));
+    // A whole title: every record the index places in it, unnumbered chapters included.
+    for (const q of ["Title 24", "Title 30", "Title 48"]) out["rules whole " + q] = ids(c.getTitle("rules", q));
+    out["admin whole Title 31"] = ids(c.getTitle("admin_code", "Title 31"));
+    out["tool title 30"] = await body("get_title", { corpus: "rules", title: "Title 30" });
+    out["every title"] = {};
+    for (const corpus of ["rules", "admin_code"]) {
+      for (const t of new Set(c.listTitles(corpus).map((x) => x.title).filter(Boolean))) out["every title"][corpus + " " + t] = ids(c.getTitle(corpus, "Title " + t)).sort().join(",");
+    }
+`);
+
+describe("get_section, get_title and list_titles with titles", () => {
+  const out = titledOut;
 
   test("each citation form finds the one section it names", () => {
     for (const q of ["15 RCNY § 1-01", "15 RCNY 1-01", "Title 15 § 1-01", "Title 15, § 1-01", "15 R.C.N.Y. § 1-01", "15 RCNY § 1–01", "Title 15 RCNY § 1-01"]) {
@@ -279,11 +325,11 @@ describe("get_section, get_title and list_titles with titles", () => {
   });
 
   test("get_title: 'Title 16' is Title 16 alone, and 'Title 15, Chapter 18' one Rules chapter", () => {
-    assert.deepEqual(out["admin title Title 16"], ["0-0-0-11", "0-0-0-12"]);
+    assert.deepEqual(out["admin title Title 16"], ["0-0-0-11", "0-0-0-12", "0-0-0-14"]);
     assert.deepEqual(out["admin title Title 16-A"], ["0-0-0-21", "0-0-0-22"]);
     assert.deepEqual(out["admin title title 16a"], ["0-0-0-21", "0-0-0-22"]);
     assert.deepEqual(out["admin title Title 16-B"], ["0-0-0-30", "0-0-0-31"]);
-    assert.deepEqual(out["admin title Title 16, Chapter 1"], ["0-0-0-11", "0-0-0-12"]);
+    assert.deepEqual(out["admin title Title 16, Chapter 1"], ["0-0-0-11", "0-0-0-12", "0-0-0-14"]);
     assert.deepEqual(out["rules title Title 15, Chapter 18"], ["0-0-0-20", "0-0-0-21"]);
     assert.deepEqual(out["rules title 15 RCNY Chapter 18"], ["0-0-0-20", "0-0-0-21"]);
     assert.deepEqual(out["rules title Title 15"], ["0-0-0-11", "0-0-0-12", "0-0-0-20", "0-0-0-21"]);
@@ -293,17 +339,20 @@ describe("get_section, get_title and list_titles with titles", () => {
     assert.deepEqual(out["rules title Title 99"], []);
   });
 
-  test("list_titles: Rules chapters by title, labeled with it; Administrative Code labels unchanged", () => {
+  test("list_titles: Rules chapters by title, labeled with it, chapters with no number after; Administrative Code labels unchanged", () => {
     assert.deepEqual(out["list rules"], [
-      "Title 15, Chapter 1", "Title 15, Chapter 18", "Title 24, Chapter 1", "Title 24, Chapter 3", "Title 30, Chapter 1",
-      "Title 38-A, Chapter 1", "Title 38-A, Chapter 2", "Title 62, Chapter 5", "Title 62, Chapter 6",
+      "Title 15, Chapter 1", "Title 15, Chapter 18", "Title 24, Chapter 1", "Title 24, Chapter 3", "Title 24, New York City Health Code",
+      "Title 30, Chapter 1", "Title 30, Apartment & Loft Order #49 (2017)", "Title 30, Apartment & Loft Order #50 (2018)",
+      "Title 38-A, Chapter 1", "Title 38-A, Chapter 2", "Title 48, Chapter 3", "Title 62, Chapter 5", "Title 62, Chapter 6",
     ]);
-    assert.deepEqual(out["list admin"], ["Chapter 1 (§ 16-101)", "Chapter 1 (§ 16-501)", "Chapter 1 (§ 16-1000)"]);
+    assert.deepEqual(out["list admin"], [
+      "Chapter 1 (§ 16-101 to § 16-110)", "Chapter 1 (§ 16-501)", "Chapter 1 (§ 16-1000)", "Chapter 3 (§ 17-376)", "Chapter 4 (§ 20-401 to § 20-410)", "Chapter 2 (§ 27-2056.14)",
+    ]);
   });
 
   test("the tools' answers name each title", () => {
     assert.equal(out["tool list"], [
-      "Showing 1 to 4 of 9. Call again with offset 4 for the next ones.",
+      "Showing 1 to 4 of 13. Call again with offset 4 for the next ones.",
       "",
       "Title 15: Department of Environmental Protection",
       "Title 15, Chapter 1 — Chapter 1: Scope",
@@ -344,6 +393,57 @@ describe("get_section, get_title and list_titles with titles", () => {
   });
 });
 
+describe("review of #59", () => {
+  const out = titledOut;
+  test("words that start with 'Health Code' are looked up as typed, as through 0.6.2", () => {
+    assert.equal(out["hc charter"], "0-0-0-11", "Charter § 558, 'Health code.'");
+    assert.deepEqual(out["hc all"], ["0-0-0-11", "0-0-0-14"], "Charter § 558 and Administrative Code § 16-110");
+    assert.equal(out["hc violations"], "0-0-0-71");
+    assert.equal(out["hc penalty"], "0-0-0-132");
+    assert.equal(out["hc observed"], "0-0-0-62");
+  });
+
+  test("an RCNY citation means the Rules only, and says so when another document is asked for", () => {
+    assert.deepEqual(out["rcny admin"], { kind: "none", rulesCitation: true });
+    assert.equal(out["rcny admin chapter"], "none");
+    assert.equal(out["rcny all"], "none", "not the Administrative Code's § 16-101");
+    assert.match(out["tool rcny admin"], /^Section not found: "16 RCNY § 16-101" is a citation of the Rules of the City of New York \("RCNY"\), so it is not looked for in the New York City Administrative Code\. Ask again with corpus 'rules', or with no corpus\.$/);
+  });
+
+  test("fullCitation does not name the title and chapter twice", () => {
+    assert.deepEqual(out["full subchapter"], ["Title 20, Chapter 4, Subchapter 3", "Title 20, Chapter 4, Subchapter 3"]);
+  });
+
+  test("get_title 'Title N' gives every record in the title, chapters with no number and sections in no chapter included", () => {
+    assert.deepEqual(out["rules whole Title 24"], ["0-0-0-31", "0-0-0-32", "0-0-0-120", "0-0-0-121", "0-0-0-40", "0-0-0-41"]);
+    assert.deepEqual(out["rules whole Title 30"], ["0-0-0-51", "0-0-0-52", "0-0-0-60", "0-0-0-61", "0-0-0-70", "0-0-0-71"]);
+    assert.deepEqual(out["rules whole Title 48"], ["0-0-0-131", "0-0-0-132"]);
+    assert.deepEqual(out["admin whole Title 31"], ["0-0-0-91"]);
+    assert.equal(out["tool title 30"], [
+      "6 records: each chapter's heading, then its sections in order.",
+      "",
+      "Title 30: Rent Guidelines Board",
+      "Title 30, Chapter 1 — Chapter 1: Rent Guidelines",
+      "§ 1-01 — § 1-01 Purpose.",
+      "Title 30, Apartment & Loft Order #49 (2017) — Apartment & Loft Order #49 (2017)",
+      "Notice — Notice",
+      "Title 30, Apartment & Loft Order #50 (2018) — Apartment & Loft Order #50 (2018)",
+      "Notice — Notice",
+    ].join("\n"));
+    // For every title: get_title gives exactly the records with that titleNumber.
+    const byTitle = {};
+    for (const [corpus, b] of [["rules", rules], ["admin_code", admin]]) {
+      for (const r of b.sections) if (r.titleNumber) (byTitle[`${corpus} ${r.titleNumber}`] ??= []).push(r.id);
+    }
+    const listed = Object.keys(out["every title"]);
+    for (const k of Object.keys(byTitle)) {
+      if (k === "admin_code 31") continue; // no chapter, so not in list_titles; checked above
+      assert.ok(listed.includes(k), `${k} is in list_titles`);
+      assert.equal(out["every title"][k], byTitle[k].sort().join(","), k);
+    }
+  });
+});
+
 describe("an index built before 0.6.3 (no titles)", () => {
   const out = runServer(`
     out["get"] = cite("15 RCNY § 1-01");
@@ -359,9 +459,9 @@ describe("an index built before 0.6.3 (no titles)", () => {
     assert.deepEqual(out.get, ["0-0-0-12", "0-0-0-32", "0-0-0-52", "0-0-0-82"], "every § 1-01: the index cannot tell titles apart");
     assert.equal(out["get hc"], "0-0-0-41", "the Health Code is found by its chapter, not its title");
     assert.equal(out.full, "Chapter 18");
-    assert.deepEqual(out["list rules"], ["Chapter 1", "Chapter 1", "Chapter 1", "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 5", "Chapter 6", "Chapter 18"]);
-    assert.deepEqual(out["admin title Title 16"], ["0-0-0-11", "0-0-0-12", "0-0-0-21", "0-0-0-22", "0-0-0-30", "0-0-0-31"], "titles from section numbers, so 16-A and 16-B come too");
+    assert.deepEqual(out["list rules"], ["Chapter 1", "Chapter 1", "Chapter 1", "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 3", "Chapter 5", "Chapter 6", "Chapter 18"]);
+    assert.deepEqual(out["admin title Title 16"], ["0-0-0-11", "0-0-0-12", "0-0-0-14", "0-0-0-21", "0-0-0-22", "0-0-0-30", "0-0-0-31"], "titles from section numbers, so 16-A and 16-B come too");
     assert.match(out["tool no title"], /^No sections found for "Title 15" in rules\. This copy of the index does not record Rules titles \(it was built before 0\.6\.3\); ask for a chapter, which list_titles lists\./);
-    assert.equal(out["tool list"], "Showing 1 to 2 of 9. Call again with offset 2 for the next ones.\n\nChapter 1 — Chapter 1: Scope\nChapter 1 — Chapter 1: General");
+    assert.equal(out["tool list"], "Showing 1 to 2 of 10. Call again with offset 2 for the next ones.\n\nChapter 1 — Chapter 1: Scope\nChapter 1 — Chapter 1: General");
   });
 });
