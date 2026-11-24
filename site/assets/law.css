@@ -234,6 +234,9 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
    set off by a rule; an editor's note in a gray box, its "Editor's note:" in bold (render-html.js).
    The words are the publisher's, unchanged. */
 .law .history { font: 15px/1.6 var(--font-body); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 12px; }
+/* A subsection's heading line inside a section's text (issue #76): h2 on a section page, h3 in a
+   chapter page's copy. One look for both, between the copy's h2 (21px) and the text (18px). */
+.law .subhead { font: 700 19px/1.4 var(--font-head); margin: 28px 0 8px; scroll-margin-top: 16px; }
 .law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
 
 .pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }

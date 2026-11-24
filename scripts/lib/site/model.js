@@ -18,6 +18,7 @@
 
 import { createHash } from "node:crypto";
 import { BOOKS } from "./config.js";
+import { citeWithAnchor } from "../../../site/assets/jump.js";
 
 const SLUG_SAFE = /^[0-9a-z][0-9a-z.-]*$/;
 
@@ -204,7 +205,7 @@ export function linkTarget(to, book, current) {
   const target = home.byId.get(to.id);
   // A target that shares its citation (an Admin Code shared number) adds what tells it apart, so
   // two links with the same words do not share a name and go to two places.
-  return { href, label: `${target.fullCitation}${to.anchor ?? ""}${target.dupNote ? `, ${target.dupNote}` : ""}` };
+  return { href, label: `${citeWithAnchor(target.fullCitation, to.anchor)}${target.dupNote ? `, ${target.dupNote}` : ""}` };
 }
 
 // ---------------------------------------------------------------------------------------------

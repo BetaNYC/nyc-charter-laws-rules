@@ -10,7 +10,7 @@
 //     scrolled to the reader's own section, or else the open chapter, rather than the Preamble.
 //   - On a chapter page at 900px and wider, where the page shows every section's text, the
 //     jump list and the tree's links for this chapter go to those copies (#s-4).
-import { lookup, jumpTarget } from "./jump.js";
+import { lookup, jumpTarget, citeWithAnchor, splitCopyId } from "./jump.js";
 
 /** The width where a chapter page shows its sections' full text and the tree is a column. law.css uses the same. */
 export const WIDE = "(min-width: 900px)";
@@ -67,7 +67,7 @@ function wireForms() {
 function citationText() {
   const cite = document.querySelector("h1 .cite")?.textContent?.trim() ?? document.title;
   const hash = decodeURIComponent(location.hash.slice(1));
-  return hash && document.getElementById(hash) ? cite + hash : cite;
+  return hash && document.getElementById(hash) ? citeWithAnchor(cite, hash) : cite;
 }
 
 async function copyText(text, what, status) {
@@ -276,7 +276,8 @@ export function wireContents(doc = document) {
  * A chapter page on a wide screen shows every section's text, so its jump list and the tree's
  * links for this chapter go to those copies (#s-4); below 900px, where the copies are hidden,
  * they go back to each section's own page. A link to a copy opened on a phone
- * (/charter/chapters/1#s-4(b)) goes on to the section's own page (/charter/sections/4#(b)).
+ * (/charter/chapters/1#s-4(b)) goes on to the section's own page (/charter/sections/4#(b)), and
+ * one to a subsection's part (#s-fc-102_102.4(1)) to /admin-code/sections/fc-102#102.4(1).
  */
 export function pointAtCopies(doc = document) {
   if (!doc.querySelector(".chapter-text")) return false;
@@ -291,11 +292,9 @@ export function pointAtCopies(doc = document) {
   apply();
   matchMedia(WIDE).addEventListener("change", apply);
   if (!wide() && location.hash.startsWith("#s-")) {
-    const hash = decodeURIComponent(location.hash.slice(3));
-    const at = hash.indexOf("(");
-    const slug = at < 0 ? hash : hash.slice(0, at);
+    const { slug, anchor } = splitCopyId(decodeURIComponent(location.hash.slice(3)));
     const to = links.find((a) => lastSegment(a.dataset.page) === slug);
-    if (to) location.replace(to.dataset.page + (at < 0 ? "" : `#${hash.slice(at)}`));
+    if (to) location.replace(to.dataset.page + (anchor ? `#${anchor}` : ""));
   }
   return true;
 }

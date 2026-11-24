@@ -82,14 +82,16 @@ test("a section with pictures or unread subsections says so and links to its pag
   assert.equal(sectionBody(rec({}, ""), SITE, ""), `<p class="empty">BetaNYC's copy has no text for this section. <a href="${url}">Read § 27-271 at American Legal Publishing</a>.</p>`);
 });
 
-test("structure: pictures and unread subsection levels are counted per section, not per chapter", () => {
+test("structure: pictures and still-unread levels are counted per section, not per chapter; Subsections are read (#76)", () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <DOCUMENT source-infobase-name="Admin">
   <LEVEL style-name="Chapter"><RECORD id="0-0-0-10"><HEADING>Chapter 1: Building Code</HEADING></RECORD>
     <LEVEL style-name="Section"><RECORD id="0-0-0-11"><HEADING>§ 27-1 Scope.</HEADING></RECORD>
       <LEVEL style-name="Normal Level"><RECORD id="0-0-0-12"><PARA>The scope.</PARA><PARA><PICTURE id="p1" name="a.jpg"/></PARA></RECORD></LEVEL>
       <LEVEL style-name="Subsection"><RECORD id="0-0-0-13"><HEADING>27-1.1 General.</HEADING><PARA>More text <PICTURE id="p2" name="b.jpg"/></PARA></RECORD></LEVEL>
-      <LEVEL style-name="Subsection"><RECORD id="0-0-0-14"><HEADING>27-1.2 Other.</HEADING><PARA>Even more.</PARA></RECORD></LEVEL>
+      <LEVEL style-name="Subsection"><RECORD id="0-0-0-14"><HEADING>27-1.2 Other.</HEADING><PARA>Even more.</PARA></RECORD>
+        <LEVEL style-name="Subsection"><RECORD id="0-0-0-17"><HEADING>27-1.2.1 Nested.</HEADING><PARA>27-1.2.1 Nested.</PARA></RECORD></LEVEL>
+      </LEVEL>
     </LEVEL>
     <LEVEL style-name="Section"><RECORD id="0-0-0-15"><HEADING>§ 27-2 Plain.</HEADING></RECORD>
       <LEVEL style-name="Normal Level"><RECORD id="0-0-0-16"><PARA>Plain text.</PARA></RECORD></LEVEL>
@@ -104,10 +106,13 @@ test("structure: pictures and unread subsection levels are counted per section, 
   assert.equal(by["Chapter 1"].pictures, undefined);
   assert.equal(by["Chapter 1"].subsections, undefined);
   assert.equal(by["§ 27-1"].pictures, 2);
-  assert.equal(by["§ 27-1"].subsections, 2);
+  // The two Subsections are read now; the level nested in 27-1.2 is not, and is the one counted.
+  assert.equal(by["§ 27-1"].subsections, 1);
   assert.equal(by["§ 27-2"].pictures, undefined);
-  // The index's text is unchanged: the subsections are still not in it.
-  assert.equal(sections.find((x) => x.citation === "§ 27-1").text, "The scope.");
+  assert.equal(by["§ 27-2"].subsections, undefined);
+  // Each Subsection's PARA says something other than its heading, so both are kept.
+  assert.equal(sections.find((x) => x.citation === "§ 27-1").text, "The scope. 27-1.1 General. More text 27-1.2 Other. Even more.");
+  assert.equal(sections.find((x) => x.citation === "§ 27-2").text, "Plain text.");
 });
 
 test("site facts: each book's own pages speak for that book only, even when the two books' dates differ", () => {

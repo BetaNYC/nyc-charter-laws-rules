@@ -63,3 +63,40 @@ export function jumpTarget(entry, anchor) {
 export function pageUrl(url) {
   return String(url ?? "").replace(/\.html(?=$|[#?])/, "");
 }
+
+/**
+ * A citation for a part of a section, as a reader writes it: the section's citation and the
+ * part's anchor. A subdivision anchor is added on ("NYC Charter § 259" + "(b)(1)"). A subsection
+ * anchor (issue #76) starts with the subsection's number, which repeats the section's: it takes
+ * the section number's place, so "… Section FC 102" + "102.4(1)" is "… Section FC 102.4(1)",
+ * never "… Section FC 102102.4(1)". A subsection number that does not start with the section's
+ * (a publisher's typo, or the Rules' "3.1.1" under "SECTION I") follows a comma.
+ */
+export function citeWithAnchor(cite, anchor) {
+  const c = String(cite ?? "");
+  const a = String(anchor ?? "");
+  if (!a) return c;
+  if (a.startsWith("(")) return c + a;
+  const at = a.indexOf("(");
+  const key = at < 0 ? a : a.slice(0, at);
+  const num = /(\S+)$/.exec(c)?.[1] ?? "";
+  if (num && key.toLowerCase().startsWith(`${num.toLowerCase()}.`)) return c.slice(0, c.length - num.length) + a;
+  return c ? `${c}, ${a}` : a;
+}
+
+/**
+ * The id of a part of a section in a chapter page's copy: "s-4" + "(b)(1)" is "s-4(b)(1)". A
+ * subsection anchor starts with a digit or letter, so "_" (never in a slug) marks where the slug
+ * ends: "s-fc-102_102.4(1)", which splitCopyId reads back.
+ */
+export function copyId(slug, anchor = "") {
+  return !anchor || anchor.startsWith("(") ? `s-${slug}${anchor}` : `s-${slug}_${anchor}`;
+}
+
+/** A copy's id without its "s-", split into the section's slug and the anchor: "fc-102_102.4(1)" → { slug: "fc-102", anchor: "102.4(1)" }. */
+export function splitCopyId(rest) {
+  const u = rest.indexOf("_");
+  if (u >= 0) return { slug: rest.slice(0, u), anchor: rest.slice(u + 1) };
+  const at = rest.indexOf("(");
+  return at < 0 ? { slug: rest, anchor: "" } : { slug: rest.slice(0, at), anchor: rest.slice(at) };
+}

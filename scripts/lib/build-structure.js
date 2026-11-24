@@ -5,14 +5,20 @@
 //               each one's heading. A file that starts at a Chapter has no Title wrapper, so its
 //               Title is found from the publisher's anchor name for it (see assignTitles below);
 //   - blocks:   the paragraphs that make up `text`, each as a [start, end) slice of `text`,
-//               with its subdivision label ("a.", "(1)"), depth and anchor ("(b)(1)");
+//               with its subdivision label ("a.", "(1)"), depth and anchor ("(b)(1)"); a
+//               Subsection's heading line ("102.4 Smoking.") is a block of type "subheading"
+//               anchored at its number ("102.4"), and the subdivisions under it are anchored
+//               under that number ("102.4(1)");
 //   - links:    each cross-reference, as a [start, end) slice of `text` and its target;
 //   - pictures:    how many <PICTURE> elements the section has (left out when none). A picture
 //                  has no text, so the index cannot show it; the site says so and links to the
 //                  section's page at American Legal Publishing.
 //   - subsections: how many levels inside the section the index does not read (left out when
-//                  none): the Construction Codes keep most of a section's text in "Subsection"
-//                  levels, which build-corpus.js skips. The site says so and links out.
+//                  none). Since issue #76 the index reads the Construction Codes' "Subsection"
+//                  levels (build-corpus.js readBody), so this counts only what is still skipped:
+//                  a level inside a section that is not its body, a Subsection or an indexed
+//                  record, and a level inside a Subsection that is not a "Normal Level" (none in
+//                  July 2026). The site says so and links out.
 //
 // The text itself is not repeated: every offset points into the section's `text` in
 // data/index/json/<corpus>.json, the file the MCP server answers from, and the structure file
@@ -44,8 +50,9 @@ import {
 
 export const STRUCTURE_FORMAT = 1;
 
-// Child levels of a section that the index reads (its body) or indexes on their own.
-const INDEXED_OR_BODY = new Set(["Normal Level", "Section", "Chapter"]);
+// Child levels of a section that the index reads (its body and its Subsections, issue #76) or
+// indexes on their own.
+const INDEXED_OR_BODY = new Set(["Normal Level", "Subsection", "Section", "Chapter"]);
 
 // Two private-use characters that never occur in the source mark where a <LINK> starts and
 // ends while its paragraph is flattened, so its position survives normalize().
@@ -63,6 +70,16 @@ export function infobaseCorpus(uil) {
 // A subdivision label as the source writes it: "a.", "1.", "4-a.", "(a)", "(1)", "(iv)",
 // "A)", or a bullet. It must be followed by a <TAB/> in the markup to count (labelOf).
 const LABEL = /^(?:\(([0-9A-Za-z][0-9A-Za-z.-]{0,5})\)|([0-9A-Za-z][0-9A-Za-z-]{0,5})[.)]|•)$/;
+
+// A subsection's number, from the start of its heading line (issue #76): "102.4 Smoking." →
+// "102.4", "E104.2.2 Group I-3." → "E104.2.2", "§ 19.1-01.1 Applicability." → "19.1-01.1",
+// "3.1.1. Definition." → "3.1.1". Null when the line does not start with one ("Appendix A").
+// The number starts the anchors of the subsection's parts; jump.js citeWithAnchor turns
+// "Section FC 102" and "102.4(1)" into the citation "Section FC 102.4(1)".
+const SUBSECTION_KEY = /^(?:§\s*)?([A-Za-z]{0,3}\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*)(?=$|[\s.:,])/;
+export function subsectionKey(text) {
+  return SUBSECTION_KEY.exec(String(text ?? ""))?.[1] ?? null;
+}
 
 // The anchor key for a label: "a." and "(a)" are both "a". A bullet has none.
 export function labelKey(label) {
@@ -226,7 +243,7 @@ export function createStructureCollector(corpus) {
       };
     },
 
-    onSection(section, { level, record, bodyRecords, ancestors, levelNode = null }) {
+    onSection(section, { level, record, parts = [], unread: unreadInSubsections = [], ancestors, levelNode = null }) {
       const parents = ancestors.map((a) => addGroup(a.level, a.record, a.heading));
       if (level === "Chapter") addGroup(level, record, section.heading);
       const entry = { id: section.id, level, parents, blocks: [], links: [] };
@@ -236,38 +253,60 @@ export function createStructureCollector(corpus) {
         entry.titleKey = own.map((d) => titleKeyOf(d.name)).find(Boolean) ?? null;
       }
 
-      // Blocks: the non-empty paragraphs, which the index joins with one space.
-      const paras = [];
-      for (const r of bodyRecords) {
-        for (const p of childrenByTag(r, "PARA")) paras.push({ p, record: getAttr(r, "id") });
-      }
+      // Blocks: the non-empty body parts (build-corpus.js readBody), which the index joins with
+      // one space: paragraphs, and each Subsection's heading line.
       // Pictures (figures, equations, some tables) carry no text, so a paragraph holding only
       // a picture adds no block and the picture is lost from the text. Count every one in the
-      // section, so the site can say what its copy leaves out and link to the official page.
-      // The index reads only a section's "Normal Level" body. Other levels inside it (the
-      // Construction Codes' "Subsection" levels, 15,905 of them in July 2026) are not in `text`
-      // at all; count them, and their pictures, so the site can say so too.
-      // A chapter's other levels hold its sections (Subchapter, Article...), so only a section's count.
-      const unread = levelNode && level === "Section" ? childrenByTag(levelNode, "LEVEL").filter((l) => !INDEXED_OR_BODY.has(getAttr(l, "style-name") || "")) : [];
-      const pictures = paras.reduce((n, { p }) => n + countTag(p, "PICTURE"), 0) + countTag(unread, "PICTURE");
+      // section, so the site can say what its copy leaves out and link to the official page:
+      // in its own paragraphs, anywhere in its Subsections (a picture can sit in a Subsection's
+      // heading PARA, which the index may not read when the HEADING says the same), and in the
+      // levels it does not read.
+      // Levels the index does not read are counted too: a section's own child levels other than
+      // its body, Subsections and indexed records (a chapter's other levels hold its sections:
+      // Subchapter, Article..., so only a section's count), and any level inside a Subsection
+      // that is not a "Normal Level".
+      const own = levelNode && level === "Section" ? childrenByTag(levelNode, "LEVEL").filter((l) => !INDEXED_OR_BODY.has(getAttr(l, "style-name") || "")) : [];
+      const unread = [...own, ...unreadInSubsections];
+      const subsectionLevels = levelNode ? childrenByTag(levelNode, "LEVEL").filter((l) => getAttr(l, "style-name") === "Subsection") : [];
+      const pictures =
+        parts.reduce((n, part) => n + (part.para && !part.subsection ? countTag(part.para, "PICTURE") : 0), 0) +
+        countTag(subsectionLevels, "PICTURE") +
+        countTag(own, "PICTURE");
       if (pictures) entry.pictures = pictures;
       if (unread.length) entry.subsections = unread.length;
       const stack = []; // open subdivisions: { depth, key }
       const used = new Map(); // anchor → times used in this section
+      let scope = ""; // the open subsection's number ("102.4"), which starts its parts' anchors
+      const unique = (anchor) => {
+        const n = (used.get(anchor) ?? 0) + 1;
+        used.set(anchor, n);
+        return n === 1 ? anchor : `${anchor}-${n}`;
+      };
       const records = []; // [body RECORD id, its first block]
       let offset = 0;
       let ok = true;
-      for (const { p, record: rid } of paras) {
-        const { text, links } = paraWithLinks(p);
+      for (const part of parts) {
+        const { text, links } = part.para ? paraWithLinks(part.para) : { text: part.text, links: [] };
         if (!text) continue;
+        const rid = getAttr(part.record, "id");
         const start = offset === 0 ? 0 : offset + 1;
         if (section.text.slice(start, start + text.length) !== text) {
           ok = false;
           break;
         }
-        const style = getAttr(p, "style-name");
+        const p = part.para;
+        const style = p ? getAttr(p, "style-name") : "";
         const block = { start, end: start + text.length, type: "text" };
-        if (style === "EdNote" || style === "EdNoteSm") {
+        if (part.kind === "subheading") {
+          // A Subsection's heading line. Its body is a new list: subdivisions under it do not
+          // nest in the ones before it, and their anchors start with its number, so item (1) of
+          // 102.4 is "102.4(1)", not the section's third "(1)" ("(1)-3"). The heading's own
+          // anchor is its number. One with no number ("Appendix A") opens no scope.
+          block.type = "subheading";
+          stack.length = 0;
+          scope = subsectionKey(text) ?? "";
+          if (scope) block.anchor = unique(scope);
+        } else if (style === "EdNote" || style === "EdNoteSm") {
           block.type = "note";
         } else {
           const { tabs, label } = labelOf(p);
@@ -281,16 +320,14 @@ export function createStructureCollector(corpus) {
             stack.push({ depth, key });
             if (key !== null) {
               const path = stack.filter((s) => s.key !== null).map((s) => `(${s.key})`).join("");
-              const n = (used.get(path) ?? 0) + 1;
-              used.set(path, n);
-              block.anchor = n === 1 ? path : `${path}-${n}`;
+              block.anchor = unique(scope + path);
             }
           } else if (tabs > 0) {
             block.depth = tabs;
           }
         }
-        if (hasTag(p, "TABLE")) block.table = true;
-        if (hasTag(p, "PICTURE")) block.picture = true;
+        if (p && hasTag(p, "TABLE")) block.table = true;
+        if (p && hasTag(p, "PICTURE")) block.picture = true;
         if (!records.some(([r]) => r === rid)) records.push([rid, block]);
         for (const l of links ?? []) {
           entry.links.push({ start: start + l.start, end: start + l.end, target: linkTarget(l.attrs, corpus) });

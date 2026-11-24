@@ -10,6 +10,8 @@
 //   { type: "subdivision", text, depth, label, anchor?, links? }   "a. The head of each agency..."
 //   { type: "text", text, depth?, links? }                          a paragraph with no label
 //   { type: "note", text, links? }                                  an editor's note
+//   { type: "subheading", text, links? }                            a Subsection's heading line,
+//                                                                   "80.1 Title." (issue #76)
 //   (a body block can also carry table: true or picture: true; its text is still the flat text)
 //
 // A body block's `text` is a slice of the section's `text` (the MCP server's text), and the body

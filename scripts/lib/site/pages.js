@@ -89,6 +89,11 @@ export function lawRecord(record, site) {
   return { citation: record.fullCitation, url: officialRecordUrl(record, site) };
 }
 
+/**
+ * A record's own text on its own page, under the page's h1: a Subsection's heading line
+ * (issue #76) is an h2. A chapter, part or title page's copy of a section sits under that
+ * section's h2, so its subheadings are h3 (sectionCopy).
+ */
 export function lawText(record, book) {
   const blocks = bodyBlocks(renderSection(record, record.structure));
   if (!blocks.length) return "";
@@ -103,9 +108,11 @@ const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
 /**
  * What BetaNYC's copy leaves out of a section, from its structure: pictures (figures, equations,
- * tables drawn as images, which have no text) and levels the index does not read (the
- * Construction Codes' subsections). One sentence and a link to the section's own page at American
- * Legal Publishing; "" when nothing is left out. Not indexed by search.
+ * tables drawn as images, which have no text) and levels the index still does not read (the
+ * structure's `subsections`: since issue #76 the Construction Codes' subsections are read, so
+ * this counts only a level nested where the index does not look, none in July 2026). One
+ * sentence and a link to the section's own page at American Legal Publishing; "" when nothing is
+ * left out. Not indexed by search.
  */
 export function leftOutNote(record, site) {
   const st = record.structure ?? {};
@@ -289,7 +296,7 @@ export function copyLinkFor(s, onPage, book) {
 function sectionCopy(s, c, book, nameNote, site) {
   const blocks = bodyBlocks(renderSection(s, s.structure));
   const linkFor = copyLinkFor(s, (target) => target.chapter === c, book);
-  return sectionBody(s, site, blocks.length ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote })}\n</div>` : "");
+  return sectionBody(s, site, blocks.length ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote, headingLevel: 3 })}\n</div>` : "");
 }
 
 // "Open this section" and "Copy citation" are on every section of a chapter page, so each one's
@@ -583,7 +590,7 @@ export function aboutPage(book, site, { paragraphs, metadata, others = [] }) {
         : "References into the Administrative Code and the Rules are plain text until those books are on this site."
     }</p>`,
     admin
-      ? `<p>In the Administrative Code, sections are grouped under the publisher's own titles, and a long chapter is split into parts of at most 100 sections, so no page is too long to load. American Legal Publishing files some local laws by the year they were enacted, outside the titles; we gather those under a heading of our own, “Local laws by year”. Some sections hold pictures (figures, equations, and tables drawn as images) or subsections that our copy does not include yet: those sections say so and link to their page at American Legal Publishing.</p>`
+      ? `<p>In the Administrative Code, sections are grouped under the publisher's own titles, and a long chapter is split into parts of at most 100 sections, so no page is too long to load. American Legal Publishing files some local laws by the year they were enacted, outside the titles; we gather those under a heading of our own, “Local laws by year”. Some sections hold pictures (figures, equations, and tables drawn as images) that our copy does not include: those sections say so and link to their page at American Legal Publishing.</p>`
       : "",
     h2("current"),
     `<p>${escapeHtml(currentLine(site))} That date changes when American Legal Publishing's files change or when BetaNYC changes how it reads them. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,

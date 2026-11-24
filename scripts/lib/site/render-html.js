@@ -9,16 +9,26 @@
 //   text         <p class="txt" data-depth="1">     (data-depth only when the source indents it)
 //                <p class="txt history">            an amendment history line, "(Am. L.L. 2016/019, ...)"
 //   note         <p class="ednote">                  an editor's note; its "Editor's note:" is in <strong>
-// The text inside each <p>, with tags removed and entities decoded, is the block's text exactly:
+//   subheading   <h2 class="subhead" id="102.4" data-pagefind-title="… Section FC 102.4">
+//                a Subsection's heading line, "102.4 Smoking." (issue #76): a real heading, one
+//                level below the heading it sits under (ctx.headingLevel); its id is the
+//                subsection's number, when its line starts with one
+// A part's citation (search titles, link names, Copy citation in law.js) is jump.js
+// citeWithAnchor: "NYC Charter § 259" + "(b)(1)", and "… Section FC 102" + "102.4(1)" →
+// "… Section FC 102.4(1)".
+// The text inside each <p> or <hN>, with tags removed and entities decoded, is the block's text exactly:
 // the history class and the <strong> change how the words look, never the words.
 // Cross-references become links when linkFor returns an address, and stay plain text otherwise.
 //
 // A chapter page shows its sections' text a second time (pages.js chapterPage). That copy is
-// written with `copyOf`: its ids carry the section's prefix ("s-4(b)(1)", so they stay unique on
-// the page), and it has no data-block and no data-pagefind-title (the block-order test and
+// written with `copyOf`: its ids carry the section's prefix ("s-4(b)(1)", "s-fc-102_102.4(1)",
+// jump.js copyId, so they stay unique on the page), and it has no data-block and no data-pagefind-title (the block-order test and
 // Pagefind read only the record's own text).
 
 import { escapeHtml } from "./html.js";
+import { citeWithAnchor, copyId } from "../../../site/assets/jump.js";
+
+export { copyId };
 
 /**
  * The amendment history line at the end of a section: one text block, wholly in parentheses,
@@ -57,10 +67,12 @@ function ednoteLead(b) {
  *        ids become "s-<slug><anchor>", and there is no data-block or data-pagefind-title
  * @param {string} [ctx.nameNote] words added to each subdivision link's name, when two sections on
  *        one page share a citation ("a., link to NYC Charter § 530(a), Composition")
+ * @param {number} [ctx.headingLevel] the level of a subheading's element: 2 on a section page
+ *        (under its h1), 3 in a chapter, part or title page's copy (under the section's h2)
  */
-export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "" }) {
+export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2 }) {
   const caseNotes = anchorCaseNotes(blocks);
-  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote: caseNotes.get(b.anchor) })).join("\n");
+  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor) })).join("\n");
 }
 
 /**
@@ -88,15 +100,15 @@ export function anchorCaseNotes(blocks) {
   return notes;
 }
 
-/** The id of a subdivision in a chapter page's copy of a section: "s-4" + "(b)(1)". */
-export function copyId(slug, anchor = "") {
-  return `s-${slug}${anchor}`;
-}
 
-function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote }) {
+function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote }) {
   const attrs = [];
   let cls = "txt";
-  if (b.type === "subdivision") cls = "sub";
+  let tag = "p";
+  if (b.type === "subheading") {
+    cls = "subhead";
+    tag = `h${Math.min(Math.max(Number(headingLevel) || 2, 2), 6)}`;
+  } else if (b.type === "subdivision") cls = "sub";
   else if (b.type === "note") cls = "ednote";
   else if (isHistoryLine(b)) cls = "txt history";
   attrs.push(`class="${cls}"`);
@@ -104,7 +116,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote }) 
   const id = b.anchor ? (copyOf ? copyId(copyOf, b.anchor) : b.anchor) : null;
   if (id) {
     attrs.push(`id="${escapeHtml(id)}"`);
-    if (!copyOf) attrs.push(`data-pagefind-title="${escapeHtml(fullCitation + b.anchor)}"`);
+    if (!copyOf) attrs.push(`data-pagefind-title="${escapeHtml(citeWithAnchor(fullCitation, b.anchor))}"`);
   }
   if (b.table) attrs.push(`data-table`);
   if (!copyOf) attrs.push(`data-block="${n}"`);
@@ -114,7 +126,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote }) 
   const labelEnd = b.type === "subdivision" && b.anchor && b.label && b.text.startsWith(b.label) ? b.label.length : 0;
   const spans = [];
   if (labelEnd && !links.some((l) => l.start < labelEnd)) {
-    const name = `${b.label}, link to ${fullCitation}${b.anchor}${caseNote ? `, ${caseNote}` : ""}${nameNote ? `, ${nameNote}` : ""}`;
+    const name = `${b.label}, link to ${citeWithAnchor(fullCitation, b.anchor)}${caseNote ? `, ${caseNote}` : ""}${nameNote ? `, ${nameNote}` : ""}`;
     spans.push({ start: 0, end: labelEnd, open: `<a class="num" href="#${escapeHtml(id)}" aria-label="${escapeHtml(name)}">` });
   }
   // "Editor's note:" in bold, unless a cross-reference starts inside it (none does, 2026-11-23).
@@ -146,17 +158,17 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote }) 
     at = s.end;
   }
   html += escapeHtml(b.text.slice(at));
-  return `<p ${attrs.join(" ")}>${html}</p>`;
+  return `<${tag} ${attrs.join(" ")}>${html}</${tag}>`;
 }
 
-/** Read the blocks back from a page's HTML (tests): [{ n, cls, id, text }], in page order. */
+/** Read the blocks back from a page's HTML (tests): [{ n, tag, cls, id, text }], in page order. */
 export function readBlocks(html, unescape) {
   const out = [];
-  const re = /<p ([^>]*\bdata-block="(\d+)"[^>]*)>([\s\S]*?)<\/p>/g;
+  const re = /<(p|h[2-6]) ([^>]*\bdata-block="(\d+)"[^>]*)>([\s\S]*?)<\/\1>/g;
   for (const m of html.matchAll(re)) {
-    const cls = /class="([^"]*)"/.exec(m[1])?.[1] ?? "";
-    const id = /\bid="([^"]*)"/.exec(m[1])?.[1];
-    out.push({ n: Number(m[2]), cls, id: id === undefined ? undefined : unescape(id), text: unescape(m[3].replace(/<[^>]*>/g, "")) });
+    const cls = /class="([^"]*)"/.exec(m[2])?.[1] ?? "";
+    const id = /\bid="([^"]*)"/.exec(m[2])?.[1];
+    out.push({ n: Number(m[3]), tag: m[1], cls, id: id === undefined ? undefined : unescape(id), text: unescape(m[4].replace(/<[^>]*>/g, "")) });
   }
   return out;
 }
