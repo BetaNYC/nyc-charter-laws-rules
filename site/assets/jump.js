@@ -4,16 +4,23 @@
 // fetches nothing itself.
 
 /**
- * The keys a reader might type for a citation, lowercased: "§ 259" → ["259"]. A Rules record
- * also gets its title's form, since each title restarts its numbers: "§ 1-01" in Title 15 →
- * ["1-01", "15 rcny 1-01"] ("15 RCNY § 1-01", parseQuery).
+ * The keys a reader might type for a citation, lowercased: "§ 259" → ["259"]. A record in a
+ * title (the Administrative Code's and the Rules') also gets the title's form, "title 28 chapter
+ * 1", which both books share; a Rules record gets the Rules' own form too, since each Rules title
+ * restarts its numbers: "§ 1-01" in Title 15 → ["1-01", "title 15 1-01", "15 rcny 1-01"]
+ * ("15 RCNY § 1-01", parseQuery).
+ * @param {string} citation
+ * @param {string} [title]          the record's title number ("15", "38-A")
+ * @param {{ rules?: boolean }} [o] a Rules record
  */
-export function citationKeys(citation, title) {
+export function citationKeys(citation, title, { rules = false } = {}) {
   const c = String(citation).trim().toLowerCase();
   const sec = /^§\s*(\S+)$/.exec(c);
   const ch = /^chapter\s+(\S+)$/.exec(c);
   const key = sec ? sec[1] : ch ? `chapter ${ch[1]}` : c;
-  return title ? [key, `${titleKey(title)} rcny ${key}`] : [key];
+  if (!title) return [key];
+  const t = titleKey(title);
+  return rules ? [key, `title ${t} ${key}`, `${t} rcny ${key}`] : [key, `title ${t} ${key}`];
 }
 
 /** "15", "38-A", "38a", "015" → "15", "38-a": a Rules title number as keys hold it. */
@@ -21,32 +28,46 @@ function titleKey(t) {
   return String(t).toLowerCase().replace(/^0+(?=\d)/, "").replace(/^(\d+)-?([a-z])$/, "$1-$2");
 }
 
-// "15 RCNY § 1-01", "15 R.C.N.Y. 1-01", "Title 15 § 1-01", "RCNY Title 15, Chapter 18",
-// "24 RCNY Health Code § 81.08", "Health Code § 81.08" (the Health Code is in Title 24). As
-// src/corpus.ts parseTitledCitation reads them, lowercased.
+// The Rules' own forms, as src/corpus.ts parseTitledCitation reads them, lowercased: "15 RCNY §
+// 1-01", "15 R.C.N.Y. 1-01", "RCNY Title 15, Chapter 18", "Title 15 RCNY § 1-01", "24 RCNY Health
+// Code § 81.08", "Health Code § 81.08" (the Health Code is in Title 24). These name the Rules.
+// "Title 28, Chapter 1" alone does not: the Administrative Code's pages cite its chapters that
+// way too (TITLE_ONLY), so it is a key both books share, and never jumps straight to the Rules.
 const RCNY = String.raw`r\.?\s?c\.?\s?n\.?\s?y\b\.?`;
 const TNUM = String.raw`\d+(?:-?[a-z](?![a-z]))?`;
 const RCNY_FIRST = new RegExp(`^(${TNUM})\\s*${RCNY}[\\s,]*(.*)$`);
-const TITLE_FIRST = new RegExp(`^(?:${RCNY}[\\s,]*)?title\\s+(${TNUM})(?=[\\s,§]|$)[\\s,]*(?:${RCNY}[\\s,]*)?(.*)$`);
+const TITLE_RCNY = new RegExp(`^(?:${RCNY}[\\s,]*title\\s+(${TNUM})(?=[\\s,§]|$)[\\s,]*(?:${RCNY}[\\s,]*)?|title\\s+(${TNUM})(?=[\\s,§]|$)[\\s,]*${RCNY}[\\s,]*)(.*)$`);
+const TITLE_ONLY = new RegExp(`^title\\s+(${TNUM})(?=[\\s,§]|$)[\\s,]*(.*)$`);
 const HEALTH_CODE = /^(?:(?:the\s+)?new york city\s+)?health code\b[\s,]*(.*)$/;
 
 // Words a reader may put before a number, taken off one at a time.
 const PREFIXES = [/^nyc\b\.?/, /^new york city\b/, /^city\b/, /^charter\b/, /^the\b/, /^sections?\b\.?/, /^sec\b\.?/, /^§+/];
 
 /**
- * What a typed query asks for, or null when it is words to search: { key, anchor }.
- * "Section 259(a)(1)" → { key: "259", anchor: "(a)(1)" }; "Ch. 2-A" → { key: "chapter 2-a" }.
+ * What a typed query asks for, or null when it is words to search: { key, anchor }, and
+ * `shared: true` for "Title 28, Chapter 1", a form both titled books use (see lookup).
+ * "Section 259(a)(1)" → { key: "259", anchor: "(a)(1)" }; "Ch. 2-A" → { key: "chapter 2-a" };
+ * "15 RCNY § 1-01" → { key: "15 rcny 1-01" }; "Title 28, Chapter 1" → { key: "title 28 chapter 1", shared: true }.
  */
 export function parseQuery(query) {
   let q = String(query ?? "").toLowerCase().replace(/[\u2010-\u2015\u2212]/g, "-").replace(/\s+/g, " ").trim();
   // A Rules citation with its title: the title, then the rest as any citation.
-  const titled = RCNY_FIRST.exec(q) ?? TITLE_FIRST.exec(q);
-  const hc = HEALTH_CODE.exec(titled ? titled[2] : q);
-  if (titled || hc) {
-    const rest = hc ? hc[1] : titled[2];
-    const inner = rest ? parseQuery(rest) : null;
-    if (!inner) return null;
-    return { key: `${titled ? titleKey(titled[1]) : "24"} rcny ${inner.key}`, anchor: inner.anchor };
+  let m = RCNY_FIRST.exec(q);
+  let title = m?.[1];
+  let rest = m?.[2];
+  if (!m && (m = TITLE_RCNY.exec(q))) [title, rest] = [m[1] ?? m[2], m[3]];
+  const hc = HEALTH_CODE.exec(m ? rest : q);
+  if (m || hc) {
+    const inner = hc ? (hc[1] ? parseQuery(hc[1]) : null) : rest ? parseQuery(rest) : null;
+    if (!inner || inner.shared) return null;
+    return { key: `${m ? titleKey(title) : "24"} rcny ${inner.key}`, anchor: inner.anchor };
+  }
+  // "Title 28, Chapter 1": the Administrative Code's or the Rules'.
+  const plain = TITLE_ONLY.exec(q);
+  if (plain) {
+    const inner = plain[2] ? parseQuery(plain[2]) : null;
+    if (!inner || inner.shared) return null;
+    return { key: `title ${titleKey(plain[1])} ${inner.key}`, anchor: inner.anchor, shared: true };
   }
   for (let changed = true; changed && q; ) {
     changed = false;
@@ -60,21 +81,29 @@ export function parseQuery(query) {
   }
   if (!q) return null;
   if (q === "preamble" || q === "introductory") return { key: q, anchor: "" };
-  const ch = /^(?:chapter|ch\.?)\s*([0-9]+(?:-[a-z]+)?)$/.exec(q);
+  const ch = /^(?:chapter|ch\.?)\s*([0-9]+(?:\.[0-9]+)?(?:-?[a-z]+)?)$/.exec(q);
   if (ch) return { key: `chapter ${ch[1]}`, anchor: "" };
   const sec = /^([0-9][0-9a-z.-]*?)\.?\s?((?:\([0-9a-z]+\))*)$/.exec(q);
   if (sec) return { key: sec[1], anchor: sec[2] ?? "" };
   return null;
 }
 
+/** The Rules' book name in citations.json (`b`). */
+export const RULES_BOOK = "Rules";
+
 /**
- * The citation list's entries the query names, and the subdivision anchor it asked for.
- * `list` is citations.json: [{ k: keys, c: citation, h: heading, p: path, b: book }].
+ * The citation list's entries the query names, the subdivision anchor it asked for, and `jump`:
+ * whether to go straight to the one match. "Title 28, Chapter 1" (shared) goes straight only to
+ * an Administrative Code page; when the Rules have one, the reader picks (the search page's
+ * list), since only "28 RCNY …" names the Rules. `list` is citations.json:
+ * [{ k: keys, c: citation, h: heading, p: path, b: book }].
  */
 export function lookup(list, query) {
   const parsed = parseQuery(query);
-  if (!parsed) return { matches: [], anchor: "" };
-  return { matches: list.filter((e) => e.k.includes(parsed.key)), anchor: parsed.anchor };
+  if (!parsed) return { matches: [], anchor: "", jump: false };
+  const matches = list.filter((e) => e.k.includes(parsed.key));
+  const jump = matches.length === 1 && !(parsed.shared && matches[0].b === RULES_BOOK);
+  return { matches, anchor: parsed.anchor, jump };
 }
 
 /** Where a single match goes: its path, plus the anchor when the reader named a subdivision. */

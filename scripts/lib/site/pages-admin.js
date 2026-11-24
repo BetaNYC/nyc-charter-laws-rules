@@ -422,6 +422,40 @@ export function adminSharedNumberPage(sh, book, site) {
   };
 }
 
+/**
+ * A chapter number one title gives two chapters (the Administrative Code's starred pairs, Rules
+ * Title 43's two Chapter 15s): a page at the plain path to pick one (model.js chapterPaths).
+ */
+export function sharedChapterPage(sc, book, site) {
+  const t = sc.title;
+  const crumbs = [...crumbsTo(book, { title: t }), { name: sc.citation, path: sc.path }];
+  const name = (c) => (sc.chapters.filter((o) => o.name === c.name).length > 1 ? `${c.name} (American Legal id ${c.id})` : c.name);
+  const main = [
+    breadcrumbs(crumbs),
+    citeHeading(sc.chapters[0].fullCitation, `${sc.chapters.length} chapters have this number`),
+    `<p>${esc(t.name)} has ${sc.chapters.length} chapters numbered ${esc(sc.citation.replace(/^Chapter /, ""))}. Pick one:</p>`,
+    `<ul class="contents">`,
+    ...sc.chapters.map((c) => `<li><a href="${esc(c.path)}">${esc(name(c))}</a> <span class="count">(${plural(c.sections.length, "section")})</span></li>`),
+    `</ul>`,
+  ].join("\n");
+  return {
+    path: sc.path,
+    file: fileFor(sc.path),
+    kind: "shared",
+    html: page({
+      path: sc.path,
+      title: titleOf(`${sc.chapters[0].fullCitation}: ${sc.chapters.length} chapters share this number`),
+      description: describe(`${t.name} has ${sc.chapters.length} chapters numbered ${sc.citation.replace(/^Chapter /, "")}: ${sc.chapters.map((c) => c.title || c.citation).join("; ")}.`),
+      main,
+      aside: titlesTree(book, { title: t, here: sc.path }),
+      here: t.name,
+      nav: book.book.slug,
+      site,
+      jsonLd: [breadcrumbJsonLd(crumbs)],
+    }),
+  };
+}
+
 /** Every page of the Admin Code, as functions that each make one page (12,000+ pages are written one at a time, not held in memory). */
 export function adminPageMakers(book, site) {
   return [
@@ -431,5 +465,6 @@ export function adminPageMakers(book, site) {
     ...book.parts.map((p) => () => adminPartPage(p, book, site)),
     ...book.sections.map((s) => () => adminSectionPage(s, book, site)),
     ...book.shared.map((sh) => () => adminSharedNumberPage(sh, book, site)),
+    ...(book.sharedChapters ?? []).map((sc) => () => sharedChapterPage(sc, book, site)),
   ];
 }

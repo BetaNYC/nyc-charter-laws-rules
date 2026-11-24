@@ -185,6 +185,18 @@ test("the jump box: '<title> RCNY § <number>' goes to its page", async () => {
   await ctx.close();
 });
 
+test("the jump box: 'Title <n>, Chapter <m>' does not open the Rules; it offers them on the search page", async () => {
+  const c = section.chapter.kind === "title" ? rules.chapters[0] : section.chapter;
+  const { page, ctx } = await open("/");
+  const box = page.getByRole("searchbox", { name: /Go to a section/ }).or(page.getByRole("textbox", { name: /Go to a section/ })).first();
+  await box.fill(`Title ${c.titleNumber}, ${c.citation}`);
+  await box.press("Enter");
+  await page.waitForURL(/\/search\?q=/);
+  await page.locator("#pick").waitFor({ state: "visible" });
+  assert.equal(await page.locator(`#pick a[href="${c.path}"]`).count(), 1, "the Rules chapter is offered");
+  await ctx.close();
+});
+
 test("at 390px: no sideways scroll on the Rules' pages; the cards are one column; Contents opens the menu", async () => {
   const pages = ["/rules/", section.titleNode.path, section.path, pick.path, rules.chapters.find((c) => c.parts)?.parts?.[0]?.path ?? section.chapter.path];
   for (const path of pages) {

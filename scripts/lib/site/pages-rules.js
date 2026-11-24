@@ -21,6 +21,7 @@ import {
   adminSectionPage,
   titlesTree,
   citeHeading,
+  sharedChapterPage,
 } from "./pages-admin.js";
 
 const esc = escapeHtml;
@@ -123,5 +124,6 @@ export function rulesPageMakers(book, site) {
     ...book.sections.map((s) => () => adminSectionPage(s, book, site)),
     ...book.shared.map((sh) => () => rulesSharedNumberPage(sh, book, site)),
     ...book.picks.map((pk) => () => rulesPickPage(pk, book, site)),
+    ...book.sharedChapters.map((sc) => () => sharedChapterPage(sc, book, site)),
   ];
 }

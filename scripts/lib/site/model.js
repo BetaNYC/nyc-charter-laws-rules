@@ -349,10 +349,38 @@ function titleKey(number) {
   return m ? [0, Number(m[1]), (m[2] ?? "").toUpperCase()] : [1, 0, number];
 }
 
-/** Admin Code chapter order inside a title: "Chapter 2-A" → [1, 2, "A"]; a year "2016" → [1, 2016, ""]. */
+/**
+ * Chapter order inside a title (the Administrative Code's and the Rules'): "Chapter 2-A" →
+ * [1, 2, 0, "A"]; "Chapter 19A" → [1, 19, 0, "A"]; "Chapter 19.1" → [1, 19, 1, ""]; a year
+ * "2016" → [1, 2016, 0, ""]. So Chapter 19, 19A and 19.1 come after Chapter 19 and before Chapter
+ * 20, as the publisher lists them (Rules Titles 24 and 15). Other citations (the Health Code, the
+ * yearly orders, appendices) come after the numbered chapters, in alphabetical order.
+ */
 export function adminChapterKey(citation) {
-  const m = /^(?:Chapter )?(\d+)(?:-([A-Za-z]+))?$/.exec(citation);
-  return m ? [1, Number(m[1]), (m[2] ?? "").toUpperCase()] : [2, 0, citation];
+  const m = /^(?:Chapter )?(\d+)(?:\.(\d+))?(?:-?([A-Za-z]+))?$/.exec(citation);
+  return m ? [1, Number(m[1]), m[2] === undefined ? 0 : Number(m[2]), (m[3] ?? "").toUpperCase()] : [2, 0, 0, citation];
+}
+
+/**
+ * Chapter paths in a title: the chapter's number (`slugOf`), and, for a number the title gives
+ * two chapters (the Administrative Code's starred pairs, Title 43 of the Rules' two Chapter 15s),
+ * each one's number plus American Legal's id, and a page at the plain path to pick one
+ * (`sharedChapters`, as for sections). The plain path never goes away: a number that becomes
+ * shared turns its page into the page to pick one, so an old link still reaches the chapter, and
+ * an id-suffixed path that loses its pair lands through the 404 page (its id is in redirects.json).
+ */
+function chapterPaths(t, slugOf, shared) {
+  const bySlug = new Map();
+  for (const c of t.chapters) {
+    const n = slugOf(c.citation);
+    if (!bySlug.has(n)) bySlug.set(n, []);
+    bySlug.get(n).push(c);
+  }
+  for (const [n, list] of bySlug) {
+    for (const c of list) c.slug = list.length === 1 ? n : `${n}-${c.id}`;
+    if (list.length > 1) shared.push({ number: n, title: t, citation: list[0].citation, path: `${t.path}/chapters/${n}`, chapters: list });
+  }
+  for (const c of t.chapters) c.path = `${t.path}/chapters/${c.slug}`;
 }
 
 /** The group for the local-law chapters, which have no Title record and no § numbering. Its name is BetaNYC's. */
@@ -430,16 +458,8 @@ function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
 
   // Chapter paths, under their title. Two chapters of one title with one number (four pairs in
   // the publisher's file, each marked "*") each get the number plus American Legal's id.
-  for (const t of titleList) {
-    const bySlug = new Map();
-    for (const c of t.chapters) {
-      const n = chapterSlug(c.citation);
-      if (!bySlug.has(n)) bySlug.set(n, []);
-      bySlug.get(n).push(c);
-    }
-    for (const [n, list] of bySlug) for (const c of list) c.slug = list.length === 1 ? n : `${n}-${c.id}`;
-    for (const c of t.chapters) c.path = `${t.path}/chapters/${c.slug}`;
-  }
+  const sharedChapters = [];
+  for (const t of titleList) chapterPaths(t, chapterSlug, sharedChapters);
 
   // Display names. A chapter's number repeats across titles, so its long name and citation carry its title.
   for (const r of records) r.title = adminShortHeading(r);
@@ -519,7 +539,7 @@ function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
 
   const paths = new Set();
   const parts = holders.flatMap((h) => h.parts ?? []);
-  for (const r of [...titleList, ...chapters, ...sections, ...parts, ...shared]) {
+  for (const r of [...titleList, ...chapters, ...sections, ...parts, ...shared, ...sharedChapters]) {
     if (paths.has(r.path)) throw new Error(`two pages share the path ${r.path}`);
     paths.add(r.path);
   }
@@ -551,6 +571,7 @@ function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
     chapters,
     sections,
     shared,
+    sharedChapters,
     parts,
     /** Document order of the index's records: each chapter, then its sections (a title's own sections first). */
     ordered: titleList.flatMap((t) => [...t.sections, ...t.chapters.flatMap((c) => [c, ...c.sections])]),
@@ -736,15 +757,9 @@ function layoutRules({ corpus, book, v, sha, records, byId, groups }) {
   }
 
   // Chapter paths, under their title; two chapters of one title with one number get American Legal's id too.
+  const sharedChapters = [];
   for (const t of titleList) {
-    const bySlug = new Map();
-    for (const c of t.chapters) {
-      const n = rulesChapterSlug(c.citation);
-      if (!bySlug.has(n)) bySlug.set(n, []);
-      bySlug.get(n).push(c);
-    }
-    for (const [n, list] of bySlug) for (const c of list) c.slug = list.length === 1 ? n : `${n}-${c.id}`;
-    for (const c of t.chapters) c.path = `${t.path}/chapters/${c.slug}`;
+    chapterPaths(t, rulesChapterSlug, sharedChapters);
     t.name = `${t.citation}: ${t.title}`;
     t.longName = t.name;
     t.synthetic = false;
@@ -846,7 +861,7 @@ function layoutRules({ corpus, book, v, sha, records, byId, groups }) {
 
   const paths = new Set();
   const parts = holders.flatMap((h) => h.parts ?? []);
-  for (const r of [...titleList, ...chapters, ...sections, ...parts, ...shared, ...picks]) {
+  for (const r of [...titleList, ...chapters, ...sections, ...parts, ...shared, ...picks, ...sharedChapters]) {
     if (paths.has(r.path)) throw new Error(`two pages share the path ${r.path}`);
     paths.add(r.path);
   }
@@ -886,6 +901,7 @@ function layoutRules({ corpus, book, v, sha, records, byId, groups }) {
     chapters,
     sections,
     shared,
+    sharedChapters,
     picks,
     numbers,
     parts,

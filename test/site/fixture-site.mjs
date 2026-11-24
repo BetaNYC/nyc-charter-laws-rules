@@ -75,14 +75,15 @@ export async function buildFixtureSite({ search = false } = {}) {
  * scripts/build-index.js builds them (a title index finished after the last file). `titles:
  * false` takes `titleNumber` and `titleHeading` off every record: an index from before 0.6.3.
  */
-export function buildRulesFixtureData({ titles = true } = {}) {
+export function buildRulesFixtureData({ titles = true, extra = [] } = {}) {
   const files = readdirSync(RULES_XML).filter((f) => f.endsWith(".xml")).sort();
+  // `extra`: more files, as XML text, read after the fixtures (a test's own chapters).
+  const texts = [...files.map((f) => [f, readFileSync(join(RULES_XML, f), "utf8")]), ...extra.map((xml, i) => [`extra-${i}.xml`, xml])];
   const collector = createStructureCollector("rules");
   const index = createTitleIndex();
   let sections = [];
   let version = "Unknown";
-  for (const f of files) {
-    const xml = readFileSync(join(RULES_XML, f), "utf8");
+  for (const [f, xml] of texts) {
     collectSectionsFromXml(xml, "rules", sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), index);
     if (f === "0-0-0-1.xml") version = extractVersion(xml);
   }
@@ -95,9 +96,9 @@ export function buildRulesFixtureData({ titles = true } = {}) {
 }
 
 /** Build the Charter and the Rules fixtures into a new temporary folder. */
-export async function buildRulesFixtureSite({ search = false, titles = true, books = ["charter", "rules"] } = {}) {
+export async function buildRulesFixtureSite({ search = false, titles = true, books = ["charter", "rules"], extra = [] } = {}) {
   const d = writeFixtureData();
-  const rules = buildRulesFixtureData({ titles });
+  const rules = buildRulesFixtureData({ titles, extra });
   writeFileSync(join(d.indexDir, "rules.json"), rules.json);
   writeFileSync(join(d.structureDir, "rules.json"), structureJson(rules.structure));
   writeFileSync(join(d.indexDir, "versions.json"), JSON.stringify({ ...d.data.versions, rules: rules.version }, null, 2));

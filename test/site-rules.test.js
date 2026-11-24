@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { buildRulesFixtureSite, buildRulesFixtureData, ROOT } from "./site/fixture-site.mjs";
-import { rulesReady, rcnyForm, localCitation, rulesChapterSlug, linkHref, linkTarget } from "../scripts/lib/site/model.js";
+import { rulesReady, rcnyForm, localCitation, rulesChapterSlug, linkHref, linkTarget, adminChapterKey } from "../scripts/lib/site/model.js";
 import { parseQuery, lookup, citationKeys } from "../site/assets/jump.js";
 import { redirectFor, redirectChoices, rulesNumberFor } from "../site/assets/not-found.js";
 import { officialLinks, possessive, listOf, bottomBox } from "../scripts/lib/site/layout.js";
@@ -273,7 +273,7 @@ test("home, search, About and 404 cover the Rules", () => {
 test("jump box: '15 RCNY § 1-01' goes to its page; '§ 1-01' alone is in several titles", () => {
   assert.deepEqual(parseQuery("15 RCNY § 1-01"), { key: "15 rcny 1-01", anchor: "" });
   assert.deepEqual(parseQuery("15 R.C.N.Y. 1-01(a)"), { key: "15 rcny 1-01", anchor: "(a)" });
-  assert.deepEqual(parseQuery("Title 15 § 1-01"), { key: "15 rcny 1-01", anchor: "" });
+  assert.deepEqual(parseQuery("Title 15 RCNY § 1-01"), { key: "15 rcny 1-01", anchor: "" });
   assert.deepEqual(parseQuery("RCNY Title 15, Chapter 18"), { key: "15 rcny chapter 18", anchor: "" });
   assert.deepEqual(parseQuery("38a RCNY § 1-01"), { key: "38-a rcny 1-01", anchor: "" });
   assert.deepEqual(parseQuery("24 RCNY Health Code § 81.08"), { key: "24 rcny 81.08", anchor: "" });
@@ -281,13 +281,15 @@ test("jump box: '15 RCNY § 1-01' goes to its page; '§ 1-01' alone is in severa
   assert.deepEqual(parseQuery("15 RCNY"), null);
   // The Charter's forms are unchanged.
   assert.deepEqual(parseQuery("Section 259(a)(1)"), { key: "259", anchor: "(a)(1)" });
-  assert.deepEqual(citationKeys("§ 1-01", "38-A"), ["1-01", "38-a rcny 1-01"]);
-  assert.deepEqual(citationKeys("Chapter 18", "15"), ["chapter 18", "15 rcny chapter 18"]);
+  assert.deepEqual(citationKeys("§ 1-01", "38-A", { rules: true }), ["1-01", "title 38-a 1-01", "38-a rcny 1-01"]);
+  assert.deepEqual(citationKeys("Chapter 18", "15", { rules: true }), ["chapter 18", "title 15 chapter 18", "15 rcny chapter 18"]);
+  assert.deepEqual(citationKeys("Chapter 1", "28"), ["chapter 1", "title 28 chapter 1"]);
   assert.deepEqual(citationKeys("§ 259"), ["259"]);
   const list = JSON.parse(read("citations.json"));
   const one = lookup(list, "15 RCNY § 1-01(b)");
   assert.deepEqual(one.matches.map((m) => [m.p, m.c]), [["/rules/titles/15/sections/1-01", "15 RCNY § 1-01"]]);
   assert.equal(one.anchor, "(b)");
+  assert.equal(one.jump, true);
   assert.deepEqual(lookup(list, "Health Code § 81.08").matches.map((m) => m.p), ["/rules/titles/24/sections/81.08"]);
   assert.deepEqual(lookup(list, "§ 1-01").matches.filter((m) => m.b === "Rules").map((m) => m.c), ["15 RCNY § 1-01", "24 RCNY § 1-01", "30 RCNY § 1-01", "38-A RCNY § 1-01"]);
 });
@@ -331,4 +333,111 @@ test("sitemaps and the site's data files include the Rules", () => {
   assert.equal(meta.skipped, undefined);
   const idx = JSON.parse(read("index.json"));
   assert.deepEqual(idx.books.find((b) => b.book === "rules").children.map((t) => t.path), rules.titles.map((t) => t.path));
+});
+
+test("jump box: 'Title N, Chapter M' never goes straight to the Rules; only 'N RCNY …' does", () => {
+  // The Administrative Code cites its chapters "Title 28, Chapter 1" too (breadcrumbs, search titles).
+  assert.deepEqual(parseQuery("Title 28, Chapter 1"), { key: "title 28 chapter 1", anchor: "", shared: true });
+  assert.deepEqual(parseQuery("Title 17 Chapter 3"), { key: "title 17 chapter 3", anchor: "", shared: true });
+  assert.deepEqual(parseQuery("Title 15 § 1-01"), { key: "title 15 1-01", anchor: "", shared: true });
+  assert.deepEqual(parseQuery("RCNY Title 15, Chapter 18"), { key: "15 rcny chapter 18", anchor: "" });
+  const admin = { k: citationKeys("Chapter 1", "28"), c: "NYC Administrative Code Title 28, Chapter 1", h: "Administration", p: "/admin-code/titles/28/chapters/1", b: "Admin Code" };
+  const rule = { k: citationKeys("Chapter 1", "28", { rules: true }), c: "28 RCNY Chapter 1", h: "General", p: "/rules/titles/28/chapters/1", b: "Rules" };
+  const rule17 = { k: citationKeys("Chapter 3", "17", { rules: true }), c: "17 RCNY Chapter 3", h: "Other", p: "/rules/titles/17/chapters/3", b: "Rules" };
+  const list = [admin, rule, rule17];
+  // Both books have it: the reader picks, from the search page's list.
+  const both = lookup(list, "Title 28, Chapter 1");
+  assert.deepEqual(both.matches.map((m) => m.p), [admin.p, rule.p]);
+  assert.equal(both.jump, false);
+  // The Admin Code alone: straight there.
+  assert.deepEqual(lookup([admin, rule17], "Title 28, Chapter 1"), { matches: [admin], anchor: "", jump: true });
+  // The Rules alone: offered, not opened.
+  const only = lookup(list, "Title 17 Chapter 3");
+  assert.deepEqual([only.matches.map((m) => m.p), only.jump], [[rule17.p], false]);
+  // The Rules' own form goes straight there.
+  assert.deepEqual(lookup(list, "28 RCNY Chapter 1"), { matches: [rule], anchor: "", jump: true });
+  assert.deepEqual(lookup(list, "17 RCNY Chapter 3").jump, true);
+  // On the fixture site's citations.json: the Charter has no titles, so it is untouched.
+  const real = JSON.parse(read("citations.json"));
+  assert.deepEqual(lookup(real, "Title 15 § 1-01").matches.map((m) => m.p), ["/rules/titles/15/sections/1-01"]);
+  assert.equal(lookup(real, "Title 15 § 1-01").jump, false);
+});
+
+// A title of the fixtures' own (Title 43): two chapters numbered 15, and chapters 19, 19A, 19.1
+// and 20 given out of order, as the publisher's files can give them.
+const T43 = (() => {
+  const chapter = (id, number, heading, anchor, sec) => `
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-${id}" number="${id}" version="1">
+			<HEADING>Chapter ${number}: ${heading}</HEADING>
+			<PARA><DESTINATION id="0-0-0-${id + 5000}" name="${anchor}"/>Chapter ${number}: ${heading}</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-${id + 1}" number="${id + 1}" version="1">
+				<HEADING>§ ${sec} ${heading} rules.</HEADING>
+				<PARA>§ ${sec} ${heading} rules.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-${id + 2}" number="${id + 2}" version="1"><PARA>Text of ${sec}.</PARA></RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-600" number="600" version="1">
+		<HEADING>Title 43: Mayor</HEADING>
+		<PARA><DESTINATION id="0-0-0-5600" name="Title 43"/>Title 43: Mayor</PARA>
+	</RECORD>${[
+    chapter(610, "20", "Twenty", "T43C020", "20-01"),
+    chapter(620, "19.1", "Nineteen point one", "T43C019.1", "19.1-01"),
+    chapter(630, "15", "Fifteen one", "T43C015", "15-01"),
+    chapter(640, "19A", "Nineteen A", "T43C019A", "19A-01"),
+    chapter(650, "19", "Nineteen", "T43C019", "19-01"),
+    chapter(660, "15", "Fifteen two", "T43C015", "15-11"),
+  ].join("")}
+</LEVEL>
+</DOCUMENT>`;
+})();
+
+test("chapters sort as the publisher numbers them: 19, 19A, 19.1, 20; a number used twice has a page to pick one", async () => {
+  // The key: letters and decimals after the number; the Administrative Code's "2-A" as before.
+  const order = ["Chapter 20", "Health Code", "Chapter 19.1", "Chapter 19A", "Chapter 2-A", "Chapter 19", "Chapter 2", "2016"];
+  assert.deepEqual([...order].sort((a, b) => {
+    const [x, y] = [adminChapterKey(a), adminChapterKey(b)];
+    for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1;
+    return 0;
+  }), ["Chapter 2", "Chapter 2-A", "Chapter 19", "Chapter 19A", "Chapter 19.1", "Chapter 20", "2016", "Health Code"]);
+
+  const t43site = await buildRulesFixtureSite({ extra: [T43] });
+  try {
+    const b = t43site.books.find((x) => x.corpus === "rules");
+    const t = b.titles.find((x) => x.number === "43");
+    assert.deepEqual(t.chapters.map((c) => c.citation), ["Chapter 15", "Chapter 15", "Chapter 19", "Chapter 19A", "Chapter 19.1", "Chapter 20"]);
+    assert.deepEqual(t.chapters.map((c) => c.path), [
+      "/rules/titles/43/chapters/15-0-0-0-630",
+      "/rules/titles/43/chapters/15-0-0-0-660",
+      "/rules/titles/43/chapters/19",
+      "/rules/titles/43/chapters/19a",
+      "/rules/titles/43/chapters/19.1",
+      "/rules/titles/43/chapters/20",
+    ]);
+    // Previous and next, the menu's list and the sections follow the same order.
+    const c19a = t.chapters[3];
+    assert.deepEqual([c19a.prev.citation, c19a.next.citation], ["Chapter 19", "Chapter 19.1"]);
+    const rd = (rel) => readFileSync(join(t43site.outDir, rel), "utf8");
+    assert.deepEqual(JSON.parse(rd("rules/contents/titles/43.json")).map(([p]) => p), t.chapters.map((c) => c.path));
+    assert.deepEqual(t.chapters.flatMap((c) => c.sections).map((s) => s.citation), b.sections.filter((s) => s.titleNumber === "43").map((s) => s.citation));
+    // The plain path of the shared number: a page to pick one, in the sitemap; both chapters linked.
+    assert.deepEqual(b.sharedChapters.map((sc) => [sc.path, sc.chapters.map((c) => c.id)]), [["/rules/titles/43/chapters/15", ["0-0-0-630", "0-0-0-660"]]]);
+    const pick = rd("rules/titles/43/chapters/15.html");
+    assert.match(pick, /<h1><span class="cite">43 RCNY Chapter 15<\/span> <span class="heading">2 chapters have this number<\/span><\/h1>/);
+    assert.ok(pick.includes(`<a href="/rules/titles/43/chapters/15-0-0-0-630">Chapter 15: Fifteen one</a>`));
+    assert.ok(pick.includes(`<a href="/rules/titles/43/chapters/15-0-0-0-660">Chapter 15: Fifteen two</a>`));
+    assert.match(rd("sitemaps/rules.xml"), /\/rules\/titles\/43\/chapters\/15<\/loc>/);
+    // An id-suffixed path that stops being shared still lands, through the 404 page's ids.
+    assert.equal(redirectFor("/rules/titles/43/chapters/15-0-0-0-630", JSON.parse(rd("redirects.json"))), "/rules/titles/43/chapters/15-0-0-0-630");
+  } finally {
+    rmSync(join(t43site.outDir, ".."), { recursive: true, force: true });
+  }
 });
