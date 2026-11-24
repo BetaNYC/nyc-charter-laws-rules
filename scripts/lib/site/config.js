@@ -15,8 +15,8 @@ export const REPO_URL = "https://github.com/BetaNYC/nyc-charter-laws-rules";
 export const NPM_URL = "https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules";
 
 /**
- * The books on the site: the Charter (Phase 2) and the Administrative Code (Phase 5, #65); the
- * Rules follow. `label` starts page titles ("NYC Charter § 259: ..."); `name` is the book's full
+ * The books on the site: the Charter (Phase 2), the Administrative Code and the Rules (Phase 5,
+ * #65). `label` starts page titles ("NYC Charter § 259: ..."); `name` is the book's full
  * name; `short` is the top bar's link; `long` is the name in running text ("the Administrative
  * Code"); `official` is the bold line's name for the official copy.
  */
@@ -45,6 +45,25 @@ export const BOOKS = {
     official: "The official Administrative Code",
     titles: true,
   },
+  // The Rules of the City of New York, titles first. Each title restarts its chapter and section
+  // numbers, so `rcny` makes model.js lay it out per title (layoutRules): paths and citations
+  // come from each record's `titleNumber` ("15 RCNY § 1-01"), which the index has since 0.6.3
+  // (#59). An index without it is not built (build.js rulesReady). `latestUrl` is where the City
+  // posts current rules (src/tools.ts FOOTER: "For the latest rules information, see ...").
+  rules: {
+    corpus: "rules",
+    slug: "rules",
+    source: "rules",
+    label: "NYC Rules",
+    name: "Rules of the City of New York",
+    short: "Rules",
+    long: "Rules",
+    aml: "NYCrules",
+    official: "The official Rules",
+    titles: true,
+    rcny: true,
+    latestUrl: "https://rules.cityofnewyork.us",
+  },
 };
 
 /** Absolute URL for a site path ("/charter/sections/259"). */
@@ -52,5 +71,8 @@ export function absoluteUrl(path) {
   return SITE_BASE + path;
 }
 
-/** The books build-site builds, in order, unless told otherwise (--charter-only). */
-export const DEFAULT_BOOKS = ["charter", "admin_code"];
+/**
+ * The books build-site builds, in order, unless told otherwise (--charter-only). The Rules are
+ * left out of a build whose index has no titles yet (build.js rulesReady).
+ */
+export const DEFAULT_BOOKS = ["charter", "admin_code", "rules"];

@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSy
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
-import { loadBook } from "./model.js";
+import { loadBook, rulesReady } from "./model.js";
 import { readFooter, disclaimerParagraphs } from "./disclaimer.js";
 import { newYorkLongDate, newYorkIso, newYorkDay } from "./clock.js";
 import {
@@ -23,6 +23,7 @@ import {
 import { redirectsJson, indexJson, citationsJson, metadataJson, sitemaps, robotsTxt } from "./outputs.js";
 import { BOOKS, DEFAULT_BOOKS } from "./config.js";
 import { adminPageMakers, titleChaptersPath, titleChaptersJson } from "./pages-admin.js";
+import { rulesPageMakers, rulesNumbersPath } from "./pages-rules.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -138,6 +139,8 @@ export function siteFacts(books, dataSources) {
       officialUrl,
       officialBase,
       officialName: b.book.official,
+      // Where the City posts current rules (the Rules only).
+      ...(b.book.latestUrl ? { latestUrl: b.book.latestUrl } : {}),
       creditLine,
       contentsPath: `/${b.book.slug}/`,
       ...(navBooks ? { navBooks } : {}),
@@ -156,7 +159,8 @@ export function siteFacts(books, dataSources) {
  * @param {string} [o.structureDir]   data/structure
  * @param {string} [o.outDir]         _site
  * @param {boolean} [o.search=true]   build the Pagefind index
- * @param {string[]} [o.books]        corpora to build, the Charter first (default DEFAULT_BOOKS)
+ * @param {string[]} [o.books]        corpora to build, the Charter first (default DEFAULT_BOOKS, less
+ *                                    the Rules when their index has no titles: see below)
  * @param {Date} [o.now]              the build's clock (tests fix it)
  * @param {string} [o.commit]         this repo's commit (default: GITHUB_SHA, then git)
  */
@@ -169,7 +173,7 @@ export async function buildSite(o = {}) {
   // The books to build: the Charter and the Administrative Code (DEFAULT_BOOKS), or the Charter
   // alone (--charter-only; the fixture tests). The Charter always comes first: the home, search,
   // About and 404 pages are built around it.
-  const corpora = o.books ?? DEFAULT_BOOKS;
+  let corpora = o.books ?? DEFAULT_BOOKS;
   if (corpora[0] !== "charter") throw new Error(`the first book must be the Charter, not ${corpora[0]}`);
   for (const c of corpora) if (!BOOKS[c]) throw new Error(`no site settings for "${c}"`);
 
@@ -183,11 +187,23 @@ export async function buildSite(o = {}) {
     }
   }
   const versions = JSON.parse(readFileSync(versionsFile, "utf8"));
+  // The Rules need each record's title (`titleNumber`, in the index since 0.6.3, #59): their
+  // paths and citations come from it. An index built before then has none, and the Rules are left
+  // out (`skipped`, also in metadata.json, and printed by build-site.js), so the deploy that runs
+  // before the first refresh after 0.6.3 still publishes the Charter and the Administrative Code,
+  // and no Rules page with a wrong path. An index that names a title on some records only stops
+  // the build (rulesReady).
+  const indexText = new Map(corpora.map((c) => [c, readFileSync(join(indexDir, `${c}.json`), "utf8")]));
+  const skipped = {};
+  if (corpora.includes("rules") && !rulesReady(JSON.parse(indexText.get("rules")))) {
+    skipped.rules = "the Rules index has no titles (titleNumber): it was built before 0.6.3";
+    corpora = corpora.filter((c) => c !== "rules");
+  }
   const dataSources = JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8"));
   const books = corpora.map((c) =>
     loadBook({
       corpus: c,
-      indexJsonText: readFileSync(join(indexDir, `${c}.json`), "utf8"),
+      indexJsonText: indexText.get(c),
       versions,
       structure: JSON.parse(readFileSync(join(structureDir, `${c}.json`), "utf8")),
     })
@@ -203,6 +219,7 @@ export async function buildSite(o = {}) {
     builtOn: newYorkDay(now),
     commit: o.commit ?? gitCommit(),
     structureFormat: 1,
+    skipped,
   });
 
   prepareOut(outDir);
@@ -231,13 +248,15 @@ export async function buildSite(o = {}) {
   for (const b of extra) {
     const bsite = perBook.get(b.corpus);
     if (!b.book.titles) throw new Error(`${b.corpus}: only a book laid out by titles can follow the Charter for now`);
-    for (const make of adminPageMakers(b, bsite)) {
+    for (const make of (b.book.rcny ? rulesPageMakers : adminPageMakers)(b, bsite)) {
       const p = make();
       write(outDir, p.file, p.html);
       pages.push({ path: p.path, file: p.file, kind: p.kind, book: b.book.slug, bytes: Buffer.byteLength(p.html) });
     }
   }
   for (const b of extra) for (const t of b.titles) write(outDir, titleChaptersPath(b, t).slice(1), JSON.stringify(titleChaptersJson(t)));
+  // The Rules' numbers that are in one title only, for the 404 page (/rules/sections/3-01).
+  for (const b of extra) if (b.numbers) write(outDir, rulesNumbersPath(b).slice(1), JSON.stringify(b.numbers));
   // Each chapter's sections, for the contents tree: a page carries only its own chapter's list,
   // and law.js loads another chapter's when the reader opens it (pages.js contentsTree).
   for (const c of book.chapters) if (c.sections.length) write(outDir, chapterSectionsPath(book, c).slice(1), JSON.stringify(chapterSectionsJson(c)));
@@ -280,6 +299,7 @@ export async function buildSite(o = {}) {
     bytes: total.bytes,
     pagefind,
     metadata,
+    skipped,
     seconds: Number(((t2 - t0) / 1000).toFixed(2)),
     pagesSeconds: Number(((t1 - t0) / 1000).toFixed(2)),
     searchSeconds: Number(((t2 - t1) / 1000).toFixed(2)),

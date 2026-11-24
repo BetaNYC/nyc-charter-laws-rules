@@ -33,8 +33,8 @@ export async function destination(query) {
   const q = String(query ?? "").trim();
   if (!q) return null;
   try {
-    const { matches, anchor } = lookup(await loadCitations(), q);
-    if (matches.length === 1) return jumpTarget(matches[0], anchor);
+    const { matches, anchor, jump } = lookup(await loadCitations(), q);
+    if (jump) return jumpTarget(matches[0], anchor);
   } catch (e) {
     console.warn(e);
   }

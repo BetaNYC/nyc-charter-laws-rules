@@ -1,5 +1,9 @@
-# Build the BetaNYC Law Reader (the Charter and the Administrative Code) and deploy it to GitHub
-# Pages (issues #64 and #65, epic #68).
+# Build the BetaNYC Law Reader (the Charter, the Administrative Code and the Rules) and deploy it
+# to GitHub Pages (issues #64 and #65, epic #68).
+#
+# The Rules need an index that names each record's title (`titleNumber`, since 0.6.3). Until the
+# daily refresh commits one, the build leaves the Rules out (scripts/lib/site/build.js), the check
+# step says so in a notice, and the site deploys with the other two books, as before.
 #
 # The HTML is built here, fresh, on every run, from the committed data/index/ and
 # data/structure/, and is never committed (epic #68, decision 5). The build fetches nothing.
@@ -75,6 +79,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      # "true" when the build has the Rules: the deploy job's smoke check then reads /rules/ too.
+      rules: ${{ steps.check.outputs.rules }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -103,21 +110,34 @@ jobs:
         run: npm run test:site-data
 
       - name: Build the site
-        # The Charter and the Administrative Code (scripts/lib/site/config.js DEFAULT_BOOKS; the
-        # build has no flag to add a book, so a local `npm run build-site` makes the same site).
+        # The Charter, the Administrative Code and the Rules (scripts/lib/site/config.js
+        # DEFAULT_BOOKS; the build has no flag to add a book, so a local `npm run build-site` makes
+        # the same site). The Rules are left out when their index has no titles yet.
         # Exits 1, and so stops the run before anything deploys, if data/structure/ is
         # missing, was built from other text than the index, or disagrees with versions.json.
-        # Measured 2026-11-23 on a Mac: about 9.5 seconds, 27,738 files, 386.8 MB, with a
-        # peak resident memory of 2.2 GB while Pagefind indexes. The runner's memory has not been
-        # measured here; see the README's Deploy section.
+        # Measured 2026-11-24 on a Mac, all three books on the July 2026 files: about 18 seconds,
+        # 47,111 files, 718 MB (GitHub Pages allows 1 GB), with a peak resident memory of 4.1 GB
+        # while Pagefind indexes. The runner's memory has not been measured here; see the README's
+        # Deploy section.
         run: npm run build-site
 
       - name: Check the build
+        id: check
         run: |
           set -euo pipefail
           for f in index.html about.html 404.html search.html charter/index.html admin-code/index.html redirects.json sitemap.xml sitemaps/admin-code.xml robots.txt pagefind/pagefind.js; do
             test -s "_site/$f" || { echo "::error::_site/$f is missing or empty" >&2; exit 1; }
           done
+          # The Rules: there once the index names each record's title, left out with a notice before.
+          if node -e 'process.exit(require("./_site/metadata.json").books.rules ? 0 : 1)'; then
+            for f in rules/index.html rules/numbers.json sitemaps/rules.xml; do
+              test -s "_site/$f" || { echo "::error::_site/$f is missing or empty" >&2; exit 1; }
+            done
+            echo "rules=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::The Rules were left out of this build: $(node -p 'require("./_site/metadata.json").skipped?.rules ?? "not built"')"
+            echo "rules=false" >> "$GITHUB_OUTPUT"
+          fi
           echo "deploy-site: $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
 
       - name: Configure Pages
@@ -147,10 +167,13 @@ jobs:
         # A failure turns the run red. It cannot undo the deployment.
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          RULES: ${{ needs.build.outputs.rules }}
         run: |
           set -euo pipefail
           base="${PAGE_URL%/}"
-          for path in / /about /admin-code/; do
+          paths="/ /about /admin-code/"
+          if [ "$RULES" = "true" ]; then paths="$paths /rules/"; fi
+          for path in $paths; do
             code="$(curl -sSL -o /dev/null -w '%{http_code}' --retry 5 --retry-all-errors --retry-delay 10 --max-time 30 "${base}${path}")" || code="curl failed"
             echo "deploy-site: ${base}${path} -> ${code}"
             [ "$code" = "200" ] || { echo "::error::${base}${path} answered ${code}, not 200" >&2; exit 1; }
