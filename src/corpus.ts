@@ -59,6 +59,17 @@ export interface Section {
    * schedules, editor's notes). Absent on every record of an index built before 0.6.3.
    */
   level?: string;
+  /**
+   * Administrative Code and Rules only (issue #59): the number of the Title the record is in, as
+   * the publisher's Title heading writes it ("15", "16-A", "38-A"). Each title of the Rules
+   * restarts its numbers, so "15 RCNY § 1-01" is `titleNumber` + " RCNY " + `citation`. Absent
+   * for the Charter (no titles), for records in no numbered title (the Administrative Code's
+   * unconsolidated local laws), and on every record of an index built before 0.6.3.
+   * scripts/lib/build-corpus.js ("Titles") says where it is read from.
+   */
+  titleNumber?: string;
+  /** On a chapter record with a `titleNumber`: that Title's heading ("Title 15: Department of Environmental Protection"). */
+  titleHeading?: string;
 }
 
 export interface CorpusVersion {
@@ -374,11 +385,13 @@ export function searchWithFallback(
 }
 
 // Normalize a citation for comparison: strip "§"/"section" prefixes, lowercase,
-// collapse whitespace. "§ 11-602.1", "Section 11-602.1", "11-602.1" all
-// normalize to "11-602.1"; "Chapter 3" stays "chapter 3".
+// collapse whitespace, and make any dash a hyphen. "§ 11-602.1", "Section 11-602.1", "11-602.1"
+// and "§ 11–602.1" (en dash, issue #59) all normalize to "11-602.1"; "Chapter 3" stays "chapter 3".
+const DASHES = /[\u2010-\u2015\u2212]/g;
 export function normalizeCitation(input: string): string {
   return input
     .toLowerCase()
+    .replace(DASHES, "-")
     .replace(/§§?\s*/g, "")
     .replace(/^section\s+/, "")
     .replace(/\s+/g, " ")
@@ -390,39 +403,264 @@ export type GetSectionResult =
   | { kind: "ambiguous"; candidates: Section[] }
   | { kind: "none" };
 
+// ---------------------------------------------------------------- titles (issue #59)
+//
+// Each title of the Rules restarts its chapter and section numbers: "§ 1-01" is the first section
+// of about fifty titles. The standard citation names the title first: "15 RCNY § 1-01" (Title 15
+// of the Rules of the City of New York). A lettered Administrative Code title shares its parent's
+// numbers (Title 16-A's sections are § 16-501 on). Records carry `titleNumber` (build-corpus.js),
+// so a citation can name its title, and an answer can name a record's.
+
+/** True when the index records titles for this document (built since 0.6.3; never the Charter). */
+const titlesCache: Partial<Record<Corpus, boolean>> = {};
+export function hasTitles(corpus: Corpus): boolean {
+  return (titlesCache[corpus] ??= loadCorpus(corpus).some((s) => s.titleNumber));
+}
+
+/** Each title's heading, from its chapter records: "15" → "Title 15: Department of Environmental Protection". */
+const titleNameCache: Partial<Record<Corpus, Map<string, string>>> = {};
+export function titleHeadings(corpus: Corpus): Map<string, string> {
+  if (titleNameCache[corpus]) return titleNameCache[corpus]!;
+  const names = new Map<string, string>();
+  for (const s of loadCorpus(corpus)) {
+    if (s.titleNumber && s.titleHeading && !names.has(s.titleNumber)) names.set(s.titleNumber, s.titleHeading);
+  }
+  return (titleNameCache[corpus] = names);
+}
+
+// The Health Code is part of Title 24 of the Rules, under a chapter record with no number, and is
+// cited "24 RCNY Health Code § 81.08". Its records are the ones after that chapter record, up to
+// the next chapter record. Matched on the heading the publisher gives it.
+const HEALTH_CODE_HEADING = /^(?:the\s+)?(?:new york city\s+)?health code$/i;
+// Keyed by record id (unique in each document), so a copy of a record (getTitle's chapter
+// records carry their label as citation) is still found.
+const healthCodeCache = new WeakMap<Section[], Set<string>>();
+export function inHealthCode(s: Section): boolean {
+  if (s.corpus !== "rules") return false;
+  const all = loadCorpus("rules");
+  let ids = healthCodeCache.get(all);
+  if (!ids) {
+    ids = new Set();
+    let inside = false;
+    for (const r of all) {
+      if (r.level === "Chapter") inside = HEALTH_CODE_HEADING.test(r.heading.trim());
+      if (inside) ids.add(r.id);
+    }
+    healthCodeCache.set(all, ids);
+  }
+  return ids.has(s.id);
+}
+
+// The chapter record each record sits under: the last chapter record before it in the index
+// (numbered or not: a Rent Guidelines Board order, the Health Code), up to a section with no
+// chapter around it (level "Section"). Null for a chapter record and for a record in no chapter.
+// Keyed by record id, as inHealthCode.
+const chapterOfCache = new WeakMap<Section[], Map<string, Section>>();
+export function chapterOf(s: Section): Section | null {
+  const all = loadCorpus(s.corpus);
+  let map = chapterOfCache.get(all);
+  if (!map) {
+    map = new Map();
+    let current: Section | null = null;
+    for (const r of all) {
+      if (r.level === "Chapter") current = r;
+      else if (r.level === "Section") current = null;
+      else if (current) map.set(r.id, current);
+    }
+    chapterOfCache.set(all, map);
+  }
+  return map.get(s.id) ?? null;
+}
+
+// Compared without "§", case, dashes, spacing or commas: "Title 62 Chapter 5 § 6-01" is
+// "Title 62, Chapter 5, § 6-01".
+const citationKey = (c: string) => normalizeCitation(c).replace(/\s*,\s*/g, " ");
+
+/**
+ * A record's citation with its title, the way a person would cite it:
+ *   - Rules: "15 RCNY § 1-01"; "24 RCNY Health Code § 81.08"; "Title 15, Chapter 18" for a chapter
+ *     and any other record whose citation does not already start with its title.
+ *   - Administrative Code: a chapter is "Title 3, Chapter 1"; a section of a lettered title whose
+ *     number is its parent's is "Title 16-A, § 16-501". Every other citation already says where it
+ *     is ("§ 24-163" is in Title 24; "Section FC 102" is the Fire Code), and is unchanged.
+ *   - The Charter, and any record with no `titleNumber`: its citation.
+ * Where the publisher repeats a citation inside one title (each yearly Rent Guidelines Board order
+ * has its "Notice"; Title 62 numbers sections § 6-01 on in both Chapter 5 and Chapter 6), the
+ * chapter is named too: "Title 30, Apartment & Loft Order #49 (2017), Notice", "Title 62, Chapter
+ * 5, § 6-01". get_section takes each of these forms.
+ */
+export function fullCitation(s: Section): string {
+  const own = titledCitation(s);
+  if (!s.titleNumber || (sharedTitled(s.corpus).get(citationKey(own)) ?? 0) < 2) return own;
+  const chapter = chapterOf(s);
+  return chapter ? `Title ${s.titleNumber}, ${chapter.citation}, ${s.citation}` : own;
+}
+
+// How many records of a document share each titled citation (its key).
+const sharedCache = new WeakMap<Section[], Map<string, number>>();
+function sharedTitled(corpus: Corpus): Map<string, number> {
+  const all = loadCorpus(corpus);
+  let counts = sharedCache.get(all);
+  if (!counts) {
+    counts = new Map();
+    for (const r of all) {
+      if (!r.titleNumber) continue;
+      const k = citationKey(titledCitation(r));
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
+    sharedCache.set(all, counts);
+  }
+  return counts;
+}
+
+function titledCitation(s: Section): string {
+  const t = s.titleNumber;
+  if (!t || /^title\s/i.test(s.citation)) return s.citation;
+  if (s.corpus === "rules") {
+    if (s.citation.startsWith("§")) return `${t} RCNY ${inHealthCode(s) ? "Health Code " : ""}${s.citation}`;
+    return `Title ${t}, ${s.citation}`;
+  }
+  if (s.corpus === "admin_code") {
+    if (s.level === "Chapter") return `Title ${t}, ${s.citation}`;
+    if (/[A-Z]/i.test(t) && s.citation.startsWith("§") && !new RegExp(`^§ ${escapeRegExp(t)}-`, "i").test(s.citation)) {
+      return `Title ${t}, ${s.citation}`;
+    }
+  }
+  return s.citation;
+}
+
+/** "16a", "16-a", "016" → "16-A", "16": a title number as the publisher's Title headings write it. */
+export function canonicalTitle(t: string): string {
+  return t.toUpperCase().replace(/^0+(?=\d)/, "").replace(/^(\d+)-?([A-Z])$/, "$1-$2");
+}
+
+export interface TitledCitation {
+  /** The title asked for ("15", "16-A"), if one was named. */
+  title?: string;
+  /** "RCNY" was named, or the Health Code: only the Rules can hold it. */
+  rules: boolean;
+  /** "Health Code" was named. */
+  healthCode: boolean;
+  /** The rest of the citation: "§ 1-01", "Chapter 18". */
+  rest: string;
+  /**
+   * When the Health Code was named: the rest with its name, as typed ("New York City Health Code,
+   * Title III, Article 48"), which is how the Health Code's own group records are cited.
+   */
+  named?: string;
+}
+
+const TITLE_NUM = String.raw`\d+(?:-?[A-Za-z](?![A-Za-z]))?`;
+const RCNY_WORD = String.raw`r\.?\s?c\.?\s?n\.?\s?y\b\.?`;
+// "15 RCNY § 1-01", "15 R.C.N.Y. 1-01", "15 RCNY Health Code § 81.08".
+const RCNY_FIRST = new RegExp(`^(${TITLE_NUM})\\s+${RCNY_WORD}[\\s,]*(.*)$`, "i");
+// "Title 15 § 1-01", "Title 15, § 1-01", "Title 15 RCNY § 1-01", "RCNY Title 15 § 1-01", "Title 16-A § 16-501".
+const TITLE_FIRST = new RegExp(`^(?:${RCNY_WORD}[\\s,]*)?title\\s+(${TITLE_NUM})(?=[\\s,§]|$)[\\s,]*(?:(${RCNY_WORD})[\\s,]*)?(.*)$`, "i");
+// "RCNY § 1-01".
+const RCNY_ONLY = new RegExp(`^${RCNY_WORD}[\\s,]*(.*)$`, "i");
+const HEALTH_CODE = /^(?:(?:the\s+)?new york city\s+)?health code\b[\s,]*(.*)$/i;
+
+/**
+ * Read a citation that names a title or the Health Code, or null when it names neither, or names
+ * nothing after it ("Title 15" alone is not a section).
+ */
+export function parseTitledCitation(input: string): TitledCitation | null {
+  const q = input.replace(DASHES, "-").replace(/\s+/g, " ").trim();
+  let title: string | undefined;
+  let rules = false;
+  let rest = q;
+  let m: RegExpExecArray | null;
+  if ((m = RCNY_FIRST.exec(q))) [title, rules, rest] = [m[1], true, m[2]];
+  else if ((m = TITLE_FIRST.exec(q))) [title, rules, rest] = [m[1], /^r/i.test(q) || Boolean(m[2]), m[3]];
+  else if ((m = RCNY_ONLY.exec(q))) [rules, rest] = [true, m[1]];
+  // "Health Code § 81.08": the Health Code's records. "Title 24, New York City Health Code" alone
+  // names the chapter record, so with nothing after the name it is the rest itself.
+  const hc = HEALTH_CODE.exec(rest);
+  const named = hc && hc[1].trim() ? rest.trim() : null;
+  if (named) rest = hc![1];
+  if (title === undefined && !rules && !named) return null;
+  rest = rest.trim();
+  if (!rest) return null;
+  return {
+    ...(title !== undefined ? { title: canonicalTitle(title) } : {}),
+    rules: rules || Boolean(named),
+    healthCode: Boolean(named),
+    rest,
+    ...(named ? { named } : {}),
+  };
+}
+
+// A record is in the title (and the Health Code) a citation names. An Administrative Code or
+// Rules index built before 0.6.3 records no titles: there every record counts, so a titled
+// citation still finds the records it could mean (and lists them when there are several).
+function inNamedTitle(s: Section, t: TitledCitation): boolean {
+  if (s.corpus === "charter") return false;
+  if (t.healthCode && !inHealthCode(s)) return false;
+  if (t.title === undefined || !hasTitles(s.corpus)) return true;
+  return s.titleNumber === t.title;
+}
+
+// A list of candidates by document, then by title ("6 RCNY § 1-01" before "15 RCNY § 1-01"),
+// so a person can find the title they mean; records with no title, and records of one title,
+// keep the index's order. An index built before 0.6.3 has no titles: its order is unchanged.
+const CORPUS_ORDER: Record<Corpus, number> = { charter: 0, admin_code: 1, rules: 2 };
+function byTitle(list: Section[]): Section[] {
+  return [...list].sort((a, b) => CORPUS_ORDER[a.corpus] - CORPUS_ORDER[b.corpus] || compareLabels(a.titleNumber ?? "", b.titleNumber ?? ""));
+}
+
 // Exact-citation lookup with normalization and disambiguation.
-// - Input is normalized (with/without "§", case, whitespace).
+// - Input is normalized (with/without "§", case, whitespace, any dash).
+// - A citation may name its title (issue #59): "15 RCNY § 1-01", "15 RCNY 1-01", "Title 15 § 1-01",
+//   "Title 15, Chapter 18", "24 RCNY Health Code § 81.08", "Title 16-A § 16-501". Then only that
+//   title's records are looked at ("RCNY" or the Health Code: only the Rules).
 // - Exact citation matches are preferred over heading substring matches.
 // - If `corpus` is given, only that corpus is consulted.
 // - If multiple sections tie (e.g. charter "Chapter 3" vs rules "Chapter 3"
-//   when no corpus is given), a disambiguation list is returned instead of
-//   silently picking the first hit.
+//   when no corpus is given, or the Rules' many "§ 1-01"), a disambiguation list is returned
+//   instead of silently picking the first hit.
 export function getSection(
   citation: string,
   corpus?: Corpus
 ): GetSectionResult {
+  const titled = parseTitledCitation(citation);
   const corpora: Corpus[] = corpus
     ? [corpus]
-    : ["charter", "admin_code", "rules"];
+    : titled?.rules
+      ? ["rules"]
+      : ["charter", "admin_code", "rules"];
   const q = normalizeCitation(citation);
   if (!q) return { kind: "none" };
 
-  // Pass 1: exact (normalized) citation match across the corpora in scope.
+  // Pass 1: exact (normalized) citation match across the corpora in scope: the whole citation
+  // as typed. Failing that, within the title it names, the part after the title, alone or after
+  // the record's chapter ("Title 62, Chapter 5, § 6-01"). A record whose own citation is the
+  // whole query comes first: "Title 15, Chapter 42, Appendix A" is a record's own citation, and
+  // stays that record even though a section in that chapter is cited "Appendix A".
   const exact: Section[] = [];
+  const inTitle: Section[] = [];
+  const restKeys = new Set(titled ? [titled.rest, titled.named ?? titled.rest].map(citationKey) : []);
   for (const c of corpora) {
     for (const s of loadCorpus(c)) {
-      if (normalizeCitation(s.citation) === q) exact.push(s);
+      if (normalizeCitation(s.citation) === q) {
+        exact.push(s);
+        continue;
+      }
+      if (!titled || exact.length || !inNamedTitle(s, titled)) continue;
+      const chapter = chapterOf(s);
+      if (restKeys.has(citationKey(s.citation)) || (chapter && restKeys.has(citationKey(`${chapter.citation}, ${s.citation}`)))) inTitle.push(s);
     }
   }
-  if (exact.length === 1) return { kind: "match", section: exact[0] };
-  if (exact.length > 1) return { kind: "ambiguous", candidates: exact };
+  const found = exact.length ? exact : inTitle;
+  if (found.length === 1) return { kind: "match", section: found[0] };
+  if (found.length > 1) return { kind: "ambiguous", candidates: byTitle(found) };
 
   // Pass 2: heading substring fallback (legacy behavior, kept for queries
-  // like "Independent budget office").
-  const raw = citation.toLowerCase().trim();
+  // like "Independent budget office"), within the title when one is named.
+  const raw = (titled ? titled.rest : citation).toLowerCase().trim();
   const loose: Section[] = [];
   for (const c of corpora) {
     for (const s of loadCorpus(c)) {
+      if (titled && !inNamedTitle(s, titled)) continue;
       if (s.heading.toLowerCase().includes(raw)) {
         loose.push(s);
         if (loose.length > 10) break; // cap the disambiguation list
@@ -430,7 +668,7 @@ export function getSection(
     }
   }
   if (loose.length === 1) return { kind: "match", section: loose[0] };
-  if (loose.length > 1) return { kind: "ambiguous", candidates: loose };
+  if (loose.length > 1) return { kind: "ambiguous", candidates: byTitle(loose) };
   return { kind: "none" };
 }
 
@@ -447,27 +685,42 @@ export function getSection(
 // letters off chapter labels ("Chapter 18-A" became "Chapter 18-"); extractCitation is fixed,
 // but an index built before that fix still carries the cut labels until it is rebuilt.
 //
-// Files come in no particular order, so chapters are sorted: Charter and Rules chapters by
-// number ("Chapter 1" first, "Chapter 18" before "Chapter 18-A"), Administrative Code chapters
-// by their first section (§ 1-101 first). Administrative Code titles are not in the index, but
-// its sections are numbered by title (§ 24-163 is in Title 24), so "Title 24" finds the chapters
-// whose sections are numbered 24-…. A lettered title shares its parent's numbers (Title 16-A's
-// sections are § 16-501 on), so "Title 16" brings 16-A and 16-B too, and several Administrative
-// Code chapters share a number; each is labeled with its section range, which tells them apart.
-// The Charter has no titles, and the index does not record which title a Rules chapter is in.
+// Files come in no particular order, so chapters are sorted: Charter chapters by number
+// ("Chapter 1" first, "Chapter 18" before "Chapter 18-A"); Rules chapters by title, then number;
+// Administrative Code chapters by their first section (§ 1-101 first).
+//
+// A chapter's title is its chapter record's `titleNumber` (issue #59), so "Title 16" is Title 16
+// alone, not 16-A or 16-B, and "Title 15, Chapter 18" is one Rules chapter. Rules chapters are
+// labeled with their title ("Title 15, Chapter 18"): every title has its own Chapter 1. Several
+// Administrative Code chapters share a number too; each is labeled with its section range, which
+// tells them apart. The Charter has no titles.
+//
+// An index built before 0.6.3 has no `titleNumber`. There an Administrative Code chapter's title
+// is worked out from its section numbers (§ 24-163 is in Title 24), which puts Title 16-A's
+// chapters (§ 16-501 on) in Title 16; and a Rules chapter has no title.
 
 // Same token as CHAPTER_NUMBER in scripts/lib/build-corpus.js: "18-A", "19A", "19.1", "9-a", "K1".
 const LABEL_NUMBER = String.raw`[A-Za-z]?\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*`;
 const HEADING_LABEL = new RegExp(`^(chapter|title)\\s+(${LABEL_NUMBER})`, "i");
-const TITLE_QUERY = new RegExp(`^(?:title\\s+(${LABEL_NUMBER})\\s*,?\\s*)?(?:chapter\\s+(${LABEL_NUMBER}))?$`, "i");
+// "Title 15, Chapter 18", "Title 15 Chapter 18", "15 RCNY Chapter 18", "Title 24", "Chapter 70".
+const TITLE_QUERY = new RegExp(`^(?:(?:title\\s+(${LABEL_NUMBER})|(${LABEL_NUMBER})\\s+r\\.?c\\.?n\\.?y\\b\\.?)\\s*,?\\s*)?(?:chapter\\s+(${LABEL_NUMBER}))?$`, "i");
 const ADMIN_CODE_TITLE = /^§ (\d+[A-Za-z]?)-/;
 
 export interface ChapterGroup {
   kind: "Chapter" | "Title";
   number: string;
-  /** Administrative Code only: the title number most of its § sections start with ("24"). */
+  /**
+   * The title the chapter is in ("24", "16-A"): its record's `titleNumber`; in an Administrative
+   * Code index built before 0.6.3, the title most of its § sections are numbered in. Null in the
+   * Charter.
+   */
   title: string | null;
-  /** "Chapter 18-A"; in the Administrative Code, with its range: "Chapter 1 (§ 3-101 to § 3-120)". */
+  /** That title's heading, when the index has it ("Title 15: Department of Environmental Protection"). */
+  titleHeading: string | null;
+  /**
+   * "Chapter 18-A"; in the Rules, with its title: "Title 15, Chapter 18"; in the Administrative
+   * Code, with its range: "Chapter 1 (§ 3-101 to § 3-120)".
+   */
   label: string;
   /** The heading record (its citation replaced by the label), then its sections in order. */
   records: Section[];
@@ -524,7 +777,7 @@ export function chapterGroups(corpus: Corpus): ChapterGroup[] {
     const m = s.level && s.level !== "Chapter" ? null : HEADING_LABEL.exec(s.heading);
     if (m) {
       const kind = m[1].toLowerCase() === "title" ? "Title" : "Chapter";
-      current = { kind, number: m[2], title: null, label: "", records: [s] };
+      current = { kind, number: m[2], title: s.titleNumber ?? null, titleHeading: s.titleHeading ?? null, label: "", records: [s] };
       groups.push(current);
     } else if (s.level === "Chapter" || s.level === "Section") {
       current = null;
@@ -536,8 +789,9 @@ export function chapterGroups(corpus: Corpus): ChapterGroup[] {
   for (const g of groups) {
     g.label = `${g.kind} ${g.number}`;
     first.set(g, null);
+    if (corpus === "rules" && g.title && g.kind === "Chapter") g.label = `Title ${g.title}, ${g.label}`;
     if (corpus === "admin_code") {
-      g.title = adminCodeTitle(g.records);
+      g.title ??= adminCodeTitle(g.records);
       const numbered = g.records.slice(1).filter((s) => s.citation.startsWith("§ "));
       if (numbered.length > 0) {
         const [a, b] = [numbered[0].citation, numbered[numbered.length - 1].citation];
@@ -547,8 +801,9 @@ export function chapterGroups(corpus: Corpus): ChapterGroup[] {
     }
     g.records[0] = { ...g.records[0], citation: g.label };
   }
-  // Administrative Code: by first section; chapters with no § section go last. Otherwise, and
-  // between those, by kind (Title first) then number. Array.prototype.sort is stable.
+  // Administrative Code: by first section; chapters with no § section go last. Rules: by title
+  // (chapters with none last), then as the Charter. Otherwise, and between those, by kind (Title
+  // first) then number. Array.prototype.sort is stable.
   groups.sort((a, b) => {
     const fa = first.get(a) ?? null;
     const fb = first.get(b) ?? null;
@@ -557,6 +812,11 @@ export function chapterGroups(corpus: Corpus): ChapterGroup[] {
       if (fb === null) return -1;
       return compareLabels(fa, fb);
     }
+    if (corpus === "rules" && a.title !== b.title) {
+      if (a.title === null) return 1;
+      if (b.title === null) return -1;
+      return compareLabels(a.title, b.title);
+    }
     if (a.kind !== b.kind) return a.kind === "Title" ? -1 : 1;
     return compareLabels(a.number, b.number);
   });
@@ -564,32 +824,46 @@ export function chapterGroups(corpus: Corpus): ChapterGroup[] {
   return groups;
 }
 
-export function listTitles(corpus: Corpus): { citation: string; heading: string }[] {
-  return chapterGroups(corpus).map((g) => ({ citation: g.label, heading: g.records[0].heading }));
+export interface TitleListEntry {
+  citation: string;
+  heading: string;
+  /** The chapter's title ("15"), or null. */
+  title: string | null;
+  /** That title's heading, or null when the index does not have it. */
+  titleHeading: string | null;
 }
 
-/** True for "Title 6" or "Title 3, Chapter 1": a query that names a title. */
+export function listTitles(corpus: Corpus): TitleListEntry[] {
+  return chapterGroups(corpus).map((g) => ({ citation: g.label, heading: g.records[0].heading, title: g.title, titleHeading: g.titleHeading }));
+}
+
+/** True for "Title 6", "Title 3, Chapter 1" or "15 RCNY Chapter 18": a query that names a title. */
 export function namesTitle(query: string): boolean {
-  return Boolean(TITLE_QUERY.exec(query.trim().replace(/\s+/g, " "))?.[1]);
+  const m = TITLE_QUERY.exec(query.trim().replace(/\s+/g, " "));
+  return Boolean(m?.[1] || m?.[2]);
 }
 
-// "Chapter 70": that chapter's heading, then every record in it. "Title 24" (Administrative
-// Code): every chapter whose sections are numbered 24-…. "Title 3, Chapter 1": only the
-// chapters numbered 1 among those.
+// "Chapter 70": that chapter's heading, then every record in it (in the Rules, every title's
+// Chapter 70). "Title 24": every chapter in Title 24 ("Title 16" is not 16-A or 16-B). "Title 3,
+// Chapter 1" or "3 RCNY Chapter 1": only the chapters numbered 1 among those. In an index built
+// before 0.6.3, an Administrative Code title is the chapters whose sections are numbered 24-….
 // Numbers match whole ("Chapter 1" is not "Chapter 10" or "Chapter 1-A"), in any case. Anything
 // else ("§ 259", "Preamble") falls back to records whose citation or heading starts with it.
 export function getTitle(corpus: Corpus, title: string): Section[] {
   const q = title.trim().replace(/\s+/g, " ");
   if (!q) return [];
-  const m = TITLE_QUERY.exec(q);
-  if (m && (m[1] || m[2])) {
-    const [, t, c] = m;
+  const m = TITLE_QUERY.exec(q.replace(DASHES, "-"));
+  if (m && (m[1] || m[2] || m[3])) {
+    const [, t1, t2, c] = m;
+    const t = t1 ?? t2;
     const same = (a: string | null, b: string) => a !== null && a.toLowerCase() === b.toLowerCase();
+    // A title number is compared as the publisher writes it: "16a" and "16-a" are "16-A".
+    const sameTitle = (a: string | null, b: string) => a !== null && canonicalTitle(a) === canonicalTitle(b);
     return chapterGroups(corpus)
       .filter((g) =>
         c
-          ? g.kind === "Chapter" && same(g.number, c) && (!t || same(g.title, t))
-          : (g.kind === "Title" && same(g.number, t)) || same(g.title, t),
+          ? g.kind === "Chapter" && same(g.number, c) && (!t || sameTitle(g.title, t))
+          : (g.kind === "Title" && same(g.number, t!)) || sameTitle(g.title, t!),
       )
       .flatMap((g) => g.records);
   }

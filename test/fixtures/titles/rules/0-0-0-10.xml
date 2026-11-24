@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-10" number="10" version="1">
+		<HEADING>Title 15: Department of Environmental Protection</HEADING>
+		<PARA><DESTINATION id="0-0-0-910" name="Title 15"/>Title 15: Department of Environmental Protection</PARA>
+	</RECORD>
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-11" number="11" version="1">
+			<HEADING>Chapter 1: Scope</HEADING>
+			<PARA><DESTINATION id="0-0-0-911" name="T15C001"/>Chapter 1: Scope</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-12" number="12" version="1">
+				<HEADING>§ 1-01 Scope and Application.</HEADING>
+				<PARA><DESTINATION id="0-0-0-912" name="T15C001_1-01"/>§ 1-01 Scope and Application.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-13" number="13" version="1">
+					<PARA>These rules apply to Title 15.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</LEVEL>
+</DOCUMENT>

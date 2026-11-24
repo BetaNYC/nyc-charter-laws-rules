@@ -112,14 +112,25 @@ test("titles: the publisher's Title records, plus one group for the year chapter
 
 test("titles agree with get_title (src/corpus.ts chapterGroups) for every numbered chapter", { skip }, async () => {
   const { chapterGroups } = await import("../../dist/corpus.js");
+  const hasLevels = real.index.some((s) => s.level);
   let checked = 0;
   for (const g of chapterGroups("admin_code")) {
-    if (g.kind !== "Chapter" || !g.title) continue;
+    // Only chapter records: get_title also opens a chapter at a section headed "Chapter K1" (the
+    // Building Code's Appendix K), which the site shows as a section of its chapter. Through
+    // 0.6.2 those had no title in get_title (no § sections), so this test never met them; since
+    // issue #59 every record carries its title. An index built before #78 has no `level`.
+    if (g.kind !== "Chapter" || !g.title || (hasLevels && g.records[0].level !== "Chapter")) continue;
     const c = book.byId.get(g.records[0].id);
     assert.ok(c?.titleNode, `${g.records[0].id} is a chapter on the site`);
     const num = c.titleNode.number.toLowerCase();
-    // A lettered title's sections are numbered in its parent (§ 16-501 is in Title 16-A).
-    assert.ok(num === g.title.toLowerCase() || num.replace(/-[a-z]+$/, "") === g.title.toLowerCase(), `${c.heading}: Title ${c.titleNode.number}, get_title says ${g.title}`);
+    if (g.records[0].titleNumber) {
+      // The index records the title (issue #59): the site's must be the same, letter and all.
+      assert.equal(num, g.title.toLowerCase(), `${c.heading}: Title ${c.titleNode.number}, get_title says ${g.title}`);
+    } else {
+      // An index built before 0.6.3: get_title works a title out from section numbers, and a
+      // lettered title's sections are numbered in its parent (§ 16-501 is in Title 16-A).
+      assert.ok(num === g.title.toLowerCase() || num.replace(/-[a-z]+$/, "") === g.title.toLowerCase(), `${c.heading}: Title ${c.titleNode.number}, get_title says ${g.title}`);
+    }
     checked++;
   }
   assert.ok(checked > 0);

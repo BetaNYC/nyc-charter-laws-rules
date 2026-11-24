@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-110" number="110" version="1">
+			<HEADING>Chapter 6: Environmental Review Procedures</HEADING>
+			<PARA><DESTINATION id="0-0-0-9110" name="T62C006"/>Chapter 6: Environmental Review Procedures</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-111" number="111" version="1">
+				<HEADING>§ 6-01 Purpose.</HEADING>
+				<PARA><DESTINATION id="0-0-0-9111" name="T62C006_6-01"/>§ 6-01 Purpose.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-112" number="112" version="1">
+					<PARA>Chapter 6's purpose.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

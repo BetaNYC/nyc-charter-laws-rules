@@ -20,7 +20,7 @@ import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildSectionsFromXml, collectSectionsFromXml, extractVersion } from "../scripts/lib/build-corpus.js";
+import { buildSectionsFromXml, collectSectionsFromXml, extractVersion, createTitleIndex, finishTitles } from "../scripts/lib/build-corpus.js";
 import {
   createStructureCollector,
   structureJson,
@@ -51,12 +51,14 @@ function build(dir, corpus) {
   const files = xmlFiles(dir);
   const collector = createStructureCollector(corpus);
   const sections = [];
+  const titles = createTitleIndex(); // issue #59, as build-index.js
   let version = "Unknown";
   for (const f of files) {
     const xml = readFileSync(join(dir, f), "utf8");
-    collectSectionsFromXml(xml, corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }));
+    collectSectionsFromXml(xml, corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), titles);
     if (f === "0-0-0-1.xml") version = extractVersion(xml);
   }
+  finishTitles(titles);
   const json = JSON.stringify(sections, null, 2);
   const structure = collector.finish(sections, sha(json));
   return { sections, structure, version, json };

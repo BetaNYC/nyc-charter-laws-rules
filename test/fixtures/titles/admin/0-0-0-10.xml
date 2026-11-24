@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-10" number="10" version="1">
+		<HEADING>Title 16: Sanitation</HEADING>
+		<PARA><DESTINATION id="0-0-0-910" name="T16"/>Title 16: Sanitation</PARA>
+	</RECORD>
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-11" number="11" version="1">
+			<HEADING>Chapter 1: Department of Sanitation</HEADING>
+			<PARA><DESTINATION id="0-0-0-911" name="T16C001"/>Chapter 1: Department of Sanitation</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-12" number="12" version="1">
+				<HEADING>§ 16-101 Department; commissioner.</HEADING>
+				<PARA><DESTINATION id="0-0-0-912" name="T16C001_16-101"/>§ 16-101 Department; commissioner.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-13" number="13" version="1">
+					<PARA>Sanitation text.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</LEVEL>
+</DOCUMENT>

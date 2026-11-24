@@ -105,18 +105,25 @@ search("How long can a sidewalk shed stay up?")   # term fallback; first line sa
 
 ### `get_section`
 
-Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned — re-run with the `corpus` parameter. The list shows at most 25 matches and says how many there are.
+Retrieve a specific section by citation or heading fragment. Input is normalized (with or without `§`, any case, extra whitespace, any kind of dash). If the same citation exists in more than one document (e.g. charter `Chapter 3` vs a rules chapter, or a rules section number repeated across titles), a disambiguation list is returned. Re-run with the `corpus` parameter or a more specific citation. The list shows at most 25 matches and says how many there are.
+
+Each title of the Rules numbers its own chapters and sections, so in the July 2026 files 50 titles each have a `§ 1-01`. Name the title the way the Rules are cited: `15 RCNY § 1-01` (also `15 RCNY 1-01`, `15 R.C.N.Y. § 1-01`, `Title 15 § 1-01`, `Title 15, Chapter 18`), and the Health Code as `24 RCNY Health Code § 81.08`. A bare `§ 1-01` still lists every title's, sorted by title, each with its full citation and its title's name: `[RULES] 15 RCNY § 1-01 — § 1-01 Scope and Application. (Title 15: Department of Environmental Protection)`. Where the publisher repeats a citation inside one title, the citation names the chapter too, and is accepted that way: each yearly Rent Guidelines Board order has its own "Notice" (`Title 30, Apartment & Loft Order #49 (2017), Notice`), and Title 62 numbers sections from § 6-01 in both Chapter 5 and Chapter 6 (`Title 62, Chapter 5, § 6-01`). An Administrative Code citation already names its title in its number (§ 24-163 is in Title 24), except in a lettered title, which shares its parent's numbers: `Title 16-A § 16-501`. Answers show the full citation (`[RULES] 15 RCNY § 1-01 (matched in corpus: rules; in Title 15: Department of Environmental Protection)`), and so do search results.
+
+On the July 2026 files, 17 Rules records and 14 Administrative Code records still share their full citation with another record, because the publisher numbered two sections alike inside one chapter (Title 15 Chapter 42 has two runs of § 1 to § 8) or two chapters of one title alike and marked both "*" (Rules Title 43 Chapter 19; Administrative Code Title 26 Chapters 21 and 37). `get_section` lists them together; `search` and `get_title` reach each one. Titles need an index built by 0.6.3 or later (see [What the index holds](#what-the-index-holds)); with an older index, a citation that names a title lists every record with the rest of the citation.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `11-602.1`, `Chapter 11`) |
-| `corpus` | string | no | `charter`, `admin_code`, or `rules` (default: all three) |
+| `citation` | string | yes | Section citation or heading (e.g. `§ 259`, `Section 20-f`, `11-602.1`, `Chapter 11`, `15 RCNY § 1-01`) |
+| `corpus` | string | no | `charter`, `admin_code`, or `rules` (default: all three; `RCNY` or `Health Code` in the citation means the Rules) |
 
 ```
 get_section("§ 259")
 get_section("11-602.1")
 get_section("Chapter 11", corpus="charter")
 get_section("RS 18-1")
+get_section("15 RCNY § 1-01")
+get_section("24 RCNY Health Code § 81.08")
+get_section("Title 16-A § 16-501")
 get_section("Title 19, Chapter 55, Schedule A", corpus="rules")
 ```
 
@@ -128,7 +135,7 @@ Appendices, schedules, reference standards and other text outside a section have
 
 List the chapters of a document, in order, each with its heading. The first line says how many there are (`84 chapters, in order.`); lists longer than 200, such as the Administrative Code (350) and the Rules (over 700), come in pages, and the first line says, for example, `Showing 1 to 200 of 731. Call again with offset 200 for the next ones.`
 
-Each title of the Administrative Code has its own Chapter 1, so Administrative Code chapters are shown with their section range: `Chapter 1 (§ 3-101 to § 3-196) — Chapter 1: Mayor`, sorted by first section. The index does not record which title a Rules chapter is in, so several Rules chapters share a number; their headings tell them apart. Through 0.6.0 the list came in no order, and lettered chapters showed a cut number (`Chapter 18-` for Charter Chapters 18-A to 18-D).
+Each title of the Administrative Code has its own Chapter 1, so Administrative Code chapters are shown with their section range: `Chapter 1 (§ 3-101 to § 3-196) — Chapter 1: Mayor`, sorted by first section. Each title of the Rules has its own Chapter 1 too, so Rules chapters are sorted by title and labeled with it (`Title 15, Chapter 18 — Chapter 18: Protection from Contamination…`), and each title's name is on a line of its own before its first chapter, after a blank line (`Title 15: Department of Environmental Protection`). Through 0.6.2 the index did not record Rules titles: the Rules came as one list sorted by chapter number, with every title's Chapter 1 together and only the headings to tell them apart. An index built before 0.6.3 still gives that list. Through 0.6.0 the list came in no order, and lettered chapters showed a cut number (`Chapter 18-` for Charter Chapters 18-A to 18-D).
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -147,14 +154,14 @@ list_titles("rules")
 
 List the sections in a chapter: the chapter's heading, then the citation and heading of each section, in order. Use `get_section` for a section's text. Numbers match whole: `Chapter 1` is not `Chapter 10` or `Chapter 1-A`. A number several chapters share (an Administrative Code or Rules `Chapter 1`) gives each of them.
 
-The Administrative Code's titles are not in the index, but its sections are numbered by title (§ 24-163 is in Title 24), so `Title 24` gives every chapter whose sections are numbered 24-…, and `Title 3, Chapter 1` narrows to the chapters numbered 1 among those. A lettered title shares its parent's numbers (Title 16-A's sections are § 16-501 on), so `Title 16` brings Titles 16-A and 16-B too. The Charter has no titles, and the index does not record Rules titles, so ask for a chapter there.
+In the Administrative Code and the Rules, `Title 24` gives every chapter in that title, and `Title 15, Chapter 18` (or `15 RCNY Chapter 18`) only that title's Chapter 18. A Rules answer names each title on a line before its first chapter, as `list_titles` does. `Title 16` gives Title 16 alone. Titles 16-A and 16-B share its section numbers (16-A's sections are § 16-501 on), and are asked for as `Title 16-A` and `Title 16-B`. Through 0.6.2 the index recorded no titles, so `Title 16` brought 16-A and 16-B too (an Administrative Code chapter's title was worked out from its section numbers), and a Rules title found nothing; an index built before 0.6.3 still behaves that way. The Charter has no titles.
 
 The index is flat: each source file keeps its records in document order, and a chapter is its heading record plus the records after it, up to the next chapter record. Through 0.6.0 this tool returned only the chapter's heading record, and `Title 6` found nothing. Through 0.6.2 a chapter ran on into the next file whenever that file's chapter had no number: the Health Code (a chapter headed "New York City Health Code") was listed in Rules Chapter 21, the Administrative Code's local laws by year in the chapters before them, and Title 31's sections in Title 28's Chapter 3. Now a chapter record with no number (`Preamble`, `2016`, `New York City Health Code`), or a section in no chapter, ends the chapter before it; those records are in no chapter here, and `search` and `get_section` find them.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
 | `corpus` | string | yes | `charter`, `admin_code`, or `rules` |
-| `title` | string | yes | A chapter (`Chapter 11`), or in the Administrative Code a title (`Title 6`) or both (`Title 3, Chapter 1`) |
+| `title` | string | yes | A chapter (`Chapter 11`), or in the Administrative Code and the Rules a title (`Title 6`) or both (`Title 15, Chapter 18`) |
 | `limit` | integer | no | Max records to return (default 200, max 1000) |
 | `offset` | integer | no | How many to skip, for the next page (default 0) |
 
@@ -162,6 +169,7 @@ The index is flat: each source file keeps its records in document order, and a c
 get_title("charter", "Chapter 11")
 get_title("admin_code", "Title 6")
 get_title("admin_code", "Title 3, Chapter 1")
+get_title("rules", "Title 15, Chapter 18")
 ```
 
 ---
@@ -438,6 +446,8 @@ Each record has a `citation`, a `heading`, its `text` and American Legal's recor
 - **editor's notes and amendment lines** on a subchapter, article or part (`Title 3, Chapter 2, Subchapter 3`).
 
 A record's citation starts with the numbered levels it sits in, as a chapter's carries its title, then the number its heading starts with: "Subchapter 3: Domestic Partnerships" in Title 3, Chapter 2 is `Title 3, Chapter 2, Subchapter 3`. The publisher numbers subchapters, articles and appendices afresh in each chapter (ten chapters of the Administrative Code have a Subchapter 3), so the number alone would name many records. A reference standard is the exception: "REFERENCE STANDARD RS 18–1" is `RS 18-1`, with a plain hyphen so it can be typed, because the code's own name for it is unique, and the parts inside one are named from it (`RS 13-1, Chapter 1`). A heading with no number goes last, whole (`Title 15, Chapter 20, Appendix`). Two records share a citation only where the publisher gives two subchapters of one chapter the same number (three pairs in the July 2026 Administrative Code, each marked "*" by the publisher); their headings tell them apart. No such record shares a citation with a section or chapter, so `get_section("Schedule A", corpus="rules")` still finds the one section cited that way. When no citation matches, `get_section` looks in headings, so a distinctive piece of one finds its record without the long citation (`Water and Wastewater Rate Schedule`, `Chapter D5`).
+
+Each Administrative Code and Rules record also carries `titleNumber`, the number of the title it is in, as the publisher's title heading writes it (`"15"`, `"16-A"`, `"38-A"`); a chapter record also carries `titleHeading`, that title's heading (`"Title 15: Department of Environmental Protection"`) (issue #59). They come from, in order: the title around the record in its own file; its chapter's anchor name in the XML (`T15C018` is Title 15, Chapter 18); or, for a chapter with neither, the last title before it in the publisher's record order (the `number` on each record). In the July 2026 Rules that last rule places 24 chapters: the Health Code (Title 24), the Rent Guidelines Board's yearly orders (Title 30), Appendix A to Title 62 and Title 3's Chapter 11; for every other record, record order gives the same title as the first two rules (`build-index` prints how many do not, which should be 0). The Charter has no titles, and neither do the Administrative Code's local laws by year, which sit in its "Appendix A: Unconsolidated Local Laws". A Rules citation is `titleNumber`, `RCNY` and the citation: `15 RCNY § 1-01`. An index built before 0.6.3 has neither field.
 
 Each record carries a `level`, the publisher's name for its level, except a section inside a chapter (nearly every record): `Chapter` for a chapter, `Section` for a section in no chapter (the Administrative Code's Title 31), and `Appendix`, `Part`, `Subchapter` and so on for these records. `get_title` reads it to know where a chapter ends (see [`get_title`](#get_title)). An unnumbered part with no sections inside it, such as a reference standard's `CONTENTS`, is read into the record around it, under its heading line. A record never takes text that a section inside it has. The text a publisher puts on a whole title (front matter, and a few editor's notes) is left out: the index has no title records.
 
@@ -740,9 +750,10 @@ Every tool response ends with a disclaimer. `NYC_CLR_FOOTER` sets how much of it
 ### Browse the Rules on a subject area
 
 ```
-1. list_titles("rules")                   → find the relevant chapter by its heading
-2. get_title("rules", "Chapter 900")      → its sections (Fire Protection Systems)
+1. list_titles("rules")                   → find the agency's title and the chapter by its heading
+2. get_title("rules", "Title 15, Chapter 18") → its sections
 3. search("fire safety", corpus="rules")  → keyword search within rules
+4. get_section("15 RCNY § 18-11")         → one section, cited with its title
 ```
 
 ### Ground a legal answer in the correct version
