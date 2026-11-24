@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Hand-made for issue #76, in the shape of American Legal Publishing's Administrative Code XML
+  (Title 28, the Construction Codes): Section > Subsection > Normal Level. Not the publisher's
+  text. Each Subsection exercises one rule of readBody in scripts/lib/build-corpus.js.
+-->
+<DOCUMENT source-infobase-name="Admin">
+  <LEVEL style-name="Title" style-name-escaped="Title" level-depth="1" toc-section="true">
+    <RECORD id="0-0-0-90" number="90" version="1">
+      <HEADING>Title 28: Construction Codes</HEADING>
+      <PARA><DESTINATION id="0-0-0-91" name="T28"/>Title 28: Construction Codes</PARA>
+    </RECORD>
+    <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+      <RECORD id="0-0-0-100" number="100" version="1">
+        <HEADING>Chapter 1: Electrical Code</HEADING>
+        <PARA><DESTINATION id="0-0-0-101" name="T28C001"/>Chapter 1: Electrical Code</PARA>
+      </RECORD>
+      <!-- All of the section's text is in Subsections (Section EC 80's shape). -->
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-110" number="110" version="1">
+          <HEADING>Section EC 80: General</HEADING>
+          <PARA><DESTINATION id="0-0-0-111" name="EC80"/>Section EC 80: General</PARA>
+        </RECORD>
+        <!-- The PARA repeats the HEADING: the HEADING is the line, said once. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-112" number="112" version="1">
+            <HEADING>80.1 Title.</HEADING>
+            <PARA><DESTINATION id="0-0-0-113" name="80.1"/>80.1 Title.</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-114" number="114" version="1">
+              <PARA>This code shall be known and may be cited as the "New York City Electrical Code."</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <!-- A body with subdivisions. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-115" number="115" version="1">
+            <HEADING>80.2 Scope.</HEADING>
+            <PARA>80.2 Scope.</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-116" number="116" version="1">
+              <PARA>This code applies to:</PARA>
+              <PARA><TAB/>1.<TAB/>New work.</PARA>
+              <PARA><TAB tab-count="2"/>(a)<TAB/>In new buildings.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <!-- The PARA differs from the HEADING only in spaces: the HEADING is the line. Its (a)
+             starts a new list, not (1)(a) under 80.2's 1., and its 1. is 80.3(1), not a second
+             (1) of the section. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-117" number="117" version="1">
+            <HEADING>80.3 Wind resistance.</HEADING>
+            <PARA>80. 3 Wind resistance .</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-118" number="118" version="1">
+              <PARA><TAB tab-count="2"/>(a)<TAB/>Exempt structures.</PARA>
+              <PARA><TAB/>1.<TAB/>Small sheds.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <!-- No HEADING: the PARA is the line. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-119" number="119" version="1">
+            <HEADING></HEADING>
+            <PARA>80.4 Approval.</PARA>
+          </RECORD>
+        </LEVEL>
+        <!-- The PARA starts with the HEADING and says more: the PARA is the line. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-120" number="120" version="1">
+            <HEADING>80.5</HEADING>
+            <PARA>80.5 Listed equipment.</PARA>
+          </RECORD>
+        </LEVEL>
+        <!-- The PARA holds a cross-reference: the PARA is the line, with its link. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-121" number="121" version="1">
+            <HEADING>80.6 Terms defined in Chapter 1.</HEADING>
+            <PARA>80.6 Terms defined in <LINK style-name="Jump" type="Jump" destination-name="T28C001" destination-id="0-0-0-101">Chapter 1</LINK>.</PARA>
+          </RECORD>
+        </LEVEL>
+        <!-- The PARA says something else: both, the HEADING as the line, then the PARA. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-122" number="122" version="1">
+            <HEADING>80.7 Reserved.</HEADING>
+            <PARA>Not in force.</PARA>
+          </RECORD>
+        </LEVEL>
+        <!-- A picture in the body, and a level nested in the Subsection that is not read. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-123" number="123" version="1">
+            <HEADING>80.8 Tables.</HEADING>
+            <PARA>80.8 Tables.</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-124" number="124" version="1">
+              <PARA>Table 80.8 follows.</PARA>
+              <PARA><PICTURE id="pic-1" name="table-80-8.jpg"/></PARA>
+            </RECORD>
+          </LEVEL>
+          <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="5" toc-section="true">
+            <RECORD id="0-0-0-125" number="125" version="1">
+              <HEADING>80.8.1 Nested.</HEADING>
+              <PARA>80.8.1 Nested.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <!-- The HEADING says more than the PARA, which is only its number: the HEADING alone. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-126" number="126" version="1">
+            <HEADING>80.9 ABS plastic.</HEADING>
+            <PARA>80.9</PARA>
+          </RECORD>
+        </LEVEL>
+        <!-- No number in the heading: its parts are anchored at the section, as before. -->
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-127" number="127" version="1">
+            <HEADING>Appendix A</HEADING>
+            <PARA>Appendix A</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-128" number="128" version="1">
+              <PARA><TAB/>1.<TAB/>The form.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+      <!-- Body text first, then a Subsection (19 Administrative Code sections in July 2026). Its
+           link points at 80.1's anchor, which is on a Subsection record of EC 80. -->
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-130" number="130" version="1">
+          <HEADING>Section EC 81: Applicability</HEADING>
+          <PARA><DESTINATION id="0-0-0-131" name="EC81"/>Section EC 81: Applicability</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-132" number="132" version="1">
+            <PARA>The provisions of this code apply as follows.</PARA>
+          </RECORD>
+        </LEVEL>
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-133" number="133" version="1">
+            <HEADING>81.1 General.</HEADING>
+            <PARA>81.1 General.</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-134" number="134" version="1">
+              <PARA>See section <LINK style-name="Jump" type="Jump" destination-name="80.1" destination-id="0-0-0-113">80.1</LINK>.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+      <!-- No Subsection: the text the index always had. -->
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-140" number="140" version="1">
+          <HEADING>Section EC 82: Definitions</HEADING>
+          <PARA><DESTINATION id="0-0-0-141" name="EC82"/>Section EC 82: Definitions</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-142" number="142" version="1">
+            <PARA>For the purposes of this code:</PARA>
+            <PARA><TAB/>a.<TAB/>Words have their ordinary meaning.</PARA>
+          </RECORD>
+        </LEVEL>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+</DOCUMENT>

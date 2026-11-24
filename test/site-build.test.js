@@ -20,7 +20,7 @@ import { buildSite, currentThroughLine, BUILD_MARKER } from "../scripts/lib/site
 import { loadBook, chapterOrderKey, sectionSlug, chapterSlug, shortHeading, linkHref, linkTarget } from "../scripts/lib/site/model.js";
 import { readFooter, disclaimerParagraphs, plainParagraph } from "../scripts/lib/site/disclaimer.js";
 import { newYorkDay, newYorkLongDate, newYorkIso } from "../scripts/lib/site/clock.js";
-import { readBlocks, bodyHtml, isHistoryLine } from "../scripts/lib/site/render-html.js";
+import { readBlocks, bodyHtml, isHistoryLine, copyId } from "../scripts/lib/site/render-html.js";
 import { unescapeHtml, escapeHtml } from "../scripts/lib/site/html.js";
 import { robotsTxt, WELCOMED_CRAWLERS } from "../scripts/lib/site/outputs.js";
 import { SITE_BASE, SITE_NAME } from "../scripts/lib/site/config.js";
@@ -345,7 +345,7 @@ test("the About page: its sections in order, a jump list that resolves, the disc
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).
-function assertSameBlocks(record, structure, html, label) {
+function assertSameBlocks(record, structure, html, label, headingLevel = 2) {
   const blocks = renderSection(record, structure);
   const body = bodyBlocks(blocks);
   const shown = readBlocks(html, unescapeHtml);
@@ -353,8 +353,10 @@ function assertSameBlocks(record, structure, html, label) {
   shown.forEach((b, i) => {
     assert.equal(b.n, i, `${label}: block ${i} out of order`);
     assert.equal(b.text, body[i].text, `${label}: block ${i} text`);
-    const cls = { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote" }[body[i].type];
+    const cls = { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote", subheading: "subhead" }[body[i].type];
     assert.equal(b.cls, cls, `${label}: block ${i} type`);
+    // A Subsection's heading line is a real heading (issue #76); every other block is a paragraph.
+    assert.equal(b.tag, body[i].type === "subheading" ? `h${headingLevel}` : "p", `${label}: block ${i} element`);
     assert.equal(b.id, body[i].anchor, `${label}: block ${i} anchor`);
   });
   const md = sectionMarkdown(blocks);
@@ -608,10 +610,10 @@ test("chapter page: a jump list, then every section's full text in order, each u
       const at = html.indexOf(`<div class="chapter-section" id="s-${s.slug}">`);
       const end = html.indexOf('<div class="chapter-section"', at + 1);
       const copy = html.slice(at, end < 0 ? html.indexOf('<div class="back-wrap">') : end);
-      const words = unescapeHtml(copy.replace(/<h2>[\s\S]*?<\/p>\n/, "").replace(/<\/p>/g, " ").replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
+      const words = unescapeHtml(copy.replace(/<h2>[\s\S]*?<\/p>\n/, "").replace(/<\/(?:p|h[3-6])>/g, " ").replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
       if (s.text) assert.equal(words, s.text.replace(/\s+/g, " ").trim(), `${s.citation}: its text`);
       // Subdivision ids carry the section's prefix, so two sections' (a) do not collide.
-      for (const b of s.structure.blocks) if (b.anchor) assert.ok(copy.includes(` id="${escapeHtml(`s-${s.slug}${b.anchor}`)}"`), `${s.citation}${b.anchor}: prefixed id`);
+      for (const b of s.structure.blocks) if (b.anchor) assert.ok(copy.includes(` id="${escapeHtml(copyId(s.slug, b.anchor))}"`), `${s.citation}${b.anchor}: prefixed id`);
       assert.doesNotMatch(copy, /data-block=|data-pagefind-title=/, `${s.citation}: the copy is not read as the chapter's own text`);
     }
     // "Back to contents" goes to the jump list; NYSDS's back-to-top is left off.

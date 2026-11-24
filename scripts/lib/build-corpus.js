@@ -39,15 +39,96 @@ export function extractVersion(xml) {
   return "Unknown";
 }
 
+const styleOf = (level) => getAttr(level, "style-name") || "";
+const headingOf = (record) => normalize(childrenByTag(record, "HEADING").map(extractText).join(""));
+const squash = (s) => s.replace(/\s+/g, "");
+
+function hasLink(node) {
+  if (Array.isArray(node)) return node.some(hasLink);
+  if (!node || typeof node !== "object" || "#text" in node) return false;
+  const tag = tagOf(node);
+  return tag === "LINK" || (tag ? hasLink(node[tag]) : false);
+}
+
+// The body of a Chapter or Section level (issue #76): its child levels in document order.
+//   - A "Normal Level" child gives each PARA of its RECORDs, as the index always read it.
+//   - A "Subsection" child (the Construction Codes in Title 28 of the Administrative Code, and
+//     90 Rules sections, keep most of a section's text in them) gives its heading line, then
+//     the PARAs of its own "Normal Level" children.
+// Every other child level is skipped: a Section or Chapter inside is indexed on its own, and a
+// Subchapter, Article... holds sections. A level inside a Subsection that is not a "Normal Level"
+// is not read; it is returned in `unread` so the structure can count it (none in July 2026).
+//
+// A Subsection's RECORD has a HEADING ("80.1 Title.") and, in July 2026, one PARA that repeats
+// it. Its heading line is chosen so nothing is lost and nothing is said twice:
+//   - the HEADING, when the PARAs say the same characters (spaces aside: 81.2.2 vs "81. 2.2"),
+//     or only the start of it ("705.2" under "705.2 ABS plastic."), and hold no
+//     cross-reference: the publisher's heading is the clean copy;
+//   - the PARAs, when the HEADING is empty (19 in the Administrative Code) or the PARAs start
+//     with it and say more ("705.2" vs "705.2 ABS plastic."), or hold a cross-reference (23):
+//     they are what the publisher's page shows, links included;
+//   - otherwise (none in July 2026) both: the HEADING as the heading line, then the PARAs as
+//     ordinary paragraphs (and a PARA with a cross-reference that is only the start of a longer
+//     HEADING: the link is kept, at the cost of the number twice).
+//
+// Returns { parts, unread }. Each part is { kind: "para" | "subheading", text, para?, record,
+// subsection? }: `text` is what goes into the index's `text`, in order; `para` is the PARA it
+// was read from, if any; `subsection` is the Subsection LEVEL it came from, if any.
+export function readBody(level) {
+  const parts = [];
+  const unread = [];
+  const paraPart = (para, record, subsection, kind = "para") => {
+    const part = { kind, text: normalize(extractText(para)), para, record };
+    if (subsection) part.subsection = subsection;
+    return part;
+  };
+  const normalLevel = (child, subsection) => {
+    for (const record of childrenByTag(child, "RECORD")) {
+      for (const para of childrenByTag(record, "PARA")) parts.push(paraPart(para, record, subsection));
+    }
+  };
+  for (const child of childrenByTag(level, "LEVEL")) {
+    const style = styleOf(child);
+    if (style === "Normal Level") {
+      normalLevel(child, null);
+    } else if (style === "Subsection") {
+      for (const record of childrenByTag(child, "RECORD")) {
+        const heading = headingOf(record);
+        const paras = childrenByTag(record, "PARA").filter((p) => normalize(extractText(p)));
+        const said = normalize(paras.map((p) => normalize(extractText(p))).join(" "));
+        const headingPart = { kind: "subheading", text: heading, record, subsection: child };
+        if (!said) {
+          if (heading) parts.push(headingPart);
+        } else if (heading && squash(heading).startsWith(squash(said)) && !hasLink(paras)) {
+          // The same characters, or the HEADING says more ("705.2 ABS plastic." over a PARA
+          // of "705.2"): the HEADING alone, so the number is not said twice.
+          parts.push(headingPart);
+        } else if (!heading || squash(said).startsWith(squash(heading))) {
+          parts.push(paraPart(paras[0], record, child, "subheading"));
+          for (const p of paras.slice(1)) parts.push(paraPart(p, record, child));
+        } else {
+          parts.push(headingPart);
+          for (const p of paras) parts.push(paraPart(p, record, child));
+        }
+      }
+      for (const inner of childrenByTag(child, "LEVEL")) {
+        if (styleOf(inner) === "Normal Level") normalLevel(inner, child);
+        else unread.push(inner);
+      }
+    }
+  }
+  return { parts, unread };
+}
+
 // Walk the LEVEL tree and collect sections.
 // `node` is an ordered element object (DOCUMENT, then each LEVEL as we recurse).
 //
 // `onSection` (optional, issue #61) is called once per indexed section, right after it is
 // pushed, with what the site structure needs and the index drops: the LEVEL style, the heading
-// RECORD, the body RECORDs whose PARAs make up `text`, and the enclosing LEVELs that carry a
-// heading (outermost first), and the section's own LEVEL (`levelNode`), whose other child levels
-// (a "Subsection" in the Construction Codes) the index does not read. It is only told about a section: it cannot change one, so the
-// index is the same with or without it (test/structure.test.js checks this byte for byte).
+// RECORD, the body `parts` that make up `text` and the levels inside a Subsection that were not
+// read (`unread`; see readBody), the enclosing LEVELs that carry a heading (outermost first), and
+// the section's own LEVEL (`levelNode`). It is only told about a section: it cannot change one,
+// so the index is the same with or without it (test/structure.test.js checks this byte for byte).
 // `ancestors` is the recursion's own state; callers leave it out.
 export function collectSections(node, corpus, sections, onSection = null, ancestors = []) {
   if (!node) return;
@@ -67,20 +148,10 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
         (styleName === "Section" || styleName === "Chapter") &&
         heading.length > 3
       ) {
-        // Collect body text from child Normal Level records.
-        const bodyParts = [];
-        const bodyRecords = [];
-        const childLevels = childrenByTag(level, "LEVEL");
-        for (const child of childLevels) {
-          if ((getAttr(child, "style-name") || "") === "Normal Level") {
-            const childRecords = childrenByTag(child, "RECORD");
-            for (const cr of childRecords) {
-              bodyRecords.push(cr);
-              const paras = childrenByTag(cr, "PARA");
-              bodyParts.push(...paras.map((p) => normalize(extractText(p))));
-            }
-          }
-        }
+        // The body, in document order: Normal Level paragraphs, and each Subsection's heading
+        // line and paragraphs (readBody). A section with no Subsection gets exactly the text it
+        // always had: its Normal Level PARAs, in order, joined with one space.
+        const { parts, unread } = readBody(level);
 
         const citation = extractCitation(heading);
         const section = {
@@ -88,11 +159,11 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
           id: getAttr(record, "id") || "",
           citation,
           heading,
-          text: normalize(bodyParts.join(" ")),
+          text: normalize(parts.map((p) => p.text).join(" ")),
         };
         sections.push(section);
         if (onSection) {
-          onSection(section, { level: styleName, record, bodyRecords, ancestors, levelNode: level });
+          onSection(section, { level: styleName, record, parts, unread, ancestors, levelNode: level });
         }
       }
     }

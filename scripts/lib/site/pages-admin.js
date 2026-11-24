@@ -131,7 +131,7 @@ function adminDescription(record, where) {
 function sectionCopy(s, onPage, book, nameNote, site) {
   const blocks = bodyBlocks(renderSection(s, s.structure));
   const linkFor = copyLinkFor(s, (target) => onPage.has(target), book);
-  return sectionBody(s, site, blocks.length ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote })}\n</div>` : "");
+  return sectionBody(s, site, blocks.length ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote, headingLevel: 3 })}\n</div>` : "");
 }
 
 /** The jump list and full text of a run of sections (a whole holder or one part). */

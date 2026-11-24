@@ -297,3 +297,45 @@ test("every Admin Code page: one link name never goes to two places; no two butt
   }
   assert.deepEqual(problems.slice(0, 20), [], `${problems.length} pages with a shared name`);
 });
+
+// Issue #76: the index reads the Construction Codes' Subsection levels, and the site shows each
+// one's heading line as a real heading: an h2 under the section page's h1, an h3 under the
+// section's h2 in a chapter, part or title page's copy. On data built before #76 there are no
+// subheading blocks and nothing to check; the counts below come from the data.
+test("subsections: an h2 on the section page, an h3 in its copy; no page's headings skip a level", { skip }, (t) => {
+  const site = SITE();
+  const headingsOf = (html) => {
+    const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
+    return [...main.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/g)].map((m) => ({ level: Number(m[1]), sub: /class="subhead"/.test(m[2]), text: unescapeHtml(m[3].replace(/<[^>]*>/g, "")).trim() }));
+  };
+  const problems = [];
+  const outline = (h, where) => {
+    if (h[0]?.level !== 1) problems.push(`${where}: starts at h${h[0]?.level}`);
+    h.forEach((x, i) => {
+      if (i && x.level > h[i - 1].level + 1) problems.push(`${where}: "${x.text}" is an h${x.level} after an h${h[i - 1].level}`);
+    });
+  };
+  const withSub = book.sections.filter((s) => s.structure.blocks.some((b) => b.type === "subheading"));
+  const holders = new Set();
+  let shown = 0;
+  for (const s of withSub) {
+    const h = headingsOf(adminSectionPage(s, book, site).html);
+    outline(h, s.path);
+    const subs = h.filter((x) => x.sub);
+    const want = s.structure.blocks.filter((b) => b.type === "subheading").length;
+    if (subs.length !== want || subs.some((x) => x.level !== 2)) problems.push(`${s.path}: ${subs.length} subheadings (want ${want}), levels ${[...new Set(subs.map((x) => x.level))]}`);
+    if (new Set(subs.map((x) => x.text)).size !== subs.length) problems.push(`${s.path}: two subheadings share their words`);
+    shown += subs.length;
+    holders.add(s.part ?? s.chapter);
+  }
+  for (const holder of holders) {
+    const p = holder.holder ? adminPartPage(holder, book, site) : holder.kind === "title" ? adminTitlePage(holder, book, site) : adminChapterPage(holder, book, site);
+    const h = headingsOf(p.html);
+    outline(h, p.path);
+    const bad = h.filter((x) => x.sub && x.level !== 3);
+    if (bad.length) problems.push(`${p.path}: ${bad.length} subheadings in the copies are not h3`);
+    if (!h.some((x) => x.sub)) problems.push(`${p.path}: no subheading in the copies`);
+  }
+  t.diagnostic(`${n(withSub.length)} sections with ${n(shown)} subheadings, on ${n(holders.size)} chapter, part or title pages`);
+  assert.deepEqual(problems.slice(0, 20), [], `${problems.length} problems`);
+});
