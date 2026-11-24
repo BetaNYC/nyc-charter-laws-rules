@@ -4,7 +4,8 @@
     "id": "0-0-0-1262",
     "citation": "Chapter 11",
     "heading": "Chapter 11: Independent Budget Office",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -25,7 +26,8 @@
     "id": "0-0-0-1277",
     "citation": "Chapter 12",
     "heading": "Chapter 12: Obligations of the City",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -193,7 +195,8 @@
     "id": "0-0-0-1350",
     "citation": "Chapter 13",
     "heading": "Chapter 13: Procurement",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -382,7 +385,8 @@
     "id": "0-0-0-1553",
     "citation": "Chapter 15",
     "heading": "Chapter 15: Property of the City",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -417,7 +421,8 @@
     "id": "0-0-0-1594",
     "citation": "Chapter 17",
     "heading": "Chapter 17: Law Department",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -480,7 +485,8 @@
     "id": "0-0-0-1616",
     "citation": "Chapter 18",
     "heading": "Chapter 18: Police Department",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -543,7 +549,8 @@
     "id": "0-0-0-1641",
     "citation": "Chapter 18-A",
     "heading": "Chapter 18-A: Civilian Complaint Review Board",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/001."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/001.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -564,7 +571,8 @@
     "id": "0-0-0-1721",
     "citation": "Chapter 18-D",
     "heading": "Chapter 18-D: Sale, Purchase and Possession of Weapons",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -613,7 +621,8 @@
     "id": "0-0-0-1742",
     "citation": "Chapter 19",
     "heading": "Chapter 19: Fire Department",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -718,7 +727,8 @@
     "id": "0-0-0-1786",
     "citation": "Chapter 19-A",
     "heading": "Chapter 19-A: Emergency Management Department",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -753,7 +763,8 @@
     "id": "0-0-0-2004",
     "citation": "Chapter 21-A",
     "heading": "Chapter 21-A: New York City Sports Commission",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -767,7 +778,8 @@
     "id": "0-0-0-2137",
     "citation": "Chapter 23",
     "heading": "Chapter 23: Office of Animal Welfare",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -788,7 +800,8 @@
     "id": "0-0-0-2150",
     "citation": "Chapter 24-A",
     "heading": "Chapter 24-A: Department of Homeless Services",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/051 and L.L. 1995/075."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1993/051 and L.L. 1995/075.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -830,7 +843,8 @@
     "id": "0-0-0-2231",
     "citation": "Chapter 26",
     "heading": "Chapter 26: Department of Buildings",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -914,7 +928,8 @@
     "id": "0-0-0-2276",
     "citation": "Chapter 27",
     "heading": "Chapter 27: Board of Standards and Appeals",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1005,14 +1020,16 @@
     "id": "0-0-0-2332",
     "citation": "Chapter 28",
     "heading": "Chapter 28: Department of Juvenile Justice [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2010/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2010/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-2399",
     "citation": "Chapter 34",
     "heading": "Chapter 34: Department of Investigation",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1082,7 +1099,8 @@
     "id": "0-0-0-2433",
     "citation": "Chapter 35",
     "heading": "Chapter 35: Department of Citywide Administrative Services",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1996/059."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1996/059.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1257,7 +1275,8 @@
     "id": "0-0-0-2677",
     "citation": "Chapter 39",
     "heading": "Chapter 39: Office of Payroll Administration",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1285,7 +1304,8 @@
     "id": "0-0-0-2690",
     "citation": "Chapter 40",
     "heading": "Chapter 40: New York City Human Rights Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1341,7 +1361,8 @@
     "id": "0-0-0-2724",
     "citation": "Chapter 45",
     "heading": "Chapter 45: City Administrative Procedure Act",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1397,7 +1418,8 @@
     "id": "0-0-0-2801",
     "citation": "Chapter 45-A",
     "heading": "Chapter 45-A: Office of Administrative Trials and Hearings",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/049."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/049.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1432,7 +1454,8 @@
     "id": "0-0-0-2910",
     "citation": "Chapter 46",
     "heading": "Chapter 46: Elections and Voter Assistance",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1544,7 +1567,8 @@
     "id": "0-0-0-3169",
     "citation": "Chapter 49",
     "heading": "Chapter 49: Officers and Employees",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1775,7 +1799,8 @@
     "id": "0-0-0-3297",
     "citation": "Chapter 51",
     "heading": "Chapter 51: Transitory Provisions",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1838,7 +1863,8 @@
     "id": "0-0-0-3316",
     "citation": "Chapter 52",
     "heading": "Chapter 52: General Provisions",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1901,7 +1927,8 @@
     "id": "0-0-0-3429",
     "citation": "Chapter 54",
     "heading": "Chapter 54: Collective Bargaining",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -1964,7 +1991,8 @@
     "id": "0-0-0-3449",
     "citation": "Chapter 55",
     "heading": "Chapter 55: Department of Design and Construction",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1995/077."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1995/077.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2020,7 +2048,8 @@
     "id": "0-0-0-3464",
     "citation": "Chapter 56",
     "heading": "Chapter 56: Department of Small Business Services",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2104,14 +2133,16 @@
     "id": "0-0-0-3822",
     "citation": "Chapter 59",
     "heading": "Chapter 59: Department of General Services [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1996/059."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1996/059.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-3866",
     "citation": "Chapter 63",
     "heading": "Chapter 63: Business Integrity Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2139,7 +2170,8 @@
     "id": "0-0-0-3884",
     "citation": "Chapter 64",
     "heading": "Chapter 64: Department of Consumer and Worker Protection",
-    "text": "(Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020) Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2020/080."
+    "text": "(Am. L.L. 2020/080, 8/28/2020, eff. 8/28/2020) Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2020/080.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2174,14 +2206,16 @@
     "id": "0-0-0-4",
     "citation": "Preamble",
     "heading": "Preamble",
-    "text": "We, the people of New York city, declare that our city is a multiracial democracy, and that our diversity is our strength. We honor and respect the cultures, languages, and histories of all who call and have called this land home, and we celebrate their revolutionary imagination, courage, and resiliency. We strive to be a city where the value, talents, and contributions of every New Yorker are recognized and embraced, and where equity and inclusiveness, community empowerment, accessibility, and opportunity for every New Yorker are the unwavering standards to which we are held accountable in all aspects of governance, business, and service delivery. We endeavor to ensure that every person who resides in New York city has the opportunity to thrive with: (i) A safe, healthy, and sustainable living environment; (ii) A resilient neighborhood served by quality and accessible infrastructure and services as well as a robust local economy; (iii) Vibrant and welcoming public spaces throughout New York city, where everyone belongs and can move freely; (iv) Resources necessary to prosper economically and build wealth; (v) Safe, secure, and affordable housing; (vi) Quality and culturally-relevant child and youth supports, including early childhood and pre-kindergarten through twelfth grade education; (vii) Compassionate and culturally-responsive health, trauma, and mental health care; (viii) Access and opportunity to participate meaningfully in government decision-making; and (ix) Humane, empathetic, and respectful treatment. We recognize that New York city sits on the traditional territories of the original inhabitants, the Lenape, and we endeavor to honor their stewardship of the land by protecting our environment and all living things. We acknowledge the grave injustices and atrocities that form part of our country's history, including the forced labor of enslaved Africans, the colonialism that displaced Indigenous people from their lands, the devaluing and underpaying of immigrant workers, and the discrimination, racial segregation, mass incarceration, and other forms of violence and systemic inequity that continue to be experienced by marginalized groups, including, but not limited to, Black, Indigenous, Latinx, Asian, Pacific Islander, Middle Eastern, and other People of Color, women, religious minorities, immigrants, people who are LGBTQ+, and people with disabilities. We also recognize that these systemic injustices are at the foundation of so many of society's structures and institutions, and have caused profound physical, emotional, social, and psychological harm and trauma to individuals, families, and communities. They have also resulted in widespread loss of economic opportunity and intergenerational wealth. The effects of these harms are deeply engrained, systemic, and continuing. We are ever mindful that vigilance is required to prevent the recurrence of past or worsening of continuing harms. We must act intentionally to remedy these past and continuing harms and to reconstruct, revise and reimagine our foundations, structures, institutions, and laws to promote justice and equity for all New Yorkers. The collective values set out in this preamble will guide the operation of our city government and inform and shape how the city carries out the duties, obligations, and authorities, and upholds and protects the rights set out in the charter. We, the people of New York city, united in our resolve to build a just and equitable city for all, recognize the efforts of those New Yorkers, past and present, who fought for racial equity and social justice, honor the contributions of those New Yorkers who have suffered in the name of freedom, and acknowledge all who fought, struggled, and dreamed for a better life and a better city. Together, we stand on their shoulders as we move boldly toward a brighter tomorrow for ourselves, our children, and future generations. (L.L. 2022/121, 12/2/2022, eff. 12/2/2022)"
+    "text": "We, the people of New York city, declare that our city is a multiracial democracy, and that our diversity is our strength. We honor and respect the cultures, languages, and histories of all who call and have called this land home, and we celebrate their revolutionary imagination, courage, and resiliency. We strive to be a city where the value, talents, and contributions of every New Yorker are recognized and embraced, and where equity and inclusiveness, community empowerment, accessibility, and opportunity for every New Yorker are the unwavering standards to which we are held accountable in all aspects of governance, business, and service delivery. We endeavor to ensure that every person who resides in New York city has the opportunity to thrive with: (i) A safe, healthy, and sustainable living environment; (ii) A resilient neighborhood served by quality and accessible infrastructure and services as well as a robust local economy; (iii) Vibrant and welcoming public spaces throughout New York city, where everyone belongs and can move freely; (iv) Resources necessary to prosper economically and build wealth; (v) Safe, secure, and affordable housing; (vi) Quality and culturally-relevant child and youth supports, including early childhood and pre-kindergarten through twelfth grade education; (vii) Compassionate and culturally-responsive health, trauma, and mental health care; (viii) Access and opportunity to participate meaningfully in government decision-making; and (ix) Humane, empathetic, and respectful treatment. We recognize that New York city sits on the traditional territories of the original inhabitants, the Lenape, and we endeavor to honor their stewardship of the land by protecting our environment and all living things. We acknowledge the grave injustices and atrocities that form part of our country's history, including the forced labor of enslaved Africans, the colonialism that displaced Indigenous people from their lands, the devaluing and underpaying of immigrant workers, and the discrimination, racial segregation, mass incarceration, and other forms of violence and systemic inequity that continue to be experienced by marginalized groups, including, but not limited to, Black, Indigenous, Latinx, Asian, Pacific Islander, Middle Eastern, and other People of Color, women, religious minorities, immigrants, people who are LGBTQ+, and people with disabilities. We also recognize that these systemic injustices are at the foundation of so many of society's structures and institutions, and have caused profound physical, emotional, social, and psychological harm and trauma to individuals, families, and communities. They have also resulted in widespread loss of economic opportunity and intergenerational wealth. The effects of these harms are deeply engrained, systemic, and continuing. We are ever mindful that vigilance is required to prevent the recurrence of past or worsening of continuing harms. We must act intentionally to remedy these past and continuing harms and to reconstruct, revise and reimagine our foundations, structures, institutions, and laws to promote justice and equity for all New Yorkers. The collective values set out in this preamble will guide the operation of our city government and inform and shape how the city carries out the duties, obligations, and authorities, and upholds and protects the rights set out in the charter. We, the people of New York city, united in our resolve to build a just and equitable city for all, recognize the efforts of those New Yorkers, past and present, who fought for racial equity and social justice, honor the contributions of those New Yorkers who have suffered in the name of freedom, and acknowledge all who fought, struggled, and dreamed for a better life and a better city. Together, we stand on their shoulders as we move boldly toward a brighter tomorrow for ourselves, our children, and future generations. (L.L. 2022/121, 12/2/2022, eff. 12/2/2022)",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-4187",
     "citation": "Chapter 69",
     "heading": "Chapter 69: Community Districts and Coterminality of Services",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2251,7 +2285,8 @@
     "id": "0-0-0-4248",
     "citation": "Chapter 70",
     "heading": "Chapter 70: City Government In the Community",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2272,7 +2307,8 @@
     "id": "0-0-0-4283",
     "citation": "Chapter 71",
     "heading": "Chapter 71: Department of Transportation",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2321,7 +2357,8 @@
     "id": "0-0-0-433",
     "citation": "Chapter 2-A",
     "heading": "Chapter 2-A: Districting Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2349,7 +2386,8 @@
     "id": "0-0-0-4357",
     "citation": "Chapter 72",
     "heading": "Chapter 72: Department of Records and Information Services",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2447,7 +2485,8 @@
     "id": "0-0-0-4479",
     "citation": "Chapter 76",
     "heading": "Chapter 76: Civic Engagement Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2489,14 +2528,16 @@
     "id": "0-0-0-470",
     "citation": "Chapter 3",
     "heading": "Chapter 3: Board of Estimate [Repealed]",
-    "text": "Editor's note: Chapter 3 was repealed at the election held November 7, 1989."
+    "text": "Editor's note: Chapter 3 was repealed at the election held November 7, 1989.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-472",
     "citation": "Chapter 4",
     "heading": "Chapter 4: Borough Presidents.",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2538,7 +2579,8 @@
     "id": "0-0-0-5082",
     "citation": "Chapter 77",
     "heading": "Chapter 77: Office of Ethnic and Community Media",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2580,7 +2622,8 @@
     "id": "0-0-0-532",
     "citation": "Chapter 5",
     "heading": "Chapter 5: Comptroller.",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2636,7 +2679,8 @@
     "id": "0-0-0-5350",
     "citation": "Chapter 38",
     "heading": "Chapter 38: Financial Information Services Agency",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2664,7 +2708,8 @@
     "id": "0-0-0-5370",
     "citation": "Chapter 24",
     "heading": "Chapter 24: Department of Social Services",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2706,7 +2751,8 @@
     "id": "0-0-0-5708",
     "citation": "Chapter 65",
     "heading": "Chapter 65: New York City Taxi and Limousine Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2755,7 +2801,8 @@
     "id": "0-0-0-5713",
     "citation": "Chapter 66",
     "heading": "Chapter 66: Department for the Aging",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -2804,7 +2851,8 @@
     "id": "0-0-0-5715",
     "citation": "Chapter 10",
     "heading": "Chapter 10: Budget Process",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3063,7 +3111,8 @@
     "id": "0-0-0-5830",
     "citation": "Chapter 18-B",
     "heading": "Chapter 18-B: Independent Police Investigation and Audit Board",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1995/013 and L.L. 1997/091."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1995/013 and L.L. 1997/091.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3133,7 +3182,8 @@
     "id": "0-0-0-592",
     "citation": "Chapter 6",
     "heading": "Chapter 6: Expense Budget",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3231,7 +3281,8 @@
     "id": "0-0-0-6170",
     "citation": "Chapter 47",
     "heading": "Chapter 47: Public Access to Meetings and Information",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3336,7 +3387,8 @@
     "id": "0-0-0-6195",
     "citation": "Chapter 20",
     "heading": "Chapter 20: Education",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3469,7 +3521,8 @@
     "id": "0-0-0-6213",
     "citation": "Chapter 58",
     "heading": "Chapter 58: Department of Finance",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3700,7 +3753,8 @@
     "id": "0-0-0-6265",
     "citation": "Chapter 78",
     "heading": "Chapter 78: Equity",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3749,7 +3803,8 @@
     "id": "0-0-0-6307",
     "citation": "Chapter 25",
     "heading": "Chapter 25: Department of Correction",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3805,7 +3860,8 @@
     "id": "0-0-0-6335",
     "citation": "Introductory",
     "heading": "Introductory",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3826,7 +3882,8 @@
     "id": "0-0-0-6504",
     "citation": "Chapter 46-A",
     "heading": "Chapter 46-A: Voting by Lawful Permanent Residents and Persons Authorized to Work in the United States",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -3987,7 +4044,8 @@
     "id": "0-0-0-6536",
     "citation": "Chapter 21",
     "heading": "Chapter 21: Department of Parks and Recreation",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4022,14 +4080,16 @@
     "id": "0-0-0-6538",
     "citation": "Chapter 29",
     "heading": "Chapter 29: Department of Ports and Trade [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1989/014 and L.L. 1991/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1989/014 and L.L. 1991/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-6551",
     "citation": "Chapter 50-A",
     "heading": "Chapter 50-A: Qualification for Elected Office",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4043,7 +4103,8 @@
     "id": "0-0-0-6576",
     "citation": "Chapter 50",
     "heading": "Chapter 50: Term Limits",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4064,7 +4125,8 @@
     "id": "0-0-0-6578",
     "citation": "Chapter 74",
     "heading": "Chapter 74: Landmarks Preservation Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4085,7 +4147,8 @@
     "id": "0-0-0-6595",
     "citation": "Chapter 7",
     "heading": "Chapter 7: Tax Appeals",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4218,7 +4281,8 @@
     "id": "0-0-0-6712",
     "citation": "Chapter 18-C",
     "heading": "Chapter 18-C: Public Safety",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4239,7 +4303,8 @@
     "id": "0-0-0-6721",
     "citation": "Chapter 31",
     "heading": "Chapter 31: Department of Sanitation",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4281,7 +4346,8 @@
     "id": "0-0-0-6743",
     "citation": "Chapter 36",
     "heading": "Chapter 36: Equal Employment Practices Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4309,7 +4375,8 @@
     "id": "0-0-0-6752",
     "citation": "Chapter 16",
     "heading": "Chapter 16: Heads of Mayoral Agencies",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4358,7 +4425,8 @@
     "id": "0-0-0-6758",
     "citation": "Chapter 37",
     "heading": "Chapter 37: Art Commission",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4428,7 +4496,8 @@
     "id": "0-0-0-6765",
     "citation": "Chapter 61",
     "heading": "Chapter 61: Department of Housing Preservation and Development",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4491,7 +4560,8 @@
     "id": "0-0-0-6782",
     "citation": "Chapter 24-B",
     "heading": "Chapter 24-B: Administration for Children's Services",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4540,7 +4610,8 @@
     "id": "0-0-0-6819",
     "citation": "Chapter 75",
     "heading": "Chapter 75: Department of Veterans' Services",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4575,21 +4646,24 @@
     "id": "0-0-0-6820",
     "citation": "Chapter 13-A",
     "heading": "Chapter 13-A: Office of Economic and Financial Opportunity [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-6821",
     "citation": "Chapter 13-B",
     "heading": "Chapter 13-B: Office of Labor Services [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1991/061.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-6822",
     "citation": "Chapter 14",
     "heading": "Chapter 14: Franchises, Revocable Consents and Concessions",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4680,7 +4754,8 @@
     "id": "0-0-0-6823",
     "citation": "Chapter 22",
     "heading": "Chapter 22: Department of Health and Mental Hygiene",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4820,7 +4895,8 @@
     "id": "0-0-0-6825",
     "citation": "Chapter 30",
     "heading": "Chapter 30: Department of Youth and Community Development",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1989/018 and L.L. 1996/081."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1989/018 and L.L. 1996/081.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4869,7 +4945,8 @@
     "id": "0-0-0-7162",
     "citation": "Chapter 79",
     "heading": "Chapter 79: Community Hiring and Workforce Development",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4890,7 +4967,8 @@
     "id": "0-0-0-7200",
     "citation": "Chapter 68",
     "heading": "Chapter 68: Conflicts of Interest",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -4953,7 +5031,8 @@
     "id": "0-0-0-7272",
     "citation": "Chapter 67",
     "heading": "Chapter 67: Department of Cultural Affairs",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5030,7 +5109,8 @@
     "id": "0-0-0-7578",
     "citation": "Chapter 48",
     "heading": "Chapter 48: Department of Information Technology and Telecommunications",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1990/071 and L.L. 1994/024."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 1990/071 and L.L. 1994/024.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5086,14 +5166,16 @@
     "id": "0-0-0-7729",
     "citation": "Chapter 73",
     "heading": "Chapter 73: Department of Employment [Repealed]",
-    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2003/052."
+    "text": "Editor's note: For related unconsolidated provisions, see Administrative Code Appendix A at L.L. 2003/052.",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
     "id": "0-0-0-7792",
     "citation": "Chapter 57",
     "heading": "Chapter 57: Department of Environmental Protection",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5135,7 +5217,8 @@
     "id": "0-0-0-7870",
     "citation": "Chapter 2",
     "heading": "Chapter 2: Council",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5352,7 +5435,8 @@
     "id": "0-0-0-795",
     "citation": "Chapter 8",
     "heading": "Chapter 8: City Planning",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5506,7 +5590,8 @@
     "id": "0-0-0-9",
     "citation": "Chapter 1",
     "heading": "Chapter 1: Mayor",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
@@ -5863,7 +5948,8 @@
     "id": "0-0-0-926",
     "citation": "Chapter 9",
     "heading": "Chapter 9: Capital Projects and Budget",
-    "text": ""
+    "text": "",
+    "level": "Chapter"
   },
   {
     "corpus": "charter",
