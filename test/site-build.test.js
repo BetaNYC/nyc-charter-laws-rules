@@ -20,7 +20,7 @@ import { buildSite, currentThroughLine, BUILD_MARKER } from "../scripts/lib/site
 import { loadBook, chapterOrderKey, sectionSlug, chapterSlug, shortHeading, linkHref, linkTarget } from "../scripts/lib/site/model.js";
 import { readFooter, disclaimerParagraphs, plainParagraph } from "../scripts/lib/site/disclaimer.js";
 import { newYorkDay, newYorkLongDate, newYorkIso } from "../scripts/lib/site/clock.js";
-import { readBlocks, bodyHtml, isHistoryLine } from "../scripts/lib/site/render-html.js";
+import { readBlocks, bodyHtml, isHistoryLine, copyId } from "../scripts/lib/site/render-html.js";
 import { unescapeHtml, escapeHtml } from "../scripts/lib/site/html.js";
 import { robotsTxt, WELCOMED_CRAWLERS } from "../scripts/lib/site/outputs.js";
 import { SITE_BASE, SITE_NAME } from "../scripts/lib/site/config.js";
@@ -345,7 +345,7 @@ test("the About page: its sections in order, a jump list that resolves, the disc
 });
 
 // Markdown and HTML: the same blocks, in the same order (deferred from #61).
-function assertSameBlocks(record, structure, html, label) {
+function assertSameBlocks(record, structure, html, label, headingLevel = 2) {
   const blocks = renderSection(record, structure);
   const body = bodyBlocks(blocks);
   const shown = readBlocks(html, unescapeHtml);
@@ -353,8 +353,10 @@ function assertSameBlocks(record, structure, html, label) {
   shown.forEach((b, i) => {
     assert.equal(b.n, i, `${label}: block ${i} out of order`);
     assert.equal(b.text, body[i].text, `${label}: block ${i} text`);
-    const cls = { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote" }[body[i].type];
+    const cls = { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote", subheading: "subhead" }[body[i].type];
     assert.equal(b.cls, cls, `${label}: block ${i} type`);
+    // A Subsection's heading line is a real heading (issue #76); every other block is a paragraph.
+    assert.equal(b.tag, body[i].type === "subheading" ? `h${headingLevel}` : "p", `${label}: block ${i} element`);
     assert.equal(b.id, body[i].anchor, `${label}: block ${i} anchor`);
   });
   const md = sectionMarkdown(blocks);
@@ -608,10 +610,10 @@ test("chapter page: a jump list, then every section's full text in order, each u
       const at = html.indexOf(`<div class="chapter-section" id="s-${s.slug}">`);
       const end = html.indexOf('<div class="chapter-section"', at + 1);
       const copy = html.slice(at, end < 0 ? html.indexOf('<div class="back-wrap">') : end);
-      const words = unescapeHtml(copy.replace(/<h2>[\s\S]*?<\/p>\n/, "").replace(/<\/p>/g, " ").replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
+      const words = unescapeHtml(copy.replace(/<h2>[\s\S]*?<\/p>\n/, "").replace(/<\/(?:p|h[3-6])>/g, " ").replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
       if (s.text) assert.equal(words, s.text.replace(/\s+/g, " ").trim(), `${s.citation}: its text`);
       // Subdivision ids carry the section's prefix, so two sections' (a) do not collide.
-      for (const b of s.structure.blocks) if (b.anchor) assert.ok(copy.includes(` id="${escapeHtml(`s-${s.slug}${b.anchor}`)}"`), `${s.citation}${b.anchor}: prefixed id`);
+      for (const b of s.structure.blocks) if (b.anchor) assert.ok(copy.includes(` id="${escapeHtml(copyId(s.slug, b.anchor))}"`), `${s.citation}${b.anchor}: prefixed id`);
       assert.doesNotMatch(copy, /data-block=|data-pagefind-title=/, `${s.citation}: the copy is not read as the chapter's own text`);
     }
     // "Back to contents" goes to the jump list; NYSDS's back-to-top is left off.
@@ -688,21 +690,29 @@ test("contents tree over the full Charter: all its chapters on a section page (f
   const biggest = [...book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
   const page = chapterPage(biggest, book, facts).html;
   console.log(`# full Charter: ${book.chapters.length} chapters in the tree; ${Buffer.byteLength(contentsTree(book, { chapter: s.chapter, section: s }))} bytes on ${s.fullCitation}'s page; ${biggest.citation} page ${Buffer.byteLength(page)} bytes`);
-  // § 4's history line and editor's note (Noel's example, 2026-11-23).
-  const s4 = book.sections.find((x) => x.citation === "§ 4");
-  const html = bodyHtml(bodyBlocks(renderSection(s4, s4.structure)), { fullCitation: s4.fullCitation, linkFor: () => null });
-  assert.match(html, /<p class="txt history" data-block="1">\(Am\. L\.L\. 2016\/019, 2\/19\/2016, retro\. eff\. 1\/1\/2016; Am\. L\.L\. 2026\/134, 8\/18\/2026, eff\. 1\/1\/2026\)<\/p>/);
-  assert.match(html, /<p class="ednote" data-block="2"><strong>Editor&#39;s note:<\/strong> For related unconsolidated provisions/);
-  // Every history line in the Charter is one: a whole text block in parentheses, about its making.
+  // History lines and editor's notes, as on § 4 (Noel's example, 2026-11-23), across the whole
+  // Charter. Worked out from the data, not pinned to § 4's words: the daily refresh runs npm test,
+  // and an amendment to § 4 must not turn it red.
   let lines = 0;
-  for (const r of book.ordered) for (const b of bodyBlocks(renderSection(r, r.structure))) {
-    const t = b.text.trim();
-    if (b.type === "text" && t.startsWith("(") && t.endsWith(")")) {
-      assert.ok(isHistoryLine(b), `${r.citation}: ${t.slice(0, 60)}`);
-      lines++;
-    }
+  let notes = 0;
+  for (const r of book.ordered) {
+    const body = bodyBlocks(renderSection(r, r.structure));
+    const html = bodyHtml(body, { fullCitation: r.fullCitation, linkFor: () => null });
+    body.forEach((b, n) => {
+      const t = b.text.trim();
+      // Every whole text block in parentheses is a history line: about its making.
+      if (b.type === "text" && t.startsWith("(") && t.endsWith(")")) {
+        assert.ok(isHistoryLine(b), `${r.citation}: ${t.slice(0, 60)}`);
+        if (!b.links?.length) assert.ok(html.includes(`<p class="txt history" data-block="${n}">${escapeHtml(b.text)}</p>`), `${r.citation}: history line ${n}`);
+        lines++;
+      }
+      if (b.type === "note" && /^Editor['’]s note:/.test(b.text)) {
+        assert.ok(html.includes(`<p class="ednote" data-block="${n}"><strong>${escapeHtml(b.text.slice(0, b.text.indexOf(":") + 1))}</strong>`), `${r.citation}: editor's note ${n}`);
+        notes++;
+      }
+    });
   }
-  assert.ok(lines > 250, `${lines} history lines`);
+  assert.ok(lines > 0 && notes > 0, `${lines} history lines, ${notes} editor's notes`);
 });
 
 test("notes: the amendment history line and the editor's note, words unchanged", () => {
@@ -924,7 +934,7 @@ test("the build refuses bad input and never clears a folder it did not make", as
   // An output folder with someone else's files.
   const out = mkdtempSync(join(tmpdir(), "law-reader-other-"));
   writeFileSync(join(out, "keep.txt"), "not ours");
-  await assert.rejects(buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir: out, search: false, now: FIXED_NOW }), /not clearing it/);
+  await assert.rejects(buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir: out, search: false, now: FIXED_NOW, books: ["charter"] }), /not clearing it/);
   assert.ok(existsSync(join(out, "keep.txt")));
   // Missing structure: says how to make it.
   const empty = mkdtempSync(join(tmpdir(), "law-reader-empty-"));

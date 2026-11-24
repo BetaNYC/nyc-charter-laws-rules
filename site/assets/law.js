@@ -10,7 +10,7 @@
 //     scrolled to the reader's own section, or else the open chapter, rather than the Preamble.
 //   - On a chapter page at 900px and wider, where the page shows every section's text, the
 //     jump list and the tree's links for this chapter go to those copies (#s-4).
-import { lookup, jumpTarget } from "./jump.js";
+import { lookup, jumpTarget, citeWithAnchor, splitCopyId } from "./jump.js";
 
 /** The width where a chapter page shows its sections' full text and the tree is a column. law.css uses the same. */
 export const WIDE = "(min-width: 900px)";
@@ -67,7 +67,7 @@ function wireForms() {
 function citationText() {
   const cite = document.querySelector("h1 .cite")?.textContent?.trim() ?? document.title;
   const hash = decodeURIComponent(location.hash.slice(1));
-  return hash && document.getElementById(hash) ? cite + hash : cite;
+  return hash && document.getElementById(hash) ? citeWithAnchor(cite, hash) : cite;
 }
 
 async function copyText(text, what, status) {
@@ -168,10 +168,18 @@ function addDisclosure(li, nav) {
   button.className = "tw";
   button.setAttribute("aria-expanded", String(!list.hidden));
   button.setAttribute("aria-controls", list.id);
-  button.setAttribute("aria-label", `Sections in ${link.textContent}`);
+  // What the button opens: "Sections" (the Charter's chapters), or, in a titles-first tree, the
+  // nav's data-child ("Chapters"), unless the item names its own (a title with only sections).
+  const child = li.dataset.child ?? nav.dataset.child ?? "Sections";
+  button.setAttribute("aria-label", `${child} in ${link.textContent}`);
   button.append(triangle(doc));
   li.prepend(button);
+  // A titles-first tree has one status line: "Loading…" while a list loads, and the failure
+  // there if it does not. Focus stays on the button throughout.
+  const status = nav.querySelector(".tree-status");
   button.addEventListener("click", async () => {
+    // A press while the list is still loading does nothing: no second fetch, no list twice.
+    if (button.getAttribute("aria-busy") === "true") return;
     if (button.getAttribute("aria-expanded") === "true") {
       list.hidden = true;
       button.setAttribute("aria-expanded", "false");
@@ -179,10 +187,19 @@ function addDisclosure(li, nav) {
     }
     if (!list.children.length) {
       button.setAttribute("aria-busy", "true");
+      if (status) status.textContent = "Loading…";
       try {
         await loadSections(nav, link.getAttribute("href"), list);
+        if (status) status.textContent = "";
       } catch (e) {
         console.warn(e);
+        if (status) {
+          // Left closed, so the next press tries again; the title's link still lists them.
+          list.replaceChildren();
+          status.textContent = `Could not load the ${child.toLowerCase()} in ${link.textContent}. Press the button to try again, or follow the link to its page.`;
+          button.removeAttribute("aria-busy");
+          return;
+        }
         const note = doc.createElement("li");
         note.className = "load-error";
         const a = doc.createElement("a");
@@ -259,7 +276,8 @@ export function wireContents(doc = document) {
  * A chapter page on a wide screen shows every section's text, so its jump list and the tree's
  * links for this chapter go to those copies (#s-4); below 900px, where the copies are hidden,
  * they go back to each section's own page. A link to a copy opened on a phone
- * (/charter/chapters/1#s-4(b)) goes on to the section's own page (/charter/sections/4#(b)).
+ * (/charter/chapters/1#s-4(b)) goes on to the section's own page (/charter/sections/4#(b)), and
+ * one to a subsection's part (#s-fc-102_102.4(1)) to /admin-code/sections/fc-102#102.4(1).
  */
 export function pointAtCopies(doc = document) {
   if (!doc.querySelector(".chapter-text")) return false;
@@ -274,11 +292,9 @@ export function pointAtCopies(doc = document) {
   apply();
   matchMedia(WIDE).addEventListener("change", apply);
   if (!wide() && location.hash.startsWith("#s-")) {
-    const hash = decodeURIComponent(location.hash.slice(3));
-    const at = hash.indexOf("(");
-    const slug = at < 0 ? hash : hash.slice(0, at);
+    const { slug, anchor } = splitCopyId(decodeURIComponent(location.hash.slice(3)));
     const to = links.find((a) => lastSegment(a.dataset.page) === slug);
-    if (to) location.replace(to.dataset.page + (at < 0 ? "" : `#${hash.slice(at)}`));
+    if (to) location.replace(to.dataset.page + (anchor ? `#${anchor}` : ""));
   }
   return true;
 }

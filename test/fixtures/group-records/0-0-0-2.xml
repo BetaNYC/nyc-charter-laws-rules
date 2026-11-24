@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Hand-made for issue #78, in the shape of American Legal Publishing's Administrative Code XML.
+  Not the publisher's text. Each level is one shape the index once left unread:
+    - text held by group levels (Appendix, Part, Article, Subarticle), as in Title 27's Building
+      Code Reference Standards, with a double-encoded &Sigma; and &alpha;;
+    - a group level with an editor's note and sections inside it;
+    - a Section whose HEADING is empty (Building Code § BC 602);
+    - a Section whose HEADING is only its number (§ 21-905);
+    - a group level whose heading reads like a chapter ("Chapter D5"), inside a real chapter;
+    - a note held by the Title level, which the index leaves out (it has no Title records);
+    - a title whose section sits in no chapter (Title 31).
+-->
+<DOCUMENT source-infobase-name="Admin">
+  <LEVEL style-name="Title" style-name-escaped="Title" level-depth="1" toc-section="true">
+    <RECORD id="0-0-0-200" number="200" version="1">
+      <HEADING>Title 27: Construction and Maintenance</HEADING>
+      <PARA><DESTINATION id="0-0-0-201" name="T27"/>Title 27: Construction and Maintenance</PARA>
+    </RECORD>
+    <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+      <RECORD id="0-0-0-202" number="202" version="1">
+        <PARA style-name="EdNote">Editor's note: a note held by the title itself.</PARA>
+      </RECORD>
+    </LEVEL>
+    <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+      <RECORD id="0-0-0-210" number="210" version="1">
+        <HEADING>Chapter 1: Building Code</HEADING>
+        <PARA><DESTINATION id="0-0-0-211" name="T27C001"/>Chapter 1: Building Code</PARA>
+      </RECORD>
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-220" number="220" version="1">
+          <HEADING>§ 27-101 Title of code.</HEADING>
+          <PARA>§ 27-101 Title of code.</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-221" number="221" version="1">
+            <PARA>This code shall be known as the building code. See <LINK type="Jump" destination-id="0-0-0-255" destination-name="RS18-1">reference standard RS 18-1</LINK>.</PARA>
+          </RECORD>
+        </LEVEL>
+      </LEVEL>
+      <!-- A group level with a note of its own and a section inside it. -->
+      <LEVEL style-name="Article" style-name-escaped="Article" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-230" number="230" version="1">
+          <HEADING>Article 2: Building Access</HEADING>
+          <PARA>Article 2: Building Access</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-231" number="231" version="1">
+            <PARA style-name="EdNote">Editor's note: For related unconsolidated provisions, see Appendix A.</PARA>
+          </RECORD>
+        </LEVEL>
+        <LEVEL style-name="Subarticle" style-name-escaped="Subarticle" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-232" number="232" version="1">
+            <HEADING>Subarticle 1: Fire Department Access</HEADING>
+            <PARA>Subarticle 1: Fire Department Access</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-233" number="233" version="1">
+              <PARA style-name="EdNote">Editor's note: a note on the subarticle.</PARA>
+            </RECORD>
+          </LEVEL>
+          <LEVEL style-name="Subarticle - Part" style-name-escaped="Subarticle-Part" level-depth="5" toc-section="true">
+            <LEVEL style-name="Section" style-name-escaped="Section" level-depth="6" toc-section="true">
+              <RECORD id="0-0-0-234" number="234" version="1">
+                <HEADING>§ 27-301 Access required.</HEADING>
+                <PARA>§ 27-301 Access required.</PARA>
+              </RECORD>
+              <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                <RECORD id="0-0-0-235" number="235" version="1">
+                  <PARA>Every building shall have fire department access.</PARA>
+                </RECORD>
+              </LEVEL>
+            </LEVEL>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+      <!-- The reference standards: a subchapter with no text, around appendices and parts that hold text. -->
+      <LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-240" number="240" version="1">
+          <HEADING>Appendix: Reference Standards</HEADING>
+          <PARA>Appendix: Reference Standards</PARA>
+        </RECORD>
+        <!-- No number, no sections: read into the subchapter, under its heading. -->
+        <LEVEL style-name="Appendix" style-name-escaped="Appendix" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-241" number="241" version="1">
+            <HEADING>BUILDING CODE REFERENCE STANDARDS</HEADING>
+            <PARA>BUILDING CODE REFERENCE STANDARDS</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-242" number="242" version="1">
+              <PARA>RS 18 Elevators and Conveyors.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+        <LEVEL style-name="Appendix" style-name-escaped="Appendix" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-250" number="250" version="1">
+            <HEADING>REFERENCE STANDARD RS 18 ELEVATORS AND CONVEYORS</HEADING>
+            <PARA>REFERENCE STANDARD RS 18 ELEVATORS AND CONVEYORS</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-251" number="251" version="1">
+              <PARA>List of Referenced National Standards RS 18–1 Safety Code for Elevators.</PARA>
+            </RECORD>
+          </LEVEL>
+          <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+            <RECORD id="0-0-0-255" number="255" version="1">
+              <HEADING>REFERENCE STANDARD RS 18–1</HEADING>
+              <PARA><DESTINATION id="0-0-0-256" name="RS18-1"/>REFERENCE STANDARD RS 18–1</PARA>
+            </RECORD>
+            <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+              <RECORD id="0-0-0-257" number="257" version="1">
+                <PARA>Safety code for elevators and escalators, as modified.</PARA>
+                <PARA>The sum &amp;Sigma; of the loads, and the angle &amp;alpha;, shall be shown.</PARA>
+              </RECORD>
+            </LEVEL>
+            <!-- No number, no sections: read into RS 18-1. -->
+            <LEVEL style-name="Article" style-name-escaped="Article" level-depth="6" toc-section="true">
+              <RECORD id="0-0-0-260" number="260" version="1">
+                <HEADING>STANDARD FOR THE INSTALLATION OF ELEVATORS</HEADING>
+                <PARA>STANDARD FOR THE INSTALLATION OF ELEVATORS</PARA>
+              </RECORD>
+              <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                <RECORD id="0-0-0-261" number="261" version="1">
+                  <PARA>ANSI A17.1, AS MODIFIED</PARA>
+                </RECORD>
+              </LEVEL>
+              <LEVEL style-name="Subarticle" style-name-escaped="Subarticle" level-depth="7" toc-section="true">
+                <RECORD id="0-0-0-262" number="262" version="1">
+                  <HEADING>CONTENTS</HEADING>
+                  <PARA>CONTENTS</PARA>
+                </RECORD>
+                <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                  <RECORD id="0-0-0-263" number="263" version="1">
+                    <PARA>Chapter 1—General</PARA>
+                  </RECORD>
+                </LEVEL>
+              </LEVEL>
+              <!-- A number: a record of its own, named after RS 18-1. Its heading reads like a chapter. -->
+              <LEVEL style-name="Subarticle" style-name-escaped="Subarticle" level-depth="7" toc-section="true">
+                <RECORD id="0-0-0-264" number="264" version="1">
+                  <HEADING>CHAPTER 1 – GENERAL</HEADING>
+                  <PARA>CHAPTER 1 – GENERAL</PARA>
+                </RECORD>
+                <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                  <RECORD id="0-0-0-265" number="265" version="1">
+                    <PARA>1–1 Scope. This standard covers passenger elevators.</PARA>
+                  </RECORD>
+                </LEVEL>
+              </LEVEL>
+            </LEVEL>
+          </LEVEL>
+          <!-- A part that holds sections and no text of its own: not a record. -->
+          <LEVEL style-name="Part" style-name-escaped="Part" level-depth="5" toc-section="true">
+            <RECORD id="0-0-0-270" number="270" version="1">
+              <HEADING>REFERENCE STANDARD RS 18–2 ESCALATORS</HEADING>
+              <PARA>REFERENCE STANDARD RS 18–2 ESCALATORS</PARA>
+            </RECORD>
+            <LEVEL style-name="Article" style-name-escaped="Article" level-depth="6" toc-section="true">
+              <LEVEL style-name="Subarticle" style-name-escaped="Subarticle" level-depth="7" toc-section="true">
+                <LEVEL style-name="Subarticle - Part" style-name-escaped="Subarticle-Part" level-depth="8" toc-section="true">
+                  <LEVEL style-name="Section" style-name-escaped="Section" level-depth="9" toc-section="true">
+                    <RECORD id="0-0-0-271" number="271" version="1">
+                      <HEADING>SECTION 1 – GENERAL</HEADING>
+                      <PARA>SECTION 1 – GENERAL</PARA>
+                    </RECORD>
+                    <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+                      <RECORD id="0-0-0-272" number="272" version="1">
+                        <PARA>Escalators shall be installed as this standard provides.</PARA>
+                      </RECORD>
+                    </LEVEL>
+                  </LEVEL>
+                </LEVEL>
+              </LEVEL>
+            </LEVEL>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+  <!-- A chapter outside the title, as a file that starts at a chapter: its sections name Title 21. -->
+  <LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2" toc-section="true">
+      <RECORD id="0-0-0-300" number="300" version="1">
+        <HEADING>Chapter 7: New York City Building Code</HEADING>
+        <PARA><DESTINATION id="0-0-0-301" name="T21C007"/>Chapter 7: New York City Building Code</PARA>
+      </RECORD>
+      <!-- The HEADING is empty; the PARA names the section (Building Code § BC 602). -->
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-310" number="310" version="1">
+          <HEADING></HEADING>
+          <PARA><DESTINATION id="0-0-0-311" name="BC602"/>Section BC 602: Construction Classification</PARA>
+        </RECORD>
+        <LEVEL style-name="Subsection" style-name-escaped="Subsection" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-312" number="312" version="1">
+            <HEADING>602.1 General.</HEADING>
+            <PARA>602.1 General.</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-313" number="313" version="1">
+              <PARA>Buildings shall be classified in one of the five construction types.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+      <!-- The HEADING is only the number; the PARA has the catchline (§ 21-905). -->
+      <LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-320" number="320" version="1">
+          <HEADING>§ 21-905</HEADING>
+          <PARA>§ 21-905 Demographic data of the juvenile justice system.</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-321" number="321" version="1">
+            <PARA>The department shall report demographic data.</PARA>
+          </RECORD>
+        </LEVEL>
+      </LEVEL>
+      <!-- A group level whose heading reads like a chapter, with text and a section. -->
+      <LEVEL style-name="Subarticle - Part" style-name-escaped="Subarticle-Part" level-depth="3" toc-section="true">
+        <RECORD id="0-0-0-330" number="330" version="1">
+          <HEADING>Chapter D5: Non-Fireproof Multiple Dwellings</HEADING>
+          <PARA>Chapter D5: Non-Fireproof Multiple Dwellings</PARA>
+        </RECORD>
+        <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+          <RECORD id="0-0-0-331" number="331" version="1">
+            <PARA>D501 Applicability. Alterations shall comply with this chapter.</PARA>
+          </RECORD>
+        </LEVEL>
+        <LEVEL style-name="Section" style-name-escaped="Section" level-depth="4" toc-section="true">
+          <RECORD id="0-0-0-332" number="332" version="1">
+            <HEADING>Section D505: Spaces</HEADING>
+            <PARA>Section D505: Spaces</PARA>
+          </RECORD>
+          <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+            <RECORD id="0-0-0-333" number="333" version="1">
+              <PARA>Enclosed spaces shall be ventilated.</PARA>
+            </RECORD>
+          </LEVEL>
+        </LEVEL>
+      </LEVEL>
+  </LEVEL>
+  <!-- A title whose sections sit in no chapter (Title 31's shape): not in Chapter 7 before it. -->
+  <LEVEL style-name="Title" style-name-escaped="Title" level-depth="1" toc-section="true">
+    <RECORD id="0-0-0-800" number="800" version="1">
+      <HEADING>Title 31: Department of Veterans' Services</HEADING>
+      <PARA><DESTINATION id="0-0-0-801" name="T31"/>Title 31: Department of Veterans' Services</PARA>
+    </RECORD>
+    <LEVEL style-name="Section" style-name-escaped="Section" level-depth="2" toc-section="true">
+      <RECORD id="0-0-0-810" number="810" version="1">
+        <HEADING>§ 31-101 Definitions.</HEADING>
+        <PARA>§ 31-101 Definitions.</PARA>
+      </RECORD>
+      <LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+        <RECORD id="0-0-0-811" number="811" version="1">
+          <PARA>For the purposes of this title, a veteran is a person who served.</PARA>
+        </RECORD>
+      </LEVEL>
+    </LEVEL>
+  </LEVEL>
+</DOCUMENT>

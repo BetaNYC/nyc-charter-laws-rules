@@ -10,7 +10,11 @@
 //   { type: "subdivision", text, depth, label, anchor?, links? }   "a. The head of each agency..."
 //   { type: "text", text, depth?, links? }                          a paragraph with no label
 //   { type: "note", text, links? }                                  an editor's note
-//   (a body block can also carry table: true or picture: true; its text is still the flat text)
+//   { type: "subheading", text, links? }                            a Subsection's heading line,
+//                                                                   "80.1 Title." (issue #76)
+//   (a body block can also carry table: true or picture: true, and `marks`, the publisher's bold
+//   and italic runs as [start, end, "b" | "i" | "bi"] offsets into its text; its text is still
+//   the flat text)
 //
 // A body block's `text` is a slice of the section's `text` (the MCP server's text), and the body
 // blocks' texts joined with one space are exactly the section's `text`. Each link's start and
@@ -39,6 +43,11 @@ export function renderSection(section, structure = null) {
       .filter((l) => l.start >= b.start && l.end <= b.end)
       .map((l) => ({ start: l.start - b.start, end: l.end - b.start, to: l.to }));
     if (inside.length) block.links = inside;
+    // Bold and italic runs (structure `marks`), clipped to the block and made block-relative.
+    const marks = (structure.marks ?? [])
+      .filter(([x, y]) => x < b.end && y > b.start)
+      .map(([x, y, look]) => [Math.max(x, b.start) - b.start, Math.min(y, b.end) - b.start, look]);
+    if (marks.length) block.marks = marks;
     blocks.push(block);
   }
   return blocks;

@@ -47,11 +47,13 @@ jobs:
       - name: Run tests
         run: npm test
 
-  # The Charter site (issue #62): npm run test:site builds the site from the test fixtures,
-  # with its Pagefind index, and reads it in headless Chromium (accessibility tree, JavaScript
-  # off, search). When data/structure/ is committed (the daily refresh does that), it also
-  # builds the whole Charter site, to catch a build that only fails on the full text. Nothing
-  # is deployed: the site goes to _site/, which is git-ignored.
+  # The site (issues #62 and #65): npm run test:site builds the Charter site from the test
+  # fixtures, with its Pagefind index, and the real Charter and Administrative Code without one
+  # (test/site/admin.test.mjs), and reads them in headless Chromium (accessibility tree,
+  # JavaScript off, search). When data/structure/ is committed (the daily refresh does that), it
+  # also builds the whole site, to catch a build that only fails on the full text. Nothing is
+  # deployed: the site goes to _site/, which is git-ignored. The job keeps its name, "Charter
+  # site", so a required check that names it still matches.
   site:
     name: Charter site
     runs-on: ubuntu-latest
@@ -73,11 +75,15 @@ jobs:
       - name: Install Chromium for Playwright
         run: npx playwright install --with-deps chromium
 
+      - name: Site layout on the committed data
+        # test/site-data/: kept out of npm test (which the daily refresh runs) on purpose.
+        run: npm run test:site-data
+
       - name: Browser tests
         run: npm run test:site
 
-      - name: Build the whole Charter site
-        if: hashFiles('data/structure/charter.json') != ''
+      - name: Build the whole site (Charter and Administrative Code)
+        if: hashFiles('data/structure/charter.json') != '' && hashFiles('data/structure/admin_code.json') != ''
         run: npm run build-site
 
   # BetaNYC's What's changed standard (betanyc-ai-workspace

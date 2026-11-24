@@ -15,7 +15,7 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./co
  * @param {string} p.main          the inside of <main>
  * @param {string} [p.aside]       the contents tree (pages.js contentsTree), before <main>, on the left
  * @param {string} [p.here]        the reader's chapter, named on the Contents bar
- * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
+ * @param {string} [p.nav]         which top-bar link is current: "charter", "admin-code", "search", "about"
  * @param {boolean} [p.noindex]
  * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
  *   2026-11-23). Every page reaches search through the top bar's Search link.
@@ -56,7 +56,7 @@ export function page(p) {
 
   const body = [
     `<a class="skip" href="#main">Skip to main content</a>`,
-    topBar(p.nav, p.navPage === true),
+    topBar(p.nav, p.navPage === true, p.site?.navBooks),
     p.searchStrip === true ? searchStrip(p.site) : "",
     // The contents tree comes before <main> (Noel, 2026-11-23: people expect navigation at the
     // top), and the skip link jumps past it to the law text. "☰ Contents" sits at the top of the
@@ -72,7 +72,9 @@ export function page(p) {
 }
 
 // The current part of the site gets aria-current="true"; "page" only on that link's own page.
-function topBar(current, isPage) {
+// navBooks: the books this build has, as [{ slug, short }]; a Charter-only build passes none and
+// gets the Charter's link alone, as before.
+function topBar(current, isPage, navBooks = [{ slug: "charter", short: "Charter" }]) {
   const link = (key, href, text) =>
     `<li><a href="${href}"${current === key ? ` aria-current="${isPage ? "page" : "true"}"` : ""}>${text}</a></li>`;
   return `<header class="site-bar">
@@ -81,7 +83,7 @@ function topBar(current, isPage) {
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu" hidden><svg aria-hidden="true" focusable="false" viewBox="0 0 20 20"><path d="M2 4h16M2 10h16M2 16h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>Menu</button>
     <nav id="site-menu" aria-label="Site">
       <ul>
-        ${link("charter", "/charter/", "Charter")}
+        ${navBooks.map((b) => link(b.slug, `/${b.slug}/`, escapeHtml(b.short))).join("\n        ")}
         ${link("search", "/search", "Search")}
         ${link("about", "/about", "About")}
         <li><a href="${REPO_URL}">GitHub</a></li>
@@ -111,18 +113,23 @@ export function contentsButton(here) {
  * text inside the box, not a line of its own; the visible label stays its name. Without
  * JavaScript it shows a link to the contents.
  */
-export function searchForm({ contentsPath, id, handler }) {
+export function searchForm({ contentsPath, id, handler, books }) {
+  // Without JavaScript: a link to each book's contents (site.books, when the build has more than one).
+  const browse =
+    books && books.length > 1
+      ? books.map((b, i) => `<a href="${escapeHtml(b.contentsPath)}">${i === 0 ? "Browse " : ""}the ${escapeHtml(b.long)}'s contents</a>`).join(" or ")
+      : `<a href="${contentsPath}">Browse the Charter's contents</a>`;
   return `<form class="jump" action="/search" method="get" role="search" aria-label="Go to a section or search"${handler ? ` data-handler="${handler}"` : ""}>
   <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" placeholder="Try &quot;§ 259&quot;, &quot;259&quot;, or &quot;budget office&quot;"></nys-textinput>
   <nys-button type="submit" variant="filled" label="Go"></nys-button>
 </form>
-<noscript><p class="nojs">Search needs JavaScript. <a href="${contentsPath}">Browse the Charter's contents</a> instead.</p></noscript>`;
+<noscript><p class="nojs">Search needs JavaScript. ${browse} instead.</p></noscript>`;
 }
 
 function searchStrip(site) {
   return `<div class="find" data-pagefind-ignore="all">
   <div class="wrap">
-${searchForm({ contentsPath: site.contentsPath, id: "q" })}
+${searchForm({ contentsPath: site.contentsPath, id: "q", books: site.books })}
   </div>
 </div>`;
 }
@@ -135,6 +142,12 @@ ${searchForm({ contentsPath: site.contentsPath, id: "q" })}
  * start "Current through" stops the build, so a person decides how to word it.
  */
 export function currentLine(site) {
+  // A page for every book (home, search, About, 404) gives each book's line, unless they say the same.
+  if (site.books && site.books.length > 1) {
+    const lines = site.books.map((b) => currentLine({ currentThrough: b.currentThrough, copyChangedOn: b.copyChangedOn }));
+    if (lines.every((l) => l === lines[0])) return lines[0];
+    return site.books.map((b, i) => `The ${b.long}: ${lines[i]}`).join(" ");
+  }
   const t = String(site.currentThrough ?? "");
   if (!/^Current through /.test(t)) throw new Error(`the publisher's line does not start "Current through": "${t.slice(0, 60)}"`);
   return `American Legal Publishing's text is c${t.slice(1)} BetaNYC's copy last changed on ${site.copyChangedOn}.`;
@@ -153,7 +166,9 @@ export function bottomBox(site, law) {
   const what = law ? "this text" : "the law text on this site";
   const official = law
     ? `The official text of ${escapeHtml(law.citation)} is at <a href="${escapeHtml(law.url)}">American Legal Publishing</a>.`
-    : `${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.`;
+    : site.books && site.books.length > 1
+      ? `The official texts are at American Legal Publishing: ${site.books.map((b) => `<a href="${escapeHtml(b.officialUrl)}">the official ${escapeHtml(b.long)}</a>`).join(" and ")}.`
+      : `${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.`;
   return `<div class="wrap" data-pagefind-ignore="all">
 <aside class="warnbox copy-box" aria-label="About this copy">
 <p class="current">${escapeHtml(currentLine(site))}</p>

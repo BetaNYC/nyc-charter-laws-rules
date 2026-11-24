@@ -8,7 +8,9 @@ import { citationKeys } from "../../../site/assets/jump.js";
 export function redirectsJson(books) {
   const out = {};
   for (const b of books) {
-    out[b.book.slug] = Object.fromEntries(b.ordered.map((r) => [r.id, r.path]));
+    // An Admin Code title's own record (its id from the publisher's Title record) lands on the title page.
+    const titles = (b.titles ?? []).filter((t) => /^\d+-\d+-\d+-\d+$/.test(t.id)).map((t) => [t.id, t.path]);
+    out[b.book.slug] = Object.fromEntries([...titles, ...b.ordered.map((r) => [r.id, r.path])]);
   }
   return out;
 }
@@ -23,7 +25,26 @@ export function indexJson(books) {
       name: b.book.name,
       path: `/${b.book.slug}/`,
       currentThrough: b.version.currentThrough,
-      children: b.chapters.map((c) => ({
+      children: b.titles
+        ? b.titles.map((t) => ({
+            kind: "title",
+            id: t.id,
+            citation: t.citation,
+            heading: t.title,
+            path: t.path,
+            children: [
+              ...t.sections.map((s) => ({ kind: "section", id: s.id, citation: s.citation, heading: s.title, path: s.path })),
+              ...t.chapters.map((c) => ({
+                kind: "chapter",
+                id: c.id,
+                citation: c.citation,
+                heading: c.title,
+                path: c.path,
+                children: c.sections.map((s) => ({ kind: "section", id: s.id, citation: s.citation, heading: s.title, path: s.path })),
+              })),
+            ],
+          }))
+        : b.chapters.map((c) => ({
         kind: "chapter",
         id: c.id,
         citation: c.citation,
@@ -43,7 +64,8 @@ export function citationsJson(books) {
   const list = [];
   for (const b of books) {
     for (const r of b.ordered) {
-      list.push({ k: citationKeys(r.citation), c: `${b.book.label} ${r.citation}`, h: r.title, p: r.path, b: b.book.short });
+      // fullCitation is "<label> <citation>" for the Charter; an Admin Code chapter's carries its title.
+      list.push({ k: citationKeys(r.citation), c: r.fullCitation ?? `${b.book.label} ${r.citation}`, h: r.title, p: r.path, b: b.book.short });
     }
   }
   return list;
@@ -93,7 +115,13 @@ export function sitemaps(books, otherPaths) {
   const files = {};
   files["sitemaps/pages.xml"] = urlset(otherPaths);
   for (const b of books) {
-    files[`sitemaps/${b.book.slug}.xml`] = urlset([`/${b.book.slug}/`, ...b.ordered.map((r) => r.path), ...b.shared.map((s) => s.path)]);
+    files[`sitemaps/${b.book.slug}.xml`] = urlset([
+      `/${b.book.slug}/`,
+      ...(b.titles ?? []).map((t) => t.path),
+      ...b.ordered.map((r) => r.path),
+      ...(b.parts ?? []).map((p) => p.path),
+      ...b.shared.map((s) => s.path),
+    ]);
   }
   files["sitemap.xml"] = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(files)
     .map((f) => `<sitemap><loc>${xmlEscape(absoluteUrl("/" + f))}</loc></sitemap>`)

@@ -125,6 +125,12 @@ nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5
 .tree > li > a[aria-current="page"] { margin-left: 0; padding-left: 6px; }
 .tree a[aria-current="true"] { font-weight: 700; }
 .tree .load-error { padding: 3px 0; }
+/* The Administrative Code's deeper levels: title > chapter > part > sections, each
+   indented under its link. The Charter's tree has no ul inside a ul, so this does not touch it. */
+.tree ul ul { margin: 2px 0 6px; border-left: 2px solid var(--line-soft); padding-left: 10px; }
+/* Kept in the page when empty (not display: none), so screen readers hear what is put in it. */
+.tree-status { margin: 0; font-size: 14px; }
+.tree-status:not(:empty) { margin: 0 0 6px; }
 .tw { width: 26px; height: 28px; display: flex; align-items: center; justify-content: center; padding: 0; background: none; border: 0; color: var(--ink); cursor: pointer; }
 .tw svg { width: 12px; height: 12px; transition: transform .15s; }
 .tw[aria-expanded="true"] svg { transform: rotate(90deg); }
@@ -189,8 +195,10 @@ html.contents-ready .contents-summary { display: none; }
 @media (min-width: 900px) { html:has(.chapter-text) { scroll-padding-bottom: 80px; } }
 
 /* The law text. */
-h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
-h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
+/* Room under the breadcrumbs and between the citation and the title (Noel, 2026-11-23, on a
+   phone: the title sat right under the citation line). */
+h1 .cite { display: block; font-size: .55em; font-weight: 600; color: var(--ink); letter-spacing: .02em; line-height: 1.3; margin-bottom: 10px; }
+h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
 .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 20px; }
 /* Copy link, Copy citation, Print: small chips (Noel, 2026-11-23), quieter than the outlined
    buttons they replaced, so the title leads and they do not look like Menu or Contents. NYSDS's
@@ -226,6 +234,16 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 6px; }
    set off by a rule; an editor's note in a gray box, its "Editor's note:" in bold (render-html.js).
    The words are the publisher's, unchanged. */
 .law .history { font: 15px/1.6 var(--font-body); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 12px; }
+/* A subsection's heading line inside a section's text (issue #76): h2 on a section page, h3 in a
+   chapter page's copy. One look for both, between the copy's h2 (21px) and the text (18px).
+   Set off by space and a light rule so a long section doesn't read as one block (Noel,
+   2026-11-24, on FC 102). */
+.law .subhead { font: 700 19px/1.4 var(--font-head); margin: 44px 0 10px; padding-top: 20px; border-top: 1px solid var(--line-soft); scroll-margin-top: 16px; }
+/* A paragraph the publisher set wholly in bold that reads as a heading line (render-html.js
+   isBoldLine, Noel 2026-11-24 on RS 18-1): the subheading's look, kept a paragraph. Right after a
+   subheading, or first in the text, no second rule. */
+.law .boldline { font: 700 19px/1.4 var(--font-head); margin: 44px 0 10px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+.law .subhead + .boldline, .law > .boldline:first-child { margin-top: 12px; padding-top: 0; border-top: 0; }
 .law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
 
 .pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }
@@ -237,6 +255,25 @@ ol.contents, ul.contents { padding-left: 1.4em; }
 ol.contents li, ul.contents li { margin: 0 0 .4rem; }
 .count { font-size: 14px; }
 .hero-law { padding: 24px 0 8px; }
+.hero-law .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Text for screen readers only ("Title " before a title card's number). */
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* The Administrative Code's front page (pages-admin.js adminContentsPage; Noel, 2026-11-23): one
+   card per title, each one link. One column on a phone; on a wider screen as many 300px columns
+   as fit. The focus ring is the template's (a:focus-visible), kept clear of the next card by the gap. */
+.title-cards { list-style: none; margin: 16px 0 32px; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.title-cards a { display: block; height: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--line-soft); border-left: 4px solid var(--blue); border-radius: 4px; background: var(--bg-blue); text-decoration: none; color: var(--ink); }
+.title-cards a:hover, .title-cards a:focus-visible { background: var(--white); border-color: var(--blue); }
+.title-cards a:hover .tc-name { text-decoration: underline; }
+.tc-top { display: flex; align-items: baseline; gap: 8px; }
+.tc-num { flex: 0 0 2.6em; font-size: 14px; font-weight: 700; color: var(--ink); }
+.tc-name { flex: 1; font-weight: 700; color: var(--blue); font-size: 17px; line-height: 1.25; }
+.tc-count { font-size: 14px; color: var(--ink); white-space: nowrap; margin-left: auto; }
+
+/* What BetaNYC's copy leaves out of a section (pictures, unread subsections), with a link out. */
+.left-out { border-left: 4px solid var(--warn); background: var(--light); padding: 8px 12px; margin: 0 0 16px; }
 
 /* The one box at the bottom of every page. */
 .copy-box { margin-top: 40px; }

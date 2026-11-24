@@ -14,15 +14,15 @@ import { paragraphHtml } from "./disclaimer.js";
 import { SITE_NAME, SITE_BASE, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
 
 // The first crumb (Noel, 2026-11-23: "Law Reader" confused people).
-const HOME = { name: "Home", path: "/" };
+export const HOME = { name: "Home", path: "/" };
 
-function fileFor(path) {
+export function fileFor(path) {
   if (path === "/") return "index.html";
   if (path.endsWith("/")) return path.slice(1) + "index.html";
   return path.slice(1) + ".html";
 }
 
-function titleOf(text) {
+export function titleOf(text) {
   return `${text} | ${SITE_NAME}`;
 }
 
@@ -54,7 +54,7 @@ export function lawDescription(record) {
   return describe(`${base} "${cutAtWord(record.text, room - base.length - 3)}"`);
 }
 
-function legislationJsonLd(record, book, site) {
+export function legislationJsonLd(record, book, site) {
   return {
     "@context": "https://schema.org",
     "@type": "Legislation",
@@ -68,7 +68,7 @@ function legislationJsonLd(record, book, site) {
   };
 }
 
-function pagefindHead(record, book, kind) {
+export function pagefindHead(record, book, kind) {
   return [
     `<meta data-pagefind-filter="book[content]" content="${escapeHtml(book.book.short)}">`,
     `<meta data-pagefind-filter="kind[content]" content="${kind}">`,
@@ -85,11 +85,16 @@ export function officialRecordUrl(record, site) {
 }
 
 /** What a law page's bottom box needs: the record's citation and its own page at American Legal. */
-function lawRecord(record, site) {
+export function lawRecord(record, site) {
   return { citation: record.fullCitation, url: officialRecordUrl(record, site) };
 }
 
-function lawText(record, book) {
+/**
+ * A record's own text on its own page, under the page's h1: a Subsection's heading line
+ * (issue #76) is an h2. A chapter, part or title page's copy of a section sits under that
+ * section's h2, so its subheadings are h3 (sectionCopy).
+ */
+export function lawText(record, book) {
   const blocks = bodyBlocks(renderSection(record, record.structure));
   if (!blocks.length) return "";
   const html = bodyHtml(blocks, {
@@ -99,14 +104,53 @@ function lawText(record, book) {
   return `<div class="law">\n${html}\n</div>`;
 }
 
-const TOOLS = `<div class="tools" data-pagefind-ignore="all">
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+/**
+ * What BetaNYC's copy leaves out of a section, from its structure: pictures (figures, equations,
+ * tables drawn as images, which have no text) and levels the index still does not read (the
+ * structure's `subsections`: since issue #76 the Construction Codes' subsections are read, so
+ * this counts only a level nested where the index does not look, none in July 2026). One
+ * sentence and a link to the section's own page at American Legal Publishing; "" when nothing is
+ * left out. Not indexed by search.
+ */
+export function leftOutNote(record, site) {
+  const st = record.structure ?? {};
+  // A structure built before `pictures` was counted still marks a block that holds one (with text
+  // beside it), but cannot say how many there are: then the note gives no number.
+  const counted = st.pictures !== undefined;
+  const pictures = counted ? st.pictures : (st.blocks ?? []).some((b) => b.picture) ? 1 : 0;
+  const subsections = st.subsections ?? 0;
+  if (!pictures && !subsections) return "";
+  const what = [
+    subsections ? plural(subsections, "subsection") : null,
+    pictures ? `${counted ? plural(pictures, "picture") : "pictures"} (figures, equations, or tables drawn as images)` : null,
+  ]
+    .filter(Boolean)
+    .join(" and ");
+  return `<p class="left-out" data-pagefind-ignore="all">This section has ${what} that BetaNYC's copy does not show. <a href="${escapeHtml(officialRecordUrl(record, site))}">Read ${escapeHtml(record.citation)} at American Legal Publishing</a>.</p>`;
+}
+
+/** A section with no text in BetaNYC's copy: say so, and link to its page at American Legal Publishing. */
+export function emptyText(record, site) {
+  return `<p class="empty">BetaNYC's copy has no text for this section. <a href="${escapeHtml(officialRecordUrl(record, site))}">Read ${escapeHtml(record.citation)} at American Legal Publishing</a>.</p>`;
+}
+
+/** A section's body: what is left out, then its text, or the empty-text line when it has none and nothing explains why. */
+export function sectionBody(record, site, textHtml) {
+  const note = leftOutNote(record, site);
+  if (textHtml) return note ? `${note}\n${textHtml}` : textHtml;
+  return note || emptyText(record, site);
+}
+
+export const TOOLS = `<div class="tools" data-pagefind-ignore="all">
 <nys-button class="tool-link" variant="ghost" size="sm" label="Copy link"></nys-button>
 <nys-button class="tool-cite" variant="ghost" size="sm" label="Copy citation"></nys-button>
 <nys-button class="tool-print" variant="ghost" size="sm" label="Print"></nys-button>
 <p class="copy-status" role="status"></p>
 </div>`;
 
-function h1(record) {
+export function h1(record) {
   return `<h1><span class="cite">${escapeHtml(record.fullCitation)}</span> <span class="heading">${escapeHtml(record.title)}</span></h1>`;
 }
 
@@ -203,7 +247,7 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
     `<article class="law-page" data-pagefind-body>`,
     h1(s),
     TOOLS,
-    lawText(s, book) || `<p class="empty">American Legal Publishing's file has no text for this section.</p>`,
+    sectionBody(s, site, lawText(s, book)),
     `</article>`,
     pager,
   ].join("\n");
@@ -233,25 +277,33 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
  * part of one, jump within the page (#s-4, #s-4(b)); the copy only shows on a wide screen, where
  * that section is on the page too. Other links go where they go on the section's own page.
  */
-function sectionCopy(s, c, book, nameNote) {
-  const blocks = bodyBlocks(renderSection(s, s.structure));
-  const linkFor = (to) => {
+/**
+ * Where a cross-reference in a page's copy of section `s` goes: to the copy on this page when its
+ * target is one (`onPage(target)`), else where it goes on the section's own page. A reference into
+ * another book never stays on the page, even when that book has a record with the same id (68
+ * ids are in both the Charter and the Administrative Code).
+ */
+export function copyLinkFor(s, onPage, book) {
+  return (to) => {
     const t = linkTarget(to, book, s);
-    if (!t || to?.kind) return t;
+    if (!t || to?.kind || to.corpus !== book.corpus) return t;
     const target = book.byId.get(to.id);
-    if (target?.chapter !== c || !target.slug) return t;
+    if (!target?.slug || !onPage(target)) return t;
     return { href: `#${copyId(target.slug, to.anchor ?? "")}`, label: t.label };
   };
-  return blocks.length
-    ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote })}\n</div>`
-    : `<p class="empty">American Legal Publishing's file has no text for this section.</p>`;
+}
+
+function sectionCopy(s, c, book, nameNote, site) {
+  const blocks = bodyBlocks(renderSection(s, s.structure));
+  const linkFor = copyLinkFor(s, (target) => target.chapter === c, book);
+  return sectionBody(s, site, blocks.length ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote, headingLevel: 3 })}\n</div>` : "");
 }
 
 // "Open this section" and "Copy citation" are on every section of a chapter page, so each one's
 // name adds its citation ("Open this section: § 4"), and its heading too when two sections in
 // the chapter share the number (§ 20-t, § 530, § 808). The name starts with the visible words
 // (WCAG 2.5.3, label in name).
-const named = (words, s, note) => `aria-label="${escapeHtml(`${words}: ${s.citation}${note ? `, ${note}` : ""}`)}"`;
+export const named = (words, s, note) => `aria-label="${escapeHtml(`${words}: ${s.citation}${note ? `, ${note}` : ""}`)}"`;
 
 /**
  * A chapter's page (Noel, 2026-11-23). Its own text, if it has any; then a jump list of its
@@ -285,7 +337,7 @@ ${c.sections
     (x) => `<div class="chapter-section" id="${escapeHtml(copyId(x.slug))}">
 <h2>${escapeHtml(`${x.citation}. ${x.title}`)}</h2>
 <p class="sec-tools"><a href="${escapeHtml(x.path)}" ${named("Open this section", x, shared(x))}>Open this section</a> <button type="button" class="copy-cite" data-cite="${escapeHtml(x.fullCitation)}" ${named("Copy citation", x, shared(x))} hidden>Copy citation</button> <span class="copy-status" role="status"></span></p>
-${sectionCopy(x, c, book, shared(x))}
+${sectionCopy(x, c, book, shared(x), site)}
 </div>`
   )
   .join("\n")}
@@ -390,19 +442,45 @@ export function contentsPage(book, site) {
   };
 }
 
-export function homePage(book, site) {
+/** "Charter" or "Charter and Administrative Code": the books' names in running text. */
+export function bookNames(books) {
+  const names = books.map((b) => b.book.long ?? b.book.short);
+  return names.length < 3 ? names.join(" and ") : `${names.slice(0, -1).join(", ")}, and ${names.at(-1)}`;
+}
+
+/** A book's line under "What is here": its parts, counted. */
+function bookCounts(b) {
+  if (!b.titles) return `${b.chapters.length} chapters, ${b.sections.length} sections`;
+  const numbered = b.titles.filter((t) => !t.synthetic).length;
+  const extra = b.titles.length > numbered ? " plus local laws by year" : "";
+  return `${numbered} titles${extra}, ${b.chapters.length.toLocaleString("en-US")} chapters, ${b.sections.length.toLocaleString("en-US")} sections`;
+}
+
+export function homePage(book, site, others = []) {
+  const all = [book, ...others];
+  const many = others.length > 0;
+  const lede = many
+    ? `New York City's ${escapeHtml(bookNames(all))}, one page per section, with links between sections and a search box. BetaNYC builds them from American Legal Publishing's copy of the law, for research.`
+    : `New York City's Charter, one page per section, with links between sections and a search box. BetaNYC builds it from American Legal Publishing's copy of the law, for research.`;
+  const buttons = all.map((b) => `<a class="button" href="/${b.book.slug}/">Browse the ${escapeHtml(many ? b.book.long : b.book.short)}</a>`).join(" ");
+  const coming = many
+    ? `<p>The Rules of the City of New York are still to come: we are working to parse and display them.</p>`
+    : `<p>We are now working to parse and display the Administrative Code and the Rules of the City of New York.</p>`;
+  const example = many
+    ? `like <code>§ 259</code> in the Charter or <code>§ 28-101.1</code> in the Administrative Code`
+    : `like <code>§ 259</code> or <code>259</code>`;
   const main = `<section class="hero-law">
 <h1>${escapeHtml(SITE_NAME)}</h1>
-<p class="lede">New York City's Charter, one page per section, with links between sections and a search box. BetaNYC builds it from American Legal Publishing's copy of the law, for research.</p>
-<p><a class="button" href="/${book.book.slug}/">Browse the ${escapeHtml(book.book.short)}</a></p>
+<p class="lede">${lede}</p>
+<p${many ? ` class="buttons"` : ""}>${buttons}</p>
 </section>
 <h2 id="books">What is here</h2>
 <ul class="contents">
-<li><a href="/${book.book.slug}/">${escapeHtml(book.book.name)}</a>: ${book.chapters.length} chapters, ${book.sections.length} sections.</li>
+${all.map((b) => `<li><a href="/${b.book.slug}/">${escapeHtml(b.book.name)}</a>: ${bookCounts(b)}.</li>`).join("\n")}
 </ul>
-<p>We are now working to parse and display the Administrative Code and the Rules of the City of New York.</p>
+${coming}
 <h2 id="how">How to use it</h2>
-<p>Type a section number, like <code>§ 259</code> or <code>259</code>, in the box above or on the <a href="/search">search page</a> to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
+<p>Type a section number, ${example}, in the box above or on the <a href="/search">search page</a> to go straight to it, or type words to search the text. Every part of a section has its own link: select the letter or number at its start.</p>
 `;
   return {
     path: "/",
@@ -410,8 +488,8 @@ export function homePage(book, site) {
     kind: "home",
     html: page({
       path: "/",
-      title: `${SITE_NAME}: the NYC Charter, section by section`,
-      description: describe("Read New York City's Charter one section at a time, with links between sections and search."),
+      title: `${SITE_NAME}: the NYC ${bookNames(all)}, section by section`,
+      description: describe(`Read New York City's ${bookNames(all)} one section at a time, with links between sections and search.`),
       main,
       searchStrip: true,
       site,
@@ -420,12 +498,12 @@ export function homePage(book, site) {
   };
 }
 
-export function searchPage(book, site) {
+export function searchPage(book, site, others = []) {
   const crumbs = [HOME, { name: "Search", path: "/search" }];
   const main = [
     breadcrumbs(crumbs),
     `<h1>Search</h1>`,
-    searchForm({ contentsPath: site.contentsPath, id: "search-q", handler: "search" }),
+    searchForm({ contentsPath: site.contentsPath, id: "search-q", handler: "search", books: site.books }),
     `<p class="summary" id="search-status" role="status"></p>`,
     `<div class="results-layout">`,
     `<div class="filters" id="filters" hidden></div>`,
@@ -443,7 +521,7 @@ export function searchPage(book, site) {
     html: page({
       path: "/search",
       title: titleOf("Search"),
-      description: describe(`Search the ${book.book.name} by section number or by words.`),
+      description: describe(`Search the ${others.length ? `New York City ${bookNames([book, ...others])}` : book.book.name} by section number or by words.`),
       main,
       nav: "search",
       navPage: true,
@@ -482,7 +560,9 @@ const HISTORY = {
   mcp: "https://www.beta.nyc/2026/05/21/new-nyc-digital-democracy-tools-for-ai/",
 };
 
-export function aboutPage(book, site, { paragraphs, metadata }) {
+export function aboutPage(book, site, { paragraphs, metadata, others = [] }) {
+  const many = others.length > 0;
+  const admin = others.find((b) => b.corpus === "admin_code");
   const crumbs = [HOME, { name: "About", path: "/about" }];
   const h2 = (id) => `<h2 id="${id}">${escapeHtml(ABOUT_SECTIONS.find(([k]) => k === id)[1])}</h2>`;
   const mail = `<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`;
@@ -495,13 +575,23 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     `</ul></nav>`,
     h2("why"),
     `<p>The ${name} sets up the City's government: the Council, the Mayor, the Comptroller, the Public Advocate, the borough presidents, community boards, and the agencies. Reporters, Council staff, community board members, advocates, and students all end up reading it.</p>`,
-    `<p>We built this site so the ${escapeHtml(book.book.short)} is easy to read, search, and cite. Every section, and every lettered or numbered part of a section, has its own link you can paste into an email or testimony. Search finds a section by its number or by its words.</p>`,
+    admin
+      ? `<p>The ${escapeHtml(admin.book.name)} collects the City's local laws by subject, in ${admin.titles.filter((t) => !t.synthetic).length} titles such as Taxation and Finance, Health, and Housing and Buildings.</p>`
+      : "",
+    `<p>We built this site so the ${escapeHtml(many ? bookNames([book, ...others]) : book.book.short)} ${many ? "are" : "is"} easy to read, search, and cite. Every section, and every lettered or numbered part of a section, has its own link you can paste into an email or testimony. Search finds a section by its number or by its words.</p>`,
     h2("history"),
     `<p>At the end of 2013, BetaNYC and its community wrote <a href="${escapeHtml(HISTORY.roadmap)}">The People's Roadmap to a Digital New York City</a> for the City's incoming leaders. It asked the City to put the Charter, the Rules, and the Administrative Code online with open tools, like <a href="${escapeHtml(HISTORY.dcDecoded)}">DC Decoded</a> in Washington, D.C. It also asked the City to publish its records in machine-readable formats.</p>`,
     `<p>In June 2014, BetaNYC <a href="${escapeHtml(HISTORY.testimony)}">testified before the Council</a> in support of Intro 149, the bill to put the City's laws online, and asked that it require bulk downloads in machine-readable formats. Mayor de Blasio signed it on August 7, 2014, as <a href="${escapeHtml(HISTORY.law)}">Local Law 37 of 2014</a>, and <a href="${escapeHtml(HISTORY.statement)}">we welcomed it</a> the same day. The law, now section 7-111 of the Administrative Code, requires the City's Law Department to publish the Charter, the Administrative Code, and the Rules on its website, searchable, in formats that can be downloaded in bulk, and updated within four weeks of a change.</p>`,
     `<p>American Legal Publishing publishes that compilation for the City and offers it as bulk XML files. In May 2026, BetaNYC built <a href="${escapeHtml(HISTORY.mcp)}">an MCP server</a> from those files so AI assistants can quote the law and name the section they quote. This site puts the same text in front of people.</p>`,
     h2("changes"),
-    `<p>BetaNYC modified the text. We split each section into its parts (a, b, (1), (2)…), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. References into the Administrative Code and the Rules are plain text until those books are on this site.</p>`,
+    `<p>BetaNYC modified the text. We split each section into its parts (a, b, (1), (2)…), give each part its own link, turn references to other sections into links, and remove the publisher's editing marks (such as [ALP S-054]). Section numbers are worked out from each heading, and can be wrong. ${
+      many
+        ? "References between the Charter and the Administrative Code are links. References into the Rules are plain text until the Rules are on this site."
+        : "References into the Administrative Code and the Rules are plain text until those books are on this site."
+    }</p>`,
+    admin
+      ? `<p>In the Administrative Code, sections are grouped under the publisher's own titles, and a long chapter is split into parts of at most 100 sections, so no page is too long to load. American Legal Publishing files some local laws by the year they were enacted, outside the titles; we gather those under a heading of our own, “Local laws by year”. Some sections hold pictures (figures, equations, and tables drawn as images) that our copy does not include: those sections say so and link to their page at American Legal Publishing.</p>`
+      : "",
     h2("current"),
     `<p>${escapeHtml(currentLine(site))} That date changes when American Legal Publishing's files change or when BetaNYC changes how it reads them. This site was built on ${escapeHtml(metadata.builtOnLong)} (New York time).</p>`,
     h2("built-by"),
@@ -525,7 +615,9 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     h2("support"),
     `<p>This site is free and has no ads. If it helps your work, please <a href="https://beta.nyc/donate/">support BetaNYC</a>.</p>`,
     h2("disclaimer"),
-    `<p><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
+    many
+      ? `<p><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. The official texts are at American Legal Publishing: ${site.books.map((b) => `<a href="${escapeHtml(b.officialUrl)}">the official ${escapeHtml(b.long)}</a>`).join(" and ")}.</strong></p>`
+      : `<p><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>`,
     `<p>BetaNYC's MCP server ends its answers with the disclaimer below. The paragraph that starts “Official disclaimer from American Legal Publishing” is the publisher's, written for its own site, codelibrary.amlegal.com, so “this site” in it means theirs.</p>`,
     `<div class="disclaimer">`,
     ...paragraphs.map((p) => `<p>${paragraphHtml(p)}</p>`),
@@ -538,7 +630,11 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     html: page({
       path: "/about",
       title: titleOf("About"),
-      description: describe(`Who built ${SITE_NAME}, where its copy of the ${book.book.name} comes from, how BetaNYC changed it, and the full disclaimer.`),
+      description: describe(
+        many
+          ? `Who built ${SITE_NAME}, where its copies of the ${bookNames([book, ...others])} come from, how BetaNYC changed them, and the full disclaimer.`
+          : `Who built ${SITE_NAME}, where its copy of the ${book.book.name} comes from, how BetaNYC changed it, and the full disclaimer.`
+      ),
       main,
       nav: "about",
       navPage: true,
@@ -550,10 +646,11 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
   };
 }
 
-export function notFoundPage(book, site) {
+export function notFoundPage(book, site, others = []) {
+  const contents = [book, ...others].map((b) => `<a href="/${b.book.slug}/">the ${escapeHtml(others.length ? b.book.long : b.book.short)}'s contents</a>`);
   const main = `<h1>Page not found</h1>
 <p id="redirect-status" role="status">There is no page at this address.</p>
-<p>Try <a href="/${book.book.slug}/">the ${escapeHtml(book.book.short)}'s contents</a>, or <a href="/search">search</a>.</p>`;
+<p>Try ${contents.join(", ")}, or <a href="/search">search</a>.</p>`;
   return {
     path: "/404",
     file: "404.html",

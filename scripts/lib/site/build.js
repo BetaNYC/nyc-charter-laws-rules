@@ -1,4 +1,4 @@
-// The site build (issue #62): reads the index and structure, writes the static site. The only
+// The site build (issues #62 and #65): reads the index and structure, writes the static site. The only
 // I/O in the site code is here; everything it calls is pure. It never fetches anything.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, copyFileSync, rmSync } from "node:fs";
@@ -21,6 +21,8 @@ import {
   chapterSectionsJson,
 } from "./pages.js";
 import { redirectsJson, indexJson, citationsJson, metadataJson, sitemaps, robotsTxt } from "./outputs.js";
+import { BOOKS, DEFAULT_BOOKS } from "./config.js";
+import { adminPageMakers, titleChaptersPath, titleChaptersJson } from "./pages-admin.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -118,12 +120,43 @@ export function sourceFacts(dataSources, corpus) {
 }
 
 /**
+ * The facts each page needs about its book (issue #65 review): `perBook`, corpus → that book's own
+ * facts, for its law and contents pages; and `shared`, for the home, search, About and 404 pages,
+ * which also lists every book (`books`) when there is more than one, so their bottom box, "current
+ * through" line and no-JavaScript links name each. A book's own pages never carry `books`: a
+ * Charter page says only what is true of the Charter, even when the two books' dates differ.
+ */
+export function siteFacts(books, dataSources) {
+  const navBooks = books.length > 1 ? books.map((b) => ({ slug: b.book.slug, short: b.book.short })) : undefined;
+  const siteFor = (b) => {
+    const { officialUrl, officialBase, creditLine } = sourceFacts(dataSources, b.book.source ?? b.corpus);
+    return {
+      currentThrough: currentThroughLine(b.version.currentThrough),
+      // versions.json's indexedAt: when BetaNYC's index last picked up a change in the text
+      // (scripts/lib/merge-versions.js keeps it when a rebuild changes nothing). Not a download date.
+      copyChangedOn: newYorkLongDate(b.version.indexedAt),
+      officialUrl,
+      officialBase,
+      officialName: b.book.official,
+      creditLine,
+      contentsPath: `/${b.book.slug}/`,
+      ...(navBooks ? { navBooks } : {}),
+    };
+  };
+  const perBook = new Map(books.map((b) => [b.corpus, siteFor(b)]));
+  const first = perBook.get(books[0].corpus);
+  const shared = books.length > 1 ? { ...first, books: books.map((b) => ({ ...perBook.get(b.corpus), long: b.book.long, name: b.book.name })) } : first;
+  return { perBook, shared };
+}
+
+/**
  * Build the site. Returns counts, sizes and timings.
  * @param {object} [o]
  * @param {string} [o.indexDir]       data/index/json
  * @param {string} [o.structureDir]   data/structure
  * @param {string} [o.outDir]         _site
  * @param {boolean} [o.search=true]   build the Pagefind index
+ * @param {string[]} [o.books]        corpora to build, the Charter first (default DEFAULT_BOOKS)
  * @param {Date} [o.now]              the build's clock (tests fix it)
  * @param {string} [o.commit]         this repo's commit (default: GITHUB_SHA, then git)
  */
@@ -132,10 +165,16 @@ export async function buildSite(o = {}) {
   const indexDir = resolve(o.indexDir ?? join(ROOT, "data", "index", "json"));
   const structureDir = resolve(o.structureDir ?? join(ROOT, "data", "structure"));
   const outDir = resolve(o.outDir ?? join(ROOT, "_site"));
-  const corpus = "charter";
   const now = o.now ?? new Date();
+  // The books to build: the Charter and the Administrative Code (DEFAULT_BOOKS), or the Charter
+  // alone (--charter-only; the fixture tests). The Charter always comes first: the home, search,
+  // About and 404 pages are built around it.
+  const corpora = o.books ?? DEFAULT_BOOKS;
+  if (corpora[0] !== "charter") throw new Error(`the first book must be the Charter, not ${corpora[0]}`);
+  for (const c of corpora) if (!BOOKS[c]) throw new Error(`no site settings for "${c}"`);
 
-  const need = [join(indexDir, `${corpus}.json`), join(indexDir, "versions.json"), join(structureDir, `${corpus}.json`)];
+  const versionsFile = join(indexDir, "versions.json");
+  const need = [versionsFile, ...corpora.flatMap((c) => [join(indexDir, `${c}.json`), join(structureDir, `${c}.json`)])];
   for (const f of need) {
     if (!existsSync(f)) {
       throw new Error(
@@ -143,27 +182,23 @@ export async function buildSite(o = {}) {
       );
     }
   }
-  const book = loadBook({
-    corpus,
-    indexJsonText: readFileSync(need[0], "utf8"),
-    versions: JSON.parse(readFileSync(need[1], "utf8")),
-    structure: JSON.parse(readFileSync(need[2], "utf8")),
-  });
-  const { officialUrl, officialBase, creditLine } = sourceFacts(JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8")), corpus);
+  const versions = JSON.parse(readFileSync(versionsFile, "utf8"));
+  const dataSources = JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8"));
+  const books = corpora.map((c) =>
+    loadBook({
+      corpus: c,
+      indexJsonText: readFileSync(join(indexDir, `${c}.json`), "utf8"),
+      versions,
+      structure: JSON.parse(readFileSync(join(structureDir, `${c}.json`), "utf8")),
+    })
+  );
+  // Cross-references between books link when the build has both.
+  if (books.length > 1) for (const b of books) b.others = new Map(books.filter((x) => x !== b).map((x) => [x.corpus, x]));
+  const [book, ...extra] = books;
+  const { perBook, shared: site } = siteFacts(books, dataSources);
   const paragraphs = disclaimerParagraphs(readFooter(join(ROOT, "src", "tools.ts")));
-  const site = {
-    currentThrough: currentThroughLine(book.version.currentThrough),
-    // versions.json's indexedAt: when BetaNYC's index last picked up a change in the text
-    // (scripts/lib/merge-versions.js keeps it when a rebuild changes nothing). Not a download date.
-    copyChangedOn: newYorkLongDate(book.version.indexedAt),
-    officialUrl,
-    officialBase,
-    officialName: book.book.official,
-    creditLine,
-    contentsPath: `/${book.book.slug}/`,
-  };
   const metadata = metadataJson({
-    books: [book],
+    books,
     builtAt: newYorkIso(now),
     builtOn: newYorkDay(now),
     commit: o.commit ?? gitCommit(),
@@ -182,26 +217,37 @@ export async function buildSite(o = {}) {
   copyFileSync(join(pagefindDir(), "LICENSE", "LICENSE"), join(outDir, "licenses", "pagefind-LICENSE.txt"));
 
   const pages = [
-    homePage(book, site),
-    contentsPage(book, site),
-    ...book.chapters.map((c) => chapterPage(c, book, site)),
-    ...book.sections.map((s) => sectionPage(s, book, site)),
-    ...book.shared.map((sh) => sharedNumberPage(sh, book, site)),
-    searchPage(book, site),
-    aboutPage(book, site, { paragraphs, metadata: { builtOnLong: newYorkLongDate(now) } }),
-    notFoundPage(book, site),
+    homePage(book, site, extra),
+    // The Charter's own pages speak for the Charter alone (its box, its "current through" line).
+    contentsPage(book, perBook.get(book.corpus)),
+    ...book.chapters.map((c) => chapterPage(c, book, perBook.get(book.corpus))),
+    ...book.sections.map((s) => sectionPage(s, book, perBook.get(book.corpus))),
+    ...book.shared.map((sh) => sharedNumberPage(sh, book, perBook.get(book.corpus))),
+    searchPage(book, site, extra),
+    aboutPage(book, site, { paragraphs, metadata: { builtOnLong: newYorkLongDate(now) }, others: extra }),
+    notFoundPage(book, site, extra),
   ];
   for (const p of pages) write(outDir, p.file, p.html);
+  for (const b of extra) {
+    const bsite = perBook.get(b.corpus);
+    if (!b.book.titles) throw new Error(`${b.corpus}: only a book laid out by titles can follow the Charter for now`);
+    for (const make of adminPageMakers(b, bsite)) {
+      const p = make();
+      write(outDir, p.file, p.html);
+      pages.push({ path: p.path, file: p.file, kind: p.kind, book: b.book.slug, bytes: Buffer.byteLength(p.html) });
+    }
+  }
+  for (const b of extra) for (const t of b.titles) write(outDir, titleChaptersPath(b, t).slice(1), JSON.stringify(titleChaptersJson(t)));
   // Each chapter's sections, for the contents tree: a page carries only its own chapter's list,
   // and law.js loads another chapter's when the reader opens it (pages.js contentsTree).
   for (const c of book.chapters) if (c.sections.length) write(outDir, chapterSectionsPath(book, c).slice(1), JSON.stringify(chapterSectionsJson(c)));
 
-  write(outDir, "redirects.json", JSON.stringify(redirectsJson([book])));
-  write(outDir, "index.json", JSON.stringify(indexJson([book])));
-  write(outDir, "citations.json", JSON.stringify(citationsJson([book])));
+  write(outDir, "redirects.json", JSON.stringify(redirectsJson(books)));
+  write(outDir, "index.json", JSON.stringify(indexJson(books)));
+  write(outDir, "citations.json", JSON.stringify(citationsJson(books)));
   write(outDir, "metadata.json", JSON.stringify(metadata, null, 2) + "\n");
   const other = pages.filter((p) => p.kind === "home" || p.kind === "about").map((p) => p.path);
-  for (const [f, xml] of Object.entries(sitemaps([book], other))) write(outDir, f, xml);
+  for (const [f, xml] of Object.entries(sitemaps(books, other))) write(outDir, f, xml);
   write(outDir, "robots.txt", robotsTxt());
   const t1 = performance.now();
 
@@ -226,6 +272,7 @@ export async function buildSite(o = {}) {
   return {
     outDir,
     book,
+    books,
     pages,
     pageCount: pages.length,
     lawPageCount,

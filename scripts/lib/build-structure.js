@@ -1,12 +1,30 @@
 // The site structure (issue #61): what a law page needs that the index's flat `text` drops.
 //
-// For every indexed section, in index order, the structure file records
+// For every indexed record, in index order (a section, a chapter, or since issue #78 a group
+// level's own text, such as a reference standard or an appendix: see build-corpus.js), the
+// structure file records
+//   - level:    the publisher's level for it ("Section", "Chapter", "Appendix", "Part"...);
 //   - parents:  the Title, Chapter, Subchapter, Article... it sits in, outermost first, with
 //               each one's heading. A file that starts at a Chapter has no Title wrapper, so its
 //               Title is found from the publisher's anchor name for it (see assignTitles below);
 //   - blocks:   the paragraphs that make up `text`, each as a [start, end) slice of `text`,
-//               with its subdivision label ("a.", "(1)"), depth and anchor ("(b)(1)");
-//   - links:    each cross-reference, as a [start, end) slice of `text` and its target.
+//               with its subdivision label ("a.", "(1)"), depth and anchor ("(b)(1)"); a
+//               Subsection's heading line ("102.4 Smoking.") is a block of type "subheading"
+//               anchored at its number ("102.4"), and the subdivisions under it are anchored
+//               under that number ("102.4(1)");
+//   - links:    each cross-reference, as a [start, end) slice of `text` and its target;
+//   - marks:    the publisher's bold and italic runs (issue #78 follow-up), each [start, end,
+//               "b" | "i" | "bi"], a slice of `text` (left out when none). Display only;
+//               see paraFormatting;
+//   - pictures:    how many <PICTURE> elements the section has (left out when none). A picture
+//                  has no text, so the index cannot show it; the site says so and links to the
+//                  section's page at American Legal Publishing.
+//   - subsections: how many levels inside the section the index does not read (left out when
+//                  none). Since issue #76 the index reads the Construction Codes' "Subsection"
+//                  levels (build-corpus.js readBody), so this counts only what is still skipped:
+//                  a level inside a section that is not its body, a Subsection or an indexed
+//                  record, and a level inside a Subsection that is not a "Normal Level" (none in
+//                  July 2026). The site says so and links out.
 //
 // The text itself is not repeated: every offset points into the section's `text` in
 // data/index/json/<corpus>.json, the file the MCP server answers from, and the structure file
@@ -38,6 +56,10 @@ import {
 
 export const STRUCTURE_FORMAT = 1;
 
+// Child levels of a section that the index reads (its body and its Subsections, issue #76) or
+// indexes on their own.
+const INDEXED_OR_BODY = new Set(["Normal Level", "Subsection", "Section", "Chapter"]);
+
 // Two private-use characters that never occur in the source mark where a <LINK> starts and
 // ends while its paragraph is flattened, so its position survives normalize().
 const OPEN = "";
@@ -54,6 +76,16 @@ export function infobaseCorpus(uil) {
 // A subdivision label as the source writes it: "a.", "1.", "4-a.", "(a)", "(1)", "(iv)",
 // "A)", or a bullet. It must be followed by a <TAB/> in the markup to count (labelOf).
 const LABEL = /^(?:\(([0-9A-Za-z][0-9A-Za-z.-]{0,5})\)|([0-9A-Za-z][0-9A-Za-z-]{0,5})[.)]|•)$/;
+
+// A subsection's number, from the start of its heading line (issue #76): "102.4 Smoking." →
+// "102.4", "E104.2.2 Group I-3." → "E104.2.2", "§ 19.1-01.1 Applicability." → "19.1-01.1",
+// "3.1.1. Definition." → "3.1.1". Null when the line does not start with one ("Appendix A").
+// The number starts the anchors of the subsection's parts; jump.js citeWithAnchor turns
+// "Section FC 102" and "102.4(1)" into the citation "Section FC 102.4(1)".
+const SUBSECTION_KEY = /^(?:§\s*)?([A-Za-z]{0,3}\d[\dA-Za-z-]*(?:\.\d[\dA-Za-z-]*)*)(?=$|[\s.:,])/;
+export function subsectionKey(text) {
+  return SUBSECTION_KEY.exec(String(text ?? ""))?.[1] ?? null;
+}
 
 // The anchor key for a label: "a." and "(a)" are both "a". A bullet has none.
 export function labelKey(label) {
@@ -147,6 +179,77 @@ export function paraWithLinks(para) {
   return { text: plain, links };
 }
 
+// Bold and italic, as the publisher's <CHARFORMAT bold="1">/<CHARFORMAT italic="1"> mark them
+// (Noel, 2026-11-24, on RS 18-1: whole bold lines act as headings, "Modifications.—" leads a
+// paragraph in bold, notes are in italics). Display only: the index's `text` never changes.
+// Each CHARFORMAT states bold and italic itself (July 2026: every one), so a run's look is its
+// nearest CHARFORMAT's; one that leaves an attribute out takes it from the CHARFORMAT around it.
+// Marks go inside each CHARFORMAT, as paraWithLinks does for links, so the separator rules in
+// extractText see the same siblings. One character per look opens a run; FMT_CLOSE ends it.
+const FMT_OPEN = { "": "\uE010", b: "\uE011", i: "\uE012", bi: "\uE013" };
+const FMT_CLOSE = "\uE014";
+const FMT_OF = Object.fromEntries(Object.entries(FMT_OPEN).map(([k, v]) => [v, k]));
+
+function markFormatting(node, outer = "") {
+  if (Array.isArray(node)) return node.map((n) => markFormatting(n, outer));
+  if (!node || typeof node !== "object" || "#text" in node) return node;
+  const tag = tagOf(node);
+  if (!tag) return node;
+  const kids = Array.isArray(node[tag]) ? node[tag] : [];
+  if (tag !== "CHARFORMAT") return { ...node, [tag]: markFormatting(kids, outer) };
+  const flag = (name, k) => {
+    const v = getAttr(node, name);
+    return v === "" ? outer.includes(k) : v === "1";
+  };
+  const look = `${flag("bold", "b") ? "b" : ""}${flag("italic", "i") ? "i" : ""}`;
+  return { ...node, [tag]: [{ "#text": FMT_OPEN[look] }, ...markFormatting(kids, look), { "#text": FMT_CLOSE }] };
+}
+
+/**
+ * A PARA's bold and italic runs, as [start, end, "b" | "i" | "bi"] slices of its flattened text
+ * (normalize(extractText(para)), the index's text for it), trimmed of spaces at their ends and
+ * merged when they touch. Null when the marks moved the text in any way (then the paragraph
+ * shows plain, as before), and [] when nothing in it is bold or italic.
+ */
+export function paraFormatting(para) {
+  const plain = normalize(extractText(para));
+  const marked = normalize(extractText(markFormatting(para)));
+  const stack = [];
+  const looks = []; // per character of out
+  let out = "";
+  for (const ch of marked) {
+    if (ch in FMT_OF) stack.push(FMT_OF[ch]);
+    else if (ch === FMT_CLOSE) {
+      if (!stack.length) return null;
+      stack.pop();
+    } else if (/\s/.test(ch)) {
+      if (out.length > 0 && !out.endsWith(" ")) {
+        out += " ";
+        looks.push(stack.at(-1) ?? "");
+      }
+    } else {
+      out += ch;
+      looks.push(stack.at(-1) ?? "");
+    }
+  }
+  while (out.endsWith(" ")) {
+    out = out.slice(0, -1);
+    looks.pop();
+  }
+  if (out !== plain || stack.length) return null;
+  const runs = [];
+  for (let i = 0; i < out.length; i++) {
+    const look = looks[i];
+    if (!look) continue;
+    // A space takes the look of the run around it only when both sides have it.
+    if (out[i] === " ") continue;
+    const last = runs.at(-1);
+    if (last && last[2] === look && out.slice(last[1], i).trim() === "" && looks.slice(last[1], i).every((l) => l === look)) last[1] = i + 1;
+    else runs.push([i, i + 1, look]);
+  }
+  return runs;
+}
+
 // The raw target of a <LINK>, before it is resolved to a section.
 function linkTarget(attrs, corpus) {
   const a = (k) => attrs[`@_${k}`] ?? "";
@@ -217,37 +320,70 @@ export function createStructureCollector(corpus) {
       };
     },
 
-    onSection(section, { level, record, bodyRecords, ancestors }) {
+    onSection(section, { level, record, parts = [], unread: unreadInSubsections = [], ancestors, levelNode = null }) {
       const parents = ancestors.map((a) => addGroup(a.level, a.record, a.heading));
       if (level === "Chapter") addGroup(level, record, section.heading);
-      const entry = { id: section.id, level, parents, blocks: [], links: [] };
+      const entry = { id: section.id, level, parents, blocks: [], links: [], marks: [] };
       if (level === "Chapter") {
         const own = [];
         collectDestinations(record, null, own);
         entry.titleKey = own.map((d) => titleKeyOf(d.name)).find(Boolean) ?? null;
       }
 
-      // Blocks: the non-empty paragraphs, which the index joins with one space.
-      const paras = [];
-      for (const r of bodyRecords) {
-        for (const p of childrenByTag(r, "PARA")) paras.push({ p, record: getAttr(r, "id") });
-      }
+      // Blocks: the non-empty body parts (build-corpus.js readBody), which the index joins with
+      // one space: paragraphs, and each Subsection's heading line.
+      // Pictures (figures, equations, some tables) carry no text, so a paragraph holding only
+      // a picture adds no block and the picture is lost from the text. Count every one in the
+      // section, so the site can say what its copy leaves out and link to the official page:
+      // in its own paragraphs, anywhere in its Subsections (a picture can sit in a Subsection's
+      // heading PARA, which the index may not read when the HEADING says the same), and in the
+      // levels it does not read.
+      // Levels the index does not read are counted too: a section's own child levels other than
+      // its body, Subsections and indexed records (a chapter's other levels hold its sections:
+      // Subchapter, Article..., so only a section's count), and any level inside a Subsection
+      // that is not a "Normal Level".
+      const own = levelNode && level === "Section" ? childrenByTag(levelNode, "LEVEL").filter((l) => !INDEXED_OR_BODY.has(getAttr(l, "style-name") || "")) : [];
+      const unread = [...own, ...unreadInSubsections];
+      const subsectionLevels = levelNode ? childrenByTag(levelNode, "LEVEL").filter((l) => getAttr(l, "style-name") === "Subsection") : [];
+      const pictures =
+        parts.reduce((n, part) => n + (part.para && !part.subsection ? countTag(part.para, "PICTURE") : 0), 0) +
+        countTag(subsectionLevels, "PICTURE") +
+        countTag(own, "PICTURE");
+      if (pictures) entry.pictures = pictures;
+      if (unread.length) entry.subsections = unread.length;
       const stack = []; // open subdivisions: { depth, key }
       const used = new Map(); // anchor → times used in this section
+      let scope = ""; // the open subsection's number ("102.4"), which starts its parts' anchors
+      const unique = (anchor) => {
+        const n = (used.get(anchor) ?? 0) + 1;
+        used.set(anchor, n);
+        return n === 1 ? anchor : `${anchor}-${n}`;
+      };
       const records = []; // [body RECORD id, its first block]
       let offset = 0;
       let ok = true;
-      for (const { p, record: rid } of paras) {
-        const { text, links } = paraWithLinks(p);
+      for (const part of parts) {
+        const { text, links } = part.para ? paraWithLinks(part.para) : { text: part.text, links: [] };
         if (!text) continue;
+        const rid = getAttr(part.record, "id");
         const start = offset === 0 ? 0 : offset + 1;
         if (section.text.slice(start, start + text.length) !== text) {
           ok = false;
           break;
         }
-        const style = getAttr(p, "style-name");
+        const p = part.para;
+        const style = p ? getAttr(p, "style-name") : "";
         const block = { start, end: start + text.length, type: "text" };
-        if (style === "EdNote" || style === "EdNoteSm") {
+        if (part.kind === "subheading") {
+          // A Subsection's heading line. Its body is a new list: subdivisions under it do not
+          // nest in the ones before it, and their anchors start with its number, so item (1) of
+          // 102.4 is "102.4(1)", not the section's third "(1)" ("(1)-3"). The heading's own
+          // anchor is its number. One with no number ("Appendix A") opens no scope.
+          block.type = "subheading";
+          stack.length = 0;
+          scope = subsectionKey(text) ?? "";
+          if (scope) block.anchor = unique(scope);
+        } else if (style === "EdNote" || style === "EdNoteSm") {
           block.type = "note";
         } else {
           const { tabs, label } = labelOf(p);
@@ -261,20 +397,19 @@ export function createStructureCollector(corpus) {
             stack.push({ depth, key });
             if (key !== null) {
               const path = stack.filter((s) => s.key !== null).map((s) => `(${s.key})`).join("");
-              const n = (used.get(path) ?? 0) + 1;
-              used.set(path, n);
-              block.anchor = n === 1 ? path : `${path}-${n}`;
+              block.anchor = unique(scope + path);
             }
           } else if (tabs > 0) {
             block.depth = tabs;
           }
         }
-        if (hasTag(p, "TABLE")) block.table = true;
-        if (hasTag(p, "PICTURE")) block.picture = true;
+        if (p && hasTag(p, "TABLE")) block.table = true;
+        if (p && hasTag(p, "PICTURE")) block.picture = true;
         if (!records.some(([r]) => r === rid)) records.push([rid, block]);
         for (const l of links ?? []) {
           entry.links.push({ start: start + l.start, end: start + l.end, target: linkTarget(l.attrs, corpus) });
         }
+        for (const [a, b, look] of (p ? paraFormatting(p) : null) ?? []) entry.marks.push([start + a, start + b, look]);
         if (links === null) entry.unplacedLinks = (entry.unplacedLinks ?? 0) + countTag(p, "LINK");
         entry.blocks.push(block);
         offset = block.end;
@@ -283,6 +418,7 @@ export function createStructureCollector(corpus) {
         // The paragraphs do not slice `text` exactly; keep the section as one block, no links.
         entry.blocks = section.text ? [{ start: 0, end: section.text.length, type: "text" }] : [];
         entry.links = [];
+        entry.marks = [];
         entry.flat = true;
         for (const r of records) r[1] = entry.blocks[0];
       }
@@ -304,8 +440,11 @@ export function createStructureCollector(corpus) {
       const out = entries.map((e) => {
         const s = { id: e.id, level: e.level, parents: e.parents, blocks: e.blocks };
         if (e.links.length) s.links = e.links.map((l) => ({ start: l.start, end: l.end, to: resolveTarget(l.target, resolvers) }));
+        if (e.marks.length) s.marks = e.marks;
         if (e.flat) s.flat = true;
         if (e.unplacedLinks) s.unplacedLinks = e.unplacedLinks;
+        if (e.pictures) s.pictures = e.pictures;
+        if (e.subsections) s.subsections = e.subsections;
         return s;
       });
       const usedGroups = new Set(entries.flatMap((e) => e.parents));

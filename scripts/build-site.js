@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// CLI: builds the BetaNYC Law Reader, a static website for the Charter (issue #62, epic #68),
-// from the index and its structure. It never fetches anything.
+// CLI: builds the BetaNYC Law Reader, a static website for the Charter and the Administrative
+// Code (issues #62 and #65, epic #68), from the index and its structure. It never fetches anything.
 //
 //   npm run build-site                      reads data/index/json/ and data/structure/, writes _site/
-//   node scripts/build-site.js --index-dir <dir> --structure-dir <dir> --out <dir> [--no-search]
+//   node scripts/build-site.js --index-dir <dir> --structure-dir <dir> --out <dir> [--no-search] [--charter-only]
 //
 // The output folder is git-ignored and is never committed (epic #68, decision 5). --no-search
-// skips the Pagefind index (the unit tests use it to stay fast).
+// skips the Pagefind index (the unit tests use it to stay fast). --charter-only leaves out the
+// Administrative Code (a quick local look at the Charter; the deploy builds both).
 
 import { buildSite } from "./lib/site/build.js";
 
@@ -24,8 +25,9 @@ function parseArgs(argv) {
     else if (a === "--out") opts.outDir = next();
     else if (a === "--no-search") opts.search = false;
     else if (a === "--commit") opts.commit = next();
+    else if (a === "--charter-only") opts.books = ["charter"];
     else if (a === "--help" || a === "-h") {
-      console.log("Usage: node scripts/build-site.js [--index-dir DIR] [--structure-dir DIR] [--out DIR] [--no-search] [--commit SHA]");
+      console.log("Usage: node scripts/build-site.js [--index-dir DIR] [--structure-dir DIR] [--out DIR] [--no-search] [--commit SHA] [--charter-only]");
       process.exit(0);
     } else throw new Error(`unknown option ${a}`);
   }

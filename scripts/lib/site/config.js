@@ -15,9 +15,10 @@ export const REPO_URL = "https://github.com/BetaNYC/nyc-charter-laws-rules";
 export const NPM_URL = "https://www.npmjs.com/package/@betanyc/nyc-charter-laws-rules";
 
 /**
- * The books on the site. Only the Charter is built in Phase 2; the Administrative Code and the
- * Rules follow in Phase 5 (#65). `label` starts page titles ("NYC Charter § 259: ..."); `name`
- * is the book's full name; `official` is the bold line's name for the official copy.
+ * The books on the site: the Charter (Phase 2) and the Administrative Code (Phase 5, #65); the
+ * Rules follow. `label` starts page titles ("NYC Charter § 259: ..."); `name` is the book's full
+ * name; `short` is the top bar's link; `long` is the name in running text ("the Administrative
+ * Code"); `official` is the bold line's name for the official copy.
  */
 export const BOOKS = {
   charter: {
@@ -26,8 +27,23 @@ export const BOOKS = {
     label: "NYC Charter",
     name: "New York City Charter",
     short: "Charter",
+    long: "Charter",
     aml: "NYCcharter",
     official: "The official Charter",
+  },
+  // The Administrative Code, titles first. `titles` switches model.js to the title > chapter
+  // layout; `source` is its id in DATA-SOURCES.json.
+  admin_code: {
+    corpus: "admin_code",
+    slug: "admin-code",
+    source: "admin-code",
+    label: "NYC Administrative Code",
+    name: "New York City Administrative Code",
+    short: "Admin Code",
+    long: "Administrative Code",
+    aml: "NYCadmin",
+    official: "The official Administrative Code",
+    titles: true,
   },
 };
 
@@ -35,3 +51,6 @@ export const BOOKS = {
 export function absoluteUrl(path) {
   return SITE_BASE + path;
 }
+
+/** The books build-site builds, in order, unless told otherwise (--charter-only). */
+export const DEFAULT_BOOKS = ["charter", "admin_code"];

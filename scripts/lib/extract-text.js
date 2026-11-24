@@ -54,6 +54,11 @@ const NAMED_ENTITIES = {
   apos: "'",
   nbsp: " ", // non-breaking space; whitespace-collapsed by normalize()
   divide: "÷", // ÷
+  // Double-encoded in the Title 27 Building Code Reference Standards (issue #78): the source has
+  // "&amp;Sigma;" once and "&amp;alpha;" twice (July 2026), which the parser turns into the
+  // literal text "&Sigma;" and "&alpha;".
+  Sigma: "Σ",
+  alpha: "α",
 };
 
 // Decode numeric character references and the named entities above. nbsp decodes

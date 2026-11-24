@@ -1,6 +1,6 @@
 {
   "name": "@betanyc/nyc-charter-laws-rules",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "MCP server for NYC Charter, Administrative Code, and Rules of the City of New York",
   "mcpName": "io.github.BetaNYC/nyc-charter-laws-rules",
   "keywords": [
@@ -48,6 +48,7 @@
     "prepare": "npm run build",
     "fetch-data": "node scripts/fetch-data.js",
     "build-index": "node scripts/build-index.js",
+    "audit:coverage": "node scripts/audit-coverage.js",
     "update-changelog": "node scripts/update-changelog.js",
     "build-site": "node scripts/build-site.js",
     "serve-site": "node scripts/serve-site.js",
@@ -55,7 +56,9 @@
     "test": "node --test test/*.test.js",
     "test:diff": "node --test test/diff/differential.mjs",
     "eval": "npm run build && node eval/run.mjs",
-    "test:site": "node --test test/site/*.test.mjs"
+    "test:site": "node --test test/site/*.test.mjs",
+    "pretest:site-data": "npm run build",
+    "test:site-data": "node --test test/site-data/*.test.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
