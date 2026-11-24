@@ -52,8 +52,8 @@ test("the Rules are built when every record names its title, as a third book", (
 });
 
 test("titles come from each record's titleNumber, not from the Title records around it", () => {
-  assert.deepEqual(rules.titles.map((t) => t.number), ["15", "24", "30", "38-A", "62"]);
-  assert.deepEqual(rules.titles.map((t) => t.path), ["/rules/titles/15", "/rules/titles/24", "/rules/titles/30", "/rules/titles/38-a", "/rules/titles/62"]);
+  assert.deepEqual(rules.titles.map((t) => t.number), ["15", "24", "30", "38-A", "48", "62"]);
+  assert.deepEqual(rules.titles.map((t) => t.path), ["/rules/titles/15", "/rules/titles/24", "/rules/titles/30", "/rules/titles/38-a", "/rules/titles/48", "/rules/titles/62"]);
   const t24 = rules.titles.find((t) => t.number === "24");
   // The Health Code (no number, no anchor) and Chapter 3 (its anchor says Title 24, its file has no
   // Title record) are both in Title 24.
@@ -82,6 +82,7 @@ test("paths: /rules/titles/<title>/sections/<number>; a number the title repeats
       "/rules/titles/30/sections/notice-0-0-0-71",
       "/rules/titles/38-a/sections/1-01",
       "/rules/titles/38-a/sections/2-01",
+      "/rules/titles/48/sections/3-112",
       "/rules/titles/62/sections/6-01-0-0-0-102",
       "/rules/titles/62/sections/6-01-0-0-0-111",
     ]
@@ -260,7 +261,7 @@ test("home, search, About and 404 cover the Rules", () => {
   const home = read("index.html");
   assert.match(home, /like <code>§ 259<\/code> in the Charter or <code>15 RCNY § 1-01<\/code> in the Rules, in the box/);
   assert.doesNotMatch(home, /still to come/);
-  assert.match(home, /<a href="\/rules\/">Rules of the City of New York<\/a>: 5 titles, 12 chapters, 12 sections\./);
+  assert.match(home, /<a href="\/rules\/">Rules of the City of New York<\/a>: 6 titles, 13 chapters, 13 sections\./);
   assert.match(home, /<a class="button" href="\/rules\/">Browse the Rules<\/a>/);
   const about = read("about.html");
   assert.match(about, /15 RCNY § 1-01 is § 1-01 of Title 15/);
