@@ -3,15 +3,32 @@
 // each citation's keys with citationKeys), so the two cannot disagree. No dependencies; it
 // fetches nothing itself.
 
-/** The keys a reader might type for a citation, lowercased: "§ 259" → ["259"]. */
-export function citationKeys(citation) {
+/**
+ * The keys a reader might type for a citation, lowercased: "§ 259" → ["259"]. A Rules record
+ * also gets its title's form, since each title restarts its numbers: "§ 1-01" in Title 15 →
+ * ["1-01", "15 rcny 1-01"] ("15 RCNY § 1-01", parseQuery).
+ */
+export function citationKeys(citation, title) {
   const c = String(citation).trim().toLowerCase();
   const sec = /^§\s*(\S+)$/.exec(c);
-  if (sec) return [sec[1]];
   const ch = /^chapter\s+(\S+)$/.exec(c);
-  if (ch) return [`chapter ${ch[1]}`];
-  return [c];
+  const key = sec ? sec[1] : ch ? `chapter ${ch[1]}` : c;
+  return title ? [key, `${titleKey(title)} rcny ${key}`] : [key];
 }
+
+/** "15", "38-A", "38a", "015" → "15", "38-a": a Rules title number as keys hold it. */
+function titleKey(t) {
+  return String(t).toLowerCase().replace(/^0+(?=\d)/, "").replace(/^(\d+)-?([a-z])$/, "$1-$2");
+}
+
+// "15 RCNY § 1-01", "15 R.C.N.Y. 1-01", "Title 15 § 1-01", "RCNY Title 15, Chapter 18",
+// "24 RCNY Health Code § 81.08", "Health Code § 81.08" (the Health Code is in Title 24). As
+// src/corpus.ts parseTitledCitation reads them, lowercased.
+const RCNY = String.raw`r\.?\s?c\.?\s?n\.?\s?y\b\.?`;
+const TNUM = String.raw`\d+(?:-?[a-z](?![a-z]))?`;
+const RCNY_FIRST = new RegExp(`^(${TNUM})\\s*${RCNY}[\\s,]*(.*)$`);
+const TITLE_FIRST = new RegExp(`^(?:${RCNY}[\\s,]*)?title\\s+(${TNUM})(?=[\\s,§]|$)[\\s,]*(?:${RCNY}[\\s,]*)?(.*)$`);
+const HEALTH_CODE = /^(?:(?:the\s+)?new york city\s+)?health code\b[\s,]*(.*)$/;
 
 // Words a reader may put before a number, taken off one at a time.
 const PREFIXES = [/^nyc\b\.?/, /^new york city\b/, /^city\b/, /^charter\b/, /^the\b/, /^sections?\b\.?/, /^sec\b\.?/, /^§+/];
@@ -21,7 +38,16 @@ const PREFIXES = [/^nyc\b\.?/, /^new york city\b/, /^city\b/, /^charter\b/, /^th
  * "Section 259(a)(1)" → { key: "259", anchor: "(a)(1)" }; "Ch. 2-A" → { key: "chapter 2-a" }.
  */
 export function parseQuery(query) {
-  let q = String(query ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  let q = String(query ?? "").toLowerCase().replace(/[\u2010-\u2015\u2212]/g, "-").replace(/\s+/g, " ").trim();
+  // A Rules citation with its title: the title, then the rest as any citation.
+  const titled = RCNY_FIRST.exec(q) ?? TITLE_FIRST.exec(q);
+  const hc = HEALTH_CODE.exec(titled ? titled[2] : q);
+  if (titled || hc) {
+    const rest = hc ? hc[1] : titled[2];
+    const inner = rest ? parseQuery(rest) : null;
+    if (!inner) return null;
+    return { key: `${titled ? titleKey(titled[1]) : "24"} rcny ${inner.key}`, anchor: inner.anchor };
+  }
   for (let changed = true; changed && q; ) {
     changed = false;
     for (const p of PREFIXES) {

@@ -119,7 +119,7 @@ async function showPick(matches, anchor, q) {
     return;
   }
   pick.innerHTML = `<h2>Pages numbered “${esc(q)}”</h2><ul class="contents">${matches
-    .map((m) => `<li><a href="${esc(jumpTarget(m, anchor))}">${esc(`${m.c}. ${m.h}`)}</a></li>`)
+    .map((m) => `<li><a href="${esc(jumpTarget(m, anchor))}">${esc(m.h ? `${m.c}. ${m.h}` : m.c)}</a></li>`)
     .join("")}</ul>`;
   pick.hidden = false;
 }

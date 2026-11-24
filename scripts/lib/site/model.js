@@ -99,8 +99,11 @@ export function loadBook({ corpus, indexJsonText, structure, versions }) {
   }
   if (v.sha256 && v.sha256 !== sha) throw new Error(`versions.json sha256 for ${corpus} does not match its index file`);
 
-  const records = index.map((r, i) => ({ ...r, level: structure.sections[i].level, structure: structure.sections[i], order: i }));
+  // `indexLevel` keeps the index's own level ("Chapter", a group's level, or none for a section in
+  // a chapter), which src/corpus.ts reads; `level` is the structure's, set on every record.
+  const records = index.map((r, i) => ({ ...r, indexLevel: r.level, level: structure.sections[i].level, structure: structure.sections[i], order: i }));
   const byId = new Map(records.map((r) => [r.id, r]));
+  if (book.rcny) return layoutRules({ corpus, book, v, sha, records, byId, groups: structure.groups ?? {} });
   if (book.titles) return layoutTitled({ corpus, book, v, sha, records, byId, groups: structure.groups ?? {} });
 
   const chapters = records.filter((r) => r.level === "Chapter");
@@ -550,6 +553,342 @@ function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
     shared,
     parts,
     /** Document order of the index's records: each chapter, then its sections (a title's own sections first). */
+    ordered: titleList.flatMap((t) => [...t.sections, ...t.chapters.flatMap((c) => [c, ...c.sections])]),
+  };
+}
+
+// ---------------------------------------------------------------------------------------------
+// The Rules of the City of New York, titles first (issue #65, after #59).
+//
+// Each title restarts its chapter and section numbers: about fifty titles have a § 1-01. So
+// everything here is per title, and the title is each record's `titleNumber` (the index has it
+// since 0.6.3), not the structure's Title parent: 24 chapters have none (the Health Code in Title
+// 24, the Rent Guidelines Board's yearly orders in Title 30, Appendix A to Title 62, Title 3's
+// Chapter 11).
+//
+// Paths:
+//   /rules/titles/15                              a title
+//   /rules/titles/15/chapters/1                   a chapter ("Chapter 1"; other chapter citations
+//                                                 are slugged: /rules/titles/24/chapters/new-york-city-health-code)
+//   /rules/titles/24/chapters/<c>/parts/2         part 2 of a split chapter
+//   /rules/titles/15/sections/1-01                a section: the title's number, then the section's
+//   /rules/titles/30/sections/notice              a number the title repeats (the yearly orders'
+//                                                 "Notice"): a page to pick one; each record is the
+//                                                 number plus American Legal's id, as the Admin Code's
+//   /rules/sections/1-01                          a number in more than one title: a page to pick one
+//
+// Citations: rulesCitation, the form src/corpus.ts fullCitation gives, written the way the Rules
+// are cited: "15 RCNY § 1-01", "24 RCNY Health Code § 81.08", "15 RCNY Chapter 18", and, where a
+// title repeats a citation, with its chapter: "30 RCNY Apartment & Loft Order #49 (2017), Notice".
+// get_section takes each of them (test/site-data/rules-layout.test.js checks every record).
+
+/** True when every record of a Rules index names its title; false when none does. Mixed stops the build. */
+export function rulesReady(index) {
+  const titled = index.filter((r) => r.titleNumber).length;
+  if (titled === 0) return false;
+  if (titled !== index.length) throw new Error(`the Rules index names a title on ${titled} of ${index.length} records; rebuild it with npm run build-index`);
+  return true;
+}
+
+// src/corpus.ts HEALTH_CODE_HEADING: the Health Code's chapter record, in Title 24.
+const HEALTH_CODE_HEADING = /^(?:the\s+)?(?:new york city\s+)?health code$/i;
+
+// src/corpus.ts normalizeCitation, then citationKey (commas as spaces).
+const citationKey = (c) =>
+  String(c)
+    .toLowerCase()
+    .replace(/[‐-―−]/g, "-")
+    .replace(/§§?\s*/g, "")
+    .replace(/^section\s+/, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\s*,\s*/g, " ");
+
+// src/corpus.ts titledCitation, for the Rules.
+function titledRuleCitation(r, healthCode) {
+  const t = r.titleNumber;
+  if (/^title\s/i.test(r.citation)) return r.citation;
+  if (r.citation.startsWith("§")) return `${t} RCNY ${healthCode ? "Health Code " : ""}${r.citation}`;
+  return `Title ${t}, ${r.citation}`;
+}
+
+/** "Title 15, Chapter 18" → "15 RCNY Chapter 18"; a citation that already says "RCNY" is kept. */
+export function rcnyForm(citation, titleNumber) {
+  const prefix = `Title ${titleNumber}, `;
+  return citation.startsWith(prefix) ? `${titleNumber} RCNY ${citation.slice(prefix.length)}` : citation;
+}
+
+/**
+ * Every Rules record's citation (Map id → citation), as src/corpus.ts fullCitation gives it, in
+ * the RCNY form. `records` in index order; `chapterOf` is the chapter record each sits in.
+ */
+export function rulesCitations(records, chapterOf) {
+  const healthCode = new Set();
+  let inside = false;
+  for (const r of records) {
+    if (r.indexLevel === "Chapter") inside = HEALTH_CODE_HEADING.test(r.heading.trim());
+    if (inside) healthCode.add(r.id);
+  }
+  const own = new Map(records.map((r) => [r.id, titledRuleCitation(r, healthCode.has(r.id))]));
+  const counts = new Map();
+  for (const c of own.values()) counts.set(citationKey(c), (counts.get(citationKey(c)) ?? 0) + 1);
+  const out = new Map();
+  for (const r of records) {
+    let c = own.get(r.id);
+    const ch = chapterOf(r);
+    if ((counts.get(citationKey(c)) ?? 0) >= 2 && ch) c = `Title ${r.titleNumber}, ${ch.citation}, ${r.citation}`;
+    // A record whose own citation starts with its title ("Title 6, Chapter 2, Subchapter B", a
+    // group record) keeps it: get_section finds it by that citation, not by "6 RCNY Chapter 2, ...".
+    out.set(r.id, /^title\s/i.test(r.citation) ? c : rcnyForm(c, r.titleNumber));
+  }
+  return { citations: out, healthCode };
+}
+
+/**
+ * What a Rules record is called inside its own title and chapter: "Title 19, Chapter 55,
+ * Schedule A" in Title 19's Chapter 55 is "Schedule A"; "New York City Health Code, Title III,
+ * Article 48" in the Health Code is "Title III, Article 48". Section citations are unchanged.
+ */
+export function localCitation(citation, titleNumber, chapter) {
+  let c = String(citation);
+  const t = `Title ${titleNumber}, `;
+  if (c.toLowerCase().startsWith(t.toLowerCase())) c = c.slice(t.length);
+  if (chapter && c.startsWith(`${chapter.citation}, `)) c = c.slice(chapter.citation.length + 2);
+  return c;
+}
+
+/** A Rules chapter's path segment: "Chapter 18" → "18"; "Apartment & Loft Order #49 (2017)" → "apartment-loft-order-49-2017". */
+export function rulesChapterSlug(citation) {
+  const m = /^Chapter (\S+)$/.exec(citation);
+  if (m && SLUG_SAFE.test(m[1].toLowerCase())) return m[1].toLowerCase();
+  return anySectionSlug(citation);
+}
+
+function layoutRules({ corpus, book, v, sha, records, byId, groups }) {
+  const chapterRecs = records.filter((r) => r.level === "Chapter");
+  const chapterIds = new Set(chapterRecs.map((c) => c.id));
+  for (const r of records) if (!r.titleNumber) throw new Error(`${r.citation} (${r.id}) has no titleNumber; the Rules site needs an index built by 0.6.3 or later`);
+
+  // The Title records, by number: their headings name the titles, and their ids link to American Legal.
+  const titleGroups = new Map();
+  for (const [id, g] of Object.entries(groups)) {
+    if (g.level !== "Title") continue;
+    const n = String(g.label ?? "").replace(/^Title\s+/, "");
+    if (n && !titleGroups.has(n)) titleGroups.set(n, { id, heading: g.heading });
+  }
+  const titles = new Map();
+  const titleNode = (number) => {
+    if (!titles.has(number)) {
+      const g = titleGroups.get(number);
+      const heading = g?.heading ?? chapterRecs.find((c) => c.titleNumber === number && c.titleHeading)?.titleHeading ?? "";
+      const slug = number.toLowerCase();
+      if (!SLUG_SAFE.test(slug)) throw new Error(`Rules title "${number}" does not make a safe path`);
+      const t = {
+        kind: "title",
+        id: g?.id ?? `title-${slug}`,
+        number,
+        slug,
+        citation: `Title ${number}`,
+        title: heading.replace(/^Title\s+\S+?:\s*/, "").trim() || `Title ${number}`,
+        fullCitation: `${book.label} Title ${number}`,
+        chapters: [],
+        sections: [],
+        path: `/${book.slug}/titles/${slug}`,
+      };
+      titles.set(number, t);
+    }
+    return titles.get(number);
+  };
+
+  // Sections into their chapter (the structure's parents); a record in no chapter goes straight
+  // into its title (none in July 2026, but a title's own sections are laid out as the Admin Code's).
+  for (const c of chapterRecs) {
+    c.sections = [];
+    c.titleNode = titleNode(c.titleNumber);
+    c.titleNode.chapters.push(c);
+  }
+  for (const r of records) {
+    if (r.level === "Chapter") continue;
+    const parent = [...r.structure.parents].reverse().find((p) => chapterIds.has(p));
+    if (parent) {
+      r.chapter = byId.get(parent);
+      if (r.chapter.titleNumber !== r.titleNumber) throw new Error(`${r.citation} (${r.id}) is in Title ${r.titleNumber}, its chapter ${r.chapter.citation} in Title ${r.chapter.titleNumber}`);
+      r.chapter.sections.push(r);
+    } else {
+      const t = titleNode(r.titleNumber);
+      t.sections.push(r);
+      r.chapter = t;
+    }
+  }
+
+  const titleList = [...titles.values()].sort((a, b) => compareKeys(titleKey(a.number), titleKey(b.number)));
+  for (const t of titleList) t.chapters.sort((a, b) => compareKeys(adminChapterKey(a.citation), adminChapterKey(b.citation)) || a.order - b.order);
+
+  // Citations (src/corpus.ts fullCitation), and what a record is called inside its chapter.
+  const { citations, healthCode } = rulesCitations(records, (r) => (r.level === "Chapter" ? null : r.chapter?.kind === "title" ? null : r.chapter));
+  for (const r of records) {
+    r.fullCitation = citations.get(r.id);
+    // How the page names the record in running text ("Read 15 RCNY § 1-01 at American Legal Publishing").
+    r.citeAs = r.fullCitation;
+    r.healthCode = healthCode.has(r.id);
+    r.title = adminShortHeading(r);
+    r.local = r.level === "Chapter" ? r.citation : localCitation(r.citation, r.titleNumber, r.chapter?.kind === "title" ? null : r.chapter);
+  }
+
+  // Chapter paths, under their title; two chapters of one title with one number get American Legal's id too.
+  for (const t of titleList) {
+    const bySlug = new Map();
+    for (const c of t.chapters) {
+      const n = rulesChapterSlug(c.citation);
+      if (!bySlug.has(n)) bySlug.set(n, []);
+      bySlug.get(n).push(c);
+    }
+    for (const [n, list] of bySlug) for (const c of list) c.slug = list.length === 1 ? n : `${n}-${c.id}`;
+    for (const c of t.chapters) c.path = `${t.path}/chapters/${c.slug}`;
+    t.name = `${t.citation}: ${t.title}`;
+    t.longName = t.name;
+    t.synthetic = false;
+    for (const c of t.chapters) {
+      c.name = c.title ? `${c.citation}: ${c.title}` : c.citation;
+      c.longName = `${t.citation}, ${c.name}`;
+      c.searchTitle = c.title ? `${c.fullCitation}: ${c.title}` : c.fullCitation;
+    }
+  }
+
+  // Document order: each title's own sections, then its chapters, each followed by its sections.
+  const holders = titleList.flatMap((t) => [...(t.sections.length ? [t] : []), ...t.chapters]);
+  const sections = holders.flatMap((h) => h.sections);
+  const chapters = titleList.flatMap((t) => t.chapters);
+
+  // Section paths, per title. A number the title repeats gets American Legal's id, and a page to
+  // pick one at the plain path (`shared`); a number in more than one title gets a page to pick one
+  // at /rules/sections/<number> (`picks`).
+  const shared = [];
+  const lineOfRule = (s) => (s.title ? `${s.local}. ${s.title}` : s.local);
+  for (const t of titleList) {
+    const own = [...t.sections, ...t.chapters.flatMap((c) => c.sections)];
+    const byNumber = new Map();
+    for (const s of own) {
+      // A group record's path keeps its chapter ("chapter-2-subchapter-b"); its name in lists does not.
+      const n = anySectionSlug(localCitation(s.citation, s.titleNumber, null));
+      s.number = n;
+      if (!byNumber.has(n)) byNumber.set(n, []);
+      byNumber.get(n).push(s);
+    }
+    for (const [n, list] of byNumber) {
+      if (list.length === 1) list[0].slug = n;
+      else {
+        for (const s of list) s.slug = `${n}-${s.id}`;
+        shared.push({ number: n, title: t, citation: list[0].local, fullCitation: rcnyForm(`Title ${t.number}, ${localCitation(list[0].citation, t.number, null)}`, t.number).replace(/^(\S+ RCNY) (?=§)/, list.every((x) => x.healthCode) ? "$1 Health Code " : "$1 "), path: `${t.path}/sections/${n}`, sections: list });
+      }
+    }
+    for (const s of own) s.path = `${t.path}/sections/${s.slug}`;
+  }
+  for (const s of sections) {
+    s.line = lineOfRule(s);
+    s.searchTitle = s.title ? `${s.fullCitation}. ${s.title}` : s.fullCitation;
+  }
+  for (const sh of shared) {
+    for (const s of sh.sections) {
+      const same = sh.sections.filter((o) => lineOfRule(o) === lineOfRule(s));
+      if (same.length === 1) {
+        s.dupNote = s.title || null;
+        continue;
+      }
+      s.dupNote = tellApart(s, same, groups);
+      s.line = `${lineOfRule(s)} (${s.dupNote})`;
+    }
+  }
+  // A page's title: the citation and heading, and what tells it apart when another record has both.
+  const named = new Map();
+  for (const s of sections) {
+    const k = s.title ? `${s.fullCitation}: ${s.title}` : s.fullCitation;
+    named.set(k, (named.get(k) ?? 0) + 1);
+  }
+  for (const s of sections) {
+    const k = s.title ? `${s.fullCitation}: ${s.title}` : s.fullCitation;
+    s.pageName = named.get(k) > 1 ? `${k} (${s.dupNote ?? tellApart(s, sections.filter((o) => o.fullCitation === s.fullCitation), groups)})` : k;
+  }
+  for (const s of sections) s.titleNode = s.chapter.kind === "title" ? s.chapter : s.chapter.titleNode;
+  const byBare = new Map();
+  for (const s of sections) {
+    if (!byBare.has(s.number)) byBare.set(s.number, []);
+    byBare.get(s.number).push(s);
+  }
+  const picks = [];
+  const numbers = {};
+  for (const [n, list] of byBare) {
+    const inTitles = new Set(list.map((s) => s.titleNumber));
+    if (inTitles.size > 1) picks.push({ number: n, citation: localCitation(list[0].citation, list[0].titleNumber, null), path: `/${book.slug}/sections/${n}`, sections: list });
+    // A number in one title: /rules/sections/<n> goes to its page (or its title's page to pick one), from not-found.js.
+    else numbers[n] = list.length === 1 ? list[0].path : `${list[0].titleNode.path}/sections/${n}`;
+  }
+
+  // Parts.
+  for (const h of holders) {
+    const runs = splitIntoParts(h.sections);
+    if (runs.length < 2) {
+      h.parts = null;
+      continue;
+    }
+    h.parts = runs.map((list, i) => ({ n: i + 1, of: runs.length, holder: h, sections: list, path: `${h.path}/parts/${i + 1}` }));
+    for (const p of h.parts) {
+      const first = p.sections[0].local;
+      const last = p.sections[p.sections.length - 1].local;
+      p.name = `Part ${p.n} of ${p.of}: ${first}${p.sections.length > 1 ? ` to ${last}` : ""}`;
+      for (const s of p.sections) s.part = p;
+    }
+    h.parts.forEach((p, i) => {
+      p.prev = h.parts[i - 1] ?? null;
+      p.next = h.parts[i + 1] ?? null;
+    });
+  }
+
+  const paths = new Set();
+  const parts = holders.flatMap((h) => h.parts ?? []);
+  for (const r of [...titleList, ...chapters, ...sections, ...parts, ...shared, ...picks]) {
+    if (paths.has(r.path)) throw new Error(`two pages share the path ${r.path}`);
+    paths.add(r.path);
+  }
+
+  sections.forEach((s, i) => {
+    s.prev = sections[i - 1] ?? null;
+    s.next = sections[i + 1] ?? null;
+  });
+  chapters.forEach((c, i) => {
+    c.prev = chapters[i - 1] ?? null;
+    c.next = chapters[i + 1] ?? null;
+  });
+  titleList.forEach((t, i) => {
+    t.prev = titleList[i - 1] ?? null;
+    t.next = titleList[i + 1] ?? null;
+  });
+  for (const t of titleList) if (!byId.has(t.id)) byId.set(t.id, t);
+  // A link to one of the publisher's groups that is not a record of its own (a Health Code
+  // Article, a Subchapter) goes to the group's first section, named by its chapter and label.
+  for (const s of sections) {
+    for (const gid of s.structure.parents) {
+      const g = groups[gid];
+      if (byId.has(gid) || !g || g.level === "Title" || g.level === "Chapter") continue;
+      byId.set(gid, { id: gid, group: true, path: s.path, fullCitation: `${s.chapter.fullCitation}, ${g.label ?? g.heading}` });
+    }
+  }
+
+  return {
+    corpus,
+    book,
+    version: v,
+    indexSha256: sha,
+    records,
+    byId,
+    titles: titleList,
+    titleNotes: [],
+    chapters,
+    sections,
+    shared,
+    picks,
+    numbers,
+    parts,
     ordered: titleList.flatMap((t) => [...t.sections, ...t.chapters.flatMap((c) => [c, ...c.sections])]),
   };
 }

@@ -117,13 +117,39 @@ export function searchForm({ contentsPath, id, handler, books }) {
   // Without JavaScript: a link to each book's contents (site.books, when the build has more than one).
   const browse =
     books && books.length > 1
-      ? books.map((b, i) => `<a href="${escapeHtml(b.contentsPath)}">${i === 0 ? "Browse " : ""}the ${escapeHtml(b.long)}'s contents</a>`).join(" or ")
+      ? books.map((b, i) => `<a href="${escapeHtml(b.contentsPath)}">${i === 0 ? "Browse " : ""}the ${possessiveHtml(b.long)} contents</a>`).join(" or ")
       : `<a href="${contentsPath}">Browse the Charter's contents</a>`;
   return `<form class="jump" action="/search" method="get" role="search" aria-label="Go to a section or search"${handler ? ` data-handler="${handler}"` : ""}>
   <nys-textinput id="${id}" name="q" type="search" width="full" label="Go to a section, or search the words" placeholder="Try &quot;§ 259&quot;, &quot;259&quot;, or &quot;budget office&quot;"></nys-textinput>
   <nys-button type="submit" variant="filled" label="Go"></nys-button>
 </form>
 <noscript><p class="nojs">Search needs JavaScript. ${browse} instead.</p></noscript>`;
+}
+
+/** "Charter" → "Charter's"; "Rules" → "Rules'". */
+export function possessive(name) {
+  return /s$/.test(name) ? `${name}'` : `${name}'s`;
+}
+
+/** possessive(), with the name escaped and the apostrophe left as typed (the pages' own text). */
+export function possessiveHtml(name) {
+  return `${escapeHtml(name)}${/s$/.test(name) ? "'" : "'s"}`;
+}
+
+/** "a", "a and b", "a, b, and c". */
+export function listOf(items) {
+  return items.length < 3 ? items.join(" and ") : `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
+}
+
+/** The official copies, one link per book, for the pages that cover every book. */
+export function officialLinks(books) {
+  return listOf(books.map((b) => `<a href="${escapeHtml(b.officialUrl)}">the official ${escapeHtml(b.long)}</a>`));
+}
+
+/** The City's own site for current rules (the Rules only): one sentence, or "". */
+export function latestRulesLine(url) {
+  if (!url) return "";
+  return ` The City posts the latest rules at <a href="${escapeHtml(url)}">${escapeHtml(url.replace(/^https?:\/\//, ""))}</a>.`;
 }
 
 function searchStrip(site) {
@@ -164,11 +190,13 @@ export function currentLine(site) {
  */
 export function bottomBox(site, law) {
   const what = law ? "this text" : "the law text on this site";
+  // The Rules add where the City posts current rules (src/tools.ts FOOTER says the same).
+  const latest = latestRulesLine(site.books && site.books.length > 1 ? site.books.find((b) => b.latestUrl)?.latestUrl : site.latestUrl);
   const official = law
-    ? `The official text of ${escapeHtml(law.citation)} is at <a href="${escapeHtml(law.url)}">American Legal Publishing</a>.`
+    ? `The official text of ${escapeHtml(law.citation)} is at <a href="${escapeHtml(law.url)}">American Legal Publishing</a>.${latest}`
     : site.books && site.books.length > 1
-      ? `The official texts are at American Legal Publishing: ${site.books.map((b) => `<a href="${escapeHtml(b.officialUrl)}">the official ${escapeHtml(b.long)}</a>`).join(" and ")}.`
-      : `${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.`;
+      ? `The official texts are at American Legal Publishing: ${officialLinks(site.books)}.${latest}`
+      : `${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.${latest}`;
   return `<div class="wrap" data-pagefind-ignore="all">
 <aside class="warnbox copy-box" aria-label="About this copy">
 <p class="current">${escapeHtml(currentLine(site))}</p>

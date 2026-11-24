@@ -1,13 +1,15 @@
 #!/usr/bin/env node
-// CLI: builds the BetaNYC Law Reader, a static website for the Charter and the Administrative
-// Code (issues #62 and #65, epic #68), from the index and its structure. It never fetches anything.
+// CLI: builds the BetaNYC Law Reader, a static website for the Charter, the Administrative Code
+// and the Rules (issues #62 and #65, epic #68), from the index and its structure. It never fetches
+// anything. The Rules are left out, with a line on stderr, when their index has no titles yet
+// (built before 0.6.3; scripts/lib/site/build.js).
 //
 //   npm run build-site                      reads data/index/json/ and data/structure/, writes _site/
 //   node scripts/build-site.js --index-dir <dir> --structure-dir <dir> --out <dir> [--no-search] [--charter-only]
 //
 // The output folder is git-ignored and is never committed (epic #68, decision 5). --no-search
 // skips the Pagefind index (the unit tests use it to stay fast). --charter-only leaves out the
-// Administrative Code (a quick local look at the Charter; the deploy builds both).
+// other books (a quick local look at the Charter; the deploy builds all three).
 
 import { buildSite } from "./lib/site/build.js";
 
@@ -36,6 +38,7 @@ function parseArgs(argv) {
 
 try {
   const result = await buildSite(parseArgs(process.argv.slice(2)));
+  for (const [book, why] of Object.entries(result.skipped ?? {})) console.error(`build-site: left out ${book}: ${why}`);
   const mb = (n) => (n / 1024 / 1024).toFixed(2);
   console.log(
     JSON.stringify({
@@ -46,6 +49,8 @@ try {
       files: result.fileCount,
       bytes: result.bytes,
       megabytes: Number(mb(result.bytes)),
+      books: result.books.map((b) => b.book.slug),
+      skipped: result.skipped,
       pagefindFiles: result.pagefind?.files ?? 0,
       pagefindBytes: result.pagefind?.bytes ?? 0,
       seconds: result.seconds,
