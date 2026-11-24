@@ -149,6 +149,21 @@ test("the site's layout tests on real data stay out of the daily refresh, and ga
   assert.match(readFileSync(join(ROOT, ".github/workflows/test.yml"), "utf8"), /^ {8}run: npm run test:site-data$/m);
 });
 
+test("refresh-data.yml: the coverage audit only reports, after build-index, and nothing reads it", () => {
+  const at = REFRESH.indexOf("- name: Coverage audit (report only)");
+  assert.ok(at > REFRESH.indexOf("- name: Build index"), "after build-index");
+  assert.ok(at < REFRESH.indexOf("- name: Run tests"), "before the tests and the commit");
+  const step = REFRESH.slice(at, REFRESH.indexOf("\n      - name: ", at + 1));
+  assert.match(step, /^ {8}continue-on-error: true$/m, "it can never fail the job");
+  assert.doesNotMatch(step, /^ {8}id:/m, "no id, so no later step can read its outcome");
+  assert.match(step, /npm run --silent audit:coverage 2>&1 \| head -c \d+/);
+  const run = step.slice(step.indexOf("run: |"));
+  assert.ok(run.length > 6, "the step has a run block");
+  assert.doesNotMatch(run, /--check/, "report only, never the gate");
+  assert.match(step, />> "\$GITHUB_STEP_SUMMARY"/);
+  assert.doesNotMatch(step, /\$GITHUB_OUTPUT|git (add|commit|push)/, "it sets no output and commits nothing");
+});
+
 test("refresh-data.yml dispatches the deploy only when its commit step pushed", () => {
   // Both pushes in the commit step record it.
   const pushes = REFRESH.match(/git push origin HEAD:main\n\s+echo "pushed=true" >> "\$GITHUB_OUTPUT"/g) ?? [];
