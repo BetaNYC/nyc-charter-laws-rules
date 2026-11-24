@@ -131,6 +131,22 @@ const KNOWN_SECTION_AND_OF = new Set([
 ]);
 
 const RE_RUN_TOGETHER = /\b(sections?|subdivision|paragraph|chapter|title)of\b/i;
+
+// The two checks below have lists of records where the publisher's own text matches (legal
+// phrasing, or a typo in the source). New law can bring another such record, and the daily
+// refresh runs npm test on that day's law, so a few new hits must not turn it red and hold back
+// the law text (CS-23). They are printed for a person to check against the XML. A parser
+// regression is far bigger: the fused-label bug (issue #27) hit 3,647 records. More than this
+// many new hits in one book fails.
+const NEW_HIT_LIMIT = 25;
+function tolerateFew(t, violations, what) {
+  if (violations.length && violations.length <= NEW_HIT_LIMIT) {
+    t.diagnostic(`${violations.length} new ${what} to check against the source XML (not failing: at most ${NEW_HIT_LIMIT}):`);
+    for (const v of violations) t.diagnostic(`  ${v.corpus} ${v.id} ${v.citation}: ${v.snippet}`);
+    return [];
+  }
+  return violations;
+}
 const RE_SECTION_AND_OF = /\bsections? and of\b/i;
 
 describe("Invariant 1: no run-together text signatures", () => {
@@ -146,7 +162,7 @@ describe("Invariant 1: no run-together text signatures", () => {
       assert.equal(violations.length, 0, msg("run-together text signatures", violations));
     });
 
-    test(`${name}: no NEW "section and of" outside the 6 known-legitimate IDs`, () => {
+    test(`${name}: no NEW "section and of" outside the 6 known-legitimate IDs (a few are reported, not failed)`, (t) => {
       // The 6 KNOWN_SECTION_AND_OF IDs match this regex via legitimate legal
       // phrasing (confirmed by manual review, 2026-06-02). Only new hits are
       // treated as violations.
@@ -158,10 +174,11 @@ describe("Invariant 1: no run-together text signatures", () => {
         }
         return null;
       });
+      const failing = tolerateFew(t, violations, `"section and of" hits`);
       assert.equal(
-        violations.length,
+        failing.length,
         0,
-        msg("unexpected 'section and of' run (outside 6 known-legitimate IDs)", violations)
+        msg("unexpected 'section and of' run (outside 6 known-legitimate IDs)", failing)
       );
     });
   }
@@ -193,7 +210,7 @@ const RE_FUSED_LABEL = /(^|\s)([a-z]|\d{1,2})\.([A-Z][a-z]+)/;
 
 describe("Invariant 1b: no subdivision label fused to the next word", () => {
   for (const [name, sections] of Object.entries(CORPORA)) {
-    test(`${name}: no "a.There"-style fused label outside known source typos`, () => {
+    test(`${name}: no "a.There"-style fused label outside known source typos (a few are reported, not failed)`, (t) => {
       const violations = collectViolations(sections, name, (s) => {
         if (KNOWN_FUSED_LABEL_IN_SOURCE.has(s.id)) return null;
         for (const val of [s.heading, s.text]) {
@@ -202,7 +219,8 @@ describe("Invariant 1b: no subdivision label fused to the next word", () => {
         }
         return null;
       });
-      assert.equal(violations.length, 0, msg("fused subdivision label", violations));
+      const failing = tolerateFew(t, violations, "fused labels");
+      assert.equal(failing.length, 0, msg("fused subdivision label", failing));
     });
   }
 });

@@ -690,21 +690,29 @@ test("contents tree over the full Charter: all its chapters on a section page (f
   const biggest = [...book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
   const page = chapterPage(biggest, book, facts).html;
   console.log(`# full Charter: ${book.chapters.length} chapters in the tree; ${Buffer.byteLength(contentsTree(book, { chapter: s.chapter, section: s }))} bytes on ${s.fullCitation}'s page; ${biggest.citation} page ${Buffer.byteLength(page)} bytes`);
-  // § 4's history line and editor's note (Noel's example, 2026-11-23).
-  const s4 = book.sections.find((x) => x.citation === "§ 4");
-  const html = bodyHtml(bodyBlocks(renderSection(s4, s4.structure)), { fullCitation: s4.fullCitation, linkFor: () => null });
-  assert.match(html, /<p class="txt history" data-block="1">\(Am\. L\.L\. 2016\/019, 2\/19\/2016, retro\. eff\. 1\/1\/2016; Am\. L\.L\. 2026\/134, 8\/18\/2026, eff\. 1\/1\/2026\)<\/p>/);
-  assert.match(html, /<p class="ednote" data-block="2"><strong>Editor&#39;s note:<\/strong> For related unconsolidated provisions/);
-  // Every history line in the Charter is one: a whole text block in parentheses, about its making.
+  // History lines and editor's notes, as on § 4 (Noel's example, 2026-11-23), across the whole
+  // Charter. Worked out from the data, not pinned to § 4's words: the daily refresh runs npm test,
+  // and an amendment to § 4 must not turn it red.
   let lines = 0;
-  for (const r of book.ordered) for (const b of bodyBlocks(renderSection(r, r.structure))) {
-    const t = b.text.trim();
-    if (b.type === "text" && t.startsWith("(") && t.endsWith(")")) {
-      assert.ok(isHistoryLine(b), `${r.citation}: ${t.slice(0, 60)}`);
-      lines++;
-    }
+  let notes = 0;
+  for (const r of book.ordered) {
+    const body = bodyBlocks(renderSection(r, r.structure));
+    const html = bodyHtml(body, { fullCitation: r.fullCitation, linkFor: () => null });
+    body.forEach((b, n) => {
+      const t = b.text.trim();
+      // Every whole text block in parentheses is a history line: about its making.
+      if (b.type === "text" && t.startsWith("(") && t.endsWith(")")) {
+        assert.ok(isHistoryLine(b), `${r.citation}: ${t.slice(0, 60)}`);
+        if (!b.links?.length) assert.ok(html.includes(`<p class="txt history" data-block="${n}">${escapeHtml(b.text)}</p>`), `${r.citation}: history line ${n}`);
+        lines++;
+      }
+      if (b.type === "note" && /^Editor['’]s note:/.test(b.text)) {
+        assert.ok(html.includes(`<p class="ednote" data-block="${n}"><strong>${escapeHtml(b.text.slice(0, b.text.indexOf(":") + 1))}</strong>`), `${r.citation}: editor's note ${n}`);
+        notes++;
+      }
+    });
   }
-  assert.ok(lines > 250, `${lines} history lines`);
+  assert.ok(lines > 0 && notes > 0, `${lines} history lines, ${notes} editor's notes`);
 });
 
 test("notes: the amendment history line and the editor's note, words unchanged", () => {

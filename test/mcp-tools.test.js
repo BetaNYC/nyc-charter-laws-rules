@@ -33,7 +33,21 @@ import {
   listTitles,
   getTitle,
   getVersions,
+  resolveIndexDir,
 } from "../dist/corpus.js";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+// The index file the server reads. The daily refresh runs these tests on that day's law, so a
+// heading, a phrase or a rank is read from here, never pinned in the test: an amendment must not
+// turn the refresh red. The sections named (§ 292, § 11-602, Chapter 11) only have to exist.
+const indexCache = {};
+const readIndex = (corpus) => (indexCache[corpus] ??= JSON.parse(readFileSync(join(resolveIndexDir(), `${corpus}.json`), "utf8")));
+const record = (corpus, citation) => {
+  const hits = readIndex(corpus).filter((s) => s.citation === citation);
+  assert.equal(hits.length, 1, `${citation} is one record in the ${corpus} index`);
+  return hits[0];
+};
 
 // Convenience: unwrap a single-match result or fail loudly.
 function expectMatch(citation, corpus) {
@@ -54,32 +68,25 @@ function expectMatch(citation, corpus) {
 // ---------------------------------------------------------------------------
 
 describe("searchCorpus", () => {
-  test("'sinking fund' in charter returns results including § 292", () => {
-    // § 292 is the 14th section mentioning "sinking fund" in the charter
-    // (search is linear by section order). limit=25 is required to reach it.
-    // The test plan spec listed limit=10, but § 292 falls at position 14 in
-    // the actual index — limit adjusted to 25 to ensure § 292 is included.
-    const results = searchCorpus("sinking fund", "charter", 25);
-    assert.ok(results.length > 0, "must return at least one result");
-
-    const s292 = results.find((s) => s.citation === "§ 292");
-    assert.ok(
-      s292,
-      `§ 292 must appear in results (it is the 14th sinking-fund hit); got citations: ${results.map((r) => r.citation).join(", ")}`
-    );
+  test("'sinking fund' in charter returns every section that has the phrase, § 292 among them", () => {
+    // Phrase search finds exactly the records whose heading or text holds the phrase. The
+    // expected set is read from the index, so a new section on the sinking fund (or § 292
+    // ranking lower) cannot turn this red; the test once pinned § 292 as the 14th hit.
+    const has = (s) => /sinking fund/i.test(`${s.heading} ${s.text}`);
+    const expected = readIndex("charter").filter(has).map((s) => s.id).sort();
+    assert.ok(expected.length > 0, "the Charter mentions the sinking fund");
+    const results = searchCorpus("sinking fund", "charter", expected.length + 10);
+    assert.deepEqual(results.map((s) => s.id).sort(), expected);
+    if (has(record("charter", "§ 292"))) assert.ok(results.some((s) => s.citation === "§ 292"));
   });
 
-  test("§ 292 text contains the issue-#3 corrected phrase (not 'sectionof')", () => {
-    // Uses limit=25 — see note in the previous test.
-    const results = searchCorpus("sinking fund", "charter", 25);
-    const s292 = results.find((s) => s.citation === "§ 292");
-    assert.ok(s292, "§ 292 must be present in sinking-fund results (limit=25)");
-
-    assert.match(
-      s292.text,
-      /section two hundred ninety-eight of this chapter/,
-      "text must contain the spelled-out cross-reference in document order"
-    );
+  test("§ 292 text is the index's, with no 'sectionof' (issue #3)", () => {
+    // The phrase check ("section two hundred ninety-eight of this chapter", the cross-reference
+    // in document order) is on a fixture in test/build-smoke.test.js, so an amendment to § 292
+    // cannot turn the refresh red; corpus-invariants.test.js checks every record for the
+    // run-together signatures.
+    const s292 = expectMatch("§ 292", "charter");
+    assert.equal(s292.text, record("charter", "§ 292").text);
     assert.doesNotMatch(
       s292.text,
       /sectionof/,
@@ -140,14 +147,18 @@ describe("searchCorpus", () => {
 
   test("corpus='all' at a small limit is not exhausted by charter (ranking reaches other corpora)", () => {
     // "taxicab" appears in admin_code/rules headings; before the ranking fix a
-    // small limit was filled by whatever corpus came first in file order.
+    // small limit was filled by whatever corpus came first in file order. Whether the top 10
+    // must reach past the Charter is worked out from the index: when fewer than 10 Charter
+    // headings have the word and another book's heading does, a heading match ranks in.
+    const inHeading = (c) => readIndex(c).filter((s) => /taxicab/i.test(s.heading)).length;
     const results = searchCorpus("taxicab", "all", 10);
     assert.ok(results.length > 0);
-    const nonCharter = results.some((s) => s.corpus !== "charter");
-    assert.ok(
-      nonCharter,
-      `top-10 'taxicab' results must include admin_code/rules heading matches; got ${results.map((s) => s.corpus).join(",")}`
-    );
+    if (inHeading("charter") < 10 && inHeading("admin_code") + inHeading("rules") > 0) {
+      assert.ok(
+        results.some((s) => s.corpus !== "charter"),
+        `top-10 'taxicab' results must include admin_code/rules heading matches; got ${results.map((s) => s.corpus).join(",")}`
+      );
+    }
   });
 });
 
@@ -160,7 +171,8 @@ describe("getSection", () => {
     const section = expectMatch("§ 292");
     assert.equal(section.corpus, "charter");
     assert.equal(section.citation, "§ 292");
-    assert.equal(section.heading, "Section 292. Administration.");
+    assert.equal(section.heading, record("charter", "§ 292").heading);
+    assert.match(section.heading, /^Section 292\. /);
   });
 
   test("§ 292 text is clean — no entities, no leaked XML, no run-together", () => {
@@ -193,11 +205,11 @@ describe("getSection", () => {
   test("decimal sections: § 11-602 and § 11-602.1 are distinct (truncation fix)", () => {
     const base = expectMatch("§ 11-602", "admin_code");
     assert.equal(base.citation, "§ 11-602");
-    assert.match(base.heading, /Definitions/);
+    assert.equal(base.heading, record("admin_code", "§ 11-602").heading);
 
     const decimal = expectMatch("§ 11-602.1", "admin_code");
     assert.equal(decimal.citation, "§ 11-602.1");
-    assert.match(decimal.heading, /Application of this subchapter/);
+    assert.equal(decimal.heading, record("admin_code", "§ 11-602.1").heading);
 
     assert.notEqual(base.id, decimal.id);
     assert.notEqual(base.text, decimal.text);
@@ -214,7 +226,7 @@ describe("getSection", () => {
   test("corpus param scopes the lookup ('Chapter 11' in charter)", () => {
     const section = expectMatch("Chapter 11", "charter");
     assert.equal(section.corpus, "charter");
-    assert.match(section.heading, /Independent Budget Office/i);
+    assert.equal(section.heading, record("charter", "Chapter 11").heading);
   });
 
   test("repeated rules citation ('§ 1-01') is ambiguous, not first-hit", () => {

@@ -45,6 +45,12 @@
 # does. The dispatched run is a run OF release.yml, which is the workflow
 # filename npm trusted publishing is bound to (see release.yml).
 #
+# Coverage audit (issue #78), report only: after build-index, `npm run audit:coverage` writes
+# how much of each document's text reached the index, and any text it did not, to the run's
+# step summary. It has continue-on-error, writes no file in the repo, and no later step reads
+# its outcome, so it can never block the tests, the commit, the release or the deploy. A person
+# reads the summary; `npm run audit:coverage -- --check` is the gate to use by hand.
+#
 # The website (issue #64): when the commit step pushed (new law text, or the site
 # structure alone), the last step dispatches deploy-site.yml on main, for the same
 # GITHUB_TOKEN reason. No commit, no deploy.
@@ -131,6 +137,21 @@ jobs:
       - name: Build index
         # Rebuilds data/index/json + data/index/markdown + versions.json.
         run: npm run build-index
+
+      - name: Coverage audit (report only)
+        # Issue #78. Never blocks anything: continue-on-error, no `id` (no step reads its
+        # outcome), output only to $GITHUB_STEP_SUMMARY, no file written in the repo. Without
+        # --check it exits 0 even when text is unread; a crash shows in the summary instead.
+        # `head -c` keeps the summary under GitHub's 1 MiB step limit.
+        continue-on-error: true
+        run: |
+          {
+            echo "## Index coverage audit (report only)"
+            echo
+            echo '```text'
+            npm run --silent audit:coverage 2>&1 | head -c 200000
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Update changelog
         # Updates data/changelog.json, CHANGELOG.md, and re-stamps README.md.
