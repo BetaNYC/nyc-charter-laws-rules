@@ -13,6 +13,9 @@
 //               anchored at its number ("102.4"), and the subdivisions under it are anchored
 //               under that number ("102.4(1)");
 //   - links:    each cross-reference, as a [start, end) slice of `text` and its target;
+//   - marks:    the publisher's bold and italic runs (issue #78 follow-up), each [start, end,
+//               "b" | "i" | "bi"], a slice of `text` (left out when none). Display only;
+//               see paraFormatting;
 //   - pictures:    how many <PICTURE> elements the section has (left out when none). A picture
 //                  has no text, so the index cannot show it; the site says so and links to the
 //                  section's page at American Legal Publishing.
@@ -176,6 +179,77 @@ export function paraWithLinks(para) {
   return { text: plain, links };
 }
 
+// Bold and italic, as the publisher's <CHARFORMAT bold="1">/<CHARFORMAT italic="1"> mark them
+// (Noel, 2026-11-24, on RS 18-1: whole bold lines act as headings, "Modifications.—" leads a
+// paragraph in bold, notes are in italics). Display only: the index's `text` never changes.
+// Each CHARFORMAT states bold and italic itself (July 2026: every one), so a run's look is its
+// nearest CHARFORMAT's; one that leaves an attribute out takes it from the CHARFORMAT around it.
+// Marks go inside each CHARFORMAT, as paraWithLinks does for links, so the separator rules in
+// extractText see the same siblings. One character per look opens a run; FMT_CLOSE ends it.
+const FMT_OPEN = { "": "\uE010", b: "\uE011", i: "\uE012", bi: "\uE013" };
+const FMT_CLOSE = "\uE014";
+const FMT_OF = Object.fromEntries(Object.entries(FMT_OPEN).map(([k, v]) => [v, k]));
+
+function markFormatting(node, outer = "") {
+  if (Array.isArray(node)) return node.map((n) => markFormatting(n, outer));
+  if (!node || typeof node !== "object" || "#text" in node) return node;
+  const tag = tagOf(node);
+  if (!tag) return node;
+  const kids = Array.isArray(node[tag]) ? node[tag] : [];
+  if (tag !== "CHARFORMAT") return { ...node, [tag]: markFormatting(kids, outer) };
+  const flag = (name, k) => {
+    const v = getAttr(node, name);
+    return v === "" ? outer.includes(k) : v === "1";
+  };
+  const look = `${flag("bold", "b") ? "b" : ""}${flag("italic", "i") ? "i" : ""}`;
+  return { ...node, [tag]: [{ "#text": FMT_OPEN[look] }, ...markFormatting(kids, look), { "#text": FMT_CLOSE }] };
+}
+
+/**
+ * A PARA's bold and italic runs, as [start, end, "b" | "i" | "bi"] slices of its flattened text
+ * (normalize(extractText(para)), the index's text for it), trimmed of spaces at their ends and
+ * merged when they touch. Null when the marks moved the text in any way (then the paragraph
+ * shows plain, as before), and [] when nothing in it is bold or italic.
+ */
+export function paraFormatting(para) {
+  const plain = normalize(extractText(para));
+  const marked = normalize(extractText(markFormatting(para)));
+  const stack = [];
+  const looks = []; // per character of out
+  let out = "";
+  for (const ch of marked) {
+    if (ch in FMT_OF) stack.push(FMT_OF[ch]);
+    else if (ch === FMT_CLOSE) {
+      if (!stack.length) return null;
+      stack.pop();
+    } else if (/\s/.test(ch)) {
+      if (out.length > 0 && !out.endsWith(" ")) {
+        out += " ";
+        looks.push(stack.at(-1) ?? "");
+      }
+    } else {
+      out += ch;
+      looks.push(stack.at(-1) ?? "");
+    }
+  }
+  while (out.endsWith(" ")) {
+    out = out.slice(0, -1);
+    looks.pop();
+  }
+  if (out !== plain || stack.length) return null;
+  const runs = [];
+  for (let i = 0; i < out.length; i++) {
+    const look = looks[i];
+    if (!look) continue;
+    // A space takes the look of the run around it only when both sides have it.
+    if (out[i] === " ") continue;
+    const last = runs.at(-1);
+    if (last && last[2] === look && out.slice(last[1], i).trim() === "" && looks.slice(last[1], i).every((l) => l === look)) last[1] = i + 1;
+    else runs.push([i, i + 1, look]);
+  }
+  return runs;
+}
+
 // The raw target of a <LINK>, before it is resolved to a section.
 function linkTarget(attrs, corpus) {
   const a = (k) => attrs[`@_${k}`] ?? "";
@@ -249,7 +323,7 @@ export function createStructureCollector(corpus) {
     onSection(section, { level, record, parts = [], unread: unreadInSubsections = [], ancestors, levelNode = null }) {
       const parents = ancestors.map((a) => addGroup(a.level, a.record, a.heading));
       if (level === "Chapter") addGroup(level, record, section.heading);
-      const entry = { id: section.id, level, parents, blocks: [], links: [] };
+      const entry = { id: section.id, level, parents, blocks: [], links: [], marks: [] };
       if (level === "Chapter") {
         const own = [];
         collectDestinations(record, null, own);
@@ -335,6 +409,7 @@ export function createStructureCollector(corpus) {
         for (const l of links ?? []) {
           entry.links.push({ start: start + l.start, end: start + l.end, target: linkTarget(l.attrs, corpus) });
         }
+        for (const [a, b, look] of (p ? paraFormatting(p) : null) ?? []) entry.marks.push([start + a, start + b, look]);
         if (links === null) entry.unplacedLinks = (entry.unplacedLinks ?? 0) + countTag(p, "LINK");
         entry.blocks.push(block);
         offset = block.end;
@@ -343,6 +418,7 @@ export function createStructureCollector(corpus) {
         // The paragraphs do not slice `text` exactly; keep the section as one block, no links.
         entry.blocks = section.text ? [{ start: 0, end: section.text.length, type: "text" }] : [];
         entry.links = [];
+        entry.marks = [];
         entry.flat = true;
         for (const r of records) r[1] = entry.blocks[0];
       }
@@ -364,6 +440,7 @@ export function createStructureCollector(corpus) {
       const out = entries.map((e) => {
         const s = { id: e.id, level: e.level, parents: e.parents, blocks: e.blocks };
         if (e.links.length) s.links = e.links.map((l) => ({ start: l.start, end: l.end, to: resolveTarget(l.target, resolvers) }));
+        if (e.marks.length) s.marks = e.marks;
         if (e.flat) s.flat = true;
         if (e.unplacedLinks) s.unplacedLinks = e.unplacedLinks;
         if (e.pictures) s.pictures = e.pictures;
