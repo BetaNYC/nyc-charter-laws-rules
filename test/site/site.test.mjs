@@ -11,6 +11,10 @@ import { chromium } from "playwright";
 import { buildFixtureSite } from "./fixture-site.mjs";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { chapterName } from "../../scripts/lib/site/pages.js";
+
+/** "☰ Contents", the bar above the breadcrumbs: its name is "Contents", then the reader's chapter. */
+const CONTENTS_BUTTON = /^Contents(, |$)/;
 
 let site, server, base, browser;
 const outside = [];
@@ -73,14 +77,19 @@ test("agents on the page: every control on a section page has its own name", asy
     // No search box on a law page (Noel, 2026-11-23): the top bar's Search link goes to it.
     assert.ok(!names.includes("Go") && !names.some((n) => n.startsWith("Go to a section")), `no search box at ${width}px`);
     if (width === 390) {
-      assert.ok(names.includes("Charter chapters"), "the side list's button");
+      assert.ok(names.includes(`Contents, ${chapterName(s.chapter)}`), "the Contents bar, naming the chapter");
       assert.ok(names.includes("Menu"), "menu button");
-      await page.getByRole("button", { name: "Charter chapters" }).click();
+      assert.ok(!names.includes("Hide contents"), "the tree is closed");
+      await page.getByRole("button", { name: CONTENTS_BUTTON }).click();
       await page.getByRole("link", { name: `${s.citation}. ${s.title}` }).first().waitFor();
-      // Open, the list's links still have their own names.
-      await assertNamedControls(page, `${s.path} at ${width}px, side list open`);
+      // Open, every control still has its own name: one button per chapter, named for it.
+      const open = (await assertNamedControls(page, `${s.path} at ${width}px, tree open`)).controls.map((x) => x.name);
+      assert.ok(open.includes("Hide contents"));
+      for (const c of site.book.chapters.filter((x) => x.sections.length)) assert.ok(open.includes(`Sections in ${chapterName(c)}`), `${c.citation}'s button`);
     } else {
-      assert.ok(!names.includes("Charter chapters"), "no button on a wide screen");
+      assert.ok(!names.some((n) => CONTENTS_BUTTON.test(n)), "no Contents button while the tree shows");
+      assert.ok(names.includes("Hide contents"), "Hide");
+      assert.ok(names.includes(`Sections in ${chapterName(s.chapter)}`), "the open chapter's button");
     }
     assert.deepEqual(problems, []);
     await ctx.close();
@@ -115,6 +124,8 @@ function pageTypes() {
     ["home", "/"],
     ["contents", "/charter/"],
     ["chapter", s.chapter.path],
+    // Two § 530s in one chapter: their copies' controls must not share names.
+    ["chapter with a shared number", site.book.shared[0].sections[0].chapter.path],
     ["section", s.path],
     ["shared number", site.book.shared[0].path],
     ["search", "/search?q=the"],
@@ -203,16 +214,15 @@ test("search field: border 3:1 on its own background, focus ring at least 2px an
   }
 });
 
-test("print: the official text and the source show their addresses", async () => {
+test("print: the official text shows its address", async () => {
   const s = sectionWithParts();
   const { page, ctx } = await open(s.path);
   await page.emulateMedia({ media: "print" });
-  for (const sel of [".source a[href^='http']", ".copy-box a[href^='http']"]) {
-    const [href, after] = await page.locator(sel).first().evaluate((a) => [a.href, getComputedStyle(a, "::after").content]);
-    assert.ok(after.includes(href.replace(/\/$/, "")), `${sel}: printed ${after}`);
-  }
+  const sel = ".copy-box a[href^='http']";
+  const [href, after] = await page.locator(sel).first().evaluate((a) => [a.href, getComputedStyle(a, "::after").content]);
+  assert.ok(after.includes(href.replace(/\/$/, "")), `${sel}: printed ${after}`);
   await page.emulateMedia({ media: "screen" });
-  assert.equal(await page.locator(".source a[href^='http']").first().evaluate((a) => getComputedStyle(a, "::after").content), "none");
+  assert.equal(await page.locator(sel).first().evaluate((a) => getComputedStyle(a, "::after").content), "none");
   await ctx.close();
 });
 
@@ -237,7 +247,7 @@ test("section text and the bottom box read with JavaScript off", async () => {
   const first = s.structure.blocks[0];
   await assert.doesNotReject(page.locator(`p[data-block="0"]`).waitFor({ state: "visible" }));
   assert.equal((await page.locator(`p[data-block="0"]`).innerText()).replace(/\s+/g, " ").trim(), s.text.slice(first.start, first.end));
-  await page.getByText("This is BetaNYC's copy, for research.").waitFor({ state: "visible" });
+  await page.getByText("BetaNYC modified this text. It is not legal advice.").waitFor({ state: "visible" });
   await page.getByRole("link", { name: "Read the full disclaimer" }).waitFor({ state: "visible" });
   // No search box on a law page, so no "search needs JavaScript" line either; the top bar links to the contents.
   await page.getByRole("navigation", { name: "Site" }).getByRole("link", { name: "Charter", exact: true }).waitFor({ state: "visible" });
@@ -342,15 +352,14 @@ test("an American Legal id in the address lands on its page", async () => {
   await ctx.close();
 });
 
-// Noel, 2026-11-23: the side list shows the whole Charter, with the reader's chapter open.
-test("side list: every chapter, the current one open, the current section marked", async () => {
+// Noel, 2026-11-23: the contents tree, after American Legal Publishing's code library. Every
+// chapter, the reader's chapter open, a disclosure button per chapter, "Hide" and "☰ Contents".
+test("contents tree: every chapter, the current one open, the current section marked", async () => {
   const s = sectionWithParts();
   const { page, ctx, problems } = await open(s.path, { width: 1200 });
-  const nav = page.getByRole("navigation", { name: "Charter chapters" });
-  assert.equal(await nav.count(), 1, "one side list, named");
-  // A visible heading and no fold on a wide screen (Noel, 2026-11-23: say what the list is).
-  const heading = page.getByRole("heading", { name: "Charter chapters", level: 2 });
-  assert.equal(await heading.count(), 1);
+  const nav = page.getByRole("navigation", { name: "Contents", exact: true });
+  assert.equal(await nav.count(), 1, "one tree, named by its heading");
+  const heading = nav.getByRole("heading", { name: "Contents", level: 2 });
   assert.ok(await heading.isVisible());
   // In the template's heading font and blue.
   const [font, color, headFont, blue] = await heading.evaluate((h) => {
@@ -363,45 +372,130 @@ test("side list: every chapter, the current one open, the current section marked
     return out;
   });
   assert.deepEqual([font, color], [headFont, blue]);
-  assert.equal(await page.getByRole("button", { name: "Charter chapters" }).count(), 0);
-  // The links are NYSDS's slotted children, so they are found under .toc, not under the <nav> in its shadow root.
+  assert.equal(await nav.getByRole("link", { name: "New York City Charter", exact: true }).getAttribute("href"), "/charter/");
   for (const c of site.book.chapters) {
-    const name = c.title === c.citation ? c.title : `${c.citation}: ${c.title}`;
-    assert.equal(await page.locator(".toc").getByRole("link", { name, exact: true }).getAttribute("href"), c.path, name);
+    const link = nav.getByRole("link", { name: chapterName(c), exact: true });
+    assert.equal(await link.getAttribute("href"), c.path, chapterName(c));
+    // Underlined links, as in American Legal's tree.
+    if (c !== s.chapter) assert.match(await link.evaluate((a) => getComputedStyle(a).textDecorationLine), /underline/);
+    // A disclosure button before every chapter that has sections, named for its chapter.
+    const button = nav.getByRole("button", { name: `Sections in ${chapterName(c)}`, exact: true });
+    assert.equal(await button.count(), c.sections.length ? 1 : 0, chapterName(c));
+    if (!c.sections.length) continue;
+    assert.equal(await button.getAttribute("aria-expanded"), String(c === s.chapter));
+    const controls = await button.getAttribute("aria-controls");
+    assert.equal(await page.locator(`[id="${controls}"]`).count(), 1, `${chapterName(c)}: aria-controls names a list`);
+    assert.ok(await button.evaluate((b, id) => b.parentElement.contains(document.getElementById(id)), controls), `${chapterName(c)}: the list is in the chapter's item`);
   }
   const chapterLink = page.locator(`.toc a[href="${s.chapter.path}"]`);
   assert.equal(await chapterLink.getAttribute("aria-current"), "true");
+  assert.equal(await chapterLink.evaluate((a) => getComputedStyle(a).fontWeight), "700", "the open chapter is bold, not only colored");
   const own = page.locator('.toc a[aria-current="page"]');
   assert.equal(await own.count(), 1);
   assert.equal(await own.getAttribute("href"), s.path);
   assert.ok(await own.isVisible());
-  // Only the open chapter shows its sections.
+  // Only the open chapter's sections, until another is opened.
   const sectionLinks = await page.locator('.toc a[href^="/charter/sections/"]').evaluateAll((as) => as.map((a) => a.getAttribute("href")));
   assert.deepEqual(sectionLinks, s.chapter.sections.map((x) => x.path));
-  // The open chapter is marked by more than color: bold.
-  assert.equal(await chapterLink.evaluate((a) => getComputedStyle(a).fontWeight), "700");
   assert.deepEqual(problems, []);
   await ctx.close();
-  // A chapter page: the same list, with that chapter open and current.
+  // A chapter page: the same tree, with that chapter open and current.
   {
     const { page, ctx } = await open(s.chapter.path, { width: 1200 });
     const own = page.locator('.toc a[aria-current="page"]');
     assert.equal(await own.count(), 1);
     assert.equal(await own.getAttribute("href"), s.chapter.path);
-    assert.equal(await page.locator('.toc a[href^="/charter/sections/"]').count(), s.chapter.sections.length);
+    assert.equal(await page.locator('.toc li.open > ul a').count(), s.chapter.sections.length);
     await ctx.close();
   }
 });
 
-test("side list on a phone: one named button, closed, above the breadcrumbs, one tab stop", async () => {
+test("contents tree: a chapter's button opens and closes it from the keyboard, loading only that chapter's list", async () => {
+  const s = sectionWithParts();
+  const other = site.book.chapters.find((c) => c !== s.chapter && c.sections.length >= 2);
+  const { page, ctx, problems } = await open(s.path, { width: 1200 });
+  const loaded = [];
+  page.on("request", (r) => r.url().includes("/contents/") && loaded.push(new URL(r.url()).pathname));
+  const button = page.getByRole("button", { name: `Sections in ${chapterName(other)}`, exact: true });
+  const list = page.locator(`[id="${await button.getAttribute("aria-controls")}"]`);
+  assert.equal(await list.isVisible(), false);
+  // Enter opens.
+  await button.focus();
+  await page.keyboard.press("Enter");
+  await list.getByRole("link").first().waitFor();
+  assert.equal(await button.getAttribute("aria-expanded"), "true");
+  assert.deepEqual(await list.getByRole("link").evaluateAll((as) => as.map((a) => [a.getAttribute("href"), a.textContent])), other.sections.map((x) => [x.path, `${x.citation}. ${x.title}`]));
+  assert.deepEqual(loaded, [`/charter/contents/${other.slug}.json`], "one small file, for that chapter");
+  // Space closes, and focus stays on the button.
+  await page.keyboard.press("Space");
+  assert.equal(await button.getAttribute("aria-expanded"), "false");
+  assert.equal(await list.isVisible(), false);
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains("tw")), true);
+  // Opened again, it does not load again.
+  await page.keyboard.press("Enter");
+  assert.ok(await list.isVisible());
+  assert.equal(loaded.length, 1);
+  // The open chapter closes too, with its list in the page.
+  const mine = page.getByRole("button", { name: `Sections in ${chapterName(s.chapter)}`, exact: true });
+  await mine.click();
+  assert.equal(await mine.getAttribute("aria-expanded"), "false");
+  assert.equal(await page.locator('.toc a[aria-current="page"]').isVisible(), false);
+  // Tab order: the button, then its chapter's link.
+  await button.focus();
+  await page.keyboard.press("Tab");
+  assert.equal(await page.evaluate(() => document.activeElement.getAttribute("href")), other.path);
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("contents tree: a list that will not load says so and links to the chapter", async () => {
+  const s = sectionWithParts();
+  const other = site.book.chapters.find((c) => c !== s.chapter && c.sections.length);
+  const ctx = await browser.newContext({ viewport: { width: 1200, height: 900 } });
+  await ctx.route("**/contents/*.json", (r) => r.fulfill({ status: 500, body: "" }));
+  const page = await ctx.newPage();
+  await page.goto(base + s.path, { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: `Sections in ${chapterName(other)}`, exact: true }).click();
+  const link = page.getByRole("link", { name: `Open ${chapterName(other)}`, exact: true });
+  await link.waitFor();
+  assert.equal(await link.getAttribute("href"), other.path);
+  await ctx.close();
+});
+
+test("Hide and Contents: the tree folds away on a wide screen, is remembered, and comes back", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 1200 });
+  const hide = page.getByRole("button", { name: "Hide contents", exact: true });
+  const show = page.getByRole("button", { name: CONTENTS_BUTTON });
+  assert.equal(await show.count(), 0, "no Contents button while the tree shows");
+  const textWidth = () => page.locator("main").evaluate((m) => m.getBoundingClientRect().width);
+  const before = await textWidth();
+  await hide.click();
+  assert.equal(await page.locator(".toc").isVisible(), false);
+  assert.equal(await show.getAttribute("aria-expanded"), "false");
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains("contents-open")), true, "focus moves to Contents");
+  assert.ok((await textWidth()) > before + 200, "the page takes the tree's column");
+  // The next page opens the same way.
+  await page.goto(base + s.chapter.path, { waitUntil: "networkidle" });
+  assert.equal(await page.locator(".toc").isVisible(), false, "remembered");
+  await show.click();
+  assert.ok(await page.locator(".toc").isVisible());
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains("contents-hide")), true, "focus moves to Hide");
+  await page.goto(base + s.path, { waitUntil: "networkidle" });
+  assert.ok(await page.locator(".toc").isVisible(), "shown again on the next page");
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("contents on a phone: one Contents button, closed, above the breadcrumbs, one tab stop", async () => {
   const s = sectionWithParts();
   const { page, ctx, problems } = await open(s.path, { width: 390 });
-  const button = page.getByRole("button", { name: "Charter chapters" });
+  const button = page.getByRole("button", { name: CONTENTS_BUTTON });
   assert.equal(await button.count(), 1);
+  assert.equal(await page.getByRole("button", { name: `Contents, ${chapterName(s.chapter)}`, exact: true }).count(), 1, "a \"you are here\" bar naming the chapter");
   assert.equal(await button.getAttribute("aria-expanded"), "false", "closed by default");
   assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).isVisible(), false, "chapter links hidden while closed");
-  assert.equal(await page.locator(".toc-h").isVisible(), false, "the button is the heading on a phone");
-  // With scripts the fold is open and its summary gone: NYSDS's button is the one control.
+  // With scripts the fold is open and its summary gone: the button is the one control.
   assert.equal(await page.locator(".toc details").getAttribute("open"), "");
   assert.equal(await page.locator(".toc summary").isVisible(), false, "no summary beside the button");
   // The button is above the breadcrumbs, the heading and the law text (Noel, 2026-11-23).
@@ -411,61 +505,72 @@ test("side list on a phone: one named button, closed, above the breadcrumbs, one
   // One tab stop: from the menu button, Tab lands on it, and the next Tab is the first crumb.
   await page.getByRole("button", { name: "Menu" }).focus();
   await page.keyboard.press("Tab");
-  assert.equal(await page.evaluate(() => { let a = document.activeElement; while (a?.shadowRoot?.activeElement) a = a.shadowRoot.activeElement; return a?.getAttribute("aria-expanded") !== null && a?.textContent.trim(); }), "Charter chapters");
+  assert.equal(await page.evaluate(() => document.activeElement?.classList.contains("contents-open")), true);
   await page.keyboard.press("Tab");
   assert.equal(await page.evaluate(() => document.activeElement?.textContent), "Home");
+  // Open: the tree above the page, focus on Hide; Hide closes it and focus returns.
   await button.click();
-  assert.equal(await button.getAttribute("aria-expanded"), "true");
   await page.locator('.toc a[aria-current="page"]').waitFor({ state: "visible" });
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains("contents-hide")), true);
+  assert.ok((await top(page.locator(".toc"))) < (await top(page.locator(".crumbs"))));
+  await page.getByRole("button", { name: "Hide contents" }).click();
+  assert.equal(await page.locator(".toc").isVisible(), false);
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains("contents-open")), true);
+  assert.equal(await button.getAttribute("aria-expanded"), "false");
   assert.deepEqual(problems, []);
   await ctx.close();
 });
 
-test("side list with JavaScript off: a plain list of every chapter, the current one open; folded on a phone", async () => {
+test("contents with JavaScript off: a plain list of every chapter, the current one open, no buttons; folded on a phone", async () => {
   const s = sectionWithParts();
   for (const width of [1200, 390]) {
     const { page, ctx } = await open(s.path, { width, js: false });
-    const links = page.locator(".toc a");
-    const top = await page.locator(".toc nys-verticalnav > ul > li > a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+    const top = await page.locator(".toc .tree > li > a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
     assert.deepEqual(top, site.book.chapters.map((c) => c.path), `${width}px: every chapter`);
-    assert.equal(await links.count(), site.book.chapters.length + s.chapter.sections.length);
+    assert.equal(await page.locator(".toc a").count(), 1 + site.book.chapters.length + s.chapter.sections.length);
+    assert.equal(await page.getByRole("button").count(), 0, `${width}px: no buttons that need scripts`);
     const summary = page.locator(".toc summary");
     if (width === 390) {
-      // Code review S3: closed, one line named like the list, which opens to the same list.
+      // Code review S3: closed, one line, which opens to the same list.
       assert.ok(await summary.isVisible(), "the fold's summary");
-      assert.equal((await summary.innerText()).trim(), "Charter chapters");
+      assert.equal((await summary.innerText()).replace(/\s+/g, " ").trim(), "☰ Contents");
       assert.equal(await page.locator('.toc a[aria-current="page"]').isVisible(), false, "closed by default");
       await summary.click();
-      assert.equal(await page.locator(".toc-h").isVisible(), false, "the summary names it; no second heading");
     } else {
       assert.equal(await summary.isVisible(), false, "no fold on a wide screen");
-      assert.ok(await page.getByRole("heading", { name: "Charter chapters", level: 2 }).isVisible(), "the heading");
+      assert.ok(await page.getByRole("heading", { name: "Contents", level: 2 }).isVisible(), "the heading");
     }
     assert.ok(await page.locator('.toc a[aria-current="page"]').isVisible(), `${width}px: current section shown`);
     assert.equal(await page.locator(`.toc a[href="${s.chapter.path}"]`).getAttribute("aria-current"), "true");
+    // The chapter links still work.
+    const other = site.book.chapters.find((c) => c !== s.chapter);
+    await Promise.all([page.waitForURL(`${base}${other.path}`), page.locator(`.toc a[href="${other.path}"]`).click()]);
     await ctx.close();
   }
 });
 
 // Code review S3: with the whole list open, a phone with JavaScript off reached the law text
-// about 5,000px down. Folded, the heading and the text start within the first screen.
-test("phone, JavaScript off: the section's heading and text start near the top", async () => {
+// about 5,000px down. Folded, the heading and the text start within the first screen; on a
+// chapter page, the jump list does (Noel, 2026-11-23).
+test("phone: the heading and the text, or the chapter's jump list, start near the top", async () => {
   const s = sectionWithParts();
-  for (const path of [s.path, s.chapter.path]) {
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
-    const page = await ctx.newPage();
-    await page.goto(base + path);
-    const r = await page.evaluate(() => ({
-      h1: document.querySelector("h1").getBoundingClientRect().top + scrollY,
-      law: (document.querySelector(".law p, .contents li") ?? document.querySelector("main p")).getBoundingClientRect().top + scrollY,
-    }));
-    assert.ok(r.h1 < 400, `${path}: the heading starts at ${r.h1}px`);
-    assert.ok(r.law < 844, `${path}: the text starts at ${r.law}px, past the first screen`);
-    await ctx.close();
+  for (const js of [false, true]) {
+    for (const path of [s.path, s.chapter.path]) {
+      const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: js });
+      const page = await ctx.newPage();
+      await page.goto(base + path, { waitUntil: "networkidle" });
+      const r = await page.evaluate(() => ({
+        h1: document.querySelector("h1").getBoundingClientRect().top + scrollY,
+        law: (document.querySelector(".jump li, .law p") ?? document.querySelector("main p")).getBoundingClientRect().top + scrollY,
+      }));
+      assert.ok(r.h1 < 400, `${path}${js ? "" : ", JavaScript off"}: the heading starts at ${r.h1}px`);
+      assert.ok(r.law < 600, `${path}${js ? "" : ", JavaScript off"}: the text or jump list starts at ${r.law}px`);
+      await ctx.close();
+    }
   }
 });
 
-test("skip link: straight to the law text, past the side list", async () => {
+test("skip link: straight to the law text, past the contents", async () => {
   const s = sectionWithParts();
   const { page, ctx } = await open(s.path, { width: 1200 });
   await page.keyboard.press("Tab");
@@ -475,22 +580,22 @@ test("skip link: straight to the law text, past the side list", async () => {
   await page.keyboard.press("Tab");
   const where = await page.evaluate(() => ({ inMain: !!document.activeElement?.closest("main"), inList: !!document.activeElement?.closest(".toc") }));
   assert.deepEqual(where, { inMain: true, inList: false });
-  // In the page the list comes before main (navigation at the top); the skip link passes it.
+  // In the page the tree comes before main (navigation at the top); the skip link passes it.
   assert.ok(await page.evaluate(() => document.querySelector(".toc").compareDocumentPosition(document.querySelector("main")) & Node.DOCUMENT_POSITION_FOLLOWING));
   await ctx.close();
 });
 
-// Where a link sits in the side list: in view means below the sticky heading and above the list's bottom edge.
+// Where a link sits in the tree: in view means below the sticky heading row and above the tree's bottom edge.
 function placeInList(href) {
   const toc = document.querySelector(".toc");
   const a = (href ? toc.querySelector(`a[href="${href}"]`) : document.activeElement).getBoundingClientRect();
   const t = toc.getBoundingClientRect();
-  const h = toc.querySelector(".toc-h").getBoundingClientRect();
+  const h = toc.querySelector(".contents-top").getBoundingClientRect();
   return { pageY: window.scrollY, inView: a.top >= h.bottom - 0.5 && a.bottom <= t.bottom + 0.5, covered: Math.max(0, Math.min(a.bottom, h.bottom) - a.top) };
 }
 
-test("side list scrolls itself, not the page, to the reader's own section, or else the open chapter", async () => {
-  // A short window, so the list scrolls even with the fixtures' chapters.
+test("contents tree scrolls itself, not the page, to the reader's own section, or else the open chapter", async () => {
+  // A short window, so the tree scrolls even with the fixtures' chapters.
   const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
   const cases = [
     // Code review S1: the last section of the fixtures' longest chapter (Chapter 10, 36 sections),
@@ -512,9 +617,9 @@ test("side list scrolls itself, not the page, to the reader's own section, or el
   }
 });
 
-// Code review S2 (WCAG 2.4.11): moving focus up the list scrolls each link to the top of the
-// list, where the "Charter chapters" heading stays; scroll-padding keeps the link below it.
-test("side list: a focused link never hides under the sticky heading (Shift+Tab up the list)", async () => {
+// Code review S2 (WCAG 2.4.11): moving focus up the tree scrolls each link and button to the
+// top of the tree, where the "Contents" heading row stays; scroll-padding keeps it below that row.
+test("contents tree: a focused link or button never hides under the sticky heading (Shift+Tab up the tree)", async () => {
   const deepest = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
   const s = deepest.sections.at(-1);
   const ctx = await browser.newContext({ viewport: { width: 1200, height: 420 } });
@@ -523,14 +628,177 @@ test("side list: a focused link never hides under the sticky heading (Shift+Tab 
   await page.waitForFunction(() => document.querySelector(".toc").scrollTop > 0);
   await page.locator('.toc a[aria-current="page"]').focus();
   let steps = 0;
-  for (; steps < 80; steps++) {
+  for (; steps < 200; steps++) {
     await page.keyboard.press("Shift+Tab");
-    if (!(await page.evaluate(() => document.activeElement?.closest(".toc") && document.activeElement.tagName === "A"))) break;
+    if (!(await page.evaluate(() => document.activeElement?.closest(".tree")))) break;
     const r = await page.evaluate(placeInList, null);
     assert.ok(r.inView && r.covered === 0, `Shift+Tab ${steps + 1}: "${await page.evaluate(() => document.activeElement.textContent)}" is covered by ${r.covered}px`);
   }
-  assert.ok(steps > deepest.sections.length, `walked ${steps} links up the list`);
+  assert.ok(steps > deepest.sections.length + 2, `walked ${steps} links and buttons up the tree`);
   await ctx.close();
+});
+
+test("forced colors: the triangles and the current page's mark still show", async () => {
+  const s = sectionWithParts();
+  const { page, ctx } = await open(s.path, { width: 1200 });
+  await page.emulateMedia({ forcedColors: "active", colorScheme: "dark" });
+  const r = await page.locator(".tw").first().evaluate((b) => {
+    const svg = b.querySelector("svg");
+    const box = svg.getBoundingClientRect();
+    const path = getComputedStyle(svg.querySelector("path"));
+    let el = b;
+    let bg = "rgba(0, 0, 0, 0)";
+    while (el && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
+      bg = getComputedStyle(el).backgroundColor;
+      el = el.parentElement;
+    }
+    return { w: box.width, h: box.height, fill: path.fill, bg, forced: matchMedia("(forced-colors: active)").matches };
+  });
+  assert.ok(r.forced);
+  assert.ok(r.w >= 10 && r.h >= 10, `triangle ${r.w}x${r.h}`);
+  assert.ok(contrast(r.fill, r.bg) >= 3, `triangle ${r.fill} on ${r.bg}`);
+  const bar = await page.locator('.toc a[aria-current="page"]').evaluate((a) => [getComputedStyle(a).borderLeftStyle, parseFloat(getComputedStyle(a).borderLeftWidth)]);
+  assert.deepEqual(bar, ["solid", 4], "the current page keeps its bar (a border, not a background)");
+  await ctx.close();
+});
+
+// Noel, 2026-11-23: a chapter page on a wide screen is the whole chapter (mockup B); on a phone, its jump list (mockup A).
+test("chapter page, wide: every section's text, the jump list and the tree jump within the page, Back to contents", async () => {
+  const c = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const { page, ctx, problems } = await open(c.path, { width: 1280, ctxOpts: { permissions: ["clipboard-read", "clipboard-write"], reducedMotion: "reduce" } });
+  assert.ok(await page.locator(".chapter-text").isVisible());
+  assert.equal(await page.locator(".chapter-section").count(), c.sections.length);
+  const target = c.sections[Math.floor(c.sections.length / 2)];
+  // The jump list and the tree's links for this chapter go to the copies on the page.
+  const jump = page.locator(".jump").getByRole("link", { name: `${target.citation}. ${target.title}`, exact: true });
+  assert.equal(await jump.getAttribute("href"), `#s-${target.slug}`);
+  assert.equal(await page.locator(".toc li.open > ul").getByRole("link", { name: `${target.citation}. ${target.title}`, exact: true }).getAttribute("href"), `#s-${target.slug}`);
+  await jump.click();
+  await page.waitForFunction((id) => Math.abs(document.getElementById(id).getBoundingClientRect().top) < 40, `s-${target.slug}`);
+  assert.equal(decodeURIComponent(new URL(page.url()).hash), `#s-${target.slug}`);
+  // Each copy has an h2, "Open this section" and "Copy citation", named for its section.
+  const copy = page.locator(`[id="s-${target.slug}"]`);
+  assert.equal(await copy.getByRole("heading", { level: 2 }).innerText(), `${target.citation}. ${target.title}`);
+  assert.equal(await copy.getByRole("link", { name: `Open this section: ${target.citation}`, exact: true }).getAttribute("href"), target.path);
+  await copy.getByRole("button", { name: `Copy citation: ${target.citation}`, exact: true }).click();
+  await copy.getByRole("status").filter({ hasText: "Copied the citation" }).waitFor();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), target.fullCitation);
+  // "Back to contents" stays on screen while the text scrolls, and goes back to the jump list.
+  const back = page.getByRole("link", { name: "Back to contents", exact: true });
+  const inWindow = () => back.evaluate((a) => {
+    const r = a.getBoundingClientRect();
+    return r.top >= 0 && r.bottom <= innerHeight;
+  });
+  assert.ok(await inWindow(), "in the window mid-chapter");
+  await page.evaluate(() => scrollBy(0, 600));
+  assert.ok(await inWindow(), "still there after scrolling");
+  await back.click();
+  await page.waitForFunction(() => Math.abs(document.getElementById("sections").getBoundingClientRect().top) < 40);
+  // Its name is not the tree's.
+  assert.notEqual("Back to contents".toLowerCase(), "contents");
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("chapter page, wide: a focused control in the text never hides under Back to contents (WCAG 2.4.11)", async () => {
+  const c = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  // Reduced motion: the template scrolls smoothly otherwise, and each step is measured at once.
+  const { page, ctx } = await open(c.path, { width: 1280, ctxOpts: { reducedMotion: "reduce" } });
+  await page.locator(".chapter-text a").first().focus();
+  let steps = 0;
+  for (; steps < 400; steps++) {
+    const r = await page.evaluate(() => {
+      const el = document.activeElement;
+      if (!el?.closest(".chapter-text") || el.classList.contains("back-to-contents")) return null;
+      const a = el.getBoundingClientRect();
+      const b = document.querySelector(".back-to-contents").getBoundingClientRect();
+      const overlap = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+      return { overlap, text: el.textContent.slice(0, 40), visible: a.top >= 0 && a.bottom <= innerHeight };
+    });
+    if (!r) break;
+    assert.equal(r.overlap, 0, `Tab ${steps}: "${r.text}" is under Back to contents`);
+    assert.ok(r.visible, `Tab ${steps}: "${r.text}" is in the window`);
+    await page.keyboard.press("Tab");
+  }
+  assert.ok(steps > c.sections.length * 2, `walked ${steps} controls through the chapter`);
+  await ctx.close();
+});
+
+test("chapter page, phone: the jump list to each section's own page, no full text; a link to a copy goes on to the section", async () => {
+  const c = [...site.book.chapters].sort((a, b) => b.sections.length - a.sections.length)[0];
+  const target = c.sections[1];
+  for (const js of [true, false]) {
+    const { page, ctx } = await open(c.path, { width: 390, js });
+    assert.equal(await page.locator(".chapter-text").isVisible(), false, "no full text");
+    assert.equal(await page.getByRole("link", { name: "Back to contents" }).count(), 0, "no Back to contents");
+    const jump = page.locator(".jump").getByRole("link", { name: `${target.citation}. ${target.title}`, exact: true });
+    assert.equal(await jump.getAttribute("href"), target.path, js ? "JavaScript on" : "JavaScript off");
+    await ctx.close();
+  }
+  // JavaScript off on a wide screen: the full text is there; the links go to the sections' pages.
+  {
+    const { page, ctx } = await open(c.path, { width: 1280, js: false });
+    assert.ok(await page.locator(".chapter-text").isVisible());
+    assert.equal(await page.locator(".jump").getByRole("link", { name: `${target.citation}. ${target.title}`, exact: true }).getAttribute("href"), target.path);
+    await ctx.close();
+  }
+  // A link to a copy, opened on a phone, lands on the section's own page and part.
+  const part = target.structure.blocks.find((b) => b.anchor)?.anchor ?? "";
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  await page.goto(`${base}${c.path}#s-${target.slug}${part}`);
+  await page.waitForURL((u) => u.pathname === target.path);
+  assert.equal(decodeURIComponent(new URL(page.url()).hash), part ? `#${part}` : "");
+  // Narrow to wide and back in one page: the links follow the width.
+  await page.goto(base + c.path, { waitUntil: "networkidle" });
+  const hrefIs = (href) => page.waitForFunction(([name, h]) => [...document.querySelectorAll(".jump a")].find((a) => a.textContent === name)?.getAttribute("href") === h, [`${target.citation}. ${target.title}`, href]);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await hrefIs(`#s-${target.slug}`);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await hrefIs(target.path);
+  await ctx.close();
+});
+
+test("search: one hit per section, never the chapter page's copy", async () => {
+  // Words that appear in exactly one section of a chapter with several, and nowhere else.
+  const words = (t) => new Set(String(t ?? "").toLowerCase().match(/[a-z]{9,}/g) ?? []);
+  const count = new Map();
+  for (const r of site.book.ordered) for (const w of words(`${r.title} ${r.text}`)) count.set(w, (count.get(w) ?? 0) + 1);
+  const picks = [];
+  for (const s of site.book.sections) {
+    if (s.chapter.sections.length < 3 || picks.some((p) => p.s.chapter === s.chapter)) continue;
+    const w = [...words(s.text)].find((x) => count.get(x) === 1);
+    if (w) picks.push({ s, w });
+    if (picks.length === 5) break;
+  }
+  assert.equal(picks.length, 5);
+  const { page, ctx, problems } = await open("/search");
+  for (const { s, w } of picks) {
+    const urls = await page.evaluate(async (q) => {
+      const pf = await import("/pagefind/pagefind.js");
+      const r = await pf.search(q);
+      return Promise.all(r.results.map(async (x) => (await x.data()).url));
+    }, w);
+    // Pagefind stems words ("enumeration" also finds "enumerated"), so other sections may match too; no chapter page may.
+    const paths = urls.map((u) => u.replace(/\.html$/, ""));
+    assert.ok(paths.includes(s.path), `"${w}" finds ${s.citation}: ${paths.join(", ")}`);
+    assert.deepEqual(paths.filter((u) => u.includes("/chapters/")), [], `"${w}": no chapter page`);
+  }
+  assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("chapter page weight: the HTML a phone downloads, raw and gzipped", async () => {
+  const { gzipSync } = await import("node:zlib");
+  const { readFileSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const sizes = site.book.chapters.map((c) => {
+    const raw = readFileSync(join(site.outDir, c.path.slice(1) + ".html"));
+    return { c: c.citation, raw: raw.length, gz: gzipSync(raw, { level: 9 }).length };
+  });
+  const max = sizes.sort((a, b) => b.gz - a.gz)[0];
+  console.log(`# fixtures: largest chapter page ${max.c}, ${max.raw} bytes, ${max.gz} gzipped`);
+  assert.ok(max.gz < 200_000, `${max.c}: ${max.gz} bytes gzipped`);
 });
 
 test("the law text is in the body font, on screen and in print", async () => {
@@ -663,4 +931,23 @@ test("reflow: no law page scrolls sideways, from 320px to 1920px", async () => {
 
 test("nothing loads from outside the site", () => {
   assert.deepEqual([...new Set(outside)], []);
+});
+
+// Noel, 2026-11-23: Copy link, Copy citation and Print are small chips, a soft fill and a thin
+// border, quieter than the title and unlike Menu and the Contents bar; still at least 24px to tap.
+test("the page tools are small chips, at least 24px tall, unlike the Menu button", async () => {
+  const s = sectionWithParts();
+  const { page, ctx, problems } = await open(s.path, { width: 390 });
+  const menu = await page.locator(".menu-btn").evaluate((b) => getComputedStyle(b).borderRadius);
+  for (const name of ["Copy link", "Copy citation", "Print"]) {
+    const b = page.getByRole("button", { name, exact: true });
+    const box = await b.boundingBox();
+    assert.ok(box.height >= 24 && box.height <= 40, `${name}: ${box.height}px tall`);
+    const [radius, width] = await b.evaluate((el) => { const cs = getComputedStyle(el); return [cs.borderTopLeftRadius, cs.borderTopWidth]; });
+    assert.ok(parseFloat(radius) >= box.height / 2 - 1, `${name}: rounded like a chip (${radius})`);
+    assert.equal(width, "1px", `${name}: a thin border`);
+    assert.notEqual(radius, menu, `${name}: not shaped like Menu`);
+  }
+  assert.deepEqual(problems, []);
+  await ctx.close();
 });

@@ -6,7 +6,7 @@
 // /charter/sections/259 from that file, and the canonical link names the path without ".html".
 
 import { renderSection, bodyBlocks } from "../render-section.js";
-import { bodyHtml } from "./render-html.js";
+import { bodyHtml, copyId } from "./render-html.js";
 import { linkTarget } from "./model.js";
 import { page, breadcrumbs, breadcrumbJsonLd, searchForm, currentLine } from "./layout.js";
 import { escapeHtml } from "./html.js";
@@ -84,12 +84,9 @@ export function officialRecordUrl(record, site) {
   return `${site.officialBase}${encodeURIComponent(record.id)}`;
 }
 
-function sourceBox(record, site) {
-  return `<div class="note source" data-pagefind-ignore="all">
-<p>${escapeHtml(site.creditLine)} <a href="${escapeHtml(officialRecordUrl(record, site))}">Official text at American Legal Publishing</a>.</p>
-<p><strong>BetaNYC modified this.</strong> We built this page from American Legal Publishing's bulk XML: we split the text into its parts, added links between sections, and removed the publisher's editing marks.</p>
-<p>Links that use American Legal's id for this text, <code>${escapeHtml(record.id)}</code>, still land here.</p>
-</div>`;
+/** What a law page's bottom box needs: the record's citation and its own page at American Legal. */
+function lawRecord(record, site) {
+  return { citation: record.fullCitation, url: officialRecordUrl(record, site) };
 }
 
 function lawText(record, book) {
@@ -103,9 +100,9 @@ function lawText(record, book) {
 }
 
 const TOOLS = `<div class="tools" data-pagefind-ignore="all">
-<nys-button class="tool-link" variant="outline" size="sm" label="Copy link"></nys-button>
-<nys-button class="tool-cite" variant="outline" size="sm" label="Copy citation"></nys-button>
-<nys-button class="tool-print" variant="outline" size="sm" label="Print"></nys-button>
+<nys-button class="tool-link" variant="ghost" size="sm" label="Copy link"></nys-button>
+<nys-button class="tool-cite" variant="ghost" size="sm" label="Copy citation"></nys-button>
+<nys-button class="tool-print" variant="ghost" size="sm" label="Print"></nys-button>
 <p class="copy-status" role="status"></p>
 </div>`;
 
@@ -118,51 +115,72 @@ export function chapterName(c) {
   return c.title === c.citation ? c.title : `${c.citation}: ${c.title}`;
 }
 
-/** The side list's name: the phone button's label and the name of its navigation landmark. */
-export function chapterNavName(book) {
-  return `${book.book.short} chapters`;
+/** The contents tree's heading, the name of its navigation landmark, and the phone button's label. */
+export const CONTENTS_NAME = "Contents";
+
+/** Where the build writes a chapter's list of sections for the contents tree: /charter/contents/1.json. */
+export function chapterSectionsPath(book, c) {
+  return `/${book.book.slug}/contents/${c.slug}.json`;
+}
+
+/** A chapter's list of sections for the contents tree, as law.js reads it: [[path, "§ 3. Office powers"], ...]. */
+export function chapterSectionsJson(c) {
+  return c.sections.map((x) => [x.path, `${x.citation}. ${x.title}`]);
+}
+
+/** The id of the current chapter's list of sections in the contents tree. */
+export function treeListId(c) {
+  return `toc-${c.slug}`;
 }
 
 /**
- * The side list on the book's pages: every chapter, as a link to its page, with one chapter
- * open to show its sections. A plain nested list, so it reads with JavaScript off; NYSDS's
- * vertical navigation wraps it when scripts run. Its heading is our own <h2> in NYSDS's
- * `header` slot, so it takes the template's heading style; below 1024px NYSDS folds the list
- * behind one button named by `heading` (the same words), and law.css hides the <h2> there.
+ * The contents tree on every law page (Noel, 2026-11-23, after American Legal Publishing's code
+ * library): the heading "Contents", the book, and every chapter in order as a link, with the
+ * current chapter open to show its sections. It replaces the side list of chapters.
  *
- * The open chapter's link is aria-current="true" (the part of the site the reader is in), or
- * "page" on the chapter's own page; the section's own link is aria-current="page".
+ * Only the current chapter's sections are in the HTML, so a page stays small when the book has
+ * hundreds of chapters. law.js adds a disclosure button (a real <button aria-expanded
+ * aria-controls>, named "Sections in Chapter 2: Council") before each chapter that has sections;
+ * opening another chapter loads its list from chapterSectionsPath. Without JavaScript there are no
+ * buttons, and every chapter link still goes to the chapter's page. A disclosure pattern (lists
+ * of links and buttons), not ARIA role="tree".
  *
- * The list sits in a <details> fold, closed in the HTML (code review S3). With JavaScript off a
- * phone shows only its summary, so the law text starts near the top instead of after every
- * chapter; on a wide screen law.css shows the list anyway and hides the summary. With scripts,
- * law.js opens the fold and NYSDS's button does the folding, and law.css hides the summary.
+ * law.js also adds "Hide" (the column folds away on a wide screen) and "☰ Contents" (layout.js,
+ * which brings it back, and opens it on a phone). Without JavaScript the tree sits in a <details>
+ * fold whose summary is "☰ Contents": closed on a phone, so the law text starts near the top;
+ * on a wide screen law.css shows the tree whether the fold is open or not.
+ *
+ * aria-current: "page" on this page's own link; "true" on the open chapter's link on a section
+ * page (the part of the book the reader is in).
  *
  * @param {object} book
  * @param {object} [at]
  * @param {object} [at.chapter]  the chapter to open
  * @param {object} [at.section]  the section this page shows
  */
-export function chapterNav(book, { chapter = null, section = null } = {}) {
+export function contentsTree(book, { chapter = null, section = null } = {}) {
   const item = (c) => {
-    if (c !== chapter) return `<li><a href="${escapeHtml(c.path)}">${escapeHtml(chapterName(c))}</a></li>`;
-    const current = section ? "true" : "page";
+    const name = escapeHtml(chapterName(c));
+    const cls = c === chapter ? "open" : c.sections.length ? "" : "empty";
+    const li = cls ? `<li class="${cls}">` : "<li>";
+    if (c !== chapter) return `${li}<a href="${escapeHtml(c.path)}">${name}</a></li>`;
     const sections = c.sections.length
-      ? `\n<ul>\n${c.sections
+      ? `\n<ul id="${treeListId(c)}">\n${c.sections
           .map((x) => `<li><a href="${escapeHtml(x.path)}"${x === section ? ` aria-current="page"` : ""}>${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`)
           .join("\n")}\n</ul>\n`
       : "";
-    return `<li class="open"><a href="${escapeHtml(c.path)}" aria-current="${current}">${escapeHtml(chapterName(c))}</a>${sections}</li>`;
+    return `${li}<a href="${escapeHtml(c.path)}" aria-current="${section ? "true" : "page"}">${name}</a>${sections}</li>`;
   };
   return `<div class="toc" data-pagefind-ignore="all">
-<details class="toc-fold">
-<summary class="toc-summary">${escapeHtml(chapterNavName(book))}</summary>
-<nys-verticalnav heading="${escapeHtml(chapterNavName(book))}" headingLevel="h2">
-<h2 slot="header" class="toc-h">${escapeHtml(chapterNavName(book))}</h2>
-<ul>
+<details class="contents-fold">
+<summary class="contents-summary"><span aria-hidden="true">&#9776; </span>${CONTENTS_NAME}</summary>
+<nav class="contents-nav" id="contents" aria-labelledby="contents-h" data-sections="/${escapeHtml(book.book.slug)}/contents/">
+<div class="contents-top"><h2 id="contents-h">${CONTENTS_NAME}</h2><button type="button" class="contents-hide" aria-label="Hide contents" hidden>Hide</button></div>
+<p class="book"><a href="/${escapeHtml(book.book.slug)}/">${escapeHtml(book.book.name)}</a></p>
+<ul class="tree">
 ${book.chapters.map(item).join("\n")}
 </ul>
-</nys-verticalnav>
+</nav>
 </details>
 </div>`;
 }
@@ -175,7 +193,7 @@ export function sectionPage(s, book, site) {
     { name: s.chapter.citation, path: s.chapter.path },
     { name: s.citation, path: s.path },
   ];
-  const toc = chapterNav(book, { chapter: s.chapter, section: s });
+  const toc = contentsTree(book, { chapter: s.chapter, section: s });
   const pager = `<nav class="pager" aria-label="Previous and next section" data-pagefind-ignore="all">
 ${s.prev ? `<a class="prev" href="${escapeHtml(s.prev.path)}"><small>Previous</small> ${escapeHtml(`${s.prev.citation}. ${s.prev.title}`)}</a>` : ""}
 ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small> ${escapeHtml(`${s.next.citation}. ${s.next.title}`)}</a>` : ""}
@@ -187,7 +205,6 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
     TOOLS,
     lawText(s, book) || `<p class="empty">American Legal Publishing's file has no text for this section.</p>`,
     `</article>`,
-    sourceBox(s, site),
     pager,
   ].join("\n");
   return {
@@ -201,8 +218,9 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
       description: lawDescription(s),
       main,
       aside: toc,
+      here: chapterName(s.chapter),
       nav: book.book.slug,
-      sourceBox: true,
+      lawRecord: lawRecord(s, site),
       site,
       headExtra: pagefindHead(s, book, "Section"),
       jsonLd: [legislationJsonLd(s, book, site), breadcrumbJsonLd(crumbs)],
@@ -210,15 +228,70 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
   };
 }
 
-/** A chapter's page: its own text, if it has any, then a plain list of its sections. */
+/**
+ * A chapter page's copy of one section's text. Links to a section of the same chapter, or to a
+ * part of one, jump within the page (#s-4, #s-4(b)); the copy only shows on a wide screen, where
+ * that section is on the page too. Other links go where they go on the section's own page.
+ */
+function sectionCopy(s, c, book, nameNote) {
+  const blocks = bodyBlocks(renderSection(s, s.structure));
+  const linkFor = (to) => {
+    const t = linkTarget(to, book, s);
+    if (!t || to?.kind) return t;
+    const target = book.byId.get(to.id);
+    if (target?.chapter !== c || !target.slug) return t;
+    return { href: `#${copyId(target.slug, to.anchor ?? "")}`, label: t.label };
+  };
+  return blocks.length
+    ? `<div class="law">\n${bodyHtml(blocks, { fullCitation: s.fullCitation, linkFor, copyOf: s.slug, nameNote })}\n</div>`
+    : `<p class="empty">American Legal Publishing's file has no text for this section.</p>`;
+}
+
+// "Open this section" and "Copy citation" are on every section of a chapter page, so each one's
+// name adds its citation ("Open this section: § 4"), and its heading too when two sections in
+// the chapter share the number (§ 20-t, § 530, § 808). The name starts with the visible words
+// (WCAG 2.5.3, label in name).
+const named = (words, s, note) => `aria-label="${escapeHtml(`${words}: ${s.citation}${note ? `, ${note}` : ""}`)}"`;
+
+/**
+ * A chapter's page (Noel, 2026-11-23). Its own text, if it has any; then a jump list of its
+ * sections ("Sections in Chapter 1"); then, for a wide screen, every section's full text in
+ * order, each under an <h2> with an "Open this section" link to its own page and a "Copy
+ * citation" button, and a "Back to contents" link that stays on screen while the text scrolls.
+ *
+ * One HTML page for both widths. Below 900px law.css hides the full text, so a phone shows the
+ * jump list, whose links go to each section's own page. At 900px and wider, law.js points the
+ * jump list and the contents tree's links for this chapter at the copies on the page (#s-4);
+ * with JavaScript off they go to the sections' own pages, and the full text is still there.
+ *
+ * The copies are data-pagefind-ignore (one search hit per section, on its own page), carry no
+ * data-block (the block-order test reads the chapter's own text), and prefix their ids (#s-4(b)).
+ */
 export function chapterPage(c, book, site) {
   const crumbs = [HOME, { name: book.book.label, path: `/${book.book.slug}/` }, { name: c.citation, path: c.path }];
   const list = c.sections.length
-    ? `<h2 id="sections" data-pagefind-ignore>Sections in ${escapeHtml(c.citation)}</h2>
-<ol class="contents" data-pagefind-ignore="all">
+    ? `<nav class="jump" aria-labelledby="sections" data-pagefind-ignore="all">
+<h2 id="sections">Sections in ${escapeHtml(c.citation)}</h2>
+<ol class="contents">
 ${c.sections.map((x) => `<li><a href="${escapeHtml(x.path)}">${escapeHtml(`${x.citation}. ${x.title}`)}</a></li>`).join("\n")}
-</ol>`
+</ol>
+</nav>`
     : `<p>No sections in this chapter.</p>`;
+  const shared = (x) => (c.sections.filter((y) => y.citation === x.citation).length > 1 ? x.title : "");
+  const text = c.sections.length
+    ? `<div class="chapter-text" data-pagefind-ignore="all">
+${c.sections
+  .map(
+    (x) => `<div class="chapter-section" id="${escapeHtml(copyId(x.slug))}">
+<h2>${escapeHtml(`${x.citation}. ${x.title}`)}</h2>
+<p class="sec-tools"><a href="${escapeHtml(x.path)}" ${named("Open this section", x, shared(x))}>Open this section</a> <button type="button" class="copy-cite" data-cite="${escapeHtml(x.fullCitation)}" ${named("Copy citation", x, shared(x))} hidden>Copy citation</button> <span class="copy-status" role="status"></span></p>
+${sectionCopy(x, c, book, shared(x))}
+</div>`
+  )
+  .join("\n")}
+<div class="back-wrap"><a class="back-to-contents" href="#sections">Back to contents</a></div>
+</div>`
+    : "";
   const pager = `<nav class="pager" aria-label="Previous and next chapter" data-pagefind-ignore="all">
 ${c.prev ? `<a class="prev" href="${escapeHtml(c.prev.path)}"><small>Previous</small> ${escapeHtml(chapterName(c.prev))}</a>` : ""}
 ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small> ${escapeHtml(chapterName(c.next))}</a>` : ""}
@@ -230,8 +303,8 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
     `<h1>${heading}</h1>`,
     lawText(c, book),
     list,
+    text,
     `</article>`,
-    sourceBox(c, site),
     pager,
   ].join("\n");
   return {
@@ -244,9 +317,12 @@ ${c.next ? `<a class="next" href="${escapeHtml(c.next.path)}"><small>Next</small
       title: titleOf(c.title === c.citation ? `${book.book.label}: ${c.title}` : `${book.book.label} ${c.citation}: ${c.title}`),
       description: describe(`${book.book.label} ${c.citation}${c.title === c.citation ? "" : `, ${c.title}`}: ${c.sections.length} section${c.sections.length === 1 ? "" : "s"}.`),
       main,
-      aside: chapterNav(book, { chapter: c }),
+      aside: contentsTree(book, { chapter: c }),
+      here: chapterName(c),
       nav: book.book.slug,
-      sourceBox: true,
+      lawRecord: lawRecord(c, site),
+      // "Back to contents" does that job here, and two floating buttons would crowd the corner.
+      backToTop: c.sections.length === 0,
       site,
       headExtra: pagefindHead(c, book, "Chapter"),
       jsonLd: [legislationJsonLd(c, book, site), breadcrumbJsonLd(crumbs)],
@@ -274,7 +350,7 @@ export function sharedNumberPage(sh, book, site) {
       title: titleOf(`${book.book.label} ${sh.citation}: ${sh.sections.length} sections share this number`),
       description: describe(`${book.book.label} has ${sh.sections.length} sections numbered ${sh.citation}: ${sh.sections.map((s) => s.title).join("; ")}.`),
       main,
-      aside: chapterNav(book),
+      aside: contentsTree(book),
       nav: book.book.slug,
       site,
       jsonLd: [breadcrumbJsonLd(crumbs)],
@@ -282,7 +358,7 @@ export function sharedNumberPage(sh, book, site) {
   };
 }
 
-/** The book's contents: a plain list of its chapters. It has no side list: the page is that list. */
+/** The book's contents: a plain list of its chapters. It has no contents tree: the page is that list. */
 export function contentsPage(book, site) {
   const path = `/${book.book.slug}/`;
   const crumbs = [HOME, { name: book.book.label, path }];
@@ -442,7 +518,7 @@ export function aboutPage(book, site, { paragraphs, metadata }) {
     `<p>Read <a href="https://www.beta.nyc/about/ai-policy/">BetaNYC's AI policy</a>. Questions: ${mail}.</p>`,
     h2("licenses"),
     `<p>This site's code is <a href="${REPO_URL}">on GitHub</a> under the MIT license. That license covers our code, not American Legal Publishing's text.</p>`,
-    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, contents, and search controls come from the <a href="https://designsystem.ny.gov/">New York State Design System</a>. This is not a New York State site; we use the design system as a library. Its notice covers the State's own work (CC0), Google's Material Icons (Apache License 2.0), and Lit (BSD 3-Clause): see <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>. DOMPurify, which the design system includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>).</p>`,
+    `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, buttons, and search controls come from the <a href="https://designsystem.ny.gov/">New York State Design System</a>. This is not a New York State site; we use the design system as a library. Its notice covers the State's own work (CC0), Google's Material Icons (Apache License 2.0), and Lit (BSD 3-Clause): see <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>. DOMPurify, which the design system includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>).</p>`,
     h2("mistakes"),
     `<p>If a section is wrong, missing, or out of date here, <a href="${REPO_URL}/issues">open an issue on GitHub</a> or email ${mail}. Tell us the section number and what looks wrong. Fixes to the code are welcome as pull requests.</p>`,
     `<p>If the mistake is in the publisher's text itself, American Legal Publishing's disclaimer asks readers to tell the publisher at <a href="mailto:NYC.editor@amlegal.com">NYC.editor@amlegal.com</a> or the NYC Law Department at <a href="mailto:NYCCodeRulesCharter@law.nyc.gov">NYCCodeRulesCharter@law.nyc.gov</a>.</p>`,

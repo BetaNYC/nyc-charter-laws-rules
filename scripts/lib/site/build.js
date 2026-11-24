@@ -17,6 +17,8 @@ import {
   searchPage,
   aboutPage,
   notFoundPage,
+  chapterSectionsPath,
+  chapterSectionsJson,
 } from "./pages.js";
 import { redirectsJson, indexJson, citationsJson, metadataJson, sitemaps, robotsTxt } from "./outputs.js";
 
@@ -190,6 +192,9 @@ export async function buildSite(o = {}) {
     notFoundPage(book, site),
   ];
   for (const p of pages) write(outDir, p.file, p.html);
+  // Each chapter's sections, for the contents tree: a page carries only its own chapter's list,
+  // and law.js loads another chapter's when the reader opens it (pages.js contentsTree).
+  for (const c of book.chapters) if (c.sections.length) write(outDir, chapterSectionsPath(book, c).slice(1), JSON.stringify(chapterSectionsJson(c)));
 
   write(outDir, "redirects.json", JSON.stringify(redirectsJson([book])));
   write(outDir, "index.json", JSON.stringify(indexJson([book])));

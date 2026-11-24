@@ -13,19 +13,21 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./co
  * @param {string} p.title         <title>
  * @param {string} p.description   meta description
  * @param {string} p.main          the inside of <main>
- * @param {string} [p.aside]       the side list of chapters (pages.js chapterNav), before <main>, on the left
+ * @param {string} [p.aside]       the contents tree (pages.js contentsTree), before <main>, on the left
+ * @param {string} [p.here]        the reader's chapter, named on the Contents bar
  * @param {string} [p.nav]         which top-bar link is current: "charter", "search", "about"
  * @param {boolean} [p.noindex]
  * @param {boolean} [p.searchStrip=false] the search box under the top bar: the home page only (Noel,
  *   2026-11-23). Every page reaches search through the top bar's Search link.
  * @param {boolean} [p.bottomBox=true] the box at the bottom (About leaves it off: it ends with the full disclaimer)
- * @param {boolean} [p.sourceBox=false] the page has a source box (law pages), which already says where the
- *   text comes from and that BetaNYC modified it, so the footer does not say it again
+ * @param {{citation: string, url: string}} [p.lawRecord] a law page's own record: the bottom box then links
+ *   to that record's page at American Legal Publishing
  * @param {object[]} [p.jsonLd]
  * @param {string[]} [p.headExtra] more <head> lines (Pagefind filters and metadata)
  * @param {string[]} [p.scripts]   extra module scripts
  * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialBase, officialName, contentsPath }
  * @param {boolean} [p.navPage]  the top-bar link is this page itself (aria-current="page"), not just its section
+ * @param {boolean} [p.backToTop=true] NYSDS's back-to-top button in the footer (a chapter page has its own "Back to contents")
  */
 export function page(p) {
   const canonical = absoluteUrl(p.path);
@@ -56,14 +58,15 @@ export function page(p) {
     `<a class="skip" href="#main">Skip to main content</a>`,
     topBar(p.nav, p.navPage === true),
     p.searchStrip === true ? searchStrip(p.site) : "",
-    // The side list comes before <main> (Noel, 2026-11-23: people expect navigation at the
-    // top). On a phone it is one closed button above the breadcrumbs; the skip link jumps
-    // past it to the law text.
+    // The contents tree comes before <main> (Noel, 2026-11-23: people expect navigation at the
+    // top), and the skip link jumps past it to the law text. "☰ Contents" sits at the top of the
+    // page's column: it brings the tree back on a wide screen after "Hide", and opens it on a
+    // phone. law.js shows it; without JavaScript the tree's own fold does that job.
     p.aside
-      ? `<div class="wrap layout">\n${p.aside}\n<main id="main">\n${p.main}\n</main>\n</div>`
+      ? `<div class="wrap layout">\n${p.aside}\n<div class="main-col">\n${contentsButton(p.here)}\n<main id="main">\n${p.main}\n</main>\n</div>\n</div>`
       : `<main id="main">\n<div class="wrap">\n${p.main}\n</div>\n</main>`,
-    p.bottomBox === false ? "" : bottomBox(p.site),
-    footer(p.site, { sourceBox: p.sourceBox === true }),
+    p.bottomBox === false ? "" : bottomBox(p.site, p.lawRecord),
+    footer(p.site, { sourceLine: p.bottomBox === false, backToTop: p.backToTop !== false }),
   ];
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n${head.join("\n")}\n</head>\n<body>\n${body.join("\n")}\n</body>\n</html>\n`;
 }
@@ -86,6 +89,21 @@ function topBar(current, isPage) {
     </nav>
   </div>
 </header>`;
+}
+
+/**
+ * "☰ Contents": shows the contents tree (pages.js contentsTree). Hidden until law.js wires it.
+ * It is a full-width "you are here" bar, not an outlined button, so it does not look like the
+ * top bar's Menu (Noel, 2026-11-23): Menu goes around the site, Contents around this book. It
+ * names the reader's chapter; its accessible name starts with "Contents".
+ * @param {string} [here] the reader's chapter, as the tree names it ("Chapter 2: Council")
+ */
+export function contentsButton(here) {
+  // Its spoken name is "Contents, Chapter 2: Council", the words on the bar, in order. A hidden
+  // comma span would not do: Chrome puts a space before it in the accessible name.
+  const where = here ? ` <span class="contents-here">${escapeHtml(here)}</span>` : "";
+  const label = here ? ` aria-label="${escapeHtml(`Contents, ${here}`)}"` : "";
+  return `<button type="button" class="contents-open" aria-controls="contents" aria-expanded="false"${label} hidden><svg class="cb-icon" aria-hidden="true" focusable="false" viewBox="0 0 20 20"><path d="M2 4h16M2 10h16M2 16h16" stroke="currentColor" stroke-width="2" fill="none"/></svg><span class="contents-word">Contents</span>${where}<svg class="cb-chev" aria-hidden="true" focusable="false" viewBox="0 0 20 20"><path d="M5 7l5 6 5-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>`;
 }
 
 /**
@@ -123,29 +141,37 @@ export function currentLine(site) {
 }
 
 /**
- * The one warning on the page, at the bottom, in plain HTML (the template's .warnbox): how
- * current the text is, the bold "BetaNYC's copy" line, and a link to the full disclaimer.
+ * The one warning on the page, at the bottom, in plain HTML (the template's .warnbox), in two
+ * paragraphs (Noel, 2026-11-23): how current the text is; then, in bold, that BetaNYC modified
+ * the text and it is not legal advice, how BetaNYC changed it, where the official text is, and a
+ * link to the full disclaimer. On a law page the official link goes to that record's own page at
+ * American Legal Publishing; elsewhere it goes to the book.
+ * @param {object} site
+ * @param {{citation: string, url: string}} [law] the law page's record
  */
-export function bottomBox(site) {
+export function bottomBox(site, law) {
+  const what = law ? "this text" : "the law text on this site";
+  const official = law
+    ? `The official text of ${escapeHtml(law.citation)} is at <a href="${escapeHtml(law.url)}">American Legal Publishing</a>.`
+    : `${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.`;
   return `<div class="wrap" data-pagefind-ignore="all">
 <aside class="warnbox copy-box" aria-label="About this copy">
 <p class="current">${escapeHtml(currentLine(site))}</p>
-<p class="lead"><strong>This is BetaNYC's copy, for research. It is not the official text and not legal advice. ${escapeHtml(site.officialName)} is at <a href="${escapeHtml(site.officialUrl)}">American Legal Publishing</a>.</strong></p>
-<p><a href="/about#disclaimer">Read the full disclaimer</a></p>
+<p class="lead"><strong>BetaNYC modified ${what}. It is not legal advice.</strong> We built it from American Legal Publishing's bulk XML, split it into its parts, added links between sections, and removed the publisher's editing marks. ${official} <a href="/about#disclaimer">Read the full disclaimer</a></p>
 </aside>
 </div>`;
 }
 
-// The "comes from American Legal Publishing, and BetaNYC modified it" line is left off law
-// pages, whose source box says the same thing (copy review S2). The MIT line stays everywhere.
-function footer(site, { sourceBox = false } = {}) {
-  return `<footer data-pagefind-ignore="all">
-  <nys-backtotop></nys-backtotop>
+// The "comes from American Legal Publishing, and BetaNYC modified it" line is left off every page
+// with a bottom box, which says the same thing (copy review S2); only About, which has no box,
+// keeps it. The MIT line stays everywhere.
+function footer(site, { sourceLine = false, backToTop = true } = {}) {
+  return `<footer data-pagefind-ignore="all">${backToTop ? "\n  <nys-backtotop></nys-backtotop>" : ""}
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
     <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
     <p>Want all of it? Download the text as JSON and Markdown <a href="${REPO_URL}/tree/main/data/index">from GitHub</a> instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
-    <p class="small">${sourceBox ? "" : `The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). `}Our code is MIT licensed; the license does not cover the publisher's text.</p>
+    <p class="small">${!sourceLine ? "" : `The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). `}Our code is MIT licensed; the license does not cover the publisher's text.</p>
   </div>
 </footer>`;
 }

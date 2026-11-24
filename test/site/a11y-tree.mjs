@@ -18,7 +18,11 @@ export function parseSnapshot(snapshot) {
   for (let i = 0; i < lines.length; i++) {
     const m = LINE.exec(lines[i]);
     if (!m) continue;
-    const node = { role: m[2], name: m[3] === undefined ? "" : JSON.parse(`"${m[3]}"`), indent: m[1].length, line: lines[i].trim() };
+    // A line the snapshot wraps in single quotes (YAML) doubles any ' in the name: "Children''s".
+    const quoted = lines[i].slice(m[1].length).startsWith("- '");
+    let name = m[3] === undefined ? "" : JSON.parse(`"${m[3]}"`);
+    if (quoted) name = name.replace(/''/g, "'");
+    const node = { role: m[2], name, indent: m[1].length, line: lines[i].trim() };
     if (node.role === "link") {
       for (let j = i + 1; j < lines.length; j++) {
         const lead = /^(\s*)/.exec(lines[j])[1].length;
