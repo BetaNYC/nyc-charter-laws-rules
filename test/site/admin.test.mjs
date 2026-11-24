@@ -231,3 +231,37 @@ test("the home page with both books: two Browse buttons, every control named onc
   assert.deepEqual(errors, []);
   await ctx.close();
 });
+
+// Issue #78: a group record (the longest one in the data: in July 2026, reference standard RS 18-1)
+// is a page like any section's: in the contents tree, with Copy link and Copy citation, no
+// sideways scroll on a phone, every control named once.
+test("a group record's page: in the tree, copy link and citation, fits a phone, every control named once", { skip }, async () => {
+  const groups = admin.sections.filter((s) => s.level !== "Section" && s.level !== "Chapter");
+  if (!groups.length) return; // data built before #78
+  const s = groups.reduce((a, b) => (b.text.length > a.text.length ? b : a));
+  for (const width of [1280, 390]) {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "reduce", permissions: ["clipboard-read", "clipboard-write"] });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto(base + s.path, { waitUntil: "networkidle" });
+    assert.equal((await page.locator("h1 .cite").textContent()).trim(), s.fullCitation);
+    if (width === 1280) {
+      assert.equal(await page.locator(`#contents a[aria-current="page"]`).getAttribute("href"), s.path, "the tree marks this page");
+    }
+    await page.getByRole("button", { name: "Copy citation", exact: true }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the citation" }).waitFor();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), s.fullCitation);
+    await page.getByRole("button", { name: "Copy link", exact: true }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the link" }).waitFor();
+    assert.ok((await page.evaluate(() => navigator.clipboard.readText())).endsWith(s.path));
+    const [sw, cw] = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+    assert.ok(sw <= cw, `no sideways scroll at ${width}px (${sw} > ${cw})`);
+    const { c, l } = await named(page);
+    assert.deepEqual(c.unnamed, []);
+    assert.deepEqual(c.duplicates, []);
+    assert.deepEqual(l.conflicting, []);
+    assert.deepEqual(errors, []);
+    await ctx.close();
+  }
+});

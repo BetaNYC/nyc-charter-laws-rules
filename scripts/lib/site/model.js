@@ -288,9 +288,37 @@ export function anySectionSlug(citation) {
  */
 export function adminShortHeading(record) {
   let h = String(record.heading ?? "").trim();
+  if (record.level && record.level !== "Section" && record.level !== "Chapter") return groupShortHeading(h, record.citation);
   if (h.startsWith(record.citation)) h = h.slice(record.citation.length);
   else if (/^§\s/.test(record.citation)) h = h.replace(/^Section\s+\S+/, "");
   return h.replace(/^[\s.:–-]+/, "").replace(/\.$/, "").trim();
+}
+
+const foldDashes = (s) => s.replace(/[–—]/g, "-").toLowerCase();
+
+/**
+ * A group record's heading without its label (issue #78). The citation's last label ("RS 18-1",
+ * or "Chapter 1" in "RS 13-1, Chapter 1") is found at the start of the heading, dashes and case
+ * aside, or after "REFERENCE STANDARD": "REFERENCE STANDARD RS 10–9 PLYWOOD CONSTRUCTION" →
+ * "PLYWOOD CONSTRUCTION", "REFERENCE STANDARD RS 18–1" → "", "CHAPTER 1 – GENERAL" → "GENERAL",
+ * "Part I – Definitions" → "Definitions". A heading with no label, which ends the citation
+ * ("Title 15, Chapter 20, Appendix"), → "".
+ * A heading with no label found is kept whole.
+ */
+export function groupShortHeading(heading, citation) {
+  const own = String(citation).split(", ").pop();
+  const folded = foldDashes(heading);
+  for (const label of new Set([own, own.replace(/^RS /, "")])) {
+    for (const prefix of ["", "reference standard "]) {
+      const start = prefix + foldDashes(label);
+      if (folded.startsWith(start) && /^(?:$|[\s.:;,*()[\]–—-])/.test(heading.slice(start.length))) {
+        return heading.slice(start.length).replace(/^[\s.:;,*–—-]+/, "").replace(/\.$/, "").trim();
+      }
+    }
+  }
+  // A heading with no label ends the citation ("Title 15, Chapter 20, Appendix").
+  const whole = heading.replace(/\.$/, "").trim();
+  return citation === whole || citation.endsWith(`, ${whole}`) ? "" : whole;
 }
 
 /** A section as lists name it: "§ 11-601. Definitions", or the citation alone when it has no heading. */

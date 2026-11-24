@@ -1,6 +1,9 @@
 // The site structure (issue #61): what a law page needs that the index's flat `text` drops.
 //
-// For every indexed section, in index order, the structure file records
+// For every indexed record, in index order (a section, a chapter, or since issue #78 a group
+// level's own text, such as a reference standard or an appendix: see build-corpus.js), the
+// structure file records
+//   - level:    the publisher's level for it ("Section", "Chapter", "Appendix", "Part"...);
 //   - parents:  the Title, Chapter, Subchapter, Article... it sits in, outermost first, with
 //               each one's heading. A file that starts at a Chapter has no Title wrapper, so its
 //               Title is found from the publisher's anchor name for it (see assignTitles below);
