@@ -59,6 +59,6 @@ export function writeFixtureData(data = buildFixtureData()) {
 export async function buildFixtureSite({ search = false } = {}) {
   const d = writeFixtureData();
   const outDir = join(mkdtempSync(join(tmpdir(), "law-reader-site-")), "site");
-  const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef" });
+  const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef", books: ["charter"] });
   return { ...result, data: d.data, dataDirs: d };
 }

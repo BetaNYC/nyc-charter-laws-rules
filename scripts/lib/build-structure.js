@@ -6,7 +6,13 @@
 //               Title is found from the publisher's anchor name for it (see assignTitles below);
 //   - blocks:   the paragraphs that make up `text`, each as a [start, end) slice of `text`,
 //               with its subdivision label ("a.", "(1)"), depth and anchor ("(b)(1)");
-//   - links:    each cross-reference, as a [start, end) slice of `text` and its target.
+//   - links:    each cross-reference, as a [start, end) slice of `text` and its target;
+//   - pictures:    how many <PICTURE> elements the section has (left out when none). A picture
+//                  has no text, so the index cannot show it; the site says so and links to the
+//                  section's page at American Legal Publishing.
+//   - subsections: how many levels inside the section the index does not read (left out when
+//                  none): the Construction Codes keep most of a section's text in "Subsection"
+//                  levels, which build-corpus.js skips. The site says so and links out.
 //
 // The text itself is not repeated: every offset points into the section's `text` in
 // data/index/json/<corpus>.json, the file the MCP server answers from, and the structure file
@@ -37,6 +43,9 @@ import {
 } from "./extract-text.js";
 
 export const STRUCTURE_FORMAT = 1;
+
+// Child levels of a section that the index reads (its body) or indexes on their own.
+const INDEXED_OR_BODY = new Set(["Normal Level", "Section", "Chapter"]);
 
 // Two private-use characters that never occur in the source mark where a <LINK> starts and
 // ends while its paragraph is flattened, so its position survives normalize().
@@ -217,7 +226,7 @@ export function createStructureCollector(corpus) {
       };
     },
 
-    onSection(section, { level, record, bodyRecords, ancestors }) {
+    onSection(section, { level, record, bodyRecords, ancestors, levelNode = null }) {
       const parents = ancestors.map((a) => addGroup(a.level, a.record, a.heading));
       if (level === "Chapter") addGroup(level, record, section.heading);
       const entry = { id: section.id, level, parents, blocks: [], links: [] };
@@ -232,6 +241,17 @@ export function createStructureCollector(corpus) {
       for (const r of bodyRecords) {
         for (const p of childrenByTag(r, "PARA")) paras.push({ p, record: getAttr(r, "id") });
       }
+      // Pictures (figures, equations, some tables) carry no text, so a paragraph holding only
+      // a picture adds no block and the picture is lost from the text. Count every one in the
+      // section, so the site can say what its copy leaves out and link to the official page.
+      // The index reads only a section's "Normal Level" body. Other levels inside it (the
+      // Construction Codes' "Subsection" levels, 15,905 of them in July 2026) are not in `text`
+      // at all; count them, and their pictures, so the site can say so too.
+      // A chapter's other levels hold its sections (Subchapter, Article...), so only a section's count.
+      const unread = levelNode && level === "Section" ? childrenByTag(levelNode, "LEVEL").filter((l) => !INDEXED_OR_BODY.has(getAttr(l, "style-name") || "")) : [];
+      const pictures = paras.reduce((n, { p }) => n + countTag(p, "PICTURE"), 0) + countTag(unread, "PICTURE");
+      if (pictures) entry.pictures = pictures;
+      if (unread.length) entry.subsections = unread.length;
       const stack = []; // open subdivisions: { depth, key }
       const used = new Map(); // anchor → times used in this section
       const records = []; // [body RECORD id, its first block]
@@ -306,6 +326,8 @@ export function createStructureCollector(corpus) {
         if (e.links.length) s.links = e.links.map((l) => ({ start: l.start, end: l.end, to: resolveTarget(l.target, resolvers) }));
         if (e.flat) s.flat = true;
         if (e.unplacedLinks) s.unplacedLinks = e.unplacedLinks;
+        if (e.pictures) s.pictures = e.pictures;
+        if (e.subsections) s.subsections = e.subsections;
         return s;
       });
       const usedGroups = new Set(entries.flatMap((e) => e.parents));

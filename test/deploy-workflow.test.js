@@ -8,7 +8,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -112,9 +112,41 @@ test("deploy-site.yml: the official Pages actions, and tests and build before up
   assert.ok(order.every((i) => i > 0), "every step is present");
   assert.deepEqual([...order].sort((a, b) => a - b), order, "npm ci, npm test, build-site, upload, in that order");
   assert.match(DEPLOY, /path: _site\//);
-  // The smoke check reads the deployed URL and checks the home page and /about.
+  // The smoke check reads the deployed URL and checks the home page, /about and the Admin Code.
   assert.match(DEPLOY, /PAGE_URL: \$\{\{ steps\.deployment\.outputs\.page_url \}\}/);
-  assert.match(DEPLOY, /for path in \/ \/about; do/);
+  assert.match(DEPLOY, /for path in \/ \/about \/admin-code\/; do/);
+});
+
+test("deploy-site.yml builds the Charter and the Administrative Code, and checks both are there", async () => {
+  const { DEFAULT_BOOKS } = await import("../scripts/lib/site/config.js");
+  assert.deepEqual(DEFAULT_BOOKS, ["charter", "admin_code"]);
+  // The plain command, so the deploy builds DEFAULT_BOOKS: no --charter-only.
+  assert.match(DEPLOY, /^ {8}run: npm run build-site$/m);
+  assert.doesNotMatch(DEPLOY, /--charter-only/);
+  const check = DEPLOY.slice(DEPLOY.indexOf("- name: Check the build"), DEPLOY.indexOf("- name: Configure Pages"));
+  for (const f of ["charter/index.html", "admin-code/index.html", "sitemaps/admin-code.xml", "pagefind/pagefind.js"]) {
+    assert.ok(check.includes(` ${f}`), `the check step looks for _site/${f}`);
+  }
+});
+
+test("the site's layout tests on real data stay out of the daily refresh, and gate the deploy", () => {
+  const pkg = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
+  // npm test, which the refresh runs before it commits new law text, does not reach test/site-data/.
+  assert.equal(pkg.scripts.test, "node --test test/*.test.js");
+  assert.equal(pkg.scripts["test:site-data"], "node --test test/site-data/*.test.js");
+  assert.doesNotMatch(REFRESH, /test:site-data|test\/site-data|test:site\b/);
+  assert.match(REFRESH, /^ {8}run: npm test$/m);
+  // No file npm test runs lays out the real Administrative Code (pages-admin.js, or loadBook on it).
+  for (const f of readdirSync(join(ROOT, "test")).filter((x) => x.endsWith(".test.js") && x !== "deploy-workflow.test.js")) {
+    const src = readFileSync(join(ROOT, "test", f), "utf8");
+    assert.doesNotMatch(src, /pages-admin\.js/, `${f} is in npm test and imports pages-admin.js: move it to test/site-data/`);
+    assert.ok(!(/loadBook/.test(src) && /admin_code\.json/.test(src)), `${f} is in npm test and loads the real Administrative Code: move it to test/site-data/`);
+  }
+  // The deploy runs them after npm test and before the build; test.yml runs them too.
+  const order = ["run: npm test", "run: npm run test:site-data", "run: npm run build-site"].map((x) => DEPLOY.indexOf(x));
+  assert.ok(order.every((i) => i > 0));
+  assert.deepEqual([...order].sort((a, b) => a - b), order);
+  assert.match(readFileSync(join(ROOT, ".github/workflows/test.yml"), "utf8"), /^ {8}run: npm run test:site-data$/m);
 });
 
 test("refresh-data.yml dispatches the deploy only when its commit step pushed", () => {

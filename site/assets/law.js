@@ -168,10 +168,18 @@ function addDisclosure(li, nav) {
   button.className = "tw";
   button.setAttribute("aria-expanded", String(!list.hidden));
   button.setAttribute("aria-controls", list.id);
-  button.setAttribute("aria-label", `Sections in ${link.textContent}`);
+  // What the button opens: "Sections" (the Charter's chapters), or, in a titles-first tree, the
+  // nav's data-child ("Chapters"), unless the item names its own (a title with only sections).
+  const child = li.dataset.child ?? nav.dataset.child ?? "Sections";
+  button.setAttribute("aria-label", `${child} in ${link.textContent}`);
   button.append(triangle(doc));
   li.prepend(button);
+  // A titles-first tree has one status line: "Loading…" while a list loads, and the failure
+  // there if it does not. Focus stays on the button throughout.
+  const status = nav.querySelector(".tree-status");
   button.addEventListener("click", async () => {
+    // A press while the list is still loading does nothing: no second fetch, no list twice.
+    if (button.getAttribute("aria-busy") === "true") return;
     if (button.getAttribute("aria-expanded") === "true") {
       list.hidden = true;
       button.setAttribute("aria-expanded", "false");
@@ -179,10 +187,19 @@ function addDisclosure(li, nav) {
     }
     if (!list.children.length) {
       button.setAttribute("aria-busy", "true");
+      if (status) status.textContent = "Loading…";
       try {
         await loadSections(nav, link.getAttribute("href"), list);
+        if (status) status.textContent = "";
       } catch (e) {
         console.warn(e);
+        if (status) {
+          // Left closed, so the next press tries again; the title's link still lists them.
+          list.replaceChildren();
+          status.textContent = `Could not load the ${child.toLowerCase()} in ${link.textContent}. Press the button to try again, or follow the link to its page.`;
+          button.removeAttribute("aria-busy");
+          return;
+        }
         const note = doc.createElement("li");
         note.className = "load-error";
         const a = doc.createElement("a");

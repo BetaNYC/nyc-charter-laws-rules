@@ -59,7 +59,33 @@ function ednoteLead(b) {
  *        one page share a citation ("a., link to NYC Charter § 530(a), Composition")
  */
 export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "" }) {
-  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote })).join("\n");
+  const caseNotes = anchorCaseNotes(blocks);
+  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote: caseNotes.get(b.anchor) })).join("\n");
+}
+
+/**
+ * Anchors that differ only in letter case ("(D)(ii)" and "(D)(II)", in some Administrative Code
+ * sections) would give two subdivision links one spoken name. Each such anchor gets a word for its
+ * label's case ("capital letters", "small letters"), or, when that does not tell them apart, its
+ * place among them ("2 of 2"). Anchor → note; none for an anchor with no twin.
+ */
+export function anchorCaseNotes(blocks) {
+  const byFold = new Map();
+  for (const b of blocks) {
+    if (!b.anchor) continue;
+    const k = b.anchor.toLowerCase();
+    if (!byFold.has(k)) byFold.set(k, []);
+    if (!byFold.get(k).some((x) => x.anchor === b.anchor)) byFold.get(k).push(b);
+  }
+  const notes = new Map();
+  const caseOf = (label) => (/[A-Z]/.test(label ?? "") && !/[a-z]/.test(label ?? "") ? "capital letters" : /[a-z]/.test(label ?? "") && !/[A-Z]/.test(label ?? "") ? "small letters" : "");
+  for (const list of byFold.values()) {
+    if (list.length < 2) continue;
+    const words = list.map((b) => caseOf(b.label));
+    const distinct = words.every((w, i) => w && words.indexOf(w) === i);
+    list.forEach((b, i) => notes.set(b.anchor, distinct ? words[i] : `${i + 1} of ${list.length}`));
+  }
+  return notes;
 }
 
 /** The id of a subdivision in a chapter page's copy of a section: "s-4" + "(b)(1)". */
@@ -67,7 +93,7 @@ export function copyId(slug, anchor = "") {
   return `s-${slug}${anchor}`;
 }
 
-function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote }) {
+function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, caseNote }) {
   const attrs = [];
   let cls = "txt";
   if (b.type === "subdivision") cls = "sub";
@@ -88,7 +114,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote }) {
   const labelEnd = b.type === "subdivision" && b.anchor && b.label && b.text.startsWith(b.label) ? b.label.length : 0;
   const spans = [];
   if (labelEnd && !links.some((l) => l.start < labelEnd)) {
-    const name = `${b.label}, link to ${fullCitation}${b.anchor}${nameNote ? `, ${nameNote}` : ""}`;
+    const name = `${b.label}, link to ${fullCitation}${b.anchor}${caseNote ? `, ${caseNote}` : ""}${nameNote ? `, ${nameNote}` : ""}`;
     spans.push({ start: 0, end: labelEnd, open: `<a class="num" href="#${escapeHtml(id)}" aria-label="${escapeHtml(name)}">` });
   }
   // "Editor's note:" in bold, unless a cross-reference starts inside it (none does, 2026-11-23).

@@ -45,7 +45,8 @@ export function extractVersion(xml) {
 // `onSection` (optional, issue #61) is called once per indexed section, right after it is
 // pushed, with what the site structure needs and the index drops: the LEVEL style, the heading
 // RECORD, the body RECORDs whose PARAs make up `text`, and the enclosing LEVELs that carry a
-// heading (outermost first). It is only told about a section: it cannot change one, so the
+// heading (outermost first), and the section's own LEVEL (`levelNode`), whose other child levels
+// (a "Subsection" in the Construction Codes) the index does not read. It is only told about a section: it cannot change one, so the
 // index is the same with or without it (test/structure.test.js checks this byte for byte).
 // `ancestors` is the recursion's own state; callers leave it out.
 export function collectSections(node, corpus, sections, onSection = null, ancestors = []) {
@@ -91,7 +92,7 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
         };
         sections.push(section);
         if (onSection) {
-          onSection(section, { level: styleName, record, bodyRecords, ancestors });
+          onSection(section, { level: styleName, record, bodyRecords, ancestors, levelNode: level });
         }
       }
     }

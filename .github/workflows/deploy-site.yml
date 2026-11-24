@@ -1,4 +1,5 @@
-# Build the BetaNYC Law Reader and deploy it to GitHub Pages (issue #64, epic #68).
+# Build the BetaNYC Law Reader (the Charter and the Administrative Code) and deploy it to GitHub
+# Pages (issues #64 and #65, epic #68).
 #
 # The HTML is built here, fresh, on every run, from the committed data/index/ and
 # data/structure/, and is never committed (epic #68, decision 5). The build fetches nothing.
@@ -94,15 +95,27 @@ jobs:
         # fixtures, so new law text cannot change their result.
         run: npm test
 
+      - name: Check the site's layout on the committed data
+        # The Administrative Code's titles, parts and names on today's data
+        # (test/site-data/). Kept out of npm test, which the daily refresh runs before it
+        # commits new law text: a surprise in the data's shape stops the website here, never
+        # the refresh.
+        run: npm run test:site-data
+
       - name: Build the site
+        # The Charter and the Administrative Code (scripts/lib/site/config.js DEFAULT_BOOKS; the
+        # build has no flag to add a book, so a local `npm run build-site` makes the same site).
         # Exits 1, and so stops the run before anything deploys, if data/structure/ is
         # missing, was built from other text than the index, or disagrees with versions.json.
+        # Measured 2026-11-23 on a Mac: about 9.5 seconds, 27,738 files, 386.8 MB, with a
+        # peak resident memory of 2.2 GB while Pagefind indexes. The runner's memory has not been
+        # measured here; see the README's Deploy section.
         run: npm run build-site
 
       - name: Check the build
         run: |
           set -euo pipefail
-          for f in index.html about.html 404.html search.html redirects.json sitemap.xml robots.txt pagefind/pagefind.js; do
+          for f in index.html about.html 404.html search.html charter/index.html admin-code/index.html redirects.json sitemap.xml sitemaps/admin-code.xml robots.txt pagefind/pagefind.js; do
             test -s "_site/$f" || { echo "::error::_site/$f is missing or empty" >&2; exit 1; }
           done
           echo "deploy-site: $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
@@ -137,7 +150,7 @@ jobs:
         run: |
           set -euo pipefail
           base="${PAGE_URL%/}"
-          for path in / /about; do
+          for path in / /about /admin-code/; do
             code="$(curl -sSL -o /dev/null -w '%{http_code}' --retry 5 --retry-all-errors --retry-delay 10 --max-time 30 "${base}${path}")" || code="curl failed"
             echo "deploy-site: ${base}${path} -> ${code}"
             [ "$code" = "200" ] || { echo "::error::${base}${path} answered ${code}, not 200" >&2; exit 1; }

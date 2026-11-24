@@ -924,7 +924,7 @@ test("the build refuses bad input and never clears a folder it did not make", as
   // An output folder with someone else's files.
   const out = mkdtempSync(join(tmpdir(), "law-reader-other-"));
   writeFileSync(join(out, "keep.txt"), "not ours");
-  await assert.rejects(buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir: out, search: false, now: FIXED_NOW }), /not clearing it/);
+  await assert.rejects(buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir: out, search: false, now: FIXED_NOW, books: ["charter"] }), /not clearing it/);
   assert.ok(existsSync(join(out, "keep.txt")));
   // Missing structure: says how to make it.
   const empty = mkdtempSync(join(tmpdir(), "law-reader-empty-"));
