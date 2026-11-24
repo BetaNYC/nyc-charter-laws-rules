@@ -25,6 +25,8 @@ import { fileURLToPath } from "url";
 import {
   extractVersion,
   collectSectionsFromXml,
+  createTitleIndex,
+  finishTitles,
 } from "./lib/build-corpus.js";
 import { mergeVersions } from "./lib/merge-versions.js";
 import { createStructureCollector, structureJson } from "./lib/build-structure.js";
@@ -73,6 +75,8 @@ for (const corpus of CORPORA) {
   let version = "Unknown";
   const sections = [];
   const structure = createStructureCollector(corpus.key);
+  // Each record's title (issue #59): read file by file, finished once every file is read.
+  const titles = createTitleIndex();
   let fileCount = 0;
 
   for (const entry of entries) {
@@ -85,7 +89,8 @@ for (const corpus of CORPORA) {
       (e) => {
         console.warn(`  Skipping ${entry.entryName}: ${e.message}`);
       },
-      structure.forFile({ root: entry.entryName.endsWith("0-0-0-1.xml") })
+      structure.forFile({ root: entry.entryName.endsWith("0-0-0-1.xml") }),
+      titles
     );
     if (!ok) continue;
 
@@ -100,6 +105,11 @@ for (const corpus of CORPORA) {
   }
 
   console.log(`  Indexed ${sections.length} sections from ${fileCount} files`);
+  if (corpus.key !== "charter") {
+    // How each record's title was found (build-corpus.js, "Titles"). `disagree` should be 0: it
+    // counts records whose own file names a title that record order would not give.
+    console.log(`  Titles: ${JSON.stringify(finishTitles(titles))}`);
+  }
 
   // Write JSON index. Its sha256 goes in versions.json, so a shipped index file can be
   // checked against the build that made it (issue #45, test/index-checksum.test.js).

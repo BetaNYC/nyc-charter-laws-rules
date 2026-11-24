@@ -13,6 +13,9 @@ import {
   getTitle,
   namesTitle,
   getVersions,
+  fullCitation,
+  titleHeadings,
+  hasTitles,
   type Corpus,
   type SearchMode,
 } from "./corpus.js";
@@ -356,6 +359,34 @@ function answer(text: string, corpora: Iterable<Corpus>, use: SourceUse = "text"
   return { content: [{ type: "text" as const, text: withFooter(`${text}\n\n${sourceLines(corpora, use)}`) }] };
 }
 
+// The heading of the title a record is in ("Title 15: Department of Environmental Protection"),
+// when the index has it (issue #59).
+function titleName(s: { corpus: Corpus; titleNumber?: string }): string | undefined {
+  return s.titleNumber ? titleHeadings(s.corpus).get(s.titleNumber) : undefined;
+}
+
+// Rules lists (list_titles, get_title) name each title once, on its own line before its first
+// chapter, with a blank line before it (issue #59): every Rules title has its own Chapter 1, and
+// a title is an agency's. An item with no `titleHeading` never starts a title. Other documents'
+// lists are one line per item, as before.
+export function withTitleLines(
+  corpus: Corpus,
+  items: { line: string; title: string | null; titleHeading: string | null }[],
+): string {
+  if (corpus !== "rules") return items.map((i) => i.line).join("\n");
+  const out: string[] = [];
+  let last: string | null = null;
+  for (const i of items) {
+    if (i.titleHeading && i.title !== last) {
+      if (out.length) out.push("");
+      out.push(i.titleHeading);
+      last = i.title;
+    }
+    out.push(i.line);
+  }
+  return out.join("\n");
+}
+
 // Lists (issue #42): a page of `items` and a line saying which part of how many it is, and
 // how to get the rest. No line when everything fits on the first page.
 export const MAX_CANDIDATES = 25;
@@ -381,7 +412,7 @@ const SHAPES = {
     limit: z.number().int().min(1).max(50).optional().describe("Max results to return (default 10, max 50)"),
   },
   get_section: {
-    citation: z.string().describe("Section citation or heading"),
+    citation: z.string().describe("Section citation or heading; a Rules citation with its title ('15 RCNY § 1-01')"),
     corpus: CORPUS.optional().describe("Which document to look in (default: all three)"),
   },
   list_titles: {
@@ -391,7 +422,7 @@ const SHAPES = {
   },
   get_title: {
     corpus: CORPUS.describe("Which document"),
-    title: z.string().describe("A chapter ('Chapter 11'), or in the Administrative Code a title ('Title 6') or both ('Title 3, Chapter 1')"),
+    title: z.string().describe("A chapter ('Chapter 11'), or in the Administrative Code and the Rules a title ('Title 6') or both ('Title 15, Chapter 18')"),
     limit: z.number().int().min(1).max(1000).optional().describe("Max records to return (default 200, max 1000)"),
     offset: z.number().int().min(0).optional().describe("How many to skip, to get the next page (default 0)"),
   },
@@ -423,19 +454,19 @@ export const TOOLS = annotateTools([
   {
     name: "get_section",
     title: "Get a section",
-    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned.`,
+    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. Each title of the Rules restarts its numbers, so name the title: '15 RCNY § 1-01' or 'Title 15 § 1-01' ('24 RCNY Health Code § 81.08'); a bare '§ 1-01' lists every title's, each labeled with its title.`,
     inputSchema: inputSchema(SHAPES.get_section),
   },
   {
     name: "list_titles",
     title: "List chapters or titles",
-    description: `List a document's chapters in order, each with its heading. Administrative Code chapters show their section range, since several share a number: 'Chapter 1 (§ 3-101 to § 3-196)'. Rules chapters can share a number too (the index does not record Rules titles); their headings tell them apart.`,
+    description: `List a document's chapters in order, each with its heading. Administrative Code chapters show their section range, since several share a number: 'Chapter 1 (§ 3-101 to § 3-196)'. Rules chapters are listed by title, each title named before its chapters: 'Title 15, Chapter 18'; a chapter with no number, such as the Health Code, by its name: 'Title 24, New York City Health Code'.`,
     inputSchema: inputSchema(SHAPES.list_titles),
   },
   {
     name: "get_title",
     title: "Get a chapter or title",
-    description: `List a chapter's sections in order: its heading, then each section's citation and heading (get_section gives the text). 'Chapter 70' gives every chapter with that number. Administrative Code only: 'Title 24' gives the chapters whose sections are numbered 24-… (a lettered title such as 16-A shares its parent's numbers), and 'Title 3, Chapter 1' narrows to those numbered 1. Numbers match whole: 'Chapter 1' is not 'Chapter 10' or 'Chapter 1-A'.`,
+    description: `List a chapter's sections in order: its heading, then each section's citation and heading (get_section gives the text). 'Chapter 70' gives every chapter with that number. Administrative Code and Rules: 'Title 24' gives every record in that title, chapter by chapter, including chapters with no number such as the Health Code ('Title 16' is not 16-A); 'Title 15, Chapter 18' gives only its Chapter 18. Numbers match whole: 'Chapter 1' is not 'Chapter 10' or 'Chapter 1-A'.`,
     inputSchema: inputSchema(SHAPES.get_title),
   },
   {
@@ -483,7 +514,7 @@ export async function callTool(name: string, args: unknown) {
           .map((s) => {
             const long = s.text.length > SNIPPET_CHARS;
             cut ||= long;
-            return `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}\n${s.text.slice(0, SNIPPET_CHARS)}${long ? "…" : ""}`;
+            return `[${s.corpus.toUpperCase()}] ${fullCitation(s)} — ${s.heading}\n${s.text.slice(0, SNIPPET_CHARS)}${long ? "…" : ""}`;
           })
           .join("\n\n---\n\n");
         const cutNote = cut
@@ -498,22 +529,37 @@ export async function callTool(name: string, args: unknown) {
         const { citation, corpus } = parseArgs("get_section", SHAPES.get_section, args);
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
+          if (result.rulesCitation && corpus) {
+            // "RCNY" names the Rules (issue #59): it is not looked for in another document.
+            return answer(
+              `Section not found: "${echo(citation)}" is a citation of the Rules of the City of New York ("RCNY"), so it is not looked for in the ${SOURCES[corpus].title}. Ask again with corpus 'rules', or with no corpus.`,
+              [corpus],
+            );
+          }
           const searched = corpus ? [corpus] : ALL_CORPORA;
           return answer(`Section not found: "${echo(citation)}". ${searchedLine(searched)}`, searched);
         }
         if (result.kind === "ambiguous") {
           const { shown, note } = page(result.candidates, 0, MAX_CANDIDATES);
+          // Each candidate with its title (issue #59), so a person can tell the Rules' many
+          // "§ 1-01" apart and ask again for the one they mean: "15 RCNY § 1-01".
           const list = shown
-            .map((s) => `[${s.corpus.toUpperCase()}] ${s.citation} — ${s.heading}`)
+            .map((s) => {
+              const name = titleName(s);
+              return `[${s.corpus.toUpperCase()}] ${fullCitation(s)} — ${s.heading}${name ? ` (${name})` : ""}`;
+            })
             .join("\n");
-          const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.` : "";
+          const example = result.candidates.find((s) => fullCitation(s) !== s.citation);
+          const titled = example ? ` A citation can name its title: '${fullCitation(example)}'.` : "";
+          const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.${titled}` : "";
           return answer(
             `Multiple sections match "${echo(citation)}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
             shown.map((s) => s.corpus)
           );
         }
         const section = result.section;
-        const text = `[${section.corpus.toUpperCase()}] ${section.citation} (matched in corpus: ${section.corpus})\n${section.heading}\n\n${section.text}`;
+        const name = titleName(section);
+        const text = `[${section.corpus.toUpperCase()}] ${fullCitation(section)} (matched in corpus: ${section.corpus}${name ? `; in ${name}` : ""})\n${section.heading}\n\n${section.text}`;
         return answer(text, [section.corpus]);
       }
 
@@ -524,8 +570,10 @@ export async function callTool(name: string, args: unknown) {
           return answer(`No titles found for ${corpus}. ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(titles, offset ?? 0, limit ?? 200);
-        const count = note ?? `${titles.length} chapters, in order.`;
-        const text = [count, shown.map((t) => `${t.citation} — ${t.heading}`).join("\n")].join("\n\n");
+        const byTitle = corpus === "rules" && titles.some((t) => t.titleHeading);
+        const count = note ?? `${titles.length} chapters, in order${byTitle ? ", under their titles" : ""}.`;
+        const lines = withTitleLines(corpus, shown.map((t) => ({ line: `${t.citation} — ${t.heading}`, title: t.title, titleHeading: t.titleHeading })));
+        const text = [count, lines].join("\n\n");
         return answer(text, [corpus]);
       }
 
@@ -533,15 +581,22 @@ export async function callTool(name: string, args: unknown) {
         const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
         const sections = getTitle(corpus, title);
         if (sections.length === 0) {
-          const hint =
-            corpus !== "admin_code" && namesTitle(title)
-              ? ` Only the Administrative Code is listed by title here (the Charter has no titles, and the index does not record Rules titles); ask for a chapter, which list_titles lists.`
-              : "";
+          const hint = !namesTitle(title) || corpus === "admin_code"
+            ? ""
+            : corpus === "charter"
+              ? " The Charter has no titles; ask for a chapter, which list_titles lists."
+              : hasTitles(corpus)
+                ? " list_titles lists each title's chapters."
+                : " This copy of the index does not record Rules titles (it was built before 0.6.3); ask for a chapter, which list_titles lists.";
           return answer(`No sections found for "${echo(title)}" in ${corpus}.${hint} ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(sections, offset ?? 0, limit ?? 200);
         const count = note ?? `${sections.length} records: each chapter's heading, then its sections in order.`;
-        const text = [count, shown.map((s) => `${s.citation} — ${s.heading}`).join("\n")].join("\n\n");
+        const lines = withTitleLines(
+          corpus,
+          shown.map((s) => ({ line: `${s.citation} — ${s.heading}`, title: s.titleNumber ?? null, titleHeading: s.level === "Chapter" ? (s.titleHeading ?? null) : null })),
+        );
+        const text = [count, lines].join("\n\n");
         return answer(text, [corpus]);
       }
 

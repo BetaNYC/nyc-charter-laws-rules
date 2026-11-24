@@ -61,18 +61,25 @@ export function indexJson(books) {
  * Short field names keep it small: k keys, c citation, h heading, p path, b book.
  */
 export function citationsJson(books) {
+  // The title a record is in, for its "title 28 chapter 1" key: the site's own title (the Admin
+  // Code's from its Title records, the Rules' from titleNumber); none for "Local laws by year".
+  const titleOf = (r) => {
+    const t = r.level === "Chapter" ? r.titleNode : r.chapter?.kind === "title" ? r.chapter : r.chapter?.titleNode;
+    return t && !t.synthetic ? t.number : undefined;
+  };
   const list = [];
   for (const b of books) {
     for (const r of b.ordered) {
-      // fullCitation is "<label> <citation>" for the Charter; an Admin Code chapter's carries its title.
-      list.push({ k: citationKeys(r.citation), c: r.fullCitation ?? `${b.book.label} ${r.citation}`, h: r.title, p: r.path, b: b.book.short });
+      // fullCitation is "<label> <citation>" for the Charter; an Admin Code chapter's carries its
+      // title; a Rules record's is "15 RCNY § 1-01", and its keys add the titled form ("15 rcny 1-01").
+      list.push({ k: citationKeys(r.citation, titleOf(r), { rules: !!b.book.rcny }), c: r.fullCitation ?? `${b.book.label} ${r.citation}`, h: r.title, p: r.path, b: b.book.short });
     }
   }
   return list;
 }
 
 /** Build facts. `builtAt` is an ISO time in New York (the one clock); `commit` is this repo's. */
-export function metadataJson({ books, builtAt, builtOn, commit, structureFormat }) {
+export function metadataJson({ books, builtAt, builtOn, commit, structureFormat, skipped = {} }) {
   return {
     site: SITE_NAME,
     base: SITE_BASE,
@@ -94,6 +101,8 @@ export function metadataJson({ books, builtAt, builtOn, commit, structureFormat 
         },
       ])
     ),
+    // Books left out of this build, and why (build.js: the Rules, before their index has titles).
+    ...(Object.keys(skipped).length ? { skipped } : {}),
   };
 }
 
@@ -121,6 +130,8 @@ export function sitemaps(books, otherPaths) {
       ...b.ordered.map((r) => r.path),
       ...(b.parts ?? []).map((p) => p.path),
       ...b.shared.map((s) => s.path),
+      ...(b.picks ?? []).map((s) => s.path),
+      ...(b.sharedChapters ?? []).map((s) => s.path),
     ]);
   }
   files["sitemap.xml"] = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(files)

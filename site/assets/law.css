@@ -91,6 +91,10 @@ form.jump nys-textinput { flex: 1 1 18rem; max-width: 34rem; }
    its --_nys-breadcrumbs-padding; the one documented property, --nys-max-width--content, sets only
    the width). This site's column is already padded, so the trail lines up with the heading. */
 nys-breadcrumbs.crumbs { --_nys-breadcrumbs-padding: 0; }
+/* NYSDS sets each crumb nowrap; a long one (a Rules record such as "Property Owner's Certification
+   and Application for Reimbursement") then pushed a phone's page sideways. Long crumbs wrap. */
+nys-breadcrumbs.crumbs li { min-width: 0; }
+nys-breadcrumbs.crumbs li > a, nys-breadcrumbs.crumbs li > span { white-space: normal; overflow-wrap: anywhere; }
 nys-breadcrumbs:not(:defined) ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; list-style: none; margin: 0; padding: 0; }
 nys-breadcrumbs:not(:defined) li + li::before { content: "›"; margin-right: .5rem; }
 
@@ -215,6 +219,11 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
    a second family clashed). 18px with a 1.7 line height and lines of at most 70 characters
    keeps long legal text readable. */
 .law { font: 18px/1.7 var(--font-body); max-width: 70ch; }
+/* A run with no space in it, such as a form's fill-in blank ("________" for 60 characters, 21 Rules
+   sections in July 2026) or a long address, breaks at the edge instead of pushing the page
+   sideways on a phone. `anywhere` breaks only a run that would overflow, so ordinary words and
+   lines are as before; it also lets the column shrink to fit (test/site/overflow.test.mjs). */
+.law, main h1, main h2, main h3 { overflow-wrap: anywhere; }
 .law p { margin: 0 0 16px; scroll-margin-top: 16px; }
 .law [data-depth="2"] { margin-left: 1.6em; }
 .law [data-depth="3"] { margin-left: 3.2em; }

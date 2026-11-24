@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-90" number="90" version="1">
+			<HEADING>Chapter 2: Hearings</HEADING>
+			<PARA><DESTINATION id="0-0-0-990" name="T38-aC002"/>Chapter 2: Hearings</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-91" number="91" version="1">
+				<HEADING>§ 2-01 Hearings.</HEADING>
+				<PARA><DESTINATION id="0-0-0-991" name="T38-aC002_2-01"/>§ 2-01 Hearings.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-92" number="92" version="1">
+					<PARA>Hearing text.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

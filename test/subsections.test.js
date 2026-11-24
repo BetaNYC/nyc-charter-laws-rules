@@ -17,7 +17,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildSectionsFromXml, collectSectionsFromXml, findDocument, readBody } from "../scripts/lib/build-corpus.js";
+import { buildSectionsFromXml, collectSectionsFromXml, findDocument, readBody, createTitleIndex, finishTitles } from "../scripts/lib/build-corpus.js";
 import { makeParser, childrenByTag, getAttr, extractText, normalize } from "../scripts/lib/extract-text.js";
 import { createStructureCollector, subsectionKey } from "../scripts/lib/build-structure.js";
 import { citeWithAnchor, copyId, splitCopyId } from "../site/assets/jump.js";
@@ -44,9 +44,11 @@ const xmlFiles = (dir) => readdirSync(dir).filter((f) => f.endsWith(".xml")).sor
 function build(dir, corpus) {
   const collector = createStructureCollector(corpus);
   const sections = [];
+  const titles = createTitleIndex(); // issue #59, as build-index.js
   for (const f of xmlFiles(dir)) {
-    collectSectionsFromXml(readFileSync(join(dir, f), "utf8"), corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }));
+    collectSectionsFromXml(readFileSync(join(dir, f), "utf8"), corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), titles);
   }
+  finishTitles(titles);
   const json = JSON.stringify(sections, null, 2);
   return { sections, json, structure: collector.finish(sections, sha(json)) };
 }

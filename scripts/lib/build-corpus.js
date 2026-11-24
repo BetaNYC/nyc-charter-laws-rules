@@ -256,6 +256,89 @@ function anchorTitle(node) {
   return tag ? anchorTitle(node[tag]) : null;
 }
 
+// ---------------------------------------------------------------------------------------------
+// Titles (issue #59). Each title of the Rules restarts its chapter and section numbers (Title 15's
+// § 1-01 and Title 24's § 1-01 are different rules), and a lettered Administrative Code title
+// shares its parent's numbers (Title 16-A's sections are § 16-501 on). So each record of those two
+// books carries `titleNumber`: the number of the Title it is in, as the publisher's Title heading
+// writes it ("15", "16-A", "38-A"), so "15 RCNY § 1-01" can be built from it and `citation`. A
+// chapter record also carries `titleHeading`, that Title's heading ("Title 15: Department of
+// Environmental Protection"), so a list of chapters can name each title once. (Not `title`: the
+// site's records use that for a short heading.) Both are left out
+// where there is no numbered title: the whole Charter (it has none), the Administrative Code's
+// unconsolidated local laws (in "Appendix A", a Title level with no number) and each book's front
+// matter.
+//
+// Where a record's title comes from, in this order:
+//   1. The Title level around it in its own file ("Title 73: Civic Engagement Commission" around
+//      its Chapter 1). A record inside a Title level with no number has no title.
+//   2. Its chapter's anchor name: "T15C018" is Title 15, Chapter 18 (anchorTitle). The publisher
+//      puts a Title's record only in its first chapter's file, so this is how most chapters say it.
+//   3. Otherwise, the last Title record before it in the publisher's record order (the RECORD
+//      `number` attribute, which runs through the whole book). In July 2026 that decides 24 Rules
+//      chapters with no anchor at all: the Health Code (Title 24), the Rent Guidelines Board's
+//      yearly orders (Title 30), "Appendix A to Title 62" and Title 3's "Chapter 11: Reserved".
+//      Checked on the July 2026 build: for every record that 1 or 2 places, record order gives
+//      the same title (build-index.js prints the count that disagree; finishTitles returns it).
+// 1 and 2 are read while a file is walked; 3 and `titleHeading` need every file, so
+// collectSections notes what it saw in a title index (createTitleIndex) and finishTitles fills
+// them in after the last file. Without a title index a build has no titles at all (the index
+// as 0.6.2 wrote it); one that skips finishTitles has only 1 and 2.
+
+/** "16a", "16-a", "016" → "16-A", "16": a title number as the publisher's Title headings write it. */
+export function canonicalTitle(t) {
+  return String(t).toUpperCase().replace(/^0+(?=\d)/, "").replace(/^(\d+)-?([A-Z])$/, "$1-$2");
+}
+
+/** What a book's titles need from every file before they can be finished (finishTitles). */
+export function createTitleIndex() {
+  return { titles: [], records: [] };
+}
+
+const recordNumber = (record) => {
+  const n = Number(getAttr(record, "number"));
+  return Number.isFinite(n) ? n : null;
+};
+
+/**
+ * Fill in what needs every file (see "Titles" above): a title from record order for each record
+ * with none from its own file, and `titleHeading` on each chapter record with a title. Changes
+ * the records in place. Returns counts: { fromFile, byOrder, none, disagree }, where `disagree`
+ * is how many records whose own file gave a title would get another from record order.
+ */
+export function finishTitles(index) {
+  const heading = new Map();
+  for (const t of index.titles) if (t.title && !heading.has(t.title)) heading.set(t.title, t.heading);
+  const marks = [
+    ...index.titles.filter((t) => t.number !== null).map((t) => ({ number: t.number, title: t })),
+    ...index.records.filter((r) => r.number !== null).map((r) => ({ number: r.number, record: r })),
+  ].sort((a, b) => a.number - b.number || (a.title ? -1 : 1));
+  const stats = { fromFile: 0, byOrder: 0, none: 0, disagree: 0 };
+  let current = null;
+  for (const m of marks) {
+    if (m.title) {
+      current = m.title;
+      continue;
+    }
+    const byOrder = current?.title ?? null;
+    const r = m.record;
+    if (r.settled) {
+      if ((r.section.titleNumber ?? null) !== byOrder) stats.disagree++;
+    } else if (byOrder) {
+      r.section.titleNumber = byOrder;
+    }
+  }
+  for (const r of index.records) {
+    if (r.settled && r.section.titleNumber) stats.fromFile++;
+    else if (r.section.titleNumber) stats.byOrder++;
+    else stats.none++;
+    if (r.section.level === "Chapter" && r.section.titleNumber && heading.has(r.section.titleNumber)) {
+      r.section.titleHeading = heading.get(r.section.titleNumber);
+    }
+  }
+  return stats;
+}
+
 // A level indexed on its own: a Section or Chapter with a RECORD.
 const indexedOnItsOwn = (level) => ["Section", "Chapter"].includes(styleOf(level)) && childrenByTag(level, "RECORD").length > 0;
 // The RECORD that names a level: its first with a heading.
@@ -307,7 +390,11 @@ export function readGroupBody(level) {
 // the section's own LEVEL (`levelNode`). It is only told about a section: it cannot change one,
 // so the index is the same with or without it (test/structure.test.js checks this byte for byte).
 // `ancestors` is the recursion's own state; callers leave it out.
-export function collectSections(node, corpus, sections, onSection = null, ancestors = [], state = { merged: new WeakSet(), chain: [], inChapter: false }) {
+// `titles` (issue #59): a createTitleIndex() shared by every file of a book, or null. When given,
+// each Administrative Code and Rules record gets `titleNumber` from its own file where it can (see
+// "Titles" above), and the index notes what finishTitles needs. The Charter is left alone.
+export function collectSections(node, corpus, sections, onSection = null, ancestors = [], state = null, titles = null) {
+  state ??= { merged: new WeakSet(), chain: [], inChapter: false, titles: corpus === "charter" ? null : titles, title: null, inTitle: false };
   if (!node) return;
 
   const levels = childrenByTag(node, "LEVEL");
@@ -317,6 +404,9 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
     // What the levels inside this one are named from (groupCitation), and whether they sit in a chapter.
     let chain = state.chain;
     let inChapter = state.inChapter;
+    // The title of the records inside this level, and whether a Title level in this file says so.
+    let title = state.title;
+    let inTitle = state.inTitle;
 
     if (styleName === "Section" || styleName === "Chapter") {
       for (const record of records) {
@@ -344,14 +434,23 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
           // ends even when its heading has no number (src/corpus.ts chapterGroups).
           if (styleName === "Chapter") section.level = "Chapter";
           else if (!state.inChapter) section.level = "Section";
+          // Its title (issue #59): from the Title level around it, else its chapter's (passed
+          // down in state), else a chapter's own anchor name.
+          let own = state.title;
+          if (!own && !state.inTitle && styleName === "Chapter") {
+            const a = anchorTitle(record);
+            if (a) own = canonicalTitle(a);
+          }
+          noteTitle(state.titles, section, record, own, state.inTitle || Boolean(own));
           sections.push(section);
           if (onSection) {
             onSection(section, { level: styleName, record, parts, unread, ancestors, levelNode: level });
           }
           if (styleName === "Chapter" && !inChapter) {
-            const title = state.chain.find((c) => c.startsWith("Title ")) ?? (anchorTitle(record) ? `Title ${anchorTitle(record)}` : null);
-            chain = [...(title ? [title] : []), citation];
+            const chainTitle = state.chain.find((c) => c.startsWith("Title ")) ?? (anchorTitle(record) ? `Title ${anchorTitle(record)}` : null);
+            chain = [...(chainTitle ? [chainTitle] : []), citation];
             inChapter = true;
+            if (section.titleNumber && !state.inTitle) title = section.titleNumber;
           }
         }
       }
@@ -364,6 +463,7 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
         for (const m of merged) state.merged.add(m);
         const heading = recordHeading(record);
         const section = { corpus, id: getAttr(record, "id") || "", citation: groupCitation(heading, state.chain), heading, text, level: styleName };
+        noteTitle(state.titles, section, record, state.title, state.inTitle || Boolean(state.title));
         sections.push(section);
         if (onSection) {
           onSection(section, { level: styleName, record, parts, unread, ancestors, levelNode: level });
@@ -377,6 +477,13 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
       const label = record ? chainLabel(styleName, recordHeading(record)) : null;
       if (label?.standard) chain = [label.label];
       else if (label) chain = styleName === "Title" ? [label] : [...chain, label.label];
+      // A Title level names the title of everything inside it, or says it has none ("Appendix
+      // A: Unconsolidated Local Laws", a book's front matter): issue #59.
+      if (styleName === "Title" && state.titles && record) {
+        title = label ? canonicalTitle(label.slice("Title ".length)) : null;
+        inTitle = true;
+        state.titles.titles.push({ number: recordNumber(record), title, heading: recordHeading(record) });
+      }
     }
 
     // Recurse into nested levels. A LEVEL that is not body text and has a heading is an
@@ -388,8 +495,16 @@ export function collectSections(node, corpus, sections, onSection = null, ancest
         if (heading) inner = [...inner, { level: styleName, record, heading }];
       }
     }
-    collectSections(level, corpus, sections, onSection, inner, { merged: state.merged, chain, inChapter });
+    collectSections(level, corpus, sections, onSection, inner, { merged: state.merged, chain, inChapter, titles: state.titles, title, inTitle });
   }
+}
+
+// A record's title, as far as its own file says (issue #59), and what finishTitles needs for it.
+// `settled`: its file said, by a Title level around it (with a number or without) or an anchor.
+function noteTitle(titles, section, record, title, settled) {
+  if (!titles) return;
+  if (title) section.titleNumber = title;
+  titles.records.push({ number: recordNumber(record), section, settled });
 }
 
 // A section-number token: starts with a digit, may contain letters and
@@ -463,7 +578,9 @@ export function findDocument(parsed) {
 //
 // `hooks` (optional, issue #61): { onDocument(documentNode), onSection(section, info) }, used by
 // scripts/lib/build-structure.js to record the structure the index drops. See collectSections.
-export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks = null) {
+// `titles` (optional, issue #59): a createTitleIndex() shared by every file of the book; call
+// finishTitles on it after the last file. See "Titles" above.
+export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks = null, titles = null) {
   const cleaned = xml.replace(/^﻿/, ""); // strip BOM
   let parsed;
   try {
@@ -474,7 +591,7 @@ export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks 
   }
   const doc = findDocument(parsed);
   if (hooks?.onDocument && doc) hooks.onDocument(doc);
-  collectSections(doc, corpusKey, sections, hooks?.onSection ?? null);
+  collectSections(doc, corpusKey, sections, hooks?.onSection ?? null, [], null, titles);
   return true;
 }
 
@@ -487,8 +604,10 @@ export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks 
 // accumulated in document order across the files, exactly as the CLI loop does.
 export function buildSectionsFromXml(xmlStrings, corpusKey, onError) {
   const sections = [];
+  const titles = createTitleIndex();
   for (const xml of xmlStrings) {
-    collectSectionsFromXml(xml, corpusKey, sections, onError);
+    collectSectionsFromXml(xml, corpusKey, sections, onError, null, titles);
   }
+  finishTitles(titles);
   return sections;
 }

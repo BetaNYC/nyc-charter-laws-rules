@@ -113,13 +113,14 @@ ${subs.length ? `<ul class="subs">${subs.map((s) => `<li><a href="${esc(pageUrl(
 }
 
 async function showPick(matches, anchor, q) {
-  if (matches.length < 2) {
+  // One match is shown as a choice too when the query did not name its book ("Title 17, Chapter 3" in the Rules).
+  if (!matches.length) {
     pick.hidden = true;
     pick.innerHTML = "";
     return;
   }
   pick.innerHTML = `<h2>Pages numbered “${esc(q)}”</h2><ul class="contents">${matches
-    .map((m) => `<li><a href="${esc(jumpTarget(m, anchor))}">${esc(`${m.c}. ${m.h}`)}</a></li>`)
+    .map((m) => `<li><a href="${esc(jumpTarget(m, anchor))}">${esc(m.h ? `${m.c}. ${m.h}` : m.c)}</a></li>`)
     .join("")}</ul>`;
   pick.hidden = false;
 }
@@ -138,12 +139,13 @@ export async function run() {
   }
   let matches = [];
   let anchor = "";
+  let jump = false;
   try {
-    ({ matches, anchor } = lookup(await loadCitations(), state.q));
+    ({ matches, anchor, jump } = lookup(await loadCitations(), state.q));
   } catch (e) {
     console.warn(e);
   }
-  if (matches.length === 1) {
+  if (jump) {
     say(`Going to ${matches[0].c}.`);
     location.replace(jumpTarget(matches[0], anchor));
     return;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-20" number="20" version="1">
+			<HEADING>Chapter 18: Water Supply</HEADING>
+			<PARA><DESTINATION id="0-0-0-920" name="T15C018"/>Chapter 18: Water Supply</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-21" number="21" version="1">
+				<HEADING>§ 18-11 Preface.</HEADING>
+				<PARA><DESTINATION id="0-0-0-921" name="T15C018_18-11"/>§ 18-11 Preface.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-22" number="22" version="1">
+					<PARA>Water supply text.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

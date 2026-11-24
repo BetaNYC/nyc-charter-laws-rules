@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-80" number="80" version="1">
+		<HEADING>Title 20: Consumer and Worker Protection</HEADING>
+		<PARA><DESTINATION id="0-0-0-980" name="T20"/>Title 20: Consumer and Worker Protection</PARA>
+	</RECORD>
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-81" number="81" version="1">
+			<HEADING>Chapter 4: Licenses</HEADING>
+			<PARA><DESTINATION id="0-0-0-981" name="T20C004"/>Chapter 4: Licenses</PARA>
+		</RECORD>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="false">
+			<RECORD id="0-0-0-82" number="82" version="1">
+				<HEADING>Subchapter 3: Sidewalk Cafes</HEADING>
+				<PARA>Subchapter 3: Sidewalk Cafes</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-83" number="83" version="1">
+					<PARA>Editor's note: the publisher numbers two subchapters 3.</PARA>
+				</RECORD>
+			</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-84" number="84" version="1">
+				<HEADING>§ 20-401 Definitions.</HEADING>
+				<PARA><DESTINATION id="0-0-0-984" name="T20C004_20-401"/>§ 20-401 Definitions.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-85" number="85" version="1">
+					<PARA>Cafe definitions.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" level-depth="3" toc-section="false">
+			<RECORD id="0-0-0-86" number="86" version="1">
+				<HEADING>Subchapter 3: Newsstands</HEADING>
+				<PARA>Subchapter 3: Newsstands</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-87" number="87" version="1">
+					<PARA>Editor's note: the second Subchapter 3.</PARA>
+				</RECORD>
+			</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-88" number="88" version="1">
+				<HEADING>§ 20-410 Definitions.</HEADING>
+				<PARA><DESTINATION id="0-0-0-988" name="T20C004_20-410"/>§ 20-410 Definitions.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-89" number="89" version="1">
+					<PARA>Newsstand definitions.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</LEVEL>
+</DOCUMENT>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-30" number="30" version="1">
+			<HEADING>Chapter 1: Commercial Waste Zones</HEADING>
+			<PARA><DESTINATION id="0-0-0-930" name="T16-bC001"/>Chapter 1: Commercial Waste Zones</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-31" number="31" version="1">
+				<HEADING>§ 16-1000 Definitions.</HEADING>
+				<PARA><DESTINATION id="0-0-0-931" name="T16-bC001_16-1000"/>§ 16-1000 Definitions.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-32" number="32" version="1">
+					<PARA>Waste zone definitions.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

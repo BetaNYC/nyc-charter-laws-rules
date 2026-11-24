@@ -75,8 +75,12 @@ test("deploy-site.yml: every file the site build imports or reads is in the push
     "src/tools.ts", // FOOTER, for "About this copy"
     "DATA-SOURCES.json", // the official URL and credit line
     "data/index/json/charter.json",
+    "data/index/json/admin_code.json",
+    "data/index/json/rules.json",
     "data/index/json/versions.json",
     "data/structure/charter.json",
+    "data/structure/admin_code.json",
+    "data/structure/rules.json",
     "package-lock.json", // NYSDS and Pagefind, copied into the site
     ".github/workflows/deploy-site.yml",
   ];
@@ -112,14 +116,19 @@ test("deploy-site.yml: the official Pages actions, and tests and build before up
   assert.ok(order.every((i) => i > 0), "every step is present");
   assert.deepEqual([...order].sort((a, b) => a - b), order, "npm ci, npm test, build-site, upload, in that order");
   assert.match(DEPLOY, /path: _site\//);
-  // The smoke check reads the deployed URL and checks the home page, /about and the Admin Code.
+  // The smoke check reads the deployed URL and checks the home page, /about, the Admin Code, and
+  // the Rules when the build has them (the build job's `rules` output, from its check step).
   assert.match(DEPLOY, /PAGE_URL: \$\{\{ steps\.deployment\.outputs\.page_url \}\}/);
-  assert.match(DEPLOY, /for path in \/ \/about \/admin-code\/; do/);
+  assert.match(DEPLOY, /^ {10}paths="\/ \/about \/admin-code\/"$/m);
+  assert.match(DEPLOY, /^ {10}RULES: \$\{\{ needs\.build\.outputs\.rules \}\}$/m);
+  assert.match(DEPLOY, /^ {10}if \[ "\$RULES" = "true" \]; then paths="\$paths \/rules\/"; fi$/m);
+  assert.match(DEPLOY, /^ {10}for path in \$paths; do$/m);
+  assert.match(DEPLOY, /^ {6}rules: \$\{\{ steps\.check\.outputs\.rules \}\}$/m);
 });
 
-test("deploy-site.yml builds the Charter and the Administrative Code, and checks both are there", async () => {
+test("deploy-site.yml builds the Charter, the Administrative Code and the Rules, and checks they are there", async () => {
   const { DEFAULT_BOOKS } = await import("../scripts/lib/site/config.js");
-  assert.deepEqual(DEFAULT_BOOKS, ["charter", "admin_code"]);
+  assert.deepEqual(DEFAULT_BOOKS, ["charter", "admin_code", "rules"]);
   // The plain command, so the deploy builds DEFAULT_BOOKS: no --charter-only.
   assert.match(DEPLOY, /^ {8}run: npm run build-site$/m);
   assert.doesNotMatch(DEPLOY, /--charter-only/);
@@ -127,6 +136,13 @@ test("deploy-site.yml builds the Charter and the Administrative Code, and checks
   for (const f of ["charter/index.html", "admin-code/index.html", "sitemaps/admin-code.xml", "pagefind/pagefind.js"]) {
     assert.ok(check.includes(` ${f}`), `the check step looks for _site/${f}`);
   }
+  // The Rules: required when metadata.json says the build has them (an index from before 0.6.3
+  // has no titles, and the build leaves them out), and a notice when it does not.
+  assert.match(check, /^ {8}id: check$/m);
+  assert.ok(check.includes(`require("./_site/metadata.json").books.rules`), "the check reads which books were built");
+  for (const f of ["rules/index.html", "rules/numbers.json", "sitemaps/rules.xml"]) assert.ok(check.includes(` ${f}`), `the check step looks for _site/${f}`);
+  assert.match(check, /::notice::The Rules were left out/);
+  assert.match(check, /echo "rules=true" >> "\$GITHUB_OUTPUT"/);
 });
 
 test("the site's layout tests on real data stay out of the daily refresh, and gate the deploy", () => {

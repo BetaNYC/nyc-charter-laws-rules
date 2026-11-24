@@ -11,7 +11,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { collectSectionsFromXml, buildSectionsFromXml } from "../scripts/lib/build-corpus.js";
+import { collectSectionsFromXml, buildSectionsFromXml, createTitleIndex, finishTitles } from "../scripts/lib/build-corpus.js";
 import { createStructureCollector, paraFormatting } from "../scripts/lib/build-structure.js";
 import { renderSection, bodyBlocks } from "../scripts/lib/render-section.js";
 import { bodyHtml, readBlocks, isBoldLine, wholeBold } from "../scripts/lib/site/render-html.js";
@@ -25,9 +25,11 @@ const sha = (s) => createHash("sha256").update(s).digest("hex");
 function build(dir, corpus) {
   const collector = createStructureCollector(corpus);
   const sections = [];
+  const titles = createTitleIndex(); // issue #59, as build-index.js
   for (const f of readdirSync(dir).filter((x) => x.endsWith(".xml")).sort()) {
-    collectSectionsFromXml(readFileSync(join(dir, f), "utf8"), corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }));
+    collectSectionsFromXml(readFileSync(join(dir, f), "utf8"), corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), titles);
   }
+  finishTitles(titles);
   const json = JSON.stringify(sections, null, 2);
   return { sections, json, structure: collector.finish(sections, sha(json)) };
 }

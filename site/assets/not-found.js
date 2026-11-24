@@ -4,10 +4,24 @@
 // /charter/sections/530-0-0-0-6575 after § 530 stops being shared. A bare id that is in both the
 // Charter and the Administrative Code goes to neither: the page lists both. Without JavaScript
 // the page offers the contents and search.
-const BOOK_ALIASES = { nyccharter: "charter", charter: "charter", nycadmin: "admin-code", "admin-code": "admin-code" };
+//
+// The Rules (issue #65): /NYCrules/0-0-0-21089 and /rules/0-0-0-21089 go to that record's page, as
+// the other books' ids do. A Rules section number is only a page under its title
+// (/rules/titles/15/sections/1-01); /rules/sections/1-01, a number in several titles, is a page to
+// pick one, and /rules/sections/3-01 for a number in one title only goes to its page, from
+// /rules/numbers.json (rulesNumberFor).
+const BOOK_ALIASES = { nyccharter: "charter", charter: "charter", nycadmin: "admin-code", "admin-code": "admin-code", nycrules: "rules", rules: "rules" };
 
 /** The books' names on the 404 page, when an id is in more than one. */
-export const BOOK_NAMES = { charter: "the Charter", "admin-code": "the Administrative Code" };
+export const BOOK_NAMES = { charter: "the Charter", "admin-code": "the Administrative Code", rules: "the Rules" };
+
+/** The page for /rules/sections/<number> when that number is in one title only, from numbers.json; else null. */
+export function rulesNumberFor(pathname, numbers) {
+  const m = /^\/rules\/sections\/([^/]+?)\/?$/.exec(pathname);
+  if (!m) return null;
+  const n = decodeURIComponent(m[1]).toLowerCase();
+  return Object.prototype.hasOwnProperty.call(numbers ?? {}, n) ? numbers[n] : null;
+}
 
 /**
  * Every page an address could mean: [{ book, to }]. An address that names a book (/charter/…,
@@ -32,6 +46,16 @@ export function redirectFor(pathname, redirects) {
 
 async function main() {
   try {
+    if (/^\/rules\/sections\/[^/]+\/?$/.test(location.pathname)) {
+      const n = await fetch("/rules/numbers.json");
+      const to = n.ok ? rulesNumberFor(location.pathname, await n.json()) : null;
+      if (to) {
+        const status = document.getElementById("redirect-status");
+        if (status) status.textContent = `Going to ${to}.`;
+        location.replace(to + location.hash);
+        return;
+      }
+    }
     const r = await fetch("/redirects.json");
     if (!r.ok) return;
     const choices = redirectChoices(location.pathname, await r.json());

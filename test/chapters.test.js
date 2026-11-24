@@ -157,10 +157,31 @@ describe("get_title", () => {
     assert.ok(numbered.length > 0 && numbered.every((s) => /^§ 3-/.test(s.citation)));
   });
 
-  test("a title in the Rules is not found, and the answer says to ask for a chapter", async () => {
+  test("a Rules title: its chapters when the index records titles, else a hint to ask for a chapter", async () => {
+    // Issue #59: an index built since 0.6.3 records each record's title; the committed index
+    // may predate that until the next refresh rebuilds it, so both shapes must pass.
     const t = textOf(await callTool("get_title", { corpus: "rules", title: "Title 15" }));
-    assert.match(t, /^No sections found for "Title 15" in rules\. Only the Administrative Code is listed by title here/);
     assert.match(t, /legal advice/i);
+    const titled = readIndex("rules").filter((s) => s.titleNumber === "15");
+    if (titled.length === 0) {
+      assert.match(t, /^No sections found for "Title 15" in rules\. This copy of the index does not record Rules titles/);
+      return;
+    }
+    const records = getTitle("rules", "Title 15");
+    assert.ok(records.length > 0 && records.every((s) => s.titleNumber === "15"), "only Title 15's records");
+    assert.ok(records.every((s, i) => i === 0 || s.level !== "Chapter" || /^Title 15, Chapter /.test(s.citation)), "chapters labeled with their title");
+    assert.match(body(t), /^(\d+ records|Showing 1 to \d+ of \d+)[^\n]*\n\nTitle 15: [^\n]+\nTitle 15, Chapter /);
+  });
+
+  test("Administrative Code 'Title 16' leaves out Titles 16-A and 16-B when the index records titles", () => {
+    const records = getTitle("admin_code", "Title 16");
+    assert.ok(records.length > 0);
+    if (!readIndex("admin_code").some((s) => s.titleNumber)) return; // built before 0.6.3
+    assert.ok(records.every((s) => s.titleNumber === "16"), records.filter((s) => s.titleNumber !== "16").map((s) => s.citation).slice(0, 5).join(", "));
+    const lettered = readIndex("admin_code").filter((s) => /^16-[A-Z]$/.test(s.titleNumber ?? ""));
+    for (const t of new Set(lettered.map((s) => s.titleNumber))) {
+      assert.deepEqual(getTitle("admin_code", `Title ${t}`).map((s) => s.id).sort(), getTitle("admin_code", `Title ${t}`).filter((s) => s.titleNumber === t).map((s) => s.id).sort());
+    }
   });
 
   test("a query that is not a chapter or title still matches records by prefix, whole tokens only", () => {

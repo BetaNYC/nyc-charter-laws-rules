@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Rules" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-120" number="120" version="1">
+			<HEADING>Chapter 3: Vaccines</HEADING>
+			<PARA><DESTINATION id="0-0-0-9120" name="T24C003"/>Chapter 3: Vaccines</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-121" number="121" version="1">
+				<HEADING>§ 3-01 Scope.</HEADING>
+				<PARA><DESTINATION id="0-0-0-9121" name="T24C003_3-01"/>§ 3-01 Scope.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-122" number="122" version="1">
+					<PARA>A Title 24 chapter the publisher numbered after Title 62.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>
