@@ -460,13 +460,13 @@ export const TOOLS = annotateTools([
   {
     name: "list_titles",
     title: "List chapters or titles",
-    description: `List a document's chapters in order, each with its heading. Administrative Code chapters show their section range, since several share a number: 'Chapter 1 (§ 3-101 to § 3-196)'. Rules chapters are listed by title, each title named before its chapters: 'Title 15, Chapter 18'.`,
+    description: `List a document's chapters in order, each with its heading. Administrative Code chapters show their section range, since several share a number: 'Chapter 1 (§ 3-101 to § 3-196)'. Rules chapters are listed by title, each title named before its chapters: 'Title 15, Chapter 18'; a chapter with no number, such as the Health Code, by its name: 'Title 24, New York City Health Code'.`,
     inputSchema: inputSchema(SHAPES.list_titles),
   },
   {
     name: "get_title",
     title: "Get a chapter or title",
-    description: `List a chapter's sections in order: its heading, then each section's citation and heading (get_section gives the text). 'Chapter 70' gives every chapter with that number. Administrative Code and Rules: 'Title 24' gives that title's chapters ('Title 16' is not 16-A), and 'Title 15, Chapter 18' only its Chapter 18. Numbers match whole: 'Chapter 1' is not 'Chapter 10' or 'Chapter 1-A'.`,
+    description: `List a chapter's sections in order: its heading, then each section's citation and heading (get_section gives the text). 'Chapter 70' gives every chapter with that number. Administrative Code and Rules: 'Title 24' gives every record in that title, chapter by chapter, including chapters with no number such as the Health Code ('Title 16' is not 16-A); 'Title 15, Chapter 18' gives only its Chapter 18. Numbers match whole: 'Chapter 1' is not 'Chapter 10' or 'Chapter 1-A'.`,
     inputSchema: inputSchema(SHAPES.get_title),
   },
   {
@@ -529,6 +529,13 @@ export async function callTool(name: string, args: unknown) {
         const { citation, corpus } = parseArgs("get_section", SHAPES.get_section, args);
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
+          if (result.rulesCitation && corpus) {
+            // "RCNY" names the Rules (issue #59): it is not looked for in another document.
+            return answer(
+              `Section not found: "${echo(citation)}" is a citation of the Rules of the City of New York ("RCNY"), so it is not looked for in the ${SOURCES[corpus].title}. Ask again with corpus 'rules', or with no corpus.`,
+              [corpus],
+            );
+          }
           const searched = corpus ? [corpus] : ALL_CORPORA;
           return answer(`Section not found: "${echo(citation)}". ${searchedLine(searched)}`, searched);
         }
