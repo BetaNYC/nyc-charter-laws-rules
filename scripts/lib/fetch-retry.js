@@ -7,6 +7,9 @@
 // - Up to MAX_RETRIES retries on 429 and 5xx, honoring Retry-After (delay-seconds or an
 //   HTTP-date, RFC 9110 § 10.2.3), else 5 s then 10 s; every wait capped at 60 s.
 //   No other retries, and nothing runs in the background.
+// - `redirect` is passed to fetch as given. fetch-data asks for "manual" and checks each hop
+//   itself (scripts/lib/fetch-zip.js, issue #55), so a redirect can never take the download
+//   off https or to another host.
 
 import { readFileSync } from "node:fs";
 
@@ -29,11 +32,15 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** fetch(url) with the rules above. Returns the last response (ok or not); a timeout or
  * network error throws. `fetchImpl` and `wait` are for tests. */
-export async function politeFetch(url, { fetchImpl = fetch, timeoutMs = DEFAULT_TIMEOUT_MS, wait = sleep } = {}) {
+export async function politeFetch(
+  url,
+  { fetchImpl = fetch, timeoutMs = DEFAULT_TIMEOUT_MS, wait = sleep, redirect = "follow" } = {}
+) {
   for (let attempt = 0; ; attempt++) {
     const res = await fetchImpl(url, {
       headers: { "User-Agent": USER_AGENT },
       signal: AbortSignal.timeout(timeoutMs),
+      redirect,
     });
     const retryable = res.status === 429 || res.status >= 500;
     if (!retryable || attempt >= MAX_RETRIES) return res;

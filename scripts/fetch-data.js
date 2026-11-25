@@ -1,45 +1,38 @@
 #!/usr/bin/env node
-// Downloads and unzips the three AML bulk XML files into data/raw/.
-// Run once before starting the server: npm run fetch-data
+// Downloads the three AML bulk XML ZIPs into data/raw/ over https, checks each one, and
+// records what was downloaded in data/fetch-provenance.json (issue #55). The checks are in
+// scripts/lib/fetch-zip.js. Run before build-index: npm run fetch-data
+//
+// Any failed download or check fails the run (issues #39, #55) and replaces no file: carrying
+// on would build an index from a document that is missing or not the publisher's.
+//
+// NYC_CLR_ALLOW_SIZE_CHANGE=<document>[,<document>] accepts a ZIP much smaller or much larger
+// than the last good one for those documents only (with a warning), for the day American Legal
+// really does change a file's size. Every other check still applies. The daily refresh sets it
+// from its manual `allow_size_change` input, for that run only.
 
-import { createWriteStream, mkdirSync } from "fs";
-import { pipeline } from "stream/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { politeFetch } from "./lib/fetch-retry.js";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { fetchAll, parseAllowSizeChange } from "./lib/fetch-zip.js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, "..", "data", "raw");
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-const SOURCES = [
-  {
-    name: "charter",
-    url: "http://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip",
-  },
-  {
-    name: "admin_code",
-    url: "http://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip",
-  },
-  {
-    name: "rules",
-    url: "http://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip",
-  },
-];
-
-mkdirSync(DATA_DIR, { recursive: true });
-
-// A failed download fails the run (issue #39): carrying on would build an index with a
-// document missing.
-for (const source of SOURCES) {
-  console.log(`Downloading ${source.name}...`);
-  const dest = join(DATA_DIR, `${source.name}.zip`);
-  const response = await politeFetch(source.url);
-  if (!response.ok) {
-    console.error(`Failed to fetch ${source.name}: HTTP ${response.status} from ${source.url}`);
-    process.exit(1);
+try {
+  await fetchAll({
+    rawDir: join(ROOT, "data", "raw"),
+    provenancePath: join(ROOT, "data", "fetch-provenance.json"),
+    allowSizeChange: parseAllowSizeChange(process.env.NYC_CLR_ALLOW_SIZE_CHANGE),
+  });
+} catch (e) {
+  // fetch() rejects with "fetch failed" and the reason (a TLS or DNS error) in `cause`.
+  const cause = e.cause ? ` (${e.cause.code ?? e.cause.message ?? e.cause})` : "";
+  console.error(`fetch-data: ${e.message}${cause}`);
+  if (e.replaced?.length) {
+    // Only a rename failing part way gets here: every check had passed.
+    console.error(`fetch-data: already replaced before the failure: ${e.replaced.join(", ")}.`);
+    console.error("fetch-data: data/raw/ and data/fetch-provenance.json may not match; run fetch-data again.");
+  } else {
+    console.error("fetch-data: nothing in data/raw/ or data/fetch-provenance.json was replaced.");
   }
-  await pipeline(response.body, createWriteStream(dest));
-  console.log(`  Saved to ${dest}`);
+  process.exit(1);
 }
-
-console.log("\nDone. Unzip each file in data/raw/ to access the XML source files.");

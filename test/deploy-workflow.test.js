@@ -180,14 +180,20 @@ test("refresh-data.yml: the coverage audit only reports, after build-index, and 
   assert.doesNotMatch(step, /\$GITHUB_OUTPUT|git (add|commit|push)/, "it sets no output and commits nothing");
 });
 
-test("refresh-data.yml dispatches the deploy only when its commit step pushed", () => {
+test("refresh-data.yml dispatches the deploy only when its commit step pushed a change the site reads", () => {
   // Both pushes in the commit step record it.
   const pushes = REFRESH.match(/git push origin HEAD:main\n\s+echo "pushed=true" >> "\$GITHUB_OUTPUT"/g) ?? [];
   assert.equal(pushes.length, 2, "both git pushes set pushed=true");
   assert.equal((REFRESH.match(/git push origin HEAD:main/g) ?? []).length, 2, "no other push without the output");
+  // deploy=true: always after an index push; on the unshipped-only push, only when
+  // data/structure changed (issue #55: the download record alone does not redeploy).
+  // test/refresh-commit-step.test.js runs the step itself.
+  assert.match(REFRESH, /echo "pushed=true" >> "\$GITHUB_OUTPUT"\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"\n\s+echo "refresh-data: pushed refreshed index to main"/);
+  assert.match(REFRESH, /if \[ -n "\$\(git status --porcelain -- data\/structure\)" \]; then\n\s+structure_changed=true/);
+  assert.match(REFRESH, /git push origin HEAD:main\n\s+echo "pushed=true" >> "\$GITHUB_OUTPUT"\n\s+if \[ -n "\$structure_changed" \]; then\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"/, "deploy only after the push succeeded");
   const step = REFRESH.slice(REFRESH.indexOf("- name: Deploy the website if this run committed"));
   assert.ok(step.length > 1, "the dispatch step exists");
-  assert.match(step, /if: \$\{\{ !cancelled\(\) && steps\.commit\.outputs\.pushed == 'true' \}\}/);
+  assert.match(step, /if: \$\{\{ !cancelled\(\) && steps\.commit\.outputs\.deploy == 'true' \}\}/);
   assert.match(step, /run: gh workflow run deploy-site\.yml --ref main /);
   // It is the last step, so a failed dispatch can never stop a release.
   assert.doesNotMatch(step.slice(1), /\n {6}- name: /, "the dispatch is the last step");

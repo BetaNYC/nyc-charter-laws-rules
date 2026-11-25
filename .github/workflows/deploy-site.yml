@@ -19,7 +19,9 @@
 #      create a new workflow run", except that "workflow_dispatch and repository_dispatch
 #      events always create workflow runs" (https://docs.github.com/en/actions/concepts/security/github_token,
 #      "When GITHUB_TOKEN triggers workflow runs"). So its push never reaches trigger 1, and
-#      its last step dispatches this workflow instead, only when its commit step pushed.
+#      its last step dispatches this workflow instead, only when its commit step pushed a
+#      change the site is built from (the index or data/structure, not the download record
+#      data/fetch-provenance.json alone).
 #      A `workflow_run` trigger was not used: it would fire on every refresh, including the
 #      days nothing changed, and not on a run that committed law text and then went red over
 #      the release.
