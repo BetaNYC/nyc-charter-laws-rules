@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-116152" number="10093" version="3061">
+			<HEADING>Appendix A: Summary of Application Referral, Hearing Notice, and Proof of Service Requirements</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-1304" name="T02AppA"/>Appendix A: Summary of Application Referral, Hearing Notice, and Proof of Service Requirements</PARA>
+		</RECORD>
+		<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+			<RECORD id="0-0-0-155640" number="10094" version="3061">
+				<PARA>
+					<TABLE>
+						<TABLEFORMAT number-of-widths="9" space-before="212" left-border-space="43" left-border-width="15" left-border-color="#000000" right-border-space="43" right-border-width="15" right-border-color="#000000" top-border-space="43" top-border-width="15" top-border-color="#000000" bottom-border-space="43" bottom-border-width="15" bottom-border-color="#000000" horizontal-border-space="43" horizontal-border-width="15" horizontal-border-color="#000000" vertical-border-space="43" vertical-border-width="15" vertical-border-color="#000000">
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+							<COLUMNFORMAT column-width="90" percentage="no"/>
+						</TABLEFORMAT>
+						<ROW>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">
+										</CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<PARAFORMAT justify="center">
+										<CELL cells-merged-right="1" header="true">
+											<CELLFORMAT alignment="bottom">Zoning Calendar (BZ)</CELLFORMAT>
+										</CELL>
+									</PARAFORMAT>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<PARAFORMAT justify="center">
+										<CELL cells-merged-right="3" header="true">
+											<CELLFORMAT alignment="bottom">Appeals Calendar (A)</CELLFORMAT>
+										</CELL>
+									</PARAFORMAT>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<PARAFORMAT justify="center">
+										<CELL cells-merged-right="1" header="true">
+											<CELLFORMAT alignment="bottom">Special Order Calendar (SOC)</CELLFORMAT>
+										</CELL>
+									</PARAFORMAT>
+								</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">
+										</CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">Variance Reinstatement Major Amendment </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">Special Permit </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">
+											<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Agency Final</CHARFORMAT>&#160;<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Determination </CHARFORMAT>
+										</CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">GCL § 35<LINEBRK/>GCL § 36 </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELLFORMAT alignment="bottom">Charter § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="666-a" destination-id="0-0-0-0">666-a</LINK>
+									</CELLFORMAT>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">Vested Rights </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">Amendment </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL header="true">
+										<CELLFORMAT alignment="bottom">Extension of Term </CELLFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="SmallBold" style-name-escaped="SmallBold" style-id="0-0-0-28">
+									<CELL cells-merged-right="8">Application Referral</CELL>
+								</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">
+									<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applicant</CHARFORMAT>
+									<LINEBRK/>Within three (3) business days of filing must send copies to:</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">CB*, BP, CC, AO, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">CB*, BP, CC, AO, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">AO, and the subject property owner (if not the applicant); for applications to interpret the ZR, also send to DOB and CPC legal counsel</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">DOB, CB*, and BP</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">DOB, CB, BP, CC, and CPC <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-122]</HIGHLIGHTER>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">DOB, CB*, BP, CC, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">CB*, BP, CC, AO, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">CB*, BP, CC, AO,</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">
+									<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applicant</CHARFORMAT>
+									<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">
+										<LINEBRK/>
+									</CHARFORMAT>Must submit Proof of Service of Referral:</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-122]</HIGHLIGHTER>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of filing</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">
+									<CELL cells-merged-right="8">
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Hearing Notice</CHARFORMAT>
+									</CELL>
+								</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">
+									<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applicant</CHARFORMAT>
+									<LINEBRK/>At least twenty (20) days before hearing must:</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify CB*, BP, CC, CPC, and affected property owners<LINEBRK/>Publish in newspaper, one day of each week for 2 of the 3 weeks before hearing</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify CB*, BP, CC, CPC, and affected property owners</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify administrative agency and subject property owner (if not applicant)</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify DOB, CB*, and BP</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify DOB, CB, BP, CC, CPC, and affected property owners <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-122]</HIGHLIGHTER>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify DOB, CB*, BP, CC, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify CB*, BP, CC, and CPC</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Notify CB*, BP, CC, and CPC</PARA>
+							</COL>
+						</ROW>
+						<ROW>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">
+									<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Applicant</CHARFORMAT>
+									<LINEBRK/>Must submit<LINEBRK/>Proof of Service of Hearing Notice:</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-122]</HIGHLIGHTER>
+								</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+							<COL>
+								<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">Within 10 days of sending notice</PARA>
+							</COL>
+						</ROW>
+					</TABLE>
+				</PARA>
+				<PARA>
+				</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-155641" number="10095" version="3061">
+				<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">CB = Community Board; BP = Borough President; CC = City Council Member; CPC = City Planning Commission; DOB = Department of Buildings; and AO = Administrative Official who issued the determination.</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-155642" number="10096" version="3061">
+				<PARA style-name="Small" style-name-escaped="Small" style-id="0-0-0-27">* If the subject property is located within more than one community board, the applicant must also refer the application and provide notice to the affected borough board.</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-155643" number="10097" version="3061">
+				<PARA>This table is intended to serve as a summary. Please see the full text of the associated rule for all requirements.</PARA>
+			</RECORD>
+			<RECORD id="0-0-0-155644" number="10098" version="3061">
+				<PARA>(Amended City Record 5/18/2026, eff. 6/17/2026) <HIGHLIGHTER style="highlighter-ALP" original-style-name="ALP" style-name-escaped="highlighter-ALP" name="ALP" id="0-0-0-33">[ALP S-122]</HIGHLIGHTER>
+				</PARA>
+			</RECORD>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

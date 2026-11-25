@@ -1,0 +1,1075 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="#!-- #STYLESHEETS:ALP.xsl --#"?>
+
+<DOCUMENT source-infobase-name="Rules" content-collection-id="NYCrules" source-infobase-title="The Rules of the City of New York" base-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\" default-split-level="Chapter" makefile-filename="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\NYCrules.mak" css-stylesheet-href="#!-- #ID=NYCrules_css_id --#" xml-output-dir="D:\process\NFOProcess\codes\ny\newyorkcity\NYCrules\output\NDYXTLPPNCWJQAVG\XML\" css-stylesheet-name="NYCrules_css" makefile-document-depth="2">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" style-id="0-0-0-477" level-depth="2" toc-section="false">
+		<RECORD id="0-0-0-97119" number="66299" version="57">
+			<HEADING>Chapter 32: Tax Exemption and Tax Abatement Under Section 421-g of the Real Property Tax Law</HEADING>
+			<PARA>
+				<DESTINATION id="0-0-0-8007" name="T28C032"/>Chapter 32: Tax Exemption and Tax Abatement Under Section 421-g of the Real Property Tax Law</PARA>
+		</RECORD>
+		<LEVEL style-name="Subchapter" style-name-escaped="Subchapter" style-id="0-0-0-480" level-depth="3" toc-section="false">
+			<LEVEL style-name="Subtitle" style-name-escaped="Subtitle" style-id="0-0-0-15301" level-depth="4" toc-section="false">
+				<LEVEL style-name="Part" style-name-escaped="Part" style-id="0-0-0-483" level-depth="5" toc-section="false">
+					<LEVEL style-name="Subpart" style-name-escaped="Subpart" style-id="0-0-0-15960" level-depth="6" toc-section="false">
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58121" number="66300" version="3">
+								<HEADING>§ 32-01 Scope and Construction.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8009" name="T28C032_32-01"/>§ 32-01 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Scope and Construction.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-58122" number="66301" version="2512">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Scope of Rules.</CHARFORMAT> This chapter governs the grant of tax abatement and exemption pursuant to § 421-g of the Real Property Tax Law of the State of New York, including the procedure for filing an application for tax abatement and exemption and the issuance of Certificates of Eligibility by the Office of Tax Incentives of the Department of Housing Preservation and Development. Upon issuance of the Certificate of Eligibility, the calculation and implementation of the tax abatement and exemption are under the jurisdiction of the Department of Finance.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58123" number="66302" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Construction.</CHARFORMAT> This chapter is to be construed to secure the effectuation of the purposes of § 421-g of the Real Property Tax Law in accordance with the general principle of law that tax exemption and abatement statutes are to be strictly construed against the taxpayer applying for the tax exemption or abatement.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58124" number="66303" version="3">
+								<HEADING>§ 32-02 Definitions.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8011" name="T28C032_32-02"/>§ 32-02 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Definitions.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-58125" number="66304" version="3">
+									<PARA>As used in this chapter, the following terms shall have the following meanings:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58126" number="66305" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Act.</CHARFORMAT> &quot;Act&quot; shall mean § 421-g of the Real Property Tax Law.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58127" number="66306" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Aggregate Floor Area.</CHARFORMAT> &quot;Aggregate Floor Area&quot; shall mean the sum of the gross areas of the several floors of a building, measured from the exterior faces of exterior walls or from the center lines of walls separating two buildings.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58128" number="66307" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Applicant.</CHARFORMAT> &quot;Applicant&quot; shall mean any person obligated to pay real property taxes on the property for which exemption from or abatement of real property taxes under the Act is sought or in the case of exempt property, the record owner or lessee thereof.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58129" number="66308" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Benefit Period.</CHARFORMAT> &quot;Benefit Period&quot; shall mean the period of time when a Recipient is eligible to receive benefits pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58130" number="66309" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Certificate of Eligibility.</CHARFORMAT> &quot;Certificate of Eligibility&quot; shall mean the document issued by the Department certifying a tax lot as eligible for benefits pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58131" number="66310" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Class A Multiple Dwelling.</CHARFORMAT> &quot;Class A Multiple Dwelling&quot; shall mean a Class A multiple dwelling as defined in § 4 of the Multiple Dwelling Law.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58132" number="66311" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Commencement of Conversion.</CHARFORMAT> &quot;Commencement of Conversion&quot; shall mean the date of issuance by the Department of Buildings of a building permit for the conversion of a Non-Residential Building to an Eligible Multiple Dwelling, provided however that such permit is issued on or after July 1, 1995 and no later than June 30, 2007.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58133" number="66312" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Commissioner.</CHARFORMAT> &quot;Commissioner&quot; shall mean the Commissioner of Housing Preservation and Development, or his or her designee, or the chief executive officer of any successor agency or department thereto authorized to administer these Rules.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58134" number="66313" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Completion of Conversion.</CHARFORMAT> &quot;Completion of Conversion&quot; shall mean the date of issuance by the Department of Buildings of a Temporary or Permanent Certificate of Occupancy for the portion of the building for which an application for a Certificate of Eligibility is filed.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58135" number="66314" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Department.</CHARFORMAT> &quot;Department&quot; shall mean the Department of Housing Preservation and Development of the City of New York or any successor agency or department thereto.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58136" number="66315" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Department of Buildings.</CHARFORMAT> &quot;Department of Buildings&quot; shall mean the Department of Buildings of the City of New York or any successor agency or department thereto.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58137" number="66316" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Department of Finance.</CHARFORMAT> &quot;Department of Finance&quot; shall mean the Department of Finance of the City of New York or any successor agency or department thereto.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58138" number="66317" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Eligible Area.</CHARFORMAT> Subject to the Zoning Resolution, the &quot;Eligible Area&quot; in which tax benefits pursuant to the Act for Eligible Multiple Dwellings are available shall mean the area in the borough of Manhattan bounded by Murray Street on the north starting at the intersection of West Street and Murray Street; running easterly along the center line of Murray Street; connecting through City Hall Park with the center line of Frankfort Street and running easterly along the center lines of Frankfort and Dover Streets to the intersection of Dover Street and South Street; running southerly along the center line of South Street to Peter Minuit Plaza; connecting through Peter Minuit Plaza to the center line of State Street and running northwesterly along the center line of State Street to the intersection of State Street and Battery Place; running westerly along the center line of Battery Place to the intersection of Battery Place and West Street; and running northerly along the center line of West Street to the intersection of West Street and Murray Street. Any tax lot which is located partly inside the Eligible Area shall be deemed to be located entirely inside such area.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58139" number="66318" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Eligible Multiple Dwelling.</CHARFORMAT> &quot;Eligible Multiple Dwelling&quot; shall mean a Class A multiple dwelling, except a Hotel, created from conversion of a Non-Residential Building, provided, however, that such multiple dwelling is located within the Eligible Area, and provided further, however, that the Aggregate Floor Area of Commercial, Community Facility and Accessory Use Space within such multiple dwelling does not exceed twenty-five per cent (25%) of the Aggregate Floor Area of such multiple dwelling.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58140" number="66319" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Exempt Dwelling Unit.</CHARFORMAT> &quot;Exempt Dwelling Unit&quot; shall mean a dwelling unit exempt from rent regulation or deregulated pursuant to the Rent Regulation Reform Act of 1993, the Rent Regulation Reform Act of 1997, Local Law 4 of 1994, or by reason of the condominium or cooperative status of the dwelling unit.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58141" number="66320" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Floor Area of Commercial, Community Facility and Accessory Use Space.</CHARFORMAT> &quot;Floor Area of Commercial, Community Facility and Accessory Use Space&quot; shall mean the gross horizontal areas of all space in a multiple dwelling or dwellings designated for commercial or community facility or accessory uses (as defined in § 12-10 of the Zoning Resolution). Home occupation space within dwelling units shall not be counted as accessory use space.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58142" number="66321" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Hotel.</CHARFORMAT> &quot;Hotel&quot; shall mean (i) any Class B multiple dwelling, as such term is defined in the Multiple Dwelling Law, (ii) any structure or part thereof containing living or sleeping accommodations which is used or intended to be used for transient occupancy, (iii) any apartment hotel or transient hotel as defined in the Zoning Resolution, or (iv) any structure or part thereof which is used to provide short term rentals or owned or leased by an entity engaged in the business of providing short term rentals. For purposes of this definition, a lease, sublease, license or any other form of rental agreement for a period of less than six months shall be deemed to be a short term rental. Notwithstanding the foregoing, a structure or part thereof owned or leased by a not-for-profit corporation for the purpose of providing governmentally funded emergency housing shall not be considered a hotel for purposes of this chapter.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58143" number="66322" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Landmark.</CHARFORMAT> &quot;Landmark&quot; shall mean a structure designated a landmark or a structure in a historic district designated by the Landmarks Preservation Commission of the City of New York or any successor commission, agency or department thereto.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58144" number="66323" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Non-Residential Building.</CHARFORMAT> &quot;Non-Residential Building&quot; shall mean a structure or portion of a structure having at least one floor, a roof and at least three walls enclosing all or most of the space used in connection with the structure or portion of the structure, and which has a Certificate of Occupancy for commercial, manufacturing or other non-residential use for not less than ninety per cent (90%) of the aggregate floor area of such structure or portion of such structure, or other proof of such non-residential use as is acceptable to the Department.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58145" number="66324" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Office.</CHARFORMAT> &quot;Office&quot; shall mean the Office of Tax Incentives of the Department or any successor thereto.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58146" number="66325" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Person.</CHARFORMAT> &quot;Person&quot; shall mean an individual, corporation, limited liability company, partnership, association, agency, trust, estate, foreign or domestic government or subdivision thereof, or other entity.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58147" number="66326" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Recipient.</CHARFORMAT> &quot;Recipient&quot; shall mean an applicant to whom a Certificate of Eligibility has been issued pursuant to the Act or the successor in interest of such applicant, provided that where a person who has entered into a lease or purchase agreement with the owner or lessee of exempt property has been a co-applicant, such person or the successor in interest of such person shall be deemed the Recipient.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58148" number="66327" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Rules.</CHARFORMAT> &quot;Rules&quot; shall mean this chapter of the Rules of the City of New York.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58149" number="66328" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Temporary Certificate of Occupancy.</CHARFORMAT> &quot;Temporary Certificate of Occupancy&quot; shall mean, for the purpose of establishing eligibility pursuant to the Act, a Temporary Certificate of Occupancy issued by the Department of Buildings for all of the dwelling units in an Eligible Multiple Dwelling for which benefits pursuant to the Act are sought.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58150" number="66329" version="1166">
+									<PARA>
+										<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">
+											<TAB tab-count="1"/>Zoning Resolution.</CHARFORMAT> &quot;Zoning Resolution&quot; shall mean the Zoning Resolution of the City of New York.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58151" number="66330" version="3">
+								<HEADING>§ 32-03 Application Procedure, Documentation, Filing Fees.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8013" name="T28C032_32-03"/>§ 32-03 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Application Procedure, Documentation, Filing Fees.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-58152" number="66331" version="2512">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Application Forms.</CHARFORMAT> All applications shall be submitted to the Department by the March 31 immediately following the first taxable status date following Completion of Conversion on such form or forms as shall be prescribed by the Department. All application forms may be obtained from the Department of Housing Preservation and Development, Office of Tax Incentives, 100 Gold Street, New York, NY 10038. Only applications complete in all detail shall be considered for a Certificate of Eligibility. All forms must be filled out fully and legibly by the applicant and shall be typewritten or inscribed in permanent ink. An application shall consist of the following:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58153" number="66332" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>A copy of the pre-construction Certificate of Occupancy, or, if no such Certificate of Occupancy is available, a letter from the Department of Buildings establishing the pre-conversion use of the Non-Residential Building, or other proof that the Eligible Multiple Dwelling was a Non-Residential Building prior to conversion.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58154" number="66333" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A copy of the new Temporary or Permanent Certificate of Occupancy issued as a result of the conversion of a Non-Residential Building to an Eligible Multiple Dwelling. The new Temporary or Permanent Certificate of Occupancy must be issued by the Department of Buildings by the taxable status date in order for the Eligible Multiple Dwelling to receive tax benefits the following tax year.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58155" number="66334" version="2481">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>(i)<TAB tab-count="1"/>If the Eligible Multiple Dwelling shall be owned as a cooperative or condominium: a copy of the prospectus or offering plan which has been accepted for filing by the Attorney General (if required by law), and all subsequent amendments which become effective prior to the time the Office issues a Certificate of Eligibility. If the prospectus or offering plan has not yet been approved by the Attorney General, a statement by the owner that if the prospective cooperative or condominium plan has not been declared effective for filing at a time fifteen months after the issuance of a Certificate of Eligibility, that such owner will register the rental units with the New York State Division of Housing and Community Renewal no later than fifteen calendar days after such fifteen month period or</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58156" number="66335" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>If the Eligible Multiple Dwelling shall be owned as a rental building:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58157" number="66336" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(A)<TAB tab-count="1"/>evidence satisfactory to the Office that the owner of rental dwelling units has registered all dwelling units in the Eligible Multiple Dwelling other than Exempt Dwelling Units with the New York State Division of Housing Community and Renewal or</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58158" number="66337" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(B)<TAB tab-count="1"/>if the Eligible Multiple Dwelling is not registered at the time of issuance of a Certificate of Eligibility, an affidavit, on a form approved by the Office, stating that the owner shall register all units other than Exempt Dwelling Units as they become occupied and shall submit proof of registration thereof.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58159" number="66338" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>A copy of one set of plans covering the Eligible Multiple Dwelling approved by the Department of Buildings, as evidenced by a seal of the Department of Buildings thereon or an architect&apos;s affidavit that such plans are so approved.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58160" number="66339" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>A copy of the Department of Buildings &quot;Plan Work Approval Application&quot; (PW-1), with the &quot;Schedule A – Occupancy/Use&quot; (PW-1A), the &quot;Work Permit Application&quot; (PW-2), and the approved building permit or equivalent, as required by the Department of Buildings.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58161" number="66340" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(6)<TAB tab-count="1"/>A copy of the dated revised tax map approved by the Department of Finance if applicable. A complete application for a revised tax map for the Eligible Multiple Dwelling must be filed with the Department of Finance no later than December first of the year preceding the commencement of the Benefit Period.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58162" number="66341" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(7)<TAB tab-count="1"/>A computer printout from the Department of Finance and the Department of Environmental Protection (for water &amp; sewer charges) listing outstanding charges on the Eligible Multiple Dwelling owed to the City. If outstanding charges on the Eligible Multiple Dwelling are owed to the City at time of application, the Applicant must provide proof of payment or evidence that the outstanding charges are being paid in timely installments pursuant to a written agreement with the Department of Finance or other appropriate agency.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58163" number="66342" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(8)<TAB tab-count="1"/>An affidavit, in the form approved by the Office, setting forth the following information:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58164" number="66343" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>a statement that within seven years immediately preceding the date of application for a Certificate of Eligibility, neither the Applicant, nor any person owning a substantial interest in the property (as herein defined as ownership and control of an interest of ten per cent (10%) or more in property or any Person owning a property), nor any officer, director, or general partner of the applicant or such person was finally adjudicated by a court of competent jurisdiction to have violated § 235 of the Real Property Law or any section of Article 150 of the Penal Law or any similar arson law of another jurisdiction with respect to any building, or was an officer, director, or general partner of a Person at the time such Person was finally adjudicated to have violated such law; and</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58165" number="66344" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>a statement setting forth any pending charges alleging violation of § 235 of the Real Property Law or any section of Article 150 of the Penal Law or any similar arson law of another jurisdiction with respect to any building by the applicant or any Person owning a substantial interest (as defined above) in the property, or any officer, director, or general partner of the Applicant or such Person, or any Person for whom the applicant or person owning a substantial interest in the property is an officer, director or general partner.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58166" number="66345" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(9)<TAB tab-count="1"/>A statement that the applicant agrees to comply with and be subject to the Rules promulgated by the Department of Finance and the Department to secure compliance with the Act and all applicable local, state, and federal laws.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58167" number="66346" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(10)<TAB tab-count="1"/>Such application shall also certify that all taxes, water charges and sewer rents currently due and owing on the property which is subject of the application have been paid or are currently being paid in timely installments pursuant to written agreement with the Department of Finance or other appropriate agency.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58168" number="66347" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Qualified Applicants.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58169" number="66348" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>In addition to any other qualifications for benefits pursuant to the Act, the Applicant must be:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58170" number="66349" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>obligated to pay real property tax on the property for which benefits are sought, whether such obligation arises because of record ownership of such property or because the obligation to pay such tax has been assumed by contract; or</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58171" number="66350" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>the record owner or lessee of property which is exempt from real property taxation who has entered into an agreement to sell or lease such property to another person. Such person shall be a co-applicant with such owner or lessee.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58172" number="66351" version="748">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A co-applicant with a public entity shall be eligible to receive benefits pursuant to the Act, provided that for such period as the property that is the subject of the Certificate of Eligibility is exempt from real property taxation because it is owned or controlled by a public entity no benefits shall be available to such Recipient pursuant to the Act. Such Recipient shall receive benefits pursuant to the Act when such property ceases to be eligible for exemption pursuant to other provisions of law, as follows: the Recipient shall, commencing with the date such tax exemption ceases, and continuing until the expiration of the Benefit Period pursuant to the Act, receive the benefits to which such Recipient is entitled in the corresponding tax year pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58173" number="66352" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>The burden of proof shall be on the applicant to show by clear and convincing evidence that the requirements for granting benefits under the Act have been satisfied. The Department shall have the authority to require that statements in connection with the application shall be made under oath.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58174" number="66353" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Timing Requirements.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58175" number="66354" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>Non-Residential Buildings of less than 100,000 square feet of Aggregate Floor Area</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58176" number="66355" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>In a non-residential building of less than 100,000 square feet of Aggregate Floor Area; Completion of Conversion to an Eligible Multiple Dwelling of at least seventy-five per cent (75%) of the Aggregate Floor Area of such Non-Residential Building, as evidenced by a Temporary or permanent Certificate of Occupancy, must take place within three years of Commencement of Construction.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58177" number="66356" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Only the Aggregate Floor Area for which conversion is completed within such three year period shall be considered in calculating the exemption and abatement provided pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58178" number="66357" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>Non-Residential Buildings of 100,000 square feet or more of Aggregate Floor Area</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58179" number="66358" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>In a Non-Residential Building of 100,000 square feet or more of Aggregate Floor Area, Completion of Conversion to an Eligible Multiple Dwelling of at least seventy-five per cent (75%) of the Aggregate Floor Area of such Non-Residential Building, as evidenced by a Temporary or permanent Certificate of Occupancy, must take place within five years of Commencement of Conversion, provided, however, that Completion of Conversion to an Eligible Multiple Dwelling of at least fifty per cent (50%) of the Aggregate Floor Area of such Non-Residential Building must take place within three years of Commencement of Conversion.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58180" number="66359" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Proof of completion of partial conversion within three years shall be submitted with an application for a Certificate of Eligibility for full exemption and abatement benefits pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58181" number="66360" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>Only the Aggregate Floor Area for which conversion is completed within the five-year period specified in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-03" destination-id="0-0-0-8013">32-03</LINK>(c)(2)(i) or, in the case of partial exemption from or partial abatement of real property taxes, the three-year period specified in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-04" destination-id="0-0-0-8015">32-04</LINK>(b)(3), shall be considered in calculating the exemption and abatement provided pursuant to the Act, provided, however, that neither partial exemption from nor partial abatement of real property taxes shall be available for Commercial, Community Facility or Accessory Use Space.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58182" number="66361" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(d)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Calculating Aggregate Floor Area.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58183" number="66362" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>In a Non-Residential Building of less than 100,000 square feet of Aggregate Floor Area containing a separately assessed non-residential parcel, the Aggregate Floor Area of such separately assessed non-residential parcel shall not be considered in determining whether seventy-five per cent (75%) of the Aggregate Floor Area of such Non-Residential Building has been converted to an Eligible Multiple Dwelling.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58184" number="66363" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>In a Non-Residential Building of 100,000 square feet or more of Aggregate Floor Area containing a separately assessed non-residential parcel, the Aggregate Floor Area of such separately assessed non-residential parcel shall not be considered in determining whether seventy-five per cent (75%) or, in the case of partial exemption from or partial abatement of real property taxes, fifty per cent (50%) of the Aggregate Floor Area of such Non-Residential building has been converted to an Eligible Multiple Dwelling.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58185" number="66364" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Commercial Reduction of Benefits:</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58186" number="66365" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>If the Aggregate Floor Area of Commercial, Community Facility and Accessory Use Space exceeds twelve per cent (12%) of the Aggregate Floor Area of any building (Eligible Multiple Dwelling) receiving benefits pursuant to the Act, the benefits provided pursuant to the Act shall be equal to the amount provided by 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-04" destination-id="0-0-0-8015">32-04</LINK>(b)(1) and (b)(2), reduced by a percentage equal to the difference between the per centum of the Aggregate Floor Area that is Commercial, Community Facility and Accessory Use Space and twelve per cent (12%).</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58187" number="66366" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>If the Aggregate Floor Area of such building (Eligible Multiple Dwelling) contains more than twenty-five per cent (25%) of Commercial, Community Facility and Accessory Use Space no benefits shall be available pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58188" number="66367" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(iii)<TAB tab-count="1"/>If a building contains a separately assessed non-residential parcel, the Aggregate Floor Area of such parcel shall not be considered in calculating the Aggregate Floor Area of Commercial, Community Facility and Accessory Use Space relevant to determining eligibility for and amount of benefits pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58189" number="66368" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(e)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Filing Fees.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58190" number="66369" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Application Fee:</CHARFORMAT> A non-refundable application fee of one thousand five hundred dollars ($1,500) plus two hundred and fifty dollars ($250) per dwelling unit, not to exceed twenty five thousand dollars ($25,000) per application shall be paid at the time of application. For applications received prior to the effective date of these Rules, the application fee shall be paid at the time of issuance of a Certificate of Eligibility. No applications received after the effective date of these Rules will be accepted by the Department without the application fee. For Eligible Multiple Dwellings of 100,000 square feet or more of Aggregate Floor Area applying for partial benefits, each subsequent submission after the initial application shall be accompanied by a non-refundable fee of two thousand five hundred ($2,500) dollars. Such fee shall be non-refundable under any circumstances, including but not limited to the subsequent revocation or revision of a Certificate of Eligibility.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58191" number="66370" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>A declaratory ruling with respect to an analysis of a specific fact pattern, document or organizational structure or an interpretation of the applicability of a specific provision of the Act or Rules to an actual or hypothetical site, project, fact pattern, document or organizational structure or any other issue related to eligibility may be given by the Office upon payment of a non-refundable fee of one thousand five hundred ($1,500) dollars payable at the time such declaratory ruling is requested in writing. In no event shall a prior ruling bind the Office as to the overall eligibility of a project for benefits pursuant to the Act.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58192" number="66371" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>Payment of the fees required by paragraphs (1) and (2) of this subdivision shall be made by a certified or cashier&apos;s check payable to the New York City Department of Finance.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58193" number="66372" version="1745">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>Paragraphs (1) and (3) of this subdivision shall take effect in accordance with subdivision e of Section <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="1813066185-672468487-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Charter.NFO" destination-infobase-name="" destination-infobase-title="" destination-name="1043" destination-id="0-0-0-0">1043</LINK> of the Charter and shall be retroactive to and deemed to have been in full force and effect on and after April 1, 1997.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58194" number="66373" version="3">
+								<HEADING>§ 32-04 Effective Date, Duration of Exemption and Abatement, Implementation Procedure with the Department of Finance.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8015" name="T28C032_32-04"/>§ 32-04 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Effective Date, Duration of Exemption and Abatement, Implementation Procedure with the Department of Finance.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-58195" number="66374" version="2512">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Effective Date of Abatement and Exemption.</CHARFORMAT> Tax benefits issued pursuant to the Act shall begin the July 1 following the issuance of a Certificate of Eligibility by the Department, provided that:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58196" number="66375" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>an application for tax benefits must be received by the Department by the close of business on the March 31 following the first taxable status date following Completion of Conversion. An application for partial tax exemption and abatement benefits for Non-Residential Buildings of 100,000 square feet or more of Aggregate Floor Area must be received by the close of business on the March 31 following the first taxable status date following the partial Completion of Conversion, and</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58197" number="66376" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>a Temporary Certificate of Occupancy or Certificate of Occupancy is issued by the Department of Buildings by the prior taxable status date, and</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58198" number="66377" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>for applications received after March 31, 1997, the applicant has submitted evidence that the Department of Finance has approved the final tax lots for those tax lots subject to the benefits pursuant to the Act by the prior taxable status date, if lot apportionment is required.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58199" number="66378" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Duration and Extent of Benefits.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58200" number="66379" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(1)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Duration of Exemption.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58201" number="66380" version="748">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Eligible Multiple Dwellings not designated as a Landmark prior to Completion of Conversion: a tax lot containing an Eligible Multiple Dwelling that is the subject of a Certificate of Eligibility issued pursuant to the Act shall be exempt from real property taxation for local purposes, other than assessments for local improvements, on the amount of the assessed value attributable exclusively to the physical improvement, for a period not to exceed twelve consecutive years beginning in the tax year immediately following the issuance of a Certificate of Eligibility, so long as such Eligible Multiple Dwelling is used or held out for use for dwelling purposes, except as otherwise provided herein. During the first eight years, the exemption shall equal the amount of the assessed value attributable exclusively to the physical improvement. During the ninth year, the exemption shall equal eighty per cent (80%) of such amount; during the tenth year, the exemption shall equal sixty per cent (60%) of such amount; during the eleventh year, the exemption shall equal forty per cent (40%) of such amount; and during the twelfth year, the exemption shall equal twenty per cent (20%) of such amount.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58202" number="66381" version="748">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Eligible Multiple Dwellings designated as a Landmark before Completion of Conversion: a tax lot containing an Eligible Multiple Dwelling that is the subject of a Certificate of Eligibility issued pursuant to the Act, and that is in a building that, in accordance with procedures set forth in local law, was designated as a Landmark before Completion of Conversion shall be exempt from real property taxation for local purposes, other than assessments for local improvements, on the amount of the assessed value attributable exclusively to the physical improvement, for a period not to exceed thirteen consecutive years beginning in the tax year immediately following the issuance of a Certificate of Eligibility, so long as such Eligible Multiple Dwelling is used or held out for use for dwelling purposes, except as otherwise provided herein. During the first nine years, the exemption shall equal the amount of the assessed value attributable exclusively to the physical improvement. During the tenth year, the exemption shall equal eighty per cent (80%) of such amount; during the eleventh year, the exemption shall equal sixty per cent (60%) of such amount; during the twelfth year, the exemption shall equal forty per cent (40%) of such amount; and during the thirteenth year, the exemption shall equal twenty per cent (20%) of such amount.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58203" number="66382" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(2)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Duration of Abatement.</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58204" number="66383" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>Eligible Multiple Dwellings not designated as a Landmark prior to Completion of Conversion: in addition to the benefits set forth in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-04" destination-id="0-0-0-8015">32-04</LINK>(b)(1)(i), a tax lot containing an Eligible Multiple Dwelling that is the subject of a Certificate of Eligibility issued pursuant to the Act shall receive an abatement of real property taxes for a period not to exceed fourteen consecutive years beginning in the tax year immediately following the issuance of a Certificate of Eligibility, so long as such Eligible Multiple Dwelling is used or held out for use for dwelling purposes, except as otherwise provided herein. During the first year, the abatement shall be equal to the amount of the real property tax that would have been due but for such abatement, provided, however, that if the tax lot, during the first year of such abatement, was fully or partially exempt from real property taxes, other than pursuant to the exemption authorized by the Act, then the abatement shall equal the amount of real property tax that would have been due but for such full or partial exemption. During the second through tenth years, the abatement shall equal one hundred per cent (100%) of such amount; during the eleventh year, the abatement shall equal eighty per cent (80%) of such amount; during the twelfth year, the abatement shall equal sixty per cent (60%) of such amount; during the thirteenth year, the abatement shall equal forty per cent (40%) of such amount, and during the fourteenth year, the abatement shall equal twenty per cent (20%) of such amount.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58205" number="66384" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>Eligible Multiple Dwellings designated a Landmark prior to Completion of Conversion: in addition to the benefits set forth in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-04" destination-id="0-0-0-8015">32-04</LINK>(b)(1)(ii), a tax lot containing an Eligible Multiple Dwelling that is the subject of a Certificate of Eligibility issued pursuant to the Act and that is in a building that, in accordance with procedures set forth in local law, was designated as a Landmark before Completion of Conversion shall receive an abatement of real property taxes for a period not to exceed fifteen consecutive years beginning in the tax year immediately following the issuance of a Certificate of Eligibility, so long as such Eligible Multiple Dwelling is used or held out for use for dwelling purposes, except as otherwise provided herein. During the first year, the abatement shall be equal to the amount of the real property tax that would have been due but for such abatement, provided, however, that if the tax lot, during the first year of such abatement, was fully or partially exempt from real property taxes, other than pursuant to the exemption authorized by the Act, then the abatement shall equal the amount of the real property tax that would have been due but for such full or partial exemption. During the second through eleventh years, the abatement shall equal one hundred per cent (100%) of such amount; during the twelfth year, the abatement shall equal eighty per cent (80%) of such amount; during the thirteenth year, the abatement shall equal sixty per cent (60%) of such amount; during the fourteenth year, the abatement shall equal forty per cent (40%) of such amount, and during the fifteenth year, the abatement shall equal twenty per cent (20%) of such amount. The following table shall illustrate the computation of the exemption and abatement pursuant to this subsection: <LINEBRK/>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58206" number="66385" version="2500">
+									<PARA>
+										<TABLE>
+											<TABLEFORMAT number-of-widths="5" left-border-space="43" left-border-width="15" left-border-color="#000000" right-border-space="43" right-border-width="15" right-border-color="#000000" top-border-space="43" top-border-width="15" top-border-color="#000000" bottom-border-space="43" bottom-border-width="15" bottom-border-color="#000000" horizontal-border-space="43" horizontal-border-width="15" horizontal-border-color="#000000" vertical-border-space="43" vertical-border-width="15" vertical-border-color="#000000">
+												<COLUMNFORMAT column-width="8" percentage="yes"/>
+												<COLUMNFORMAT column-width="6" percentage="yes"/>
+												<COLUMNFORMAT column-width="6" percentage="yes"/>
+												<COLUMNFORMAT column-width="6" percentage="yes"/>
+												<COLUMNFORMAT column-width="6" percentage="yes"/>
+											</TABLEFORMAT>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL cells-merged-down="1" header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Tax Year Following Date of Issuance of Certificate of Eligibility</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL cells-merged-right="1" header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Landmarked Eligible Multiple Dwellings</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL cells-merged-right="1" header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Non-Landmarked Eligible Multiple Dwellings </CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Exemption</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Abatement</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Exemption</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">
+															<CELL header="true">
+																<CELLFORMAT alignment="bottom">
+																	<CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Abatement</CHARFORMAT>
+																</CELLFORMAT>
+															</CELL>
+														</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">1</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100% </PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">2</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">3</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">4</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">5</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">6</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">7</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">8</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">9</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">80%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">10</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">80%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">60%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">11</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">60%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">100%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">40%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">80%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">12</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">40%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">80%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">20%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">60%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">13</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">20%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">60%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">40%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">14</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">40%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">20%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+											<ROW>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">15</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">20%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+												<COL>
+													<PARA>
+														<PARAFORMAT justify="center">0%</PARAFORMAT>
+													</PARA>
+												</COL>
+											</ROW>
+										</TABLE>
+									</PARA>
+									<PARA>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58207" number="66386" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(3)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Partial Benefits for Buildings of 100,000 square feet or more</CHARFORMAT>
+									</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58208" number="66387" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(i)<TAB tab-count="1"/>In a Non-Residential Building of 100,000 square feet or more of Aggregate Floor Area in which Completion of Conversion to an Eligible Multiple Dwelling of at least fifty per cent (50%) of the Aggregate Floor Area of such Non-Residential Building has taken place within three years of Commencement of Conversion, and which is the subject of a Certificate of Eligibility for partial exemption and partial abatement issued pursuant to the Act, partial exemption and partial abatement of real property taxes shall be available, as follows:</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58209" number="66388" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(A)<TAB tab-count="1"/>partial exemption benefits shall equal the amount of the assessed value attributable exclusively to the physical improvement resulting from the conversion of at least fifty per cent (50%) of the Aggregate Floor Area of the Non-Residential Building that has received a Temporary Certificate of Occupancy and</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58210" number="66389" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(B)<TAB tab-count="1"/>partial abatement benefits shall be equal to the amount of the real property tax that would have been due during the first year of such partial abatement but for such partial abatement upon the amount of square feet of Aggregate Floor Area of the Non-Residential Building that has received a Temporary Certificate of Occupancy for conversion of at least fifty per cent (50%) of the Aggregate Floor Area of the Non-Residential Building, provided, however, that if the tax lot, during the first year of such partial abatement was fully or partially exempt from real property taxes, other than pursuant to the exemption authorized by the Act, then the partial abatement shall be equal to the amount of real property tax that would have been due upon such amount of square feet of Aggregate Floor Area of the Non-Residential Building but for such full or partial exemption. Nothing in this paragraph shall be deemed to require an Applicant to apply for partial exemption or abatement benefits pursuant to the Act, provided, however, that if an applicant applies for a Certificate of Eligibility for such benefits, he or she shall submit proof of completion of partial conversion with the application for such certificate.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58211" number="66390" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(ii)<TAB tab-count="1"/>The Benefit Period of the exemption and abatement benefits defined in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-04" destination-id="0-0-0-8015">32-04</LINK>(b) shall begin upon receipt of any partial exemption from or partial abatement of real property taxes for a Non-Residential Building of 100,000 square feet or more of Aggregate Floor Area.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58212" number="66391" version="1166">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(4)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Benefit Reduction for Non-Residential Space.</CHARFORMAT> If the Aggregate Floor Area of Commercial, Community Facility and Accessory Use Space exceeds twelve per cent (12%) of the Aggregate Floor Area of any building receiving benefits pursuant to the Act, the abatement and exemption benefit shall be reduced according to the procedure set forth in 28 RCNY § <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Jump" destination-name="T28C032_32-03" destination-id="0-0-0-8013">32-03</LINK>(d)(3).</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58213" number="66392" version="3">
+									<PARA>
+										<TAB tab-count="1"/>
+										<TAB tab-count="1"/>(5)<TAB tab-count="1"/>Benefits granted under the Act may not be combined with benefits under any other section of the Real Property Tax Law or any local law or any Rule promulgated thereunder for the same tax lot.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58214" number="66393" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(c)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Implementation of Benefit.</CHARFORMAT> Upon issuance of a 421-g Certificate of Eligibility, payment of outstanding fees, and verification that all charges owed to the City outstanding for more than one quarter have been paid, the Department will transmit the Certificate of Eligibility to the Department of Finance.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58215" number="66394" version="3">
+								<HEADING>§ 32-05 Rent Regulation.</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8017" name="T28C032_32-05"/>§ 32-05 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Rent Regulation.</CHARFORMAT>
+								</PARA>
+							</RECORD>
+							<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" style-id="0-0-0-0" level-depth="0" toc-section="false">
+								<RECORD id="0-0-0-58216" number="66395" version="2512">
+									<PARA>
+										<TAB tab-count="1"/>(a)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Applicability of Rent Regulation:</CHARFORMAT> Notwithstanding the provisions of the City Rent and Rehabilitation Law (§§ <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="26-401" destination-id="0-0-0-0">26-401</LINK> et seq. of the Administrative Code), as amended; or the Rent Stabilization Law of 1969 (§§ <LINK style-name="Jump" style-name-escaped="Jump" style-id="0-0-0-31" type="Inter Infobase Jump" destination-infobase-id="671734137-329684122-0-0" destination-infobase-uil="L:\NY\New York City\Folio\Working\Admin.nfo" destination-infobase-name="" destination-infobase-title="" destination-name="26-501" destination-id="0-0-0-0">26-501</LINK> et seq. of the Administrative Code), as amended; or the Emergency Tenant Protection Act of 1974, as amended, the rents of each dwelling unit in an Eligible Multiple Dwelling, except Exempt Dwelling Units, shall be fully subject to control under such local laws and act for the entire period for which the Eligible Multiple Dwelling is receiving benefits pursuant to the Act. An Eligible Multiple Dwelling receiving benefits pursuant to the Act whose benefits are suspended, terminated or revoked by the Department shall be deemed to be receiving benefits for the length of time such benefits would have been received if such benefits had not been suspended, terminated or revoked, or for the period such local law is in effect, whichever is shorter.</PARA>
+								</RECORD>
+								<RECORD id="0-0-0-58217" number="66396" version="3">
+									<PARA>
+										<TAB tab-count="1"/>(b)<TAB tab-count="1"/>
+										<CHARFORMAT bold="0" italic="1" underline="0" strike-out="0" hidden="0">Deregulation of Units:</CHARFORMAT> After the expiration of the Benefit Period, such rents shall continue to be subject to rent regulation, except that such rents that would not have been subject to such rent regulation but for this Section, shall be decontrolled if the landlord has included in each lease and renewal thereof for such unit for the tenant in residence at the time of such decontrol a notice in at least twelve point type informing such tenant that the unit shall become subject to such decontrol upon the expiration of benefits pursuant to the Act.</PARA>
+								</RECORD>
+							</LEVEL>
+						</LEVEL>
+						<LEVEL style-name="Section" style-name-escaped="Section" style-id="0-0-0-486" level-depth="7" toc-section="true">
+							<RECORD id="0-0-0-58218" number="66397" version="3">
+								<HEADING>§ 32-06 Certifying Continuing Use, Record Keeping; Revocation of Tax Exemption and Abatement; Discrimination Prohibited. [Repealed]</HEADING>
+								<PARA>
+									<DESTINATION id="0-0-0-8019" name="T28C032_32-06"/>§ 32-06 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">Certifying Continuing Use, Record Keeping; Revocation of Tax Exemption and Abatement; Discrimination Prohibited. [Repealed]</CHARFORMAT>
+								</PARA>
+							</RECORD>
+						</LEVEL>
+					</LEVEL>
+				</LEVEL>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

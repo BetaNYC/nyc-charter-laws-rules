@@ -115,10 +115,11 @@ jobs:
         # the same site). The Rules are left out when their index has no titles yet.
         # Exits 1, and so stops the run before anything deploys, if data/structure/ is
         # missing, was built from other text than the index, or disagrees with versions.json.
-        # Measured 2026-11-24 on a Mac, all three books on the July 2026 files: about 18 seconds,
-        # 47,111 files, 718 MB (GitHub Pages allows 1 GB), with a peak resident memory of 4.1 GB
-        # while Pagefind indexes. The runner's memory has not been measured here; see the README's
-        # Deploy section.
+        # Measured 2026-11-25 on a Mac, all three books on the committed data: about 17 seconds,
+        # 47,392 files, 724 MB (GitHub Pages allows 1 GB; tables, #65, add about 9 MB once the
+        # structure carries them), with a peak resident memory of 3.9 GB while Pagefind indexes.
+        # The last deploy's artifact was 138 MB and its Deploy step took 15 seconds. The runner's
+        # memory has not been measured here; see the README's Deploy section.
         run: npm run build-site
 
       - name: Check the build

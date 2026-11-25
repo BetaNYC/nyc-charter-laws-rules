@@ -14,7 +14,9 @@
 //                                                                   "80.1 Title." (issue #76)
 //   (a body block can also carry table: true or picture: true, and `marks`, the publisher's bold
 //   and italic runs as [start, end, "b" | "i" | "bi"] offsets into its text; its text is still
-//   the flat text)
+//   the flat text. A table block can carry `rows` (issue #65): rows of cells, each
+//   [start, end] or [start, end, { h, cs, rs, al, br }] with offsets into its text, see
+//   build-structure.js paraTable; display only)
 //
 // A body block's `text` is a slice of the section's `text` (the MCP server's text), and the body
 // blocks' texts joined with one space are exactly the section's `text`. Each link's start and
@@ -48,6 +50,13 @@ export function renderSection(section, structure = null) {
       .filter(([x, y]) => x < b.end && y > b.start)
       .map(([x, y, look]) => [Math.max(x, b.start) - b.start, Math.min(y, b.end) - b.start, look]);
     if (marks.length) block.marks = marks;
+    // A table's cells (structure `rows`), made block-relative.
+    if (b.rows) {
+      const rel = (x) => x - b.start;
+      block.rows = b.rows.map((row) =>
+        row.map(([x, y, extra]) => (extra ? [rel(x), rel(y), extra.br ? { ...extra, br: extra.br.map(rel) } : { ...extra }] : [rel(x), rel(y)]))
+      );
+    }
     blocks.push(block);
   }
   return blocks;
