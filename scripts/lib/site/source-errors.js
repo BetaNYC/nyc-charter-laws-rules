@@ -146,10 +146,16 @@ export function parseSourceErrors(jsonText, file = "data/source-errors.json") {
   }
   const r = SourceErrorsFileSchema.safeParse(raw);
   if (!r.success) {
+    // "SE-0003 evidence.images[0].sha256: ..." (the entry by its id, or by its place when it has none).
+    const pathText = (path) => path.map((p) => (typeof p === "number" ? `[${p}]` : `.${p}`)).join("").replace(/^\./, "");
     const lines = r.error.issues.map((i) => {
-      const at = i.path.length ? i.path.map((p) => (typeof p === "number" ? `[${p}]` : `.${p}`)).join("").replace(/^\./, "") : "(top)";
-      const id = i.path[0] === "errors" && typeof i.path[1] === "number" ? raw.errors?.[i.path[1]]?.id : undefined;
-      return `${id ? `${id} ` : ""}${at}: ${i.message}`;
+      if (i.path[0] === "errors" && typeof i.path[1] === "number") {
+        const id = raw.errors?.[i.path[1]]?.id;
+        const who = typeof id === "string" && id ? id : `errors[${i.path[1]}]`;
+        const rest = pathText(i.path.slice(2));
+        return `${who}${rest ? ` ${rest}` : ""}: ${i.message}`;
+      }
+      return `${pathText(i.path) || "(top)"}: ${i.message}`;
     });
     throw new Error(`${file} does not match its schema:\n  ${lines.join("\n  ")}`);
   }
