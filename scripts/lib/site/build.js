@@ -187,16 +187,16 @@ export async function buildSite(o = {}) {
     }
   }
   const versions = JSON.parse(readFileSync(versionsFile, "utf8"));
-  // The Rules need each record's title (`titleNumber`, in the index since 0.6.3, #59): their
+  // The Rules need each record's title (`titleNumber`, in the index since 0.7.0, #59): their
   // paths and citations come from it. An index built before then has none, and the Rules are left
   // out (`skipped`, also in metadata.json, and printed by build-site.js), so the deploy that runs
-  // before the first refresh after 0.6.3 still publishes the Charter and the Administrative Code,
+  // before the first refresh after 0.7.0 still publishes the Charter and the Administrative Code,
   // and no Rules page with a wrong path. An index that names a title on some records only stops
   // the build (rulesReady).
   const indexText = new Map(corpora.map((c) => [c, readFileSync(join(indexDir, `${c}.json`), "utf8")]));
   const skipped = {};
   if (corpora.includes("rules") && !rulesReady(JSON.parse(indexText.get("rules")))) {
-    skipped.rules = "the Rules index has no titles (titleNumber): it was built before 0.6.3";
+    skipped.rules = "the Rules index has no titles (titleNumber): it was built before 0.7.0";
     corpora = corpora.filter((c) => c !== "rules");
   }
   const dataSources = JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8"));

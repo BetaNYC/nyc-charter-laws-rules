@@ -2,7 +2,7 @@
 // CLI: builds the BetaNYC Law Reader, a static website for the Charter, the Administrative Code
 // and the Rules (issues #62 and #65, epic #68), from the index and its structure. It never fetches
 // anything. The Rules are left out, with a line on stderr, when their index has no titles yet
-// (built before 0.6.3; scripts/lib/site/build.js).
+// (built before 0.7.0; scripts/lib/site/build.js).
 //
 //   npm run build-site                      reads data/index/json/ and data/structure/, writes _site/
 //   node scripts/build-site.js --index-dir <dir> --structure-dir <dir> --out <dir> [--no-search] [--charter-only]

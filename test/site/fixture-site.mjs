@@ -73,7 +73,7 @@ export async function buildFixtureSite({ search = false } = {}) {
 /**
  * Index JSON text, versions entry and structure for the Rules fixtures, built the way
  * scripts/build-index.js builds them (a title index finished after the last file). `titles:
- * false` takes `titleNumber` and `titleHeading` off every record: an index from before 0.6.3.
+ * false` takes `titleNumber` and `titleHeading` off every record: an index from before 0.7.0.
  */
 export function buildRulesFixtureData({ titles = true, extra = [] } = {}) {
   const files = readdirSync(RULES_XML).filter((f) => f.endsWith(".xml")).sort();

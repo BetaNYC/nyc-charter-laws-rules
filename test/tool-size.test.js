@@ -14,6 +14,9 @@
 // Live check, 2026-11-19: list_titles and get_title now say how chapters are labeled and that
 // get_title lists a chapter's sections (it returned only the chapter's heading). Measured 17,191;
 // budget unchanged.
+// 2026-11-24: get_section names the citations it now takes: a book's name ("NYC Charter §
+// 1133"), code sections ("FC 102") and a part of a section ("§ 1133(b)(1)"). Measured 17,910;
+// budget unchanged.
 //
 // Requires: npm run build (dist/ must exist). Guaranteed by "pretest".
 

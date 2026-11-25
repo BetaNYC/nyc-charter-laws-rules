@@ -293,6 +293,71 @@ test("jump: a citation goes straight to its page; a shared number shows a short 
   }
 });
 
+test("a part typed in another case still lands on it: #(A) goes to (a), and copies use the real id", async () => {
+  // The jump box keeps the case a reader typed (anchors keep the publisher's, "(d)(2)(C)"), so
+  // "§ 259(A)" must still reach "(a)". A section with an "(a)" lower on the page than the top.
+  const s = site.book.sections.find((x) => {
+    const ids = x.structure.blocks.map((b) => b.anchor).filter(Boolean);
+    return ids.includes("(a)") && !ids.includes("(A)") && /^§ \d+$/.test(x.citation) && !site.book.shared.some((sh) => sh.sections.includes(x));
+  });
+  assert.ok(s, "a fixture section with an (a)");
+  const inView = (page) => page.evaluate(() => {
+    const r = document.getElementById("(a)").getBoundingClientRect();
+    return r.top >= 0 && r.top < innerHeight;
+  });
+  {
+    const { page, ctx, problems } = await open(`${s.path}#(A)`, { ctxOpts: { permissions: ["clipboard-read", "clipboard-write"] } });
+    await page.waitForFunction(() => location.hash === "#(a)");
+    assert.equal(await page.evaluate(() => document.querySelector(":target")?.id), "(a)");
+    assert.ok(await inView(page), "scrolled to (a)");
+    assert.equal(await page.evaluate(() => history.length), 2, "no extra history entry (blank page, then this one)");
+    await page.getByRole("button", { name: "Copy citation" }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the citation" }).waitFor();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), `${s.fullCitation}(a)`);
+    await page.getByRole("button", { name: "Copy link" }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the link" }).waitFor();
+    assert.ok((await page.evaluate(() => navigator.clipboard.readText())).endsWith(`${s.path}#(a)`));
+    // Ids that differ only by case: the exact one when there is one, else none.
+    const where = await page.evaluate(async () => {
+      const law = document.querySelector(".law");
+      for (const id of ["(Y)", "(y)", "x-q", "X-Q"]) law.append(Object.assign(document.createElement("p"), { id, textContent: id }));
+      const go = (h) => new Promise((done) => {
+        addEventListener("hashchange", () => setTimeout(() => done(location.hash), 50), { once: true });
+        location.hash = h;
+      });
+      return [await go("#(Y)"), await go("#x-Q")];
+    });
+    assert.deepEqual(where, ["#(Y)", "#x-Q"]);
+    assert.deepEqual(problems, []);
+    await ctx.close();
+  }
+  // From the jump box, typed in capitals.
+  {
+    const { page, ctx, problems } = await open("/");
+    await page.getByRole("searchbox", { name: /Go to a section/ }).fill(`${s.citation}(A)`);
+    await Promise.all([page.waitForURL((u) => u.pathname === s.path), page.getByRole("button", { name: "Go" }).click()]);
+    await page.waitForFunction(() => location.hash === "#(a)");
+    assert.ok(await inView(page), "scrolled to (a)");
+    assert.deepEqual(problems, []);
+    await ctx.close();
+  }
+});
+
+test("a hash that is not percent-encoding (#%, #50%) leaves the page's controls working", async () => {
+  // decodeURIComponent throws on these; an uncaught throw in law.js stopped every control.
+  const s = sectionWithParts();
+  for (const hash of ["#%", "#50%"]) {
+    const { page, ctx, problems } = await open(`${s.path}${hash}`, { ctxOpts: { permissions: ["clipboard-read", "clipboard-write"] } });
+    await page.getByRole("button", { name: "Copy citation" }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the citation" }).waitFor();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), s.fullCitation, hash);
+    await page.getByRole("button", { name: "Copy link" }).click();
+    await page.getByRole("status").filter({ hasText: "Copied the link" }).waitFor();
+    assert.deepEqual(problems, [], hash);
+    await ctx.close();
+  }
+});
+
 test("word search: book, citation, heading, highlighted snippet, sub-results, paging, filters", async () => {
   const { page, ctx, problems } = await open("/search?q=the");
   const status = page.getByRole("status").filter({ hasText: "results for" });
@@ -338,6 +403,35 @@ test("copy citation, print stylesheet, skip link", async () => {
   assert.equal(await page.locator(".copy-box").isVisible(), true);
   assert.equal(await page.locator(".law").isVisible(), true);
   assert.deepEqual(problems, []);
+  await ctx.close();
+});
+
+test("copy works with no Clipboard API, as over plain http", async () => {
+  // Noel's phone, 2026-11-24: law.beta.nyc served over http had no navigator.clipboard, and
+  // both Copy buttons said "Could not copy". Remove the API and record what execCommand copies.
+  const s = sectionWithParts();
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 900 } });
+  await ctx.addInitScript(() => {
+    Object.defineProperty(Navigator.prototype, "clipboard", { get: () => undefined, configurable: true });
+    window.__copied = [];
+    document.execCommand = (cmd) => {
+      if (cmd !== "copy") return false;
+      const el = document.activeElement;
+      window.__copied.push(el && "value" in el ? el.value.slice(el.selectionStart, el.selectionEnd) : "");
+      return true;
+    };
+  });
+  const page = await ctx.newPage();
+  await page.goto(base + s.path, { waitUntil: "networkidle" });
+  await page.waitForFunction(() => customElements.get("nys-button") !== undefined);
+  await page.getByRole("button", { name: "Copy citation" }).click();
+  await page.getByRole("status").filter({ hasText: "Copied the citation" }).waitFor();
+  await page.getByRole("button", { name: "Copy link" }).click();
+  await page.getByRole("status").filter({ hasText: "Copied the link" }).waitFor();
+  const copied = await page.evaluate(() => window.__copied);
+  assert.equal(copied[0], s.fullCitation);
+  assert.ok(copied[1].endsWith(s.path), copied[1]);
+  assert.equal(await page.locator("textarea").count(), 0, "the helper textarea is removed");
   await ctx.close();
 });
 

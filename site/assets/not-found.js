@@ -19,7 +19,12 @@ export const BOOK_NAMES = { charter: "the Charter", "admin-code": "the Administr
 export function rulesNumberFor(pathname, numbers) {
   const m = /^\/rules\/sections\/([^/]+?)\/?$/.exec(pathname);
   if (!m) return null;
-  const n = decodeURIComponent(m[1]).toLowerCase();
+  let n;
+  try {
+    n = decodeURIComponent(m[1]).toLowerCase();
+  } catch {
+    return null; // "/rules/sections/50%": not percent-encoding, so no number
+  }
   return Object.prototype.hasOwnProperty.call(numbers ?? {}, n) ? numbers[n] : null;
 }
 

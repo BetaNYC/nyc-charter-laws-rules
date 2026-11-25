@@ -846,8 +846,9 @@ test("metadata.json, index.json and citations.json", () => {
 test("jump box: citations a reader might type", () => {
   assert.deepEqual(parseQuery("§ 259"), { key: "259", anchor: "" });
   assert.deepEqual(parseQuery("259"), { key: "259", anchor: "" });
-  assert.deepEqual(parseQuery("charter 259"), { key: "259", anchor: "" });
-  assert.deepEqual(parseQuery("NYC Charter § 259"), { key: "259", anchor: "" });
+  // A book's name narrows the jump to that book (test/citation-round-trip.test.js).
+  assert.deepEqual(parseQuery("charter 259"), { key: "259", anchor: "", book: "Charter" });
+  assert.deepEqual(parseQuery("NYC Charter § 259"), { key: "259", anchor: "", book: "Charter" });
   assert.deepEqual(parseQuery("Section 259(a)(1)"), { key: "259", anchor: "(a)(1)" });
   assert.deepEqual(parseQuery("§§ 20-T"), { key: "20-t", anchor: "" });
   assert.deepEqual(parseQuery("258.1"), { key: "258.1", anchor: "" });

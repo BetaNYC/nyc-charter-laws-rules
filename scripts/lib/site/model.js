@@ -583,7 +583,7 @@ function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
 //
 // Each title restarts its chapter and section numbers: about fifty titles have a § 1-01. So
 // everything here is per title, and the title is each record's `titleNumber` (the index has it
-// since 0.6.3), not the structure's Title parent: 24 chapters have none (the Health Code in Title
+// since 0.7.0), not the structure's Title parent: 24 chapters have none (the Health Code in Title
 // 24, the Rent Guidelines Board's yearly orders in Title 30, Appendix A to Title 62, Title 3's
 // Chapter 11).
 //
@@ -688,7 +688,7 @@ export function rulesChapterSlug(citation) {
 function layoutRules({ corpus, book, v, sha, records, byId, groups }) {
   const chapterRecs = records.filter((r) => r.level === "Chapter");
   const chapterIds = new Set(chapterRecs.map((c) => c.id));
-  for (const r of records) if (!r.titleNumber) throw new Error(`${r.citation} (${r.id}) has no titleNumber; the Rules site needs an index built by 0.6.3 or later`);
+  for (const r of records) if (!r.titleNumber) throw new Error(`${r.citation} (${r.id}) has no titleNumber; the Rules site needs an index built by 0.7.0 or later`);
 
   // The Title records, by number: their headings name the titles, and their ids link to American Legal.
   const titleGroups = new Map();

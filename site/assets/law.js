@@ -64,22 +64,95 @@ function wireForms() {
   }
 }
 
+/**
+ * The element a hash names: the one with that id, else the one whose id matches it in any case
+ * ("(A)" for "(a)": the jump box keeps the case a reader typed, and anchors keep the publisher's,
+ * "(d)(2)(C)"). Only when exactly one id matches that way: two that differ only by case, as
+ * "(C)" and "(c)" may, are ambiguous, and then none is.
+ */
+function anchorFor(hash) {
+  if (!hash) return null;
+  const exact = document.getElementById(hash);
+  if (exact) return exact;
+  const want = hash.toLowerCase();
+  const found = [...document.querySelectorAll("[id]")].filter((e) => e.id.toLowerCase() === want);
+  return found.length === 1 ? found[0] : null;
+}
+
+/**
+ * The address's hash without its "#", decoded: "#(b)(1)" or "#%28b%29%281%29" → "(b)(1)". A hash
+ * that is not valid percent-encoding ("#%", "#50%") is kept as it is rather than throwing, which
+ * would stop every script on the page.
+ */
+function hashText(hash = location.hash) {
+  const raw = hash.replace(/^#/, "");
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
+/** On load and on each hash change: a hash that names an id in another case goes to that id. */
+function landOnAnchor() {
+  const hash = hashText();
+  if (!hash || document.getElementById(hash)) return;
+  const el = anchorFor(hash);
+  // replace, not assign: the address gets the real id (so Copy link and Copy citation use it)
+  // without a second history entry, and the browser scrolls there and sets :target.
+  if (el) location.replace(`#${el.id}`);
+}
+
 function citationText() {
   const cite = document.querySelector("h1 .cite")?.textContent?.trim() ?? document.title;
-  const hash = decodeURIComponent(location.hash.slice(1));
-  return hash && document.getElementById(hash) ? citeWithAnchor(cite, hash) : cite;
+  const el = anchorFor(hashText());
+  return el ? citeWithAnchor(cite, el.id) : cite;
+}
+
+/**
+ * Browsers give a page the Clipboard API only over https (a "secure context"). Over plain http
+ * (law.beta.nyc before its certificate, Noel's phone 2026-11-24) `navigator.clipboard` is
+ * undefined, so copy the old way: select the text in a hidden, read-only textarea and run
+ * `execCommand("copy")`. That runs before any `await`, so it is still inside the click.
+ */
+function copyBySelection(text) {
+  const area = document.createElement("textarea");
+  area.value = text;
+  area.setAttribute("readonly", "");
+  area.setAttribute("aria-hidden", "true");
+  area.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+  const back = document.activeElement;
+  document.body.append(area);
+  area.focus({ preventScroll: true });
+  area.select();
+  area.setSelectionRange(0, text.length);
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {
+    ok = false;
+  }
+  area.remove();
+  back?.focus?.({ preventScroll: true });
+  return ok;
 }
 
 async function copyText(text, what, status) {
   const say = (t) => {
     if (status) status.textContent = t;
   };
-  try {
-    await navigator.clipboard.writeText(text);
-    say(`Copied the ${what}: ${text}`);
-  } catch {
-    say(`Could not copy. The ${what} is: ${text}`);
+  let ok = false;
+  if (window.isSecureContext && navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      ok = true;
+    } catch {
+      ok = false;
+    }
+  } else {
+    ok = copyBySelection(text);
   }
+  say(ok ? `Copied the ${what}: ${text}` : `Could not copy. The ${what} is: ${text}`);
 }
 
 function wireTools() {
@@ -292,7 +365,7 @@ export function pointAtCopies(doc = document) {
   apply();
   matchMedia(WIDE).addEventListener("change", apply);
   if (!wide() && location.hash.startsWith("#s-")) {
-    const { slug, anchor } = splitCopyId(decodeURIComponent(location.hash.slice(3)));
+    const { slug, anchor } = splitCopyId(hashText().slice(2));
     const to = links.find((a) => lastSegment(a.dataset.page) === slug);
     if (to) location.replace(to.dataset.page + (anchor ? `#${anchor}` : ""));
   }
@@ -303,4 +376,7 @@ wireForms();
 wireTools();
 wireContents();
 pointAtCopies();
+// Last, so nothing it meets can keep the page's controls from being wired.
+landOnAnchor();
+window.addEventListener("hashchange", landOnAnchor);
 if (document.querySelector(".toc")) requestAnimationFrame(() => showOpenChapter());

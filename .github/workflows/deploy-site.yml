@@ -1,7 +1,7 @@
 # Build the BetaNYC Law Reader (the Charter, the Administrative Code and the Rules) and deploy it
 # to GitHub Pages (issues #64 and #65, epic #68).
 #
-# The Rules need an index that names each record's title (`titleNumber`, since 0.6.3). Until the
+# The Rules need an index that names each record's title (`titleNumber`, since 0.7.0). Until the
 # daily refresh commits one, the build leaves the Rules out (scripts/lib/site/build.js), the check
 # step says so in a notice, and the site deploys with the other two books, as before.
 #

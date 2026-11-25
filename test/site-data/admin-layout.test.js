@@ -127,7 +127,7 @@ test("titles agree with get_title (src/corpus.ts chapterGroups) for every number
       // The index records the title (issue #59): the site's must be the same, letter and all.
       assert.equal(num, g.title.toLowerCase(), `${c.heading}: Title ${c.titleNode.number}, get_title says ${g.title}`);
     } else {
-      // An index built before 0.6.3: get_title works a title out from section numbers, and a
+      // An index built before 0.7.0: get_title works a title out from section numbers, and a
       // lettered title's sections are numbered in its parent (§ 16-501 is in Title 16-A).
       assert.ok(num === g.title.toLowerCase() || num.replace(/-[a-z]+$/, "") === g.title.toLowerCase(), `${c.heading}: Title ${c.titleNode.number}, get_title says ${g.title}`);
     }

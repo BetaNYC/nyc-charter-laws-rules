@@ -47,7 +47,7 @@ export const BOOKS = {
   },
   // The Rules of the City of New York, titles first. Each title restarts its chapter and section
   // numbers, so `rcny` makes model.js lay it out per title (layoutRules): paths and citations
-  // come from each record's `titleNumber` ("15 RCNY § 1-01"), which the index has since 0.6.3
+  // come from each record's `titleNumber` ("15 RCNY § 1-01"), which the index has since 0.7.0
   // (#59). An index without it is not built (build.js rulesReady). `latestUrl` is where the City
   // posts current rules (src/tools.ts FOOTER: "For the latest rules information, see ...").
   rules: {

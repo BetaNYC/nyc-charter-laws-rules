@@ -223,7 +223,7 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
    sections in July 2026) or a long address, breaks at the edge instead of pushing the page
    sideways on a phone. `anywhere` breaks only a run that would overflow, so ordinary words and
    lines are as before; it also lets the column shrink to fit (test/site/overflow.test.mjs). */
-.law, main h1, main h2, main h3 { overflow-wrap: anywhere; }
+.law, main h1, main h2, main h3, main li { overflow-wrap: anywhere; }
 .law p { margin: 0 0 16px; scroll-margin-top: 16px; }
 .law [data-depth="2"] { margin-left: 1.6em; }
 .law [data-depth="3"] { margin-left: 3.2em; }

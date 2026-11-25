@@ -2,7 +2,7 @@
 //
 // NOT part of npm test, on purpose: the daily refresh runs npm test on the freshly rebuilt index,
 // and a surprise in the data's shape must stop the website, not the data (see admin-layout.test.js).
-// Nothing here pins a count. An index built before 0.6.3 has no titles; these tests then skip.
+// Nothing here pins a count. An index built before 0.7.0 has no titles; these tests then skip.
 //
 // The Rules website (next step) builds its citations ("15 RCNY § 1-01") and per-title paths from
 // `titleNumber`, so every Rules record must have one.
@@ -21,7 +21,7 @@ const read = (corpus) => JSON.parse(readFileSync(join(INDEX, `${corpus}.json`), 
 const rules = read("rules");
 const admin = read("admin_code");
 const charter = read("charter");
-const skip = rules.some((s) => s.titleNumber) ? false : "the committed index was built before 0.6.3 and records no titles";
+const skip = rules.some((s) => s.titleNumber) ? false : "the committed index was built before 0.7.0 and records no titles";
 
 test("every Rules record has a title; the Charter has none", { skip }, () => {
   const missing = rules.filter((s) => !s.titleNumber);

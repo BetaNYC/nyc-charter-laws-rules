@@ -158,7 +158,7 @@ describe("get_title", () => {
   });
 
   test("a Rules title: its chapters when the index records titles, else a hint to ask for a chapter", async () => {
-    // Issue #59: an index built since 0.6.3 records each record's title; the committed index
+    // Issue #59: an index built since 0.7.0 records each record's title; the committed index
     // may predate that until the next refresh rebuilds it, so both shapes must pass.
     const t = textOf(await callTool("get_title", { corpus: "rules", title: "Title 15" }));
     assert.match(t, /legal advice/i);
@@ -176,7 +176,7 @@ describe("get_title", () => {
   test("Administrative Code 'Title 16' leaves out Titles 16-A and 16-B when the index records titles", () => {
     const records = getTitle("admin_code", "Title 16");
     assert.ok(records.length > 0);
-    if (!readIndex("admin_code").some((s) => s.titleNumber)) return; // built before 0.6.3
+    if (!readIndex("admin_code").some((s) => s.titleNumber)) return; // built before 0.7.0
     assert.ok(records.every((s) => s.titleNumber === "16"), records.filter((s) => s.titleNumber !== "16").map((s) => s.citation).slice(0, 5).join(", "));
     const lettered = readIndex("admin_code").filter((s) => /^16-[A-Z]$/.test(s.titleNumber ?? ""));
     for (const t of new Set(lettered.map((s) => s.titleNumber))) {
