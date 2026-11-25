@@ -51,9 +51,10 @@
 # its outcome, so it can never block the tests, the commit, the release or the deploy. A person
 # reads the summary; `npm run audit:coverage -- --check` is the gate to use by hand.
 #
-# The website (issue #64): when the commit step pushed (new law text, or the site
-# structure alone), the last step dispatches deploy-site.yml on main, for the same
-# GITHUB_TOKEN reason. No commit, no deploy.
+# The website (issue #64): when the commit step pushed something the site is built from (new
+# law text, or the site structure alone), the last step dispatches deploy-site.yml on main,
+# for the same GITHUB_TOKEN reason. No commit, or a commit of the download record alone
+# (data/fetch-provenance.json), no deploy.
 #
 # Idempotent on rerun: the checkout is `ref: main` (not the original run's SHA),
 # so a rerun after the bump commit landed rebuilds to no diff and only the
@@ -64,7 +65,17 @@
 #
 # Auth: the built-in GITHUB_TOKEN is sufficient. `permissions: contents: write`
 # lets the default checkout token push to `main` — NO PAT, NO repository secret,
-# NO deploy key. The AML fetch is public HTTP with no credential.
+# NO deploy key. The AML fetch is public HTTPS with no credential.
+#
+# Checked downloads (issue #55): fetch-data refuses http and any redirect off https or off
+# files.amlegal.com, and checks each ZIP (status, Content-Type, Content-Length, a readable ZIP
+# in American Legal's XML layout, and no smaller than half the last good download) before it
+# replaces data/raw/. It records each ZIP's URL, bytes, sha256, Last-Modified and ETag in
+# data/fetch-provenance.json, which the commit step stages with the index it was built from.
+# The floor (half) and the ceiling (four times) follow that record. When American Legal
+# really does change a file's size, run this workflow by hand with `allow_size_change` naming
+# the document(s); the waiver lasts that run only, and the committed record makes the new
+# file the baseline.
 
 name: Refresh Data
 
@@ -79,6 +90,10 @@ on:
     inputs:
       reason:
         description: "Reason for manual run (optional)"
+        required: false
+        default: ""
+      allow_size_change:
+        description: "Only after checking American Legal's file: accept a ZIP under half or over four times the last good size, for these documents (comma-separated: charter, admin_code, rules). Empty on every other run."
         required: false
         default: ""
 
@@ -130,8 +145,14 @@ jobs:
         run: npm ci
 
       - name: Fetch data from AML
-        # Pulls AML bulk XML ZIPs (public, no auth). A failure here fails the job
-        # red BEFORE build-index, so no partial/half-refreshed index can land.
+        # Pulls AML bulk XML ZIPs over https (public, no auth) and checks each one
+        # (scripts/lib/fetch-zip.js). A failed download or check fails the job red
+        # BEFORE build-index, so no partial, half-refreshed or swapped index can land.
+        env:
+          # Empty on the schedule; on a manual run, the allow_size_change input, for this run
+          # only. Passed through env, never pasted into the script, so the input cannot inject
+          # shell.
+          NYC_CLR_ALLOW_SIZE_CHANGE: ${{ github.event_name == 'workflow_dispatch' && inputs.allow_size_change || '' }}
         run: npm run fetch-data
 
       - name: Build index
@@ -193,28 +214,40 @@ jobs:
             CHANGELOG.md
             README.md
           )
-          # The site structure (issue #61), built by build-index beside the index. It is
-          # not in the npm package (package.json `files` has data/index, not data/structure),
-          # so a change to it alone needs no release. `git status --porcelain` rather than
-          # `git diff`: the first build creates these files, and git diff does not see
-          # untracked files.
-          SITE_PATHS=(data/structure)
-          site_changed() { [ -n "$(git status --porcelain -- "${SITE_PATHS[@]}")" ]; }
+          # Committed beside the index but not in the npm package (package.json `files` has
+          # data/index only), so a change to them alone needs no release:
+          #   data/structure/             the site structure (issue #61), built by build-index
+          #   data/fetch-provenance.json  which ZIP bytes were downloaded (issue #55), by fetch-data
+          # `git status --porcelain` rather than `git diff`: the first build creates these
+          # files, and git diff does not see untracked files.
+          UNSHIPPED_PATHS=(data/structure data/fetch-provenance.json)
+          unshipped_changed() { [ -n "$(git status --porcelain -- "${UNSHIPPED_PATHS[@]}")" ]; }
 
           # The build is idempotent, so a no-op rebuild leaves the allow-list
           # byte-identical. Commit iff anything in it actually changed.
           if git diff --quiet -- "${PATHS[@]}"; then
-            if site_changed; then
-              # Only the site structure changed: its first build after #61 merges, or a
-              # change to the structure code. Commit it with no version bump and no release.
-              git add -- "${SITE_PATHS[@]}"
+            if unshipped_changed; then
+              # The website reads the structure, not the download record: redeploy only if
+              # the structure moved. Checked before `git add`, which would hide it, and kept in
+              # a variable: the output is written only after the push succeeds.
+              structure_changed=""
+              if [ -n "$(git status --porcelain -- data/structure)" ]; then
+                structure_changed=true
+              fi
+              # Only the site structure or the download record changed: a first build, a
+              # change to the structure code, or American Legal re-zipping text that did not
+              # change. Commit it with no version bump and no release.
+              git add -- "${UNSHIPPED_PATHS[@]}"
               git \
                 -c user.name="github-actions[bot]" \
                 -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                commit -m "chore: refresh site structure $(TZ=America/New_York date +%F)"
+                commit -m "chore: refresh site structure and download record $(TZ=America/New_York date +%F)"
               git push origin HEAD:main
               echo "pushed=true" >> "$GITHUB_OUTPUT"
-              echo "refresh-data: pushed the site structure to main (no index change, no release)"
+              if [ -n "$structure_changed" ]; then
+                echo "deploy=true" >> "$GITHUB_OUTPUT"
+              fi
+              echo "refresh-data: pushed the site structure and download record to main (no index change, no release)"
               exit 0
             fi
             echo "refresh-data: no change after rebuild — skipping commit"
@@ -283,8 +316,9 @@ jobs:
             SUFFIX=" (release v${RELEASE_VERSION})"
           fi
 
-          # Stage only the allow-listed paths, and the site structure built with them.
-          PATHS+=("${SITE_PATHS[@]}")
+          # Stage only the allow-listed paths, and the site structure and download record
+          # that go with them.
+          PATHS+=("${UNSHIPPED_PATHS[@]}")
           git add -- "${PATHS[@]}"
 
           # Commit as github-actions[bot] with identity set inline (no global config).
@@ -295,6 +329,7 @@ jobs:
 
           git push origin HEAD:main
           echo "pushed=true" >> "$GITHUB_OUTPUT"
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
           echo "refresh-data: pushed refreshed index to main"
 
       - name: Release if needed
@@ -325,9 +360,11 @@ jobs:
         # except workflow_dispatch and repository_dispatch:
         # https://docs.github.com/en/actions/concepts/security/github_token). Dispatch it
         # instead, as "Release if needed" does for release.yml; `actions: write` above covers it.
-        # Last, and `!cancelled()`, so it runs whenever the commit step pushed, even if the
-        # release steps went red, and a failed dispatch can never block a release.
-        if: ${{ !cancelled() && steps.commit.outputs.pushed == 'true' }}
+        # Last, and `!cancelled()`, so it runs whenever the commit step pushed a change the
+        # site is built from (output `deploy`: the index, or data/structure), even if the
+        # release steps went red, and a failed dispatch can never block a release. A commit of
+        # the download record alone sets `pushed` but not `deploy`: the site has not changed.
+        if: ${{ !cancelled() && steps.commit.outputs.deploy == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
