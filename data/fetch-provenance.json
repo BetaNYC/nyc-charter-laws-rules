@@ -1,0 +1,38 @@
+{
+  "about": "The American Legal Publishing ZIPs the index was last built from, written by scripts/fetch-data.js (issue #55). sha256 is of the ZIP as downloaded. firstFetchedAt is when these exact bytes were first downloaded: a later download of the same bytes leaves the entry unchanged.",
+  "corpora": {
+    "charter": {
+      "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip",
+      "bytes": 790055,
+      "sha256": "191c2ae52d4f7dad208429c6c57e98aae8f5276d0d71e71491cf12be21eb4efe",
+      "contentType": "application/zip",
+      "lastModified": "Sat, 21 Nov 2026 15:43:45 GMT",
+      "etag": "\"6b01bc31-c0e27\"",
+      "xmlFiles": 87,
+      "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
+      "firstFetchedAt": "2026-11-25T12:17:52.649Z"
+    },
+    "admin_code": {
+      "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip",
+      "bytes": 65528920,
+      "sha256": "eb27fb310404a2b61ac9dacb71f3cd378dc0bb7fa3429491e3c7817776f2eb63",
+      "contentType": "application/zip",
+      "lastModified": "Sat, 21 Nov 2026 15:44:12 GMT",
+      "etag": "\"6b01bc4c-3e7e458\"",
+      "xmlFiles": 398,
+      "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
+      "firstFetchedAt": "2026-11-25T12:17:55.002Z"
+    },
+    "rules": {
+      "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip",
+      "bytes": 59533689,
+      "sha256": "80e043e1581d7d6442127e184298b93e996781d2a78773033ae66c2d8a2cd30b",
+      "contentType": "application/zip",
+      "lastModified": "Fri, 13 Nov 2026 18:04:05 GMT",
+      "etag": "\"6af75115-38c6979\"",
+      "xmlFiles": 768,
+      "currentThrough": "Current through rules effective November 14, 2026.",
+      "firstFetchedAt": "2026-11-25T12:17:56.912Z"
+    }
+  }
+}
