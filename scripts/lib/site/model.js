@@ -386,6 +386,16 @@ function chapterPaths(t, slugOf, shared) {
 /** The group for the local-law chapters, which have no Title record and no § numbering. Its name is BetaNYC's. */
 export const LOCAL_LAWS = { slug: "local-laws", citation: "Local laws", title: "Local laws by year" };
 
+/**
+ * Whether a section or chapter is one of the Administrative Code's local-law notes or a year of
+ * them: the records this file puts in its own "Local laws by year" group (LOCAL_LAWS), the
+ * publisher's "Unconsolidated Local Laws" (L.L. 2016/002 ...), which sit in no title.
+ */
+export function isLocalLaw(r) {
+  const holder = r.level === "Chapter" ? r : r.chapter;
+  return holder?.titleNode?.synthetic === true;
+}
+
 function layoutTitled({ corpus, book, v, sha, records, byId, groups }) {
   const chapterRecs = records.filter((r) => r.level === "Chapter");
   const chapterIds = new Set(chapterRecs.map((c) => c.id));

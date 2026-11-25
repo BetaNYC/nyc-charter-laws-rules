@@ -4,16 +4,15 @@
 //   - words are searched with Pagefind's static index (pagefind/pagefind.js, written by the
 //     build), which the browser loads in pieces. Built against Pagefind 1.6's search API docs
 //     (pagefind.app/docs/api, /docs/js-api-filtering, /docs/sub-results).
-// The address keeps the query, the page and the filters (?q=...&page=2&kind=Section), so a
+// The address keeps the query, the page and the filters (?q=...&page=2&kind=Section&book=Rules), so a
 // search can be linked to and the back button works.
+// The filters (book, and kind of page: sections, chapters, local laws) and the result labels come
+// from filters.js, which the build uses too (issue #65).
 import { lookup, jumpTarget, pageUrl } from "./jump.js";
 import { loadCitations } from "./law.js";
+import { filterGroups, groupOptions, kindLabel } from "./filters.js";
 
 const PAGE_SIZE = 10;
-const FILTER_GROUPS = [
-  { key: "book", label: "Book" },
-  { key: "kind", label: "Kind of page", names: { Section: "Sections", Chapter: "Chapters" } },
-];
 
 const form = document.querySelector('form.jump[data-handler="search"]');
 const input = form?.querySelector("nys-textinput");
@@ -22,6 +21,15 @@ const results = document.getElementById("results");
 const pick = document.getElementById("pick");
 const pager = document.getElementById("pages");
 const filtersBox = document.getElementById("filters");
+
+function siteBooks() {
+  try {
+    return JSON.parse(filtersBox?.dataset.books ?? "[]");
+  } catch {
+    return [];
+  }
+}
+const FILTER_GROUPS = filterGroups(siteBooks());
 
 let pagefind = null;
 async function engine() {
@@ -64,12 +72,11 @@ async function buildFilters(state) {
   const all = await (await engine()).filters();
   const parts = [];
   for (const g of FILTER_GROUPS) {
-    const values = Object.keys(all[g.key] ?? {}).sort();
-    if (!values.length) continue;
-    const boxes = values
-      .map((v) => {
+    const options = groupOptions(g, Object.keys(all[g.key] ?? {}));
+    if (!options.length) continue;
+    const boxes = options
+      .map(([v, name]) => {
         const checked = !state.filters[g.key] || state.filters[g.key].includes(v);
-        const name = g.names?.[v] ?? v;
         return `<nys-checkbox name="${esc(g.key)}" value="${esc(v)}" label="${esc(name)}"${checked ? " checked" : ""}></nys-checkbox>`;
       })
       .join("");
@@ -78,13 +85,31 @@ async function buildFilters(state) {
   filtersBox.innerHTML = `<h2 class="filters-h">Show results from</h2>${parts.join("")}`;
   filtersBox.hidden = false;
   filtersBuilt = true;
-  filtersBox.addEventListener("nys-change", (e) => {
+  filtersBox.addEventListener("nys-change", async (e) => {
     if (!e.target.matches?.("nys-checkbox")) return;
+    // Every box in a group unchecked would mean no results, and the address cannot say "none"
+    // (no value means "all"). So the last box stays checked, and the status line says why.
+    const group = e.target.closest("nys-checkboxgroup");
+    if (group && ![...group.querySelectorAll("nys-checkbox")].some((b) => b.checked)) {
+      // A mouse click fires nys-change from the inner input's change event, before the checkbox
+      // (a Lit element) has drawn itself unchecked (NYSDS 1.23 nys-checkbox _handleChange); setting
+      // `checked` back at once would be folded into that same draw and leave the inner input
+      // unchecked. So wait for the draw (Lit's updateComplete), then check it again.
+      await e.target.updateComplete;
+      e.target.checked = true;
+      await e.target.updateComplete;
+      // Keep the results line and add why. Clear the status first so a screen reader announces
+      // the line again when the same box is tried twice.
+      const line = status.textContent.replace(/\s*At least one box under “[^”]*” stays checked\.$/, "");
+      say("");
+      setTimeout(() => say(`${line ? `${line} ` : ""}At least one box under “${group.getAttribute("label")}” stays checked.`), 100);
+      return;
+    }
     const s = readState();
     s.filters = {};
-    for (const group of filtersBox.querySelectorAll("nys-checkboxgroup")) {
-      const key = group.dataset.group;
-      const boxes = [...group.querySelectorAll("nys-checkbox")];
+    for (const g of filtersBox.querySelectorAll("nys-checkboxgroup")) {
+      const key = g.dataset.group;
+      const boxes = [...g.querySelectorAll("nys-checkbox")];
       const on = boxes.filter((b) => b.checked).map((b) => b.value);
       if (on.length && on.length < boxes.length) s.filters[key] = on;
     }
@@ -92,6 +117,18 @@ async function buildFilters(state) {
     writeState(s, true);
     run();
   });
+}
+
+/** Set each box from the address (after Back or Forward), so the boxes match the results. */
+function syncFilters(state) {
+  if (!filtersBuilt) return;
+  for (const group of filtersBox.querySelectorAll("nys-checkboxgroup")) {
+    const on = state.filters[group.dataset.group];
+    for (const box of group.querySelectorAll("nys-checkbox")) {
+      const want = !on || on.includes(box.value);
+      if (box.checked !== want) box.checked = want;
+    }
+  }
 }
 
 function pagefindFilters(filters) {
@@ -102,7 +139,7 @@ function pagefindFilters(filters) {
 
 function hitHtml(d) {
   const book = d.meta?.book ?? "";
-  const kind = d.meta?.kind === "Chapter" ? "Chapter" : "Section";
+  const kind = kindLabel(d.meta?.kind);
   const subs = (d.sub_results ?? []).filter((s) => s.anchor).slice(0, 3);
   return `<li class="hit">
 <p class="where"><span class="badge">${esc(book)}</span> ${esc(kind)}</p>
@@ -130,6 +167,7 @@ export async function run() {
   const id = ++runId;
   const state = readState();
   if (input && input.value !== state.q) input.value = state.q;
+  syncFilters(state);
   results.innerHTML = "";
   pager.hidden = true;
   if (!state.q) {

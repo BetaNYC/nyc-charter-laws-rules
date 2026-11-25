@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+<LEVEL style-name="Title" style-name-escaped="Title" level-depth="1">
+	<RECORD id="0-0-0-10" number="10" version="1">
+		<HEADING>Title 10: Public Safety</HEADING>
+		<PARA><DESTINATION id="0-0-0-910" name="T10"/>Title 10: Public Safety</PARA>
+	</RECORD>
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-11" number="11" version="1">
+			<HEADING>Chapter 1: Police</HEADING>
+			<PARA><DESTINATION id="0-0-0-911" name="T10C001"/>Chapter 1: Police</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-12" number="12" version="1">
+				<HEADING>§ 10-172 Security guards in nonpublic schools.</HEADING>
+				<PARA><DESTINATION id="0-0-0-912" name="T10C001_10-172"/>§ 10-172 Security guards in nonpublic schools.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-13" number="13" version="1">
+					<PARA>a. The commissioner shall reimburse a nonpublic school for the cost of security guard services, including the cost of a turnstile at each entrance, under a program set out in this section.</PARA>
+					<PARA>b. A school that seeks reimbursement shall apply to the commissioner each year, in the form and by the date the commissioner sets, and shall keep its records for six years.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-14" number="14" version="1">
+				<HEADING>§ 10-173 Reports.</HEADING>
+				<PARA><DESTINATION id="0-0-0-914" name="T10C001_10-173"/>§ 10-173 Reports.</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-15" number="15" version="1">
+					<PARA>The commissioner shall report each year on the program.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</LEVEL>
+</DOCUMENT>
