@@ -40,6 +40,7 @@ const ASSETS = [
   ["site/assets/law.js", "assets/law.js"],
   ["site/assets/jump.js", "assets/jump.js"],
   ["site/assets/search.js", "assets/search.js"],
+  ["site/assets/filters.js", "assets/filters.js"],
   ["site/assets/not-found.js", "assets/not-found.js"],
 ];
 

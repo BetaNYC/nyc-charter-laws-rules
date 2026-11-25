@@ -95,16 +95,19 @@ function ednoteLead(b) {
  *        one page share a citation ("a., link to NYC Charter § 530(a), Composition")
  * @param {number} [ctx.headingLevel] the level of a subheading's element: 2 on a section page
  *        (under its h1), 3 in a chapter, part or title page's copy (under the section's h2)
+ * @param {(b: object, n: number) => (number|undefined)} [ctx.weightFor] a block's Pagefind
+ *        weight (data-pagefind-weight, pagefind.app/docs/weighting), or undefined for none; never
+ *        on a copy, which search does not read (a local-law note's paragraphs: pages.js searchKind)
  */
-export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2 }) {
+export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2, weightFor = null }) {
   const caseNotes = anchorCaseNotes(blocks);
   const tableCount = blocks.filter(isTable).length;
   let tableNo = 0;
   return blocks
     .map((b, n) =>
       isTable(b)
-        ? tableHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, number: ++tableNo, count: tableCount })
-        : blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor), next: blocks[n + 1] ?? null })
+        ? tableHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, number: ++tableNo, count: tableCount, weight: weightFor?.(b, n) })
+        : blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor), next: blocks[n + 1] ?? null, weight: weightFor?.(b, n) })
     )
     .join("\n");
 }
@@ -216,7 +219,7 @@ function formatted(text, a, z, marks = [], { bold = true } = {}) {
     .join("");
 }
 
-function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote, next = null }) {
+function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote, next = null, weight }) {
   const attrs = [];
   let cls = "txt";
   let tag = "p";
@@ -236,6 +239,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel
   }
   if (b.table) attrs.push(`data-table`);
   if (!copyOf) attrs.push(`data-block="${n}"`);
+  if (weight !== undefined && !copyOf) attrs.push(`data-pagefind-weight="${weight}"`);
 
   const links = [...(b.links ?? [])].sort((x, y) => x.start - y.start);
   // The label link covers the label at the start of the text, unless a cross-reference starts there.
@@ -296,12 +300,14 @@ function spansHtml(text, a, z, spans, marks, { bold = true } = {}) {
  * runs inside it, and a <br> where the publisher starts a new line in the cell. A link that
  * does not sit inside one cell is left as plain text.
  */
-function tableHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, number, count }) {
+function tableHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, number, count, weight }) {
   const attrs = [`class="table-scroll"`, `data-table-name="${escapeHtml(tableName({ fullCitation, nameNote, number, count }))}"`];
   // A table of many columns may break a word anywhere in print (law.css), the only way it fits
   // the paper; a narrower one keeps its words whole there.
   if (tableColumns(b.rows) >= PRINT_DENSE_COLUMNS) attrs.push("data-many-columns");
   if (!copyOf) attrs.push(`data-block="${n}"`);
+  // A table in a local-law note takes the note's weight, as its paragraphs do (bodyHtml weightFor).
+  if (weight !== undefined && !copyOf) attrs.push(`data-pagefind-weight="${weight}"`);
   const links = [...(b.links ?? [])].sort((x, y) => x.start - y.start);
   const marks = b.marks ?? [];
   const rows = b.rows;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT source-infobase-name="Admin" default-split-level="Chapter">
+	<LEVEL style-name="Chapter" style-name-escaped="Chapter" level-depth="2">
+		<RECORD id="0-0-0-50" number="50" version="1">
+			<HEADING>2017</HEADING>
+			<PARA>2017</PARA>
+		</RECORD>
+		<LEVEL style-name="Section" style-name-escaped="Section" level-depth="3" toc-section="true">
+			<RECORD id="0-0-0-51" number="51" version="1">
+				<HEADING>L.L. 2017/001</HEADING>
+				<PARA>L.L. 2017/001</PARA>
+			</RECORD>
+			<LEVEL style-name="Normal Level" style-name-escaped="Normal-Level" level-depth="0" toc-section="false">
+				<RECORD id="0-0-0-52" number="52" version="1">
+					<PARA>Enactment date: 2/1/2017</PARA>
+					<PARA>A Local Law in relation to a study of ferry landings.</PARA>
+					<PARA>§ 1. The department shall study each ferry landing and report by June 30, 2017.</PARA>
+				</RECORD>
+			</LEVEL>
+		</LEVEL>
+	</LEVEL>
+</DOCUMENT>

@@ -1,0 +1,187 @@
+{
+  "about": "Search-ranking queries for local-law notes (issue #65), read by test/site/search-ranking.test.mjs. crowding: subject searches where notes crowded out sections. noteSubjects: 40 notes picked by a seeded random draw (seed 7) from the November 2026 index among notes with an \"in relation to\" clause, each searched by the first five words of that clause; the note is the answer. Kept as data so the numbers in the journal and README can be rerun.",
+  "crowding": [
+    "interagency task force",
+    "congestion",
+    "covid-19",
+    "outdoor dining",
+    "carryout bags",
+    "speed camera",
+    "security guard nonpublic schools",
+    "working group",
+    "pilot program",
+    "task force",
+    "study",
+    "open data",
+    "rent",
+    "noise",
+    "budget",
+    "street vendor",
+    "organic waste",
+    "paid sick leave",
+    "lead paint",
+    "bicycle"
+  ],
+  "noteSubjects": [
+    {
+      "note": "L.L. 1996/029",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 2008/051",
+      "query": "term limits for elected officials"
+    },
+    {
+      "note": "L.L. 1998/017",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 2026/106",
+      "query": "plan to expand access to"
+    },
+    {
+      "note": "L.L. 1994/028",
+      "query": "enhanced 911 telephone surcharge Be"
+    },
+    {
+      "note": "L.L. 1999/062",
+      "query": "corners names"
+    },
+    {
+      "note": "L.L. 1988/056",
+      "query": "playground name"
+    },
+    {
+      "note": "L.L. 1986/048",
+      "query": "appointment of a Tax Study"
+    },
+    {
+      "note": "L.L. 2018/156",
+      "query": "disapproval of a determination by"
+    },
+    {
+      "note": "L.L. 2026/161",
+      "query": "requiring the creation of a"
+    },
+    {
+      "note": "L.L. 2015/050",
+      "query": "preservation of certain hotels"
+    },
+    {
+      "note": "L.L. 2023/111",
+      "query": "lead-based paint hazards in common"
+    },
+    {
+      "note": "L.L. 2026/139",
+      "query": "requiring the department of sanitation"
+    },
+    {
+      "note": "L.L. 2018/046",
+      "query": "requiring the department of city"
+    },
+    {
+      "note": "L.L. 2004/001",
+      "query": "childhood lead poisoning prevention"
+    },
+    {
+      "note": "L.L. 2017/061",
+      "query": "online submission of applications for"
+    },
+    {
+      "note": "L.L. 2018/147",
+      "query": "conducting a study of the"
+    },
+    {
+      "note": "L.L. 1994/037",
+      "query": "filing of disclosure reports pursuant"
+    },
+    {
+      "note": "L.L. 1986/066",
+      "query": "fees charged owners of buildings"
+    },
+    {
+      "note": "L.L. 1990/072",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 1992/080",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 2018/074",
+      "query": "requiring the commissioners of sanitation"
+    },
+    {
+      "note": "L.L. 1996/078",
+      "query": "provision of a retirement incentive"
+    },
+    {
+      "note": "L.L. 2000/058",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 2015/005",
+      "query": "regulating pet shops"
+    },
+    {
+      "note": "L.L. 1987/038",
+      "query": "increasing certain penalties payable in"
+    },
+    {
+      "note": "L.L. 2018/129",
+      "query": "requiring the municipal drug strategy"
+    },
+    {
+      "note": "L.L. 1990/056",
+      "query": "area name"
+    },
+    {
+      "note": "L.L. 2021/043",
+      "query": "additional freeboard for structures in"
+    },
+    {
+      "note": "L.L. 2017/045",
+      "query": "naming of 40 thoroughfares and"
+    },
+    {
+      "note": "L.L. 1992/008",
+      "query": "increasing the graduated income eligibility"
+    },
+    {
+      "note": "L.L. 1992/075",
+      "query": "provision of a retirement Incentive"
+    },
+    {
+      "note": "L.L. 1988/023",
+      "query": "dates for submission of the"
+    },
+    {
+      "note": "L.L. 1989/007",
+      "query": "corner name"
+    },
+    {
+      "note": "L.L. 1989/053",
+      "query": "street name"
+    },
+    {
+      "note": "L.L. 1992/083",
+      "query": "tobacco products Be it enacted"
+    },
+    {
+      "note": "L.L. 2017/118",
+      "query": "wild or exotic animal circus"
+    },
+    {
+      "note": "L.L. 2006/024",
+      "query": "film production tax credits"
+    },
+    {
+      "note": "L.L. 2021/063",
+      "query": "tenant data privacy Be it"
+    },
+    {
+      "note": "L.L. 1995/081",
+      "query": "street name"
+    }
+  ]
+}

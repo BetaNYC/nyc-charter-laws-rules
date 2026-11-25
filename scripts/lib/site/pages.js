@@ -7,11 +7,12 @@
 
 import { renderSection, bodyBlocks } from "../render-section.js";
 import { bodyHtml, copyId } from "./render-html.js";
-import { linkTarget } from "./model.js";
+import { linkTarget, isLocalLaw } from "./model.js";
 import { page, breadcrumbs, breadcrumbJsonLd, searchForm, currentLine, possessiveHtml, officialLinks, latestRulesLine } from "./layout.js";
 import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
 import { SITE_NAME, SITE_BASE, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
+import { KIND } from "../../../site/assets/filters.js";
 
 // The first crumb (Noel, 2026-11-23: "Law Reader" confused people).
 export const HOME = { name: "Home", path: "/" };
@@ -69,13 +70,55 @@ export function legislationJsonLd(record, book, site) {
 }
 
 export function pagefindHead(record, book, kind) {
+  return searchMeta(book, kind, `${record.citation}. ${record.title}`, record.fullCitation);
+}
+
+/**
+ * How much a local-law note's words count in search, against 1 for a section's
+ * (pagefind.app/docs/weighting: 0 to 10, on a quadratic scale). A note's title paragraph ("A Local
+ * Law to amend ..., in relation to ...", localLawTitleBlock) says what the law is about, so it
+ * counts a little more (LOCAL_LAW_TITLE_WEIGHT), and a search for the law's subject finds its
+ * note; the rest (sponsors, dates, the unconsolidated provisions, often long) counts for little
+ * (LOCAL_LAW_WEIGHT), so notes stop crowding out the sections the laws wrote. Tuned on the
+ * November 2026 data against both of test/site/search-ranking.test.mjs's measures (issue #65; the
+ * journal has the table): every note at 1 put 24 notes in the top 10 of the 20 crowding searches
+ * and found 21 of the 40 notes by their subject; 1.5 and 0.1 give 13 and 21.
+ */
+export const LOCAL_LAW_TITLE_WEIGHT = 1.5;
+export const LOCAL_LAW_WEIGHT = 0.1;
+
+/**
+ * A local-law note's title paragraph, among its body blocks: the first that starts "A Local Law"
+ * (the publisher's form), or else "To amend" or "In relation to" (two notes in November 2026).
+ * Null when there is none; then every paragraph gets LOCAL_LAW_WEIGHT.
+ */
+export function localLawTitleBlock(blocks) {
+  return blocks.find((b) => /^\s*A\s+Local\s+Law\b/i.test(b.text ?? "")) ?? blocks.find((b) => /^\s*(?:To amend|In relation to)\b/i.test(b.text ?? "")) ?? null;
+}
+
+/** A page's search kind, its result label and the weight of each paragraph of its text. */
+export function searchKind(r) {
+  if (!isLocalLaw(r)) return { kind: r.level === "Chapter" ? KIND.chapter : KIND.section, weightFor: null };
+  const weightFor = (b, blocks) => (b === localLawTitleBlock(blocks) ? LOCAL_LAW_TITLE_WEIGHT : LOCAL_LAW_WEIGHT);
+  return { kind: KIND.localLaw, label: r.level === "Chapter" ? "Local laws by year" : KIND.localLaw, weightFor };
+}
+
+/**
+ * Pagefind's filters and result fields for a law page (pagefind.app/docs/filtering, /docs/metadata).
+ * `book` filters by the book's short name (the top bar's: "Admin Code"), which search links carry
+ * (?book=Admin+Code); the search page names the checkbox by the book's long name. `kind` is one of
+ * filters.js KIND; `label` is what the result says it is, when that is not the kind itself (a year
+ * of local laws is filtered as a local law and labeled "Local laws by year").
+ */
+export function searchMeta(book, kind, title, citation, label = kind) {
+  if (!Object.values(KIND).includes(kind)) throw new Error(`unknown search kind "${kind}"`);
   return [
     `<meta data-pagefind-filter="book[content]" content="${escapeHtml(book.book.short)}">`,
-    `<meta data-pagefind-filter="kind[content]" content="${kind}">`,
-    `<meta data-pagefind-meta="title[content]" content="${escapeHtml(`${record.citation}. ${record.title}`)}">`,
-    `<meta data-pagefind-meta="citation[content]" content="${escapeHtml(record.fullCitation)}">`,
+    `<meta data-pagefind-filter="kind[content]" content="${escapeHtml(kind)}">`,
+    `<meta data-pagefind-meta="title[content]" content="${escapeHtml(title)}">`,
+    `<meta data-pagefind-meta="citation[content]" content="${escapeHtml(citation)}">`,
     `<meta data-pagefind-meta="book[content]" content="${escapeHtml(book.book.label)}">`,
-    `<meta data-pagefind-meta="kind[content]" content="${kind}">`,
+    `<meta data-pagefind-meta="kind[content]" content="${escapeHtml(label)}">`,
   ];
 }
 
@@ -94,12 +137,15 @@ export function lawRecord(record, site) {
  * (issue #76) is an h2. A chapter, part or title page's copy of a section sits under that
  * section's h2, so its subheadings are h3 (sectionCopy).
  */
-export function lawText(record, book) {
+export function lawText(record, book, { weightFor = null } = {}) {
   const blocks = bodyBlocks(renderSection(record, record.structure));
   if (!blocks.length) return "";
   const html = bodyHtml(blocks, {
     fullCitation: record.fullCitation,
     linkFor: (to) => linkTarget(to, book, record),
+    // Pagefind ranks a paragraph's words by its data-pagefind-weight (pagefind.app/docs/weighting:
+    // 0 to 10, default 1, on a quadratic scale). Only a local-law note sets one (searchKind).
+    weightFor: weightFor ? (b) => weightFor(b, blocks) : null,
   });
   return `<div class="law">\n${html}\n</div>`;
 }
@@ -511,7 +557,8 @@ export function searchPage(book, site, others = []) {
     searchForm({ contentsPath: site.contentsPath, id: "search-q", handler: "search", books: site.books }),
     `<p class="summary" id="search-status" role="status"></p>`,
     `<div class="results-layout">`,
-    `<div class="filters" id="filters" hidden></div>`,
+    // The book filter's checkboxes, in the site's order: [filter value, name] (site/assets/filters.js).
+    `<div class="filters" id="filters" data-books="${escapeHtml(JSON.stringify([book, ...others].map((b) => [b.book.short, b.book.long])))}" hidden></div>`,
     `<div class="results">`,
     `<div id="pick" hidden></div>`,
     `<ol class="hits" id="results"></ol>`,

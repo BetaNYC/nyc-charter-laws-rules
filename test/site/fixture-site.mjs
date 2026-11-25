@@ -26,6 +26,14 @@ export const CHARTER_XML = join(ROOT, "test", "fixtures", "diff", "xml");
  */
 export const RULES_XML = join(ROOT, "test", "fixtures", "titles", "rules");
 
+/**
+ * The Administrative Code fixtures for the search tests (issue #65): hand-made in the publisher's
+ * shape, not its text. Title 10 (two sections, one about a turnstile program) and two years of
+ * "Unconsolidated Local Laws" (L.L. 2016/002, about the same turnstile program, and L.L.
+ * 2017/001), whose year chapters sit in no Title, as the real ones do.
+ */
+export const ADMIN_SITE_XML = join(ROOT, "test", "fixtures", "site-admin");
+
 /** The build's fixed clock: 2026-11-23 03:30 UTC is 10:30 pm on November 22 in New York. */
 export const FIXED_NOW = new Date("2026-11-23T03:30:00Z");
 /** The fixture index's own indexedAt (UTC). In New York it is still November 22. */
@@ -76,15 +84,20 @@ export async function buildFixtureSite({ search = false } = {}) {
  * false` takes `titleNumber` and `titleHeading` off every record: an index from before 0.7.0.
  */
 export function buildRulesFixtureData({ titles = true, extra = [] } = {}) {
-  const files = readdirSync(RULES_XML).filter((f) => f.endsWith(".xml")).sort();
+  return buildTitledFixtureData("rules", RULES_XML, { titles, extra });
+}
+
+/** The same for any book with titles: the Rules, or the Administrative Code (ADMIN_SITE_XML). */
+export function buildTitledFixtureData(corpus, dir, { titles = true, extra = [] } = {}) {
+  const files = readdirSync(dir).filter((f) => f.endsWith(".xml")).sort();
   // `extra`: more files, as XML text, read after the fixtures (a test's own chapters).
-  const texts = [...files.map((f) => [f, readFileSync(join(RULES_XML, f), "utf8")]), ...extra.map((xml, i) => [`extra-${i}.xml`, xml])];
-  const collector = createStructureCollector("rules");
+  const texts = [...files.map((f) => [f, readFileSync(join(dir, f), "utf8")]), ...extra.map((xml, i) => [`extra-${i}.xml`, xml])];
+  const collector = createStructureCollector(corpus);
   const index = createTitleIndex();
   let sections = [];
   let version = "Unknown";
   for (const [f, xml] of texts) {
-    collectSectionsFromXml(xml, "rules", sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), index);
+    collectSectionsFromXml(xml, corpus, sections, (e) => { throw e; }, collector.forFile({ root: f === "0-0-0-1.xml" }), index);
     if (f === "0-0-0-1.xml") version = extractVersion(xml);
   }
   finishTitles(index);
@@ -105,4 +118,22 @@ export async function buildRulesFixtureSite({ search = false, titles = true, boo
   const outDir = join(mkdtempSync(join(tmpdir(), "law-reader-site-")), "site");
   const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef", books });
   return { ...result, data: d.data, rules, dataDirs: d };
+}
+
+/**
+ * Build the Charter, the Administrative Code (ADMIN_SITE_XML) and the Rules fixtures into a new
+ * temporary folder: all three books, as the deploy builds them (issue #65's search tests).
+ */
+export async function buildThreeBookFixtureSite({ search = false, books = ["charter", "admin_code", "rules"] } = {}) {
+  const d = writeFixtureData();
+  const admin = buildTitledFixtureData("admin_code", ADMIN_SITE_XML);
+  const rules = buildRulesFixtureData();
+  for (const [corpus, data] of [["admin_code", admin], ["rules", rules]]) {
+    writeFileSync(join(d.indexDir, `${corpus}.json`), data.json);
+    writeFileSync(join(d.structureDir, `${corpus}.json`), structureJson(data.structure));
+  }
+  writeFileSync(join(d.indexDir, "versions.json"), JSON.stringify({ ...d.data.versions, admin_code: admin.version, rules: rules.version }, null, 2));
+  const outDir = join(mkdtempSync(join(tmpdir(), "law-reader-site-")), "site");
+  const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef", books });
+  return { ...result, data: d.data, admin, rules, dataDirs: d };
 }
