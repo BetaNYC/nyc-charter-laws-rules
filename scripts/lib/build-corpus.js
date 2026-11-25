@@ -21,6 +21,7 @@ import {
   extractText,
   normalize,
 } from "./extract-text.js";
+import { mapSymbolRuns } from "./symbol-font.js";
 
 // Extract the "Current through..." version string from the root document's
 // raw XML text. The text lives in CHARFORMAT nodes inside Introduction-style
@@ -580,7 +581,9 @@ export function findDocument(parsed) {
 // scripts/lib/build-structure.js to record the structure the index drops. See collectSections.
 // `titles` (optional, issue #59): a createTitleIndex() shared by every file of the book; call
 // finishTitles on it after the last file. See "Titles" above.
-export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks = null, titles = null) {
+// `symbols` (optional, issue #88): a createSymbolTally() (symbol-font.js) that counts the
+// Symbol-font runs mapped to Unicode, for the build log. The mapping happens either way.
+export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks = null, titles = null, symbols = null) {
   const cleaned = xml.replace(/^﻿/, ""); // strip BOM
   let parsed;
   try {
@@ -589,6 +592,9 @@ export function collectSectionsFromXml(xml, corpusKey, sections, onError, hooks 
     if (onError) onError(e);
     return false;
   }
+  // Text set in the Symbol font becomes the Unicode the font draws ("³" → "≥"), before anything
+  // reads the tree, so the index, the structure and the coverage audit agree (issue #88).
+  mapSymbolRuns(parsed, symbols);
   const doc = findDocument(parsed);
   if (hooks?.onDocument && doc) hooks.onDocument(doc);
   collectSections(doc, corpusKey, sections, hooks?.onSection ?? null, [], null, titles);

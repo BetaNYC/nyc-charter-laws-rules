@@ -31,6 +31,7 @@ import {
 import { mergeVersions } from "./lib/merge-versions.js";
 import { createStructureCollector, structureJson } from "./lib/build-structure.js";
 import { corpusMarkdown } from "./lib/serialize-markdown.js";
+import { createSymbolTally } from "./lib/symbol-font.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data");
@@ -77,6 +78,8 @@ for (const corpus of CORPORA) {
   const structure = createStructureCollector(corpus.key);
   // Each record's title (issue #59): read file by file, finished once every file is read.
   const titles = createTitleIndex();
+  // Text in the Symbol font, mapped to Unicode while parsing (issue #88).
+  const symbols = createSymbolTally();
   let fileCount = 0;
 
   for (const entry of entries) {
@@ -90,7 +93,8 @@ for (const corpus of CORPORA) {
         console.warn(`  Skipping ${entry.entryName}: ${e.message}`);
       },
       structure.forFile({ root: entry.entryName.endsWith("0-0-0-1.xml") }),
-      titles
+      titles,
+      symbols
     );
     if (!ok) continue;
 
@@ -105,6 +109,16 @@ for (const corpus of CORPORA) {
   }
 
   console.log(`  Indexed ${sections.length} sections from ${fileCount} files`);
+  // Symbol-font runs (issue #88). An unmapped character is left as the XML has it: name it, so
+  // the table or the XML can be checked, rather than guess.
+  const unmapped = [...symbols.unmapped].map(([ch, n]) =>
+    `${JSON.stringify(ch)} U+${ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")} x${n}`
+  );
+  console.log(
+    `  Symbol font: ${symbols.runs} runs, ${symbols.mapped} characters mapped to Unicode, ${symbols.headings} headings matched to their text` +
+      (unmapped.length ? `; NOT mapped, left as is: ${unmapped.join(", ")}` : "")
+  );
+  if (unmapped.length) console.warn(`  Warning: ${unmapped.length} Symbol-font characters have no Unicode in the table.`);
   if (corpus.key !== "charter") {
     // How each record's title was found (build-corpus.js, "Titles"). `disagree` should be 0: it
     // counts records whose own file names a title that record order would not give.
