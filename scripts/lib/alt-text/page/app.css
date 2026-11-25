@@ -1,0 +1,78 @@
+/* The picture description page (issue #87). Plain CSS, no external files. */
+:root {
+  --bg: #ffffff;
+  --fg: #1b1b1b;
+  --muted: #4a4a4a;
+  --line: #8a8a8a;
+  --panel: #f3f4f6;
+  --accent: #0b4f9c;
+  --accent-fg: #ffffff;
+  --focus: #b3261e;
+  --warn-bg: #fff4d6;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --fg: #f1f1f1;
+    --muted: #c4c4c4;
+    --line: #9a9a9a;
+    --panel: #1f2328;
+    --accent: #8ab4f8;
+    --accent-fg: #0b1a2e;
+    --focus: #ffb4ab;
+    --warn-bg: #3a2f10;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+header.top, main { max-width: 64rem; margin: 0 auto; padding: 0 16px; }
+header.top { padding-top: 1rem; }
+h1 { font-size: 1.75rem; margin: 0.5rem 0; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+.about, .meta, .hint, .keys { color: var(--muted); }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 8px; background: var(--bg); padding: 0.5rem; z-index: 10; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+[tabindex="-1"]:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 1rem; }
+.field { display: flex; flex-direction: column; min-width: 12rem; }
+label { font-weight: 600; margin-top: 0.75rem; display: block; }
+fieldset label { font-weight: 400; margin-top: 0.25rem; }
+select, textarea, input, button, .button { font: inherit; }
+select, textarea { border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--fg); padding: 0.4rem; }
+textarea { width: 100%; resize: vertical; }
+textarea[readonly] { background: var(--panel); }
+button, .button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+button[disabled] { opacity: 0.6; cursor: default; }
+#save-next, #prev, #next, .disclosure { background: var(--bg); color: var(--accent); }
+.pager { display: flex; align-items: center; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+figure { margin: 1rem 0; padding: 0.5rem; background: #ffffff; border: 1px solid var(--line); }
+figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+figcaption { color: #333333; font-size: 0.9rem; margin-top: 0.5rem; }
+#uses li { margin-bottom: 1rem; }
+#uses blockquote { margin: 0.25rem 0; padding: 0.25rem 0.75rem; border-left: 4px solid var(--line); background: var(--panel); white-space: pre-wrap; }
+.unsure { background: var(--warn-bg); padding: 0.5rem; border-radius: 4px; }
+.actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+fieldset { margin-top: 1rem; border: 1px solid var(--line); border-radius: 4px; }
+/* body carries the mode too; only the parts inside it are switched. */
+:not(body)[data-mode] { display: none; }
+body[data-mode="local"] [data-mode="local"], body[data-mode="static"] [data-mode="static"] { display: revert; }
+body[data-mode="local"] div[data-mode="local"], body[data-mode="static"] div[data-mode="static"] { display: block; }
+#save-status:not(:empty) { font-weight: 600; }

@@ -52,6 +52,10 @@
     "update-changelog": "node scripts/update-changelog.js",
     "build-site": "node scripts/build-site.js",
     "serve-site": "node scripts/serve-site.js",
+    "alt:inventory": "node scripts/alt-text.js inventory",
+    "alt:draft": "node scripts/alt-text.js draft",
+    "alt:review": "node scripts/alt-text.js review",
+    "alt:build-static": "node scripts/alt-text.js build-static",
     "pretest": "npm run build",
     "test": "node --test test/*.test.js",
     "test:diff": "node --test test/diff/differential.mjs",
@@ -67,6 +71,7 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "1.8.0",
     "@nysds/components": "^1.23.2",
     "@types/node": "^22.0.0",
     "pagefind": "^1.6.0",

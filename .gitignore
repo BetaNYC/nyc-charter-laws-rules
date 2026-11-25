@@ -5,3 +5,8 @@ data/raw/
 .DS_Store
 __pycache__/
 _site/
+
+# Alt-text tool (issue #87): lock and temp files beside the sidecars, and the static page build
+data/alt-text/*.lock
+data/alt-text/*.tmp-*
+_alt-review/
