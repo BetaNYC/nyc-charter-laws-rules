@@ -212,7 +212,7 @@ function footer(site, { sourceLine = false, backToTop = true } = {}) {
   return `<footer data-pagefind-ignore="all">${backToTop ? "\n  <nys-backtotop></nys-backtotop>" : ""}
   <div class="wrap">
     <img class="wordmark" src="/assets/betanyc-wordmark-blue.svg" alt="BetaNYC" width="90" height="30">
-    <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>.</p>
+    <p><strong>${escapeHtml(SITE_NAME)}</strong> is built by <a href="https://beta.nyc">BetaNYC</a>, a project of the Fund for the City of New York. <a href="${REPO_URL}">Source code on GitHub</a>. Found a mistake? <a href="${REPO_URL}/issues">Tell us</a>. Mistakes in the publisher's own text are listed on <a href="/source-errors/">Errors in the publisher's text</a>.</p>
     <p>Want all of it? Download the text as JSON and Markdown <a href="${REPO_URL}/tree/main/data/index">from GitHub</a> instead of copying pages. AI assistants can read the same text through BetaNYC's MCP server, <a href="${NPM_URL}">@betanyc/nyc-charter-laws-rules on npm</a>.</p>
     <p class="small">${!sourceLine ? "" : `The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). `}Our code is MIT licensed; the license does not cover the publisher's text.</p>
   </div>
