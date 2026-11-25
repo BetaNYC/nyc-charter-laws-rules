@@ -255,6 +255,26 @@ h1 { font-size: clamp(26px, 4vmin, 36px); margin-top: 20px; }
 .law .subhead + .boldline, .law > .boldline:first-child { margin-top: 12px; padding-top: 0; border-top: 0; }
 .law .ednote { font: 15px/1.6 var(--font-body); background: var(--light); border-left: 4px solid var(--line); padding: 8px 12px; }
 
+/* Tables (issue #65; render-html.js tableHtml): a plain <table> inside NYSDS's nys-table, inside the
+   template's .table-scroll box (site.css: "A wide table scrolls inside its own box on a phone
+   instead of widening the page", WCAG 1.4.10), with the template's table look. The box is
+   focusable and named, so a keyboard can scroll it, and shows the focus ring. These rules hold
+   whether or not nys-table has run (JavaScript off, print): NYSDS 1.23.2 adopts its own table
+   styles once the element connects, and its selectors (`nys-table td`) beat the template's plain
+   `td` but not these. Cell borders are the template's --line (3.03:1 on white) rather than its
+   --line-soft or NYSDS's bordered gray (#d0d0ce, about 1.5:1), so the grid stays visible in a
+   table with no header row. A cell keeps its words whole: the column's `overflow-wrap: anywhere`
+   would squeeze a wide table into one-letter columns rather than let its box scroll. */
+.law .table-scroll { max-width: 100%; margin: 0 0 16px; overflow-wrap: normal; }
+.law .table-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.law .table-scroll nys-table { display: block; }
+.law .table-scroll table { width: auto; min-width: 100%; margin: 0; font: 16px/1.5 var(--font-body); }
+.law .table-scroll th, .law .table-scroll td { border: 1px solid var(--line); padding: 6px 10px; vertical-align: top; text-align: left; overflow-wrap: normal; overflow: visible; }
+.law .table-scroll th { font-weight: 700; }
+.law .table-scroll .num { text-align: right; }
+.law .table-scroll .al-c { text-align: center; }
+.law .table-scroll a { overflow-wrap: normal; }
+
 .pager { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line-soft); margin-top: 28px; padding-top: 16px; max-width: 72ch; }
 .pager a { text-decoration: none; display: block; padding: .4rem 0; max-width: 32ch; }
 .pager small { display: block; color: var(--ink); font-size: 13px; }
@@ -313,6 +333,20 @@ ol.hits { list-style: none; padding: 0; margin: 0; }
   /* A printed chapter page has every section's text, whatever the paper's width. */
   .chapter-text { display: block !important; }
   .law { max-width: none; font-size: 12pt; }
+  /* On paper a box cannot scroll, so a table must fit the page's width: it is the page's width,
+     in smaller type with tighter cells; in a table of many columns a cell's words may break
+     anywhere (below), so even the widest tables (29 columns in the Administrative Code) wrap
+     instead of running off the right edge.
+     Rows are kept whole, and the head repeats on each page. */
+  .law .table-scroll { overflow: visible; max-width: 100%; }
+  .law .table-scroll table { width: 100%; min-width: 0; font-size: 8pt; line-height: 1.3; }
+  .law .table-scroll th, .law .table-scroll td, .law .table-scroll a { overflow-wrap: break-word; padding: 2px 4px; }
+  /* A table of 8 columns or more (render-html.js PRINT_DENSE_COLUMNS) may need its words broken
+     anywhere to fit; a narrower one keeps its words whole ("Yes", not "Ye|s"). */
+  .law .table-scroll[data-many-columns] th, .law .table-scroll[data-many-columns] td, .law .table-scroll[data-many-columns] a { overflow-wrap: anywhere; }
+  .law .table-scroll a { padding: 0; }
+  .law .table-scroll tr { break-inside: avoid; }
+  .law .table-scroll thead { display: table-header-group; }
   .law a { color: inherit; text-decoration: none; }
   .copy-box { break-inside: avoid; }
   /* On paper, the official text still needs its address. */

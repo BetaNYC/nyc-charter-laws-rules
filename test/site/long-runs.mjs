@@ -62,3 +62,29 @@ export function pagesWithLongRuns(outDir, min = LONG_RUN) {
   walk(outDir);
   return out.sort((a, b) => a.path.localeCompare(b.path));
 }
+
+/**
+ * Every page in a built site that shows a table as a table (issue #65; render-html.js tableHtml):
+ * [{ path, tables }]. A table's box scrolls a wide table inside itself; overflow.test.mjs opens
+ * each of these at 390px and 320px to check that the page itself does not scroll sideways.
+ */
+export function pagesWithTables(outDir) {
+  const out = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) {
+        if (e.name !== "pagefind" && e.name !== "assets") walk(p);
+      } else if (e.name.endsWith(".html")) {
+        const tables = (readFileSync(p, "utf8").match(/<div class="table-scroll" /g) ?? []).length;
+        if (tables) {
+          const rel = "/" + relative(outDir, p).replace(/\\/g, "/");
+          const path = rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length) : rel.replace(/\.html$/, "");
+          out.push({ path, tables });
+        }
+      }
+    }
+  };
+  walk(outDir);
+  return out.sort((a, b) => a.path.localeCompare(b.path));
+}

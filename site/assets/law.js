@@ -10,6 +10,8 @@
 //     scrolled to the reader's own section, or else the open chapter, rather than the Preamble.
 //   - On a chapter page at 900px and wider, where the page shows every section's text, the
 //     jump list and the tree's links for this chapter go to those copies (#s-4).
+//   - Table boxes (issue #65): a box whose table is wider than it is a named region and a tab
+//     stop, so a keyboard can scroll it; one whose table fits is neither.
 import { lookup, jumpTarget, citeWithAnchor, splitCopyId } from "./jump.js";
 
 /** The width where a chapter page shows its sections' full text and the tree is a column. law.css uses the same. */
@@ -372,10 +374,59 @@ export function pointAtCopies(doc = document) {
   return true;
 }
 
+/**
+ * A table's box (render-html.js tableHtml) scrolls a wide table sideways inside itself. While it
+ * does, the box is a region named from its data-table-name ("Table, 15 RCNY § 1-01", unique on
+ * the page) and a tab stop, so a keyboard can reach it and scroll it with the arrow keys. A box
+ * whose table fits is neither: a page can hold hundreds of small tables, and a region and a tab
+ * stop that scroll nothing are noise. Checked again whenever the box or its table changes size
+ * (a resize, a phone turned, nys-table's styles arriving).
+ */
+export function wireTables(doc = document) {
+  const boxes = [...doc.querySelectorAll(".table-scroll[data-table-name]")];
+  if (!boxes.length) return false;
+  // Write an attribute only when its value changes (null removes it), so a resize that changes
+  // nothing touches nothing.
+  const set = (box, name, value) => {
+    if (value === null) {
+      if (box.hasAttribute(name)) box.removeAttribute(name);
+    } else if (box.getAttribute(name) !== value) box.setAttribute(name, value);
+  };
+  // A box that stops scrolling while it has the focus (the window widened) keeps its tab stop
+  // and name until the focus leaves it; taking them away then would drop the focus to <body>.
+  const waiting = new WeakSet();
+  const apply = (box) => {
+    const scrolls = box.scrollWidth > box.clientWidth;
+    if (!scrolls && box === doc.activeElement && box.hasAttribute("tabindex")) {
+      if (!waiting.has(box)) {
+        waiting.add(box);
+        box.addEventListener("blur", () => { waiting.delete(box); apply(box); }, { once: true });
+      }
+      return;
+    }
+    set(box, "role", scrolls ? "region" : null);
+    set(box, "aria-label", scrolls ? box.dataset.tableName : null);
+    set(box, "tabindex", scrolls ? "0" : null);
+  };
+  boxes.forEach(apply);
+  if (typeof ResizeObserver === "function") {
+    const watch = new ResizeObserver((entries) => {
+      for (const box of new Set(entries.map((e) => e.target.closest(".table-scroll")))) if (box) apply(box);
+    });
+    for (const box of boxes) {
+      watch.observe(box);
+      const table = box.querySelector("table");
+      if (table) watch.observe(table);
+    }
+  }
+  return true;
+}
+
 wireForms();
 wireTools();
 wireContents();
 pointAtCopies();
+wireTables();
 // Last, so nothing it meets can keep the page's controls from being wired.
 landOnAnchor();
 window.addEventListener("hashchange", landOnAnchor);

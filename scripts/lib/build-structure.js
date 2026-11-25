@@ -45,6 +45,8 @@
 //     what they are.
 //   - Tables and pictures appear in the Administrative Code and the Rules only; a block holding
 //     one says so (`table`, `picture`), and its text is the flattened text the index has.
+//   - A table's rows and cells (issue #65, display only) are carried as `rows` on its block:
+//     see paraTable. The index's text for the table does not change.
 
 import {
   tagOf,
@@ -250,6 +252,150 @@ export function paraFormatting(para) {
   return runs;
 }
 
+// Tables (issue #65). Display only: the index's text for a table is its cells' words, run
+// together, and never changes; the rows and cells here are slices of that text.
+//
+// What American Legal's bulk XML marks (no published schema; read from the July 5, 2026 files,
+// 7,413 TABLE elements, 2,324 in the Rules and 5,089 in the Administrative Code, none in the
+// Charter):
+//   - A TABLE is the only content of its PARA (every one), never inside another TABLE. Its
+//     children are one TABLEFORMAT (number-of-widths, COLUMNFORMAT widths: layout only) and its
+//     ROWs; a ROW's children are COLs (the cells), and a COL holds one or more PARAs.
+//   - A cell's other facts are on a CELL element inside its first PARA (at most one per COL):
+//     header="true" (a header cell), cells-merged-right="N" (it spans N more columns) and
+//     cells-merged-down="N" (N more rows). A row below a merged-down cell leaves that column's
+//     COL out, the way HTML leaves out the cells a rowspan covers. Of 7,413 tables, 55 do not
+//     add up to their number-of-widths; they are kept as the publisher has them.
+//   - Inside a cell, a second PARA, or a <LINEBRK/>, starts a new line.
+//   - PARAFORMAT justify="right" | "center" sets a cell's alignment (prices, column heads).
+// Cell marks go inside each COL, and a line-break mark before each <LINEBRK/> and each later
+// PARA, so the separator rules in extractText (which look at the node after a separator) see
+// the same siblings; then the flattened text must equal the index's text, or the table is
+// left as plain text (paraTable returns null).
+const CELL_OPEN = "";
+const CELL_CLOSE = "";
+const LINE = "";
+
+function markLines(node) {
+  if (Array.isArray(node)) return node.flatMap((n) => (n && typeof n === "object" && tagOf(n) === "LINEBRK" ? [{ "#text": LINE }, n] : [markLines(n)]));
+  if (!node || typeof node !== "object" || "#text" in node) return node;
+  const tag = tagOf(node);
+  if (!tag) return node;
+  return { ...node, [tag]: markLines(Array.isArray(node[tag]) ? node[tag] : []) };
+}
+
+function firstTag(node, tag) {
+  if (Array.isArray(node)) {
+    for (const n of node) {
+      const hit = firstTag(n, tag);
+      if (hit) return hit;
+    }
+    return null;
+  }
+  if (!node || typeof node !== "object" || "#text" in node) return null;
+  const t = tagOf(node);
+  if (!t) return null;
+  return t === tag ? node : firstTag(node[t], tag);
+}
+
+const ALIGN = { right: "r", center: "c" };
+
+/**
+ * A table PARA's rows, as slices of its flattened text (normalize(extractText(para)), the index's
+ * text for it): rows → cells, each [start, end] or [start, end, extra] with extra holding
+ * h: 1 (a header cell), cs / rs (column and row span, when more than 1), al: "r" | "c" (right or
+ * centered) and br (offsets where a new line starts inside the cell). Null when the PARA holds no
+ * TABLE or the marks moved the text in any way; the block is then shown as plain text, as before.
+ */
+export function paraTable(para) {
+  const kids = para?.[tagOf(para)];
+  if (!Array.isArray(kids)) return null;
+  const table = kids.find((k) => tagOf(k) === "TABLE");
+  if (!table) return null;
+  const plain = normalize(extractText(para));
+  const facts = []; // per COL, in document order
+  const grid = []; // per ROW: how many COLs
+  const markedTable = {
+    ...table,
+    TABLE: table.TABLE.map((row) => {
+      if (tagOf(row) !== "ROW") return row;
+      let n = 0;
+      const r = {
+        ...row,
+        ROW: row.ROW.map((col) => {
+          if (tagOf(col) !== "COL") return col;
+          n++;
+          const cell = firstTag(col, "CELL");
+          const format = firstTag(col, "PARAFORMAT");
+          const span = (name) => Math.max(0, Math.floor(Number(cell ? getAttr(cell, name) : 0) || 0));
+          facts.push({
+            header: cell ? getAttr(cell, "header") === "true" : false,
+            cs: span("cells-merged-right") + 1,
+            rs: span("cells-merged-down") + 1,
+            al: format ? ALIGN[getAttr(format, "justify")] ?? null : null,
+          });
+          let paras = 0;
+          const inner = col.COL.flatMap((k) => {
+            const m = markLines(k);
+            if (tagOf(k) === "PARA" && paras++ > 0) return [{ "#text": LINE }, m];
+            return [m];
+          });
+          return { ...col, COL: [{ "#text": CELL_OPEN }, ...inner, { "#text": CELL_CLOSE }] };
+        }),
+      };
+      grid.push(n);
+      return r;
+    }),
+  };
+  const marked = normalize(extractText({ ...para, [tagOf(para)]: kids.map((k) => (k === table ? markedTable : k)) }));
+  const cells = [];
+  let open = null;
+  let out = "";
+  for (const ch of marked) {
+    if (ch === CELL_OPEN) {
+      if (open) return null;
+      open = { start: out.length, br: [] };
+    } else if (ch === CELL_CLOSE) {
+      if (!open) return null;
+      cells.push({ ...open, end: out.length });
+      open = null;
+    } else if (ch === LINE) {
+      if (!open) return null;
+      open.br.push(out.length);
+    } else if (/\s/.test(ch)) {
+      if (out.length > 0 && !out.endsWith(" ")) out += " ";
+    } else {
+      out += ch;
+    }
+  }
+  while (out.endsWith(" ")) out = out.slice(0, -1);
+  if (open || out !== plain || cells.length !== facts.length) return null;
+  const rows = [];
+  let k = 0;
+  for (const n of grid) {
+    const row = [];
+    for (let i = 0; i < n; i++, k++) {
+      let { start, end } = cells[k];
+      // Empty cells at the end of the table open after the space the text's end trims off.
+      end = Math.min(end, out.length);
+      start = Math.min(start, end);
+      while (start < end && out[start] === " ") start++;
+      while (end > start && out[end - 1] === " ") end--;
+      const f = facts[k];
+      const extra = {};
+      if (f.header) extra.h = 1;
+      if (f.cs > 1) extra.cs = f.cs;
+      if (f.rs > 1) extra.rs = f.rs;
+      if (f.al) extra.al = f.al;
+      const br = [...new Set(cells[k].br.map((p) => Math.min(p, out.length)))].filter((p) => p > start && p < end);
+      if (br.length) extra.br = br;
+      row.push(Object.keys(extra).length ? [start, end, extra] : [start, end]);
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
 // The raw target of a <LINK>, before it is resolved to a section.
 function linkTarget(attrs, corpus) {
   const a = (k) => attrs[`@_${k}`] ?? "";
@@ -403,7 +549,12 @@ export function createStructureCollector(corpus) {
             block.depth = tabs;
           }
         }
-        if (p && hasTag(p, "TABLE")) block.table = true;
+        if (p && hasTag(p, "TABLE")) {
+          block.table = true;
+          // Its rows and cells (issue #65), as offsets into the section's `text`, like links.
+          const rows = paraTable(p);
+          if (rows) block.rows = rows.map((row) => row.map(([a, b, extra]) => (extra ? [start + a, start + b, extra.br ? { ...extra, br: extra.br.map((x) => start + x) } : extra] : [start + a, start + b])));
+        }
         if (p && hasTag(p, "PICTURE")) block.picture = true;
         if (!records.some(([r]) => r === rid)) records.push([rid, block]);
         for (const l of links ?? []) {

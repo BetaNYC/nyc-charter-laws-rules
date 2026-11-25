@@ -20,7 +20,7 @@ import { buildSite, currentThroughLine, BUILD_MARKER } from "../scripts/lib/site
 import { loadBook, chapterOrderKey, sectionSlug, chapterSlug, shortHeading, linkHref, linkTarget } from "../scripts/lib/site/model.js";
 import { readFooter, disclaimerParagraphs, plainParagraph } from "../scripts/lib/site/disclaimer.js";
 import { newYorkDay, newYorkLongDate, newYorkIso } from "../scripts/lib/site/clock.js";
-import { readBlocks, bodyHtml, isHistoryLine, copyId } from "../scripts/lib/site/render-html.js";
+import { readBlocks, bodyHtml, isHistoryLine, isTable, copyId } from "../scripts/lib/site/render-html.js";
 import { unescapeHtml, escapeHtml } from "../scripts/lib/site/html.js";
 import { robotsTxt, WELCOMED_CRAWLERS } from "../scripts/lib/site/outputs.js";
 import { SITE_BASE, SITE_NAME } from "../scripts/lib/site/config.js";
@@ -353,10 +353,12 @@ function assertSameBlocks(record, structure, html, label, headingLevel = 2) {
   shown.forEach((b, i) => {
     assert.equal(b.n, i, `${label}: block ${i} out of order`);
     assert.equal(b.text, body[i].text, `${label}: block ${i} text`);
-    const cls = { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote", subheading: "subhead" }[body[i].type];
+    // A table with its cells (issue #65) is a scrolling box around a <table>.
+    const table = isTable(body[i]);
+    const cls = table ? "table-scroll" : { subdivision: "sub", text: isHistoryLine(body[i]) ? "txt history" : "txt", note: "ednote", subheading: "subhead" }[body[i].type];
     assert.equal(b.cls, cls, `${label}: block ${i} type`);
     // A Subsection's heading line is a real heading (issue #76); every other block is a paragraph.
-    assert.equal(b.tag, body[i].type === "subheading" ? `h${headingLevel}` : "p", `${label}: block ${i} element`);
+    assert.equal(b.tag, table ? "div" : body[i].type === "subheading" ? `h${headingLevel}` : "p", `${label}: block ${i} element`);
     assert.equal(b.id, body[i].anchor, `${label}: block ${i} anchor`);
   });
   const md = sectionMarkdown(blocks);
