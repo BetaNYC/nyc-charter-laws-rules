@@ -70,3 +70,10 @@ test("Retry-After: seconds, an HTTP date, garbage, and the 60 s cap", () => {
   assert.equal(retryWaitMs(null, 2, now), 10_000);
   assert.equal(retryWaitMs("3600", 1, now), 60_000);
 });
+
+test("passes redirect through to fetch: follow by default, manual when asked (issue #55)", async () => {
+  const { impl, calls } = fakeFetch([200]);
+  await politeFetch("https://example.test/x.zip", { fetchImpl: impl, wait: async () => {} });
+  await politeFetch("https://example.test/x.zip", { fetchImpl: impl, wait: async () => {}, redirect: "manual" });
+  assert.deepEqual(calls.map((c) => c.redirect), ["follow", "manual"]);
+});
