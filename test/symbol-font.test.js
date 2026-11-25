@@ -17,6 +17,8 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import {
   SYMBOL_TO_UNICODE,
+  REVIEWED_SYMBOL_CODES,
+  KEPT_SYMBOL_CODES,
   parseSymbolTable,
   symbolToUnicode,
   mapSymbolRuns,
@@ -36,7 +38,7 @@ const paraText = (xml, tally = null) => {
 
 // --- The table ---------------------------------------------------------------------------------
 
-test("table: the codes the publisher's files use map to the characters the Symbol font draws", () => {
+test("table: the vendored table says what the font draws, including at codes we do not change", () => {
   const want = {
     0xa3: "≤", 0xb3: "≥", 0xb4: "×", 0xb7: "•", 0xd6: "√", 0xa7: "♣",
     0x44: "Δ", 0x53: "Σ", 0x57: "Ω", 0x61: "α", 0x6d: "μ", 0x71: "θ", 0x72: "ρ", 0x73: "σ",
@@ -45,6 +47,22 @@ test("table: the codes the publisher's files use map to the characters the Symbo
   for (const [code, ch] of Object.entries(want)) {
     assert.equal(SYMBOL_TO_UNICODE.get(Number(code)), ch, `0x${Number(code).toString(16)}`);
   }
+});
+
+test("reviewed list: only these thirteen codes change, each to what the vendored table says", () => {
+  // The list, as reviewed against the publisher's July 2026 files. Adding a code means reading
+  // the records the build reports it in first; this test makes that a deliberate edit.
+  assert.deepEqual(
+    [...REVIEWED_SYMBOL_CODES].map(([code, ch]) => `${String.fromCharCode(code)}→${ch}`),
+    ["D→Δ", "S→Σ", "W→Ω", "a→α", "m→μ", "q→θ", "r→ρ", "s→σ", "£→≤", "³→≥", "´→×", "Ö→√", "(→("]
+  );
+  for (const [code, ch] of REVIEWED_SYMBOL_CODES) {
+    assert.equal(SYMBOL_TO_UNICODE.get(code), ch, `0x${code.toString(16)} agrees with the table`);
+  }
+  // Reviewed and kept as they are: § (footnote marks in 1 RCNY § 101-14, where the font draws ♣)
+  // and · (bullets, and "times" in Mechanical Code units, where the font draws •).
+  assert.deepEqual([...KEPT_SYMBOL_CODES.keys()], [0xa7, 0xb7]);
+  for (const code of KEPT_SYMBOL_CODES.keys()) assert.ok(!REVIEWED_SYMBOL_CODES.has(code));
 });
 
 test("table: where it lists two Unicode values, the one NFKC keeps wins; Corporate Use is left out", () => {
@@ -70,7 +88,8 @@ test("table: where it lists two Unicode values, the one NFKC keeps wins; Corpora
 test("symbolToUnicode: maps glyph codes, keeps whitespace and character references", () => {
   assert.equal(symbolToUnicode("³"), "≥");
   assert.equal(symbolToUnicode("£ "), "≤ ");
-  assert.equal(symbolToUnicode("\n\t\t·"), "\n\t\t•");
+  assert.equal(symbolToUnicode("\n\t\t·"), "\n\t\t·", "the middle dot is kept");
+  assert.equal(symbolToUnicode("§§ "), "§§ ", "§ is kept, never ♣");
   // "&#160;" is a character reference the parser leaves as text; it names Unicode, not a Symbol
   // code, and decodeEntities() turns it into a no-break space later. Mapping its letters would
   // be wrong only by luck of the table (& # digits ; map to themselves), so it is skipped.
@@ -80,11 +99,29 @@ test("symbolToUnicode: maps glyph codes, keeps whitespace and character referenc
   assert.equal(symbolToUnicode(""), "≥≤");
 });
 
-test("symbolToUnicode: a character the table has no Unicode for is kept and counted, never guessed", () => {
+test("symbolToUnicode: a code not on the reviewed list is kept and reported with its record, never guessed", () => {
   const tally = createSymbolTally();
-  assert.equal(symbolToUnicode("³Āx", tally), "≥Āξ");
-  assert.equal(tally.mapped, 2);
-  assert.deepEqual([...tally.unmapped], [["Ā", 1]]);
+  // "x" is ξ in the font and "Ā" has no Symbol meaning: neither is reviewed, so both stay.
+  assert.equal(symbolToUnicode("³Āx§·", tally, "0-0-0-1"), "≥Āx§·");
+  assert.equal(tally.mapped, 1);
+  assert.equal(tally.kept, 2, "§ and · are reviewed, kept, and not reported");
+  assert.deepEqual(
+    [...tally.unreviewed].map(([ch, byRecord]) => [ch, [...byRecord]]),
+    [["Ā", [["0-0-0-1", 1]]], ["x", [["0-0-0-1", 1]]]]
+  );
+  // A private-use character whose low byte is not reviewed stays too, and is reported.
+  const t2 = createSymbolTally();
+  assert.equal(symbolToUnicode("\uF0A7", t2, "r"), "\uF0A7");
+  assert.deepEqual([...t2.unreviewed.keys()], ["\uF0A7"]);
+});
+
+test("symbolToUnicode: character references are skipped whole, so their letters are not read as Symbol codes", () => {
+  // Without the guard, the "a" in "&alpha;" and in "&#x3a3;" would become "α" (a reviewed
+  // code), and "&", "#", "l", "p", "h", ";" would be reported as unreviewed codes.
+  const tally = createSymbolTally();
+  assert.equal(symbolToUnicode("&alpha;&#x3a3;&#160;S", tally, "r"), "&alpha;&#x3a3;&#160;Σ");
+  assert.equal(tally.mapped, 1);
+  assert.equal(tally.unreviewed.size, 0);
 });
 
 // --- Real paragraphs: only Symbol runs change ----------------------------------------------------
@@ -123,13 +160,38 @@ ${SYM}D</CHARFORMAT>Dr/H) </PARA>`;
   assert.equal(tally.mapped, 3);
 });
 
-test("Rules: a Symbol-font bullet (·) becomes •, the words around it stay", () => {
+test("Rules: a Symbol-font bullet (·) is kept as a middle dot, the words around it stay", () => {
   // File 0-0-0-140078.xml: a carbon dioxide warning sign, bold, with a Symbol bullet.
   const xml = `<PARA><CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0">DO NOT ENTER ROOM/EVACUATE THE AREA:<LINEBRK/>
 </CHARFORMAT>
 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0" font-name="Symbol" font-family="serif" character-set="symbol">·</CHARFORMAT>
 <CHARFORMAT bold="1" italic="0" underline="0" strike-out="0" hidden="0"> if the CO</CHARFORMAT></PARA>`;
-  assert.equal(paraText(xml), "DO NOT ENTER ROOM/EVACUATE THE AREA: • if the CO");
+  assert.equal(paraText(xml), "DO NOT ENTER ROOM/EVACUATE THE AREA: · if the CO");
+});
+
+test("1 RCNY § 101-14: the '§§' footnote marks set in Symbol stay '§§', not '♣♣'", () => {
+  // File 0-0-0-2190.xml, record 0-0-0-2569, trimmed. The plain-text marks are "**"; the next
+  // footnote's "§§" is set in Symbol, where the font draws clubs.
+  const xml = `<RECORD id="0-0-0-2569"><PARA>ii. the dwelling unit is within a single room occupancy multiple dwelling${SYM}§§ <LINEBRK/>
+<LINEBRK/>
+</CHARFORMAT>** The permanent removal of a portion of the partition shall constitute a &quot;material alteration&quot;.<LINEBRK/>
+<LINEBRK/>
+${SYM}§§ </CHARFORMAT>Such work shall be considered an alteration and therefore require a building permit</PARA></RECORD>`;
+  const tally = createSymbolTally();
+  assert.equal(
+    paraText(xml, tally),
+    "ii. the dwelling unit is within a single room occupancy multiple dwelling§§ ** The permanent removal of a portion of the partition shall constitute a \"material alteration\". §§ Such work shall be considered an alteration and therefore require a building permit"
+  );
+  assert.equal(tally.runs, 2);
+  assert.equal(tally.mapped, 0);
+  assert.equal(tally.kept, 4);
+  assert.equal(tally.unreviewed.size, 0);
+});
+
+test("Mechanical Code MC 308: the multiplication dot in units stays '·', not a bullet", () => {
+  // File 0-0-0-230002.xml: "1.0 Btu·in/(ft²·h·°F)", each dot in its own Symbol run.
+  const xml = `<PARA>1.0 Btu${SYM}·</CHARFORMAT>in/(ft<CHARFORMAT baseline="60">2</CHARFORMAT>${SYM}·</CHARFORMAT>h${SYM}·</CHARFORMAT>°F)</PARA>`;
+  assert.equal(paraText(xml), "1.0 Btu·in/(ft2·h·°F)");
 });
 
 test("guard: the same characters in any other font, or in no font, are not changed", () => {
@@ -239,4 +301,31 @@ test("index: a HEADING that is not a copy of its PARA is left as the publisher w
   const record = tree[0];
   assert.equal(normalize(childrenByTag(record, "HEADING").map(extractText).join("")), "Limits for £ signs");
   assert.equal(tally.headings, 0);
+});
+
+test("index: a HEADING's character references are written back as they were, never decoded twice", () => {
+  const heading = (headingXml, paraXml) => {
+    const tree = makeParser().parse(`<RECORD><HEADING>${headingXml}</HEADING><PARA>${paraXml}</PARA></RECORD>`);
+    const tally = createSymbolTally();
+    mapSymbolRuns(tree, tally);
+    return [childrenByTag(tree[0], "HEADING")[0].HEADING, tally.headings];
+  };
+  // A no-break space written as "&#160;" is compared as a space and kept as "&#160;".
+  assert.deepEqual(heading(`1609.7.1 h £ 60&#160;ft.`, `1609.7.1 h ${SYM}£ </CHARFORMAT>60 ft.`), [
+    [{ "#text": "1609.7.1 h ≤ 60&#160;ft." }],
+    1,
+  ]);
+  // The parser decodes "&amp;" but leaves "&#8805;" as text, so "&amp;amp;#8805;" in the XML is
+  // the text "&amp;#8805;", which normalize() reads once as the literal "&#8805;". Writing the
+  // HEADING back from its decoded text ("&#8805;") would make normalize() read "≥" later.
+  assert.deepEqual(
+    heading(`1609.7.1 h £ 60 ft. &amp;amp;#8805;`, `1609.7.1 h ${SYM}£ </CHARFORMAT>60 ft. &amp;amp;amp;#8805;`),
+    [[{ "#text": "1609.7.1 h ≤ 60 ft. &amp;#8805;" }], 1]
+  );
+  // When the changed character is one the HEADING writes as a reference ("&#163;" is £), the
+  // HEADING is left as the publisher wrote it.
+  assert.deepEqual(heading(`1609.7.1 h &#163; 60 ft.`, `1609.7.1 h ${SYM}£ </CHARFORMAT>60 ft.`), [
+    [{ "#text": "1609.7.1 h &#163; 60 ft." }],
+    0,
+  ]);
 });

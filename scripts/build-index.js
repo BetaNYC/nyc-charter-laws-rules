@@ -109,16 +109,19 @@ for (const corpus of CORPORA) {
   }
 
   console.log(`  Indexed ${sections.length} sections from ${fileCount} files`);
-  // Symbol-font runs (issue #88). An unmapped character is left as the XML has it: name it, so
-  // the table or the XML can be checked, rather than guess.
-  const unmapped = [...symbols.unmapped].map(([ch, n]) =>
-    `${JSON.stringify(ch)} U+${ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")} x${n}`
-  );
+  // Symbol-font runs (issue #88). Only reviewed codes are changed (symbol-font.js
+  // REVIEWED_SYMBOL_CODES); any other character in a Symbol run is left as the XML has it and
+  // named here with its record, so a person can read it in context before it is added to the list.
   console.log(
-    `  Symbol font: ${symbols.runs} runs, ${symbols.mapped} characters mapped to Unicode, ${symbols.headings} headings matched to their text` +
-      (unmapped.length ? `; NOT mapped, left as is: ${unmapped.join(", ")}` : "")
+    `  Symbol font: ${symbols.runs} runs, ${symbols.mapped} characters changed, ` +
+      `${symbols.kept} kept as reviewed, ${symbols.headings} headings matched to their text`
   );
-  if (unmapped.length) console.warn(`  Warning: ${unmapped.length} Symbol-font characters have no Unicode in the table.`);
+  for (const [ch, byRecord] of symbols.unreviewed) {
+    const hex = ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0");
+    for (const [record, n] of byRecord) {
+      console.warn(`  Warning: unreviewed Symbol code ${JSON.stringify(ch)} U+${hex} in ${corpus.key} record ${record || "(none)"} x${n}, left as is`);
+    }
+  }
   if (corpus.key !== "charter") {
     // How each record's title was found (build-corpus.js, "Titles"). `disagree` should be 0: it
     // counts records whose own file names a title that record order would not give.
