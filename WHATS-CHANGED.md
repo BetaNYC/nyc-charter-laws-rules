@@ -7,6 +7,15 @@ This page lists the changes to nyc-charter-laws-rules that a reader would notice
 
 To report a bug in this server or ask for a new feature, [open an issue on GitHub](https://github.com/BetaNYC/nyc-charter-laws-rules/issues).
 
+## Unreleased: Math signs and Greek letters showed as the wrong characters
+
+- **Tags:** MCP, Site, Data, Correction
+- **What changed:** American Legal Publishing's files set some characters in the old Symbol font, a font that shows math signs and Greek letters in place of ordinary characters. This server and the BetaNYC Law Reader website read those characters as plain text, so they showed the wrong ones. Building Code section BC 722.2.1.1.4 read "For s ³ 4t" where the law says "For s ≥ 4t", and "£" stood for "≤". Formulas lost their Greek letters ("D P" for "ΔP", "S" for "Σ"), "´" stood for "×", "Ö" stood for the square root sign "√", and bullets showed as "·". Screen readers read out the wrong characters too. BetaNYC now changes each of these characters to the one the font shows, using the Unicode Consortium's published table for the Symbol font, and changes nothing set in any other font. In American Legal Publishing's July 2026 files, this changes the text of 56 Administrative Code records, most of them in the City's construction codes, and 23 Rules records. The Charter has no text in this font. The law did not change: this fixes how BetaNYC reads the publisher's files. This server's text is BetaNYC's modified copy, not the official text.
+- **If you used the old numbers:** If you quoted a formula, a limit or a table from the construction codes or the Rules, check it against the current text or American Legal Publishing's site. A "³", "£", "´" or "Ö" inside a formula or next to a number was a "≥", "≤", "×" or "√".
+- **Who it affects:** Anyone who reads the construction codes or the technical parts of the Rules through this server or the BetaNYC Law Reader, and anyone who uses a screen reader.
+- **MCP version:** [nyc-charter-laws-rules 0.8.0](RELEASES.md)
+- **More detail:** [The issue](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/88) · [Where the data comes from](DATA-SOURCES.json)
+
 ## 2026-11-24: Missing building and fire code text and appendices, and wrong chapter lists
 
 - **Tags:** MCP, Data, Correction
