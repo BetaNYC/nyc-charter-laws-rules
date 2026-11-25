@@ -41,14 +41,23 @@ function bodyOf(p, current, suggestion) {
   ].join("\n");
 }
 
+// encodeURIComponent throws on a lone surrogate (half of an emoji or a math letter, as a
+// pasted fragment can carry), so such a half is replaced with U+FFFD first.
+const wellFormed = (s) => (typeof s.toWellFormed === "function" ? s.toWellFormed() : s.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, "\uFFFD"));
+const enc = (s) => encodeURIComponent(wellFormed(s));
+
 function build(title, body) {
-  return `${REPO_ISSUES}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  return `${REPO_ISSUES}?title=${enc(title)}&body=${enc(body)}`;
 }
 
+// Cut on a code point boundary: never between the two halves of a surrogate pair.
 function shorten(s, by) {
   if (!s) return s;
-  const keep = Math.max(0, s.length - by - CUT.length);
-  return keep >= s.length ? s : `${s.slice(0, keep)}${CUT}`;
+  let keep = Math.max(0, s.length - by - CUT.length);
+  if (keep >= s.length) return s;
+  const last = s.charCodeAt(keep - 1);
+  if (keep > 0 && last >= 0xd800 && last <= 0xdbff) keep--;
+  return `${s.slice(0, keep)}${CUT}`;
 }
 
 /**
@@ -76,9 +85,9 @@ export function issueUrl(p, current, suggestion, maxLength = MAX_URL_LENGTH) {
       ["sug.alt", sug.alt],
     ].filter(([, v]) => v);
     if (!fields.length) break;
-    fields.sort((a, b) => encodeURIComponent(b[1]).length - encodeURIComponent(a[1]).length);
+    fields.sort((a, b) => enc(b[1]).length - enc(a[1]).length);
     const [name, value] = fields[0];
-    const ratio = value.length / encodeURIComponent(value).length;
+    const ratio = value.length / enc(value).length;
     const by = Math.max(1, Math.ceil(over * ratio) + CUT.length);
     const next = shorten(value, by);
     if (name === "cur.long") cur.long = next;

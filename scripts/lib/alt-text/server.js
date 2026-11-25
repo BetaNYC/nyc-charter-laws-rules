@@ -95,7 +95,17 @@ function readBody(req) {
   });
 }
 
-const str = (v, max = 20000) => (typeof v === "string" ? v.slice(0, max) : "");
+export const MAX_FIELD = 20000;
+const FIELD_NAMES = { alt: "alt text", long: "long description", note: "note" };
+const str = (v) => (typeof v === "string" ? v : "");
+/** The first review field over MAX_FIELD characters, as a message, or null. */
+function tooLong(review) {
+  for (const [k, name] of Object.entries(FIELD_NAMES)) {
+    const n = str(review?.[k]).length;
+    if (n > MAX_FIELD) return `The ${name} is ${n.toLocaleString("en-US")} characters; the limit is ${MAX_FIELD.toLocaleString("en-US")}. Shorten it and save again.`;
+  }
+  return null;
+}
 
 /**
  * Start the review server. { inventories, sources: { book: source }, storeDir, port } →
@@ -138,6 +148,8 @@ export function startReviewServer({ inventories, sources, storeDir, port = 8765,
           const hit = byKey.get(`${body.book}/${body.sha256}`);
           if (!hit) return send(res, 404, { error: "No such picture in this source." });
           if (!STATUSES.includes(body.status)) return send(res, 400, { error: `Status must be one of ${STATUSES.join(", ")}.` });
+          const over = tooLong(body.review);
+          if (over) return send(res, 413, { error: over });
           const review = { alt: str(body.review?.alt).trim(), long: str(body.review?.long).trim(), note: str(body.review?.note).trim() };
           if (!review.note) delete review.note;
           try {

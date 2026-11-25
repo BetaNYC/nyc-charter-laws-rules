@@ -5,13 +5,13 @@
 
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { chromium } from "playwright";
 import { openSource } from "../../scripts/lib/alt-text/source.js";
 import { buildInventory, loadIndex } from "../../scripts/lib/alt-text/inventory.js";
-import { saveDraft, storePath } from "../../scripts/lib/alt-text/store.js";
+import { saveDraft, saveReview, readStore, storePath } from "../../scripts/lib/alt-text/store.js";
 import { startReviewServer } from "../../scripts/lib/alt-text/server.js";
 import { buildStatic } from "../../scripts/lib/alt-text/static-build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
@@ -19,9 +19,34 @@ import { parseSnapshot, controlProblems, focusableProblems, CHROMIUM_ARGS } from
 import { makeFixture } from "../alt-text/fixture.js";
 
 let fx, inv, source, review, browser, staticSrv;
+const extra = [];
+
+// Text from the law with HTML in it must show as text. The fixture's paragraph and heading
+// carry markup that would run (window.__xss) or render (an <img>, a <b>) if inserted as HTML.
+const MARKUP = '<img src=x onerror="window.__xss=1"> & <b>bold</b>';
+const escXml = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function makeMarkupFixture() {
+  const f = makeFixture();
+  const xmlPath = join(f.source, "XML", "0-0-0-1.xml");
+  writeFileSync(xmlPath, readFileSync(xmlPath, "utf8").replace("means the item is salty.", `means the item is salty ${escXml(MARKUP)}.`));
+  const indexPath = join(f.indexDir, "rules.json");
+  writeFileSync(indexPath, readFileSync(indexPath, "utf8").replace("§ 1-01 Signs.", "§ 1-01 Signs <i>and</i> symbols."));
+  return f;
+}
+
+/** A server on its own copy of the fixture, for tests that change what is on disk. */
+async function freshServer() {
+  const f = makeMarkupFixture();
+  const src = openSource(f.source);
+  const i = buildInventory("rules", src, loadIndex("rules", f.indexDir));
+  await saveDraft(f.storeDir, "rules", i.images[0], { draft: { alt: "draft icon", long: "", unsure: "" }, model: "claude-fable-5-2" });
+  const srv = await startReviewServer({ inventories: [i], sources: { rules: src }, storeDir: f.storeDir, port: 0 });
+  extra.push(srv);
+  return { f, i, src, srv, entry: (n = 0) => readStore(f.storeDir, "rules").images[i.images[n].sha256] };
+}
 
 before(async () => {
-  fx = makeFixture();
+  fx = makeMarkupFixture();
   source = openSource(fx.source);
   inv = buildInventory("rules", source, loadIndex("rules", fx.indexDir));
   await saveDraft(fx.storeDir, "rules", inv.images[0], { draft: { alt: "draft icon", long: "", unsure: "the exact color" }, model: "claude-fable-5-2" });
@@ -33,6 +58,7 @@ before(async () => {
 });
 
 after(async () => {
+  for (const s of extra) await s.close?.();
   await browser?.close();
   await review?.close();
   staticSrv?.server?.close();
@@ -94,6 +120,7 @@ test("local page: Next moves focus to the picture's heading, and Control+Enter s
   await page.locator("#prev").click();
   const box = page.getByLabel("Alt text", { exact: true });
   await box.fill("the sodium warning icon");
+  await page.getByLabel("Reviewed: ready to show").check();
   await box.press("Control+Enter");
   await page.waitForFunction(() => /Saved/.test(document.getElementById("save-status").textContent));
   const stored = JSON.parse(readFileSync(storePath(fx.storeDir, "rules"), "utf8")).images[inv.images[0].sha256];
@@ -133,4 +160,130 @@ test("static page: Save becomes a prefilled GitHub issue link, and controls stay
   assert.deepEqual(c.unnamed, []);
   assert.deepEqual(c.duplicates, []);
   assert.deepEqual(await focusableProblems(page), []);
+});
+
+test("local page: an unread AI draft is never marked reviewed by one click (no status is chosen for it)", async () => {
+  const { srv, entry } = await freshServer();
+  const { page } = await open(`${srv.url}/`);
+  const checked = () => page.evaluate(() => document.querySelector('input[name="status"]:checked')?.value ?? null);
+  assert.equal(await checked(), null, "a drafted picture starts with no status chosen");
+  await page.locator("#save-next").click();
+  await page.waitForFunction(() => /status/i.test(document.getElementById("save-status").textContent));
+  assert.match(await page.locator("#save-status").textContent(), /Choose a status/);
+  assert.match(await page.locator("#position").textContent(), /Picture 1 of 3/, "it does not move on");
+  assert.equal(entry().status, "drafted");
+  assert.equal(entry().review, null, "nothing was saved");
+  // A picture with no entry at all starts with none chosen too.
+  await page.locator("#next").click();
+  assert.equal(await checked(), null);
+  await page.locator("#prev").click();
+  // Choosing one on purpose saves it.
+  await page.getByLabel("Leave it marked as not reviewed").check();
+  await page.locator("#save").click();
+  await page.waitForFunction(() => /^Saved/.test(document.getElementById("save-status").textContent));
+  assert.equal(entry().status, "drafted");
+  assert.equal(entry().review.alt, "draft icon");
+});
+
+test("local page: a filter change keeps unsaved text, or warns before dropping it; closing the tab asks", async () => {
+  const { srv } = await freshServer();
+  const { page } = await open(`${srv.url}/`);
+  const box = page.getByLabel("Alt text", { exact: true });
+  await box.fill("MY UNSAVED EDIT");
+  // The picture is still in the list: the text stays.
+  await page.getByLabel("Status").selectOption("drafted");
+  assert.equal(await box.inputValue(), "MY UNSAVED EDIT");
+  assert.match(await page.locator("#position").textContent(), /Picture 1 of 1/);
+  // The picture would leave the list: warn once and keep everything as it was.
+  await page.getByLabel("Book").selectOption("admin_code");
+  assert.equal(await box.inputValue(), "MY UNSAVED EDIT");
+  assert.match(await page.locator("#save-status").textContent(), /unsaved changes/);
+  assert.equal(await page.getByLabel("Book").inputValue(), "", "the filter is put back");
+  // Closing the tab with unsaved text asks first (Chromium asks only after a real click).
+  await box.click();
+  const dialog = new Promise((resolve) =>
+    page.once("dialog", async (d) => {
+      resolve(d.type());
+      await d.dismiss();
+    }),
+  );
+  await page.close({ runBeforeUnload: true });
+  assert.equal(await Promise.race([dialog, new Promise((r) => setTimeout(() => r("no dialog"), 2000))]), "beforeunload");
+});
+
+test("local page: after a conflict, Save again is refused; the person must pick a version", async () => {
+  const { srv, entry } = await freshServer();
+  const one = (await open(`${srv.url}/`)).page;
+  const two = (await open(`${srv.url}/`)).page;
+  const saveAs = async (page, text) => {
+    await page.getByLabel("Alt text", { exact: true }).fill(text);
+    await page.getByLabel("Reviewed: ready to show").check();
+    await page.locator("#save").click();
+    await page.waitForFunction(() => /^(Saved|Not saved)/.test(document.getElementById("save-status").textContent));
+  };
+  await saveAs(one, "TAB ONE");
+  assert.equal(entry().review.alt, "TAB ONE");
+  await saveAs(two, "TAB TWO");
+  assert.match(await two.locator("#save-status").textContent(), /Not saved/);
+  assert.ok(await two.locator("#conflict").isVisible(), "the newer version is shown");
+  assert.equal(await two.getByLabel("Their alt text (read only)").inputValue(), "TAB ONE");
+  assert.equal(await two.getByLabel("Alt text", { exact: true }).inputValue(), "TAB TWO", "their own text is kept");
+  const c = controlProblems(parseSnapshot(await two.locator("body").ariaSnapshot()));
+  assert.deepEqual(c.unnamed, []);
+  assert.deepEqual(c.duplicates, []);
+  assert.deepEqual(await focusableProblems(two), []);
+  assert.equal(await two.evaluate(() => document.activeElement.id), "conflict-heading", "focus moves to the conflict");
+  // Save again: still refused, nothing overwritten.
+  await two.evaluate(() => (document.getElementById("save-status").textContent = ""));
+  await two.locator("#save").click();
+  await two.waitForFunction(() => /Not saved/.test(document.getElementById("save-status").textContent));
+  assert.equal(entry().review.alt, "TAB ONE");
+  // Only an explicit choice replaces it.
+  await two.getByRole("button", { name: "Replace theirs with mine" }).click();
+  await two.waitForFunction(() => /^Saved/.test(document.getElementById("save-status").textContent));
+  assert.equal(entry().review.alt, "TAB TWO");
+  assert.equal(await two.locator("#conflict").isVisible(), false);
+  // The other way: "Use their version" shows the newer text and saves nothing.
+  await saveAs(one, "TAB ONE AGAIN");
+  assert.ok(await one.locator("#conflict").isVisible());
+  await one.getByRole("button", { name: "Use their version" }).click();
+  assert.equal(await one.getByLabel("Alt text", { exact: true }).inputValue(), "TAB TWO");
+  assert.equal(entry().review.alt, "TAB TWO");
+});
+
+test("local page: an address ending in a bad fragment (#%) still loads", async () => {
+  const { page, problems } = await open(`${review.url}/#%`);
+  assert.match(await page.locator("#position").textContent(), /Picture 1 of 3/);
+  assert.deepEqual(problems, []);
+});
+
+test("text from the law with HTML in it shows as text, never as HTML", async () => {
+  const { page, problems } = await open(`${review.url}/`);
+  assert.deepEqual(problems, []);
+  assert.equal(await page.evaluate(() => window.__xss), undefined, "no script ran");
+  assert.equal(await page.locator("#uses img, #uses b, #item-heading i, #uses i").count(), 0, "no element was made from the text");
+  assert.ok((await page.locator("#uses").textContent()).includes(MARKUP), "the markup shows as written");
+  assert.match(await page.locator("#uses").textContent(), /Signs <i>and<\/i> symbols/);
+  assert.match(await page.locator("#item-heading").textContent(), /<i>and<\/i>/);
+});
+
+test("static page without drafts says AI drafts are not shown, not 'No AI draft yet'", async () => {
+  const f = makeFixture();
+  const src = openSource(f.source);
+  const i = buildInventory("rules", src, loadIndex("rules", f.indexDir));
+  const d = await saveDraft(f.storeDir, "rules", i.images[0], { draft: { alt: "draft icon", long: "", unsure: "" }, model: "claude-fable-5-2" });
+  await saveReview(f.storeDir, "rules", i.images[0], { review: { alt: "the sodium warning icon", long: "" }, status: "reviewed", base: d.updated_at });
+  const out = join(mkdtempSync(join(tmpdir(), "alt-static-")), "site");
+  buildStatic({ inventories: [i], sources: { rules: src }, storeDir: f.storeDir, outDir: out, includeDrafts: false });
+  const srv = await startServer(out, 0);
+  try {
+    const { page, problems } = await open(`${srv.url}/`);
+    assert.deepEqual(problems, []);
+    assert.equal(await page.getByLabel("Alt text", { exact: true }).inputValue(), "the sodium warning icon");
+    const meta = await page.locator("#draft-meta").textContent();
+    assert.doesNotMatch(meta, /No AI draft yet/);
+    assert.match(meta, /AI drafts are not shown on this page/);
+  } finally {
+    srv.server.close();
+  }
 });

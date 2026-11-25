@@ -28,6 +28,7 @@ const ENTRY_KEYS = [
   "draft",
   "draft_model",
   "drafted_at",
+  "draft_failed",
   "review",
   "reviewed_at",
   "updated_at",
@@ -91,25 +92,68 @@ const LOCK_STALE_MS = 30_000;
 const LOCK_WAIT_MS = 15_000;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function acquireLockFile(lock) {
+// A lock older than LOCK_STALE_MS was left by a process that died mid-write and may be taken
+// over. Two waiters can both see the same stale lock; if both deleted it, the slower one could
+// delete the faster one's fresh lock. So a takeover happens only while holding a second,
+// short-lived lock (`<lock>.takeover`), and the lock is checked again under it: a fresh lock
+// is never deleted. The takeover lock is held for two file calls; it is cleared only if a
+// crash inside that window left it behind for LOCK_STALE_MS.
+function tryCreate(path) {
+  try {
+    closeSync(openSync(path, "wx"));
+    return true;
+  } catch (e) {
+    if (e.code !== "EEXIST") throw e;
+    return false;
+  }
+}
+
+function ageMs(path) {
+  try {
+    return Date.now() - statSync(path).mtimeMs;
+  } catch (e) {
+    if (e.code === "ENOENT") return null;
+    throw e;
+  }
+}
+
+function unlinkIfThere(path) {
+  try {
+    unlinkSync(path);
+  } catch (e) {
+    if (e.code !== "ENOENT") throw e;
+  }
+}
+
+function takeOverStale(lock, staleMs) {
+  const takeover = `${lock}.takeover`;
+  if (!tryCreate(takeover)) {
+    const age = ageMs(takeover);
+    if (age !== null && age > staleMs) unlinkIfThere(takeover);
+    return;
+  }
+  try {
+    const age = ageMs(lock);
+    if (age !== null && age > staleMs) unlinkIfThere(lock);
+  } finally {
+    unlinkIfThere(takeover);
+  }
+}
+
+/** Create the lock file, waiting for it. Options are for tests. */
+export async function _acquireLockFile(lock, { waitMs = LOCK_WAIT_MS, staleMs = LOCK_STALE_MS, afterStaleSeen } = {}) {
   const start = Date.now();
   for (;;) {
-    try {
-      closeSync(openSync(lock, "wx"));
-      return;
-    } catch (e) {
-      if (e.code !== "EEXIST") throw e;
-      try {
-        if (Date.now() - statSync(lock).mtimeMs > LOCK_STALE_MS) {
-          unlinkSync(lock); // left by a process that died mid-write
-          continue;
-        }
-      } catch {
-        continue; // released between the open and the stat
-      }
-      if (Date.now() - start > LOCK_WAIT_MS) throw new Error(`Timed out waiting for ${lock}`);
-      await sleep(25 + Math.random() * 50);
+    if (tryCreate(lock)) return;
+    const age = ageMs(lock);
+    if (age === null) continue; // released between the open and the stat
+    if (age > staleMs) {
+      afterStaleSeen?.();
+      takeOverStale(lock, staleMs);
+      continue;
     }
+    if (Date.now() - start > waitMs) throw new Error(`Timed out waiting for ${lock}`);
+    await sleep(25 + Math.random() * 50);
   }
 }
 
@@ -120,7 +164,7 @@ export function withStoreLock(dir, book, fn) {
   const run = prev.then(async () => {
     mkdirSync(dirname(file), { recursive: true });
     const lock = `${file}.lock`;
-    await acquireLockFile(lock);
+    await _acquireLockFile(lock);
     try {
       return await fn();
     } finally {
@@ -188,10 +232,23 @@ export function saveDraft(dir, book, image, { draft, model, at = now() }) {
       draft: orderText(draft),
       draft_model: model,
       drafted_at: stamp,
+      draft_failed: undefined,
       review: e?.review ?? null,
       reviewed_at: e?.reviewed_at ?? null,
       updated_at: stamp,
     };
+  });
+}
+
+/**
+ * Record that a draft failed (a refusal, or an answer cut off or not usable), so the next run
+ * does not pay for the same picture again unless asked to retry. No text is stored, and the
+ * entry's status, draft and review are left alone.
+ */
+export function saveDraftFailure(dir, book, image, { reason, model, at = now() }) {
+  return updateEntry(dir, book, image.sha256, (e) => {
+    const stamp = nextStamp(e?.updated_at, at);
+    return { ...e, ...identity(image), draft_failed: { reason, model, at }, updated_at: stamp };
   });
 }
 

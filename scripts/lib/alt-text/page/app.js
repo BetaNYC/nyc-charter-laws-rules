@@ -19,6 +19,8 @@ let shown = [];
 let at = 0;
 let dirty = false;
 let warnedLeave = false;
+let draftsIncluded = true;
+let filterWas = { book: "", status: "" };
 
 const statusOf = (item) => item.entry?.status ?? "none";
 // The index's heading often starts with the citation ("§ 81.49 Sodium Warning."): say it once.
@@ -43,14 +45,37 @@ function progress() {
   $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed; ${drafted} have an AI draft.${filter}`;
 }
 
-function applyFilters(keepKey) {
+function filtered() {
   const book = $("filter-book").value;
   const status = $("filter-status").value;
-  shown = items.filter((i) => (!book || i.book === book) && (!status || statusOf(i) === status));
+  return items.filter((i) => (!book || i.book === book) && (!status || statusOf(i) === status));
+}
+
+// keepForm: the picture shown stays the same, so its boxes (and any unsaved text) are kept.
+function applyFilters(keepKey, keepForm = false) {
+  shown = filtered();
   const keep = keepKey ? shown.findIndex((i) => keyOf(i) === keepKey) : -1;
   at = keep >= 0 ? keep : 0;
+  filterWas = { book: $("filter-book").value, status: $("filter-status").value };
   progress();
-  render(false);
+  if (keepForm && keep >= 0) renderNav();
+  else render(false);
+}
+
+// A filter change never drops unsaved text silently: if the picture stays in the list, its
+// text stays; if it would leave, the filter is put back and the person is warned once, as
+// with Previous and Next.
+function onFilterChange(ev) {
+  const cur = shown[at];
+  const key = cur ? keyOf(cur) : null;
+  const stays = key !== null && filtered().some((i) => keyOf(i) === key);
+  if (dirty && !stays && !warnedLeave) {
+    ev.target.value = ev.target.id === "filter-book" ? filterWas.book : filterWas.status;
+    warnedLeave = true;
+    setStatus(MODE === "local" ? "You have unsaved changes. Save them, or change the filter again to leave without saving." : "Your suggestion is not sent yet. Change the filter again to leave it.");
+    return;
+  }
+  applyFilters(key, dirty && stays);
 }
 
 function el(tag, text, cls) {
@@ -60,13 +85,36 @@ function el(tag, text, cls) {
   return n;
 }
 
-function render(moveFocus) {
+function renderNav() {
   const item = shown[at];
   $("item").hidden = !item;
   $("empty").hidden = !!item;
   $("prev").disabled = at <= 0;
   $("next").disabled = at >= shown.length - 1;
   $("position").textContent = item ? `Picture ${at + 1} of ${shown.length}` : "";
+}
+
+function showConflict(item) {
+  const c = item.conflict;
+  $("conflict-alt").value = c?.review?.alt ?? c?.draft?.alt ?? "";
+  $("conflict-long").value = c?.review?.long ?? c?.draft?.long ?? "";
+  $("conflict-meta").textContent = c ? `Status: ${STATUS_NAMES[c.status ?? "none"] ?? c.status}. Saved ${(c.updated_at ?? "").replace("T", " ").slice(0, 16)} UTC.` : "There is no stored description now.";
+  $("conflict").hidden = false;
+}
+
+function hideConflict() {
+  $("conflict").hidden = true;
+}
+
+function render(moveFocus) {
+  const item = shown[at];
+  // Coming back to a picture that had a conflict: its newer version is what is shown now.
+  if (item?.conflict !== undefined) {
+    item.entry = item.conflict;
+    delete item.conflict;
+  }
+  renderNav();
+  hideConflict();
   dirty = false;
   warnedLeave = false;
   setStatus("");
@@ -118,7 +166,14 @@ function render(moveFocus) {
   const draft = e?.draft;
   $("draft-alt").value = draft?.alt ?? "";
   $("draft-long").value = draft?.long ?? "";
-  $("draft-meta").textContent = draft ? `Drafted by ${e.draft_model ?? "an AI model"} on ${(e.drafted_at ?? "").slice(0, 10)}.` : "No AI draft yet.";
+  const failed = e?.draft_failed;
+  $("draft-meta").textContent = draft
+    ? `Drafted by ${e.draft_model ?? "an AI model"} on ${(e.drafted_at ?? "").slice(0, 10)}.`
+    : MODE === "static" && !draftsIncluded
+      ? "AI drafts are not shown on this page."
+      : failed
+        ? `The AI could not draft this picture: ${failed.reason} (${failed.model ?? "unknown model"}, ${(failed.at ?? "").slice(0, 10)}).`
+        : "No AI draft yet.";
   const unsure = $("draft-unsure");
   unsure.hidden = !draft?.unsure;
   unsure.textContent = draft?.unsure ? `The model was unsure about: ${draft.unsure}` : "";
@@ -128,7 +183,9 @@ function render(moveFocus) {
     $("review-alt").value = rev ? rev.alt ?? "" : draft?.alt ?? "";
     $("review-long").value = rev ? rev.long ?? "" : draft?.long ?? "";
     $("review-note").value = rev?.note ?? "";
-    const status = e?.status && e.status !== "drafted" ? e.status : "reviewed";
+    // A status a person chose before (needs work, reviewed) is kept. A picture not reviewed
+    // yet starts with none chosen, so an unread AI draft is never marked reviewed by one click.
+    const status = e?.status && e.status !== "drafted" ? e.status : null;
     for (const r of document.querySelectorAll('input[name="status"]')) r.checked = r.value === status;
   } else {
     const cur = currentText(item);
@@ -156,7 +213,12 @@ function move(by) {
 async function save(goNext) {
   const item = shown[at];
   if (!item) return;
-  const status = document.querySelector('input[name="status"]:checked')?.value ?? "reviewed";
+  const status = document.querySelector('input[name="status"]:checked')?.value;
+  if (!status) {
+    setStatus("Not saved. Choose a status first: Reviewed, Needs more work, or Leave it marked as not reviewed.");
+    document.querySelector('input[name="status"]')?.focus();
+    return;
+  }
   const body = {
     book: item.book,
     sha256: item.sha256,
@@ -175,8 +237,12 @@ async function save(goNext) {
     });
     const data = await res.json();
     if (res.status === 409) {
-      item.entry = data.current;
-      setStatus("Not saved: someone else changed this description since you opened it. Your text is still in the boxes; copy it, then move away and back to see the newer version.");
+      // The base stays the version this page loaded, so Save again is refused too. Only "Use
+      // their version" or "Replace theirs with mine" moves on from here.
+      item.conflict = data.current ?? null;
+      showConflict(item);
+      setStatus("Not saved: someone else saved this description after you opened it. Their version is shown below yours. Choose “Use their version” or “Replace theirs with mine”.");
+      $("conflict-heading").focus();
       return;
     }
     if (!res.ok) {
@@ -184,6 +250,8 @@ async function save(goNext) {
       return;
     }
     item.entry = data.entry;
+    delete item.conflict;
+    hideConflict();
     dirty = false;
     progress();
     $("picture-facts").textContent = $("picture-facts").textContent.replace(/status: .*$/, `status: ${STATUS_NAMES[statusOf(item)]}`);
@@ -231,17 +299,46 @@ async function load() {
   try {
     const res = MODE === "local" ? await fetch("api/items", { headers: { "X-Alt-Review-Token": TOKEN } }) : await fetch("data.json");
     if (!res.ok) throw new Error(res.statusText);
-    items = (await res.json()).items;
+    const data = await res.json();
+    items = data.items;
+    if (MODE === "static") draftsIncluded = data.drafts_included !== false;
   } catch (e) {
     $("progress").textContent = `Could not load the pictures: ${e.message}`;
     return;
   }
-  const wanted = decodeURIComponent(location.hash.slice(1));
+  // A fragment that is not valid percent-encoding (#%) is ignored, not fatal.
+  let wanted = "";
+  try {
+    wanted = decodeURIComponent(location.hash.slice(1));
+  } catch {
+    wanted = "";
+  }
   applyFilters(wanted || null);
 }
 
-$("filter-book").addEventListener("change", () => applyFilters(shown[at] && keyOf(shown[at])));
-$("filter-status").addEventListener("change", () => applyFilters(shown[at] && keyOf(shown[at])));
+$("filter-book").addEventListener("change", onFilterChange);
+$("filter-status").addEventListener("change", onFilterChange);
+$("use-theirs").addEventListener("click", () => {
+  const item = shown[at];
+  if (!item || item.conflict === undefined) return;
+  render(false); // takes the newer version as the entry and shows its text
+  setStatus("Showing their version. Your text was not saved.");
+  $("review-alt").focus();
+});
+$("replace-theirs").addEventListener("click", () => {
+  const item = shown[at];
+  if (!item || item.conflict === undefined) return;
+  item.entry = item.conflict; // the base is now their version, on purpose
+  delete item.conflict;
+  hideConflict();
+  save(false);
+});
+$("suggest").addEventListener("click", () => (dirty = false));
+window.addEventListener("beforeunload", (ev) => {
+  if (!dirty) return;
+  ev.preventDefault();
+  ev.returnValue = "";
+});
 $("prev").addEventListener("click", () => move(-1));
 $("next").addEventListener("click", () => move(1));
 $("review-form").addEventListener("submit", (ev) => {

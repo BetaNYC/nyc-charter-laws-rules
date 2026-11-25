@@ -90,6 +90,19 @@
             <label><input type="radio" name="status" value="needs-work"> Needs more work before it can show</label>
             <label><input type="radio" name="status" value="drafted"> Leave it marked as not reviewed</label>
           </fieldset>
+          <section id="conflict" class="conflict" aria-labelledby="conflict-heading" hidden>
+            <h4 id="conflict-heading" tabindex="-1">Someone else saved this description after you opened it</h4>
+            <p id="conflict-meta" class="meta"></p>
+            <label for="conflict-alt">Their alt text (read only)</label>
+            <textarea id="conflict-alt" rows="3" readonly></textarea>
+            <label for="conflict-long">Their long description (read only)</label>
+            <textarea id="conflict-long" rows="4" readonly></textarea>
+            <p class="hint">Your text is still in the boxes above. Nothing is saved until you choose.</p>
+            <div class="actions">
+              <button type="button" id="use-theirs">Use their version</button>
+              <button type="button" id="replace-theirs">Replace theirs with mine</button>
+            </div>
+          </section>
           <p class="keys">Shortcut: Control+Enter (or Command+Enter) in a text box saves.</p>
           <div class="actions">
             <button type="submit" id="save">Save</button>

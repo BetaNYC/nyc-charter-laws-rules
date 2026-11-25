@@ -2,7 +2,7 @@
 // Picture descriptions for the Administrative Code and the Rules (issue #87).
 //
 //   npm run alt:inventory    -- [--check-map <picture-map.csv>]
-//   npm run alt:draft        -- [--limit N] [--book rules] [--force] [--model id] [--yes]
+//   npm run alt:draft        -- [--limit N] [--book rules] [--force] [--retry-failed] [--model id] [--yes]
 //   npm run alt:review       -- [--port 8765]
 //   npm run alt:build-static -- --out <folder> [--include-drafts]
 //
@@ -17,7 +17,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { BOOKS, openSource } from "./lib/alt-text/source.js";
 import { buildInventory, loadIndex, parseCsv, compareWithMap } from "./lib/alt-text/inventory.js";
 import { readStore, staleEntries } from "./lib/alt-text/store.js";
-import { DEFAULT_MODEL, DEFAULT_EFFORT, PRICES, ASSUMED_OUTPUT_TOKENS, pendingJobs, estimate, makeClient, runDrafts, buildRequest } from "./lib/alt-text/draft.js";
+import { DEFAULT_MODEL, DEFAULT_EFFORT, PRICES, ASSUMED_OUTPUT_TOKENS, pendingJobs, estimate, makeClient, runDrafts, buildRequest, spend } from "./lib/alt-text/draft.js";
 import { imageBytes } from "./lib/alt-text/inventory.js";
 import { startReviewServer } from "./lib/alt-text/server.js";
 import { buildStatic } from "./lib/alt-text/static-build.js";
@@ -60,7 +60,8 @@ function summary(inv, storeDir) {
   const entries = inv.images.map((i) => store.images[i.sha256]);
   const count = (s) => entries.filter((e) => e?.status === s).length;
   console.log(`${inv.book}: ${inv.tags} picture tags, ${ids.size} image files, ${inv.images.length} distinct images (by sha256), ${uses.filter((u) => u.inline).length} tags inside a sentence, ${inv.missing.length} tags with no image file.`);
-  console.log(`  Descriptions: ${entries.filter((e) => e?.draft).length} drafted, ${count("needs-work")} need work, ${count("reviewed")} reviewed, ${entries.filter((e) => !e).length} not started.`);
+  const failedDrafts = entries.filter((e) => e?.draft_failed && !e.draft).length;
+  console.log(`  Descriptions: ${entries.filter((e) => e?.draft).length} drafted, ${count("needs-work")} need work, ${count("reviewed")} reviewed, ${entries.filter((e) => !e).length} not started${failedDrafts ? `, ${failedDrafts} whose AI draft failed (skipped until --retry-failed)` : ""}.`);
   const stale = staleEntries(store, inv);
   if (stale.length) console.log(`  ${stale.length} stored description(s) match no current image (the image changed or is no longer used): ${stale.map((s) => s.image_ids?.join("+")).join(", ")}`);
   for (const m of inv.missing.slice(0, 10)) console.log(`  missing image file: ${m.picture_id} (${m.citation})`);
@@ -96,7 +97,7 @@ async function main() {
     if (!(limit > 0)) throw new Error("--limit must be a positive number");
     const onlyIds = opt("--only", null)?.split(",") ?? null;
     const { sources, inventories, storeDir } = setup();
-    const jobs = pendingJobs(inventories, storeDir, { force: flag("--force"), limit, only: onlyIds });
+    const jobs = pendingJobs(inventories, storeDir, { force: flag("--force"), retryFailed: flag("--retry-failed"), limit, only: onlyIds });
     const est = estimate(jobs, model);
     console.log(`${jobs.length} picture(s) to draft with ${model} (effort ${effort}).`);
     if (!jobs.length) return;
@@ -117,8 +118,12 @@ async function main() {
     }
     const client = makeClient({ apiKey: process.env.ANTHROPIC_API_KEY });
     const r = await runDrafts({ jobs, sources, storeDir, client, model, effort, fallbacks: !flag("--no-fallbacks"), concurrency: Number(opt("--concurrency", "2")) || 2 });
-    const price = PRICES[model];
-    console.log(`Drafted ${r.done}; failed ${r.failed.length}. Tokens used: ${r.usage.input} in, ${r.usage.output} out${price ? ` (about $${((r.usage.input * price[0] + r.usage.output * price[1]) / 1e6).toFixed(2)} at ${model} list price)` : ""}.`);
+    // Priced at the model that actually ran each attempt (a fallback model included).
+    const dollars = spend(r.usage);
+    const perModel = Object.entries(r.usage.byModel)
+      .map(([m, u]) => `${m}: ${u.input} in, ${u.output} out`)
+      .join("; ");
+    console.log(`Drafted ${r.done}; failed ${r.failed.length}. Tokens used: ${r.usage.input} in, ${r.usage.output} out${perModel ? ` (${perModel})` : ""}${dollars === null ? "; no price on file for one of these models" : `, about $${dollars.toFixed(2)} at list price`}.`);
     if (r.stopped) console.log(`Stopped early: ${r.stopped}`);
     if (r.failed.length) process.exitCode = 1;
     return;

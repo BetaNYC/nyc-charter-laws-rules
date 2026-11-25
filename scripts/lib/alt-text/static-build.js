@@ -56,7 +56,7 @@ export function buildStatic({ inventories, sources, storeDir, outDir, includeDra
   copyFileSync(join(PAGE_DIR, "app.js"), join(outDir, "app.js"));
   copyFileSync(join(PAGE_DIR, "app.css"), join(outDir, "app.css"));
   copyFileSync(join(HERE, "issue-url.js"), join(outDir, "issue-url.js"));
-  writeFileSync(join(outDir, "data.json"), `${JSON.stringify({ mode: "static", items })}\n`);
+  writeFileSync(join(outDir, "data.json"), `${JSON.stringify({ mode: "static", drafts_included: includeDrafts, items })}\n`);
   writeFileSync(join(outDir, ".nojekyll"), "");
   return { items: items.length, images };
 }

@@ -207,3 +207,25 @@ test("the static build refuses a folder with other files in it", () => {
   writeFileSync(join(out, "important.txt"), "keep me");
   assert.throws(() => buildStatic({ inventories: [inv], sources: { rules: source }, storeDir: fx.storeDir, outDir: out }), /not empty/);
 });
+
+test("a review field over 20,000 characters is refused with a clear message, not cut", async () => {
+  const sha = inv.images[1].sha256;
+  const r = await call("/api/save", { method: "POST", headers: auth(), body: { book: "rules", sha256: sha, status: "needs-work", base: null, review: { alt: "x", long: "y".repeat(20001) } } });
+  assert.equal(r.status, 413);
+  assert.match(r.body.error, /long description is 20,001 characters; the limit is 20,000/i);
+  assert.equal(readStore(fx.storeDir, "rules").images[sha], undefined, "nothing was written");
+});
+
+test("the issue link never splits an emoji or a math letter (no URIError, no broken character)", () => {
+  for (const ch of ["😀", "𝑥"]) {
+    for (let pad = 0; pad < 8; pad++) {
+      const long = "a".repeat(pad) + ch.repeat(3000);
+      const { url, cut } = issueUrl(P, { alt: "x", long }, { alt: "y" + "b".repeat(pad), long });
+      assert.equal(cut, true);
+      assert.ok(url.length <= MAX_URL_LENGTH, `${url.length}`);
+      assert.ok(!new URL(url).searchParams.get("body").includes("�"), `pad ${pad}: no broken character`);
+    }
+  }
+  // A lone surrogate (half of a pair, as a pasted fragment can carry) does not throw either.
+  assert.doesNotThrow(() => issueUrl(P, { alt: "x" }, { alt: "broken \uD835 half" }));
+});

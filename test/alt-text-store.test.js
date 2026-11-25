@@ -176,3 +176,18 @@ test("a failed change leaves the file as it was and frees the lock", async () =>
   await saveDraft(dir, "rules", fakeImage(2), { draft: { alt: "y" }, model: "m" });
   assert.equal(Object.keys(readStore(dir, "rules").images).length, 2);
 });
+
+test("two waiters that both saw a stale lock cannot both take it: a fresh lock is never deleted", async () => {
+  const store = await import("../scripts/lib/alt-text/store.js");
+  assert.equal(typeof store._acquireLockFile, "function", "the lock takeover is testable");
+  const dir = mkdtempSync(join(tmpdir(), "alt-store-"));
+  const lock = `${storePath(dir, "rules")}.lock`;
+  writeFileSync(lock, "dead");
+  const old = new Date(Date.now() - 60_000);
+  utimesSync(lock, old, old);
+  // Between this waiter seeing the stale lock and acting on it, another waiter takes the lock
+  // over and now holds a fresh one.
+  const hook = () => writeFileSync(lock, "holder A");
+  await assert.rejects(store._acquireLockFile(lock, { waitMs: 300, afterStaleSeen: hook }), /Timed out/);
+  assert.equal(readFileSync(lock, "utf8"), "holder A", "the other waiter's fresh lock is still there");
+});

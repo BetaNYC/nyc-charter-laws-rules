@@ -8,5 +8,6 @@ _site/
 
 # Alt-text tool (issue #87): lock and temp files beside the sidecars, and the static page build
 data/alt-text/*.lock
+data/alt-text/*.lock.takeover
 data/alt-text/*.tmp-*
 _alt-review/

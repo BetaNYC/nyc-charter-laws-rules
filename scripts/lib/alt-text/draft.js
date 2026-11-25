@@ -25,7 +25,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { displayable } from "./image-info.js";
 import { imageBytes } from "./inventory.js";
-import { readStore, saveDraft } from "./store.js";
+import { readStore, saveDraft, saveDraftFailure } from "./store.js";
 
 export const DEFAULT_MODEL = "claude-fable-5-2";
 export const DEFAULT_EFFORT = "high";
@@ -41,6 +41,7 @@ export const PRICES = {
   "claude-fable-5-1": [10, 50],
   "claude-opus-5-5": [4, 20],
   "claude-opus-5": [5, 25],
+  "claude-opus-4-8": [5, 25],
   "claude-sonnet-5-5": [2, 10],
   "claude-haiku-5-5": [0.1, 0.5],
 };
@@ -163,14 +164,19 @@ export function estimate(jobs, model = DEFAULT_MODEL) {
   return { requests: jobs.length, input, output, dollars };
 }
 
-/** Which images still need a draft. */
-export function pendingJobs(inventories, storeDir, { force = false, limit = Infinity, only = null } = {}) {
+/**
+ * Which images still need a draft. A picture whose last draft failed (a refusal, or an answer
+ * cut off) is skipped unless retryFailed is set, so a run does not pay for it again.
+ */
+export function pendingJobs(inventories, storeDir, { force = false, retryFailed = false, limit = Infinity, only = null } = {}) {
   const jobs = [];
   for (const inv of inventories) {
     const store = readStore(storeDir, inv.book);
     for (const image of inv.images) {
       if (only && !image.image_ids.some((id) => only.includes(id)) && !only.includes(image.sha256)) continue;
-      if (!force && store.images[image.sha256]?.draft) continue;
+      const e = store.images[image.sha256];
+      if (!force && e?.draft) continue;
+      if (!force && !retryFailed && e?.draft_failed) continue;
       jobs.push({ book: inv.book, image });
     }
   }
@@ -198,44 +204,101 @@ export function readResponse(message) {
   return { draft: { alt: out.alt.trim(), long: out.long.trim(), unsure: String(out.unsure ?? "").trim() } };
 }
 
+// Credentials: only ANTHROPIC_API_KEY is supported. The SDK can also use an `ant auth login`
+// profile, but this tool asks for the key on purpose, so a run never spends on a profile the
+// operator did not mean to use.
 export function makeClient({ apiKey, fetch } = {}) {
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set.");
   return new Anthropic({ apiKey, ...(fetch ? { fetch } : {}), maxRetries: 2 });
 }
 
+/** Add one response's tokens to usage, per model that ran (usage.iterations when present). */
+function addUsage(usage, message, model) {
+  const its = message.usage?.iterations;
+  // Per the docs, usage.iterations is the per-attempt record when a fallback ran; top-level
+  // usage covers only the attempt that produced the message.
+  const parts = Array.isArray(its) && its.length ? its.map((i) => ({ model: i.model ?? message.model ?? model, input: i.input_tokens ?? 0, output: i.output_tokens ?? 0 })) : [{ model: message.model ?? model, input: message.usage?.input_tokens ?? 0, output: message.usage?.output_tokens ?? 0 }];
+  for (const p of parts) {
+    const m = (usage.byModel[p.model] ??= { input: 0, output: 0 });
+    m.input += p.input;
+    m.output += p.output;
+    usage.input += p.input;
+    usage.output += p.output;
+  }
+}
+
+/** Dollars at list price for usage.byModel, or null when a model has no price on file. */
+export function spend(usage) {
+  let total = 0;
+  for (const [model, u] of Object.entries(usage.byModel ?? {})) {
+    const price = PRICES[model];
+    if (!price) return null;
+    total += (u.input * price[0] + u.output * price[1]) / 1e6;
+  }
+  return total;
+}
+
 /**
- * Draft each job and store it as it arrives. Returns { done, failed, usage }. `log` gets one
- * line per picture; it never sees the API key.
+ * One line for an API error: status, the API's own error type and message, and the request id
+ * (for a support ticket). The key is never in these, but is hidden anyway if a message repeats
+ * it.
  */
-export async function runDrafts({ jobs, sources, storeDir, client, model = DEFAULT_MODEL, effort = DEFAULT_EFFORT, fallbacks = true, concurrency = 2, log = console.log }) {
-  const usage = { input: 0, output: 0 };
+export function describeApiError(e, apiKey) {
+  let msg;
+  if (e instanceof Anthropic.APIConnectionError) msg = `could not reach the API (${e.message})`;
+  else if (e instanceof Anthropic.APIError) {
+    const body = e.error?.error;
+    const type = e.type ?? body?.type ?? null;
+    const text = e.apiMessage ?? body?.message ?? null;
+    const id = e.requestID ?? e.error?.request_id ?? null;
+    msg = `API error ${[e.status, type].filter(Boolean).join(" ")}${text ? `: ${text}` : ""}${id ? ` (request id ${id})` : ""}`;
+    if (e instanceof Anthropic.AuthenticationError) msg = `the API key was refused; ${msg}`;
+  } else msg = e.message;
+  return apiKey ? msg.split(apiKey).join("[API key hidden]") : msg;
+}
+
+/**
+ * Draft each job and store it as it arrives. Returns { done, failed, usage, stopped }. `log`
+ * gets one line per picture; it never sees the API key. A refusal or an unusable answer is
+ * recorded in the store (no text) so the next run skips it. The run stops at once on a
+ * refused key (401/403) or an unknown model or endpoint (404), and on the same 400 for two
+ * pictures (a bad option, not a bad picture).
+ */
+export async function runDrafts({ jobs, sources, storeDir, client, model = DEFAULT_MODEL, effort = DEFAULT_EFFORT, fallbacks = true, concurrency = 2, at, log = console.log }) {
+  const usage = { input: 0, output: 0, byModel: {} };
   let done = 0;
   const failed = [];
+  const seen400 = new Set();
   let next = 0;
   let stop = null;
+  const apiKey = typeof client.apiKey === "string" ? client.apiKey : null;
   const one = async (job) => {
     const label = `${job.book} ${job.image.image_ids[0]} (${job.image.uses[0]?.citation ?? ""})`;
     try {
       const bytes = imageBytes(sources[job.book], job.image);
       const req = buildRequest({ book: job.book, image: job.image, bytes, model, effort, fallbacks });
       const message = await client.beta.messages.create(req);
-      usage.input += message.usage?.input_tokens ?? 0;
-      usage.output += message.usage?.output_tokens ?? 0;
+      addUsage(usage, message, model);
       const r = readResponse(message);
       if (r.error) {
         failed.push({ ...job, error: r.error });
-        log(`  ✗ ${label}: ${r.error}`);
+        log(`  ✗ ${label}: ${r.error} (recorded; npm run alt:draft -- --retry-failed tries it again)`);
+        await saveDraftFailure(storeDir, job.book, job.image, { reason: r.error, model: message.model ?? model, ...(at ? { at } : {}) });
         return;
       }
-      await saveDraft(storeDir, job.book, job.image, { draft: r.draft, model: message.model ?? model });
+      await saveDraft(storeDir, job.book, job.image, { draft: r.draft, model: message.model ?? model, ...(at ? { at } : {}) });
       done++;
       log(`  ✓ ${label}${message.model && message.model !== model ? ` (answered by ${message.model})` : ""}`);
     } catch (e) {
-      const status = e instanceof Anthropic.APIError ? e.status : undefined;
-      const msg = e instanceof Anthropic.AuthenticationError ? "the API key was refused" : e instanceof Anthropic.APIError ? `API error ${status ?? ""}`.trim() : e.message;
+      const msg = describeApiError(e, apiKey);
       failed.push({ ...job, error: msg });
       log(`  ✗ ${label}: ${msg}`);
-      if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) stop = msg;
+      if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError || e instanceof Anthropic.NotFoundError) stop = msg;
+      else if (e instanceof Anthropic.BadRequestError) {
+        const key = `${e.type ?? ""}|${e.apiMessage ?? ""}`;
+        if (seen400.has(key)) stop = `${msg}; the same error for two pictures, so it is not about one picture`;
+        seen400.add(key);
+      }
     }
   };
   const worker = async () => {
