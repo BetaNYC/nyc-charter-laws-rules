@@ -72,10 +72,13 @@ function ednoteLead(b) {
  *        one page share a citation ("a., link to NYC Charter § 530(a), Composition")
  * @param {number} [ctx.headingLevel] the level of a subheading's element: 2 on a section page
  *        (under its h1), 3 in a chapter, part or title page's copy (under the section's h2)
+ * @param {(b: object, n: number) => (number|undefined)} [ctx.weightFor] a block's Pagefind
+ *        weight (data-pagefind-weight, pagefind.app/docs/weighting), or undefined for none; never
+ *        on a copy, which search does not read (a local-law note's paragraphs: pages.js searchKind)
  */
-export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2 }) {
+export function bodyHtml(blocks, { fullCitation, linkFor, copyOf = null, nameNote = "", headingLevel = 2, weightFor = null }) {
   const caseNotes = anchorCaseNotes(blocks);
-  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor), next: blocks[n + 1] ?? null })).join("\n");
+  return blocks.map((b, n) => blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel, caseNote: caseNotes.get(b.anchor), next: blocks[n + 1] ?? null, weight: weightFor?.(b, n) })).join("\n");
 }
 
 /**
@@ -161,7 +164,7 @@ function formatted(text, a, z, marks = [], { bold = true } = {}) {
     .join("");
 }
 
-function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote, next = null }) {
+function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel = 2, caseNote, next = null, weight }) {
   const attrs = [];
   let cls = "txt";
   let tag = "p";
@@ -181,6 +184,7 @@ function blockHtml(b, n, { fullCitation, linkFor, copyOf, nameNote, headingLevel
   }
   if (b.table) attrs.push(`data-table`);
   if (!copyOf) attrs.push(`data-block="${n}"`);
+  if (weight !== undefined && !copyOf) attrs.push(`data-pagefind-weight="${weight}"`);
 
   const links = [...(b.links ?? [])].sort((x, y) => x.start - y.start);
   // The label link covers the label at the start of the text, unless a cross-reference starts there.

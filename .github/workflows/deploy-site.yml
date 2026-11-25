@@ -100,8 +100,9 @@ jobs:
 
       - name: Run tests
         # The whole unit suite (pretest builds the TypeScript), site-build tests included.
-        # The browser tests (npm run test:site) run in test.yml on every push; they read
-        # fixtures, so new law text cannot change their result.
+        # The browser tests (npm run test:site) run in test.yml on every push, not here. Most
+        # read fixtures; three read the committed data (admin, rules, overflow) and one searches
+        # it (search-ranking.test.mjs, with loose bounds), so new law text can move those.
         run: npm test
 
       - name: Check the site's layout on the committed data

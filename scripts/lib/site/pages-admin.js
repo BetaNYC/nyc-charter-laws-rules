@@ -33,6 +33,8 @@ import {
   CONTENTS_NAME,
   sectionBody,
   copyLinkFor,
+  searchMeta,
+  searchKind,
 } from "./pages.js";
 
 const esc = escapeHtml;
@@ -172,18 +174,6 @@ ${h.parts.map((p) => `<li><a href="${esc(p.path)}"${p === here ? ` aria-current=
 </nav>`;
 }
 
-/** Pagefind's filters and result fields, as pages.js pagefindHead writes them for the Charter. */
-export function searchHead(book, kind, title, citation) {
-  return [
-    `<meta data-pagefind-filter="book[content]" content="${esc(book.book.short)}">`,
-    `<meta data-pagefind-filter="kind[content]" content="${kind}">`,
-    `<meta data-pagefind-meta="title[content]" content="${esc(title)}">`,
-    `<meta data-pagefind-meta="citation[content]" content="${esc(citation)}">`,
-    `<meta data-pagefind-meta="book[content]" content="${esc(book.book.label)}">`,
-    `<meta data-pagefind-meta="kind[content]" content="${kind}">`,
-  ];
-}
-
 function pager(label, prev, next, nameOf) {
   return `<nav class="pager" aria-label="${esc(label)}" data-pagefind-ignore="all">
 ${prev ? `<a class="prev" href="${esc(prev.path)}"><small>Previous</small> ${esc(nameOf(prev))}</a>` : ""}
@@ -198,6 +188,7 @@ export function citeHeading(cite, heading) {
 /** A section's page: as the Charter's, with the titles-first tree and title crumbs. */
 export function adminSectionPage(s, book, site) {
   const holder = s.chapter;
+  const found = searchKind(s);
   const title = holder.kind === "title" ? holder : holder.titleNode;
   const crumbs = [...crumbsTo(book, { title, chapter: holder, part: s.part }), { name: s.local ?? s.citation, path: s.path }];
   const main = [
@@ -205,7 +196,7 @@ export function adminSectionPage(s, book, site) {
     `<article class="law-page" data-pagefind-body>`,
     citeHeading(s.fullCitation, s.title),
     TOOLS,
-    sectionBody(s, site, lawText(s, book)),
+    sectionBody(s, site, lawText(s, book, { weightFor: found.weightFor })),
     `</article>`,
     pager("Previous and next section", s.prev, s.next, sectionLine),
   ].join("\n");
@@ -225,7 +216,7 @@ export function adminSectionPage(s, book, site) {
       lawRecord: lawRecord(s, site),
       site,
       // The Rules' search title is the full citation ("15 RCNY § 1-01. Scope"), never a bare "§ 1-01".
-      headExtra: searchHead(book, "Section", s.searchTitle ?? sectionLine(s), s.fullCitation),
+      headExtra: searchMeta(book, found.kind, s.searchTitle ?? sectionLine(s), s.fullCitation, found.label),
       jsonLd: [legislationJsonLd(s, book, site), breadcrumbJsonLd(crumbs)],
     }),
   };
@@ -237,13 +228,14 @@ export function adminSectionPage(s, book, site) {
  */
 export function adminChapterPage(c, book, site) {
   const t = c.titleNode;
+  const found = searchKind(c);
   const crumbs = crumbsTo(book, { title: t, chapter: c });
   const body = c.parts ? { list: partsList(c, null), text: "" } : sectionsBody(c.sections, book, `Sections in ${c.citation}`, site);
   const main = [
     breadcrumbs(crumbs),
     `<article class="law-page" data-pagefind-body>`,
     !c.title ? `<h1>${esc(c.fullCitation)}</h1>` : citeHeading(c.fullCitation, c.title),
-    lawText(c, book),
+    lawText(c, book, { weightFor: found.weightFor }),
     c.sections.length ? body.list : `<p>No sections in this chapter.</p>`,
     body.text,
     `</article>`,
@@ -265,7 +257,7 @@ export function adminChapterPage(c, book, site) {
       lawRecord: lawRecord(c, site),
       backToTop: c.sections.length === 0 || !!c.parts,
       site,
-      headExtra: searchHead(book, "Chapter", c.searchTitle ?? c.longName, c.fullCitation),
+      headExtra: searchMeta(book, found.kind, c.searchTitle ?? c.longName, c.fullCitation, found.label),
       jsonLd: [legislationJsonLd(c, book, site), breadcrumbJsonLd(crumbs)],
     }),
   };
