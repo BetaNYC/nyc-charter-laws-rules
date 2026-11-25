@@ -136,7 +136,7 @@ test("deploy-site.yml builds the Charter, the Administrative Code and the Rules,
   for (const f of ["charter/index.html", "admin-code/index.html", "sitemaps/admin-code.xml", "pagefind/pagefind.js"]) {
     assert.ok(check.includes(` ${f}`), `the check step looks for _site/${f}`);
   }
-  // The Rules: required when metadata.json says the build has them (an index from before 0.6.3
+  // The Rules: required when metadata.json says the build has them (an index from before 0.7.0
   // has no titles, and the build leaves them out), and a notice when it does not.
   assert.match(check, /^ {8}id: check$/m);
   assert.ok(check.includes(`require("./_site/metadata.json").books.rules`), "the check reads which books were built");

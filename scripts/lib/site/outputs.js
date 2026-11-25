@@ -2,7 +2,7 @@
 // list for the jump box, the sitemaps and robots.txt. Pure.
 
 import { SITE_BASE, SITE_NAME, absoluteUrl } from "./config.js";
-import { citationKeys } from "../../../site/assets/jump.js";
+import { recordKeys } from "../../../site/assets/jump.js";
 
 /** American Legal ids to our paths, per book: links that carry an id still land (DC's redirects.json). */
 export function redirectsJson(books) {
@@ -71,8 +71,10 @@ export function citationsJson(books) {
   for (const b of books) {
     for (const r of b.ordered) {
       // fullCitation is "<label> <citation>" for the Charter; an Admin Code chapter's carries its
-      // title; a Rules record's is "15 RCNY § 1-01", and its keys add the titled form ("15 rcny 1-01").
-      list.push({ k: citationKeys(r.citation, titleOf(r), { rules: !!b.book.rcny }), c: r.fullCitation ?? `${b.book.label} ${r.citation}`, h: r.title, p: r.path, b: b.book.short });
+      // title; a Rules record's is "15 RCNY § 1-01", and its keys add the titled form ("15 rcny 1-01")
+      // and whatever key that citation itself reads as, so Copy citation's text always leads back.
+      const c = r.fullCitation ?? `${b.book.label} ${r.citation}`;
+      list.push({ k: recordKeys(r.citation, titleOf(r), { rules: !!b.book.rcny }, c), c, h: r.title, p: r.path, b: b.book.short });
     }
   }
   return list;

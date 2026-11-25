@@ -2,7 +2,7 @@
 //
 // NOT part of npm test, on purpose (see admin-layout.test.js): a surprise in the data's shape
 // must stop the website, never the daily refresh. Nothing here pins a count; every expectation is
-// worked out from the data. The Rules need an index that names each record's title (0.6.3, #59);
+// worked out from the data. The Rules need an index that names each record's title (0.7.0, #59);
 // an index built before then has none, the site leaves the Rules out, and these tests skip.
 
 import { test } from "node:test";
@@ -34,7 +34,7 @@ function loadReal(corpus) {
 }
 const real = loadReal("rules");
 const book = real?.book;
-const skip = book ? false : "the committed Rules index has no titles yet (built before 0.6.3), or its structure is missing or from other text";
+const skip = book ? false : "the committed Rules index has no titles yet (built before 0.7.0), or its structure is missing or from other text";
 
 test("every Rules record has one page, under the title its record names", { skip }, () => {
   assert.equal(book.ordered.length, real.index.length);

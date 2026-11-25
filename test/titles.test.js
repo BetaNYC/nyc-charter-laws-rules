@@ -207,7 +207,7 @@ describe("citations that name a title", () => {
 
 // The server's tools over an index built from the fixtures, in a child process because the
 // index directory is fixed at startup. `titled: false` strips the title fields, as an index built
-// before 0.6.3 (the committed one, until the next refresh) has none.
+// before 0.7.0 (the committed one, until the next refresh) has none.
 function runServer(body, { titled = true } = {}) {
   const dir = mkdtempSync(join(tmpdir(), "titles-index-"));
   try {
@@ -444,7 +444,7 @@ describe("review of #59", () => {
   });
 });
 
-describe("an index built before 0.6.3 (no titles)", () => {
+describe("an index built before 0.7.0 (no titles)", () => {
   const out = runServer(`
     out["get"] = cite("15 RCNY § 1-01");
     out["get hc"] = cite("24 RCNY Health Code § 81.08");
@@ -461,7 +461,7 @@ describe("an index built before 0.6.3 (no titles)", () => {
     assert.equal(out.full, "Chapter 18");
     assert.deepEqual(out["list rules"], ["Chapter 1", "Chapter 1", "Chapter 1", "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 3", "Chapter 5", "Chapter 6", "Chapter 18"]);
     assert.deepEqual(out["admin title Title 16"], ["0-0-0-11", "0-0-0-12", "0-0-0-14", "0-0-0-21", "0-0-0-22", "0-0-0-30", "0-0-0-31"], "titles from section numbers, so 16-A and 16-B come too");
-    assert.match(out["tool no title"], /^No sections found for "Title 15" in rules\. This copy of the index does not record Rules titles \(it was built before 0\.6\.3\); ask for a chapter, which list_titles lists\./);
+    assert.match(out["tool no title"], /^No sections found for "Title 15" in rules\. This copy of the index does not record Rules titles \(it was built before 0\.7\.0\); ask for a chapter, which list_titles lists\./);
     assert.equal(out["tool list"], "Showing 1 to 2 of 10. Call again with offset 2 for the next ones.\n\nChapter 1 — Chapter 1: Scope\nChapter 1 — Chapter 1: General");
   });
 });

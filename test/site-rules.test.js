@@ -1,6 +1,6 @@
 // The Rules of the City of New York on the site (issue #65, after #59): paths and citations from
 // each record's title, grouping by title, the pages to pick one, and the fallback for an index
-// built before 0.6.3.
+// built before 0.7.0.
 //
 // Built from the hand-made Rules fixtures (test/fixtures/titles/rules/, the publisher's shape,
 // not its text) and the Charter fixtures, without Pagefind. Part of npm test, which the daily
@@ -179,7 +179,7 @@ test("citation helpers: the RCNY form, a record's name in its chapter, chapter s
   assert.equal(rulesChapterSlug("Appendix E – CEQR"), "appendix-e-ceqr");
 });
 
-test("an index from before 0.6.3 (no titleNumber): the site is built without the Rules, and says they are still to come", async () => {
+test("an index from before 0.7.0 (no titleNumber): the site is built without the Rules, and says they are still to come", async () => {
   const old = await buildRulesFixtureSite({ titles: false });
   try {
     assert.deepEqual(old.books.map((b) => b.book.slug), ["charter"]);
@@ -310,6 +310,7 @@ test("404: Rules ids land on their page; /rules/sections/<n> for a number in one
   assert.equal(rulesNumberFor("/rules/sections/99-99", numbers), null);
   assert.equal(rulesNumberFor("/admin-code/sections/81.08", numbers), null);
   assert.equal(rulesNumberFor("/rules/sections/constructor", numbers), null);
+  assert.equal(rulesNumberFor("/rules/sections/50%", numbers), null, "not percent-encoding: no number, no error");
 });
 
 test("cross-book links: a reference into the Rules goes to its page under its title, named by its full citation", () => {

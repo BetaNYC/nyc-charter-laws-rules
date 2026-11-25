@@ -412,7 +412,7 @@ const SHAPES = {
     limit: z.number().int().min(1).max(50).optional().describe("Max results to return (default 10, max 50)"),
   },
   get_section: {
-    citation: z.string().describe("Section citation or heading; a Rules citation with its title ('15 RCNY § 1-01')"),
+    citation: z.string().describe("Section citation or heading; a Rules citation with its title ('15 RCNY § 1-01'); may name its book ('NYC Charter § 1133') or a part ('§ 1133(b)(1)')"),
     corpus: CORPUS.optional().describe("Which document to look in (default: all three)"),
   },
   list_titles: {
@@ -454,7 +454,7 @@ export const TOOLS = annotateTools([
   {
     name: "get_section",
     title: "Get a section",
-    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. Each title of the Rules restarts its numbers, so name the title: '15 RCNY § 1-01' or 'Title 15 § 1-01' ('24 RCNY Health Code § 81.08'); a bare '§ 1-01' lists every title's, each labeled with its title.`,
+    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. Each title of the Rules restarts its numbers, so name the title: '15 RCNY § 1-01' or 'Title 15 § 1-01' ('24 RCNY Health Code § 81.08'); a bare '§ 1-01' lists every title's, each labeled with its title. A citation may name its book ('NYC Charter § 1133', 'Admin. Code § 27-506'); then only that book is looked in. Code sections: 'FC 102', 'RS 18-1'. A part of a section ('§ 1133(b)(1)', 'Section FC 102.4(1)') returns the whole section; the first line names the part.`,
     inputSchema: inputSchema(SHAPES.get_section),
   },
   {
@@ -536,6 +536,13 @@ export async function callTool(name: string, args: unknown) {
               [corpus],
             );
           }
+          if (result.bookCitation && corpus) {
+            // "NYC Charter § 1133" names its book: it is not looked for in another.
+            return answer(
+              `Section not found: "${echo(citation)}" is a citation of the ${SOURCES[result.bookCitation].title}, so it is not looked for in the ${SOURCES[corpus].title}. Ask again with corpus '${result.bookCitation}', or with no corpus.`,
+              [corpus],
+            );
+          }
           const searched = corpus ? [corpus] : ALL_CORPORA;
           return answer(`Section not found: "${echo(citation)}". ${searchedLine(searched)}`, searched);
         }
@@ -553,13 +560,18 @@ export async function callTool(name: string, args: unknown) {
           const titled = example ? ` A citation can name its title: '${fullCitation(example)}'.` : "";
           const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.${titled}` : "";
           return answer(
-            `Multiple sections match "${echo(citation)}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
+            `${result.subdivision ? `You asked for ${echo(result.subdivision)}, a part of a section. The index holds whole sections, so these are the whole sections it may be in.\n\n` : ""}Multiple sections match "${echo(citation)}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
             shown.map((s) => s.corpus)
           );
         }
         const section = result.section;
         const name = titleName(section);
-        const text = `[${section.corpus.toUpperCase()}] ${fullCitation(section)} (matched in corpus: ${section.corpus}${name ? `; in ${name}` : ""})\n${section.heading}\n\n${section.text}`;
+        // A part of a section (issue #76): the index has whole sections, so the first line says
+        // which part was asked for and that the whole section follows.
+        const part = result.subdivision
+          ? `You asked for ${echo(result.subdivision)}, a part of ${fullCitation(section)}. The index holds whole sections, so the whole section follows.\n\n`
+          : "";
+        const text = `${part}[${section.corpus.toUpperCase()}] ${fullCitation(section)} (matched in corpus: ${section.corpus}${name ? `; in ${name}` : ""})\n${section.heading}\n\n${section.text}`;
         return answer(text, [section.corpus]);
       }
 
@@ -587,7 +599,7 @@ export async function callTool(name: string, args: unknown) {
               ? " The Charter has no titles; ask for a chapter, which list_titles lists."
               : hasTitles(corpus)
                 ? " list_titles lists each title's chapters."
-                : " This copy of the index does not record Rules titles (it was built before 0.6.3); ask for a chapter, which list_titles lists.";
+                : " This copy of the index does not record Rules titles (it was built before 0.7.0); ask for a chapter, which list_titles lists.";
           return answer(`No sections found for "${echo(title)}" in ${corpus}.${hint} ${searchedLine([corpus])}`, [corpus]);
         }
         const { shown, note } = page(sections, offset ?? 0, limit ?? 200);

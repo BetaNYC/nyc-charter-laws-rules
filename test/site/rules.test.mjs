@@ -2,9 +2,9 @@
 // citation, the page to pick a title for a bare number, and a phone's width. Run with:
 // npm run test:site (test.yml only; not the daily refresh, not the deploy).
 //
-// The data: the committed Charter and Rules when the Rules index names each record's title (0.6.3
+// The data: the committed Charter and Rules when the Rules index names each record's title (0.7.0
 // and later; built without Pagefind, a few seconds); else the Charter and Rules fixtures
-// (test/site/fixture-site.mjs), so these tests run before the first refresh after 0.6.3 too.
+// (test/site/fixture-site.mjs), so these tests run before the first refresh after 0.7.0 too.
 // Pages and names come from the data, not from today's counts.
 
 import { test, before, after } from "node:test";

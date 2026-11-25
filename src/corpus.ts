@@ -56,7 +56,7 @@ export interface Section {
    * nearly every record: "Chapter" for a chapter; "Section" for a section with no chapter around
    * it; or a group level such as "Appendix", "Part", "Subchapter" or "Article" for text held
    * outside a section (the Title 27 Building Code Reference Standards, the Rules' appendices and
-   * schedules, editor's notes). Absent on every record of an index built before 0.6.3.
+   * schedules, editor's notes). Absent on every record of an index built before 0.7.0.
    */
   level?: string;
   /**
@@ -64,7 +64,7 @@ export interface Section {
    * the publisher's Title heading writes it ("15", "16-A", "38-A"). Each title of the Rules
    * restarts its numbers, so "15 RCNY § 1-01" is `titleNumber` + " RCNY " + `citation`. Absent
    * for the Charter (no titles), for records in no numbered title (the Administrative Code's
-   * unconsolidated local laws), and on every record of an index built before 0.6.3.
+   * unconsolidated local laws), and on every record of an index built before 0.7.0.
    * scripts/lib/build-corpus.js ("Titles") says where it is read from.
    */
   titleNumber?: string;
@@ -399,10 +399,18 @@ export function normalizeCitation(input: string): string {
 }
 
 export type GetSectionResult =
-  | { kind: "match"; section: Section }
-  | { kind: "ambiguous"; candidates: Section[] }
-  /** `rulesCitation`: the citation names "RCNY", and another document was asked for. */
-  | { kind: "none"; rulesCitation?: true };
+  /**
+   * `subdivision`: the citation named a part of a section that has no record of its own
+   * ("§ 1133(b)(1)", "Section FC 102.4(1)"), and this is the whole section it is in. The part
+   * as asked for: "(b)(1)", "102.4(1)".
+   */
+  | { kind: "match"; section: Section; subdivision?: string }
+  | { kind: "ambiguous"; candidates: Section[]; subdivision?: string }
+  /**
+   * `rulesCitation`: the citation names "RCNY", and another document was asked for.
+   * `bookCitation`: the citation names a book ("NYC Charter § 1133"), and another was asked for.
+   */
+  | { kind: "none"; rulesCitation?: true; bookCitation?: Corpus };
 
 // ---------------------------------------------------------------- titles (issue #59)
 //
@@ -412,7 +420,7 @@ export type GetSectionResult =
 // numbers (Title 16-A's sections are § 16-501 on). Records carry `titleNumber` (build-corpus.js),
 // so a citation can name its title, and an answer can name a record's.
 
-/** True when the index records titles for this document (built since 0.6.3; never the Charter). */
+/** True when the index records titles for this document (built since 0.7.0; never the Charter). */
 const titlesCache: Partial<Record<Corpus, boolean>> = {};
 export function hasTitles(corpus: Corpus): boolean {
   return (titlesCache[corpus] ??= loadCorpus(corpus).some((s) => s.titleNumber));
@@ -605,7 +613,7 @@ export function parseTitledCitation(input: string): TitledCitation | null {
 }
 
 // A record is in the title (and the Health Code) a citation names. An Administrative Code or
-// Rules index built before 0.6.3 records no titles: there every record counts, so a titled
+// Rules index built before 0.7.0 records no titles: there every record counts, so a titled
 // citation still finds the records it could mean (and lists them when there are several).
 function inNamedTitle(s: Section, t: TitledCitation): boolean {
   if (s.corpus === "charter") return false;
@@ -616,7 +624,7 @@ function inNamedTitle(s: Section, t: TitledCitation): boolean {
 
 // A list of candidates by document, then by title ("6 RCNY § 1-01" before "15 RCNY § 1-01"),
 // so a person can find the title they mean; records with no title, and records of one title,
-// keep the index's order. An index built before 0.6.3 has no titles: its order is unchanged.
+// keep the index's order. An index built before 0.7.0 has no titles: its order is unchanged.
 const CORPUS_ORDER: Record<Corpus, number> = { charter: 0, admin_code: 1, rules: 2 };
 function byTitle(list: Section[]): Section[] {
   return [...list].sort((a, b) => CORPUS_ORDER[a.corpus] - CORPUS_ORDER[b.corpus] || compareLabels(a.titleNumber ?? "", b.titleNumber ?? ""));
@@ -640,16 +648,137 @@ export function getSection(
   citation: string,
   corpus?: Corpus
 ): GetSectionResult {
+  const found = getWholeCitation(citation, corpus);
+  if (found.kind !== "none") return found;
+  // Only on a miss (issue #76): a part of a section, as the Law Reader website writes it when a
+  // reader copies the citation of a subdivision ("NYC Charter § 1133(b)(1)") or of a Construction
+  // Code subsection ("Section FC 102.4(1)"). The index has whole sections, so this is the whole
+  // section, marked with the part asked for. Exact citations won above, so "D302 Conversions to a
+  // multiple dwelling (MDL 9(2))" and "§ 11-602.1" are what they always were.
+  for (const part of splitSubdivision(citation)) {
+    // The section by its citation only: a heading that merely contains the stripped text is not
+    // the section a part was asked of ("Section FC 10.1" is not FC 101 to FC 109).
+    const whole = getWholeCitation(part.section, corpus, { headings: false });
+    if (whole.kind !== "none") return { ...whole, subdivision: part.subdivision };
+  }
+  return found;
+}
+
+// ---------------------------------------------------------------- book names
+//
+// The Law Reader website's "Copy citation" names the book before the citation: "NYC Charter §
+// 1133", "NYC Administrative Code § 27-506", "NYC Administrative Code Title 1, Chapter 1". A
+// citation may start with the book's name, as a person writes it ("Admin. Code § 27-506",
+// "New York City Charter § 1133"); then only that book is looked in. The name counts only when a
+// citation follows it: "Charter revision commission" is words, looked up as typed. And a book
+// lookup that finds nothing falls back to the lookup as typed, as before.
+
+// "NYC", "N.Y.C.", "New York City", "City", each optional, then the book's name.
+const CITY = String.raw`(?:(?:nyc|n\.\s?y\.\s?c\.?|new york city|city)\s+)?`;
+const BOOK_NAME = new RegExp(
+  `^(?:the\\s+)?${CITY}(?:(charter)|(?:administrative|admin\\.?)\\s*code)\\b\\.?[\\s,]*(.*)$`,
+  "i",
+);
+// What may follow a book's name for it to be a citation: "§", "Section", a number, "Title",
+// "Chapter", "Preamble"; a code's letters and number ("FC 102", "BC E104", "RS 18-1", "D302 ...",
+// "E.1"), "Reference Standard", or a local law ("L.L. 1985/006").
+const AFTER_BOOK = /^(?:§|sections?\b|sec\.|\d|(?:title|chapter|subchapter|article|appendix)\s+\S|preamble\b|introductory\b|[a-z]{1,4}[\s.]*\d|reference standards?\b|l\.\s?l\.|local laws?\b)/i;
+
+/**
+ * The book a citation names first, and the rest: "NYC Administrative Code § 27-506" →
+ * { corpus: "admin_code", rest: "§ 27-506" }. Null when it names no book, or names one with no
+ * citation after it.
+ */
+export function parseBookName(input: string): { corpus: Corpus; rest: string } | null {
+  const q = input.replace(/\s+/g, " ").trim();
+  const m = BOOK_NAME.exec(q);
+  if (!m) return null;
+  const rest = m[2].trim();
+  if (!rest || !AFTER_BOOK.test(rest)) return null;
+  return { corpus: m[1] ? "charter" : "admin_code", rest };
+}
+
+// ---------------------------------------------------------------- parts of a section
+//
+// A subdivision label in parentheses, as the website's anchors write them (scripts/lib/
+// build-structure.js LABEL): "(b)", "(1)", "(iv)", "(4-a)", "(h-1)", "(C)". Several in a row, and
+// the "-2" the site adds to the second anchor of the same name in a section ("(3)-2"). Words with
+// a space in parentheses ("(MDL 9(2))") are not one; a word with none ("(IBO)") counts only after
+// a citation with a number in it (splitSubdivision), and only when the whole is not found.
+const SUBDIVISION = String.raw`\([0-9A-Za-z][0-9A-Za-z.-]{0,5}\)`;
+const TRAILING_SUBDIVISIONS = new RegExp(`^(.*?[^\\s(])\\s?((?:${SUBDIVISION})+(?:-\\d+)?)$`);
+// A Construction Code or Fire Code section and a subsection number: "Section FC 102" + ".4"
+// ("FC 102.4" is subsection 4 of FC 102); "Section BC E104" + ".2.2". No such section's own
+// number has a point, so a point after it starts a subsection. The codes' letters are the ones
+// the Administrative Code's index cites: Plumbing, Building, Mechanical, Fuel Gas, Electrical,
+// Existing Building, and Fire.
+const CODE_SUBSECTION = /^(.*\b(?:PC|BC|MC|FGC|EC|EBC|FC)\s*([A-Z]?\d+))((?:\.\d+[A-Z]?)+(?:-\d+)?)$/i;
+// A Rules section and a subsection number: "15 RCNY § 19.1-01" + ".1" (the site's anchor
+// "19.1-01.1"). Only with "RCNY" named, since the Administrative Code's "§ 11-602.1" is a section
+// of its own, and only on a miss, since a Rules title may have a "§ 1-01.1" too.
+const RULES_SUBSECTION = /^(.*\br\.?\s?c\.?\s?n\.?\s?y\b.*?§\s*([\d.]*\d-\d+[A-Z]?))((?:\.\d+[A-Z]?)+(?:-\d+)?)$/i;
+
+/**
+ * The ways a citation may name a part of a section, each split into the section and the part,
+ * to try in order: "§ 1133(b)(1)" → [{ section: "§ 1133", subdivision: "(b)(1)" }]; "Section FC
+ * 102.4(1)" → [{ section: "Section FC 102.4", subdivision: "(1)" }, { section: "Section FC 102",
+ * subdivision: "102.4(1)" }] (a subsection, when there is no section of that number). Empty when
+ * it names no part. The part is written as the website's anchors write it.
+ */
+export function splitSubdivision(input: string): { section: string; subdivision: string }[] {
+  let base = input.replace(/\s+/g, " ").trim();
+  let parens = "";
+  const p = TRAILING_SUBDIVISIONS.exec(base);
+  if (p) [base, parens] = [p[1].trim(), p[2]];
+  const out: { section: string; subdivision: string }[] = [];
+  if (parens && /\d/.test(base)) out.push({ section: base, subdivision: parens });
+  const c = CODE_SUBSECTION.exec(base) ?? RULES_SUBSECTION.exec(base);
+  if (c) out.push({ section: c[1], subdivision: `${c[2]}${c[3]}${parens}` });
+  return out;
+}
+
+// The Administrative Code's local-law chapters are cited by their year ("1985"); the website
+// files them under "Local laws": "NYC Administrative Code Local laws, 1985".
+const LOCAL_LAWS_YEAR = /^local laws,?\s+(\d{4})$/i;
+
+// getSection without the subdivision fallback: the citation as a whole. What follows a book's
+// name, and a local-law year, are looked up by citation only: the heading search (`headings`)
+// runs only on the citation exactly as typed, so "Admin Code 1" is not every heading with a "1"
+// in it, and "Charter revision commission" is still a heading.
+function getWholeCitation(citation: string, corpus?: Corpus, { headings = true } = {}): GetSectionResult {
+  const book = parseBookName(citation);
+  if (book && corpus && corpus !== book.corpus) {
+    // A heading in the asked-for book may start with another book's name (Rules 1 RCNY § 33-01
+    // cites "Administrative Code § 26-212.1 …"): look it up as typed first.
+    const asTyped = getCitation(citation, corpus, headings);
+    return asTyped.kind !== "none" ? asTyped : { kind: "none", bookCitation: book.corpus };
+  }
+  const year = LOCAL_LAWS_YEAR.exec((book?.rest ?? citation).trim());
+  if (year && (corpus ?? "admin_code") === "admin_code" && (book?.corpus ?? "admin_code") === "admin_code") {
+    const chapter = getCitation(year[1], "admin_code", false);
+    if (chapter.kind !== "none") return chapter;
+  }
+  if (book) {
+    const inBook = getCitation(book.rest, book.corpus, false);
+    if (inBook.kind !== "none") return inBook;
+  }
+  return getCitation(citation, corpus, headings);
+}
+
+// The lookup through 0.7.0's book names: a citation with no book name. `headings: false` skips
+// the heading search (lookUp's Pass 2): a citation match or nothing.
+function getCitation(citation: string, corpus: Corpus | undefined, headings: boolean): GetSectionResult {
   const titled = parseTitledCitation(citation);
   if (titled?.rules && corpus && corpus !== "rules") return { kind: "none", rulesCitation: true };
   const asked: Corpus[] = corpus ? [corpus] : titled?.rules ? ["rules"] : ["charter", "admin_code", "rules"];
-  if (!titled) return lookUp(citation, asked, null);
-  const narrowed = lookUp(citation, corpus ? [corpus] : titled.healthCode ? ["rules"] : asked, titled);
-  return narrowed.kind === "none" ? lookUp(citation, asked, null) : narrowed;
+  if (!titled) return lookUp(citation, asked, null, headings);
+  const narrowed = lookUp(citation, corpus ? [corpus] : titled.healthCode ? ["rules"] : asked, titled, headings);
+  return narrowed.kind === "none" ? lookUp(citation, asked, null, headings) : narrowed;
 }
 
-// getSection's two passes over `corpora`; with `titled`, within the title it names.
-function lookUp(citation: string, corpora: Corpus[], titled: TitledCitation | null): GetSectionResult {
+// getSection's two passes over `corpora`; with `titled`, within the title it names. The second,
+// the heading search, only with `headings`.
+function lookUp(citation: string, corpora: Corpus[], titled: TitledCitation | null, headings = true): GetSectionResult {
   const q = normalizeCitation(citation);
   if (!q) return { kind: "none" };
 
@@ -675,6 +804,7 @@ function lookUp(citation: string, corpora: Corpus[], titled: TitledCitation | nu
   const found = exact.length ? exact : inTitle;
   if (found.length === 1) return { kind: "match", section: found[0] };
   if (found.length > 1) return { kind: "ambiguous", candidates: byTitle(found) };
+  if (!headings) return { kind: "none" };
 
   // Pass 2: heading substring fallback (legacy behavior, kept for queries
   // like "Independent budget office"), within the title when one is named.
@@ -717,7 +847,7 @@ function lookUp(citation: string, corpora: Corpus[], titled: TitledCitation | nu
 // Administrative Code chapters share a number too; each is labeled with its section range, which
 // tells them apart. The Charter has no titles.
 //
-// An index built before 0.6.3 has no `titleNumber`. There an Administrative Code chapter's title
+// An index built before 0.7.0 has no `titleNumber`. There an Administrative Code chapter's title
 // is worked out from its section numbers (§ 24-163 is in Title 24), which puts Title 16-A's
 // chapters (§ 16-501 on) in Title 16; and a Rules chapter has no title.
 
@@ -740,7 +870,7 @@ export interface ChapterGroup {
   numbered: boolean;
   /**
    * The title the chapter is in ("24", "16-A"): its record's `titleNumber`; in an Administrative
-   * Code index built before 0.6.3, the title most of its § sections are numbered in. Null in the
+   * Code index built before 0.7.0, the title most of its § sections are numbered in. Null in the
    * Charter.
    */
   title: string | null;
@@ -883,7 +1013,7 @@ export function namesTitle(query: string): boolean {
 // "Chapter 70": that chapter's heading, then every record in it (in the Rules, every title's
 // Chapter 70). "Title 24": every chapter in Title 24 ("Title 16" is not 16-A or 16-B). "Title 3,
 // Chapter 1" or "3 RCNY Chapter 1": only the chapters numbered 1 among those. In an index built
-// before 0.6.3, an Administrative Code title is the chapters whose sections are numbered 24-….
+// before 0.7.0, an Administrative Code title is the chapters whose sections are numbered 24-….
 // Numbers match whole ("Chapter 1" is not "Chapter 10" or "Chapter 1-A"), in any case. Anything
 // else ("§ 259", "Preamble") falls back to records whose citation or heading starts with it.
 export function getTitle(corpus: Corpus, title: string): Section[] {
