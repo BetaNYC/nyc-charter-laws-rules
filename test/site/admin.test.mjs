@@ -15,7 +15,7 @@ import { chromium } from "playwright";
 import { buildSite } from "../../scripts/lib/site/build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
-import { closeBrowser, closeServer } from "./cleanup.mjs";
+import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const skip = existsSync(join(ROOT, "data", "structure", "admin_code.json")) ? false : "no data/structure/admin_code.json";
@@ -42,7 +42,7 @@ after(async () => {
   await closeBrowser(browser);
   closeServer(server);
   if (out) rmSync(out, { recursive: true, force: true });
-});
+}, { timeout: HOOK_TIMEOUT });
 
 async function open(path, { width = 1200, js = true, route } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, javaScriptEnabled: js, reducedMotion: "reduce" });
