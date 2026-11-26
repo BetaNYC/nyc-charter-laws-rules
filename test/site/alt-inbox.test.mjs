@@ -20,7 +20,7 @@ import { buildStatic } from "../../scripts/lib/alt-text/static-build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { makeFixture } from "../alt-text/fixture.js";
-import { closeBrowser, closeServer } from "./cleanup.mjs";
+import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 
 const WIDTHS = [
   ["phone", 390, 844],
@@ -75,7 +75,7 @@ after(async () => {
   closeServer(site?.server);
   closeServer(intake?.srv);
   closeServer(other?.srv);
-});
+}, { timeout: HOOK_TIMEOUT });
 
 async function open(width, height, { blockStorage = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, reducedMotion: "reduce" });

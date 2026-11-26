@@ -11,7 +11,8 @@
 #     repository_dispatch, will not create a new workflow run"
 #     (https://docs.github.com/en/actions/using-workflows/triggering-a-workflow).
 #
-# Steps: tests -> guard that the run is on a tag matching package.json -> the
+# Steps: the index-build guard (the bundled index was built by the build code at this
+# commit) -> tests -> guard that the run is on a tag matching package.json -> the
 # What's changed release gate (no "Unreleased" heading left) -> skip
 # publish if that version is already on npm (so a rerun after a half-finished
 # run can still create the GitHub Release) -> npm publish -> GitHub Release.
@@ -42,11 +43,13 @@
 #
 # Failure is loud: any failed step fails the run red. Recovery: fix the cause,
 # then rerun this workflow for the tag (Actions > Release > the failed run >
-# Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
+# Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover. The one
+# exception is the index-build check below: it runs before anything is published,
+# so if it stops a release, delete the tag, wait for the refresh, and tag again
+# (README, "Releases").
 #
-# NOTE: this package ships the committed corpus index in `data/index`, so the
-# published tarball is very large (~117 MB unpacked as of v0.1.2). Trimming the
-# `files` array is tracked separately — do not change it here.
+# The package ships only data/index/json from the index (package.json `files`,
+# issue #95); the Markdown index stays in git.
 
 name: Release
 
@@ -92,6 +95,16 @@ jobs:
         with:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
+
+      # The npm package ships the committed index (data/index/), and the daily refresh, not the
+      # pull request, rebuilds it with new build code. Until the refresh runs, main's index can be
+      # older than its code (issue #95: after #89 the code said "³" becomes "≥" while the index
+      # still read "For s ³ 4t"). This refuses to publish unless data/index-build.json, written by
+      # build-index.js, matches the build code at this commit and the index files it wrote
+      # (scripts/lib/index-build-record.js). An automatic release always passes: its tag is on the
+      # refresh's own commit. Node built-ins only, so it runs first and fails fast.
+      - name: The bundled index was built by this commit's build code
+        run: node scripts/check-index-build.js
 
       - name: Upgrade npm for trusted publishing
         run: |

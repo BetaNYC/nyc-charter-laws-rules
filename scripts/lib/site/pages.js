@@ -13,6 +13,7 @@ import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
 import { SITE_NAME, SITE_BASE, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
 import { KIND } from "../../../site/assets/filters.js";
+import { sourceErrorNote, SOURCE_ERRORS_PATH, SOURCE_ERRORS_TITLE } from "./pages-source-errors.js";
 
 // The first crumb (Noel, 2026-11-23: "Law Reader" confused people).
 export const HOME = { name: "Home", path: "/" };
@@ -293,6 +294,7 @@ ${s.next ? `<a class="next" href="${escapeHtml(s.next.path)}"><small>Next</small
     `<article class="law-page" data-pagefind-body>`,
     h1(s),
     TOOLS,
+    sourceErrorNote(book.sourceErrors?.get(s.id)),
     sectionBody(s, site, lawText(s, book)),
     `</article>`,
     pager,
@@ -672,7 +674,7 @@ export function aboutPage(book, site, { paragraphs, metadata, others = [] }) {
     `<p>The page frame is BetaNYC's Pages template (MIT license). Menus, breadcrumbs, buttons, and search controls come from the <a href="https://designsystem.ny.gov/">New York State Design System</a>. This is not a New York State site; we use the design system as a library. Its notice covers the State's own work (CC0), Google's Material Icons (Apache License 2.0), and Lit (BSD 3-Clause): see <a href="/licenses/nysds-LICENSE.md">nysds-LICENSE.md</a>. DOMPurify, which the design system includes, carries its notice in <a href="/assets/nysds/nysds.js">nysds.js</a>. Search uses <a href="https://pagefind.app/">Pagefind</a> (MIT license, <a href="/licenses/pagefind-LICENSE.txt">notice</a>).</p>`,
     h2("mistakes"),
     `<p>If a section is wrong, missing, or out of date here, <a href="${REPO_URL}/issues">open an issue on GitHub</a> or email ${mail}. Tell us the section number and what looks wrong. Fixes to the code are welcome as pull requests.</p>`,
-    `<p>If the mistake is in the publisher's text itself, American Legal Publishing's disclaimer asks readers to tell the publisher at <a href="mailto:NYC.editor@amlegal.com">NYC.editor@amlegal.com</a> or the NYC Law Department at <a href="mailto:NYCCodeRulesCharter@law.nyc.gov">NYCCodeRulesCharter@law.nyc.gov</a>.</p>`,
+    `<p>If the mistake is in the publisher's text itself, American Legal Publishing's disclaimer asks readers to tell the publisher at <a href="mailto:NYC.editor@amlegal.com">NYC.editor@amlegal.com</a> or the NYC Law Department at <a href="mailto:NYCCodeRulesCharter@law.nyc.gov">NYCCodeRulesCharter@law.nyc.gov</a>. BetaNYC does not change the publisher's text; we list the errors we find in it, and where each one stands, on <a href="${SOURCE_ERRORS_PATH}">${escapeHtml(SOURCE_ERRORS_TITLE)}</a>.</p>`,
     h2("support"),
     `<p>This site is free and has no ads. If it helps your work, please <a href="https://beta.nyc/donate/">support BetaNYC</a>.</p>`,
     h2("disclaimer"),

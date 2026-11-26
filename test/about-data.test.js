@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import { callTool, TOOLS, makeBetanycTools, SERVER_INSTRUCTIONS, resetFooterState, COMPACT_FOOTER } from "../dist/tools.js";
-import { assertEveryToolExplained, SHARED_MODULE_VERSION } from "../dist/betanyc-tools.js";
+import { assertEveryToolExplained, SHARED_MODULE_VERSION, parseWhatsChanged } from "../dist/betanyc-tools.js";
 import { INDEX_DIR } from "../dist/corpus.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -82,6 +82,31 @@ test("each source cites the Law Department's own page for the contract with the 
   for (const s of ask({}).structuredContent.sources) {
     assert.ok(s.caveats.some((c) => c.includes("https://www.nyc.gov/site/law/public-resources/laws-of-the-city-of-new-york.page")), s.topic);
   }
+});
+
+// The shared check (whats_changed.py about-data check) proves that each anchor in `corrections`
+// names a real Correction entry, but not the other way round: on 2026-11-26 about_data still
+// listed three corrections and left out the 2026-11-24 one (issue #95). Which documents an entry
+// touched is a person's call; that it touched at least one is not, for a Data correction.
+test("every released Data correction in WHATS-CHANGED.md is listed in about_data's corrections", () => {
+  const parsed = parseWhatsChanged(readFileSync(join(ROOT, "WHATS-CHANGED.md"), "utf8"));
+  const listed = new Set(JSON.parse(DS_TEXT).sources.flatMap((s) => s.corrections));
+  const due = parsed.entries.filter((e) => !e.unreleased && e.tags.includes("Data") && e.tags.includes("Correction"));
+  assert.ok(due.length >= 4, "the file has its Data corrections");
+  for (const e of due) {
+    assert.ok(
+      listed.has(e.anchor),
+      `WHATS-CHANGED.md "${e.title}" (${e.date}) is a Data correction, but no source in DATA-SOURCES.json lists ` +
+        `"${e.anchor}" in its corrections. Add it to each document it touched, then run ` +
+        `python3 scripts/whats_changed.py about-data catalog DATA-SOURCES.json`
+    );
+  }
+  // and about_data answers with it
+  const body = ask({ topic: "admin-code" }).structuredContent;
+  assert.ok(
+    one(body, "admin-code").corrections.some((c) => /missing building and fire code text/i.test(c.title)),
+    "admin-code lists the 2026-11-24 correction"
+  );
 });
 
 test("a tool name works as a topic: search covers all three documents", () => {

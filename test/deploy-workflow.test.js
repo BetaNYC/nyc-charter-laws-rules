@@ -81,6 +81,7 @@ test("deploy-site.yml: every file the site build imports or reads is in the push
     "data/structure/charter.json",
     "data/structure/admin_code.json",
     "data/structure/rules.json",
+    "data/source-errors.json", // errors in the publisher's text: /source-errors/ and the section notes
     "package-lock.json", // NYSDS and Pagefind, copied into the site
     ".github/workflows/deploy-site.yml",
   ];

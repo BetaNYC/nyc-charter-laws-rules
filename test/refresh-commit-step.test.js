@@ -38,7 +38,8 @@ writeFileSync("package.json", JSON.stringify(pkg) + "\\n");
 process.stdout.write("0.7.1");
 `;
 
-function setup() {
+// noRecord: start from a main with no data/index-build.json, as before issue #95.
+function setup({ noRecord = false } = {}) {
   const dir = mkdtempSync(join(tmpdir(), "refresh-commit-"));
   const work = join(dir, "work");
   const origin = join(dir, "origin.git");
@@ -59,6 +60,9 @@ function setup() {
     "README.md": "# readme\n",
     "data/structure/charter.json": "{}\n",
     "data/fetch-provenance.json": '{"corpora":{}}\n',
+    // build-index always writes it, so it exists whenever the step runs (git add fails on a
+    // path that matches no file).
+    ...(noRecord ? {} : { "data/index-build.json": '{"fingerprint":"base"}\n' }),
     "package.json": '{"name":"x","version":"0.7.0","type":"module"}\n',
     "package-lock.json": "{}\n",
     "server.json": "{}\n",
@@ -114,6 +118,36 @@ test("the download record alone: committed by itself, no version bump, no releas
     assert.match(r.git("log", "-1", "--format=%s"), /^chore: refresh site structure and download record \d{4}-\d{2}-\d{2}$/);
     assert.match(readFileSync(join(r.work, "package.json"), "utf8"), /"version":"0\.7\.0"/);
     assert.equal(r.git("rev-parse", "HEAD"), r.git("rev-parse", "origin/main"), "pushed to main");
+  } finally {
+    rmSync(r.dir, { recursive: true, force: true });
+  }
+});
+
+test("the build record alone (issue #95): new or changed, committed with no release and no deploy", opts, () => {
+  // The build code changed but the index it builds did not: only data/index-build.json moves.
+  const r = setup({ noRecord: true });
+  try {
+    r.write("data/index-build.json", '{"fingerprint":"a"}\n'); // the first build creates it
+    const { outputs } = r.runStep();
+    assert.deepEqual(outputs, { pushed: "true" }, "pushed, but deploy is not set");
+    assert.equal(r.calls(), "", "auto-release.js prepare never ran");
+    assert.deepEqual(r.committed(), ["data/index-build.json"]);
+    r.write("data/index-build.json", '{"fingerprint":"b"}\n');
+    assert.deepEqual(r.runStep().outputs, { pushed: "true" });
+    assert.deepEqual(r.committed(), ["data/index-build.json"]);
+    assert.equal(r.calls(), "");
+  } finally {
+    rmSync(r.dir, { recursive: true, force: true });
+  }
+});
+
+test("new build code that changes the index: the index and its build record go in the same commit", opts, () => {
+  const r = setup();
+  try {
+    r.write("data/index/json/versions.json", '{"admin_code":{"sha256":"new"}}\n');
+    r.write("data/index-build.json", '{"fingerprint":"a"}\n');
+    r.runStep();
+    assert.deepEqual(r.committed(), ["data/index-build.json", "data/index/json/versions.json", "package.json"]);
   } finally {
     rmSync(r.dir, { recursive: true, force: true });
   }

@@ -16,6 +16,7 @@ import {
   fullCitation,
   titleHeadings,
   hasTitles,
+  isEmptyQuery,
   type Corpus,
   type SearchMode,
 } from "./corpus.js";
@@ -317,9 +318,78 @@ export function currentThrough(c: Corpus): string | null {
 export const CONVERSION_DETAIL =
   "converted by BetaNYC from the publisher's bulk XML files: line breaks are collapsed, so tables run together; " +
   "the publisher's editing markers are removed and character codes decoded; " +
+  "math signs and Greek letters set in the old Symbol font are changed to the characters the font shows (³ to ≥) where BetaNYC has checked them; " +
   "citations are worked out by BetaNYC from headings and can be wrong or cut short";
 export const SNIPPET_CHARS = 400;
 export const SNIPPET_DETAIL = `; search snippets are cut at ${SNIPPET_CHARS} characters`;
+
+// How much of the text before the first match a snippet keeps (issue #95).
+export const SNIPPET_LEAD = 100;
+const isHigh = (code: number) => code >= 0xd800 && code <= 0xdbff;
+const isLow = (code: number) => code >= 0xdc00 && code <= 0xdfff;
+
+/**
+ * At most SNIPPET_CHARS characters of a section's text, around the first match of any of
+ * `patterns` (issue #95), with "…" where text is left out. Through 0.7.x a snippet was always the
+ * first 400 characters, so a match further in did not show. The snippet starts up to SNIPPET_LEAD
+ * characters before the match, at the start of a word, and no later than the last full window of
+ * the text. A match only in the heading or citation, or none found, gives the opening, as before.
+ */
+export function snippet(text: string, patterns: RegExp[], max = SNIPPET_CHARS): string {
+  if (text.length <= max) return text;
+  let at = -1;
+  for (const re of patterns) {
+    const m = re.exec(text);
+    if (m && (at < 0 || m.index < at)) at = m.index;
+  }
+  let start = 0;
+  if (at > SNIPPET_LEAD) {
+    start = Math.min(at - SNIPPET_LEAD, text.length - max);
+    if (!/\s/.test(text[start - 1])) {
+      const space = text.slice(start, at).search(/\s/);
+      if (space >= 0) start += space + 1;
+    }
+    if (isLow(text.charCodeAt(start))) start++;
+  }
+  let end = Math.min(text.length, start + max);
+  if (end < text.length && isHigh(text.charCodeAt(end - 1))) end--;
+  return `${start > 0 ? "…" : ""}${text.slice(start, end)}${end < text.length ? "…" : ""}`;
+}
+
+// get_section's text in parts (issue #95). BC 722 and RS 18-1 run 80,000 to 110,000 characters,
+// and clients that cap a tool's answer cut them off. About 2% of sections are longer than the
+// default part; the rest come whole, as before.
+export const DEFAULT_MAX_CHARS = 20_000;
+export const MIN_MAX_CHARS = 1_000;
+export const MAX_MAX_CHARS = 100_000;
+
+/**
+ * The part of `text` from `offset`, at most `max` characters, ending after a space when there is
+ * one in the last fifth (so a word is not cut in two), and never inside a surrogate pair. `end` is
+ * the offset of the next part. Following each part's `end` gives back the whole text.
+ */
+export function textPart(text: string, offset: number, max: number): { part: string; end: number } {
+  let end = Math.min(text.length, offset + max);
+  if (end < text.length) {
+    const space = text.slice(offset, end).search(/\s\S*$/);
+    if (space >= 0 && space >= Math.floor(max * 0.8)) end = offset + space + 1;
+    else if (isHigh(text.charCodeAt(end - 1))) end--;
+  }
+  return { part: text.slice(offset, end), end };
+}
+
+// The line before a part of a section's text, or null when the whole text is shown.
+export function partLine(length: number, offset: number, end: number): string | null {
+  if (offset > 0 && offset >= length) {
+    return `Nothing at offset ${offset}: the text has ${length} characters. Call again with a smaller offset.`;
+  }
+  if (offset === 0 && end >= length) return null;
+  const more = end < length ? ` Call again with offset ${end} for the next part.` : "";
+  return `Showing characters ${offset + 1} to ${end} of ${length}.${more}`;
+}
+
+// "admin_code or rules"; "charter, admin_code or rules".
+const orList = (items: string[]) => (items.length < 3 ? items.join(" or ") : `${items.slice(0, -1).join(", ")} or ${items[items.length - 1]}`);
 
 // "text": an answer from the converted law text (search, get_section, list_titles, get_title).
 // "snippets": the same, with search snippets. "dates": get_version, which reports the index's
@@ -414,6 +484,8 @@ const SHAPES = {
   get_section: {
     citation: z.string().describe("Section citation or heading; a Rules citation with its title ('15 RCNY § 1-01'); may name its book ('NYC Charter § 1133') or a part ('§ 1133(b)(1)')"),
     corpus: CORPUS.optional().describe("Which document to look in (default: all three)"),
+    max_chars: z.number().int().min(MIN_MAX_CHARS).max(MAX_MAX_CHARS).optional().describe(`Most characters of text per answer (default ${DEFAULT_MAX_CHARS}, ${MIN_MAX_CHARS} to ${MAX_MAX_CHARS}); longer text comes in parts`),
+    offset: z.number().int().min(0).optional().describe("Where to start: characters into a section's text, or matches into a list (default 0)"),
   },
   list_titles: {
     corpus: CORPUS.describe("Which document to list"),
@@ -448,13 +520,13 @@ export const TOOLS = annotateTools([
   {
     name: "search",
     title: "Search the law text",
-    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, ranked so rare words and words in a heading count most; the response's first line says when this happened and which terms were used.`,
+    description: `Keyword search across the NYC Charter, Administrative Code, and Rules of the City of New York. This is keyword matching, not a question-answering engine: short keyword queries work best (e.g. 'sidewalk shed', 'water tank inspection'), not full questions. An empty query is an error. A query or term of 3 or fewer letters and digits matches whole words only ('x' is not the x in 'wax'). The query is first matched as an exact phrase (quotes around the whole query are removed first); results are relevance-ranked, with heading matches above citation matches above body-text matches, and whole-word matches above substring matches. If the phrase matches nothing, question words and common words are dropped and sections containing the remaining terms are returned, ranked so rare words and words in a heading count most; the response's first line says when this happened and which terms were used. Each snippet is the text around the first match.`,
     inputSchema: inputSchema(SHAPES.search),
   },
   {
     name: "get_section",
     title: "Get a section",
-    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. Each title of the Rules restarts its numbers, so name the title: '15 RCNY § 1-01' or 'Title 15 § 1-01' ('24 RCNY Health Code § 81.08'); a bare '§ 1-01' lists every title's, each labeled with its title. A citation may name its book ('NYC Charter § 1133', 'Admin. Code § 27-506'); then only that book is looked in. Code sections: 'FC 102', 'RS 18-1'. A part of a section ('§ 1133(b)(1)', 'Section FC 102.4(1)') returns the whole section; the first line names the part.`,
+    description: `Retrieve a specific section by its citation (e.g. '§ 259', 'Section 259', '11-602.1', 'Chapter 11'). Input is normalized (with or without '§', any case). Pass 'corpus' to disambiguate when the same citation exists in multiple documents (e.g. charter 'Chapter 3' vs a rules chapter); if multiple sections still match, a disambiguation list is returned. Each title of the Rules restarts its numbers, so name the title: '15 RCNY § 1-01' or 'Title 15 § 1-01' ('24 RCNY Health Code § 81.08'); a bare '§ 1-01' lists every title's, each labeled with its title. A citation may name its book ('NYC Charter § 1133', 'Admin. Code § 27-506'); then only that book is looked in. Code sections: 'FC 102', 'RS 18-1'. A code may be named in words ('Building Code 722.2.1.1.4'); a bare code number ('722.2.1.1.4') is looked for in every code. A part of a section ('§ 1133(b)(1)', 'Section FC 102.4(1)') returns the whole section; the first line names the part. Long text comes in parts, long lists in pages of 25; the answer gives the offset for the next.`,
     inputSchema: inputSchema(SHAPES.get_section),
   },
   {
@@ -497,36 +569,48 @@ export async function callTool(name: string, args: unknown) {
     switch (name) {
       case "search": {
         const { query, corpus, limit } = parseArgs("search", SHAPES.search, args);
+        // Through 0.7.x an empty query matched every section (issue #95).
+        if (isEmptyQuery(query)) {
+          return failed(
+            `search needs words to look for, and the query was empty${query ? " (only spaces or quote marks)" : ""}. ` +
+              "Send a keyword or a phrase, such as 'sidewalk shed'. For a section you know by its citation, call get_section, such as get_section('§ 259')."
+          );
+        }
         const max = limit ?? 10;
-        const { results, mode, terms, allTermResults, total, allTermTotal } = searchWithFallback(
+        const { results, mode, terms, allTermResults, total, allTermTotal, patterns, wholeWords } = searchWithFallback(
           query,
           corpus ?? "all",
           max
         );
+        // Short queries and terms match whole words only (issue #95): the answer says which.
+        const whole =
+          wholeWords.length === 0 ? null
+          : mode === "phrase" ? `"${echo(wholeWords[0])}" has 3 or fewer letters and digits, so it matched whole words only, not inside longer words.`
+          : wholeWords.length === 1 ? `The term "${echo(wholeWords[0])}" has 3 or fewer letters and digits, so it matched whole words only.`
+          : `Terms of 3 or fewer letters and digits (${echo(wholeWords.join(", "))}) matched whole words only.`;
         if (results.length === 0) {
           const searched = corpus && corpus !== "all" ? [corpus] : ALL_CORPORA;
-          return answer(`No results found for "${echo(query)}". ${searchedLine(searched)}`, searched);
+          return answer(`No results found for "${echo(query)}".${whole ? ` ${whole}` : ""} ${searchedLine(searched)}`, searched);
         }
         const notice = searchNotice(mode, terms, allTermTotal);
         const count = searchCountLine({ mode, shown: results.length, allTermResults, total, allTermTotal, limit: max });
         let cut = false;
         const body = results
           .map((s) => {
-            const long = s.text.length > SNIPPET_CHARS;
-            cut ||= long;
-            return `[${s.corpus.toUpperCase()}] ${fullCitation(s)} — ${s.heading}\n${s.text.slice(0, SNIPPET_CHARS)}${long ? "…" : ""}`;
+            cut ||= s.text.length > SNIPPET_CHARS;
+            return `[${s.corpus.toUpperCase()}] ${fullCitation(s)} — ${s.heading}\n${snippet(s.text, patterns)}`;
           })
           .join("\n\n---\n\n");
         const cutNote = cut
-          ? `Snippets are cut at ${SNIPPET_CHARS} characters (marked …); get_section returns a section's full text.`
+          ? `Each snippet is at most ${SNIPPET_CHARS} characters of the section, around the first match; … marks text left out. get_section returns a section's full text.`
           : null;
         // After the results, so the first line stays the notice (issue #30) and results start on line 3.
-        const text = [notice, body, count, cutNote].filter(Boolean).join("\n\n");
+        const text = [notice, body, count, whole, cutNote].filter(Boolean).join("\n\n");
         return answer(text, results.map((s) => s.corpus), "snippets");
       }
 
       case "get_section": {
-        const { citation, corpus } = parseArgs("get_section", SHAPES.get_section, args);
+        const { citation, corpus, max_chars, offset } = parseArgs("get_section", SHAPES.get_section, args);
         const result = getSection(citation, corpus);
         if (result.kind === "none") {
           if (result.rulesCitation && corpus) {
@@ -547,7 +631,8 @@ export async function callTool(name: string, args: unknown) {
           return answer(`Section not found: "${echo(citation)}". ${searchedLine(searched)}`, searched);
         }
         if (result.kind === "ambiguous") {
-          const { shown, note } = page(result.candidates, 0, MAX_CANDIDATES);
+          // In pages of MAX_CANDIDATES, with `offset` (issue #95), worded as the other lists are.
+          const { shown, note } = page(result.candidates, offset ?? 0, MAX_CANDIDATES);
           // Each candidate with its title (issue #59), so a person can tell the Rules' many
           // "§ 1-01" apart and ask again for the one they mean: "15 RCNY § 1-01".
           const list = shown
@@ -556,12 +641,18 @@ export async function callTool(name: string, args: unknown) {
               return `[${s.corpus.toUpperCase()}] ${fullCitation(s)} — ${s.heading}${name ? ` (${name})` : ""}`;
             })
             .join("\n");
+          // What to add to get one (issue #95): 'corpus' only when it was not given and the matches
+          // are in more than one document; the title when the full citations name one.
+          const corpora = [...new Set(result.candidates.map((s) => s.corpus))];
+          const ways: string[] = [];
+          if (!corpus && corpora.length > 1) ways.push(`set 'corpus' (${orList(corpora)})`);
           const example = result.candidates.find((s) => fullCitation(s) !== s.citation);
-          const titled = example ? ` A citation can name its title: '${fullCitation(example)}'.` : "";
-          const more = note ? `\n\n${note.replace(/ Call again.*$/, "")} Narrow it with 'corpus' or a more specific citation to see the others.${titled}` : "";
+          ways.push(example
+            ? `name its title in the citation, as each line below does: '${fullCitation(example)}'`
+            : "use a more specific citation, or words from its heading");
           return answer(
-            `${result.subdivision ? `You asked for ${echo(result.subdivision)}, a part of a section. The index holds whole sections, so these are the whole sections it may be in.\n\n` : ""}Multiple sections match "${echo(citation)}". Re-run get_section with the 'corpus' parameter and/or a more specific citation:\n\n${list}${more}`,
-            shown.map((s) => s.corpus)
+            `${result.subdivision ? `You asked for ${echo(result.subdivision)}, a part of a section. The index holds whole sections, so these are the whole sections it may be in.\n\n` : ""}Multiple sections match "${echo(citation)}". To get one, ${ways.join(", or ")}.${list ? `\n\n${list}` : ""}${note ? `\n\n${note}` : ""}`,
+            (shown.length ? shown : result.candidates).map((s) => s.corpus)
           );
         }
         const section = result.section;
@@ -571,7 +662,12 @@ export async function callTool(name: string, args: unknown) {
         const part = result.subdivision
           ? `You asked for ${echo(result.subdivision)}, a part of ${fullCitation(section)}. The index holds whole sections, so the whole section follows.\n\n`
           : "";
-        const text = `${part}[${section.corpus.toUpperCase()}] ${fullCitation(section)} (matched in corpus: ${section.corpus}${name ? `; in ${name}` : ""})\n${section.heading}\n\n${section.text}`;
+        // The text in parts (issue #95): a line before it says which characters of how many, and
+        // the offset for the next part. A text that fits whole has no such line, as before.
+        const from = offset ?? 0;
+        const { part: piece, end } = textPart(section.text, from, max_chars ?? DEFAULT_MAX_CHARS);
+        const line = partLine(section.text.length, from, end);
+        const text = `${part}[${section.corpus.toUpperCase()}] ${fullCitation(section)} (matched in corpus: ${section.corpus}${name ? `; in ${name}` : ""})\n${section.heading}\n\n${line ? `${line}\n\n` : ""}${piece}`;
         return answer(text, [section.corpus]);
       }
 
@@ -591,9 +687,23 @@ export async function callTool(name: string, args: unknown) {
 
       case "get_title": {
         const { corpus, title, limit, offset } = parseArgs("get_title", SHAPES.get_title, args);
-        const sections = getTitle(corpus, title);
+        let sections = getTitle(corpus, title);
+        // A bare number (issue #95): the Charter has chapters and no titles, so "11" is Chapter 11,
+        // and the answer says so. Elsewhere it could be a title or a chapter: the answer asks.
+        const bare = /^[A-Za-z]?\d[\dA-Za-z.-]*$/.test(title.trim()) ? title.trim() : null;
+        let readAs: string | null = null;
+        let bareHint = "";
+        if (sections.length === 0 && bare) {
+          if (corpus === "charter") {
+            sections = getTitle(corpus, `Chapter ${bare}`);
+            if (sections.length) readAs = `Read "${echo(bare)}" as "Chapter ${echo(bare)}": the Charter has chapters, not titles.`;
+            else bareHint = ` The Charter has no Chapter ${echo(bare)}; list_titles lists its chapters.`;
+          } else {
+            bareHint = ` Ask for 'Title ${echo(bare)}' or 'Chapter ${echo(bare)}'.`;
+          }
+        }
         if (sections.length === 0) {
-          const hint = !namesTitle(title) || corpus === "admin_code"
+          const hint = bareHint ? bareHint : !namesTitle(title) || corpus === "admin_code"
             ? ""
             : corpus === "charter"
               ? " The Charter has no titles; ask for a chapter, which list_titles lists."
@@ -608,7 +718,7 @@ export async function callTool(name: string, args: unknown) {
           corpus,
           shown.map((s) => ({ line: `${s.citation} — ${s.heading}`, title: s.titleNumber ?? null, titleHeading: s.level === "Chapter" ? (s.titleHeading ?? null) : null })),
         );
-        const text = [count, lines].join("\n\n");
+        const text = [readAs, count, lines].filter(Boolean).join("\n\n");
         return answer(text, [corpus]);
       }
 

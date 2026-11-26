@@ -1,6 +1,6 @@
 {
   "name": "@betanyc/nyc-charter-laws-rules",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "MCP server for NYC Charter, Administrative Code, and Rules of the City of New York",
   "mcpName": "io.github.BetaNYC/nyc-charter-laws-rules",
   "keywords": [
@@ -36,7 +36,7 @@
   },
   "files": [
     "dist",
-    "data/index",
+    "data/index/json",
     "WHATS-CHANGED.md",
     "DATA-SOURCES.json",
     "data.json"
@@ -45,7 +45,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/index.js",
-    "prepare": "npm run build",
+    "prepack": "npm run build",
     "fetch-data": "node scripts/fetch-data.js",
     "build-index": "node scripts/build-index.js",
     "audit:coverage": "node scripts/audit-coverage.js",
@@ -56,6 +56,7 @@
     "alt:draft": "node scripts/alt-text.js draft",
     "alt:review": "node scripts/alt-text.js review",
     "alt:build-static": "node scripts/alt-text.js build-static",
+    "source-errors:images": "node scripts/source-errors-images.js",
     "pretest": "npm run build",
     "test": "node --test test/*.test.js",
     "test:diff": "node --test test/diff/differential.mjs",
@@ -66,14 +67,14 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "adm-zip": "^0.5.17",
-    "fast-xml-parser": "^5.8.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "1.8.0",
     "@nysds/components": "^1.23.2",
     "@types/node": "^22.0.0",
+    "adm-zip": "^0.5.17",
+    "fast-xml-parser": "^5.8.0",
     "pagefind": "^1.6.0",
     "playwright": "^1.65.1",
     "typescript": "^5.5.0"

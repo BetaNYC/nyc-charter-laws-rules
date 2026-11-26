@@ -126,6 +126,25 @@ jobs:
       - name: Check WHATS-CHANGED.md
         run: node scripts/auto-release.js check-whats-changed --base-ref "$(git merge-base HEAD origin/main)"
 
+  # The bundled index and the build code (issue #95). release.yml refuses to publish an index
+  # that the build code at the tag did not build. On a pull request that changes the build code,
+  # and on main until the next daily refresh rebuilds the index, that check would fail, so here it
+  # only warns: a stale index is expected for up to a day and fixes itself. Node built-ins only.
+  index-build:
+    name: Index build record
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Was the committed index built by this code? (warning only)
+        run: node scripts/check-index-build.js --warn
+
   # BetaNYC's about-data standard (betanyc-ai-workspace platform/system/about-data-standard.md
   # § 7). scripts/whats_changed.py, scripts/tests/catalog_validate.py, scripts/mcp_shared/ and
   # src/betanyc-tools.ts are copies of the workspace's canonical files: never edit them here.
