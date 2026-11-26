@@ -4,6 +4,15 @@
 // never wait forever: the browser gets a fixed time to close, and the server drops its open
 // connections before it stops. npm run test:site also passes --test-force-exit, and the CI
 // job has a timeout, so a hang anywhere else still ends.
+//
+// --test-force-exit does not end a hook that never returns: node waits for every after()
+// hook before it exits (2026-11-26: alt-review.test.mjs's after() waited on a server
+// whose connections the still-open browser held, and the step timed out at 25 minutes).
+// Every after() hook passes { timeout: HOOK_TIMEOUT }, so a stuck hook fails fast and
+// names its file instead.
+
+/** Time limit for every browser test file's after() hook, in milliseconds. */
+export const HOOK_TIMEOUT = 60_000;
 
 /** Close a Playwright browser, giving up after `ms` milliseconds. */
 export async function closeBrowser(browser, ms = 15000) {

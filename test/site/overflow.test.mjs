@@ -20,7 +20,7 @@ import { buildSite } from "../../scripts/lib/site/build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { pagesWithLongRuns, pagesWithTables, longestRun, longestCrumb, LONG_RUN } from "./long-runs.mjs";
 import { CHROMIUM_ARGS } from "./a11y-tree.mjs";
-import { closeBrowser, closeServer } from "./cleanup.mjs";
+import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const given = process.env.LAW_READER_SITE ? resolve(process.env.LAW_READER_SITE) : null;
@@ -42,7 +42,7 @@ after(async () => {
   await closeBrowser(browser);
   closeServer(server);
   if (out) rmSync(out, { recursive: true, force: true });
-});
+}, { timeout: HOOK_TIMEOUT });
 
 test("longestRun reads <main>'s text, across tags and entities", () => {
   const html = `<nav>${"x".repeat(80)}</nav><main id="main"><p>a <a href="#">b${"_".repeat(10)}</a><strong>${"_".repeat(25)}</strong>&amp;c d</p></main>`;
