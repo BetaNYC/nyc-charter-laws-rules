@@ -216,7 +216,7 @@ jobs:
             README.md
           )
           # Committed beside the index but not in the npm package (package.json `files` has
-          # data/index only), so a change to them alone needs no release:
+          # data/index/json only), so a change to them alone needs no release:
           #   data/structure/             the site structure (issue #61), built by build-index
           #   data/fetch-provenance.json  which ZIP bytes were downloaded (issue #55), by fetch-data
           #   data/index-build.json       which build code made the index (issue #95), by
