@@ -161,8 +161,12 @@ export function symbolToUnicode(text, tally = null, record = "") {
     const uni = REVIEWED_SYMBOL_CODES.get(code);
     out += uni ?? ch;
     if (!tally) continue;
-    if (uni !== undefined) tally.mapped++;
-    else if (KEPT_SYMBOL_CODES.has(cp)) tally.kept++;
+    // A reviewed code whose Unicode character is the code itself ("(") changes nothing: it is
+    // counted as kept, so "characters changed" in the build log is what really changed (#95).
+    if (uni !== undefined) {
+      if (uni !== ch) tally.mapped++;
+      else tally.kept++;
+    } else if (KEPT_SYMBOL_CODES.has(cp)) tally.kept++;
     else {
       if (!tally.unreviewed.has(ch)) tally.unreviewed.set(ch, new Map());
       const byRecord = tally.unreviewed.get(ch);

@@ -11,7 +11,8 @@
 #     repository_dispatch, will not create a new workflow run"
 #     (https://docs.github.com/en/actions/using-workflows/triggering-a-workflow).
 #
-# Steps: tests -> guard that the run is on a tag matching package.json -> the
+# Steps: the index-build guard (the bundled index was built by the build code at this
+# commit) -> tests -> guard that the run is on a tag matching package.json -> the
 # What's changed release gate (no "Unreleased" heading left) -> skip
 # publish if that version is already on npm (so a rerun after a half-finished
 # run can still create the GitHub Release) -> npm publish -> GitHub Release.
@@ -92,6 +93,16 @@ jobs:
         with:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
+
+      # The npm package ships the committed index (data/index/), and the daily refresh, not the
+      # pull request, rebuilds it with new build code. Until the refresh runs, main's index can be
+      # older than its code (issue #95: after #89 the code said "³" becomes "≥" while the index
+      # still read "For s ³ 4t"). This refuses to publish unless data/index-build.json, written by
+      # build-index.js, matches the build code at this commit and the index files it wrote
+      # (scripts/lib/index-build-record.js). An automatic release always passes: its tag is on the
+      # refresh's own commit. Node built-ins only, so it runs first and fails fast.
+      - name: The bundled index was built by this commit's build code
+        run: node scripts/check-index-build.js
 
       - name: Upgrade npm for trusted publishing
         run: |

@@ -115,6 +115,21 @@ test("symbolToUnicode: a code not on the reviewed list is kept and reported with
   assert.deepEqual([...t2.unreviewed.keys()], ["\uF0A7"]);
 });
 
+test("symbolToUnicode: a reviewed code the same in Unicode ('(') is not counted as changed (#95)", () => {
+  // build-index printed "309 characters changed" for the Administrative Code, where the text
+  // differs in 308: the one Symbol "(" stays "(", and was counted as a change.
+  const tally = createSymbolTally();
+  assert.equal(symbolToUnicode("a (S", tally, "r"), "α (Σ");
+  assert.equal(tally.mapped, 2, "α and Σ changed; ( did not");
+  assert.equal(tally.kept, 1, "( is reviewed and kept as it is");
+  assert.equal(tally.unreviewed.size, 0);
+  // Written in the private-use range, "(" does change, so it counts.
+  const t2 = createSymbolTally();
+  assert.equal(symbolToUnicode("", t2, "r"), "(");
+  assert.equal(t2.mapped, 1);
+  assert.equal(t2.kept, 0);
+});
+
 test("symbolToUnicode: character references are skipped whole, so their letters are not read as Symbol codes", () => {
   // Without the guard, the "a" in "&alpha;" and in "&#x3a3;" would become "α" (a reviewed
   // code), and "&", "#", "l", "p", "h", ";" would be reported as unreviewed codes.

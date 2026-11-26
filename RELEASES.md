@@ -17,6 +17,9 @@ that publishes to npm. There are two kinds:
   the `vX.Y.Z` tag and starts `release.yml` on it. No new text, no release. The
   entry names which corpora's "current through" line moved. An automatic release
   ships `main` as it stands, including any code merged since the last release.
+  A change to the build code (`scripts/build-index.js` and what it imports) is
+  not rebuilt into the index by its pull request: the next refresh rebuilds and
+  commits the index, and that commit counts as new text when the index changed.
 - **Manual releases.** Bump the version on `main` in `package.json`,
   `package-lock.json` and `server.json` (both of its `version` fields), add an
   entry below headed `## vX.Y.Z — Unreleased`, then push a matching `vX.Y.Z`
@@ -27,7 +30,22 @@ that publishes to npm. There are two kinds:
   entry to [WHATS-CHANGED.md](WHATS-CHANGED.md) in the same pull request. On
   release day, one commit dates both headings (New York date), and the tag goes
   on that commit; `release.yml` refuses to publish while either still says
-  Unreleased. Steps: README, "Releases".
+  Unreleased. A release that dates a Data correction also adds its anchor to
+  `corrections` in DATA-SOURCES.json for each document it touched (a test
+  fails otherwise). Before tagging, run `node scripts/check-index-build.js`: it
+  fails when the build code changed after the last refresh. Wait for the next
+  refresh (or start it with `gh workflow run refresh-data.yml`), then tag `main`
+  after the refresh's commit. Steps: README, "Releases".
+
+`release.yml` checks first that the bundled index was built by the build code
+at the tag (`scripts/check-index-build.js`, issue #95). `build-index` writes
+`data/index-build.json`, a fingerprint of that code and the sha256 of each index
+file; the check recomputes the fingerprint and refuses to publish when it
+differs, so a tag pushed before the refresh cannot ship old text with new
+claims. An automatic release passes, because its tag is on the refresh's own
+commit. If the check stops a manual release, nothing was published: delete the
+tag (`git push origin :refs/tags/vX.Y.Z`), wait for the refresh, and tag again.
+That is the one case where re-tagging is right.
 
 Automatic data releases never get a WHATS-CHANGED.md entry: daily law text is
 recorded in CHANGELOG.md. The refresh does not release automatically while
@@ -36,7 +54,9 @@ WHATS-CHANGED.md has an Unreleased entry (see `scripts/auto-release.js`).
 If a release fails, its run goes red, and every following refresh goes red too
 until the version is published. Fix the cause and rerun the failed Release run
 (Actions → Release → Re-run, or `gh run rerun <id> --failed`). Never re-tag or
-bump to recover. Setup for npm trusted publishing is in the README, "Releases".
+bump to recover (except after the index-build check above, which stops before
+anything is published). Setup for npm trusted publishing is in the README,
+"Releases".
 
 ## Format
 
@@ -53,8 +73,12 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ## v0.8.0 — Unreleased
 
-- **Symbol-font characters show as the characters the font draws** ([#88](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/88)). American Legal sets some text in the old Symbol font (`font-name="Symbol"`), which puts math signs and Greek letters on ordinary character codes, so the index read "For s ³ 4t" where BC 722.2.1.1.4 says "For s ≥ 4t". `scripts/lib/symbol-font.js` now maps 13 reviewed codes inside Symbol runs to Unicode while the index is built (`D→Δ S→Σ W→Ω a→α m→μ q→θ r→ρ s→σ £→≤ ³→≥ ´→× Ö→√ (→(`), each checked against the Unicode Consortium's Adobe Symbol table, vendored in `scripts/vendor/unicode-adobe-symbol/`. Any other code in a Symbol run is left as is, and `build-index` warns `unreviewed Symbol code …`, so new data cannot change text silently. "·" and "§" stay unchanged on purpose (bullets and "times"; footnote marks in 1 RCNY § 101-14). A heading that copies its paragraph word for word gets the same characters (BC 1609.7.1). On the July 2026 files this changes the text of 48 Administrative Code records (308 characters) and 14 Rules records (118 characters), and nothing outside Symbol runs. "WP Greek Helve" and "Wingdings" text is not mapped yet and is listed in `known_gaps`.
+- **Symbol-font characters show as the characters the font draws** ([#88](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/88)). American Legal sets some text in the old Symbol font (`font-name="Symbol"`), which puts math signs and Greek letters on ordinary character codes, so the index read "For s ³ 4t" where BC 722.2.1.1.4 says "For s ≥ 4t". `scripts/lib/symbol-font.js` now maps 13 reviewed codes inside Symbol runs to Unicode while the index is built (`D→Δ S→Σ W→Ω a→α m→μ q→θ r→ρ s→σ £→≤ ³→≥ ´→× Ö→√ (→(`), each checked against the Unicode Consortium's Adobe Symbol table, vendored in `scripts/vendor/unicode-adobe-symbol/`. Any other code in a Symbol run is left as is, and `build-index` warns `unreviewed Symbol code …`, so new data cannot change text silently. "·" and "§" stay unchanged on purpose (bullets and "times"; footnote marks in 1 RCNY § 101-14). A heading that copies its paragraph word for word gets the same characters (BC 1609.7.1). Measured on a local build from the July 2026 files, not the later files this release ships: it changed the text of 48 Administrative Code records (308 characters) and 14 Rules records (118 characters), and nothing outside Symbol runs. "WP Greek Helve" and "Wingdings" text is not mapped yet and is listed in `known_gaps`.
 - The bundled index is rebuilt with this code by the daily refresh, not in the pull request.
+- **Release guard: the bundled index must be built by the code being released** ([#95](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/95)). `build-index` writes `data/index-build.json`, a fingerprint of `scripts/build-index.js`, the modules it imports, the Symbol table they read and the locked versions of the npm packages they use, with the sha256 of each index file. `scripts/check-index-build.js` recomputes it; `release.yml` runs it before publishing and refuses when the code changed after the index was built, naming what changed and what to do. `test.yml` runs it as a warning only. The refresh commits the record beside the index; a change to it alone is committed with no release. The record is not in the npm package.
+- **about_data lists the 2026-11-24 correction** ([#95](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/95)). The corrections for all three documents now include "Missing building and fire code text and appendices, and wrong chapter lists", which about_data left out. A new test fails when a released Data correction in WHATS-CHANGED.md is in no document's corrections.
+- **about_data no longer describes the Symbol-font change for the Charter**, which has no text in that font ([#95](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/95)).
+- **`build-index` counts Symbol-font characters exactly** ([#95](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/95)). The one Symbol "(" stays "(", and was counted as changed: the log said 309 characters changed in the Administrative Code where 308 did. It is now counted as kept.
 
 ## v0.7.1 — 2026-11-26
 
