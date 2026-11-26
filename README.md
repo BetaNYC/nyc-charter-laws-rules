@@ -9,8 +9,8 @@ The single place to access, process, and query New York City's three primary leg
 This repo includes:
 - A **[MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server** so AI assistants can query the documents directly
 - **Scripts** to fetch and parse the latest bulk XML from American Legal Publishing
-- A committed **JSON index** (`data/index/json/`) for machine use
-- A committed **Markdown index** (`data/index/markdown/`) for human browsing — readable directly on GitHub
+- A committed **JSON index** (`data/index/json/`) for machine use. The MCP server reads it, and it is the only data in the npm package.
+- A committed **Markdown index** (`data/index/markdown/`) for human browsing — readable directly on GitHub. The server does not read it, and it is not in the npm package.
 - A **site structure** (`data/structure/`) for the law website: each section's subdivisions, cross-reference targets, and chapter and title names, built with the index (see [Site structure](#site-structure-datastructure)). It is not in the npm package.
 - A **website**, the BetaNYC Law Reader: the Charter and the Administrative Code, one page per section, with links between sections and search, built from the index by `npm run build-site` (see [The website](#the-website-betanyc-law-reader)). `.github/workflows/deploy-site.yml` builds it and publishes it to law.beta.nyc on GitHub Pages; the HTML is never committed. It is not in the npm package.
 
@@ -265,6 +265,7 @@ npm test
 | `test/chapters.test.js` | `list_titles` and `get_title` (live check of 0.6.0), against the committed index with every expected value worked out from the index file, never a pinned count, heading or last section, so new law cannot turn the daily refresh red: Charter chapters once each (every chapter record in the index), in order, with whole numbers (`Chapter 18-A`, not `Chapter 18-`); Administrative Code chapters told apart by section range, no label shown twice except the publisher's own starred twins (July 2026: two Chapter 43s holding only § 21-1015); `get_title` lists a chapter's records in index order up to the next chapter (Charter Chapter 70, Chapter 1, Chapter 18-A), `Title 6` and `Title 24` give the Administrative Code chapters numbered 6-… and 24-…, `Title 3, Chapter 1` narrows to one chapter, a Rules title says to ask for a chapter, and other queries still match by prefix, whole tokens only. Holds on an index built before or after the label fix, and before or after #78's `level`. |
 | `test/echo-and-paths.test.js` | A missing or unreadable index file (through a broken `NYC_LAWS_INDEX_DIR`) names the document, never the path, and writes the path to stderr; `echo()` cuts what the caller sent to one line of at most 100 characters, for a 5,000-character query, citation, title, parameter name, corpus value and tool name, and for fake stack-trace lines. |
 | `test/index-dir.test.js` | The `NYC_LAWS_INDEX_DIR` override (issue #26), each case in a child process: unset and blank serve the bundled index; a set directory serves its versions and section text; relative paths resolve against the working directory; a directory without `versions.json` fails at startup naming the variable, with no silent fallback. Also starts the server over stdio and checks that `serverInfo.version` matches `package.json` and that `get_version` reports the override. |
+| `test/package-contents.test.js` | What the npm package carries (issue #95), from `npm pack --dry-run --json`: `dist/`, `data/index/json/`, `WHATS-CHANGED.md`, `DATA-SOURCES.json`, `data.json`, `package.json`, `README.md` and `LICENSE`, and nothing else (not the Markdown index); every package `dist/` imports is in `dependencies` and nothing more, so `adm-zip` and `fast-xml-parser`, which only the build scripts use, are devDependencies; and no script runs on install (no `prepare`; the build runs on `prepack` and `pretest`). |
 | `test/footer-modes.test.js` | Disclaimer footer modes (issue #25). `NYC_CLR_FOOTER` parsing (unset, blank, both modes, a typo falling back to `full` with a warning); the default sending the full footer once and the one-line footer after; `full` sending it every time; not-found, empty and error responses carrying a disclaimer; and the invariant that every response in every mode, including an unrecognized one, says "legal advice". Also starts the server over stdio to check `instructions`, the first and second responses, and the single stderr warning. |
 | `test/strict-schema.test.js` | Strict tool schemas (issue #19). Asserts every tool in `TOOLS` (from `dist/tools.js`) advertises `additionalProperties: false`, and that `callTool()` rejects an undeclared parameter with an error naming both the offending key and that tool's accepted keys — rather than silently dropping it and returning unfiltered results. Includes regression guards that valid calls, with and without optional params, still succeed. Also checks that the schemas generated from zod (issue #22) keep each tool's parameters, required set, choices and descriptions, and that `search`'s `limit` advertises the 1 to 50 the server enforces. |
 | `test/annotations.test.js` | Every tool carries `annotations` (`assertEveryToolAnnotated`): `readOnlyHint: true`, `openWorldHint: false` (all answers come from the bundled index) and a title, in `TOOLS` and in `tools/list` over stdio (issue #38). |
@@ -415,7 +416,7 @@ Caveats are encoded at three levels so no response can be returned without one:
 nyc-charter-laws-rules/
 ├── WHATS-CHANGED.md            ← what a reader would notice, newest first (ships in the package)
 ├── DATA-SOURCES.json           ← where the data comes from, for about_data (ships in the package)
-├── data.json                   ← DCAT-US 3.0 catalog, generated from DATA-SOURCES.json
+├── data.json                   ← DCAT-US 3.0 catalog, generated from DATA-SOURCES.json (ships in the package)
 ├── src/                        ← MCP server (TypeScript); betanyc-tools.ts is a shared copy
 ├── scripts/
 │   ├── whats_changed.py        ← checks WHATS-CHANGED.md and DATA-SOURCES.json, writes data.json (shared copy; never edit here)
@@ -447,8 +448,8 @@ nyc-charter-laws-rules/
 │   ├── raw/                    ← downloaded ZIPs (gitignored — build locally)
 │   ├── fetch-provenance.json   ← which ZIP bytes the index was built from (committed by the daily refresh; not in the npm package)
 │   ├── index/
-│   │   ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json
-│   │   └── markdown/           ← committed: charter.md, admin_code.md, rules.md
+│   │   ├── json/               ← committed: charter.json, admin_code.json, rules.json, versions.json (ships in the package)
+│   │   └── markdown/           ← committed: charter.md, admin_code.md, rules.md (not in the npm package)
 │   ├── structure/              ← site structure per document (committed by the daily refresh; not in the npm package)
 │   ├── alt-text/               ← BetaNYC's picture descriptions, one JSON per book (not in the npm package)
 │   └── source-errors.json      ← errors BetaNYC found in the publisher's text, for /source-errors/ (not in the npm package)
@@ -456,7 +457,7 @@ nyc-charter-laws-rules/
 └── dist/                       ← compiled MCP server (built locally)
 ```
 
-The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets every section of all three documents immediately — no build step required to browse or run the server.
+The JSON and Markdown indexes are committed to the repo. Anyone who clones it gets every section of all three documents immediately, with no index build needed to browse them or run the server (`npm run build` compiles the server itself). The npm package carries only what the server reads at run time: `dist/`, `data/index/json/`, `WHATS-CHANGED.md`, `DATA-SOURCES.json` and `data.json`, plus `package.json`, `README.md` and `LICENSE`, which npm always includes.
 
 ---
 
@@ -688,7 +689,10 @@ nyc-charter-laws-rules
 git clone https://github.com/BetaNYC/nyc-charter-laws-rules.git
 cd nyc-charter-laws-rules
 npm install
+npm run build
 ```
+
+`npm install` does not compile the server: the build runs before `npm pack` and `npm publish` (the `prepack` script), and before `npm test`. Run `npm run build` yourself before `npm start`.
 
 ---
 

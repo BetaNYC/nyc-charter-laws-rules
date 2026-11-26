@@ -147,7 +147,7 @@ Carried over from the June plan essentially unchanged; it was well-specified.
 
 ### Phase 4 — Scale to admin_code + rules (decision point, not automatic)
 
-14. 21,277 additional section files. **Decide first:** image policy (both corpora have `IMAGES/`), and whether `data/index/html/` is excluded from the npm tarball — `package.json` `files` is currently `["dist", "data/index"]`, so HTML would ship to every installer unless narrowed.
+14. 21,277 additional section files. **Decide first:** image policy (both corpora have `IMAGES/`), and whether `data/index/html/` is excluded from the npm tarball — `package.json` `files` was `["dist", "data/index"]`, so HTML would have shipped to every installer. Since 2026-11-26 it names `data/index/json` only (#95), so nothing else under `data/index/` ships.
 15. Extend invariants to all three corpora.
 
 Phase 4 should be its own go/no-go after Phase 1's measured size delta, not a foregone conclusion.
@@ -163,7 +163,7 @@ Phase 4 should be its own go/no-go after Phase 1's measured size delta, not a fo
 | `scripts/build-index.js` | Edit — fan out through the core; `--html` opt-in |
 | `scripts/fetch-data.js` | Edit — record ZIP checksums for provenance |
 | `.github/workflows/refresh-data.yml` | Edit — add guarded branch-cut step |
-| `package.json` | Edit — `build-html` script; decide `files` scoping before Phase 4 |
+| `package.json` | Edit — `build-html` script (`files` scoping decided 2026-11-26: `data/index/json` only) |
 | `data/index/html/` | Create — committed output tree |
 | `docs/plans/` | Replace `html-render-target.md` with this |
 | `README.md` | Edit — point-in-time retrieval, provenance scope, commit grammar |
@@ -173,7 +173,7 @@ Phase 4 should be its own go/no-go after Phase 1's measured size delta, not a fo
 | Risk / question | Mitigation / who decides |
 |---|---|
 | **Repo weight.** ~22k committed HTML files on `main`; each formatting change rewrites many. | Phase 1 measures Charter's delta before Phase 4 commits to the rest. Snapshot *branches* are near-free (shared blobs) — the growth is on `main`. |
-| **npm tarball bloat.** `files: ["dist", "data/index"]` publishes HTML to every installer. | Decide before Phase 4. Recommend narrowing to `data/index/json` + `data/index/markdown`. **Noel decides.** |
+| **npm tarball bloat.** `files: ["dist", "data/index"]` publishes HTML to every installer. | **Decided (Noel, 2026-11-26):** `files` names `data/index/json` only, the one data folder the server reads (#95). The Markdown index stays committed for browsing on GitHub but is not in the package, and neither would `data/index/html/` be. |
 | **Publication branch proliferation.** DC has 100+ and counting. | Acceptable — that *is* the feature. Branches are cheap; consider annual tags if navigation degrades. |
 | **Snapshot misread as authoritative.** Someone cites a BetaNYC publication branch as the law. | README and rendered footer state the mirror's status explicitly; provenance metadata names AML as source. Non-negotiable copy, not a nicety. |
 | **Styling.** AML's CSS is theirs and drifts. | Ship one small BetaNYC stylesheet; semantic class-annotated HTML. Carried from June §13(1). |
@@ -216,7 +216,7 @@ Phase 4 should be its own go/no-go after Phase 1's measured size delta, not a fo
 ## Open questions for review
 
 1. ~~**Repo scope**~~ — **RESOLVED 2026-08-06 (Noel): single repo.** Not revisited unless the repo becomes unwieldy.
-2. **npm `files`** — exclude `data/index/html/` from the published package? (Recommend yes.) *Blocks Phase 4 only.*
+2. ~~**npm `files`**~~ — **RESOLVED 2026-11-26 (Noel): the package ships `data/index/json` only** (#95), so `data/index/html/` and `data/index/markdown/` stay out of it.
 3. **Phase 4 appetite** — is the goal all three corpora eventually, or is Charter-with-history genuinely enough for now? *Blocks Phase 4 only.*
 4. **CC0** — worth aligning the derived index with DC's licensing posture, or leave the existing LICENSE alone? *Non-blocking.*
 

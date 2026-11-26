@@ -38,8 +38,8 @@ const DATA_DIR = join(__dirname, "..", "data");
 const RAW_DIR = join(DATA_DIR, "raw");
 const JSON_DIR = join(DATA_DIR, "index", "json");
 const MD_DIR = join(DATA_DIR, "index", "markdown");
-// The site structure (issue #61) is kept out of data/index/, so it does not ship in the npm
-// package (package.json `files`): the MCP server does not read it.
+// The site structure (issue #61) is kept out of data/index/. It is not in the npm package
+// (package.json `files` ships data/index/json only, #95): the MCP server does not read it.
 const STRUCTURE_DIR = join(DATA_DIR, "structure");
 
 mkdirSync(JSON_DIR, { recursive: true });
