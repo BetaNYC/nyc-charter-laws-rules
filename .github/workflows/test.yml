@@ -61,6 +61,10 @@ jobs:
   site:
     name: Charter site
     runs-on: ubuntu-latest
+    # A full run takes about 10 to 15 minutes. On 2026-11-25 a push run hung in Browser tests
+    # for over five hours (Chromium did not close after a file's last test); the default
+    # limit is six hours. Fail fast instead.
+    timeout-minutes: 40
     permissions:
       contents: read
     steps:
@@ -84,6 +88,7 @@ jobs:
         run: npm run test:site-data
 
       - name: Browser tests
+        timeout-minutes: 25
         run: npm run test:site
 
       - name: Build the whole site (Charter, Administrative Code and Rules)
