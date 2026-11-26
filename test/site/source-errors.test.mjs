@@ -18,7 +18,7 @@ const PNG = encodePng({ width: 40, height: 20, rgba: Buffer.alloc(40 * 20 * 4, 2
 import { loadBook } from "../../scripts/lib/site/model.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
-import { closeBrowser, closeServer } from "./cleanup.mjs";
+import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 
 const PATH = "/source-errors/";
 let site, server, base, browser, sections;
@@ -70,7 +70,7 @@ before(async () => {
 after(async () => {
   await closeBrowser(browser);
   closeServer(server);
-});
+}, { timeout: HOOK_TIMEOUT });
 
 async function open(path, { width = 1200, js = true } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, javaScriptEnabled: js });

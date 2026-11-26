@@ -17,7 +17,7 @@ import { buildStatic } from "../../scripts/lib/alt-text/static-build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { makeFixture } from "../alt-text/fixture.js";
-import { closeBrowser, closeServer } from "./cleanup.mjs";
+import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 
 let fx, inv, source, review, browser, staticSrv;
 const extra = [];
@@ -58,12 +58,13 @@ before(async () => {
   browser = await chromium.launch({ args: CHROMIUM_ARGS });
 });
 
+// The browser closes first: a server's close() waits for every open connection, and an
+// open browser holds keep-alive connections to each server. Then every server is stopped
+// with its connections dropped, never by waiting on them.
 after(async () => {
-  for (const s of extra) await s.close?.();
   await closeBrowser(browser);
-  await review?.close();
-  closeServer(staticSrv?.server);
-});
+  for (const s of [...extra, review, staticSrv]) closeServer(s?.server);
+}, { timeout: HOOK_TIMEOUT });
 
 async function open(url) {
   const page = await (await browser.newContext({ viewport: { width: 1100, height: 900 } })).newPage();
