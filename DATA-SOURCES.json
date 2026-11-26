@@ -41,7 +41,7 @@
           "reshaped",
           "cleaned"
         ],
-        "detail": "The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. Where the publisher's file sets a math sign or Greek letter in the old Symbol font, which shows them in place of ordinary characters, BetaNYC changes the ones it has checked to the character the font shows, using the Unicode Consortium's table for that font: ³ becomes ≥, £ becomes ≤ and D becomes Δ. Other characters set in that font, such as bullets and footnote marks, are left as the file has them. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
+        "detail": "The XML is split into one record per section or heading, with its citation pulled from the heading. BetaNYC also fixes text problems from the conversion: it decodes character codes the XML left as text (such as non-breaking spaces), removes American Legal Publishing's editing markers (such as [ALP S-054]) that leak into the body text, and puts back the space between a list number and the words after it. The Charter has no text in the old Symbol font, which the Administrative Code and the Rules use for some math signs and Greek letters, so no Charter character is changed for that. All line breaks are collapsed, so paragraphs and tables run together as one block of text. Deeper structure, such as which sections sit inside which title, is not kept."
       },
       "verify_at": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1",
       "freshness": {
@@ -82,6 +82,7 @@
         "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
       ],
       "corrections": [
+        "2026-11-24-missing-building-and-fire-code-text-and-appendices-and-wrong-chapter-lists",
         "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
         "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"
@@ -149,6 +150,7 @@
         "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
       ],
       "corrections": [
+        "2026-11-24-missing-building-and-fire-code-text-and-appendices-and-wrong-chapter-lists",
         "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
         "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"
@@ -217,6 +219,7 @@
         "The publisher also takes error reports by phone, 800-445-5588, and the NYC Law Department takes them at NYCCodeRulesCharter@law.nyc.gov."
       ],
       "corrections": [
+        "2026-11-24-missing-building-and-fire-code-text-and-appendices-and-wrong-chapter-lists",
         "2026-10-11-subdivision-letters-and-numbers-ran-into-the-next-word",
         "2026-07-06-sections-with-a-decimal-in-their-number-were-filed-under-the-wrong-number",
         "2026-07-06-law-text-had-cross-references-out-of-place-wrong-section-numbers-stray-codes"

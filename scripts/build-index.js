@@ -32,9 +32,11 @@ import { mergeVersions } from "./lib/merge-versions.js";
 import { createStructureCollector, structureJson } from "./lib/build-structure.js";
 import { corpusMarkdown } from "./lib/serialize-markdown.js";
 import { createSymbolTally } from "./lib/symbol-font.js";
+import { makeRecord, recordJson, RECORD_PATH } from "./lib/index-build-record.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, "..", "data");
+const ROOT = join(__dirname, "..");
+const DATA_DIR = join(ROOT, "data");
 const RAW_DIR = join(DATA_DIR, "raw");
 const JSON_DIR = join(DATA_DIR, "index", "json");
 const MD_DIR = join(DATA_DIR, "index", "markdown");
@@ -183,4 +185,11 @@ const stableVersions = mergeVersions(versions, priorVersions);
 writeFileSync(VERSIONS_PATH, JSON.stringify(stableVersions, null, 2));
 console.log("\nVersions saved to data/index/versions.json:");
 console.log(JSON.stringify(stableVersions, null, 2));
+
+// Which build code made this index (issue #95): a fingerprint of this file, the modules it
+// imports, the data they read and the npm packages they use, with the sha256 of each index file
+// written above. release.yml refuses to publish when the code at the tag would not give this
+// fingerprint (scripts/check-index-build.js). Not in the npm package; the refresh commits it.
+writeFileSync(join(ROOT, RECORD_PATH), recordJson(makeRecord(ROOT, stableVersions)));
+console.log(`Build record saved to ${RECORD_PATH}`);
 console.log("\nIndex build complete.");
