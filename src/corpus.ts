@@ -149,22 +149,54 @@ export function searchCorpus(
   return rankPhrase(query, corpus).slice(0, limit);
 }
 
+// Short terms match whole words only (issue #95). A query, or in the word fallback a term, with
+// 3 or fewer letters and digits matches only where no letter or digit touches it on either side:
+// "x" is the word x, not the x in "wax"; "tax" is not the start of "taxes". A longer one matches
+// as before: the phrase anywhere, a term at the start of a word. Through 0.7.x "a" matched inside
+// nearly every section (22,150 of 22,637). The same rule, and the same limit, as BetaNYC's
+// nyc-budget-mcp text filters. Only letters and digits count, so "s ≥ 4t" is short.
+export const SHORT_TERM_MAX = 3;
+export function isShortTerm(term: string): boolean {
+  const n = term.match(/[\p{L}\p{N}]/gu)?.length ?? 0;
+  return n > 0 && n <= SHORT_TERM_MAX;
+}
+
+const NOT_AFTER_WORD = "(?<![\\p{L}\\p{N}])";
+const NOT_BEFORE_WORD = "(?![\\p{L}\\p{N}])";
+
+/**
+ * Where the phrase stage matches `query` (already trimmed, quotes removed): anywhere, or for a
+ * short query, as whole words (isShortTerm). A boundary is checked only at an end that is a
+ * letter or digit, so a short query that ends in a sign still matches.
+ */
+export function phraseRegExp(query: string): RegExp {
+  const body = escapeRegExp(query);
+  if (!isShortTerm(query)) return new RegExp(body, "iu");
+  const pre = /^[\p{L}\p{N}]/u.test(query) ? NOT_AFTER_WORD : "";
+  const post = /[\p{L}\p{N}]$/u.test(query) ? NOT_BEFORE_WORD : "";
+  return new RegExp(`${pre}${body}${post}`, "iu");
+}
+
 // Every section matching the phrase, best first (searchCorpus without the cut), so a
 // response can say how many matched in all (issue #42).
 function rankPhrase(query: string, corpus: Corpus | "all"): Section[] {
   const corpora: Corpus[] =
     corpus === "all" ? ["charter", "admin_code", "rules"] : [corpus];
 
-  const q = query.toLowerCase();
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
   const wordRe = new RegExp(`\\b${escapeRegExp(q)}\\b`, "i");
+  // A short query matches whole words only (isShortTerm); a longer one anywhere, as through 0.7.x.
+  const short = isShortTerm(q) ? phraseRegExp(q) : null;
+  const has = (field: string) => (short ? short.test(field) : field.toLowerCase().includes(q));
   const scored: { s: Section; score: number }[] = [];
 
   for (const c of corpora) {
     const sections = loadCorpus(c);
     for (const s of sections) {
-      const inHeading = s.heading.toLowerCase().includes(q);
-      const inCitation = s.citation.toLowerCase().includes(q);
-      const inText = s.text.toLowerCase().includes(q);
+      const inHeading = has(s.heading);
+      const inCitation = has(s.citation);
+      const inText = has(s.text);
       if (!inHeading && !inCitation && !inText) continue;
 
       let score = 0;
@@ -219,12 +251,15 @@ export function queryTerms(query: string): string[] {
 // That is on purpose: it is also what lets "appoints" find "appointed". Tried in
 // the #49 review: a whole-word check (allowing only a plural s or es) took the
 // eval from 15 to 14 of 17 (Q17, the police commissioner, broke), so it is not used.
+// A term of 3 or fewer letters and digits (isShortTerm) matches whole words only (issue #95):
+// "own" is not "owner", "tax" is not "taxes".
 function termRegExp(term: string): RegExp {
+  if (isShortTerm(term)) return new RegExp(`${NOT_AFTER_WORD}${escapeRegExp(term)}${NOT_BEFORE_WORD}`, "iu");
   const stem =
     term.length > 3 && term.endsWith("s") && !term.endsWith("ss")
       ? term.slice(0, -1)
       : term;
-  return new RegExp(`(?<![\\p{L}\\p{N}])${escapeRegExp(stem)}`, "iu");
+  return new RegExp(`${NOT_AFTER_WORD}${escapeRegExp(stem)}`, "iu");
 }
 
 export type SearchMode = "phrase" | "all-terms" | "some-terms";
@@ -246,6 +281,13 @@ export interface SearchOutcome {
   // How many sections contain every term, before the cut to `limit`. Equals `total` for a
   // phrase match.
   allTermTotal: number;
+  // What was matched, for a snippet around the first match (issue #95): the phrase's pattern,
+  // or one per term. Not global, so exec() always starts at the beginning.
+  patterns: RegExp[];
+  // The phrase as searched (trimmed, quotes removed), when it matched.
+  phrase: string;
+  // Which of the phrase (phrase mode) or the terms (term modes) matched as whole words only.
+  wholeWords: string[];
 }
 
 // Quotes around the whole query mark it as a phrase; they are not part of it.
@@ -333,7 +375,8 @@ export function searchWithFallback(
   corpus: Corpus | "all" = "all",
   limit = 10
 ): SearchOutcome {
-  const phraseAll = rankPhrase(stripSurroundingQuotes(query), corpus);
+  const asTyped = stripSurroundingQuotes(query).trim();
+  const phraseAll = rankPhrase(asTyped, corpus);
   const phrase = phraseAll.slice(0, limit);
   const terms = queryTerms(query);
   if (phrase.length > 0 || terms.length === 0) {
@@ -344,6 +387,9 @@ export function searchWithFallback(
       allTermResults: phrase.length,
       total: phraseAll.length,
       allTermTotal: phraseAll.length,
+      patterns: asTyped ? [phraseRegExp(asTyped)] : [],
+      phrase: asTyped,
+      wholeWords: asTyped && isShortTerm(asTyped) ? [asTyped] : [],
     };
   }
 
@@ -381,7 +427,19 @@ export function searchWithFallback(
     allTermResults,
     total: scored.length,
     allTermTotal: scored.filter((r) => r.matched === terms.length).length,
+    patterns: res,
+    phrase: asTyped,
+    wholeWords: terms.filter(isShortTerm),
   };
+}
+
+/**
+ * True when a search query holds nothing to look for: empty, only spaces, or only quote marks
+ * ('""', "“ ”"). Through 0.7.x an empty query matched all 22,637 sections, "   " none, and '""'
+ * the few sections that hold two quote marks (issue #95).
+ */
+export function isEmptyQuery(query: string): boolean {
+  return !query.replace(/["“”'‘’\s]/g, "");
 }
 
 // Normalize a citation for comparison: strip "§"/"section" prefixes, lowercase,
@@ -644,11 +702,46 @@ function byTitle(list: Section[]): Section[] {
 // - If multiple sections tie (e.g. charter "Chapter 3" vs rules "Chapter 3"
 //   when no corpus is given, or the Rules' many "§ 1-01"), a disambiguation list is returned
 //   instead of silently picking the first hit.
+//
+// Then, only when the citation as typed finds nothing (issue #95):
+// - A construction code named in words ("Building Code 722.2.1.1.4", "NYC Fire Code § 102.4") is
+//   that code's section in the Administrative Code ("Section BC 722", part 722.2.1.1.4). It is
+//   tried first, as a book's name is, and asked of another document it finds nothing and says why.
+// - A bare code number ("722.2.1.1.4") is looked for in every construction code by citation: one
+//   code has it, that section; several, a list.
+// - Trailing punctuation is dropped: "§ 259." is § 259.
 export function getSection(
   citation: string,
   corpus?: Corpus
 ): GetSectionResult {
-  const found = getWholeCitation(citation, corpus);
+  const code = parseCodeName(citation);
+  if (code) {
+    if (corpus && corpus !== "admin_code") {
+      const asTyped = getWithParts(citation, corpus);
+      return asTyped.kind !== "none" ? asTyped : { kind: "none", bookCitation: "admin_code" };
+    }
+    const inCode = getWithParts(code, "admin_code", false);
+    if (inCode.kind !== "none") return inCode;
+  }
+  const found = getWithParts(citation, corpus);
+  if (found.kind !== "none") return found;
+  if (!corpus || corpus === "admin_code") {
+    const bare = inEveryCode(citation);
+    if (bare.kind !== "none") return bare;
+  }
+  const trimmed = citation.trim();
+  const stripped = trimmed.replace(/[\s.,;:]+$/, "");
+  if (stripped && stripped !== trimmed) {
+    const again = getSection(stripped, corpus);
+    if (again.kind !== "none") return again;
+  }
+  return found;
+}
+
+// getSection as through 0.7.x: the citation as a whole, then, on a miss, a part of a section.
+// `headings: false` skips the heading search on the citation as a whole.
+function getWithParts(citation: string, corpus: Corpus | undefined, headings = true): GetSectionResult {
+  const found = getWholeCitation(citation, corpus, { headings });
   if (found.kind !== "none") return found;
   // Only on a miss (issue #76): a part of a section, as the Law Reader website writes it when a
   // reader copies the citation of a subdivision ("NYC Charter § 1133(b)(1)") or of a Construction
@@ -696,6 +789,59 @@ export function parseBookName(input: string): { corpus: Corpus; rest: string } |
   const rest = m[2].trim();
   if (!rest || !AFTER_BOOK.test(rest)) return null;
   return { corpus: m[1] ? "charter" : "admin_code", rest };
+}
+
+// ---------------------------------------------------------------- construction codes in words
+//
+// The Administrative Code cites its construction codes' sections by letters ("Section BC 722"),
+// the letters CODE_SUBSECTION below knows. A person often names the code in words instead:
+// "Building Code 722.2.1.1.4", "NYC Fire Code § 102.4", "Fuel Gas Code section 406" (issue #95).
+// The Energy Conservation Code is not in the index, so it has no name here; the Health Code is
+// in the Rules and is read by parseTitledCitation.
+export const CODE_LETTERS: Readonly<Record<string, string>> = {
+  building: "BC",
+  fire: "FC",
+  plumbing: "PC",
+  mechanical: "MC",
+  "fuel gas": "FGC",
+  electrical: "EC",
+  "existing building": "EBC",
+};
+const CODE_NAME = new RegExp(
+  `^(?:the\\s+)?${CITY}(existing\\s+building|building|fire|plumbing|mechanical|fuel\\s+gas|electrical)\\s+code\\b[\\s,]*(?:(?:§+|sections?\\b|sec\\.)\\s*)?([A-Z]?\\d.*)$`,
+  "i",
+);
+
+/** "Building Code 722.2.1.1.4" → "Section BC 722.2.1.1.4". Null when no code is named, or nothing that starts with a number follows it. */
+export function parseCodeName(input: string): string | null {
+  const m = CODE_NAME.exec(input.replace(/\s+/g, " ").trim());
+  if (!m) return null;
+  const letters = CODE_LETTERS[m[1].toLowerCase().replace(/\s+/g, " ")];
+  return letters ? `Section ${letters} ${m[2].trim()}` : null;
+}
+
+// A bare number as the construction codes number their sections and subsections ("722",
+// "722.2.1.1.4", "E104.2"), with "§" or "Section" before it or not, and parts in parentheses
+// after it ("102.4(1)").
+const BARE_CODE_NUMBER = /^(?:§+\s*|sections?\s+|sec\.\s*)?([A-Z]?\d+(?:\.\d+[A-Z]?)*(?:\([0-9A-Za-z.-]{1,6}\))*)$/i;
+
+/** A bare code number, looked for in every construction code, by citation only. */
+function inEveryCode(input: string): GetSectionResult {
+  const m = BARE_CODE_NUMBER.exec(input.replace(/\s+/g, " ").trim());
+  if (!m) return { kind: "none" };
+  const found = new Map<string, Section>();
+  const parts = new Set<string>();
+  for (const letters of new Set(Object.values(CODE_LETTERS))) {
+    const r = getWithParts(`Section ${letters} ${m[1]}`, "admin_code", false);
+    if (r.kind === "none") continue;
+    for (const s of r.kind === "match" ? [r.section] : r.candidates) found.set(s.id, s);
+    parts.add(r.subdivision ?? "");
+  }
+  const list = [...found.values()];
+  const subdivision = parts.size === 1 && [...parts][0] ? { subdivision: [...parts][0] } : {};
+  if (list.length === 0) return { kind: "none" };
+  if (list.length === 1) return { kind: "match", section: list[0], ...subdivision };
+  return { kind: "ambiguous", candidates: list, ...subdivision };
 }
 
 // ---------------------------------------------------------------- parts of a section
