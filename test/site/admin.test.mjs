@@ -15,6 +15,7 @@ import { chromium } from "playwright";
 import { buildSite } from "../../scripts/lib/site/build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const skip = existsSync(join(ROOT, "data", "structure", "admin_code.json")) ? false : "no data/structure/admin_code.json";
@@ -38,8 +39,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
   if (out) rmSync(out, { recursive: true, force: true });
 });
 

@@ -48,9 +48,12 @@ on:
     paths:
       - "data/index/**"
       - "data/structure/**"
+      - "data/source-errors.json"
+      - "data/source-errors/**"
       - "scripts/build-site.js"
       - "scripts/lib/site/**"
       - "scripts/lib/render-section.js"
+      - "scripts/lib/alt-text/image-info.js"
       - "site/**"
       - "src/tools.ts"
       - "DATA-SOURCES.json"

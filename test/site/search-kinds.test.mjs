@@ -9,6 +9,7 @@ import { chromium } from "playwright";
 import { buildThreeBookFixtureSite } from "./fixture-site.mjs";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 let site, server, base, browser, admin;
 const outside = [];
@@ -21,8 +22,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
 });
 
 async function open(path, { width = 1200, js = true } = {}) {

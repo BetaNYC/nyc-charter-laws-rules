@@ -56,11 +56,12 @@
     "alt:draft": "node scripts/alt-text.js draft",
     "alt:review": "node scripts/alt-text.js review",
     "alt:build-static": "node scripts/alt-text.js build-static",
+    "source-errors:images": "node scripts/source-errors-images.js",
     "pretest": "npm run build",
     "test": "node --test test/*.test.js",
     "test:diff": "node --test test/diff/differential.mjs",
     "eval": "npm run build && node eval/run.mjs",
-    "test:site": "node --test test/site/*.test.mjs",
+    "test:site": "node --test --test-force-exit test/site/*.test.mjs",
     "pretest:site-data": "npm run build",
     "test:site-data": "node --test test/site-data/*.test.js"
   },

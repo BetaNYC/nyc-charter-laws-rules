@@ -2,7 +2,7 @@
 // I/O in the site code is here; everything it calls is pure. It never fetches anything.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, copyFileSync, rmSync } from "node:fs";
-import { join, dirname, resolve } from "node:path";
+import { join, dirname, resolve, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { loadBook, rulesReady } from "./model.js";
@@ -24,6 +24,9 @@ import { redirectsJson, indexJson, citationsJson, metadataJson, sitemaps, robots
 import { BOOKS, DEFAULT_BOOKS } from "./config.js";
 import { adminPageMakers, titleChaptersPath, titleChaptersJson } from "./pages-admin.js";
 import { rulesPageMakers, rulesNumbersPath } from "./pages-rules.js";
+import { parseSourceErrors, visibleErrors } from "./source-errors.js";
+import { sha256, imageSize } from "../alt-text/image-info.js";
+import { sourceErrorsPage } from "./pages-source-errors.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -42,6 +45,7 @@ const ASSETS = [
   ["site/assets/search.js", "assets/search.js"],
   ["site/assets/filters.js", "assets/filters.js"],
   ["site/assets/not-found.js", "assets/not-found.js"],
+  ["site/assets/source-errors.js", "assets/source-errors.js"],
 ];
 
 // The two packages the site copies files from. Both are devDependencies of this repo; a missing
@@ -164,6 +168,10 @@ export function siteFacts(books, dataSources) {
  *                                    the Rules when their index has no titles: see below)
  * @param {Date} [o.now]              the build's clock (tests fix it)
  * @param {string} [o.commit]         this repo's commit (default: GITHUB_SHA, then git)
+ * @param {string} [o.sourceErrorsFile] data/source-errors.json: errors in the publisher's text
+ * @param {string} [o.sourceErrorImagesDir] their pictures (default: data/source-errors/images/ beside the file)
+ * @param {boolean} [o.includeUnconfirmedErrors=false] also show the errors only found, not yet
+ *                                    checked (a preview build: --include-unconfirmed-errors)
  */
 export async function buildSite(o = {}) {
   const t0 = performance.now();
@@ -201,6 +209,30 @@ export async function buildSite(o = {}) {
     corpora = corpora.filter((c) => c !== "rules");
   }
   const dataSources = JSON.parse(readFileSync(join(ROOT, "DATA-SOURCES.json"), "utf8"));
+  // Errors in the publisher's text. A file that does not match its schema stops the build.
+  const sourceErrorsFile = resolve(o.sourceErrorsFile ?? join(ROOT, "data", "source-errors.json"));
+  const preview = o.includeUnconfirmedErrors === true;
+  const allSourceErrors = parseSourceErrors(readFileSync(sourceErrorsFile, "utf8"), sourceErrorsFile).errors;
+  const shownErrors = visibleErrors(allSourceErrors, { includeUnconfirmed: preview });
+  // Each shown error's pictures, from the committed copies (npm run source-errors:images), checked
+  // against the sha256 its entry records. A missing or changed file stops the build: the page must
+  // show the very picture the error was found in.
+  const sourceErrorImagesDir = resolve(o.sourceErrorImagesDir ?? join(dirname(sourceErrorsFile), "source-errors", "images"));
+  const errorPictures = new Map();
+  for (const e of shownErrors) {
+    errorPictures.set(
+      e.id,
+      e.evidence.images.map((i) => {
+        const name = basename(i.file);
+        const from = join(sourceErrorImagesDir, name);
+        if (!existsSync(from)) throw new Error(`${e.id}: ${i.file} is not in ${sourceErrorImagesDir}. Run npm run source-errors:images.`);
+        const bytes = readFileSync(from);
+        if (sha256(bytes) !== i.sha256) throw new Error(`${e.id}: ${from} does not match the sha256 its entry records`);
+        const size = imageSize(bytes);
+        return { file: i.file, from, src: `/source-errors/img/${name}`, width: size?.width ?? null, height: size?.height ?? null };
+      })
+    );
+  }
   const books = corpora.map((c) =>
     loadBook({
       corpus: c,
@@ -213,6 +245,29 @@ export async function buildSite(o = {}) {
   if (books.length > 1) for (const b of books) b.others = new Map(books.filter((x) => x !== b).map((x) => [x.corpus, x]));
   const [book, ...extra] = books;
   const { perBook, shared: site } = siteFacts(books, dataSources);
+  // Each shown error on its section's page (pages.js sectionPage, pages-admin.js adminSectionPage):
+  // book.sourceErrors maps American Legal's id to the entries for that section. An entry for a
+  // book this build has whose id is not one of its records is `unresolved`: still listed, with no
+  // link to our page, and named on stderr (build-site.js) so a person can fix its amlegal_id.
+  const unresolvedErrors = [];
+  for (const b of books) b.sourceErrors = new Map();
+  const bookOf = (e) => books.find((b) => b.corpus === e.book);
+  const oursFor = (e) => {
+    const r = bookOf(e)?.byId.get(e.amlegal_id);
+    return r?.path ? { path: r.path } : null;
+  };
+  for (const e of shownErrors) {
+    const b = bookOf(e);
+    if (!b) continue;
+    if (!oursFor(e)) {
+      unresolvedErrors.push(e.id);
+      continue;
+    }
+    b.sourceErrors.set(e.amlegal_id, [...(b.sourceErrors.get(e.amlegal_id) ?? []), e]);
+  }
+  // "Check at American Legal": the section's own page there, as a law page's bottom box links it
+  // (pages.js officialRecordUrl), from DATA-SOURCES.json's address for the book, built or not.
+  const amlegalUrl = (e) => `${sourceFacts(dataSources, BOOKS[e.book].source ?? e.book).officialBase}${encodeURIComponent(e.amlegal_id)}`;
   const paragraphs = disclaimerParagraphs(readFooter(join(ROOT, "src", "tools.ts")));
   const metadata = metadataJson({
     books,
@@ -222,11 +277,25 @@ export async function buildSite(o = {}) {
     structureFormat: 1,
     skipped,
   });
+  // What the errors page shows: how many, how many of those are not yet checked, and whether this
+  // is a preview build (never deployed: deploy-site.yml runs build-site without the flag).
+  metadata.sourceErrors = {
+    shown: shownErrors.length,
+    unchecked: shownErrors.filter((e) => e.status === "found").length,
+    includeUnconfirmed: preview,
+    ...(unresolvedErrors.length ? { unresolved: unresolvedErrors } : {}),
+  };
 
   prepareOut(outDir);
   for (const [from, to] of ASSETS) {
     mkdirSync(dirname(join(outDir, to)), { recursive: true });
     copyFileSync(join(ROOT, from), join(outDir, to));
+  }
+  for (const pics of errorPictures.values()) {
+    for (const p of pics) {
+      mkdirSync(join(outDir, "source-errors", "img"), { recursive: true });
+      copyFileSync(p.from, join(outDir, p.src.slice(1)));
+    }
   }
   mkdirSync(join(outDir, "assets", "nysds"), { recursive: true });
   copyFileSync(join(nysdsDir(), "dist", "nysds.js"), join(outDir, "assets", "nysds", "nysds.js"));
@@ -244,6 +313,7 @@ export async function buildSite(o = {}) {
     searchPage(book, site, extra),
     aboutPage(book, site, { paragraphs, metadata: { builtOnLong: newYorkLongDate(now) }, others: extra }),
     notFoundPage(book, site, extra),
+    sourceErrorsPage({ entries: shownErrors, preview, ours: oursFor, amlegalUrl, pictures: (e) => errorPictures.get(e.id) ?? [], site }),
   ];
   for (const p of pages) write(outDir, p.file, p.html);
   for (const b of extra) {
@@ -266,7 +336,8 @@ export async function buildSite(o = {}) {
   write(outDir, "index.json", JSON.stringify(indexJson(books)));
   write(outDir, "citations.json", JSON.stringify(citationsJson(books)));
   write(outDir, "metadata.json", JSON.stringify(metadata, null, 2) + "\n");
-  const other = pages.filter((p) => p.kind === "home" || p.kind === "about").map((p) => p.path);
+  // The errors page is in the sitemap, except in a preview build (which is noindex).
+  const other = pages.filter((p) => p.kind === "home" || p.kind === "about" || (p.kind === "source-errors" && !preview)).map((p) => p.path);
   for (const [f, xml] of Object.entries(sitemaps(books, other))) write(outDir, f, xml);
   write(outDir, "robots.txt", robotsTxt());
   const t1 = performance.now();
@@ -301,6 +372,7 @@ export async function buildSite(o = {}) {
     pagefind,
     metadata,
     skipped,
+    sourceErrors: { shown: shownErrors, unresolved: unresolvedErrors },
     seconds: Number(((t2 - t0) / 1000).toFixed(2)),
     pagesSeconds: Number(((t1 - t0) / 1000).toFixed(2)),
     searchSeconds: Number(((t2 - t1) / 1000).toFixed(2)),

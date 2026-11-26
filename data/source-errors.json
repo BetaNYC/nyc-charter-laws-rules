@@ -1,0 +1,393 @@
+{
+  "about": "Errors BetaNYC found in American Legal Publishing's text: the files this site and the MCP server are built from. BetaNYC does not change the publisher's text. Each entry is checked by a person (confirmed), reported to NYC.editor@amlegal.com and NYCCodeRulesCharter@law.nyc.gov (reported), and closed when the publisher's files no longer have it (fixed-upstream). Only confirmed, reported and fixed-upstream entries appear on law.beta.nyc/source-errors/. See README.md, \"Errors in the publisher's text\".",
+  "format": 1,
+  "errors": [
+    {
+      "id": "SE-0001",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code Section BC 1811",
+      "amlegal_id": "0-0-0-179409",
+      "kind": "same-picture-twice",
+      "summary": "Section BC 1811 shows the same picture for Equation 18-4 and Equation 18-5. The text calls the second one a lower limit on the first (\"but not less than\"), so they should be two different equations. One of the two places has the wrong picture.",
+      "evidence": {
+        "text": "6.When transverse reinforcement consists of rectangular hoops and cross ties, the total cross-sectional area of lateral transverse reinforcement in the ductile region with spacing, s, and perpendicular to dimension, h c , shall conform to: [picture] (Equation 18-4) but not less than: [picture] (Equation 18-5)",
+        "records": [
+          "0-0-0-179530",
+          "0-0-0-179531",
+          "0-0-0-179532",
+          "0-0-0-179533"
+        ],
+        "picture": "Both places hold the same picture tag (0-0-0-22810-img), which shows one equation: A_sh = 0.12 s h_c (f′_c / f_yh) (0.5 + 1.4P / (f′_c A_g)).",
+        "images": [
+          {
+            "image_id": "0-0-0-22810",
+            "file": "IMAGES/0-0-0-22810.jpg",
+            "sha256": "956909fd5eb09628172a42166e2e5259d008fb21ad02d6230394827e7aad3600"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed. Both records hold the same picture tag in the XML, and the picture shows one equation. Which equation is missing has not been checked against a printed copy of the Building Code."
+    },
+    {
+      "id": "SE-0002",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code Section PC 1114",
+      "amlegal_id": "0-0-0-163509",
+      "kind": "picture-text-mismatch",
+      "summary": "The text says a grit chamber's sump must be at least 18 inches. Figure 1114.4(1), the grit chamber drawing, marks the sump \"MIN. SUMP 12\"\".",
+      "evidence": {
+        "text": "4.The sump shall be a minimum of 18 inches (450 mm) or two times the largest inlet pipe diameter, whichever is greater, as measured to the outlet invert elevation. … Figure 1114.4(1)Grit Chamber",
+        "records": [
+          "0-0-0-163612",
+          "0-0-0-163603",
+          "0-0-0-163604"
+        ],
+        "picture": "Figure 1114.4(1), Grit Chamber: in the section drawing, the sump below the pipes is labeled \"MIN. SUMP 12\"\".",
+        "images": [
+          {
+            "image_id": "0-0-0-22708",
+            "file": "IMAGES/0-0-0-22708.png",
+            "sha256": "b53b6bc7d399a069fa9aa1a6186c40d6e6c04cf7d5e6d13ef064bc499e2b05ff"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed. The text's item 4 says 18 inches; the drawing says 12."
+    },
+    {
+      "id": "SE-0003",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code SECTION 6 – TEST METHOD FOR DETERMINING DEFLECTION",
+      "amlegal_id": "0-0-0-54344",
+      "kind": "picture-text-mismatch",
+      "summary": "In Reference Standard RS 5-16 (ceiling suspension systems), the text sets the deflection limit at \"3/360th of the span length\" and points to Fig. 5. Fig. 5 uses 1/360. The picture's own numbers (0.133 inch on a 4-foot span) are 1/360, so the text's \"3/360th\" is probably the mistake.",
+      "evidence": {
+        "text": "6.7.3 The average load-deflection curve shall be used to establish the maximum uniformly distributed load which the structural member can successfully sustain prior to reaching the deflection limit of 3/360th of the span length in inches. (Fig. 5)",
+        "records": [
+          "0-0-0-54384",
+          "0-0-0-54385"
+        ],
+        "picture": "Fig. 5, Applied load vs. Mid-span deflection: labels read \"mid-span deflection criteria of 1/360 simply supported span length\" and \"Mid-span deflection value of 0.133 in. (1/360 of the 4 ft. span length)\". 48 inches ÷ 360 = 0.133 inch. The caption also spells \"length\" as \"lenght\".",
+        "images": [
+          {
+            "image_id": "0-0-0-91",
+            "file": "IMAGES/0-0-0-91.gif",
+            "sha256": "f1ee07c5a4d4c916f6eb3d138d118e62f022be7eb49ec481bbe898a9028e3359"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed that the text and the picture disagree. That 1/360 is the right value is BetaNYC's reading of the picture's arithmetic, not checked against a printed copy."
+    },
+    {
+      "id": "SE-0004",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code RS 5-1C",
+      "amlegal_id": "0-0-0-54185",
+      "kind": "garbled-text",
+      "summary": "One wood stud wall's description has garbled wording for its plywood: \"3/8 in. thick 5/8 in. between grooves)\", with a closing parenthesis and no opening one. The drawing below it says \"5/8 inch exterior grade plywood with 1/4\" X 3/8\" wide grooves @ 8\" o.c.\"",
+      "evidence": {
+        "text": "Wall is constructed using 2 in. x 4 in. (nominal) wood studs spaced 16 in. on centers. Fire exposed side (interior) is covered with 5/8 in. Type X Gypsum Wallboard applied vertically and fastened with 6d box nails on 7 in. centers. Unexposed side (exterior) is faced with 3/8 in. thick 5/8 in. between grooves) exterior grade plywood panels applied vertically and fastened with 8d nails on 6 in. centers around edges and 12 in. centers at intermediate supports. The Cavity (stud) Spaces are filled with Mineral Wool Batts having a density of 2 lbs./cu. ft. (Mineral wool may be rock wool or slag wool of equivalent density.) All insulation and noise control materials included in wall assemblies shall be Approved by the Board of Standards and Appeals or Accepted by the Material and Equipment Acceptance Division of the Department of Buildings for the intended use.",
+        "records": [
+          "0-0-0-54214",
+          "0-0-0-54216"
+        ],
+        "picture": "A section through the wall: \"5/8\" sheetrock\" on one face and \"5/8 inch exterior grade plywood with 1/4\" X 3/8\" wide grooves @ 8\" o.c.\" on the other, labeled \"NFoPA No. WH I 694 - 020\".",
+        "images": [
+          {
+            "image_id": "0-0-0-71",
+            "file": "IMAGES/0-0-0-71.gif",
+            "sha256": "d109521fc59643ac68dfa7486c2c6d8b3832db8e297f71d7e85e81e469ed6c6b"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed that the text is garbled. It may have meant \"(3/8 in. thick at grooves, 5/8 in. between grooves)\", which would agree with the drawing; that is a guess."
+    },
+    {
+      "id": "SE-0005",
+      "book": "rules",
+      "citation": "3 RCNY § 310-02",
+      "amlegal_id": "0-0-0-9741",
+      "kind": "picture-text-mismatch",
+      "summary": "The picture of the required \"No Smoking\" sign ends \"BY ORDER OF THE FIRE COMMISSIONER\". The legend the rule sets out right after it ends \"BY ORDER OF THE COMMISSIONER\".",
+      "evidence": {
+        "text": "(4)Legend: Legend Letter Size – Capital Color  NO SMOKING IN THESE PREMISES UNDER PENALTY OF FINE OR IMPRISONMENT, OR BOTH, BY ORDER OF THE COMMISSIONER 2\" Min. 1\" or 3/4\" Min. 1/4\" Red Black Black",
+        "records": [
+          "0-0-0-9748",
+          "0-0-0-9751",
+          "0-0-0-9752"
+        ],
+        "picture": "The sign: the no-smoking symbol, then \"NO SMOKING IN THESE PREMISES UNDER PENALTY OF FINE OR IMPRISONMENT, OR BOTH, BY ORDER OF THE FIRE COMMISSIONER\".",
+        "images": [
+          {
+            "image_id": "0-0-0-100",
+            "file": "IMAGES/0-0-0-100.jpg",
+            "sha256": "0419c4d3dcc74ee5c360bf94359508497d5874e40cab923c6cba592f67fbe481"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed that the two wordings differ. Which one the Fire Department means is not known."
+    },
+    {
+      "id": "SE-0006",
+      "book": "rules",
+      "citation": "15 RCNY § 5-02",
+      "amlegal_id": "0-0-0-24573",
+      "kind": "typo-in-picture",
+      "summary": "In the drawing \"Use of boiler chimney for incinerator gas flue\", item 3 of the minimum requirements for upgrading reads \"AUTOMATIC FIRING CLUCK\", for \"CLOCK\".",
+      "evidence": {
+        "text": null,
+        "records": [
+          "0-0-0-24695"
+        ],
+        "picture": "Department of Air Pollution Control drawing, \"Use of boiler chimney for incinerator gas flue\", marked \"Upgraded\": the list of minimum requirements has \"3 - AUTOMATIC FIRING CLUCK\".",
+        "images": [
+          {
+            "image_id": "0-0-0-166",
+            "file": "IMAGES/0-0-0-166.jpg",
+            "sha256": "818f3e08a1c9108381b7d0792b4e965bb182f7b8a20a627e9be9cc608900bdfd"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed from the picture. The publisher's note under it says the image is \"the highest quality available to the publisher\"."
+    },
+    {
+      "id": "SE-0007",
+      "book": "rules",
+      "citation": "28 RCNY Chapter 54, Appendix A",
+      "amlegal_id": "0-0-0-112483",
+      "kind": "typo-in-picture",
+      "summary": "The line listing the languages this notice comes in shows the Arabic word for \"Arabic\" with its letters in reverse order, left to right instead of right to left. This is probably a font problem in the original. The Spanish version of the notice (Apéndice A) uses the same picture.",
+      "evidence": {
+        "text": null,
+        "records": [
+          "0-0-0-112427",
+          "0-0-0-112426"
+        ],
+        "picture": "\"This notice is also available in the following languages: | 简体中文 (Chinese) | 한국어 (Korean) | Kreyol Ayisyien (Haitian Creole) | Русский (Russian) | [Arabic word] (Arabic)\". In the Arabic word, the letter ع (ain) is at the left end and the letters run left to right.",
+        "images": [
+          {
+            "image_id": "0-0-0-15682",
+            "file": "IMAGES/0-0-0-15682.jpg",
+            "sha256": "8bd555c622d092f29436555fdf13d3c310a38356e3a4b9663cebdd3b998598e8"
+          },
+          {
+            "image_id": "0-0-0-15678",
+            "file": "IMAGES/0-0-0-15678.jpg",
+            "sha256": "8bd555c622d092f29436555fdf13d3c310a38356e3a4b9663cebdd3b998598e8"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): could not fully confirm. The picture is 495 by 39 pixels; enlarged, the letters look reversed, but a reader of Arabic should check. Both image files are the same picture (same sha256)."
+    },
+    {
+      "id": "SE-0008",
+      "book": "rules",
+      "citation": "3 RCNY § 404-01",
+      "amlegal_id": "0-0-0-144077",
+      "kind": "typo-in-picture",
+      "summary": "The sample building information card in Appendices B-1 and B-2 numbers its floors \"26, 24, 23 …\" with no 25, but in the same picture elevator C serves \"25 TO 20\". The top floor is probably 25, misprinted as 26, or the 25 row is missing.",
+      "evidence": {
+        "text": null,
+        "records": [
+          "0-0-0-10887",
+          "0-0-0-11022"
+        ],
+        "picture": "A color elevation chart of a building's floors, listed from the top: ROOF, 26, 24, 23, 22, 21, 20, 19 … 2, LOBBY, B-1, B-2, B-3. Elevator C's bar reads \"25 TO 20\" from the top row down.",
+        "images": [
+          {
+            "image_id": "0-0-0-15217",
+            "file": "IMAGES/0-0-0-15217.jpg",
+            "sha256": "c8ae0c3854fb6a13432d62d4632d5e7e70c50eb4811e3e49a29da9009c905d0b"
+          },
+          {
+            "image_id": "0-0-0-15221",
+            "file": "IMAGES/0-0-0-15221.jpg",
+            "sha256": "c8ae0c3854fb6a13432d62d4632d5e7e70c50eb4811e3e49a29da9009c905d0b"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed from the picture. Both image files are the same picture (same sha256)."
+    },
+    {
+      "id": "SE-0009",
+      "book": "rules",
+      "citation": "Title 15, Chapter 20, Appendix",
+      "amlegal_id": "0-0-0-129584",
+      "kind": "picture-text-mismatch",
+      "summary": "Figure 21's caption is \"Wall Mounting Meter Setting\", but its drawing shows a meter raised on two pipes from a trench cut in the floor, piped to an \"EXISTING INDOOR PIT\". Nothing in it is labeled as mounted on a wall. The caption and the drawing may not match.",
+      "evidence": {
+        "text": "Figure 21. Wall Mounting Meter Setting. (N.T.S.)",
+        "records": [
+          "0-0-0-27910",
+          "0-0-0-129633"
+        ],
+        "picture": "Turned on its side: a section \"A\" of a meter on two risers coming up from a \"SAW CUT TRENCH\" (12\" wide) with \"DUCTILE IRON SLEEVES\", and a plan of pipes from the meter, beside an \"EXISTING GARAGE DOOR\", to an \"EXISTING INDOOR PIT\".",
+        "images": [
+          {
+            "image_id": "0-0-0-242",
+            "file": "IMAGES/0-0-0-242.jpg",
+            "sha256": "128adcf1fc2b47844765b666ce481d6e3058daa3b848760555aebb68199e1400"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): could not confirm. In the plan the meter sits against a wall, so this may be a wall-mounted setting after all. Someone who knows DEP's meter settings, or a printed copy of the rule, should check."
+    },
+    {
+      "id": "SE-0010",
+      "book": "rules",
+      "citation": "Title 15, Chapter 18, Appendix 18-B",
+      "amlegal_id": "0-0-0-124263",
+      "kind": "misplaced-picture",
+      "summary": "Appendix 18-B is about water quality standards and sampling, but it ends with two maps with no caption: \"West of Hudson Watershed Counties and Towns\" and \"East of Hudson Watershed Counties and Towns\". Those are the subjects of Maps 18-A.1(a) and 18-A.1(b) in Appendix 18-A (Watershed Maps). The two maps, dated December 2015, probably belong in Appendix 18-A.",
+      "evidence": {
+        "text": "(d) Tests and Analytical Determinations. In determining compliance or noncompliance with the water quality standards in Subchapter D, the Department will only consider tests or analytical determinations made by laboratories certified by the New York State Department of Health. [ALP S-043] [two pictures] (Amended City Record 10/30/2019, eff. 11/29/2019) [ALP S-043] … In Appendix 18-A: Map 18-A.1(a) East of Hudson Watershed: Counties and Towns; Map 18-A.1(b) West of Hudson Watershed: Counties and Towns",
+        "records": [
+          "0-0-0-26904",
+          "0-0-0-26909",
+          "0-0-0-124265",
+          "0-0-0-124266",
+          "0-0-0-26876",
+          "0-0-0-26878"
+        ],
+        "picture": "Two maps, each with the title, legend and credit \"Produced by NYCDEP BWS WPP GIS (TES), 12/2015\": \"West of Hudson Watershed Counties and Towns\" and \"East of Hudson Watershed Counties and Towns\".",
+        "images": [
+          {
+            "image_id": "0-0-0-16780",
+            "file": "IMAGES/0-0-0-16780.jpg",
+            "sha256": "7c901d65402ec2a9e137d3d28283ae4d713a26db8615b69b5d62c4ad5d9664ed"
+          },
+          {
+            "image_id": "0-0-0-16783",
+            "file": "IMAGES/0-0-0-16783.jpg",
+            "sha256": "f8ec39d58374a292c11c3434d053df6cf406336b8793ec6397821cd36e8f6545"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Rules files of July 1, 2026 (Current through rules effective July 1, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed that the maps sit at the end of Appendix 18-B with no caption, and that their titles match Map 18-A.1's. Appendix 18-A has its own pictures for those maps (0-0-0-176 and 0-0-0-178), so these may be newer versions placed in the wrong appendix."
+    },
+    {
+      "id": "SE-0011",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code RS 9-6",
+      "amlegal_id": "0-0-0-54748",
+      "kind": "picture-turned",
+      "summary": "Figure No. 3 (Normalized Response Spectra) looks like the usual chart turned a quarter turn: period runs up the right edge, and acceleration runs from 4 on the left down to 0 on the right. Its values agree with Table No. 23-R, so this may be how the figure was drawn rather than a mistake.",
+      "evidence": {
+        "text": "Delete the Figure No. 3 and insert the new Figure 3 and Table No. 23-R. … Note: This table presents acceleration (g) versus natural period (seconds) to facilitate the presentation of spectra in log-log form.",
+        "records": [
+          "0-0-0-54935",
+          "0-0-0-54938",
+          "0-0-0-54939"
+        ],
+        "picture": "Figure No. 3, Normalized Response Spectra, 5% Damping: \"T Period in Seconds\" runs up the right edge from 0 to 3, and \"Spectra acceleration / Zero period acceleration (Z)\" runs along the bottom from 4 on the left to 0 on the right. The titles read upright. This is the usual chart (period across, acceleration up) turned a quarter turn counterclockwise.",
+        "images": [
+          {
+            "image_id": "0-0-0-113",
+            "file": "IMAGES/0-0-0-113.gif",
+            "sha256": "3e49f1834c63ede1e1334f68e21552d751db87a7c82ac7be09f05ff8bed95b4a"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): could not confirm that this is an error. The picture is as described, but a chart may be drawn this way on purpose. A printed copy of RS 9-6 should be checked."
+    },
+    {
+      "id": "SE-0012",
+      "book": "admin_code",
+      "citation": "NYC Administrative Code Section BC 722",
+      "amlegal_id": "0-0-0-170260",
+      "kind": "picture-text-mismatch",
+      "summary": "Equation 7-5 is printed as t + (4t/s − 1)(tₑ + t), with a plus sign in the last bracket. The text says the result must be t when s = 4t and tₑ when s = 2t. With the plus sign, s = 2t gives tₑ + 2t; with a minus sign, (tₑ − t), it gives tₑ. Equation 7-3, in the same section and with the same wording, prints the minus sign.",
+      "evidence": {
+        "text": "The thickness of slabs with ribbed or undulating soffits (see Figure 722.2.2.1.3) shall be determined by one of the following expressions, whichever is applicable: For s ³ 4t, the thickness to be used shall be t For s £ 2t, the thickness to be used shall be t e For 4t > s > 2t, the thickness to be used shall be [picture] (Equation 7-5) [In the publisher's Symbol font, ³ is ≥ and £ is ≤.]",
+        "records": [
+          "0-0-0-170366",
+          "0-0-0-170367",
+          "0-0-0-170368",
+          "0-0-0-170369",
+          "0-0-0-170370",
+          "0-0-0-170295"
+        ],
+        "picture": "Equation 7-5: t + (4t/s − 1)(tₑ + t). Equation 7-3 (picture 0-0-0-22728, the same rule for panels with ribbed or undulating surfaces) is t + (4t/s − 1)(tₑ − t).",
+        "images": [
+          {
+            "image_id": "0-0-0-22736",
+            "file": "IMAGES/0-0-0-22736.jpg",
+            "sha256": "03969f94bf2f92f0c656d55c374380a4e748b6606640ed703a7a6f3b2bec2ef2"
+          }
+        ]
+      },
+      "found": "2026-11-25",
+      "found_in": "American Legal Publishing's Administrative Code files of July 1, 2026 (Current through Local Law 2026/112, enacted June 19, 2026)",
+      "status": "found",
+      "confirmed_at": null,
+      "reported_at": null,
+      "fixed_at": null,
+      "notes": "First check, 2026-11-25, by BetaNYC's AI coding agent, from the July 2026 XML and the image file (not yet by a person): confirmed. The plus sign gives the wrong answer at s = 2t by the text's own rule, and Equation 7-3 has the minus sign."
+    }
+  ]
+}

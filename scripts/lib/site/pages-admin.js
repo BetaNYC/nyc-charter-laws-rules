@@ -19,6 +19,7 @@ import { renderSection, bodyBlocks } from "../render-section.js";
 import { bodyHtml, copyId } from "./render-html.js";
 import { page, breadcrumbs, breadcrumbJsonLd } from "./layout.js";
 import { escapeHtml } from "./html.js";
+import { sourceErrorNote } from "./pages-source-errors.js";
 import {
   HOME,
   fileFor,
@@ -196,6 +197,7 @@ export function adminSectionPage(s, book, site) {
     `<article class="law-page" data-pagefind-body>`,
     citeHeading(s.fullCitation, s.title),
     TOOLS,
+    sourceErrorNote(book.sourceErrors?.get(s.id)),
     sectionBody(s, site, lawText(s, book, { weightFor: found.weightFor })),
     `</article>`,
     pager("Previous and next section", s.prev, s.next, sectionLine),
