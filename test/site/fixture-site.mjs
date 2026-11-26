@@ -124,7 +124,7 @@ export async function buildRulesFixtureSite({ search = false, titles = true, boo
  * Build the Charter, the Administrative Code (ADMIN_SITE_XML) and the Rules fixtures into a new
  * temporary folder: all three books, as the deploy builds them (issue #65's search tests).
  */
-export async function buildThreeBookFixtureSite({ search = false, books = ["charter", "admin_code", "rules"] } = {}) {
+export async function buildThreeBookFixtureSite({ search = false, books = ["charter", "admin_code", "rules"], options = {} } = {}) {
   const d = writeFixtureData();
   const admin = buildTitledFixtureData("admin_code", ADMIN_SITE_XML);
   const rules = buildRulesFixtureData();
@@ -134,6 +134,6 @@ export async function buildThreeBookFixtureSite({ search = false, books = ["char
   }
   writeFileSync(join(d.indexDir, "versions.json"), JSON.stringify({ ...d.data.versions, admin_code: admin.version, rules: rules.version }, null, 2));
   const outDir = join(mkdtempSync(join(tmpdir(), "law-reader-site-")), "site");
-  const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef", books });
+  const result = await buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir, search, now: FIXED_NOW, commit: "0123456789abcdef", books, ...options });
   return { ...result, data: d.data, admin, rules, dataDirs: d };
 }

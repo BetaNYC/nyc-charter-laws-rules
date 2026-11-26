@@ -15,6 +15,11 @@
 // pages also show errors in the publisher's text that are only found, not yet checked, marked so.
 // Never deploy a preview; deploy-site.yml builds without it. --source-errors reads another file
 // than data/source-errors.json.
+//
+// With the Administrative Code or the Rules, the build also makes the picture description page,
+// /describe-pictures/ (issue #87): the committed pictures in data/pictures/ (npm run alt:images)
+// and the reviewed descriptions in data/alt-text/, never AI drafts. A missing or changed picture
+// stops the build.
 
 import { buildSite } from "./lib/site/build.js";
 
@@ -61,6 +66,7 @@ try {
       books: result.books.map((b) => b.book.slug),
       skipped: result.skipped,
       sourceErrors: result.metadata.sourceErrors,
+      picturePage: result.picturePage ? { path: result.picturePage.path, pictures: result.picturePage.items, megabytes: Number(mb(result.picturePage.bytes)) } : null,
       pagefindFiles: result.pagefind?.files ?? 0,
       pagefindBytes: result.pagefind?.bytes ?? 0,
       seconds: result.seconds,

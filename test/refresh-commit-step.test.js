@@ -63,6 +63,9 @@ function setup({ noRecord = false } = {}) {
     // build-index always writes it, so it exists whenever the step runs (git add fails on a
     // path that matches no file).
     ...(noRecord ? {} : { "data/index-build.json": '{"fingerprint":"base"}\n' }),
+    // npm run alt:images (issue #87) keeps these; they are on main from the first one on.
+    "data/pictures/rules.json": '{"images":[]}\n',
+    "data/pictures/images/aa.png": "png",
     "package.json": '{"name":"x","version":"0.7.0","type":"module"}\n',
     "package-lock.json": "{}\n",
     "server.json": "{}\n",
@@ -161,6 +164,26 @@ test("the site structure alone: committed with no release, and the site redeploy
     assert.deepEqual(outputs, { deploy: "true", pushed: "true" });
     assert.equal(r.calls(), "");
     assert.deepEqual(r.committed(), ["data/structure/charter.json"]);
+  } finally {
+    rmSync(r.dir, { recursive: true, force: true });
+  }
+});
+
+test("the pictures alone (issue #87): new, changed or removed, committed with no release, and the site redeploys", opts, () => {
+  const r = setup();
+  try {
+    r.write("data/pictures/images/bb.gif", "gif");
+    r.write("data/pictures/rules.json", '{"images":["bb"]}\n');
+    let { outputs } = r.runStep();
+    assert.deepEqual(outputs, { deploy: "true", pushed: "true" });
+    assert.equal(r.calls(), "", "auto-release.js prepare never ran");
+    assert.deepEqual(r.committed(), ["data/pictures/images/bb.gif", "data/pictures/rules.json"]);
+    // A picture no longer used is removed by alt:images; the commit records the removal.
+    rmSync(join(r.work, "data/pictures/images/aa.png"));
+    ({ outputs } = r.runStep());
+    assert.deepEqual(outputs, { deploy: "true", pushed: "true" });
+    assert.deepEqual(r.committed(), ["data/pictures/images/aa.png"]);
+    assert.equal(r.git("ls-files", "data/pictures/images"), "data/pictures/images/bb.gif");
   } finally {
     rmSync(r.dir, { recursive: true, force: true });
   }

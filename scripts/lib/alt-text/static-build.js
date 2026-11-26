@@ -9,10 +9,12 @@
 //     the page carries a content security policy whose connect-src is the intake's origin only;
 //     the data is written into index.html so the page never fetches anything else.
 //
-// It is not wired into deploy-site.yml or the law.beta.nyc build: publishing it is a separate
-// decision. The images are copied into the output folder (BMPs as PNG), never into the repo.
-// Unreviewed AI drafts are left out unless includeDrafts is set; when they are in, the page
-// labels each one "AI draft, not yet checked by a person".
+// The site build (scripts/lib/site/build.js) builds the inbox page at /describe-pictures/ on
+// law.beta.nyc, from the pictures committed in data/pictures/ (pictures.js, npm run
+// alt:images), with no AI drafts. By hand, this command reads the zips instead. The images are
+// copied into the output folder (BMPs as PNG). Unreviewed AI drafts are left out unless
+// includeDrafts is set; when they are in, the page labels each one "AI draft, not yet checked
+// by a person".
 
 import { mkdirSync, writeFileSync, copyFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -69,9 +71,11 @@ const escAttr = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").
 /**
  * Build the static page into outDir. mode "static" (GitHub issue links) or "inbox" (posts to
  * the intake). For inbox: endpoint (default ENDPOINT; tests pass a fake one), redirects (the
- * site's redirects.json, optional) and siteBase. Returns { items, images, bytes }.
+ * site's redirects.json, optional) and siteBase. The pictures come from `sources` (the zips or
+ * folders), or from `imageFor(book, image)` → { bytes, ext } when given (the site build: the
+ * committed copies). Returns { items, images, bytes }.
  */
-export function buildStatic({ inventories, sources, storeDir, outDir, includeDrafts = false, mode = "static", endpoint = ENDPOINT, redirects = null, siteBase = SITE_BASE }) {
+export function buildStatic({ inventories, sources, storeDir, outDir, includeDrafts = false, mode = "static", endpoint = ENDPOINT, redirects = null, siteBase = SITE_BASE, imageFor = null }) {
   if (!MODES.includes(mode)) throw new Error(`mode must be one of ${MODES.join(", ")}`);
   if (mode === "inbox" && !/^https?:\/\//.test(endpoint)) throw new Error("the inbox endpoint must be an http(s) address");
   if (existsSync(outDir) && readdirSync(outDir).length && !existsSync(join(outDir, "data.json"))) {
@@ -83,7 +87,7 @@ export function buildStatic({ inventories, sources, storeDir, outDir, includeDra
   let bytes = 0;
   for (const inv of inventories) {
     for (const image of inv.images) {
-      const shown = displayable(imageBytes(sources[inv.book], image));
+      const shown = imageFor ? imageFor(inv.book, image) : displayable(imageBytes(sources[inv.book], image));
       exts.set(image.sha256, shown.ext);
       writeFileSync(join(outDir, "images", `${image.sha256}.${shown.ext}`), shown.bytes);
       images++;

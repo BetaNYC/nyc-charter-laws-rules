@@ -7,6 +7,9 @@
 #
 # The HTML is built here, fresh, on every run, from the committed data/index/ and
 # data/structure/, and is never committed (epic #68, decision 5). The build fetches nothing.
+# The picture description page (/describe-pictures/, issue #87) is built from the pictures
+# committed in data/pictures/ (npm run alt:images) and the reviewed descriptions in
+# data/alt-text/; a missing or changed picture stops the build.
 #
 # What starts a run:
 #   1. A push to main that changes the site code, the data it reads, or this file (the
@@ -20,8 +23,8 @@
 #      events always create workflow runs" (https://docs.github.com/en/actions/concepts/security/github_token,
 #      "When GITHUB_TOKEN triggers workflow runs"). So its push never reaches trigger 1, and
 #      its last step dispatches this workflow instead, only when its commit step pushed a
-#      change the site is built from (the index or data/structure, not the download record
-#      data/fetch-provenance.json alone).
+#      change the site is built from (the index, data/structure or data/pictures, not the
+#      download record data/fetch-provenance.json alone).
 #      A `workflow_run` trigger was not used: it would fire on every refresh, including the
 #      days nothing changed, and not on a run that committed law text and then went red over
 #      the release.
@@ -50,10 +53,13 @@ on:
       - "data/structure/**"
       - "data/source-errors.json"
       - "data/source-errors/**"
+      - "data/pictures/**"
+      - "data/alt-text/**"
       - "scripts/build-site.js"
       - "scripts/lib/site/**"
       - "scripts/lib/render-section.js"
-      - "scripts/lib/alt-text/image-info.js"
+      - "scripts/lib/extract-text.js"
+      - "scripts/lib/alt-text/**"
       - "site/**"
       - "src/tools.ts"
       - "DATA-SOURCES.json"
@@ -132,7 +138,7 @@ jobs:
         id: check
         run: |
           set -euo pipefail
-          for f in index.html about.html 404.html search.html charter/index.html admin-code/index.html redirects.json sitemap.xml sitemaps/admin-code.xml robots.txt pagefind/pagefind.js; do
+          for f in index.html about.html 404.html search.html charter/index.html admin-code/index.html describe-pictures/index.html redirects.json sitemap.xml sitemaps/admin-code.xml robots.txt pagefind/pagefind.js; do
             test -s "_site/$f" || { echo "::error::_site/$f is missing or empty" >&2; exit 1; }
           done
           # The Rules: there once the index names each record's title, left out with a notice before.

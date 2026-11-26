@@ -160,6 +160,18 @@ jobs:
         # data/index-build.json (which build code made the index; release.yml checks it).
         run: npm run build-index
 
+      - name: Copy the pictures for the website
+        # The picture description page (/describe-pictures/, issue #87) shows the pictures the
+        # XML uses. They are committed in data/pictures/ because the deploy builds without the
+        # ZIPs. npm run alt:images rewrites them from the ZIPs fetch-data just checked and the
+        # index build-index just wrote; the same ZIPs give byte-identical files, so an ordinary
+        # day changes nothing. It reads every picture before it writes any, so a picture it
+        # cannot read leaves the folder as it was. continue-on-error, so that never holds back
+        # the law text: the last step turns the run red instead.
+        id: pictures
+        continue-on-error: true
+        run: npm run alt:images
+
       - name: Coverage audit (report only)
         # Issue #78. Never blocks anything: continue-on-error, no `id` (no step reads its
         # outcome), output only to $GITHUB_STEP_SUMMARY, no file written in the repo. Without
@@ -222,26 +234,28 @@ jobs:
           #   data/index-build.json       which build code made the index (issue #95), by
           #                               build-index; release.yml checks it. It changes alone
           #                               when the build code changed but the index did not.
+          #   data/pictures/              the pictures for /describe-pictures/ (issue #87), by
+          #                               npm run alt:images
           # `git status --porcelain` rather than `git diff`: the first build creates these
           # files, and git diff does not see untracked files.
-          UNSHIPPED_PATHS=(data/structure data/fetch-provenance.json data/index-build.json)
+          UNSHIPPED_PATHS=(data/structure data/fetch-provenance.json data/index-build.json data/pictures)
           unshipped_changed() { [ -n "$(git status --porcelain -- "${UNSHIPPED_PATHS[@]}")" ]; }
 
           # The build is idempotent, so a no-op rebuild leaves the allow-list
           # byte-identical. Commit iff anything in it actually changed.
           if git diff --quiet -- "${PATHS[@]}"; then
             if unshipped_changed; then
-              # The website reads the structure, not the download record: redeploy only if
-              # the structure moved. Checked before `git add`, which would hide it, and kept in
-              # a variable: the output is written only after the push succeeds.
-              structure_changed=""
-              if [ -n "$(git status --porcelain -- data/structure)" ]; then
-                structure_changed=true
+              # The website reads the structure and the pictures, not the download record:
+              # redeploy only if one of those moved. Checked before `git add`, which would hide
+              # it, and kept in a variable: the output is written only after the push succeeds.
+              site_changed=""
+              if [ -n "$(git status --porcelain -- data/structure data/pictures)" ]; then
+                site_changed=true
               fi
-              # Only the site structure, the download record or the build record changed: a
-              # first build, a change to the build code that left the index as it was, or
-              # American Legal re-zipping text that did not change. Commit it with no version
-              # bump and no release.
+              # Only the site structure, the pictures, the download record or the build record
+              # changed: a first build, a change to the build code that left the index as it
+              # was, or American Legal re-zipping text that did not change. Commit it with no
+              # version bump and no release.
               git add -- "${UNSHIPPED_PATHS[@]}"
               git \
                 -c user.name="github-actions[bot]" \
@@ -249,7 +263,7 @@ jobs:
                 commit -m "chore: refresh site structure and download record $(TZ=America/New_York date +%F)"
               git push origin HEAD:main
               echo "pushed=true" >> "$GITHUB_OUTPUT"
-              if [ -n "$structure_changed" ]; then
+              if [ -n "$site_changed" ]; then
                 echo "deploy=true" >> "$GITHUB_OUTPUT"
               fi
               echo "refresh-data: pushed the site structure and download record to main (no index change, no release)"
@@ -357,6 +371,14 @@ jobs:
         if: steps.commit.outputs.prepare_failed == 'true'
         run: |
           echo "::error::New law data was committed, but no npm release was prepared. See the warning on 'Commit refreshed index if changed'." >&2
+          exit 1
+
+      - name: Fail if the pictures could not be copied
+        # The law text was committed above without new pictures (data/pictures/ stays as it
+        # was, so the website still builds). Red, so a person reads the pictures step's error.
+        if: ${{ !cancelled() && steps.pictures.outcome == 'failure' }}
+        run: |
+          echo "::error::npm run alt:images failed, so data/pictures/ was not updated. See the 'Copy the pictures for the website' step." >&2
           exit 1
 
       - name: Deploy the website if this run committed

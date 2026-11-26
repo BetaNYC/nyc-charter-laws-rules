@@ -373,7 +373,8 @@ test("the refresh workflow commits the record fetch-data writes, with no git add
   assert.match(cli, /provenancePath: join\(ROOT, "data", "fetch-provenance\.json"\)/);
   const yml = readFileSync(new URL(".github/workflows/refresh-data.yml", root), "utf8");
   // data/index-build.json (issue #95) is the build record build-index writes beside them.
-  assert.match(yml, /^ {10}UNSHIPPED_PATHS=\(data\/structure data\/fetch-provenance\.json data\/index-build\.json\)$/m);
+  // data/pictures (issue #87): the pictures for /describe-pictures/, by npm run alt:images.
+  assert.match(yml, /^ {10}UNSHIPPED_PATHS=\(data\/structure data\/fetch-provenance\.json data\/index-build\.json data\/pictures\)$/m);
   assert.match(yml, /^ {10}PATHS\+=\("\$\{UNSHIPPED_PATHS\[@\]\}"\)$/m, "staged with the index on a release day");
   assert.match(yml, /^ {14}git add -- "\$\{UNSHIPPED_PATHS\[@\]\}"$/m, "and by itself when only it changed");
   assert.doesNotMatch(yml, /^\s+git add (-A|--all|\.)/m, "no command stages everything");
