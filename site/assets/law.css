@@ -352,6 +352,10 @@ ol.se-list { list-style: none; padding: 0; margin: 0; }
 .se-quote { margin: 0 0 8px; padding: 6px 12px; border-left: 4px solid var(--line-soft); background: var(--bg-blue-lt); overflow-wrap: anywhere; }
 .se-picture { margin: 0 0 8px; overflow-wrap: anywhere; }
 .se-files { font-size: 14px; overflow-wrap: anywhere; }
+.se-figure { margin: 8px 0 12px; }
+.se-figure img { display: block; max-width: 100%; height: auto; background: var(--white); border: 1px solid var(--line); padding: 4px; }
+.se-figure a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; display: inline-block; }
+.se-figure figcaption { font-size: 14px; margin-top: 4px; overflow-wrap: anywhere; }
 .se-facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: 15px; margin: 8px 0; }
 .se-facts dt { font-weight: 600; }
 .se-facts dd { margin: 0; overflow-wrap: anywhere; }

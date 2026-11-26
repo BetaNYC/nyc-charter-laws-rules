@@ -2,7 +2,7 @@
 // I/O in the site code is here; everything it calls is pure. It never fetches anything.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, copyFileSync, rmSync } from "node:fs";
-import { join, dirname, resolve } from "node:path";
+import { join, dirname, resolve, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { loadBook, rulesReady } from "./model.js";
@@ -25,6 +25,7 @@ import { BOOKS, DEFAULT_BOOKS } from "./config.js";
 import { adminPageMakers, titleChaptersPath, titleChaptersJson } from "./pages-admin.js";
 import { rulesPageMakers, rulesNumbersPath } from "./pages-rules.js";
 import { parseSourceErrors, visibleErrors } from "./source-errors.js";
+import { sha256, imageSize } from "../alt-text/image-info.js";
 import { sourceErrorsPage } from "./pages-source-errors.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -168,6 +169,7 @@ export function siteFacts(books, dataSources) {
  * @param {Date} [o.now]              the build's clock (tests fix it)
  * @param {string} [o.commit]         this repo's commit (default: GITHUB_SHA, then git)
  * @param {string} [o.sourceErrorsFile] data/source-errors.json: errors in the publisher's text
+ * @param {string} [o.sourceErrorImagesDir] their pictures (default: data/source-errors/images/ beside the file)
  * @param {boolean} [o.includeUnconfirmedErrors=false] also show the errors only found, not yet
  *                                    checked (a preview build: --include-unconfirmed-errors)
  */
@@ -212,6 +214,25 @@ export async function buildSite(o = {}) {
   const preview = o.includeUnconfirmedErrors === true;
   const allSourceErrors = parseSourceErrors(readFileSync(sourceErrorsFile, "utf8"), sourceErrorsFile).errors;
   const shownErrors = visibleErrors(allSourceErrors, { includeUnconfirmed: preview });
+  // Each shown error's pictures, from the committed copies (npm run source-errors:images), checked
+  // against the sha256 its entry records. A missing or changed file stops the build: the page must
+  // show the very picture the error was found in.
+  const sourceErrorImagesDir = resolve(o.sourceErrorImagesDir ?? join(dirname(sourceErrorsFile), "source-errors", "images"));
+  const errorPictures = new Map();
+  for (const e of shownErrors) {
+    errorPictures.set(
+      e.id,
+      e.evidence.images.map((i) => {
+        const name = basename(i.file);
+        const from = join(sourceErrorImagesDir, name);
+        if (!existsSync(from)) throw new Error(`${e.id}: ${i.file} is not in ${sourceErrorImagesDir}. Run npm run source-errors:images.`);
+        const bytes = readFileSync(from);
+        if (sha256(bytes) !== i.sha256) throw new Error(`${e.id}: ${from} does not match the sha256 its entry records`);
+        const size = imageSize(bytes);
+        return { file: i.file, from, src: `/source-errors/img/${name}`, width: size?.width ?? null, height: size?.height ?? null };
+      })
+    );
+  }
   const books = corpora.map((c) =>
     loadBook({
       corpus: c,
@@ -270,6 +291,12 @@ export async function buildSite(o = {}) {
     mkdirSync(dirname(join(outDir, to)), { recursive: true });
     copyFileSync(join(ROOT, from), join(outDir, to));
   }
+  for (const pics of errorPictures.values()) {
+    for (const p of pics) {
+      mkdirSync(join(outDir, "source-errors", "img"), { recursive: true });
+      copyFileSync(p.from, join(outDir, p.src.slice(1)));
+    }
+  }
   mkdirSync(join(outDir, "assets", "nysds"), { recursive: true });
   copyFileSync(join(nysdsDir(), "dist", "nysds.js"), join(outDir, "assets", "nysds", "nysds.js"));
   mkdirSync(join(outDir, "licenses"), { recursive: true });
@@ -286,7 +313,7 @@ export async function buildSite(o = {}) {
     searchPage(book, site, extra),
     aboutPage(book, site, { paragraphs, metadata: { builtOnLong: newYorkLongDate(now) }, others: extra }),
     notFoundPage(book, site, extra),
-    sourceErrorsPage({ entries: shownErrors, preview, ours: oursFor, amlegalUrl, site }),
+    sourceErrorsPage({ entries: shownErrors, preview, ours: oursFor, amlegalUrl, pictures: (e) => errorPictures.get(e.id) ?? [], site }),
   ];
   for (const p of pages) write(outDir, p.file, p.html);
   for (const b of extra) {

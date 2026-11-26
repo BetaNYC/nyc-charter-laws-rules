@@ -55,13 +55,34 @@ ${select("se-status", "Status", "All statuses", present("status", SOURCE_ERROR_S
 }
 
 /**
+ * The publisher's pictures, as the publisher's files have them. The words that describe each one
+ * are just above it (evidence.picture), so its alt text says where to read them. A picture opens
+ * full size by its link: some are large drawings.
+ */
+function figures(pictures) {
+  const many = pictures.length > 1;
+  return pictures
+    .map((p, n) => {
+      const label = many ? `The publisher's picture ${n + 1} of ${pictures.length}` : "The publisher's picture";
+      const size = p.width && p.height ? ` width="${p.width}" height="${p.height}"` : "";
+      return `<figure class="se-figure">
+<a href="${escapeHtml(p.src)}"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(`${label}. BetaNYC's description is above.`)}"${size} loading="lazy" decoding="async"></a>
+<figcaption>${escapeHtml(label)}: <code>${escapeHtml(p.file)}</code>. Select it to open full size.</figcaption>
+</figure>`;
+    })
+    .join("\n");
+}
+
+/**
  * One row: the citation (a link to our page for the section, when this build has it), the id,
  * the status, the summary, the facts, the evidence, and "Check at American Legal".
  * @param {object} e
  * @param {{path: string}|null} ours  the section's page on this site, or null (a book this build left out)
  * @param {string} amlegalUrl
+ * @param {{src: string, file: string, width: number|null, height: number|null}[]} [pictures]
+ *   the pictures to show, in the order of evidence.images (build.js copies them to /source-errors/img/)
  */
-export function sourceErrorRow(e, ours, amlegalUrl) {
+export function sourceErrorRow(e, ours, amlegalUrl, pictures = []) {
   const cite = ours ? `<a href="${escapeHtml(ours.path)}">${escapeHtml(e.citation)}</a>` : escapeHtml(e.citation);
   const dates = [
     ["Found", `${longDay(e.found)}, in ${e.found_in}`],
@@ -73,6 +94,7 @@ export function sourceErrorRow(e, ours, amlegalUrl) {
   const evidence = [
     ev.text !== null ? `<p class="se-ev-label">What the publisher's text says (quoted from its XML):</p>\n<blockquote class="se-quote">${escapeHtml(ev.text)}</blockquote>` : "",
     ev.picture !== null ? `<p class="se-ev-label">What the picture shows (BetaNYC's description):</p>\n<p class="se-picture">${escapeHtml(ev.picture)}</p>` : "",
+    pictures.length ? figures(pictures) : "",
     ev.images.length
       ? `<p class="se-files">${ev.images.length === 1 ? "Picture file" : "Picture files"}: ${ev.images.map((i) => `<code>${escapeHtml(i.file)}</code> (sha256 <code>${escapeHtml(i.sha256.slice(0, 12))}</code>…)`).join(", ")}. Records in the XML: ${ev.records.map((r) => `<code>${escapeHtml(r)}</code>`).join(", ")}.</p>`
       : `<p class="se-files">Records in the XML: ${ev.records.map((r) => `<code>${escapeHtml(r)}</code>`).join(", ")}.</p>`,
@@ -105,9 +127,10 @@ ${e.notes ? `<dt>Notes</dt><dd>${escapeHtml(e.notes)}</dd>` : ""}
  * @param {boolean} o.preview           built with --include-unconfirmed-errors
  * @param {(e: object) => ({path: string}|null)} o.ours   our page for an entry's section
  * @param {(e: object) => string} o.amlegalUrl            its page at American Legal Publishing
+ * @param {(e: object) => object[]} [o.pictures]           its pictures to show (sourceErrorRow)
  * @param {object} o.site               the shared site facts (layout.js page)
  */
-export function sourceErrorsPage({ entries, preview, ours, amlegalUrl, site }) {
+export function sourceErrorsPage({ entries, preview, ours, amlegalUrl, pictures = () => [], site }) {
   const crumbs = [HOME, { name: SOURCE_ERRORS_TITLE, path: SOURCE_ERRORS_PATH }];
   const n = entries.length;
   const unchecked = entries.filter((e) => e.status === "found").length;
@@ -130,7 +153,7 @@ export function sourceErrorsPage({ entries, preview, ours, amlegalUrl, site }) {
           filters(entries),
           `<p class="summary" id="se-count" role="status">${escapeHtml(countLine)}</p>`,
           `<ol class="se-list" id="se-list">`,
-          ...entries.map((e) => sourceErrorRow(e, ours(e), amlegalUrl(e))),
+          ...entries.map((e) => sourceErrorRow(e, ours(e), amlegalUrl(e), pictures(e))),
           `</ol>`,
         ].join("\n"),
   ].join("\n");

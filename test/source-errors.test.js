@@ -9,11 +9,12 @@
 
 import { test, before } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdtempSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { writeFixtureData, FIXED_NOW, ROOT } from "./site/fixture-site.mjs";
 import { buildSite } from "../scripts/lib/site/build.js";
+import { encodePng, sha256 } from "../scripts/lib/alt-text/image-info.js";
 import { loadBook } from "../scripts/lib/site/model.js";
 import { readFooter } from "../scripts/lib/site/disclaimer.js";
 import { unescapeHtml } from "../scripts/lib/site/html.js";
@@ -31,7 +32,15 @@ import { sourceErrorsPage, sourceErrorNote, sourceErrorRow, SOURCE_ERRORS_PATH, 
 import { rowMatches, countLine, chosenFromQuery } from "../site/assets/source-errors.js";
 
 const FILE = join(ROOT, "data", "source-errors.json");
-const SHA = "a".repeat(64);
+// A real one-pixel PNG, so a build can check each picture against its sha256 and copy it.
+const PNG = encodePng({ width: 1, height: 1, rgba: Buffer.from([0, 0, 0, 255]) });
+const SHA = sha256(PNG);
+/** A folder beside an errors file holding the pictures its fixture entries name. */
+function writePictures(dir) {
+  const images = join(dir, "source-errors", "images");
+  mkdirSync(images, { recursive: true });
+  for (const name of ["0-0-0-3.png", "0-0-0-4.jpg"]) writeFileSync(join(images, name), PNG);
+}
 
 /** A valid entry, with overrides. */
 function entry(over = {}) {
@@ -138,9 +147,15 @@ test("a row: citation to our page, Check at American Legal (named, a plain link)
   assert.match(html, /<a href="\/charter\/sections\/1">NYC Charter § 1<\/a>/);
   assert.match(html, /<a href="https:\/\/codelibrary\.amlegal\.com\/codes\/newyorkcity\/latest\/NYCcharter\/0-0-0-1" aria-label="Check at American Legal: NYC Charter § 1 \(SE-0001\)">Check at American Legal<\/a>/);
   assert.doesNotMatch(html, /target=|rel=|onclick/, "the American Legal link opens normally");
-  for (const s of ["Reported to the publisher", "Picture and text disagree", "The picture says 12; the text says 18.", "The sump shall be 18 inches.", "A drawing marked 12.", "IMAGES/0-0-0-3.png", "aaaaaaaaaaaa", "November 25, 2026, in American Legal Publishing&#39;s files of July 2026", "November 26, 2026", "November 27, 2026", "Sent to both."]) {
+  for (const s of ["Reported to the publisher", "Picture and text disagree", "The picture says 12; the text says 18.", "The sump shall be 18 inches.", "A drawing marked 12.", "IMAGES/0-0-0-3.png", SHA.slice(0, 12), "November 25, 2026, in American Legal Publishing&#39;s files of July 2026", "November 26, 2026", "November 27, 2026", "Sent to both."]) {
     assert.ok(html.includes(s), `row has ${s}`);
   }
+  assert.doesNotMatch(html, /<img/, "no picture given, none shown");
+  const shown = sourceErrorRow(e, null, "https://x.test/1", [{ src: "/source-errors/img/0-0-0-3.png", file: "IMAGES/0-0-0-3.png", width: 40, height: 20 }]);
+  assert.match(shown, /<figure class="se-figure">\n<a href="\/source-errors\/img\/0-0-0-3\.png"><img src="\/source-errors\/img\/0-0-0-3\.png" alt="The publisher&#39;s picture\. BetaNYC&#39;s description is above\." width="40" height="20" loading="lazy" decoding="async"><\/a>/);
+  const two = sourceErrorRow(e, null, "https://x.test/1", [{ src: "/a.png", file: "IMAGES/a.png", width: null, height: null }, { src: "/b.png", file: "IMAGES/b.png", width: null, height: null }]);
+  assert.match(two, /alt="The publisher&#39;s picture 2 of 2\. /);
+  assert.doesNotMatch(two, /width="null"/);
   // No page of ours (a book this build left out): the citation is plain text.
   assert.match(sourceErrorRow(e, null, "https://x.test/1"), /<span class="se-id">SE-0001<\/span> NYC Charter § 1<\/h3>/);
 });
@@ -220,6 +235,7 @@ before(async () => {
   sections = book.sections.filter((s) => s.path).slice(0, 3);
   const dir = mkdtempSync(join(tmpdir(), "source-errors-"));
   const file = join(dir, "source-errors.json");
+  writePictures(dir);
   writeFileSync(
     file,
     fileText([
@@ -285,6 +301,33 @@ test("build: the footer on every page and the About page link to the errors page
     assert.match(read(normal, rel), /Mistakes in the publisher's own text are listed on <a href="\/source-errors\/">Errors in the publisher's text<\/a>\./, rel);
   }
   assert.match(unescapeHtml(read(normal, "about.html")), /where each one stands, on <a href="\/source-errors\/">Errors in the publisher's text<\/a>/);
+});
+
+test("build: each shown error's picture is copied and shown; found ones only in a preview", () => {
+  assert.ok(existsSync(join(normal.outDir, "source-errors", "img", "0-0-0-3.png")));
+  assert.match(read(normal, "source-errors/index.html"), /<li class="se se-confirmed" id="SE-0001"[\s\S]*?<img src="\/source-errors\/img\/0-0-0-3\.png"[^>]* width="1" height="1"/);
+  assert.match(read(preview, "source-errors/index.html"), /id="SE-0002"[\s\S]*?<img src="\/source-errors\/img\/0-0-0-3\.png"/);
+});
+
+test("build: the committed pictures match the committed file", () => {
+  const data = parseSourceErrors(readFileSync(FILE, "utf8"));
+  for (const e of data.errors) for (const i of e.evidence.images) {
+    const p = join(ROOT, "data", "source-errors", "images", i.file.slice("IMAGES/".length));
+    assert.ok(existsSync(p), `${e.id}: ${p} is committed (npm run source-errors:images)`);
+    assert.equal(sha256(readFileSync(p)), i.sha256, `${e.id}: ${i.file} matches its sha256`);
+  }
+});
+
+test("build: a missing or changed picture stops the build, naming the entry", async () => {
+  const d = writeFixtureData();
+  const dir = mkdtempSync(join(tmpdir(), "source-errors-pic-"));
+  const file = join(dir, "source-errors.json");
+  writeFileSync(file, fileText([entry({ status: "confirmed", confirmed_at: "2026-11-26" })]));
+  const build = () => buildSite({ indexDir: d.indexDir, structureDir: d.structureDir, outDir: join(dir, "out"), search: false, now: FIXED_NOW, commit: "test", books: ["charter"], sourceErrorsFile: file });
+  await assert.rejects(build(), /SE-0001: IMAGES\/0-0-0-3\.png is not in .*npm run source-errors:images/);
+  mkdirSync(join(dir, "source-errors", "images"), { recursive: true });
+  writeFileSync(join(dir, "source-errors", "images", "0-0-0-3.png"), Buffer.from("not the picture"));
+  await assert.rejects(build(), /SE-0001: .*0-0-0-3\.png does not match the sha256/);
 });
 
 test("build: an errors file that fails its schema stops the build", async () => {

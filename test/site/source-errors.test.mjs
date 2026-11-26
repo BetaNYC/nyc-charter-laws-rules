@@ -5,12 +5,16 @@
 
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
-import { writeFileSync, mkdtempSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdtempSync, readFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { chromium } from "playwright";
 import { writeFixtureData, FIXED_NOW } from "./fixture-site.mjs";
 import { buildSite } from "../../scripts/lib/site/build.js";
+import { encodePng, sha256 } from "../../scripts/lib/alt-text/image-info.js";
+
+// A real picture, so the build can check it against its sha256 and show it.
+const PNG = encodePng({ width: 40, height: 20, rgba: Buffer.alloc(40 * 20 * 4, 255) });
 import { loadBook } from "../../scripts/lib/site/model.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
@@ -24,7 +28,7 @@ function entry(over) {
     book: "charter",
     kind: "picture-text-mismatch",
     summary: "The picture says 12; the text says 18.",
-    evidence: { text: "The sump shall be 18 inches.", records: ["0-0-0-2"], picture: "A drawing marked 12.", images: [{ image_id: "0-0-0-3", file: "IMAGES/0-0-0-3.png", sha256: "b".repeat(64) }] },
+    evidence: { text: "The sump shall be 18 inches.", records: ["0-0-0-2"], picture: "A drawing marked 12.", images: [{ image_id: "0-0-0-3", file: "IMAGES/0-0-0-3.png", sha256: sha256(PNG) }] },
     found: "2026-11-25",
     found_in: "American Legal Publishing's files of July 2026",
     status: "found",
@@ -42,6 +46,8 @@ before(async () => {
   sections = book.sections.filter((s) => s.path).slice(0, 3);
   const dir = mkdtempSync(join(tmpdir(), "source-errors-browser-"));
   const file = join(dir, "source-errors.json");
+  mkdirSync(join(dir, "source-errors", "images"), { recursive: true });
+  writeFileSync(join(dir, "source-errors", "images", "0-0-0-3.png"), PNG);
   const at = (s) => ({ citation: s.fullCitation, amlegal_id: s.id });
   writeFileSync(
     file,
