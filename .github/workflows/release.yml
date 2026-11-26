@@ -43,11 +43,13 @@
 #
 # Failure is loud: any failed step fails the run red. Recovery: fix the cause,
 # then rerun this workflow for the tag (Actions > Release > the failed run >
-# Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover.
+# Re-run, or `gh run rerun <id> --failed`). Never re-tag or bump to recover. The one
+# exception is the index-build check below: it runs before anything is published,
+# so if it stops a release, delete the tag, wait for the refresh, and tag again
+# (README, "Releases").
 #
-# NOTE: this package ships the committed corpus index in `data/index`, so the
-# published tarball is very large (~117 MB unpacked as of v0.1.2). Trimming the
-# `files` array is tracked separately — do not change it here.
+# The package ships only data/index/json from the index (package.json `files`,
+# issue #95); the Markdown index stays in git.
 
 name: Release
 
