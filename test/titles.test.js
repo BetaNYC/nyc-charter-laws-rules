@@ -362,7 +362,8 @@ describe("get_section, get_title and list_titles with titles", () => {
       "Title 24, Chapter 1 — Chapter 1: General",
       "Title 24, Chapter 3 — Chapter 3: Vaccines",
     ].join("\n"));
-    assert.match(out["tool ambiguous"], /^Multiple sections match "§ 1-01"\. Re-run get_section with the 'corpus' parameter and\/or a more specific citation:\n\n/);
+    // Issue #95: the answer says what to add (the title), not to re-run with 'corpus'.
+    assert.match(out["tool ambiguous"], /^Multiple sections match "§ 1-01"\. To get one, name its title in the citation, as each line below does: '15 RCNY § 1-01'\.\n\n/);
     assert.ok(out["tool ambiguous"].includes(
       "[RULES] 15 RCNY § 1-01 — § 1-01 Scope and Application. (Title 15: Department of Environmental Protection)\n" +
       "[RULES] 24 RCNY § 1-01 — § 1-01 Definitions. (Title 24: Department of Health and Mental Hygiene)\n" +
