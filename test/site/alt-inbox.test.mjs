@@ -20,6 +20,7 @@ import { buildStatic } from "../../scripts/lib/alt-text/static-build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { makeFixture } from "../alt-text/fixture.js";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 const WIDTHS = [
   ["phone", 390, 844],
@@ -70,10 +71,10 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  site?.server?.close();
-  intake?.srv.close();
-  other?.srv.close();
+  await closeBrowser(browser);
+  closeServer(site?.server);
+  closeServer(intake?.srv);
+  closeServer(other?.srv);
 });
 
 async function open(width, height, { blockStorage = false } = {}) {
@@ -128,7 +129,7 @@ for (const [name, width, height] of WIDTHS) {
     await page.locator("#prev").click();
     assert.equal(await page.getByRole("link", { name: /Read Rules § 1-01 on the Law Reader/ }).first().getAttribute("href"), "https://law.beta.nyc/rules/titles/1/sections/1-01");
     assert.equal(await page.getByRole("link", { name: "BetaNYC privacy policy" }).getAttribute("href"), "https://www.beta.nyc/privacy-policy/");
-    assert.equal(await page.getByLabel("You may credit me by name if BetaNYC uses my description").isChecked(), false, "credit is an unticked opt-in");
+    assert.equal(await page.getByLabel("I am happy for BetaNYC to thank me by name").isChecked(), false, "credit is an unticked opt-in");
     assert.deepEqual(problems, []);
     await ctx.close();
   });
@@ -254,7 +255,7 @@ test("inbox page: the page can connect only to the intake (CSP), and a down inta
   assert.match(await page.locator("#progress").textContent(), /of 3 pictures reviewed/);
   // The intake down: a network failure says so.
   const port = new URL(intake.url).port;
-  intake.srv.close();
+  closeServer(intake.srv);
   await new Promise((r) => setTimeout(r, 100));
   await page.getByLabel("Alt text", { exact: true }).fill("while the intake is down");
   await page.locator("#send").click();

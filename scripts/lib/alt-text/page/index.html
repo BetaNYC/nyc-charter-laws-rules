@@ -136,18 +136,18 @@
           <textarea id="inbox-note" rows="2"></textarea>
           <fieldset class="contact" aria-describedby="privacy-note">
             <legend>Your name and email (optional)</legend>
-            <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply or credit you. They are kept apart from your suggestion, never published, and used only to follow up: <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
+            <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply to you. Your name and email are kept apart from your suggestion, used only to follow up, and not published. If you tick the box below, we may thank you by name later; we have not decided how yet, so for now nothing we publish names anyone. See the <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
             <label for="contact-name">Name</label>
             <input id="contact-name" type="text" autocomplete="name">
             <label for="contact-email">Email</label>
             <input id="contact-email" type="email" autocomplete="email">
-            <label class="check"><input type="checkbox" id="credit-ok"> You may credit me by name if BetaNYC uses my description</label>
+            <label class="check"><input type="checkbox" id="credit-ok"> I am happy for BetaNYC to thank me by name</label>
           </fieldset>
           <div class="trap" aria-hidden="true">
             <label for="inbox-website">Leave this box empty</label>
             <input id="inbox-website" type="text" name="website" tabindex="-1" autocomplete="off">
           </div>
-          <p id="send-where" class="hint">Send posts your description, your note, and your name and email if you gave them, to BetaNYC's inbox at www.beta.nyc. It files them for BetaNYC staff in a private place.</p>
+          <p id="send-where" class="hint">Send posts your description, your note, and your name and email if you gave them, to BetaNYC's inbox at www.beta.nyc. It files them for BetaNYC staff in a private place. Your browser also keeps a random code for this page, so a new suggestion for the same picture replaces your earlier one; clearing this site's data in your browser removes it.</p>
           <button type="button" id="show-payload" class="disclosure" aria-expanded="false" aria-controls="payload">Show exactly what will be sent</button>
           <pre id="payload" class="payload" hidden></pre>
           <div class="actions">
