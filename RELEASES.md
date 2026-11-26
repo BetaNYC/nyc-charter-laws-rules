@@ -51,6 +51,10 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
+## v0.7.1 — 2026-11-26
+
+- Automatic data release. Bundled law text refreshed: Charter LL 2026/165 -> LL 2026/171; Admin Code LL 2026/165 -> LL 2026/171; Rules eff. November 14, 2026 -> eff. November 29, 2026. No code changes beyond what was already merged to `main`.
+
 ## v0.7.0 — 2026-11-24
 
 - **Construction Code sections get their text** ([#76](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/76)). The index read a section's text only from its "Normal Level" body. The Administrative Code's Construction Codes (Title 28) and Fire Code (Title 29) keep most of a section's text one level down, in "Subsection" levels, so in the July 2026 files 1,375 of their sections were missing some or all of their text (1,356 had none), and so were 90 Rules sections (74 had none). `scripts/lib/build-corpus.js` now reads a section's child levels in document order: each subsection's heading line ("80.1 Title."), then its body. A section with no subsection keeps its text byte for byte.

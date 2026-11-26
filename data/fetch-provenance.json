@@ -3,36 +3,36 @@
   "corpora": {
     "charter": {
       "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Charter/XML.zip",
-      "bytes": 790055,
-      "sha256": "191c2ae52d4f7dad208429c6c57e98aae8f5276d0d71e71491cf12be21eb4efe",
+      "bytes": 790361,
+      "sha256": "66782471c4c5b52912008a39e887ba8e3cc93bcc0bbf064691197b93a0d60230",
       "contentType": "application/zip",
-      "lastModified": "Sat, 21 Nov 2026 15:43:45 GMT",
-      "etag": "\"6b01bc31-c0e27\"",
+      "lastModified": "Wed, 25 Nov 2026 13:22:47 GMT",
+      "etag": "\"6b06e127-c0f59\"",
       "xmlFiles": 87,
-      "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
-      "firstFetchedAt": "2026-11-25T12:17:52.649Z"
+      "currentThrough": "Current through Local Law 2026/171, enacted November 21, 2026,",
+      "firstFetchedAt": "2026-11-26T11:07:15.778Z"
     },
     "admin_code": {
       "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Admin/XML.zip",
-      "bytes": 65528920,
-      "sha256": "eb27fb310404a2b61ac9dacb71f3cd378dc0bb7fa3429491e3c7817776f2eb63",
+      "bytes": 65531559,
+      "sha256": "82f0a29a9d0b38230e7d38ec2e7e89ed6e35dd1138036e1b2749992017a0cf50",
       "contentType": "application/zip",
-      "lastModified": "Sat, 21 Nov 2026 15:44:12 GMT",
-      "etag": "\"6b01bc4c-3e7e458\"",
+      "lastModified": "Wed, 25 Nov 2026 13:22:58 GMT",
+      "etag": "\"6b06e132-3e7eea7\"",
       "xmlFiles": 398,
-      "currentThrough": "Current through Local Law 2026/165, enacted November 19, 2026,",
-      "firstFetchedAt": "2026-11-25T12:17:55.002Z"
+      "currentThrough": "Current through Local Law 2026/171, enacted November 21, 2026,",
+      "firstFetchedAt": "2026-11-26T11:07:18.690Z"
     },
     "rules": {
       "url": "https://files.amlegal.com/pdffiles/NewYorkCity/Rules/XML.zip",
-      "bytes": 59533689,
-      "sha256": "80e043e1581d7d6442127e184298b93e996781d2a78773033ae66c2d8a2cd30b",
+      "bytes": 59536347,
+      "sha256": "9ca7a302e03c1ac78cd17eb2fe2c0243fdc50887467c6442827b63a191f02fe0",
       "contentType": "application/zip",
-      "lastModified": "Fri, 13 Nov 2026 18:04:05 GMT",
-      "etag": "\"6af75115-38c6979\"",
+      "lastModified": "Wed, 25 Nov 2026 13:22:51 GMT",
+      "etag": "\"6b06e12b-38c73db\"",
       "xmlFiles": 768,
-      "currentThrough": "Current through rules effective November 14, 2026.",
-      "firstFetchedAt": "2026-11-25T12:17:56.912Z"
+      "currentThrough": "Current through rules effective November 29, 2026.",
+      "firstFetchedAt": "2026-11-26T11:07:20.929Z"
     }
   }
 }
