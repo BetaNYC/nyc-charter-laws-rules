@@ -74,8 +74,24 @@ figcaption { color: #333333; font-size: 0.9rem; margin-top: 0.5rem; }
 #use-theirs { background: var(--bg); color: var(--accent); }
 .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
 fieldset { margin-top: 1rem; border: 1px solid var(--line); border-radius: 4px; }
-/* body carries the mode too; only the parts inside it are switched. */
+/* body carries the mode too; only the parts inside it are switched. A part's data-mode lists
+   the modes it shows in, separated by spaces. */
 :not(body)[data-mode] { display: none; }
-body[data-mode="local"] [data-mode="local"], body[data-mode="static"] [data-mode="static"] { display: revert; }
-body[data-mode="local"] div[data-mode="local"], body[data-mode="static"] div[data-mode="static"] { display: block; }
+body[data-mode="local"] [data-mode~="local"], body[data-mode="static"] [data-mode~="static"], body[data-mode="inbox"] [data-mode~="inbox"] { display: revert; }
+body[data-mode="local"] div[data-mode~="local"], body[data-mode="static"] div[data-mode~="static"], body[data-mode="inbox"] div[data-mode~="inbox"] { display: block; }
+/* Inbox mode (sends to BetaNYC's intake). */
+input[type="text"], input[type="email"] { width: 100%; max-width: 32rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--fg); padding: 0.4rem; }
+label.check { font-weight: 400; display: flex; gap: 0.5rem; align-items: flex-start; }
+label.check input { margin-top: 0.3rem; flex: none; }
+fieldset.contact { padding: 0.5rem 0.75rem 0.75rem; }
+fieldset.contact legend { font-weight: 600; }
+.label-tag { display: inline-block; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 4px; border: 2px solid var(--line); }
+.label-tag[data-kind="draft"] { background: var(--warn-bg); border-color: var(--focus); }
+.label-tag[data-kind="reviewed"] { border-color: var(--accent); }
+.payload { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 0.5rem; font-size: 0.85rem; }
+#uses a { overflow-wrap: anywhere; }
+[aria-invalid="true"] { border: 2px solid var(--focus); }
+/* The trap field: off screen, out of the tab order and the accessibility tree. People never
+   see it; a robot that fills every box fills it, and the intake then files nothing. */
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 #save-status:not(:empty) { font-weight: 600; }

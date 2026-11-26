@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="alt-review-mode" content="{{MODE}}">
 <meta name="alt-review-token" content="{{TOKEN}}">
+<meta name="alt-review-endpoint" content="{{ENDPOINT}}">
+{{HEAD}}
 <title>Picture descriptions | BetaNYC Law Reader</title>
 <link rel="stylesheet" href="app.css">
 <script type="module" src="app.js"></script>
@@ -16,6 +18,7 @@
   <p class="about">Text descriptions for the pictures in New York City's Administrative Code and Rules. They are written by BetaNYC: an AI model drafts each one, and a person reviews it. They are not part of American Legal Publishing's text and are not an official record.</p>
   <p class="about" data-mode="local">Save writes your review to <code>data/alt-text/</code> in this copy of the repository.</p>
   <p class="about" data-mode="static">See something wrong or missing? Write a better description and press "Suggest a better description". It opens a new GitHub issue with your text filled in; nothing is sent until you submit it there, and a person at BetaNYC reviews every suggestion.</p>
+  <p class="about" data-mode="inbox">See something wrong or missing? Write a better description and press "Send suggestion". You do not need an account. Your suggestion goes to BetaNYC, not to a public page, and a person at BetaNYC reads every one before anything on the <a href="/">Law Reader</a> changes.</p>
 </header>
 
 <main>
@@ -63,7 +66,16 @@
     </section>
 
     <form id="review-form" novalidate>
-      <section aria-labelledby="draft-heading" class="draft">
+      <section aria-labelledby="current-heading" class="current" data-mode="inbox">
+        <h3 id="current-heading">Current description</h3>
+        <p id="current-label" class="label-tag"></p>
+        <label for="current-alt">Current alt text (read only)</label>
+        <textarea id="current-alt" rows="3" readonly></textarea>
+        <label for="current-long">Current long description (read only)</label>
+        <textarea id="current-long" rows="6" readonly></textarea>
+      </section>
+
+      <section aria-labelledby="draft-heading" class="draft" data-mode="local static">
         <h3 id="draft-heading">AI draft</h3>
         <p id="draft-meta" class="meta"></p>
         <label for="draft-alt">AI draft: alt text (read only)</label>
@@ -118,11 +130,36 @@
           </div>
           <p id="suggest-note" class="meta" hidden></p>
         </div>
+
+        <div data-mode="inbox">
+          <label for="inbox-note">Note for BetaNYC (optional, not published)</label>
+          <textarea id="inbox-note" rows="2"></textarea>
+          <fieldset class="contact" aria-describedby="privacy-note">
+            <legend>Your name and email (optional)</legend>
+            <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply or credit you. They are kept apart from your suggestion, never published, and used only to follow up: <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
+            <label for="contact-name">Name</label>
+            <input id="contact-name" type="text" autocomplete="name">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" type="email" autocomplete="email">
+            <label class="check"><input type="checkbox" id="credit-ok"> You may credit me by name if BetaNYC uses my description</label>
+          </fieldset>
+          <div class="trap" aria-hidden="true">
+            <label for="inbox-website">Leave this box empty</label>
+            <input id="inbox-website" type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <p id="send-where" class="hint">Send posts your description, your note, and your name and email if you gave them, to BetaNYC's inbox at www.beta.nyc. It files them for BetaNYC staff in a private place.</p>
+          <button type="button" id="show-payload" class="disclosure" aria-expanded="false" aria-controls="payload">Show exactly what will be sent</button>
+          <pre id="payload" class="payload" hidden></pre>
+          <div class="actions">
+            <button type="submit" id="send">Send suggestion</button>
+          </div>
+        </div>
         <p id="save-status" role="status" aria-live="polite"></p>
       </section>
     </form>
   </article>
   <p id="empty" hidden>No pictures match these choices.</p>
 </main>
+<script type="application/json" id="page-data">{{DATA}}</script>
 </body>
 </html>

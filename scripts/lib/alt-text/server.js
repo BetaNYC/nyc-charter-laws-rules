@@ -26,11 +26,18 @@ const ASSETS = {
   "/app.js": [join(PAGE_DIR, "app.js"), "text/javascript; charset=utf-8"],
   "/app.css": [join(PAGE_DIR, "app.css"), "text/css; charset=utf-8"],
   "/issue-url.js": [join(HERE, "issue-url.js"), "text/javascript; charset=utf-8"],
+  "/inbox-payload.js": [join(HERE, "inbox-payload.js"), "text/javascript; charset=utf-8"],
 };
 
-/** The page's HTML for a mode ("local" or "static"). */
-export function pageHtml(mode, token = "") {
-  return readFileSync(join(PAGE_DIR, "index.html"), "utf8").replace("{{MODE}}", mode).replace("{{TOKEN}}", token);
+/**
+ * The page's HTML for a mode ("local", "static" or "inbox"). extra: { head, endpoint, data },
+ * for the inbox build only: more <head> tags, the intake's address, and the page's data as
+ * JSON already safe inside a <script type="application/json"> element. Values are put in with
+ * a function, so a "$" in them is never read as a replacement pattern.
+ */
+export function pageHtml(mode, token = "", { head = "", endpoint = "", data = "" } = {}) {
+  const values = { MODE: mode, TOKEN: token, HEAD: head, ENDPOINT: endpoint, DATA: data };
+  return readFileSync(join(PAGE_DIR, "index.html"), "utf8").replace(/\{\{(MODE|TOKEN|HEAD|ENDPOINT|DATA)\}\}/g, (_, k) => values[k]);
 }
 
 /**
