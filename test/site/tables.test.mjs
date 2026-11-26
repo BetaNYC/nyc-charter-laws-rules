@@ -17,6 +17,7 @@ import { chromium } from "playwright";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { buildRulesFixtureSite } from "./fixture-site.mjs";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 const TABLES_XML = join(dirname(fileURLToPath(import.meta.url)), "..", "fixtures", "tables", "rules");
 
@@ -36,8 +37,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
   if (out) rmSync(out, { recursive: true, force: true });
 });
 

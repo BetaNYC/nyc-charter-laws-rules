@@ -12,6 +12,7 @@ import { buildFixtureSite } from "./fixture-site.mjs";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { chapterName } from "../../scripts/lib/site/pages.js";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 /** "☰ Contents", the bar above the breadcrumbs: its name is "Contents", then the reader's chapter. */
 const CONTENTS_BUTTON = /^Contents(, |$)/;
@@ -26,8 +27,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
 });
 
 // A page that fails on console errors, failed requests and anything fetched from off the site.

@@ -20,6 +20,7 @@ import { buildSite } from "../../scripts/lib/site/build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { pagesWithLongRuns, pagesWithTables, longestRun, longestCrumb, LONG_RUN } from "./long-runs.mjs";
 import { CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const given = process.env.LAW_READER_SITE ? resolve(process.env.LAW_READER_SITE) : null;
@@ -38,8 +39,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
   if (out) rmSync(out, { recursive: true, force: true });
 });
 

@@ -17,6 +17,7 @@ import { buildStatic } from "../../scripts/lib/alt-text/static-build.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
 import { makeFixture } from "../alt-text/fixture.js";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 let fx, inv, source, review, browser, staticSrv;
 const extra = [];
@@ -59,9 +60,9 @@ before(async () => {
 
 after(async () => {
   for (const s of extra) await s.close?.();
-  await browser?.close();
+  await closeBrowser(browser);
   await review?.close();
-  staticSrv?.server?.close();
+  closeServer(staticSrv?.server);
 });
 
 async function open(url) {
