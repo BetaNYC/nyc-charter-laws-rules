@@ -17,6 +17,11 @@
 // 2026-11-24: get_section names the citations it now takes: a book's name ("NYC Charter §
 // 1133"), code sections ("FC 102") and a part of a section ("§ 1133(b)(1)"). Measured 17,910;
 // budget unchanged.
+// 2026-11-26 (issue #95): search says short terms match whole words and an empty query is an
+// error; get_section gains max_chars and offset (text in parts, lists in pages) and names the
+// code forms it now takes ("Building Code 722.2.1.1.4", a bare "722.2.1.1.4"). Measured 18,624;
+// budget raised to 19,000 on purpose, since the two parameters and what they do must be
+// advertised for a client to page.
 //
 // Requires: npm run build (dist/ must exist). Guaranteed by "pretest".
 
@@ -25,7 +30,7 @@ import assert from "node:assert/strict";
 import { TOOLS, SERVER_INSTRUCTIONS } from "../dist/tools.js";
 import { toolListSize } from "../dist/betanyc-tools.js";
 
-const BUDGET_CHARS = 18_000;
+const BUDGET_CHARS = 19_000;
 
 test("tool definitions plus server instructions stay within the size budget", () => {
   const size = toolListSize(TOOLS, SERVER_INSTRUCTIONS);

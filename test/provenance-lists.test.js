@@ -134,7 +134,7 @@ test("search says how many matched in all, and that snippets are cut", { skip },
   const t = await text("search", { query: "the", limit: 50 });
   const m = /Showing 50 of (\d+) matching sections, best first\. To see others, narrow the query, or search one corpus\./.exec(t);
   assert.ok(m && Number(m[1]) > 50, "count line");
-  assert.match(t, /Snippets are cut at 400 characters \(marked …\); get_section returns a section's full text\./);
+  assert.match(t, /Each snippet is at most 400 characters of the section, around the first match; … marks text left out\. get_section returns a section's full text\./);
   const small = await text("search", { query: "the", limit: 3 });
   assert.match(small, /Showing 3 of \d+ .*raise limit \(max 50\)/);
 });
@@ -193,10 +193,12 @@ test("a short list carries no count line", { skip }, async () => {
   assert.doesNotMatch(t, /^Showing /m);
 });
 
-test("get_section's list of matches is capped at 25 and says how many there are", { skip }, async () => {
+test("get_section's list of matches is capped at 25, says how many there are, and pages", { skip }, async () => {
   const t = await text("get_section", { citation: "Chapter 1" });
-  const m = /^Showing 1 to 25 of (\d+)\. Narrow it with 'corpus'/m.exec(t);
+  const m = /^Showing 1 to 25 of (\d+)\. Call again with offset 25 for the next ones\.$/m.exec(t);
   assert.ok(m && Number(m[1]) > 25, "cap line");
+  // With no corpus and matches in several documents, the answer says to set 'corpus' (issue #95).
+  assert.match(t, /^Multiple sections match "Chapter 1"\. To get one, set 'corpus' \(charter, admin_code or rules\)/m);
   assert.equal(t.split("\n").filter((l) => /^\[(CHARTER|ADMIN_CODE|RULES)\] /.test(l)).length, 25);
 });
 

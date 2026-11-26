@@ -48,7 +48,9 @@ describe("schemas generated from zod (issue #22)", () => {
   const DOCS = ["charter", "admin_code", "rules"];
   const EXPECTED = {
     search: { props: ["query", "corpus", "limit"], required: ["query"], corpus: [...DOCS, "all"] },
-    get_section: { props: ["citation", "corpus"], required: ["citation"], corpus: DOCS },
+    // max_chars and offset added on purpose for a long text in parts and a long list of matches
+    // in pages (issue #95); both optional.
+    get_section: { props: ["citation", "corpus", "max_chars", "offset"], required: ["citation"], corpus: DOCS },
     // limit and offset added on purpose for paging (issue #42); both optional.
     list_titles: { props: ["corpus", "limit", "offset"], required: ["corpus"], corpus: DOCS },
     get_title: { props: ["corpus", "title", "limit", "offset"], required: ["corpus", "title"], corpus: DOCS },
@@ -69,6 +71,19 @@ describe("schemas generated from zod (issue #22)", () => {
       if (want.corpus) assert.deepEqual(s.properties.corpus.enum, want.corpus);
     });
   }
+
+  test("get_section's max_chars is advertised with the bounds the server enforces (1000 to 100000)", async () => {
+    const max = byName.get_section.properties.max_chars;
+    assert.equal(max.type, "integer");
+    assert.equal(max.minimum, 1000);
+    assert.equal(max.maximum, 100000);
+    for (const bad of [999, 100001, 1500.5]) {
+      const res = await callTool("get_section", { citation: "§ 259", max_chars: bad });
+      assert.equal(res.isError, true, `max_chars ${bad} must be refused`);
+    }
+    assert.equal(byName.get_section.properties.offset.minimum, 0);
+    assert.equal((await callTool("get_section", { citation: "§ 259", offset: -1 })).isError, true);
+  });
 
   test("search's limit is advertised with the bounds the server enforces (1 to 50)", async () => {
     const limit = byName.search.properties.limit;
