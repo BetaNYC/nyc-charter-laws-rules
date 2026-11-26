@@ -57,17 +57,20 @@ ${select("se-status", "Status", "All statuses", present("status", SOURCE_ERROR_S
 /**
  * The publisher's pictures, as the publisher's files have them. The words that describe each one
  * are just above it (evidence.picture), so its alt text says where to read them. A picture opens
- * full size by its link: some are large drawings.
+ * full size by its link, and each link's name says which error and which file it is, so no two
+ * links to different files share a name.
  */
-function figures(pictures) {
+function figures(e, pictures) {
   const many = pictures.length > 1;
   return pictures
     .map((p, n) => {
-      const label = many ? `The publisher's picture ${n + 1} of ${pictures.length}` : "The publisher's picture";
+      const file = p.file.replace(/^IMAGES\//, "");
+      const which = many ? `picture ${n + 1} of ${pictures.length}` : "picture";
+      const alt = `${e.id}: the publisher's ${which}, ${file}. BetaNYC's description is above.`;
       const size = p.width && p.height ? ` width="${p.width}" height="${p.height}"` : "";
       return `<figure class="se-figure">
-<a href="${escapeHtml(p.src)}"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(`${label}. BetaNYC's description is above.`)}"${size} loading="lazy" decoding="async"></a>
-<figcaption>${escapeHtml(label)}: <code>${escapeHtml(p.file)}</code>. Select it to open full size.</figcaption>
+<a href="${escapeHtml(p.src)}"><img src="${escapeHtml(p.src)}" alt="${escapeHtml(alt)}"${size} loading="lazy" decoding="async"></a>
+<figcaption>The publisher's ${escapeHtml(which)}: <code>${escapeHtml(p.file)}</code>. Select it to open full size.</figcaption>
 </figure>`;
     })
     .join("\n");
@@ -94,7 +97,7 @@ export function sourceErrorRow(e, ours, amlegalUrl, pictures = []) {
   const evidence = [
     ev.text !== null ? `<p class="se-ev-label">What the publisher's text says (quoted from its XML):</p>\n<blockquote class="se-quote">${escapeHtml(ev.text)}</blockquote>` : "",
     ev.picture !== null ? `<p class="se-ev-label">What the picture shows (BetaNYC's description):</p>\n<p class="se-picture">${escapeHtml(ev.picture)}</p>` : "",
-    pictures.length ? figures(pictures) : "",
+    pictures.length ? figures(e, pictures) : "",
     ev.images.length
       ? `<p class="se-files">${ev.images.length === 1 ? "Picture file" : "Picture files"}: ${ev.images.map((i) => `<code>${escapeHtml(i.file)}</code> (sha256 <code>${escapeHtml(i.sha256.slice(0, 12))}</code>…)`).join(", ")}. Records in the XML: ${ev.records.map((r) => `<code>${escapeHtml(r)}</code>`).join(", ")}.</p>`
       : `<p class="se-files">Records in the XML: ${ev.records.map((r) => `<code>${escapeHtml(r)}</code>`).join(", ")}.</p>`,

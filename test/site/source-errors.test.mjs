@@ -18,6 +18,7 @@ const PNG = encodePng({ width: 40, height: 20, rgba: Buffer.alloc(40 * 20 * 4, 2
 import { loadBook } from "../../scripts/lib/site/model.js";
 import { startServer } from "../../scripts/lib/site/serve.js";
 import { parseSnapshot, controlProblems, linkProblems, focusableProblems, CHROMIUM_ARGS } from "./a11y-tree.mjs";
+import { closeBrowser, closeServer } from "./cleanup.mjs";
 
 const PATH = "/source-errors/";
 let site, server, base, browser, sections;
@@ -67,8 +68,8 @@ before(async () => {
 });
 
 after(async () => {
-  await browser?.close();
-  server?.close();
+  await closeBrowser(browser);
+  closeServer(server);
 });
 
 async function open(path, { width = 1200, js = true } = {}) {

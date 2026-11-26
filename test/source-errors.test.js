@@ -152,9 +152,11 @@ test("a row: citation to our page, Check at American Legal (named, a plain link)
   }
   assert.doesNotMatch(html, /<img/, "no picture given, none shown");
   const shown = sourceErrorRow(e, null, "https://x.test/1", [{ src: "/source-errors/img/0-0-0-3.png", file: "IMAGES/0-0-0-3.png", width: 40, height: 20 }]);
-  assert.match(shown, /<figure class="se-figure">\n<a href="\/source-errors\/img\/0-0-0-3\.png"><img src="\/source-errors\/img\/0-0-0-3\.png" alt="The publisher&#39;s picture\. BetaNYC&#39;s description is above\." width="40" height="20" loading="lazy" decoding="async"><\/a>/);
+  assert.match(shown, /<figure class="se-figure">\n<a href="\/source-errors\/img\/0-0-0-3\.png"><img src="\/source-errors\/img\/0-0-0-3\.png" alt="SE-0001: the publisher&#39;s picture, 0-0-0-3\.png\. BetaNYC&#39;s description is above\." width="40" height="20" loading="lazy" decoding="async"><\/a>/);
   const two = sourceErrorRow(e, null, "https://x.test/1", [{ src: "/a.png", file: "IMAGES/a.png", width: null, height: null }, { src: "/b.png", file: "IMAGES/b.png", width: null, height: null }]);
-  assert.match(two, /alt="The publisher&#39;s picture 2 of 2\. /);
+  assert.match(two, /alt="SE-0001: the publisher&#39;s picture 2 of 2, b\.png\. /);
+  // Two pictures, two names: a link's name never goes to two places.
+  assert.notEqual(...[...two.matchAll(/alt="([^"]+)"/g)].map((m) => m[1]));
   assert.doesNotMatch(two, /width="null"/);
   // No page of ours (a book this build left out): the citation is plain text.
   assert.match(sourceErrorRow(e, null, "https://x.test/1"), /<span class="se-id">SE-0001<\/span> NYC Charter § 1<\/h3>/);
