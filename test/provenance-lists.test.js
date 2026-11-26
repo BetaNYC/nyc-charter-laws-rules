@@ -27,7 +27,7 @@ const LINK = { charter: "NYCcharter", admin_code: "NYCadmin", rules: "NYCrules" 
 // changed the text, as about_data does, so a reader can tell it from the publisher's own copy.
 const MODIFIED =
   "BetaNYC modified this data: converted by BetaNYC from the publisher's bulk XML files: line breaks are collapsed, so tables run together; " +
-  "the publisher's editing markers are removed and character codes decoded; citations are worked out by BetaNYC from headings and can be wrong or cut short";
+  "the publisher's editing markers are removed and character codes decoded; math signs and Greek letters set in the old Symbol font are changed to the characters the font shows (³ to ≥) where BetaNYC has checked them; citations are worked out by BetaNYC from headings and can be wrong or cut short";
 const SNIPPETS = "; search snippets are cut at 400 characters";
 
 // use: "text" (law text), "snippets" (search results), "dates" (get_version: a plain Source line).

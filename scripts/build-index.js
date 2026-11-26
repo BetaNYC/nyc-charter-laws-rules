@@ -31,6 +31,7 @@ import {
 import { mergeVersions } from "./lib/merge-versions.js";
 import { createStructureCollector, structureJson } from "./lib/build-structure.js";
 import { corpusMarkdown } from "./lib/serialize-markdown.js";
+import { createSymbolTally } from "./lib/symbol-font.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "..", "data");
@@ -77,6 +78,8 @@ for (const corpus of CORPORA) {
   const structure = createStructureCollector(corpus.key);
   // Each record's title (issue #59): read file by file, finished once every file is read.
   const titles = createTitleIndex();
+  // Text in the Symbol font, mapped to Unicode while parsing (issue #88).
+  const symbols = createSymbolTally();
   let fileCount = 0;
 
   for (const entry of entries) {
@@ -90,7 +93,8 @@ for (const corpus of CORPORA) {
         console.warn(`  Skipping ${entry.entryName}: ${e.message}`);
       },
       structure.forFile({ root: entry.entryName.endsWith("0-0-0-1.xml") }),
-      titles
+      titles,
+      symbols
     );
     if (!ok) continue;
 
@@ -105,6 +109,19 @@ for (const corpus of CORPORA) {
   }
 
   console.log(`  Indexed ${sections.length} sections from ${fileCount} files`);
+  // Symbol-font runs (issue #88). Only reviewed codes are changed (symbol-font.js
+  // REVIEWED_SYMBOL_CODES); any other character in a Symbol run is left as the XML has it and
+  // named here with its record, so a person can read it in context before it is added to the list.
+  console.log(
+    `  Symbol font: ${symbols.runs} runs, ${symbols.mapped} characters changed, ` +
+      `${symbols.kept} kept as reviewed, ${symbols.headings} headings matched to their text`
+  );
+  for (const [ch, byRecord] of symbols.unreviewed) {
+    const hex = ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0");
+    for (const [record, n] of byRecord) {
+      console.warn(`  Warning: unreviewed Symbol code ${JSON.stringify(ch)} U+${hex} in ${corpus.key} record ${record || "(none)"} x${n}, left as is`);
+    }
+  }
   if (corpus.key !== "charter") {
     // How each record's title was found (build-corpus.js, "Titles"). `disagree` should be 0: it
     // counts records whose own file names a title that record order would not give.

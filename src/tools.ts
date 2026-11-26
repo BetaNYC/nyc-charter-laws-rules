@@ -317,6 +317,7 @@ export function currentThrough(c: Corpus): string | null {
 export const CONVERSION_DETAIL =
   "converted by BetaNYC from the publisher's bulk XML files: line breaks are collapsed, so tables run together; " +
   "the publisher's editing markers are removed and character codes decoded; " +
+  "math signs and Greek letters set in the old Symbol font are changed to the characters the font shows (³ to ≥) where BetaNYC has checked them; " +
   "citations are worked out by BetaNYC from headings and can be wrong or cut short";
 export const SNIPPET_CHARS = 400;
 export const SNIPPET_DETAIL = `; search snippets are cut at ${SNIPPET_CHARS} characters`;
