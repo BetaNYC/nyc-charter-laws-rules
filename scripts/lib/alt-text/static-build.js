@@ -21,7 +21,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { displayable } from "./image-info.js";
 import { imageBytes } from "./inventory.js";
-import { pageHtml, pageItems, PAGE_DIR } from "./server.js";
+import { pageHtml, pageBody, pageItems, PAGE_DIR } from "./server.js";
 import { ENDPOINT, SITE_BASE } from "./inbox-payload.js";
 import { BOOKS as SITE_BOOKS } from "../site/config.js";
 
@@ -73,11 +73,16 @@ const escAttr = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").
  * the intake). For inbox: endpoint (default ENDPOINT; tests pass a fake one), redirects (the
  * site's redirects.json, optional) and siteBase. The pictures come from `sources` (the zips or
  * folders), or from `imageFor(book, image)` → { bytes, ext } when given (the site build: the
- * committed copies). Returns { items, images, bytes }.
+ * committed copies). `frame` (inbox only; the site build) puts the page inside the Law Reader's
+ * own page frame instead of index.html: frame({ csp, head, body, data, items }) returns the whole
+ * HTML, where csp is the policy, head the page's own <meta> lines, body its working parts
+ * (page/body.html) and data its JSON, already safe inside a <script> element; the page's script
+ * is then app.js beside index.html, and app.css is not used. Returns { items, images, bytes }.
  */
-export function buildStatic({ inventories, sources, storeDir, outDir, includeDrafts = false, mode = "static", endpoint = ENDPOINT, redirects = null, siteBase = SITE_BASE, imageFor = null }) {
+export function buildStatic({ inventories, sources, storeDir, outDir, includeDrafts = false, mode = "static", endpoint = ENDPOINT, redirects = null, siteBase = SITE_BASE, imageFor = null, frame = null }) {
   if (!MODES.includes(mode)) throw new Error(`mode must be one of ${MODES.join(", ")}`);
   if (mode === "inbox" && !/^https?:\/\//.test(endpoint)) throw new Error("the inbox endpoint must be an http(s) address");
+  if (frame && mode !== "inbox") throw new Error("only the inbox page has a site frame");
   if (existsSync(outDir) && readdirSync(outDir).length && !existsSync(join(outDir, "data.json"))) {
     throw new Error(`${outDir} is not empty and is not an earlier build of this page; choose an empty folder.`);
   }
@@ -104,8 +109,10 @@ export function buildStatic({ inventories, sources, storeDir, outDir, includeDra
     return item;
   });
   const data = { mode, drafts_included: includeDrafts, items };
-  const html =
-    mode === "inbox"
+  const metas = [`<meta name="alt-review-mode" content="inbox">`, `<meta name="alt-review-token" content="">`, `<meta name="alt-review-endpoint" content="${escAttr(endpoint)}">`, `<meta name="referrer" content="no-referrer">`];
+  const html = frame
+    ? frame({ csp: inboxCsp(endpoint), head: metas, body: pageBody(), data: inlineJson(data), items })
+    : mode === "inbox"
       ? pageHtml("inbox", "", {
           head: `<meta http-equiv="Content-Security-Policy" content="${escAttr(inboxCsp(endpoint))}">\n<meta name="referrer" content="no-referrer">`,
           endpoint: escAttr(endpoint),
@@ -113,7 +120,7 @@ export function buildStatic({ inventories, sources, storeDir, outDir, includeDra
         })
       : pageHtml("static", "");
   writeFileSync(join(outDir, "index.html"), html);
-  for (const f of ["app.js", "app.css"]) copyFileSync(join(PAGE_DIR, f), join(outDir, f));
+  for (const f of frame ? ["app.js"] : ["app.js", "app.css"]) copyFileSync(join(PAGE_DIR, f), join(outDir, f));
   for (const f of ["issue-url.js", "inbox-payload.js"]) copyFileSync(join(HERE, f), join(outDir, f));
   writeFileSync(join(outDir, "data.json"), `${JSON.stringify(data)}\n`);
   writeFileSync(join(outDir, ".nojekyll"), "");

@@ -87,7 +87,7 @@ export function rulesPickPage(pk, book, site) {
   const titles = [...new Set(pk.sections.map((s) => s.titleNode))];
   const main = [
     breadcrumbs(crumbs),
-    citeHeading(`${book.book.label} ${pk.citation}`, `in ${titles.length} titles`),
+    citeHeading(`${book.book.label} ${pk.citation}`, `${pk.citation} is in ${titles.length} titles`),
     `<p>Each title of the ${esc(book.book.name)} numbers its own sections, so ${esc(pk.citation)} is in ${titles.length} titles. A citation names the title first: ${esc(pk.sections[0].fullCitation)} is ${esc(pk.citation)} of ${esc(pk.sections[0].titleNode.citation)}. Pick one:</p>`,
     `<ul class="contents pick-titles">`,
     ...titles.map((t) => {
@@ -103,7 +103,7 @@ export function rulesPickPage(pk, book, site) {
     kind: "pick",
     html: page({
       path: pk.path,
-      title: titleOf(`${book.book.label} ${pk.citation}: in ${titles.length} titles`),
+      title: titleOf(`${book.book.label} ${pk.citation} is in ${titles.length} titles`),
       description: describe(`${pk.citation} is in ${titles.length} titles of the ${book.book.name}. Pick the title you mean.`),
       main,
       aside: titlesTree(book),

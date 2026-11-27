@@ -8,7 +8,7 @@
 import { renderSection, bodyBlocks } from "../render-section.js";
 import { bodyHtml, copyId } from "./render-html.js";
 import { linkTarget, isLocalLaw } from "./model.js";
-import { page, breadcrumbs, breadcrumbJsonLd, searchForm, currentLine, possessiveHtml, officialLinks, latestRulesLine } from "./layout.js";
+import { page, breadcrumbs, breadcrumbJsonLd, searchForm, currentLine, possessiveHtml, officialLinks, latestRulesLine, bookCard } from "./layout.js";
 import { escapeHtml } from "./html.js";
 import { paragraphHtml } from "./disclaimer.js";
 import { SITE_NAME, SITE_BASE, REPO_URL, NPM_URL, absoluteUrl } from "./config.js";
@@ -458,19 +458,33 @@ export function sharedNumberPage(sh, book, site) {
   };
 }
 
-/** The book's contents: a plain list of its chapters. It has no contents tree: the page is that list. */
+/**
+ * A Charter chapter's card on the book's front page, as the other books' titles (bookCard):
+ * "2-A" (read "Chapter 2-A"), "Districting Commission", "3 sections". A chapter whose citation
+ * is not "Chapter <number>" (the Preamble, Introductory) has no number. A repealed chapter keeps
+ * the publisher's "[Repealed]" in its name, and its count is 0 sections.
+ */
+export function chapterCard(c) {
+  const number = /^Chapter (\S+)$/.exec(c.citation)?.[1] ?? null;
+  const n = c.sections.length;
+  return bookCard({ path: c.path, word: "Chapter", number, name: number ? c.title : chapterName(c), count: `${n} section${n === 1 ? "" : "s"}` });
+}
+
+/**
+ * The book's contents (the Charter's front page): one card per chapter, the grid the other
+ * books' front pages use for their titles (Noel, 2026-11-26). It has no contents tree: the page
+ * is that list.
+ */
 export function contentsPage(book, site) {
   const path = `/${book.book.slug}/`;
   const crumbs = [HOME, { name: book.book.label, path }];
+  const n = (x) => x.toLocaleString("en-US");
   const main = [
     breadcrumbs(crumbs),
     `<h1>${escapeHtml(book.book.name)}</h1>`,
-    `<p class="lede">The ${escapeHtml(book.book.short)}'s ${book.chapters.length} chapters and ${book.sections.length} sections, in order.</p>`,
-    `<ol class="contents chapters">`,
-    ...book.chapters.map(
-      (c) =>
-        `<li><a href="${escapeHtml(c.path)}">${escapeHtml(chapterName(c))}</a> <span class="count">(${c.sections.length} section${c.sections.length === 1 ? "" : "s"})</span></li>`
-    ),
+    `<p class="lede">Pick a chapter to read its sections. ${n(book.chapters.length)} chapters, ${n(book.sections.length)} sections.</p>`,
+    `<ol class="title-cards">`,
+    ...book.chapters.map(chapterCard),
     `</ol>`,
   ].join("\n");
   return {

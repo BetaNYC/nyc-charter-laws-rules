@@ -36,8 +36,17 @@ const ASSETS = {
  * a function, so a "$" in them is never read as a replacement pattern.
  */
 export function pageHtml(mode, token = "", { head = "", endpoint = "", data = "" } = {}) {
-  const values = { MODE: mode, TOKEN: token, HEAD: head, ENDPOINT: endpoint, DATA: data };
-  return readFileSync(join(PAGE_DIR, "index.html"), "utf8").replace(/\{\{(MODE|TOKEN|HEAD|ENDPOINT|DATA)\}\}/g, (_, k) => values[k]);
+  const values = { MODE: mode, TOKEN: token, HEAD: head, ENDPOINT: endpoint, DATA: data, BODY: pageBody() };
+  return readFileSync(join(PAGE_DIR, "index.html"), "utf8").replace(/\{\{(MODE|TOKEN|HEAD|ENDPOINT|DATA|BODY)\}\}/g, (_, k) => values[k]);
+}
+
+/**
+ * The page's working parts (filters, pager, picture, form), the inside of its <main>: page/body.html.
+ * index.html wraps them for the local, static and standalone inbox pages; the site build puts
+ * them inside the Law Reader's own page frame (scripts/lib/site/pages-pictures.js).
+ */
+export function pageBody() {
+  return readFileSync(join(PAGE_DIR, "body.html"), "utf8");
 }
 
 /**

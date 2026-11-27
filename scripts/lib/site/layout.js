@@ -28,11 +28,14 @@ import { SITE_NAME, SITE_SHORT_NAME, REPO_URL, NPM_URL, absoluteUrl } from "./co
  * @param {object} p.site          { currentThrough, copyChangedOn, officialUrl, officialBase, officialName, contentsPath }
  * @param {boolean} [p.navPage]  the top-bar link is this page itself (aria-current="page"), not just its section
  * @param {boolean} [p.backToTop=true] NYSDS's back-to-top button in the footer (a chapter page has its own "Back to contents")
+ * @param {string} [p.csp]       a content security policy, as a <meta> before anything the page loads
+ *   (GitHub Pages sends no headers): the picture description page only
  */
 export function page(p) {
   const canonical = absoluteUrl(p.path);
   const head = [
     `<meta charset="utf-8">`,
+    p.csp ? `<meta http-equiv="Content-Security-Policy" content="${escapeHtml(p.csp)}">` : null,
     `<meta name="viewport" content="width=device-width, initial-scale=1">`,
     `<title>${escapeHtml(p.title)}</title>`,
     `<meta name="description" content="${escapeHtml(p.description)}">`,
@@ -217,6 +220,19 @@ function footer(site, { sourceLine = false, backToTop = true } = {}) {
     <p class="small">${!sourceLine ? "" : `The text comes from American Legal Publishing, and BetaNYC modified it (<a href="/about#changes">how BetaNYC changed it</a>). `}Our code is MIT licensed; the license does not cover the publisher's text.</p>
   </div>
 </footer>`;
+}
+
+/**
+ * One card in a book's front-page grid (`<ol class="title-cards">`): the Administrative Code's
+ * and the Rules' titles, the Charter's chapters (Noel, 2026-11-26: one look for all three books).
+ * The card is one link: the number, read with its word ("Title 3", "Chapter 2-A"; the word is
+ * visually hidden), the name, and a count. A card with no number (the Preamble, local laws by
+ * year) leaves the number's column empty.
+ * @param {{path: string, word: string, number: string|null, name: string, count: string}} c
+ */
+export function bookCard({ path, word, number, name, count }) {
+  const num = number ? `<span class="vh">${escapeHtml(word)} </span>${escapeHtml(number)}` : "";
+  return `<li><a href="${escapeHtml(path)}"><span class="tc-top"><span class="tc-num">${num}</span><span class="tc-name">${escapeHtml(name)}</span><span class="tc-count">${escapeHtml(count)}</span></span></a></li>`;
 }
 
 /** Breadcrumbs: NYSDS breadcrumbs around a plain list, so they read with JavaScript off. */

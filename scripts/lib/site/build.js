@@ -30,6 +30,7 @@ import { sourceErrorsPage } from "./pages-source-errors.js";
 import { loadPictures } from "../alt-text/pictures.js";
 import { BOOKS as PICTURE_BOOKS } from "../alt-text/source.js";
 import { buildStatic, INBOX_PATH } from "../alt-text/static-build.js";
+import { pictureFrame } from "./pages-pictures.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -49,6 +50,7 @@ const ASSETS = [
   ["site/assets/filters.js", "assets/filters.js"],
   ["site/assets/not-found.js", "assets/not-found.js"],
   ["site/assets/source-errors.js", "assets/source-errors.js"],
+  ["site/assets/describe-pictures.css", "assets/describe-pictures.css"],
 ];
 
 // The two packages the site copies files from. Both are devDependencies of this repo; a missing
@@ -178,6 +180,8 @@ export function siteFacts(books, dataSources) {
  * @param {string} [o.picturesDir]    data/pictures: the pictures and their inventories for the
  *                                    picture description page (npm run alt:images)
  * @param {string} [o.altTextDir]     data/alt-text: the reviewed descriptions it shows
+ * @param {string} [o.pictureEndpoint] where its suggestions go (default: BetaNYC's intake on
+ *                                    www.beta.nyc; the browser tests pass a fake one)
  */
 export async function buildSite(o = {}) {
   const t0 = performance.now();
@@ -384,7 +388,10 @@ export async function buildSite(o = {}) {
       outDir: join(outDir, INBOX_PATH.slice(1, -1)),
       includeDrafts: false,
       mode: "inbox",
+      ...(o.pictureEndpoint ? { endpoint: o.pictureEndpoint } : {}),
       redirects: redirectsJson(books),
+      // In the site's own frame (pages-pictures.js): top bar, breadcrumbs, footer, as every page.
+      frame: pictureFrame(site),
       imageFor: (book, image) => ({ bytes: readFileSync(pictures.fileFor(image)), ext: image.shown.file.split(".").pop() }),
     });
     picturePage = { path: INBOX_PATH, ...picturePage };

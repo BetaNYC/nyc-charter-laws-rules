@@ -78,7 +78,7 @@ function progress() {
   const reviewed = items.filter((i) => statusOf(i) === "reviewed").length;
   const drafted = items.filter((i) => i.entry?.draft).length;
   const filter = shown.length === items.length ? "" : ` Showing ${shown.length} that match.`;
-  $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed; ${drafted} have an AI draft.${filter}`;
+  $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed${draftsIncluded ? `; ${drafted} have an AI draft` : ""}.${filter}`;
 }
 
 function filtered() {
@@ -448,6 +448,13 @@ async function load() {
     }
     items = data.items;
     if (MODE !== "local") draftsIncluded = data.drafts_included !== false;
+    // A page built without AI drafts (law.beta.nyc's) never speaks of drafts: a picture either
+    // has a reviewed description or none yet.
+    if (!draftsIncluded) {
+      STATUS_NAMES.none = "No description yet";
+      for (const v of ["drafted", "needs-work"]) $("filter-status").querySelector(`option[value="${v}"]`)?.remove();
+      $("filter-status").querySelector('option[value="none"]').textContent = STATUS_NAMES.none;
+    }
   } catch (e) {
     $("progress").textContent = `Could not load the pictures: ${e.message}`;
     return;

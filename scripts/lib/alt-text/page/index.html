@@ -15,150 +15,15 @@
 <a class="skip" href="#item-heading">Skip to the picture</a>
 <header class="top">
   <h1>Picture descriptions</h1>
-  <p class="about">Text descriptions for the pictures in New York City's Administrative Code and Rules. They are written by BetaNYC: an AI model drafts each one, and a person reviews it. They are not part of American Legal Publishing's text and are not an official record.</p>
+  <p class="about" data-mode="local static">Text descriptions for the pictures in New York City's Administrative Code and Rules. They are written by BetaNYC: an AI model drafts each one, and a person reviews it. They are not part of American Legal Publishing's text and are not an official record.</p>
+  <p class="about" data-mode="inbox">Text descriptions for the pictures in New York City's Administrative Code and Rules, written by BetaNYC. They are not part of American Legal Publishing's text and are not an official record. A picture that has no description yet says so.</p>
   <p class="about" data-mode="local">Save writes your review to <code>data/alt-text/</code> in this copy of the repository.</p>
   <p class="about" data-mode="static">See something wrong or missing? Write a better description and press "Suggest a better description". It opens a new GitHub issue with your text filled in; nothing is sent until you submit it there, and a person at BetaNYC reviews every suggestion.</p>
   <p class="about" data-mode="inbox">See something wrong or missing? Write a better description and press "Send suggestion". You do not need an account. Your suggestion goes to BetaNYC, not to a public page, and a person at BetaNYC reads every one before anything on the <a href="/">Law Reader</a> changes.</p>
 </header>
 
 <main>
-  <section class="filters" aria-labelledby="filters-heading">
-    <h2 id="filters-heading">Choose pictures</h2>
-    <div class="row">
-      <div class="field">
-        <label for="filter-book">Book</label>
-        <select id="filter-book">
-          <option value="">Both books</option>
-          <option value="admin_code">Administrative Code</option>
-          <option value="rules">Rules</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="filter-status">Status</label>
-        <select id="filter-status">
-          <option value="">Any status</option>
-          <option value="none">Not drafted</option>
-          <option value="drafted">Drafted, not reviewed</option>
-          <option value="needs-work">Needs work</option>
-          <option value="reviewed">Reviewed</option>
-        </select>
-      </div>
-    </div>
-    <p id="progress" role="status">Loading…</p>
-  </section>
-
-  <nav class="pager" aria-label="Pictures">
-    <button type="button" id="prev">Previous picture</button>
-    <span id="position" aria-live="polite"></span>
-    <button type="button" id="next">Next picture</button>
-  </nav>
-
-  <article id="item" aria-labelledby="item-heading" hidden>
-    <h2 id="item-heading" tabindex="-1"></h2>
-    <figure>
-      <img id="picture" alt="">
-      <figcaption id="picture-facts"></figcaption>
-    </figure>
-
-    <section aria-labelledby="uses-heading">
-      <h3 id="uses-heading">Where it appears</h3>
-      <ol id="uses"></ol>
-    </section>
-
-    <form id="review-form" novalidate>
-      <section aria-labelledby="current-heading" class="current" data-mode="inbox">
-        <h3 id="current-heading">Current description</h3>
-        <p id="current-label" class="label-tag"></p>
-        <label for="current-alt">Current alt text (read only)</label>
-        <textarea id="current-alt" rows="3" readonly></textarea>
-        <label for="current-long">Current long description (read only)</label>
-        <textarea id="current-long" rows="6" readonly></textarea>
-      </section>
-
-      <section aria-labelledby="draft-heading" class="draft" data-mode="local static">
-        <h3 id="draft-heading">AI draft</h3>
-        <p id="draft-meta" class="meta"></p>
-        <label for="draft-alt">AI draft: alt text (read only)</label>
-        <textarea id="draft-alt" rows="3" readonly></textarea>
-        <label for="draft-long">AI draft: long description (read only)</label>
-        <textarea id="draft-long" rows="6" readonly></textarea>
-        <p id="draft-unsure" class="unsure" hidden></p>
-      </section>
-
-      <section aria-labelledby="review-heading" class="review">
-        <h3 id="review-heading">Your review</h3>
-        <p id="review-hint" class="hint">Starts as a copy of the AI draft. Check it against the picture. Never add words or numbers you cannot see. For a picture inside a sentence, the alt text must read as part of the sentence.</p>
-        <label for="review-alt">Alt text</label>
-        <textarea id="review-alt" rows="3" aria-describedby="review-hint"></textarea>
-        <label for="review-long">Long description (leave empty if the alt text is enough)</label>
-        <textarea id="review-long" rows="8"></textarea>
-
-        <div data-mode="local">
-          <label for="review-note">Note for BetaNYC (not published)</label>
-          <textarea id="review-note" rows="2"></textarea>
-          <fieldset class="status">
-            <legend>Status</legend>
-            <label><input type="radio" name="status" value="reviewed"> Reviewed: ready to show</label>
-            <label><input type="radio" name="status" value="needs-work"> Needs more work before it can show</label>
-            <label><input type="radio" name="status" value="drafted"> Leave it marked as not reviewed</label>
-          </fieldset>
-          <section id="conflict" class="conflict" aria-labelledby="conflict-heading" hidden>
-            <h4 id="conflict-heading" tabindex="-1">Someone else saved this description after you opened it</h4>
-            <p id="conflict-meta" class="meta"></p>
-            <label for="conflict-alt">Their alt text (read only)</label>
-            <textarea id="conflict-alt" rows="3" readonly></textarea>
-            <label for="conflict-long">Their long description (read only)</label>
-            <textarea id="conflict-long" rows="4" readonly></textarea>
-            <p class="hint">Your text is still in the boxes above. Nothing is saved until you choose.</p>
-            <div class="actions">
-              <button type="button" id="use-theirs">Use their version</button>
-              <button type="button" id="replace-theirs">Replace theirs with mine</button>
-            </div>
-          </section>
-          <p class="keys">Shortcut: Control+Enter (or Command+Enter) in a text box saves.</p>
-          <div class="actions">
-            <button type="submit" id="save">Save</button>
-            <button type="button" id="save-next">Save and go to next</button>
-          </div>
-        </div>
-
-        <div data-mode="static">
-          <label for="review-why">Why (optional)</label>
-          <textarea id="review-why" rows="2"></textarea>
-          <div class="actions">
-            <a id="suggest" class="button" href="#" target="_blank" rel="noopener">Suggest a better description<span class="visually-hidden"> (opens GitHub in a new tab)</span></a>
-          </div>
-          <p id="suggest-note" class="meta" hidden></p>
-        </div>
-
-        <div data-mode="inbox">
-          <label for="inbox-note">Note for BetaNYC (optional, not published)</label>
-          <textarea id="inbox-note" rows="2"></textarea>
-          <fieldset class="contact" aria-describedby="privacy-note">
-            <legend>Your name and email (optional)</legend>
-            <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply to you. Your name and email are kept apart from your suggestion, used only to follow up, and not published. If you tick the box below, we may thank you by name later; we have not decided how yet, so for now nothing we publish names anyone. See the <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
-            <label for="contact-name">Name</label>
-            <input id="contact-name" type="text" autocomplete="name">
-            <label for="contact-email">Email</label>
-            <input id="contact-email" type="email" autocomplete="email">
-            <label class="check"><input type="checkbox" id="credit-ok"> I am happy for BetaNYC to thank me by name</label>
-          </fieldset>
-          <div class="trap" aria-hidden="true">
-            <label for="inbox-website">Leave this box empty</label>
-            <input id="inbox-website" type="text" name="website" tabindex="-1" autocomplete="off">
-          </div>
-          <p id="send-where" class="hint">Send posts your description, your note, and your name and email if you gave them, to BetaNYC's inbox at www.beta.nyc. It files them for BetaNYC staff in a private place. Your browser also keeps a random code for this page, so a new suggestion for the same picture replaces your earlier one; clearing this site's data in your browser removes it.</p>
-          <button type="button" id="show-payload" class="disclosure" aria-expanded="false" aria-controls="payload">Show exactly what will be sent</button>
-          <pre id="payload" class="payload" hidden></pre>
-          <div class="actions">
-            <button type="submit" id="send">Send suggestion</button>
-          </div>
-        </div>
-        <p id="save-status" role="status" aria-live="polite"></p>
-      </section>
-    </form>
-  </article>
-  <p id="empty" hidden>No pictures match these choices.</p>
+{{BODY}}
 </main>
 <script type="application/json" id="page-data">{{DATA}}</script>
 </body>

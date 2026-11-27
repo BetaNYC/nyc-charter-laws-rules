@@ -97,6 +97,9 @@ test("paths: /rules/titles/<title>/sections/<number>; a number the title repeats
   ]);
   const html = page("/rules/sections/1-01");
   assert.equal(h1Cite(html), "NYC Rules § 1-01");
+  // A whole heading, not "in 4 titles" alone (Noel, 2026-11-26).
+  assert.match(html, /<h1><span class="cite">NYC Rules § 1-01<\/span> <span class="heading">§ 1-01 is in 4 titles<\/span><\/h1>/);
+  assert.match(html, /<title>NYC Rules § 1-01 is in 4 titles/);
   for (const s of rules.picks[0].sections) assert.ok(html.includes(`<a href="${s.path}">${s.fullCitation}. ${s.title}</a>`), s.path);
   assert.match(html, /<li>Title 38-A: Civilian Complaint Review Board\n<ul>/);
   // A number in one title only: the 404 page sends /rules/sections/<n> to it, from numbers.json.

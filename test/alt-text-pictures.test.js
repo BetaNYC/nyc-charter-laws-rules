@@ -169,7 +169,31 @@ test("build-site makes /describe-pictures/ in inbox mode from the committed pict
     assert.match(html, /connect-src https:\/\/www\.beta\.nyc;/);
     assert.doesNotMatch(html, /AI DRAFT/, "no AI draft is in the page");
     assert.doesNotMatch(readFileSync(join(dir, "data.json"), "utf8"), /AI DRAFT/);
-    for (const f of ["app.js", "app.css", "inbox-payload.js", "issue-url.js"]) assert.ok(existsSync(join(dir, f)), f);
+    for (const f of ["app.js", "inbox-payload.js", "issue-url.js"]) assert.ok(existsSync(join(dir, f)), f);
+    // The site's own frame (Noel, 2026-11-26): the top bar, breadcrumbs, the site's stylesheets
+    // and footer, as on every page; not the standalone page's app.css.
+    assert.ok(!existsSync(join(dir, "app.css")), "the standalone page's stylesheet is not used");
+    assert.match(html, /<header class="site-bar"|class="site-bar"/);
+    assert.match(html, /<nys-breadcrumbs class="crumbs"[^>]*>\n<ol>\n<li><a href="\/">Home<\/a><\/li>\n<li><span aria-current="page">Picture descriptions<\/span><\/li>/);
+    assert.match(html, /<h1>Picture descriptions<\/h1>/);
+    assert.match(html, /<title>Picture descriptions \| /);
+    for (const css of ["/assets/site.css", "/assets/law.css", "/assets/describe-pictures.css"]) assert.ok(html.includes(`<link rel="stylesheet" href="${css}">`), css);
+    assert.ok(html.includes(`<script type="module" src="/describe-pictures/app.js"></script>`));
+    assert.match(html, /<footer[\s\S]*on <a href="\/describe-pictures\/">Picture descriptions<\/a>/);
+    // The policy comes before anything the page loads, and everything loaded is on the site.
+    const head = html.slice(0, html.indexOf("</head>"));
+    assert.ok(head.indexOf("Content-Security-Policy") < head.search(/<link |<script /), "the policy is first");
+    assert.match(head, /content="default-src &#39;none&#39;; img-src &#39;self&#39;; style-src &#39;self&#39;; script-src &#39;self&#39;; connect-src https:\/\/www\.beta\.nyc; /);
+    for (const m of html.matchAll(/<(?:link|script|img)\b[^>]*\b(?:href|src)="([^"]+)"/g)) {
+      if (/rel="canonical"/.test(m[0])) continue;
+      assert.ok(m[1].startsWith("/"), `${m[1]} is on the site`);
+    }
+    // The opening lines are true for what the page holds: one reviewed description, no AI.
+    assert.match(html, /<p class="lede">The pictures in New York City's Administrative Code and Rules: [^<]*1 of the 6 has a text description that a person at BetaNYC reviewed; the rest have none yet\.<\/p>/);
+    assert.doesNotMatch(html, /an AI model drafts/i);
+    assert.match(html, /You do not need an account\. Your suggestion goes to BetaNYC, not to a public page, and a person at BetaNYC reads every one before anything on the Law Reader changes\./);
+    // Not in the top bar.
+    assert.doesNotMatch(html.slice(html.indexOf('class="site-bar"'), html.indexOf("</header>")), /describe-pictures/);
 
     const data = pageData(site.outDir);
     assert.equal(data.mode, "inbox");
@@ -244,4 +268,15 @@ test("the committed pictures are kept out of the npm package", () => {
   // And the folder the site reads is the one alt:images writes by default.
   assert.match(readFileSync(join(ROOT, "scripts", "alt-text.js"), "utf8"), /join\(ROOT, "data\/pictures"\)/);
   assert.match(readFileSync(join(ROOT, "scripts", "lib", "site", "build.js"), "utf8"), /join\(ROOT, "data", "pictures"\)/);
+});
+
+test("the picture page's opening lines say how many pictures have a reviewed description, and never promise AI drafts", async () => {
+  const { pictureIntro } = await import("../scripts/lib/site/pages-pictures.js");
+  const none = pictureIntro([{ entry: null }, { entry: { status: "drafted", draft: { alt: "x" } } }]);
+  assert.match(none, /None of the 2 has a text description yet\./);
+  assert.doesNotMatch(none, /AI/);
+  const some = pictureIntro([{ entry: { status: "reviewed", review: { alt: "a" } } }, { entry: null }, { entry: null }]);
+  assert.match(some, /1 of the 3 has a text description that a person at BetaNYC reviewed; the rest have none yet\./);
+  assert.match(pictureIntro([{ entry: { status: "reviewed", review: { alt: "a" } } }, { entry: { status: "reviewed", review: { alt: "b" } } }, { entry: null }]), /2 of the 3 have a text description/);
+  for (const promise of ["You do not need an account.", "Your suggestion goes to BetaNYC, not to a public page", "a person at BetaNYC reads every one"]) assert.ok(none.includes(promise), promise);
 });
