@@ -71,7 +71,7 @@ Dates are New York (America/New_York). A hand-bumped version is headed
 
 ---
 
-## v0.8.0 — Unreleased
+## v0.8.0 — 2026-11-26
 
 - **Symbol-font characters show as the characters the font draws** ([#88](https://github.com/BetaNYC/nyc-charter-laws-rules/issues/88)). American Legal sets some text in the old Symbol font (`font-name="Symbol"`), which puts math signs and Greek letters on ordinary character codes, so the index read "For s ³ 4t" where BC 722.2.1.1.4 says "For s ≥ 4t". `scripts/lib/symbol-font.js` now maps 13 reviewed codes inside Symbol runs to Unicode while the index is built (`D→Δ S→Σ W→Ω a→α m→μ q→θ r→ρ s→σ £→≤ ³→≥ ´→× Ö→√ (→(`), each checked against the Unicode Consortium's Adobe Symbol table, vendored in `scripts/vendor/unicode-adobe-symbol/`. Any other code in a Symbol run is left as is, and `build-index` warns `unreviewed Symbol code …`, so new data cannot change text silently. "·" and "§" stay unchanged on purpose (bullets and "times"; footnote marks in 1 RCNY § 101-14). A heading that copies its paragraph word for word gets the same characters (BC 1609.7.1). Measured on a local build from the July 2026 files, not the later files this release ships: it changed the text of 48 Administrative Code records (308 characters) and 14 Rules records (118 characters), and nothing outside Symbol runs. "WP Greek Helve" and "Wingdings" text is not mapped yet and is listed in `known_gaps`.
 - The bundled index is rebuilt with this code by the daily refresh, not in the pull request.
