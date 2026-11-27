@@ -7,14 +7,14 @@
   },
   "admin_code": {
     "currentThrough": "Current through Local Law 2026/171, enacted November 21, 2026,",
-    "indexedAt": "2026-11-26T11:07:41.759Z",
+    "indexedAt": "2026-11-27T02:49:16.487Z",
     "sectionCount": 12995,
-    "sha256": "ad7a432842433e07f87afd6bab11751ab1af59613c2fe1f4f21a6173266f0354"
+    "sha256": "ad85bae8c4c10073be95f8bbdb51e347e811bbcf6d3233bd52d6db6323a96d0d"
   },
   "rules": {
     "currentThrough": "Current through rules effective November 29, 2026.",
-    "indexedAt": "2026-11-26T11:08:00.101Z",
+    "indexedAt": "2026-11-27T02:49:32.628Z",
     "sectionCount": 8786,
-    "sha256": "cac897160066b98c60b4583dc583e42eb847db04e22edb5eb9afac0850b71d74"
+    "sha256": "f9746de2e7d586c48bfd4ff63dc791adbc05c860534f88631555a765e2ffedfd"
   }
 }

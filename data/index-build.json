@@ -1,0 +1,30 @@
+{
+  "format": 1,
+  "fingerprint": "99ee038a38a4e06ccfe0202a8eb0f8246dcbd694e15a0c0e5e4e03857c580a35",
+  "files": {
+    "scripts/build-index.js": "3ade6d791fbc2cdbee66fc4099ee94844b60e3c610f53e430b4b27191c0174b7",
+    "scripts/lib/build-corpus.js": "ff5634db1cc017f026d4416f58b8e8ff5a11535423a5164b746557f277a0d5e2",
+    "scripts/lib/build-structure.js": "96c3bb6460181268b31d52e1c6785eae0021134a2549bf49426dde0dc8255de1",
+    "scripts/lib/extract-text.js": "4b63b45710f052ccd7c50fb005b37708f53fe64189bdbe56fbba0fe6191a60bd",
+    "scripts/lib/index-build-record.js": "e7c3239c2dea033505156e6f8e875ac05de6fcb3b0f7ce53dbdc5f1125dd7b67",
+    "scripts/lib/merge-versions.js": "f52be50b12c76426971deccc5be49a72b02f2c93d17569f167b6efb03ff234a8",
+    "scripts/lib/render-section.js": "cb59d0137838ec64112deb7268445ee26a63a522232571b8f51146b38b15f59a",
+    "scripts/lib/serialize-markdown.js": "666d06778462ae4e009c9599ae195450a46812a456ab1c1884764b6ef7d2e3d9",
+    "scripts/lib/symbol-font.js": "85e0b25bdab1c0ee9d9cb52d0982d551cbb22fe00594f1f9d95af710389c069c",
+    "scripts/vendor/unicode-adobe-symbol/symbol.txt": "deb78ca840a429311939b9d165890873f71fb23ef223ceeb144a6c6d641a7e52"
+  },
+  "packages": {
+    "@nodable/entities": "2.1.0",
+    "adm-zip": "0.5.17",
+    "fast-xml-builder": "1.2.0",
+    "fast-xml-parser": "5.8.0",
+    "path-expression-matcher": "1.5.0",
+    "strnum": "2.3.0",
+    "xml-naming": "0.1.0"
+  },
+  "index": {
+    "admin_code": "ad85bae8c4c10073be95f8bbdb51e347e811bbcf6d3233bd52d6db6323a96d0d",
+    "charter": "e8b1592944cbfb5056403c85ab88caca223c301a6226daec319585898ba0ecab",
+    "rules": "f9746de2e7d586c48bfd4ff63dc791adbc05c860534f88631555a765e2ffedfd"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "format": 1,
   "corpus": "rules",
-  "indexSha256": "cac897160066b98c60b4583dc583e42eb847db04e22edb5eb9afac0850b71d74",
+  "indexSha256": "f9746de2e7d586c48bfd4ff63dc791adbc05c860534f88631555a765e2ffedfd",
   "sectionCount": 8786,
   "titleStats": {"fromFile":51,"fromKey":686,"none":26,"keyDisagrees":0},
   "linkStats": {"links":22779,"unresolved":164,"ambiguous":32,"ambiguousIds":10,"ambiguousNames":11},

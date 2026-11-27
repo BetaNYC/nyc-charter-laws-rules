@@ -1,7 +1,7 @@
 {
   "format": 1,
   "corpus": "admin_code",
-  "indexSha256": "ad7a432842433e07f87afd6bab11751ab1af59613c2fe1f4f21a6173266f0354",
+  "indexSha256": "ad85bae8c4c10073be95f8bbdb51e347e811bbcf6d3233bd52d6db6323a96d0d",
   "sectionCount": 12995,
   "titleStats": {"fromFile":31,"fromKey":316,"none":42,"keyDisagrees":0},
   "linkStats": {"links":27116,"unresolved":169,"ambiguous":33,"ambiguousIds":32,"ambiguousNames":16},
