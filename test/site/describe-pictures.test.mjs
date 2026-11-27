@@ -114,9 +114,10 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     for (const id of ["filter-book", "filter-status"]) assert.equal(await tag(id), "nys-select", id);
     for (const id of ["prev", "next", "show-payload", "send"]) assert.equal(await tag(id), "nys-button", id);
     for (const id of ["current-alt", "current-long", "review-alt", "review-long", "inbox-note"]) assert.equal(await tag(id), "nys-textarea", id);
-    for (const id of ["contact-name", "contact-email"]) assert.equal(await tag(id), "nys-textinput", id);
     assert.equal(await tag("credit-ok"), "nys-checkbox");
-    assert.equal(await page.evaluate(() => document.querySelectorAll("main input, main select, main textarea, main button").length), 1, "only the trap field is a plain control");
+    // Name and email are plain inputs so the browser can fill them in (WCAG 1.3.5); with the trap
+    // field, they are the only plain controls.
+    assert.deepEqual(await page.evaluate(() => [...document.querySelectorAll("main input, main select, main textarea, main button")].map((e) => e.id)), ["contact-name", "contact-email", "inbox-website"]);
     assert.deepEqual(await page.evaluate(() => [...document.querySelectorAll("#filter-status > option")].map((o) => o.textContent)), ["Any status", "No description yet", "AI draft, not yet checked", "Needs work", "Reviewed"]);
     assert.equal(await page.evaluate(() => document.getElementById("filter-book").value), "all", "Both books is chosen, and shown");
     // The first picture has the AI draft: shown as the current text, labeled, and copied into the
@@ -228,8 +229,14 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     await page.getByRole("button", { name: "Send suggestion" }).click();
     await page.waitForFunction(() => /^Not sent:/.test(document.getElementById("save-status").textContent));
     assert.match(await page.locator("#save-status").textContent(), /That email address does not look complete/);
-    const err = await page.evaluate(() => ({ show: document.getElementById("contact-email").showError, msg: document.getElementById("contact-email").errorMessage, focus: document.activeElement?.id }));
-    assert.deepEqual(err, { show: true, msg: "That email address does not look complete. Fix it, or leave it empty.", focus: "contact-email" });
+    // Marked on the field: aria-invalid, and the message under it is the field's description.
+    const err = await page.evaluate(() => {
+      const f = document.getElementById("contact-email");
+      const box = document.getElementById(f.getAttribute("aria-describedby"));
+      return { invalid: f.getAttribute("aria-invalid"), msg: box?.textContent.trim(), shown: !!box && !box.hidden && box.getBoundingClientRect().height > 0, focus: document.activeElement?.id };
+    });
+    assert.deepEqual(err, { invalid: "true", msg: "That email address does not look complete. Fix it, or leave it empty.", shown: true, focus: "contact-email" });
+    assert.equal((await page.locator("#contact-email").evaluate((e) => e.getAttribute("aria-describedby"))), "contact-email-error");
     assert.equal(seen.length, 0, "nothing was sent");
     // Fixed, it goes; a 429 from the intake is said with its wait, and the text stays.
     await page.getByRole("textbox", { name: "Email", exact: true }).fill("");
@@ -237,7 +244,7 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     await page.getByRole("button", { name: "Send suggestion" }).click();
     await page.waitForFunction(() => /Try again in/.test(document.getElementById("save-status").textContent));
     assert.match(await page.locator("#save-status").textContent(), /^Not sent: too many suggestions .*Try again in 2 minutes\./);
-    assert.equal(await page.evaluate(() => document.getElementById("contact-email").showError), false, "the error is cleared");
+    assert.deepEqual(await page.evaluate(() => { const f = document.getElementById("contact-email"); return [f.getAttribute("aria-invalid"), f.getAttribute("aria-describedby"), document.getElementById("contact-email-error").hidden]; }), [null, null, true], "the error is cleared");
     assert.equal(await page.evaluate(() => document.getElementById("review-alt").value), "A map of a city block", "the text is kept");
     reply = { status: 201, body: { ok: true }, headers: {} };
     await page.getByRole("button", { name: "Send suggestion" }).click();
@@ -248,6 +255,68 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     // Chromium logs the 429 itself as a failed load; nothing else may be logged.
     assert.deepEqual(problems.filter((p) => !/status of 429/.test(p)), []);
     assert.deepEqual(offsite, []);
+    await ctx.close();
+  });
+
+  test(`/describe-pictures/ (${name}): name and email are plain inputs the browser can fill, drawn as NYSDS's nys-textinput draws its own`, async () => {
+    const { ctx, page, problems } = await open(width, height);
+    await page.goto(`${server.url}/describe-pictures/`);
+    await page.waitForFunction(() => !document.getElementById("item").hidden);
+    const attrs = await page.evaluate(() => ["contact-name", "contact-email"].map((id) => {
+      const e = document.getElementById(id);
+      return [e.localName, e.type, e.getAttribute("autocomplete"), document.querySelector(`label[for="${id}"]`)?.textContent];
+    }));
+    assert.deepEqual(attrs, [["input", "text", "name", "Name"], ["input", "email", "email", "Email"]]);
+    assert.equal(await page.getByRole("textbox", { name: "Name", exact: true }).count(), 1);
+    // A real nys-textinput beside them, as the reference: input, label, focus ring and error
+    // state must compute the same.
+    const r = await page.evaluate(async () => {
+      const ref = document.createElement("nys-textinput");
+      ref.setAttribute("label", "Reference");
+      ref.setAttribute("width", "full");
+      document.getElementById("contact-email").closest(".nys-like-field").after(ref);
+      await ref.updateComplete;
+      await new Promise((res) => requestAnimationFrame(() => requestAnimationFrame(res)));
+      const props = ["borderTopWidth", "borderTopStyle", "borderTopColor", "borderRadius", "paddingTop", "paddingLeft", "height", "width", "fontFamily", "fontSize", "lineHeight", "fontWeight", "letterSpacing", "color", "outlineStyle", "outlineWidth", "outlineOffset", "boxSizing"];
+      const pick = (e, list = props) => Object.fromEntries(list.map((k) => [k, getComputedStyle(e)[k]]));
+      const inner = ref.shadowRoot.querySelector("input");
+      const mine = document.getElementById("contact-email");
+      const out = { rest: [pick(inner), pick(mine)] };
+      const refLabel = ref.shadowRoot.querySelector("nys-label").shadowRoot.querySelector("label");
+      const labelProps = ["fontFamily", "fontSize", "lineHeight", "fontWeight", "letterSpacing", "color"];
+      out.label = [pick(refLabel, labelProps), pick(document.querySelector('label[for="contact-email"]'), labelProps)];
+      out.gap = [inner.getBoundingClientRect().top - refLabel.getBoundingClientRect().bottom, mine.getBoundingClientRect().top - document.querySelector('label[for="contact-email"]').getBoundingClientRect().bottom];
+      out.background = [getComputedStyle(ref.shadowRoot.querySelector(".nys-textinput__container")).backgroundColor, getComputedStyle(mine).backgroundColor];
+      const ring = ["outlineStyle", "outlineWidth", "outlineColor", "outlineOffset", "borderTopColor"];
+      inner.focus();
+      const refFocus = pick(inner, ring);
+      mine.focus();
+      out.focus = [refFocus, pick(mine, ring)];
+      mine.blur();
+      ref.showError = true;
+      ref.errorMessage = "Reference error";
+      mine.setAttribute("aria-invalid", "true");
+      await ref.updateComplete;
+      await new Promise((res) => requestAnimationFrame(res));
+      out.error = [getComputedStyle(inner).borderTopColor, getComputedStyle(mine).borderTopColor];
+      const refMsg = ref.shadowRoot.querySelector("nys-errormessage").shadowRoot.querySelector(".nys-errormessage");
+      const box = document.getElementById("contact-email-error");
+      box.hidden = false;
+      box.querySelector("span").textContent = "Mine";
+      const msgProps = ["color", "fontFamily", "fontSize", "lineHeight", "fontWeight", "display", "alignItems", "columnGap"];
+      out.message = [pick(refMsg, msgProps), pick(box, msgProps)];
+      return out;
+    });
+    assert.deepEqual(r.rest[1], r.rest[0], "the input's border, radius, padding, height, width and type");
+    assert.equal(r.rest[1].height, "40px");
+    assert.equal(r.rest[1].borderTopWidth, "2px");
+    assert.deepEqual(r.label[1], r.label[0], "the label's type");
+    assert.equal(r.gap[1], r.gap[0], "label to box spacing");
+    assert.equal(r.background[1], r.background[0], "white behind the text");
+    assert.deepEqual(r.focus[1], r.focus[0], "the focus ring");
+    assert.equal(r.error[1], r.error[0], "the error border");
+    assert.deepEqual(r.message[1], r.message[0], "the error message");
+    assert.deepEqual(problems, []);
     await ctx.close();
   });
 }

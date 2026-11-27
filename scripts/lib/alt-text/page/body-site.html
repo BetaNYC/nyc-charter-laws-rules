@@ -52,8 +52,19 @@
         <fieldset class="contact" aria-describedby="privacy-note">
           <legend>Your name and email (optional)</legend>
           <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply to you. Your name and email are kept apart from your suggestion, used only to follow up, and not published. If you tick the box below, we may thank you by name later; we have not decided how yet, so for now nothing we publish names anyone. See the <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
-          <nys-textinput id="contact-name" type="text" label="Name" width="full"></nys-textinput>
-          <nys-textinput id="contact-email" type="email" label="Email" width="full"></nys-textinput>
+          <!-- Name and email are plain inputs, so the browser can fill them in (autocomplete, WCAG
+               1.3.5; NYSDS 1.23.2's nys-textinput has no autocomplete attribute). They are drawn
+               to look like nys-textinput (describe-pictures.css .nys-like-*). -->
+          <div class="nys-like-field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" class="nys-like-input" type="text" name="name" autocomplete="name">
+            <p id="contact-name-error" class="nys-like-error" hidden><nys-icon name="error" size="2xl"></nys-icon><span></span></p>
+          </div>
+          <div class="nys-like-field">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" class="nys-like-input" type="email" name="email" autocomplete="email">
+            <p id="contact-email-error" class="nys-like-error" hidden><nys-icon name="error" size="2xl"></nys-icon><span></span></p>
+          </div>
           <nys-checkbox id="credit-ok" label="I am happy for BetaNYC to thank me by name"></nys-checkbox>
         </fieldset>
         <!-- The trap field stays a plain input: it is never shown, never in the tab order and never

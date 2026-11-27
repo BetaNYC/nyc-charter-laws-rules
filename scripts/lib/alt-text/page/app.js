@@ -48,8 +48,18 @@ function setInvalid(id, message) {
   if (isNys(e)) {
     e.showError = !!message;
     e.errorMessage = message || "";
-  } else if (message) e.setAttribute("aria-invalid", "true");
+    return;
+  }
+  if (message) e.setAttribute("aria-invalid", "true");
   else e.removeAttribute("aria-invalid");
+  // A plain field with its own message under it (the site page's name and email): the message
+  // is shown there and is the field's description while it stands.
+  const box = $(`${id}-error`);
+  if (!box) return;
+  box.querySelector("span").textContent = message || "";
+  box.hidden = !message;
+  if (message) e.setAttribute("aria-describedby", box.id);
+  else e.removeAttribute("aria-describedby");
 }
 function setExpanded(e, open) {
   if (isNys(e)) e.ariaExpanded = String(open);
