@@ -4,7 +4,8 @@
 //   npm run alt:inventory    -- [--check-map <picture-map.csv>]
 //   npm run alt:draft        -- [--limit N] [--book rules] [--force] [--retry-failed] [--model id] [--yes]
 //   npm run alt:review       -- [--port 8765]
-//   npm run alt:build-static -- --out <folder> [--include-drafts]
+//   npm run alt:build-static -- --out <folder> [--include-drafts] [--mode static|inbox] [--redirects <redirects.json>]
+//   npm run alt:images       -- [--out data/pictures]   copies the pictures for the site (pictures.js)
 //
 // Every command reads American Legal Publishing's files from a source per book: by default
 // data/raw/<book>.zip (npm run fetch-data), or a folder or zip given with --admin-code and
@@ -20,7 +21,8 @@ import { readStore, staleEntries } from "./lib/alt-text/store.js";
 import { DEFAULT_MODEL, DEFAULT_EFFORT, PRICES, ASSUMED_OUTPUT_TOKENS, pendingJobs, estimate, makeClient, runDrafts, buildRequest, spend } from "./lib/alt-text/draft.js";
 import { imageBytes } from "./lib/alt-text/inventory.js";
 import { startReviewServer } from "./lib/alt-text/server.js";
-import { buildStatic } from "./lib/alt-text/static-build.js";
+import { buildStatic, MODES } from "./lib/alt-text/static-build.js";
+import { writePictures } from "./lib/alt-text/pictures.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const [command, ...args] = process.argv.slice(2);
@@ -30,7 +32,7 @@ const opt = (name, dflt) => {
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : dflt;
 };
 
-const USAGE = `Usage: node scripts/alt-text.js <inventory|draft|review|build-static> [options]
+const USAGE = `Usage: node scripts/alt-text.js <inventory|draft|review|build-static|images> [options]
 Sources: --admin-code <folder|zip> --rules <folder|zip> (default data/raw/<book>.zip), --book <admin_code|rules>
 Also: --index-dir (default data/index/json), --store-dir (default data/alt-text)`;
 
@@ -140,9 +142,36 @@ async function main() {
   if (command === "build-static") {
     const out = opt("--out", null);
     if (!out) throw new Error("--out <folder> is required");
+    const mode = opt("--mode", "static");
+    if (!MODES.includes(mode)) throw new Error(`--mode must be one of ${MODES.join(", ")}`);
+    // Inbox mode links each picture to its section page. With the site's redirects.json (given,
+    // or beside the output folder, as in _site/describe-pictures) the link is the page itself;
+    // without it, the id address the site's 404 page sends on.
+    let redirects = null;
+    if (mode === "inbox") {
+      const given = opt("--redirects", null);
+      const file = given ? resolve(given) : join(dirname(resolve(out)), "redirects.json");
+      if (given && !existsSync(file)) throw new Error(`--redirects: ${file} is missing`);
+      if (existsSync(file)) redirects = JSON.parse(readFileSync(file, "utf8"));
+    }
     const { sources, inventories, storeDir } = setup();
-    const r = buildStatic({ inventories, sources, storeDir, outDir: resolve(out), includeDrafts: flag("--include-drafts") });
-    console.log(`Wrote ${r.items} pictures (${r.images} image files) to ${resolve(out)}. Not published anywhere.`);
+    const r = buildStatic({ inventories, sources, storeDir, outDir: resolve(out), includeDrafts: flag("--include-drafts"), mode, redirects });
+    const mb = (r.bytes / 1024 / 1024).toFixed(1);
+    console.log(`Wrote ${r.items} pictures (${r.images} image files, ${mb} MB) to ${resolve(out)}, ${mode} mode${mode === "inbox" ? `, section links ${redirects ? "from redirects.json" : "by American Legal id"}` : ""}. Not published anywhere.`);
+    return;
+  }
+
+  if (command === "images") {
+    // Both books always: the site's page lists both, and a one-book run would leave the other's
+    // pictures looking unused and remove them.
+    if (opt("--book", null)) throw new Error("images copies both books' pictures; --book is not used here");
+    const out = resolve(opt("--out", join(ROOT, "data/pictures")));
+    const { sources, inventories } = setup();
+    const r = writePictures({ inventories, sources, outDir: out });
+    for (const [book, b] of Object.entries(r.books)) {
+      console.log(`${book}: ${b.tags} picture tags, ${b.images} distinct images${b.missing ? `, ${b.missing} tag(s) with no image file in the zip (left off the page)` : ""}.`);
+    }
+    console.log(`${out}: ${r.files} pictures, ${(r.bytes / 1024 / 1024).toFixed(1)} MB; wrote ${r.written}, already there ${r.kept}, removed ${r.removed} no longer used.`);
     return;
   }
 

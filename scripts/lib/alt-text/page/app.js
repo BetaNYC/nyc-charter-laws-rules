@@ -1,18 +1,94 @@
-// The picture description page (issue #87). Two modes, set by the page's meta tag:
+// The picture description page (issue #87). Three modes, set by the page's meta tag:
 //   local:  served by `npm run alt:review`; Save posts to the local server, which writes
 //           data/alt-text/<book>.json.
 //   static: built by `npm run alt:build-static` for GitHub Pages; "Suggest a better
 //           description" opens a prefilled new GitHub issue instead.
+//   inbox:  built by `npm run alt:build-static -- --mode inbox` for law.beta.nyc; "Send
+//           suggestion" posts it to BetaNYC's data-issue intake (inbox-payload.js), no account
+//           needed. The page's data is in the page itself, so it fetches nothing but that post.
 // All text from the data is set with textContent or .value, never as HTML.
 
 import { issueUrl } from "./issue-url.js";
+import { buildPayload, describeResponse, newClientId, isClientId } from "./inbox-payload.js";
 
 const $ = (id) => document.getElementById(id);
 const meta = (name) => document.querySelector(`meta[name="${name}"]`)?.content ?? "";
-const MODE = meta("alt-review-mode") === "static" ? "static" : "local";
+// On law.beta.nyc the page is built from the New York State Design System's elements, as the rest
+// of the site is (page/body-site.html, meta alt-review-ui "nysds"); elsewhere from plain HTML
+// controls (page/body.html). Both have .value, .checked, .disabled and .focus(). The NYSDS ones
+// say what happened with their own events (nys-click, nys-input, nys-change; NYSDS 1.23.2's
+// declarations), take their label and error text as properties, and keep ARIA on properties, not
+// on the host. These helpers hide the difference; an element a mode does not have is skipped.
+const NYSDS = meta("alt-review-ui") === "nysds";
+const isNys = (e) => !!e && e.localName.startsWith("nys-");
+const NYS_EVENT = { click: "nys-click", input: "nys-input", change: "nys-change" };
+function on(id, kind, fn) {
+  const e = $(id);
+  if (e) e.addEventListener(isNys(e) ? NYS_EVENT[kind] : kind, fn);
+}
+function setValue(id, v) {
+  const e = $(id);
+  if (e) e.value = v;
+}
+/** A field's label, or a button's text. */
+function setLabel(id, text) {
+  const e = $(id);
+  if (!e) return;
+  if (isNys(e)) e.label = text;
+  else if (e.localName === "button") e.textContent = text;
+  else {
+    const l = document.querySelector(`label[for="${id}"]`);
+    if (l) l.textContent = text;
+  }
+}
+/** Mark a field wrong (with what is wrong), or clear it. */
+function setInvalid(id, message) {
+  const e = $(id);
+  if (!e) return;
+  if (isNys(e)) {
+    e.showError = !!message;
+    e.errorMessage = message || "";
+    return;
+  }
+  if (message) e.setAttribute("aria-invalid", "true");
+  else e.removeAttribute("aria-invalid");
+  // A plain field with its own message under it (the site page's name and email): the message
+  // is shown there and is the field's description while it stands.
+  const box = $(`${id}-error`);
+  if (!box) return;
+  box.querySelector("span").textContent = message || "";
+  box.hidden = !message;
+  if (message) e.setAttribute("aria-describedby", box.id);
+  else e.removeAttribute("aria-describedby");
+}
+function setExpanded(e, open) {
+  if (isNys(e)) e.ariaExpanded = String(open);
+  else e.setAttribute("aria-expanded", String(open));
+}
+/** A button made by the page: an NYSDS button on law.beta.nyc, a plain one elsewhere. */
+function makeButton(label, cls) {
+  if (!NYSDS) {
+    const b = el("button", label, cls);
+    b.type = "button";
+    return b;
+  }
+  const b = document.createElement("nys-button");
+  b.type = "button";
+  b.variant = "text";
+  b.label = label;
+  if (cls) b.className = cls;
+  return b;
+}
+const MODE = ["static", "inbox"].includes(meta("alt-review-mode")) ? meta("alt-review-mode") : "local";
 const TOKEN = meta("alt-review-token");
+const ENDPOINT = meta("alt-review-endpoint");
+const CLIENT_KEY = "betanyc-law-reader-client-id";
+// Which box each of buildPayload's fields is typed in.
+const FIELD_BOX = { alt: "review-alt", long: "review-long", note: "inbox-note", name: "contact-name", email: "contact-email" };
 const BOOKS = { admin_code: "Administrative Code", rules: "Rules" };
-const STATUS_NAMES = { none: "Not drafted", drafted: "Drafted, not reviewed", "needs-work": "Needs work", reviewed: "Reviewed" };
+const STATUS_NAMES = MODE === "inbox"
+  ? { none: "No description yet", drafted: "AI draft, not yet checked", "needs-work": "Needs work", reviewed: "Reviewed" }
+  : { none: "Not drafted", drafted: "Drafted, not reviewed", "needs-work": "Needs work", reviewed: "Reviewed" };
 
 let items = [];
 let shown = [];
@@ -21,6 +97,8 @@ let dirty = false;
 let warnedLeave = false;
 let draftsIncluded = true;
 let filterWas = { book: "", status: "" };
+let memoryClientId = null;
+const lastSent = new Map();
 
 const statusOf = (item) => item.entry?.status ?? "none";
 // The index's heading often starts with the citation ("§ 81.49 Sodium Warning."): say it once.
@@ -29,6 +107,32 @@ const keyOf = (item) => `${item.book}/${item.sha256}`;
 
 function setStatus(text) {
   $("save-status").textContent = text;
+}
+
+// A random id for this browser, never shown, so BetaNYC can fold a resend into one
+// suggestion. Kept in localStorage when the browser allows it, else for this visit only.
+function clientId() {
+  try {
+    const kept = localStorage.getItem(CLIENT_KEY);
+    if (isClientId(kept)) return kept;
+  } catch {
+    // storage blocked: fall through to an id for this visit
+  }
+  if (!memoryClientId) memoryClientId = newClientId();
+  try {
+    localStorage.setItem(CLIENT_KEY, memoryClientId);
+  } catch {
+    // not kept; this visit's id still works
+  }
+  return memoryClientId;
+}
+
+/** What the inbox page says about the current text: reviewed, an AI draft, or none. */
+function currentLabel(item) {
+  const e = item.entry;
+  if (e?.status === "reviewed" && e.review && (e.review.alt || e.review.long)) return { kind: "reviewed", text: "Reviewed by a person at BetaNYC" };
+  if (e?.draft && (e.draft.alt || e.draft.long)) return { kind: "draft", text: "AI draft, not yet checked by a person" };
+  return { kind: "none", text: draftsIncluded ? "No description yet" : "No reviewed description yet" };
 }
 
 function currentText(item) {
@@ -42,12 +146,16 @@ function progress() {
   const reviewed = items.filter((i) => statusOf(i) === "reviewed").length;
   const drafted = items.filter((i) => i.entry?.draft).length;
   const filter = shown.length === items.length ? "" : ` Showing ${shown.length} that match.`;
-  $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed; ${drafted} have an AI draft.${filter}`;
+  $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed${draftsIncluded ? `; ${drafted} have an AI draft` : ""}.${filter}`;
 }
 
+// "all" is the site page's value for "Both books" and "Any status": nys-select keeps a hidden
+// empty option of its own, so an option with value "" would show as blank there.
+const filterValue = (id) => ($(id).value === "all" ? "" : $(id).value);
+
 function filtered() {
-  const book = $("filter-book").value;
-  const status = $("filter-status").value;
+  const book = filterValue("filter-book");
+  const status = filterValue("filter-status");
   return items.filter((i) => (!book || i.book === book) && (!status || statusOf(i) === status));
 }
 
@@ -103,7 +211,7 @@ function showConflict(item) {
 }
 
 function hideConflict() {
-  $("conflict").hidden = true;
+  if ($("conflict")) $("conflict").hidden = true;
 }
 
 function render(moveFocus) {
@@ -140,6 +248,13 @@ function render(moveFocus) {
   item.uses.forEach((u, n) => {
     const li = document.createElement("li");
     li.append(el("p", `${placeName(u)} (${u.inline ? "inside a sentence" : "on its own line"})`));
+    if (MODE === "inbox" && u.section_url) {
+      const p = document.createElement("p");
+      const a = el("a", `Read ${BOOKS[item.book]} ${u.citation || placeName(u)} on the Law Reader`);
+      a.href = u.section_url;
+      p.append(a);
+      li.append(p);
+    }
     li.append(el("p", "The paragraph, with the picture's place marked [this picture]:", "meta"));
     li.append(el("blockquote", u.paragraph));
     // A disclosure button rather than <details>: it has a role and a name of its own in every
@@ -148,15 +263,17 @@ function render(moveFocus) {
     region.id = `use-context-${n + 1}`;
     region.hidden = true;
     region.append(el("p", "Before:", "meta"), el("blockquote", u.before || "(none)"), el("p", "After:", "meta"), el("blockquote", u.after || "(none)"));
-    const toggle = el("button", `Show the text around use ${n + 1}`, "disclosure");
-    toggle.type = "button";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-controls", region.id);
-    toggle.addEventListener("click", () => {
+    const toggle = makeButton(`Show the text around use ${n + 1}`, "disclosure");
+    if (isNys(toggle)) toggle.ariaControls = region.id;
+    else toggle.setAttribute("aria-controls", region.id);
+    setExpanded(toggle, false);
+    toggle.addEventListener(isNys(toggle) ? "nys-click" : "click", () => {
       const open = region.hidden;
       region.hidden = !open;
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = `${open ? "Hide" : "Show"} the text around use ${n + 1}`;
+      setExpanded(toggle, open);
+      const text = `${open ? "Hide" : "Show"} the text around use ${n + 1}`;
+      if (isNys(toggle)) toggle.label = text;
+      else toggle.textContent = text;
     });
     li.append(toggle, region);
     list.append(li);
@@ -164,10 +281,12 @@ function render(moveFocus) {
 
   const e = item.entry;
   const draft = e?.draft;
-  $("draft-alt").value = draft?.alt ?? "";
-  $("draft-long").value = draft?.long ?? "";
+  setValue("draft-alt", draft?.alt ?? "");
+  setValue("draft-long", draft?.long ?? "");
   const failed = e?.draft_failed;
-  $("draft-meta").textContent = draft
+  // The inbox page has no AI draft section (it shows the draft as the current text, labeled), and
+  // never names the model.
+  if ($("draft-meta") && MODE !== "inbox") $("draft-meta").textContent = draft
     ? `Drafted by ${e.draft_model ?? "an AI model"} on ${(e.drafted_at ?? "").slice(0, 10)}.`
     : MODE === "static" && !draftsIncluded
       ? "AI drafts are not shown on this page."
@@ -175,8 +294,10 @@ function render(moveFocus) {
         ? `The AI could not draft this picture: ${failed.reason} (${failed.model ?? "unknown model"}, ${(failed.at ?? "").slice(0, 10)}).`
         : "No AI draft yet.";
   const unsure = $("draft-unsure");
-  unsure.hidden = !draft?.unsure;
-  unsure.textContent = draft?.unsure ? `The model was unsure about: ${draft.unsure}` : "";
+  if (unsure && MODE !== "inbox") {
+    unsure.hidden = !draft?.unsure;
+    unsure.textContent = draft?.unsure ? `The model was unsure about: ${draft.unsure}` : "";
+  }
 
   if (MODE === "local") {
     const rev = e?.review;
@@ -187,12 +308,24 @@ function render(moveFocus) {
     // yet starts with none chosen, so an unread AI draft is never marked reviewed by one click.
     const status = e?.status && e.status !== "drafted" ? e.status : null;
     for (const r of document.querySelectorAll('input[name="status"]')) r.checked = r.value === status;
-  } else {
+  } else if (MODE === "static") {
     const cur = currentText(item);
     $("review-alt").value = cur.alt;
     $("review-long").value = cur.long;
     $("review-why").value = "";
     updateSuggestLink();
+  } else {
+    const cur = currentText(item);
+    const label = currentLabel(item);
+    $("current-label").textContent = label.text;
+    $("current-label").dataset.kind = label.kind;
+    setValue("current-alt", cur.alt);
+    setValue("current-long", cur.long);
+    setValue("review-alt", cur.alt);
+    setValue("review-long", cur.long);
+    setValue("inbox-note", "");
+    for (const id of Object.values(FIELD_BOX)) setInvalid(id, "");
+    updatePayload();
   }
   if (history.replaceState) history.replaceState(null, "", `#${keyOf(item)}`);
   if (moveFocus) $("item-heading").focus();
@@ -268,6 +401,89 @@ async function save(goNext) {
   }
 }
 
+/** The inbox body for the picture shown, from the boxes as they are now. */
+function payloadNow() {
+  const item = shown[at];
+  if (!item) return null;
+  return buildPayload(
+    { book: item.book, sha256: item.sha256, picture_ids: item.picture_ids, page_url: item.page_url },
+    {
+      alt: $("review-alt").value,
+      long: $("review-long").value,
+      note: $("inbox-note").value,
+      name: $("contact-name").value,
+      email: $("contact-email").value,
+      creditOk: $("credit-ok").checked,
+      website: $("inbox-website").value,
+    },
+    clientId(),
+  );
+}
+
+function updatePayload() {
+  const p = payloadNow();
+  if (!p) return;
+  $("payload").textContent = p.ok ? `To ${ENDPOINT}:\n${JSON.stringify(p.body, null, 2)}` : `Not ready to send: ${p.problems[0].message}`;
+}
+
+async function send() {
+  const item = shown[at];
+  if (!item) return;
+  for (const id of Object.values(FIELD_BOX)) setInvalid(id, "");
+  const cur = currentText(item);
+  const same = $("review-alt").value.trim() === cur.alt.trim() && $("review-long").value.trim() === cur.long.trim();
+  if (same && !$("inbox-note").value.trim()) {
+    setStatus("Not sent: change the description, or add a note saying what is right or wrong with it, then send.");
+    $("review-alt").focus();
+    return;
+  }
+  const p = payloadNow();
+  if (!p.ok) {
+    for (const pr of p.problems) if (pr.field) setInvalid(FIELD_BOX[pr.field], pr.message);
+    setStatus(`Not sent: ${p.problems.map((pr) => pr.message).join(" ")}`);
+    const first = p.problems.find((pr) => pr.field);
+    if (first) $(FIELD_BOX[first.field]).focus();
+    return;
+  }
+  const text = JSON.stringify(p.body);
+  if (lastSent.get(keyOf(item)) === text) {
+    setStatus("You already sent this suggestion. Change it to send another.");
+    return;
+  }
+  $("send").disabled = true;
+  setStatus("Sending…");
+  let status = 0;
+  let data = null;
+  let retryAfter = null;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: text,
+      credentials: "omit",
+      cache: "no-store",
+      referrerPolicy: "no-referrer",
+    });
+    status = res.status;
+    retryAfter = res.headers.get("Retry-After");
+    try {
+      data = await res.json();
+    } catch {
+      data = null;
+    }
+  } catch {
+    status = 0;
+  } finally {
+    $("send").disabled = false;
+  }
+  const said = describeResponse(status, data, retryAfter);
+  if (said.kind === "sent") {
+    lastSent.set(keyOf(item), text);
+    dirty = false;
+  }
+  setStatus(said.message);
+}
+
 function updateSuggestLink() {
   const item = shown[at];
   if (!item) return;
@@ -295,13 +511,29 @@ function updateSuggestLink() {
 
 async function load() {
   document.body.dataset.mode = MODE;
-  if (MODE === "static") $("review-heading").textContent = "Your suggestion";
+  if (MODE !== "local") $("review-heading").textContent = "Your suggestion";
+  if (MODE === "inbox") {
+    const hint = "Starts as a copy of the current description. Describe only what you can see in the picture; never add words or numbers that are not there. For a picture inside a sentence, the alt text must read as part of the sentence.";
+    $("review-hint").textContent = hint;
+    setLabel("review-long", "Long description (optional: leave it empty if the alt text is enough)");
+  }
   try {
-    const res = MODE === "local" ? await fetch("api/items", { headers: { "X-Alt-Review-Token": TOKEN } }) : await fetch("data.json");
-    if (!res.ok) throw new Error(res.statusText);
-    const data = await res.json();
+    let data;
+    if (MODE === "inbox") data = JSON.parse($("page-data").textContent);
+    else {
+      const res = MODE === "local" ? await fetch("api/items", { headers: { "X-Alt-Review-Token": TOKEN } }) : await fetch("data.json");
+      if (!res.ok) throw new Error(res.statusText);
+      data = await res.json();
+    }
     items = data.items;
-    if (MODE === "static") draftsIncluded = data.drafts_included !== false;
+    if (MODE !== "local") draftsIncluded = data.drafts_included !== false;
+    // A page built without AI drafts (law.beta.nyc's) never speaks of drafts: a picture either
+    // has a reviewed description or none yet.
+    if (!draftsIncluded) {
+      STATUS_NAMES.none = "No description yet";
+      for (const v of ["drafted", "needs-work"]) $("filter-status").querySelector(`option[value="${v}"]`)?.remove();
+      $("filter-status").querySelector('option[value="none"]').textContent = STATUS_NAMES.none;
+    }
   } catch (e) {
     $("progress").textContent = `Could not load the pictures: ${e.message}`;
     return;
@@ -316,16 +548,16 @@ async function load() {
   applyFilters(wanted || null);
 }
 
-$("filter-book").addEventListener("change", onFilterChange);
-$("filter-status").addEventListener("change", onFilterChange);
-$("use-theirs").addEventListener("click", () => {
+on("filter-book", "change", onFilterChange);
+on("filter-status", "change", onFilterChange);
+on("use-theirs", "click", () => {
   const item = shown[at];
   if (!item || item.conflict === undefined) return;
   render(false); // takes the newer version as the entry and shows its text
   setStatus("Showing their version. Your text was not saved.");
   $("review-alt").focus();
 });
-$("replace-theirs").addEventListener("click", () => {
+on("replace-theirs", "click", () => {
   const item = shown[at];
   if (!item || item.conflict === undefined) return;
   item.entry = item.conflict; // the base is now their version, on purpose
@@ -333,26 +565,42 @@ $("replace-theirs").addEventListener("click", () => {
   hideConflict();
   save(false);
 });
-$("suggest").addEventListener("click", () => (dirty = false));
+on("suggest", "click", () => (dirty = false));
 window.addEventListener("beforeunload", (ev) => {
   if (!dirty) return;
   ev.preventDefault();
   ev.returnValue = "";
 });
-$("prev").addEventListener("click", () => move(-1));
-$("next").addEventListener("click", () => move(1));
+on("prev", "click", () => move(-1));
+on("next", "click", () => move(1));
 $("review-form").addEventListener("submit", (ev) => {
   ev.preventDefault();
   if (MODE === "local") save(false);
+  // Only the Send button sends: Enter in the name or email box does not.
+  else if (MODE === "inbox" && ev.submitter?.id === "send") send();
 });
-$("save-next").addEventListener("click", () => save(true));
-for (const id of ["review-alt", "review-long", "review-note", "review-why"]) {
-  $(id).addEventListener("input", () => {
+// An NYSDS Send button is type="button" and says it was pressed with nys-click; a submit would
+// reach the form with no submitter (it calls requestSubmit()), so it is not one.
+if (isNys($("send"))) on("send", "click", () => send());
+on("show-payload", "click", () => {
+  const box = $("payload");
+  const open = box.hidden;
+  if (open) updatePayload();
+  box.hidden = !open;
+  setExpanded($("show-payload"), open);
+  setLabel("show-payload", open ? "Hide what will be sent" : "Show exactly what will be sent");
+});
+on("save-next", "click", () => save(true));
+for (const id of ["review-alt", "review-long", "review-note", "review-why", "inbox-note"]) {
+  on(id, "input", () => {
     dirty = true;
     warnedLeave = false;
     if (MODE === "static") updateSuggestLink();
+    if (MODE === "inbox") updatePayload();
   });
 }
+// Name, email and the credit box stay from picture to picture, so they never count as unsent.
+for (const id of ["contact-name", "contact-email", "credit-ok"]) on(id, id === "credit-ok" ? "change" : "input", () => MODE === "inbox" && updatePayload());
 for (const r of document.querySelectorAll('input[name="status"]')) r.addEventListener("change", () => (dirty = true));
 document.addEventListener("keydown", (ev) => {
   if (MODE === "local" && ev.key === "Enter" && (ev.ctrlKey || ev.metaKey) && ev.target instanceof HTMLTextAreaElement && !ev.target.readOnly) {

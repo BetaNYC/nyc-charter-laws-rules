@@ -27,6 +27,10 @@ import { rulesPageMakers, rulesNumbersPath } from "./pages-rules.js";
 import { parseSourceErrors, visibleErrors } from "./source-errors.js";
 import { sha256, imageSize } from "../alt-text/image-info.js";
 import { sourceErrorsPage } from "./pages-source-errors.js";
+import { loadPictures } from "../alt-text/pictures.js";
+import { BOOKS as PICTURE_BOOKS } from "../alt-text/source.js";
+import { buildStatic, INBOX_PATH } from "../alt-text/static-build.js";
+import { pictureFrame } from "./pages-pictures.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -46,6 +50,7 @@ const ASSETS = [
   ["site/assets/filters.js", "assets/filters.js"],
   ["site/assets/not-found.js", "assets/not-found.js"],
   ["site/assets/source-errors.js", "assets/source-errors.js"],
+  ["site/assets/describe-pictures.css", "assets/describe-pictures.css"],
 ];
 
 // The two packages the site copies files from. Both are devDependencies of this repo; a missing
@@ -172,6 +177,11 @@ export function siteFacts(books, dataSources) {
  * @param {string} [o.sourceErrorImagesDir] their pictures (default: data/source-errors/images/ beside the file)
  * @param {boolean} [o.includeUnconfirmedErrors=false] also show the errors only found, not yet
  *                                    checked (a preview build: --include-unconfirmed-errors)
+ * @param {string} [o.picturesDir]    data/pictures: the pictures and their inventories for the
+ *                                    picture description page (npm run alt:images)
+ * @param {string} [o.altTextDir]     data/alt-text: the reviewed descriptions it shows
+ * @param {string} [o.pictureEndpoint] where its suggestions go (default: BetaNYC's intake on
+ *                                    www.beta.nyc; the browser tests pass a fake one)
  */
 export async function buildSite(o = {}) {
   const t0 = performance.now();
@@ -233,6 +243,14 @@ export async function buildSite(o = {}) {
       })
     );
   }
+  // The picture description page (/describe-pictures/, issue #87), for the books built that have
+  // pictures (the Administrative Code and the Rules; the Charter has none). Its pictures are the
+  // committed copies in data/pictures/, each checked against its sha256 before anything is
+  // written: a missing or changed picture stops the build with the command that makes them.
+  const pictureBooks = corpora.filter((c) => PICTURE_BOOKS.includes(c));
+  const picturesDir = resolve(o.picturesDir ?? join(ROOT, "data", "pictures"));
+  const altTextDir = resolve(o.altTextDir ?? join(ROOT, "data", "alt-text"));
+  const pictures = pictureBooks.length ? loadPictures(picturesDir, pictureBooks) : null;
   const books = corpora.map((c) =>
     loadBook({
       corpus: c,
@@ -245,6 +263,8 @@ export async function buildSite(o = {}) {
   if (books.length > 1) for (const b of books) b.others = new Map(books.filter((x) => x !== b).map((x) => [x.corpus, x]));
   const [book, ...extra] = books;
   const { perBook, shared: site } = siteFacts(books, dataSources);
+  // The footer links the picture page only when this build makes it.
+  if (pictures) for (const s of [...perBook.values(), site]) s.picturesPath = INBOX_PATH;
   // Each shown error on its section's page (pages.js sectionPage, pages-admin.js adminSectionPage):
   // book.sourceErrors maps American Legal's id to the entries for that section. An entry for a
   // book this build has whose id is not one of its records is `unresolved`: still listed, with no
@@ -357,6 +377,25 @@ export async function buildSite(o = {}) {
       await pf.close();
     }
   }
+  // After the search index, so Pagefind leaves the page out: it is a form, not law text. With the
+  // AI drafts (Noel approved publishing them, 2026-11-26): the page labels each "AI draft, not yet
+  // checked by a person", and a reviewed description as reviewed. The model's name is never shown.
+  let picturePage = null;
+  if (pictures) {
+    picturePage = buildStatic({
+      inventories: pictures.inventories,
+      storeDir: altTextDir,
+      outDir: join(outDir, INBOX_PATH.slice(1, -1)),
+      includeDrafts: true,
+      mode: "inbox",
+      ...(o.pictureEndpoint ? { endpoint: o.pictureEndpoint } : {}),
+      redirects: redirectsJson(books),
+      // In the site's own frame (pages-pictures.js): top bar, breadcrumbs, footer, as every page.
+      frame: pictureFrame(site),
+      imageFor: (book, image) => ({ bytes: readFileSync(pictures.fileFor(image)), ext: image.shown.file.split(".").pop() }),
+    });
+    picturePage = { path: INBOX_PATH, ...picturePage };
+  }
   const t2 = performance.now();
   const total = folderStats(outDir);
   const lawPageCount = pages.filter((p) => p.kind === "section" || p.kind === "chapter").length;
@@ -373,6 +412,7 @@ export async function buildSite(o = {}) {
     metadata,
     skipped,
     sourceErrors: { shown: shownErrors, unresolved: unresolvedErrors },
+    picturePage,
     seconds: Number(((t2 - t0) / 1000).toFixed(2)),
     pagesSeconds: Number(((t1 - t0) / 1000).toFixed(2)),
     searchSeconds: Number(((t2 - t1) / 1000).toFixed(2)),

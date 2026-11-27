@@ -82,6 +82,18 @@ test("deploy-site.yml: every file the site build imports or reads is in the push
     "data/structure/admin_code.json",
     "data/structure/rules.json",
     "data/source-errors.json", // errors in the publisher's text: /source-errors/ and the section notes
+    // The picture description page (/describe-pictures/): the committed pictures and their
+    // inventories (npm run alt:images), the reviewed descriptions, and the page's own files,
+    // which static-build.js copies rather than imports.
+    "data/pictures/admin_code.json",
+    "data/pictures/rules.json",
+    ...readdirSync(join(ROOT, "data/pictures/images")).map((f) => `data/pictures/images/${f}`),
+    "data/alt-text/admin_code.json",
+    "data/alt-text/rules.json",
+    "scripts/lib/alt-text/page/index.html",
+    "scripts/lib/alt-text/page/app.js",
+    "scripts/lib/alt-text/page/app.css",
+    "scripts/lib/alt-text/issue-url.js",
     "package-lock.json", // NYSDS and Pagefind, copied into the site
     ".github/workflows/deploy-site.yml",
   ];
@@ -134,7 +146,7 @@ test("deploy-site.yml builds the Charter, the Administrative Code and the Rules,
   assert.match(DEPLOY, /^ {8}run: npm run build-site$/m);
   assert.doesNotMatch(DEPLOY, /--charter-only/);
   const check = DEPLOY.slice(DEPLOY.indexOf("- name: Check the build"), DEPLOY.indexOf("- name: Configure Pages"));
-  for (const f of ["charter/index.html", "admin-code/index.html", "sitemaps/admin-code.xml", "pagefind/pagefind.js"]) {
+  for (const f of ["charter/index.html", "admin-code/index.html", "describe-pictures/index.html", "sitemaps/admin-code.xml", "pagefind/pagefind.js"]) {
     assert.ok(check.includes(` ${f}`), `the check step looks for _site/${f}`);
   }
   // The Rules: required when metadata.json says the build has them (an index from before 0.7.0
@@ -187,11 +199,11 @@ test("refresh-data.yml dispatches the deploy only when its commit step pushed a 
   assert.equal(pushes.length, 2, "both git pushes set pushed=true");
   assert.equal((REFRESH.match(/git push origin HEAD:main/g) ?? []).length, 2, "no other push without the output");
   // deploy=true: always after an index push; on the unshipped-only push, only when
-  // data/structure changed (issue #55: the download record alone does not redeploy).
-  // test/refresh-commit-step.test.js runs the step itself.
+  // data/structure or data/pictures changed (issue #55: the download record alone does not
+  // redeploy). test/refresh-commit-step.test.js runs the step itself.
   assert.match(REFRESH, /echo "pushed=true" >> "\$GITHUB_OUTPUT"\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"\n\s+echo "refresh-data: pushed refreshed index to main"/);
-  assert.match(REFRESH, /if \[ -n "\$\(git status --porcelain -- data\/structure\)" \]; then\n\s+structure_changed=true/);
-  assert.match(REFRESH, /git push origin HEAD:main\n\s+echo "pushed=true" >> "\$GITHUB_OUTPUT"\n\s+if \[ -n "\$structure_changed" \]; then\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"/, "deploy only after the push succeeded");
+  assert.match(REFRESH, /if \[ -n "\$\(git status --porcelain -- data\/structure data\/pictures\)" \]; then\n\s+site_changed=true/);
+  assert.match(REFRESH, /git push origin HEAD:main\n\s+echo "pushed=true" >> "\$GITHUB_OUTPUT"\n\s+if \[ -n "\$site_changed" \]; then\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"/, "deploy only after the push succeeded");
   const step = REFRESH.slice(REFRESH.indexOf("- name: Deploy the website if this run committed"));
   assert.ok(step.length > 1, "the dispatch step exists");
   assert.match(step, /if: \$\{\{ !cancelled\(\) && steps\.commit\.outputs\.deploy == 'true' \}\}/);
@@ -199,4 +211,23 @@ test("refresh-data.yml dispatches the deploy only when its commit step pushed a 
   // It is the last step, so a failed dispatch can never stop a release.
   assert.doesNotMatch(step.slice(1), /\n {6}- name: /, "the dispatch is the last step");
   assert.match(REFRESH, /^ {2}actions: write$/m, "actions: write, needed to dispatch");
+});
+
+test("refresh-data.yml copies the pictures after build-index, and a failure never holds back the law text", () => {
+  const at = (s) => REFRESH.indexOf(s);
+  assert.ok(at("run: npm run build-index") < at("run: npm run alt:images"), "after the index it reads");
+  assert.ok(at("run: npm run alt:images") < at("- name: Commit refreshed index if changed"), "before the commit that stages it");
+  const step = REFRESH.slice(at("- name: Copy the pictures for the website"), at("- name: Coverage audit (report only)"));
+  assert.match(step, /^ {8}id: pictures$/m);
+  assert.match(step, /^ {8}continue-on-error: true$/m);
+  // The run still goes red, after the commit, the release and before the dispatch.
+  const fail = REFRESH.slice(at("- name: Fail if the pictures could not be copied"));
+  assert.match(fail, /^ {8}if: \$\{\{ !cancelled\(\) && steps\.pictures\.outcome == 'failure' \}\}$/m);
+  assert.ok(at("- name: Commit refreshed index if changed") < at("- name: Fail if the pictures could not be copied"));
+  assert.ok(at("- name: Fail if the pictures could not be copied") < at("- name: Deploy the website if this run committed"));
+  // data/pictures is committed with the site structure: no release, a redeploy.
+  assert.match(REFRESH, /^ {10}UNSHIPPED_PATHS=\([^)]*\bdata\/pictures\b[^)]*\)$/m);
+  const pkg = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
+  assert.equal(pkg.scripts["alt:images"], "node scripts/alt-text.js images");
+  assert.ok(!pkg.files.some((f) => "data/pictures/images/x.png".startsWith(f)), "the pictures are not in the npm package");
 });

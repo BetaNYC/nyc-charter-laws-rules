@@ -17,7 +17,7 @@
 
 import { renderSection, bodyBlocks } from "../render-section.js";
 import { bodyHtml, copyId } from "./render-html.js";
-import { page, breadcrumbs, breadcrumbJsonLd } from "./layout.js";
+import { page, breadcrumbs, breadcrumbJsonLd, bookCard } from "./layout.js";
 import { escapeHtml } from "./html.js";
 import { sourceErrorNote } from "./pages-source-errors.js";
 import {
@@ -351,9 +351,8 @@ ${t.chapters
  * on each title's page; this page lists none of them.
  */
 export function titleCard(t) {
-  const num = t.synthetic ? "" : `<span class="vh">Title </span>${esc(t.number)}`;
   const count = t.chapters.length ? plural(t.chapters.length, "chapter") : plural(t.sections.length, "section");
-  return `<li><a href="${esc(t.path)}"><span class="tc-top"><span class="tc-num">${num}</span><span class="tc-name">${esc(t.title)}</span><span class="tc-count">${count}</span></span></a></li>`;
+  return bookCard({ path: t.path, word: "Title", number: t.synthetic ? null : t.number, name: t.title, count });
 }
 
 export function adminContentsPage(book, site) {

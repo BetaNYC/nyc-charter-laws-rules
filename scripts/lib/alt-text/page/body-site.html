@@ -1,0 +1,87 @@
+  <section class="filters" aria-labelledby="filters-heading">
+    <h2 id="filters-heading">Choose pictures</h2>
+    <div class="row">
+      <nys-select id="filter-book" label="Book" width="full">
+        <option value="all" selected>Both books</option>
+        <option value="admin_code">Administrative Code</option>
+        <option value="rules">Rules</option>
+      </nys-select>
+      <nys-select id="filter-status" label="Status" width="full">
+        <option value="all" selected>Any status</option>
+        <option value="none">No description yet</option>
+        <option value="drafted">AI draft, not yet checked</option>
+        <option value="needs-work">Needs work</option>
+        <option value="reviewed">Reviewed</option>
+      </nys-select>
+    </div>
+    <p id="progress" role="status">Loading…</p>
+  </section>
+
+  <nav class="pager" aria-label="Pictures">
+    <nys-button id="prev" type="button" variant="outline" label="Previous picture"></nys-button>
+    <span id="position" aria-live="polite"></span>
+    <nys-button id="next" type="button" variant="outline" label="Next picture"></nys-button>
+  </nav>
+
+  <article id="item" aria-labelledby="item-heading" hidden>
+    <h2 id="item-heading" tabindex="-1"></h2>
+    <figure>
+      <img id="picture" alt="">
+      <figcaption id="picture-facts"></figcaption>
+    </figure>
+
+    <section aria-labelledby="uses-heading">
+      <h3 id="uses-heading">Where it appears</h3>
+      <ol id="uses"></ol>
+    </section>
+
+    <form id="review-form" novalidate>
+      <section aria-labelledby="current-heading" class="current">
+        <h3 id="current-heading">Current description</h3>
+        <p id="current-label" class="label-tag"></p>
+        <nys-textarea id="current-alt" label="Current alt text (read only)" rows="3" readonly></nys-textarea>
+        <nys-textarea id="current-long" label="Current long description (read only)" rows="6" readonly></nys-textarea>
+      </section>
+
+      <section aria-labelledby="review-heading" class="review">
+        <h3 id="review-heading">Your suggestion</h3>
+        <p id="review-hint" class="hint"></p>
+        <nys-textarea id="review-alt" label="Alt text" rows="3"></nys-textarea>
+        <nys-textarea id="review-long" label="Long description (optional: leave it empty if the alt text is enough)" rows="8"></nys-textarea>
+        <nys-textarea id="inbox-note" label="Note for BetaNYC (optional, not published)" rows="2"></nys-textarea>
+        <fieldset class="contact" aria-describedby="privacy-note">
+          <legend>Your name and email (optional)</legend>
+          <p id="privacy-note" class="hint">Only if you want BetaNYC to be able to reply to you. Your name and email are kept apart from your suggestion, used only to follow up, and not published. If you tick the box below, we may thank you by name later; we have not decided how yet, so for now nothing we publish names anyone. See the <a href="https://www.beta.nyc/privacy-policy/">BetaNYC privacy policy</a>.</p>
+          <!-- Name and email are plain inputs, so the browser can fill them in (autocomplete, WCAG
+               1.3.5; NYSDS 1.23.2's nys-textinput has no autocomplete attribute). They are drawn
+               to look like nys-textinput (describe-pictures.css .nys-like-*). -->
+          <div class="nys-like-field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" class="nys-like-input" type="text" name="name" autocomplete="name">
+            <p id="contact-name-error" class="nys-like-error" hidden><nys-icon name="error" size="2xl"></nys-icon><span></span></p>
+          </div>
+          <div class="nys-like-field">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" class="nys-like-input" type="email" name="email" autocomplete="email">
+            <p id="contact-email-error" class="nys-like-error" hidden><nys-icon name="error" size="2xl"></nys-icon><span></span></p>
+          </div>
+          <nys-checkbox id="credit-ok" label="I am happy for BetaNYC to thank me by name"></nys-checkbox>
+        </fieldset>
+        <!-- The trap field stays a plain input: it is never shown, never in the tab order and never
+             in the accessibility tree, and an NYSDS field's inner input could not be kept out of
+             the tab order from here. -->
+        <div class="trap" aria-hidden="true">
+          <label for="inbox-website">Leave this box empty</label>
+          <input id="inbox-website" type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p id="send-where" class="hint">Send posts your description, your note, and your name and email if you gave them, to BetaNYC's inbox at www.beta.nyc. It files them for BetaNYC staff in a private place. Your browser also keeps a random code for this page, so a new suggestion for the same picture replaces your earlier one; clearing this site's data in your browser removes it.</p>
+        <nys-button id="show-payload" type="button" variant="outline" label="Show exactly what will be sent" ariaExpanded="false" ariaControls="payload"></nys-button>
+        <pre id="payload" class="payload" hidden></pre>
+        <div class="actions">
+          <nys-button id="send" type="button" variant="filled" label="Send suggestion"></nys-button>
+        </div>
+        <p id="save-status" role="status" aria-live="polite"></p>
+      </section>
+    </form>
+  </article>
+  <p id="empty" hidden>No pictures match these choices.</p>

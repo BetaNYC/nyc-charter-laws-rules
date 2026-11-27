@@ -28,7 +28,7 @@ import { renderSection, bodyBlocks } from "../scripts/lib/render-section.js";
 import { sectionMarkdown } from "../scripts/lib/serialize-markdown.js";
 import { parseQuery, lookup, citationKeys, jumpTarget, pageUrl } from "../site/assets/jump.js";
 import { redirectFor } from "../site/assets/not-found.js";
-import { contentsTree, chapterName, CONTENTS_NAME, chapterSectionsJson, chapterSectionsPath, sectionPage, chapterPage, officialRecordUrl } from "../scripts/lib/site/pages.js";
+import { contentsTree, chapterCard, chapterName, CONTENTS_NAME, chapterSectionsJson, chapterSectionsPath, sectionPage, chapterPage, officialRecordUrl } from "../scripts/lib/site/pages.js";
 import { currentLine } from "../scripts/lib/site/layout.js";
 import { sourceFacts } from "../scripts/lib/site/build.js";
 
@@ -488,6 +488,21 @@ test("sitemaps, robots.txt and noindex", () => {
 test("contents and chapter pages are plain HTML link lists", () => {
   const contents = read("charter/index.html");
   for (const c of site.book.chapters) assert.ok(contents.includes(`<a href="${c.path}">`), c.citation);
+  // The Charter's front page is the same card grid as the other books' (Noel, 2026-11-26): one
+  // card per chapter, its number read as "Chapter <n>", its name, and how many sections.
+  assert.match(contents, /<ol class="title-cards">/);
+  assert.doesNotMatch(contents, /class="contents chapters"/);
+  const cards = [...contents.matchAll(/<li><a href="([^"]+)"><span class="tc-top"><span class="tc-num">(.*?)<\/span><span class="tc-name">(.*?)<\/span><span class="tc-count">(.*?)<\/span><\/span><\/a><\/li>/g)];
+  assert.equal(cards.length, site.book.chapters.length);
+  site.book.chapters.forEach((c, i) => {
+    const [, path, num, name, count] = cards[i];
+    assert.equal(path, c.path);
+    const n = /^Chapter (\S+)$/.exec(c.citation)?.[1];
+    assert.equal(num, n ? `<span class="vh">Chapter </span>${escapeHtml(n)}` : "", c.citation);
+    assert.equal(name, escapeHtml(n ? c.title : chapterName(c)));
+    assert.equal(count, `${c.sections.length} section${c.sections.length === 1 ? "" : "s"}`);
+  });
+  assert.match(contents, new RegExp(`<p class="lede">Pick a chapter to read its sections\\. ${site.book.chapters.length} chapters, ${site.book.sections.length} sections\\.</p>`));
   for (const c of site.book.chapters) {
     const html = read(fileForPath(c.path));
     for (const s of c.sections) assert.ok(html.includes(`<li><a href="${s.path}">`), `${c.citation} lists ${s.citation}`);
@@ -956,4 +971,16 @@ test("license notices ship with the site", () => {
   assert.ok(about.includes(`href="/licenses/nysds-LICENSE.md"`) && about.includes(`href="/licenses/pagefind-LICENSE.txt"`));
   // No NYSDS global or State-only parts anywhere.
   for (const f of htmlFiles()) assert.doesNotMatch(readFileSync(f, "utf8"), /<nys-(?:globalheader|globalfooter|unavheader|unavfooter)/);
+});
+
+test("a Charter chapter's card: number, name and count; a repealed one keeps [Repealed] and shows 0 sections", () => {
+  const card = (c) => chapterCard({ sections: [], ...c });
+  assert.equal(
+    card({ citation: "Chapter 3", title: "Board of Estimate [Repealed]", path: "/charter/chapters/3" }),
+    `<li><a href="/charter/chapters/3"><span class="tc-top"><span class="tc-num"><span class="vh">Chapter </span>3</span><span class="tc-name">Board of Estimate [Repealed]</span><span class="tc-count">0 sections</span></span></a></li>`
+  );
+  assert.match(card({ citation: "Chapter 2-A", title: "Districting Commission", path: "/charter/chapters/2-a", sections: [{}, {}, {}] }), /<span class="vh">Chapter <\/span>2-A<\/span><span class="tc-name">Districting Commission<\/span><span class="tc-count">3 sections</);
+  assert.match(card({ citation: "Chapter 11", title: "Independent Budget Office", path: "/x", sections: [{}] }), /<span class="tc-count">1 section</);
+  // No number: the Preamble's card leaves the number empty and names it.
+  assert.match(card({ citation: "Preamble", title: "Preamble", path: "/charter/chapters/preamble" }), /<span class="tc-num"><\/span><span class="tc-name">Preamble<\/span>/);
 });
