@@ -1,9 +1,11 @@
 // The picture description page as build-site makes it (/describe-pictures/, issue #87), in a real
 // browser: the three-book fixture site, with the alt-text fixture's pictures committed the way
 // npm run alt:images commits them. The page is in the site's own frame (Noel, 2026-11-26): top
-// bar, breadcrumbs, footer. The footer link opens it; every picture loads from the site itself;
-// a picture with no description says so and offers the form, with no AI draft shown; the page's
-// content security policy blocks nothing it needs; the keyboard alone sends a suggestion. The
+// bar, breadcrumbs, footer; its controls are NYSDS elements, as on the rest of the site. The
+// footer link opens it; every picture loads from the site itself; an AI draft is shown labeled
+// "AI draft, not yet checked by a person", never with the model's name, and a picture with no
+// description says so; the page's content security policy blocks nothing it needs; the keyboard
+// alone sends a suggestion and opens "what will be sent". The
 // intake is a fake one on 127.0.0.1, and every other request off 127.0.0.1 is aborted and
 // counted, so nothing is sent to www.beta.nyc. Runs with npm run test:site.
 
@@ -26,6 +28,7 @@ import { closeBrowser, closeServer, HOOK_TIMEOUT } from "./cleanup.mjs";
 let fx, site, server, browser, intake;
 let siteOrigin = "";
 const seen = [];
+let reply = { status: 201, body: { ok: true }, headers: {} };
 
 /** A fake intake that answers the site's origin as the real one does (CORS, 201). */
 function fakeIntake() {
@@ -39,8 +42,8 @@ function fakeIntake() {
         return res.end();
       }
       seen.push({ url: req.url, origin: req.headers.origin, body: Buffer.concat(chunks).toString("utf8") });
-      res.writeHead(201, { ...cors, "Content-Type": "application/json" });
-      res.end('{"ok":true}');
+      res.writeHead(reply.status, { ...cors, "Access-Control-Expose-Headers": "Retry-After", "Content-Type": "application/json", ...reply.headers });
+      res.end(JSON.stringify(reply.body));
     });
   });
   return new Promise((resolve) => srv.listen(0, "127.0.0.1", () => resolve({ srv, url: `http://127.0.0.1:${srv.address().port}` })));
@@ -52,8 +55,9 @@ before(async () => {
   const sources = { admin_code: openSource(fx.source), rules: openSource(fx.source) };
   const inventories = ["admin_code", "rules"].map((b) => buildInventory(b, sources[b], loadIndex(b, fx.indexDir)));
   writePictures({ inventories, sources, outDir: join(fx.root, "pictures") });
-  // An AI draft in the store must not reach the page.
-  await saveDraft(fx.storeDir, "admin_code", inventories[0].images[0], { draft: { alt: "AN AI DRAFT", long: "", unsure: "" }, model: "claude-fable-5-2" });
+  // One AI draft, with a note of what the model was unsure of: the page shows the draft, labeled,
+  // and never the model's name or the note.
+  await saveDraft(fx.storeDir, "admin_code", inventories[0].images[0], { draft: { alt: "An icon of a salt shaker", long: "", unsure: "MODEL UNSURE NOTE" }, model: "claude-fable-5-2" });
   intake = await fakeIntake();
   site = await buildThreeBookFixtureSite({ options: { picturesDir: join(fx.root, "pictures"), altTextDir: fx.storeDir, pictureEndpoint: `${intake.url}/wp-json/betanyc-data/v1/report` } });
   server = await startServer(site.outDir, 0);
@@ -101,9 +105,28 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     assert.deepEqual(await page.locator("nys-breadcrumbs li").allTextContents(), ["Home", "Picture descriptions"]);
     assert.equal(await page.locator("main h1").textContent(), "Picture descriptions");
     assert.ok(await page.locator("footer").isVisible());
-    assert.match(await page.locator("main .lede").textContent(), /None of the 6 has a text description yet\./);
-    assert.equal(await page.locator("#progress").textContent(), "0 of 6 pictures reviewed.");
-    assert.deepEqual(await page.locator("#filter-status option").allTextContents(), ["Any status", "No description yet", "Reviewed"]);
+    assert.match(await page.locator("main .lede").textContent(), /1 of the 6 has only a text description that an AI model drafted for BetaNYC, which no person has checked yet, labeled "AI draft, not yet checked by a person"\. 5 of the 6 have none yet\./);
+    assert.equal(await page.locator("#progress").textContent(), "0 of 6 pictures reviewed; 1 have an AI draft.");
+    // The controls are the site's NYSDS elements; the trap field is the one plain input.
+    // (NYSDS gives each element's inner control the same id inside its shadow root, so the
+    // elements are found by tag and id, or from the document.)
+    const tag = (id) => page.evaluate((x) => document.getElementById(x)?.localName, id);
+    for (const id of ["filter-book", "filter-status"]) assert.equal(await tag(id), "nys-select", id);
+    for (const id of ["prev", "next", "show-payload", "send"]) assert.equal(await tag(id), "nys-button", id);
+    for (const id of ["current-alt", "current-long", "review-alt", "review-long", "inbox-note"]) assert.equal(await tag(id), "nys-textarea", id);
+    for (const id of ["contact-name", "contact-email"]) assert.equal(await tag(id), "nys-textinput", id);
+    assert.equal(await tag("credit-ok"), "nys-checkbox");
+    assert.equal(await page.evaluate(() => document.querySelectorAll("main input, main select, main textarea, main button").length), 1, "only the trap field is a plain control");
+    assert.deepEqual(await page.evaluate(() => [...document.querySelectorAll("#filter-status > option")].map((o) => o.textContent)), ["Any status", "No description yet", "AI draft, not yet checked", "Needs work", "Reviewed"]);
+    assert.equal(await page.evaluate(() => document.getElementById("filter-book").value), "all", "Both books is chosen, and shown");
+    // The first picture has the AI draft: shown as the current text, labeled, and copied into the
+    // suggestion box.
+    assert.equal(await page.locator("#current-label").textContent(), "AI draft, not yet checked by a person");
+    assert.equal(await page.evaluate(() => document.getElementById("current-alt").value), "An icon of a salt shaker");
+    assert.equal(await page.evaluate(() => document.getElementById("review-alt").value), "An icon of a salt shaker");
+    assert.match(await page.locator("#picture-facts").textContent(), /status: AI draft, not yet checked$/);
+    const visible = await page.locator("body").innerText();
+    assert.doesNotMatch(visible, /claude|fable|anthropic|MODEL UNSURE NOTE/i, "no model name, no model note");
     const seenSrc = new Set();
     for (let i = 0; i < 6; i++) {
       const [ok, src] = await page.locator("#picture").evaluate(async (img) => {
@@ -112,16 +135,17 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
       });
       assert.ok(ok, `${src} loads`);
       seenSrc.add(src);
-      assert.equal(await page.locator("#current-label").textContent(), "No reviewed description yet");
-      assert.equal(await page.getByLabel("Current alt text (read only)").inputValue(), "");
-      assert.equal(await page.getByLabel("Alt text", { exact: true }).inputValue(), "", "the suggestion box starts empty");
+      if (i > 0) {
+        assert.equal(await page.locator("#current-label").textContent(), "No description yet");
+        assert.equal(await page.evaluate(() => document.getElementById("current-alt").value), "");
+        assert.equal(await page.evaluate(() => document.getElementById("review-alt").value), "", "the suggestion box starts empty");
+        assert.match(await page.locator("#picture-facts").textContent(), /status: No description yet$/);
+      }
       assert.ok(await page.getByRole("button", { name: "Send suggestion" }).isVisible());
-      assert.equal(await page.locator("#draft-alt").isVisible(), false, "no AI draft box");
-      assert.match(await page.locator("#picture-facts").textContent(), /status: No description yet$/);
-      if (i < 5) await page.locator("#next").click();
+      assert.equal(await page.locator("#draft-alt").count(), 0, "no separate AI draft box");
+      if (i < 5) await page.getByRole("button", { name: "Next picture" }).click();
     }
     assert.equal(seenSrc.size, 3, "three distinct pictures, each book's copy from the same file");
-    assert.doesNotMatch(await page.content(), /AN AI DRAFT/);
     const nodes = parseSnapshot(await page.locator("body").ariaSnapshot());
     const c = controlProblems(nodes);
     assert.deepEqual(c.unnamed, []);
@@ -137,6 +161,7 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
 
   test(`/describe-pictures/ (${name}): the keyboard alone writes and sends a suggestion, past the site's own top bar`, async () => {
     seen.length = 0;
+    reply = { status: 201, body: { ok: true }, headers: {} };
     const { ctx, page, problems, offsite } = await open(width, height);
     await page.goto(`${server.url}/describe-pictures/`);
     await page.waitForFunction(() => !document.getElementById("item").hidden);
@@ -151,10 +176,30 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
       assert.fail(`${id} not reached by Tab: ${order.join(",")}`);
     };
     await tabTo("review-alt");
+    await page.keyboard.press("ControlOrMeta+a");
     await page.keyboard.type("A salt shaker inside a black triangle");
+    await tabTo("contact-name");
+    await page.keyboard.type("Ada");
+    await tabTo("credit-ok");
+    await page.keyboard.press("Space");
+    assert.equal(await page.evaluate(() => document.getElementById("credit-ok").checked), true, "Space ticks the NYSDS checkbox");
+    await tabTo("show-payload");
+    await page.keyboard.press("Enter");
+    assert.equal(await page.locator("#payload").isVisible(), true, "what will be sent is shown");
+    assert.match(await page.locator("#payload").textContent(), /"kind": "alt-text-suggestion"/);
+    assert.match(await page.locator("#payload").textContent(), /"suggested_alt": "A salt shaker inside a black triangle"/);
+    assert.equal(await page.getByRole("button", { name: "Hide what will be sent" }).getAttribute("aria-expanded"), "true");
     await tabTo("send");
     assert.ok(!order.includes("inbox-website"), "the trap field is not in the tab order");
-    assert.equal(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), "solid", "focus is visible");
+    // The focus ring NYSDS draws on the button inside its shadow root (law.css sets its color).
+    const ring = await page.evaluate(() => {
+      let e = document.activeElement;
+      while (e?.shadowRoot?.activeElement) e = e.shadowRoot.activeElement;
+      const cs = getComputedStyle(e);
+      return { tag: e.localName, outline: cs.outlineStyle, width: cs.outlineWidth };
+    });
+    assert.equal(ring.tag, "button", "focus is on Send's own button");
+    assert.notEqual(ring.outline, "none", `focus is visible: ${JSON.stringify(ring)}`);
     await page.keyboard.press("Enter");
     await page.waitForFunction(() => /^Sent\./.test(document.getElementById("save-status").textContent));
     assert.equal(seen.length, 1);
@@ -164,7 +209,44 @@ for (const [name, width, height] of [["phone", 390, 844], ["desktop", 1100, 900]
     assert.equal(body.tool, "law-reader");
     assert.equal(body.kind, "alt-text-suggestion");
     assert.equal(body.suggested_alt, "A salt shaker inside a black triangle");
+    assert.equal(body.credit_ok, true);
+    assert.deepEqual(body.contact, { name: "Ada" });
     assert.deepEqual(problems, []);
+    assert.deepEqual(offsite, []);
+    await ctx.close();
+  });
+
+  test(`/describe-pictures/ (${name}): a field the form refuses is marked on the NYSDS field, and the intake's answers are said plainly`, async () => {
+    seen.length = 0;
+    reply = { status: 201, body: { ok: true }, headers: {} };
+    const { ctx, page, problems, offsite } = await open(width, height);
+    await page.goto(`${server.url}/describe-pictures/`);
+    await page.waitForFunction(() => !document.getElementById("item").hidden);
+    await page.getByRole("button", { name: "Next picture" }).click();
+    await page.getByRole("textbox", { name: "Alt text", exact: true }).fill("A map of a city block");
+    await page.getByRole("textbox", { name: "Email", exact: true }).fill("not-an-email");
+    await page.getByRole("button", { name: "Send suggestion" }).click();
+    await page.waitForFunction(() => /^Not sent:/.test(document.getElementById("save-status").textContent));
+    assert.match(await page.locator("#save-status").textContent(), /That email address does not look complete/);
+    const err = await page.evaluate(() => ({ show: document.getElementById("contact-email").showError, msg: document.getElementById("contact-email").errorMessage, focus: document.activeElement?.id }));
+    assert.deepEqual(err, { show: true, msg: "That email address does not look complete. Fix it, or leave it empty.", focus: "contact-email" });
+    assert.equal(seen.length, 0, "nothing was sent");
+    // Fixed, it goes; a 429 from the intake is said with its wait, and the text stays.
+    await page.getByRole("textbox", { name: "Email", exact: true }).fill("");
+    reply = { status: 429, body: { code: "rate_limited", message: "Too many reports." }, headers: { "Retry-After": "120" } };
+    await page.getByRole("button", { name: "Send suggestion" }).click();
+    await page.waitForFunction(() => /Try again in/.test(document.getElementById("save-status").textContent));
+    assert.match(await page.locator("#save-status").textContent(), /^Not sent: too many suggestions .*Try again in 2 minutes\./);
+    assert.equal(await page.evaluate(() => document.getElementById("contact-email").showError), false, "the error is cleared");
+    assert.equal(await page.evaluate(() => document.getElementById("review-alt").value), "A map of a city block", "the text is kept");
+    reply = { status: 201, body: { ok: true }, headers: {} };
+    await page.getByRole("button", { name: "Send suggestion" }).click();
+    await page.waitForFunction(() => /^Sent\./.test(document.getElementById("save-status").textContent));
+    await page.getByRole("button", { name: "Send suggestion" }).click();
+    await page.waitForFunction(() => /already sent/.test(document.getElementById("save-status").textContent));
+    assert.equal(seen.length, 2);
+    // Chromium logs the 429 itself as a failed load; nothing else may be logged.
+    assert.deepEqual(problems.filter((p) => !/status of 429/.test(p)), []);
     assert.deepEqual(offsite, []);
     await ctx.close();
   });

@@ -151,7 +151,7 @@ async function siteWithPictures({ store = async () => {}, search = false, books,
 
 const pageData = (outDir) => JSON.parse(/<script type="application\/json" id="page-data">([\s\S]*?)<\/script>/.exec(readFileSync(join(outDir, "describe-pictures", "index.html"), "utf8"))[1]);
 
-test("build-site makes /describe-pictures/ in inbox mode from the committed pictures, with no AI drafts", async () => {
+test("build-site makes /describe-pictures/ in inbox mode from the committed pictures, with the AI drafts labeled and no model named", async () => {
   const { site, fx, inventories } = await siteWithPictures({
     store: async (fx, invs) => {
       const rules = invs.find((i) => i.book === "rules");
@@ -167,8 +167,11 @@ test("build-site makes /describe-pictures/ in inbox mode from the committed pict
     assert.ok(html.includes(`<meta name="alt-review-endpoint" content="${ENDPOINT}">`), "posts to the data inbox");
     assert.equal(ENDPOINT, "https://www.beta.nyc/wp-json/betanyc-data/v1/report");
     assert.match(html, /connect-src https:\/\/www\.beta\.nyc;/);
-    assert.doesNotMatch(html, /AI DRAFT/, "no AI draft is in the page");
-    assert.doesNotMatch(readFileSync(join(dir, "data.json"), "utf8"), /AI DRAFT/);
+    // The AI drafts are in the page's data (Noel approved publishing them, 2026-11-26); the page
+    // labels them. The model's name may be in the data, never in the page's own text.
+    assert.match(readFileSync(join(dir, "data.json"), "utf8"), /ANOTHER AI DRAFT/);
+    const visibleText = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
+    assert.doesNotMatch(visibleText, /claude|fable|anthropic/i, "no model or product name outside the data");
     for (const f of ["app.js", "inbox-payload.js", "issue-url.js"]) assert.ok(existsSync(join(dir, f)), f);
     // The site's own frame (Noel, 2026-11-26): the top bar, breadcrumbs, the site's stylesheets
     // and footer, as on every page; not the standalone page's app.css.
@@ -183,13 +186,15 @@ test("build-site makes /describe-pictures/ in inbox mode from the committed pict
     // The policy comes before anything the page loads, and everything loaded is on the site.
     const head = html.slice(0, html.indexOf("</head>"));
     assert.ok(head.indexOf("Content-Security-Policy") < head.search(/<link |<script /), "the policy is first");
-    assert.match(head, /content="default-src &#39;none&#39;; img-src &#39;self&#39;; style-src &#39;self&#39;; script-src &#39;self&#39;; connect-src https:\/\/www\.beta\.nyc; /);
+    // style-src also allows, by its hash alone, the one inline style NYSDS's nys-select renders
+    // (<slot style="display: none;">); nothing else inline.
+    assert.match(head, /content="default-src &#39;none&#39;; img-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-hashes&#39; &#39;sha256-biLFinpqYMtWHmXfkA1BPeCY0\/fNt46SAZ\+BBk5YUog=&#39;; script-src &#39;self&#39;; connect-src https:\/\/www\.beta\.nyc; /);
     for (const m of html.matchAll(/<(?:link|script|img)\b[^>]*\b(?:href|src)="([^"]+)"/g)) {
       if (/rel="canonical"/.test(m[0])) continue;
       assert.ok(m[1].startsWith("/"), `${m[1]} is on the site`);
     }
     // The opening lines are true for what the page holds: one reviewed description, no AI.
-    assert.match(html, /<p class="lede">The pictures in New York City's Administrative Code and Rules: [^<]*1 of the 6 has a text description that a person at BetaNYC reviewed; the rest have none yet\.<\/p>/);
+    assert.match(html, /<p class="lede">The pictures in New York City's Administrative Code and Rules: [^<]*1 of the 6 has a text description that a person at BetaNYC reviewed\. 1 of the 6 has only a text description that an AI model drafted for BetaNYC, which no person has checked yet, labeled "AI draft, not yet checked by a person"\. 4 of the 6 have none yet\.<\/p>/);
     assert.doesNotMatch(html, /an AI model drafts/i);
     assert.match(html, /You do not need an account\. Your suggestion goes to BetaNYC, not to a public page, and a person at BetaNYC reads every one before anything on the Law Reader changes\./);
     // Not in the top bar.
@@ -197,14 +202,16 @@ test("build-site makes /describe-pictures/ in inbox mode from the committed pict
 
     const data = pageData(site.outDir);
     assert.equal(data.mode, "inbox");
-    assert.equal(data.drafts_included, false);
+    assert.equal(data.drafts_included, true);
     const rules = inventories.find((i) => i.book === "rules");
     assert.equal(data.items.length, 2 * rules.images.length, "both books' pictures");
     const reviewed = data.items.find((i) => i.book === "rules" && i.sha256 === rules.images[0].sha256);
     assert.equal(reviewed.entry.status, "reviewed");
     assert.equal(reviewed.entry.review.alt, "the sodium warning icon");
     const draftOnly = data.items.find((i) => i.book === "rules" && i.sha256 === rules.images[1].sha256);
-    assert.equal(draftOnly.entry, null, "a picture with only an AI draft shows as having no description");
+    assert.equal(draftOnly.entry.status, "drafted", "a picture with only an AI draft shows it");
+    assert.equal(draftOnly.entry.draft.alt, "ANOTHER AI DRAFT");
+    assert.equal(draftOnly.entry.review, null);
     assert.ok(data.items.filter((i) => i.book === "admin_code").every((i) => i.entry === null));
     // Every picture's file is in the page's own folder, as its sha256, and is the stored copy.
     for (const i of data.items) {
@@ -270,13 +277,18 @@ test("the committed pictures are kept out of the npm package", () => {
   assert.match(readFileSync(join(ROOT, "scripts", "lib", "site", "build.js"), "utf8"), /join\(ROOT, "data", "pictures"\)/);
 });
 
-test("the picture page's opening lines say how many pictures have a reviewed description, and never promise AI drafts", async () => {
+test("the picture page's opening lines count reviewed descriptions, unchecked AI drafts and pictures with none, and keep the promises", async () => {
   const { pictureIntro } = await import("../scripts/lib/site/pages-pictures.js");
-  const none = pictureIntro([{ entry: null }, { entry: { status: "drafted", draft: { alt: "x" } } }]);
+  const none = pictureIntro([{ entry: null }, { entry: null }]);
   assert.match(none, /None of the 2 has a text description yet\./);
   assert.doesNotMatch(none, /AI/);
+  const drafts = pictureIntro([{ entry: { status: "drafted", draft: { alt: "x" } } }, { entry: { status: "drafted", draft: { long: "y" } } }]);
+  assert.match(drafts, /Each has a text description that an AI model drafted for BetaNYC\. No person has checked these drafts yet, and each is labeled "AI draft, not yet checked by a person"\./);
+  assert.doesNotMatch(drafts, /none yet|reviewed/);
+  // A review saved without the "reviewed" status is not shown, so that picture counts as a draft.
+  assert.match(pictureIntro([{ entry: { status: "drafted", draft: { alt: "x" }, review: { alt: "r" } } }]), /Each has a text description that an AI model drafted/);
   const some = pictureIntro([{ entry: { status: "reviewed", review: { alt: "a" } } }, { entry: null }, { entry: null }]);
-  assert.match(some, /1 of the 3 has a text description that a person at BetaNYC reviewed; the rest have none yet\./);
+  assert.match(some, /1 of the 3 has a text description that a person at BetaNYC reviewed\. 2 of the 3 have none yet\./);
   assert.match(pictureIntro([{ entry: { status: "reviewed", review: { alt: "a" } } }, { entry: { status: "reviewed", review: { alt: "b" } } }, { entry: null }]), /2 of the 3 have a text description/);
-  for (const promise of ["You do not need an account.", "Your suggestion goes to BetaNYC, not to a public page", "a person at BetaNYC reads every one"]) assert.ok(none.includes(promise), promise);
+  for (const text of [none, drafts]) for (const promise of ["You do not need an account.", "Your suggestion goes to BetaNYC, not to a public page", "a person at BetaNYC reads every one"]) assert.ok(text.includes(promise), promise);
 });

@@ -11,12 +11,13 @@
 //
 // The site build (scripts/lib/site/build.js) builds the inbox page at /describe-pictures/ on
 // law.beta.nyc, from the pictures committed in data/pictures/ (pictures.js, npm run
-// alt:images), with no AI drafts. By hand, this command reads the zips instead. The images are
+// alt:images), with the AI drafts, each labeled as one. By hand, this command reads the zips instead. The images are
 // copied into the output folder (BMPs as PNG). Unreviewed AI drafts are left out unless
 // includeDrafts is set; when they are in, the page labels each one "AI draft, not yet checked
 // by a person".
 
 import { mkdirSync, writeFileSync, copyFileSync, existsSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { displayable } from "./image-info.js";
@@ -57,10 +58,23 @@ export function sectionUrl(book, sectionId, redirects, siteBase = SITE_BASE) {
   return `${siteBase}${typeof path === "string" && path.startsWith("/") ? path : `/${slug}/${sectionId}`}`;
 }
 
-/** The content security policy the inbox page carries (GitHub Pages cannot send headers). */
-export function inboxCsp(endpoint) {
+/**
+ * The one inline style attribute the site's NYSDS elements need: nys-select (NYSDS 1.23.2,
+ * dist/nysds.js) renders `<slot style="display: none;">` to hold its <option>s, and a policy of
+ * style-src 'self' blocks that attribute, so the options would show. Allowed by its hash alone
+ * ('unsafe-hashes' is what lets a hash cover a style attribute); no other inline style is.
+ */
+export const NYSDS_SELECT_SLOT_STYLE = "display: none;";
+export const NYSDS_STYLE_HASH = `'sha256-${createHash("sha256").update(NYSDS_SELECT_SLOT_STYLE).digest("base64")}'`;
+
+/**
+ * The content security policy the inbox page carries (GitHub Pages cannot send headers). With
+ * nysds (the site's page), style-src also allows NYSDS_STYLE_HASH.
+ */
+export function inboxCsp(endpoint, { nysds = false } = {}) {
   const origin = new URL(endpoint).origin;
-  return `default-src 'none'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src ${origin}; base-uri 'none'; form-action 'none'; object-src 'none'`;
+  const style = nysds ? `'self' 'unsafe-hashes' ${NYSDS_STYLE_HASH}` : "'self'";
+  return `default-src 'none'; img-src 'self'; style-src ${style}; script-src 'self'; connect-src ${origin}; base-uri 'none'; form-action 'none'; object-src 'none'`;
 }
 
 // JSON inside <script type="application/json">: every "<" is written as the escape \u003c, so
@@ -111,7 +125,7 @@ export function buildStatic({ inventories, sources, storeDir, outDir, includeDra
   const data = { mode, drafts_included: includeDrafts, items };
   const metas = [`<meta name="alt-review-mode" content="inbox">`, `<meta name="alt-review-token" content="">`, `<meta name="alt-review-endpoint" content="${escAttr(endpoint)}">`, `<meta name="referrer" content="no-referrer">`];
   const html = frame
-    ? frame({ csp: inboxCsp(endpoint), head: metas, body: pageBody(), data: inlineJson(data), items })
+    ? frame({ csp: inboxCsp(endpoint, { nysds: true }), head: [...metas, `<meta name="alt-review-ui" content="nysds">`], body: pageBody("site"), data: inlineJson(data), items })
     : mode === "inbox"
       ? pageHtml("inbox", "", {
           head: `<meta http-equiv="Content-Security-Policy" content="${escAttr(inboxCsp(endpoint))}">\n<meta name="referrer" content="no-referrer">`,

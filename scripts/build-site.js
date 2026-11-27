@@ -18,8 +18,8 @@
 //
 // With the Administrative Code or the Rules, the build also makes the picture description page,
 // /describe-pictures/ (issue #87): the committed pictures in data/pictures/ (npm run alt:images)
-// and the reviewed descriptions in data/alt-text/, never AI drafts. A missing or changed picture
-// stops the build.
+// and the descriptions in data/alt-text/ (AI drafts labeled as such, and reviewed ones). A
+// missing or changed picture stops the build.
 
 import { buildSite } from "./lib/site/build.js";
 

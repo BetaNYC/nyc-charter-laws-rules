@@ -41,12 +41,14 @@ export function pageHtml(mode, token = "", { head = "", endpoint = "", data = ""
 }
 
 /**
- * The page's working parts (filters, pager, picture, form), the inside of its <main>: page/body.html.
- * index.html wraps them for the local, static and standalone inbox pages; the site build puts
- * them inside the Law Reader's own page frame (scripts/lib/site/pages-pictures.js).
+ * The page's working parts (filters, pager, picture, form), the inside of its <main>. "standalone":
+ * page/body.html, plain HTML controls, which index.html wraps for the local, static and standalone
+ * inbox pages. "site": page/body-site.html, the inbox parts only, built from the New York State
+ * Design System's elements (nys-select, nys-button, nys-textarea, nys-textinput, nys-checkbox) as
+ * the rest of law.beta.nyc is, for the Law Reader's own page frame (scripts/lib/site/pages-pictures.js).
  */
-export function pageBody() {
-  return readFileSync(join(PAGE_DIR, "body.html"), "utf8");
+export function pageBody(kind = "standalone") {
+  return readFileSync(join(PAGE_DIR, kind === "site" ? "body-site.html" : "body.html"), "utf8");
 }
 
 /**

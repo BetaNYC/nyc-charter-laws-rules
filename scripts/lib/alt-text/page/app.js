@@ -13,6 +13,62 @@ import { buildPayload, describeResponse, newClientId, isClientId } from "./inbox
 
 const $ = (id) => document.getElementById(id);
 const meta = (name) => document.querySelector(`meta[name="${name}"]`)?.content ?? "";
+// On law.beta.nyc the page is built from the New York State Design System's elements, as the rest
+// of the site is (page/body-site.html, meta alt-review-ui "nysds"); elsewhere from plain HTML
+// controls (page/body.html). Both have .value, .checked, .disabled and .focus(). The NYSDS ones
+// say what happened with their own events (nys-click, nys-input, nys-change; NYSDS 1.23.2's
+// declarations), take their label and error text as properties, and keep ARIA on properties, not
+// on the host. These helpers hide the difference; an element a mode does not have is skipped.
+const NYSDS = meta("alt-review-ui") === "nysds";
+const isNys = (e) => !!e && e.localName.startsWith("nys-");
+const NYS_EVENT = { click: "nys-click", input: "nys-input", change: "nys-change" };
+function on(id, kind, fn) {
+  const e = $(id);
+  if (e) e.addEventListener(isNys(e) ? NYS_EVENT[kind] : kind, fn);
+}
+function setValue(id, v) {
+  const e = $(id);
+  if (e) e.value = v;
+}
+/** A field's label, or a button's text. */
+function setLabel(id, text) {
+  const e = $(id);
+  if (!e) return;
+  if (isNys(e)) e.label = text;
+  else if (e.localName === "button") e.textContent = text;
+  else {
+    const l = document.querySelector(`label[for="${id}"]`);
+    if (l) l.textContent = text;
+  }
+}
+/** Mark a field wrong (with what is wrong), or clear it. */
+function setInvalid(id, message) {
+  const e = $(id);
+  if (!e) return;
+  if (isNys(e)) {
+    e.showError = !!message;
+    e.errorMessage = message || "";
+  } else if (message) e.setAttribute("aria-invalid", "true");
+  else e.removeAttribute("aria-invalid");
+}
+function setExpanded(e, open) {
+  if (isNys(e)) e.ariaExpanded = String(open);
+  else e.setAttribute("aria-expanded", String(open));
+}
+/** A button made by the page: an NYSDS button on law.beta.nyc, a plain one elsewhere. */
+function makeButton(label, cls) {
+  if (!NYSDS) {
+    const b = el("button", label, cls);
+    b.type = "button";
+    return b;
+  }
+  const b = document.createElement("nys-button");
+  b.type = "button";
+  b.variant = "text";
+  b.label = label;
+  if (cls) b.className = cls;
+  return b;
+}
 const MODE = ["static", "inbox"].includes(meta("alt-review-mode")) ? meta("alt-review-mode") : "local";
 const TOKEN = meta("alt-review-token");
 const ENDPOINT = meta("alt-review-endpoint");
@@ -20,7 +76,9 @@ const CLIENT_KEY = "betanyc-law-reader-client-id";
 // Which box each of buildPayload's fields is typed in.
 const FIELD_BOX = { alt: "review-alt", long: "review-long", note: "inbox-note", name: "contact-name", email: "contact-email" };
 const BOOKS = { admin_code: "Administrative Code", rules: "Rules" };
-const STATUS_NAMES = { none: "Not drafted", drafted: "Drafted, not reviewed", "needs-work": "Needs work", reviewed: "Reviewed" };
+const STATUS_NAMES = MODE === "inbox"
+  ? { none: "No description yet", drafted: "AI draft, not yet checked", "needs-work": "Needs work", reviewed: "Reviewed" }
+  : { none: "Not drafted", drafted: "Drafted, not reviewed", "needs-work": "Needs work", reviewed: "Reviewed" };
 
 let items = [];
 let shown = [];
@@ -81,9 +139,13 @@ function progress() {
   $("progress").textContent = `${reviewed} of ${items.length} pictures reviewed${draftsIncluded ? `; ${drafted} have an AI draft` : ""}.${filter}`;
 }
 
+// "all" is the site page's value for "Both books" and "Any status": nys-select keeps a hidden
+// empty option of its own, so an option with value "" would show as blank there.
+const filterValue = (id) => ($(id).value === "all" ? "" : $(id).value);
+
 function filtered() {
-  const book = $("filter-book").value;
-  const status = $("filter-status").value;
+  const book = filterValue("filter-book");
+  const status = filterValue("filter-status");
   return items.filter((i) => (!book || i.book === book) && (!status || statusOf(i) === status));
 }
 
@@ -139,7 +201,7 @@ function showConflict(item) {
 }
 
 function hideConflict() {
-  $("conflict").hidden = true;
+  if ($("conflict")) $("conflict").hidden = true;
 }
 
 function render(moveFocus) {
@@ -191,15 +253,17 @@ function render(moveFocus) {
     region.id = `use-context-${n + 1}`;
     region.hidden = true;
     region.append(el("p", "Before:", "meta"), el("blockquote", u.before || "(none)"), el("p", "After:", "meta"), el("blockquote", u.after || "(none)"));
-    const toggle = el("button", `Show the text around use ${n + 1}`, "disclosure");
-    toggle.type = "button";
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-controls", region.id);
-    toggle.addEventListener("click", () => {
+    const toggle = makeButton(`Show the text around use ${n + 1}`, "disclosure");
+    if (isNys(toggle)) toggle.ariaControls = region.id;
+    else toggle.setAttribute("aria-controls", region.id);
+    setExpanded(toggle, false);
+    toggle.addEventListener(isNys(toggle) ? "nys-click" : "click", () => {
       const open = region.hidden;
       region.hidden = !open;
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = `${open ? "Hide" : "Show"} the text around use ${n + 1}`;
+      setExpanded(toggle, open);
+      const text = `${open ? "Hide" : "Show"} the text around use ${n + 1}`;
+      if (isNys(toggle)) toggle.label = text;
+      else toggle.textContent = text;
     });
     li.append(toggle, region);
     list.append(li);
@@ -207,10 +271,12 @@ function render(moveFocus) {
 
   const e = item.entry;
   const draft = e?.draft;
-  $("draft-alt").value = draft?.alt ?? "";
-  $("draft-long").value = draft?.long ?? "";
+  setValue("draft-alt", draft?.alt ?? "");
+  setValue("draft-long", draft?.long ?? "");
   const failed = e?.draft_failed;
-  $("draft-meta").textContent = draft
+  // The inbox page has no AI draft section (it shows the draft as the current text, labeled), and
+  // never names the model.
+  if ($("draft-meta") && MODE !== "inbox") $("draft-meta").textContent = draft
     ? `Drafted by ${e.draft_model ?? "an AI model"} on ${(e.drafted_at ?? "").slice(0, 10)}.`
     : MODE === "static" && !draftsIncluded
       ? "AI drafts are not shown on this page."
@@ -218,8 +284,10 @@ function render(moveFocus) {
         ? `The AI could not draft this picture: ${failed.reason} (${failed.model ?? "unknown model"}, ${(failed.at ?? "").slice(0, 10)}).`
         : "No AI draft yet.";
   const unsure = $("draft-unsure");
-  unsure.hidden = !draft?.unsure;
-  unsure.textContent = draft?.unsure ? `The model was unsure about: ${draft.unsure}` : "";
+  if (unsure && MODE !== "inbox") {
+    unsure.hidden = !draft?.unsure;
+    unsure.textContent = draft?.unsure ? `The model was unsure about: ${draft.unsure}` : "";
+  }
 
   if (MODE === "local") {
     const rev = e?.review;
@@ -241,12 +309,12 @@ function render(moveFocus) {
     const label = currentLabel(item);
     $("current-label").textContent = label.text;
     $("current-label").dataset.kind = label.kind;
-    $("current-alt").value = cur.alt;
-    $("current-long").value = cur.long;
-    $("review-alt").value = cur.alt;
-    $("review-long").value = cur.long;
-    $("inbox-note").value = "";
-    for (const id of Object.values(FIELD_BOX)) $(id).removeAttribute("aria-invalid");
+    setValue("current-alt", cur.alt);
+    setValue("current-long", cur.long);
+    setValue("review-alt", cur.alt);
+    setValue("review-long", cur.long);
+    setValue("inbox-note", "");
+    for (const id of Object.values(FIELD_BOX)) setInvalid(id, "");
     updatePayload();
   }
   if (history.replaceState) history.replaceState(null, "", `#${keyOf(item)}`);
@@ -351,7 +419,7 @@ function updatePayload() {
 async function send() {
   const item = shown[at];
   if (!item) return;
-  for (const id of Object.values(FIELD_BOX)) $(id).removeAttribute("aria-invalid");
+  for (const id of Object.values(FIELD_BOX)) setInvalid(id, "");
   const cur = currentText(item);
   const same = $("review-alt").value.trim() === cur.alt.trim() && $("review-long").value.trim() === cur.long.trim();
   if (same && !$("inbox-note").value.trim()) {
@@ -361,7 +429,7 @@ async function send() {
   }
   const p = payloadNow();
   if (!p.ok) {
-    for (const pr of p.problems) if (pr.field) $(FIELD_BOX[pr.field]).setAttribute("aria-invalid", "true");
+    for (const pr of p.problems) if (pr.field) setInvalid(FIELD_BOX[pr.field], pr.message);
     setStatus(`Not sent: ${p.problems.map((pr) => pr.message).join(" ")}`);
     const first = p.problems.find((pr) => pr.field);
     if (first) $(FIELD_BOX[first.field]).focus();
@@ -435,8 +503,9 @@ async function load() {
   document.body.dataset.mode = MODE;
   if (MODE !== "local") $("review-heading").textContent = "Your suggestion";
   if (MODE === "inbox") {
-    $("review-hint").textContent = "Starts as a copy of the current description. Describe only what you can see in the picture; never add words or numbers that are not there. For a picture inside a sentence, the alt text must read as part of the sentence.";
-    document.querySelector('label[for="review-long"]').textContent = "Long description (optional: leave it empty if the alt text is enough)";
+    const hint = "Starts as a copy of the current description. Describe only what you can see in the picture; never add words or numbers that are not there. For a picture inside a sentence, the alt text must read as part of the sentence.";
+    $("review-hint").textContent = hint;
+    setLabel("review-long", "Long description (optional: leave it empty if the alt text is enough)");
   }
   try {
     let data;
@@ -469,16 +538,16 @@ async function load() {
   applyFilters(wanted || null);
 }
 
-$("filter-book").addEventListener("change", onFilterChange);
-$("filter-status").addEventListener("change", onFilterChange);
-$("use-theirs").addEventListener("click", () => {
+on("filter-book", "change", onFilterChange);
+on("filter-status", "change", onFilterChange);
+on("use-theirs", "click", () => {
   const item = shown[at];
   if (!item || item.conflict === undefined) return;
   render(false); // takes the newer version as the entry and shows its text
   setStatus("Showing their version. Your text was not saved.");
   $("review-alt").focus();
 });
-$("replace-theirs").addEventListener("click", () => {
+on("replace-theirs", "click", () => {
   const item = shown[at];
   if (!item || item.conflict === undefined) return;
   item.entry = item.conflict; // the base is now their version, on purpose
@@ -486,31 +555,34 @@ $("replace-theirs").addEventListener("click", () => {
   hideConflict();
   save(false);
 });
-$("suggest").addEventListener("click", () => (dirty = false));
+on("suggest", "click", () => (dirty = false));
 window.addEventListener("beforeunload", (ev) => {
   if (!dirty) return;
   ev.preventDefault();
   ev.returnValue = "";
 });
-$("prev").addEventListener("click", () => move(-1));
-$("next").addEventListener("click", () => move(1));
+on("prev", "click", () => move(-1));
+on("next", "click", () => move(1));
 $("review-form").addEventListener("submit", (ev) => {
   ev.preventDefault();
   if (MODE === "local") save(false);
   // Only the Send button sends: Enter in the name or email box does not.
   else if (MODE === "inbox" && ev.submitter?.id === "send") send();
 });
-$("show-payload").addEventListener("click", () => {
+// An NYSDS Send button is type="button" and says it was pressed with nys-click; a submit would
+// reach the form with no submitter (it calls requestSubmit()), so it is not one.
+if (isNys($("send"))) on("send", "click", () => send());
+on("show-payload", "click", () => {
   const box = $("payload");
   const open = box.hidden;
   if (open) updatePayload();
   box.hidden = !open;
-  $("show-payload").setAttribute("aria-expanded", String(open));
-  $("show-payload").textContent = open ? "Hide what will be sent" : "Show exactly what will be sent";
+  setExpanded($("show-payload"), open);
+  setLabel("show-payload", open ? "Hide what will be sent" : "Show exactly what will be sent");
 });
-$("save-next").addEventListener("click", () => save(true));
+on("save-next", "click", () => save(true));
 for (const id of ["review-alt", "review-long", "review-note", "review-why", "inbox-note"]) {
-  $(id).addEventListener("input", () => {
+  on(id, "input", () => {
     dirty = true;
     warnedLeave = false;
     if (MODE === "static") updateSuggestLink();
@@ -518,7 +590,7 @@ for (const id of ["review-alt", "review-long", "review-note", "review-why", "inb
   });
 }
 // Name, email and the credit box stay from picture to picture, so they never count as unsent.
-for (const id of ["contact-name", "contact-email", "credit-ok"]) $(id).addEventListener(id === "credit-ok" ? "change" : "input", () => MODE === "inbox" && updatePayload());
+for (const id of ["contact-name", "contact-email", "credit-ok"]) on(id, id === "credit-ok" ? "change" : "input", () => MODE === "inbox" && updatePayload());
 for (const r of document.querySelectorAll('input[name="status"]')) r.addEventListener("change", () => (dirty = true));
 document.addEventListener("keydown", (ev) => {
   if (MODE === "local" && ev.key === "Enter" && (ev.ctrlKey || ev.metaKey) && ev.target instanceof HTMLTextAreaElement && !ev.target.readOnly) {

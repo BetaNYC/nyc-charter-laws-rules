@@ -377,16 +377,16 @@ export async function buildSite(o = {}) {
       await pf.close();
     }
   }
-  // After the search index, so Pagefind leaves the page out: it is a form, not law text. Built
-  // with no AI drafts (includeDrafts false): only descriptions a person reviewed are shown, and a
-  // picture with none says so and offers the form.
+  // After the search index, so Pagefind leaves the page out: it is a form, not law text. With the
+  // AI drafts (Noel approved publishing them, 2026-11-26): the page labels each "AI draft, not yet
+  // checked by a person", and a reviewed description as reviewed. The model's name is never shown.
   let picturePage = null;
   if (pictures) {
     picturePage = buildStatic({
       inventories: pictures.inventories,
       storeDir: altTextDir,
       outDir: join(outDir, INBOX_PATH.slice(1, -1)),
-      includeDrafts: false,
+      includeDrafts: true,
       mode: "inbox",
       ...(o.pictureEndpoint ? { endpoint: o.pictureEndpoint } : {}),
       redirects: redirectsJson(books),

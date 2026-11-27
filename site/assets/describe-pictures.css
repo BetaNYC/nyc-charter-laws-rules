@@ -1,46 +1,17 @@
 /* The picture description page (/describe-pictures/, issue #87) inside the Law Reader's frame.
-   Only the page's own working parts (scripts/lib/alt-text/page/body.html) are styled here, all
-   under .alt-app; type, links, buttons and the focus ring are the template's (site.css) and
-   law.css's. Like law.css, this file names no colors: every one is a template variable. */
-
-/* app.js puts the mode on <body>; a part shows only in the modes its data-mode lists. This page
-   is always "inbox". */
-.alt-app [data-mode] { display: none; }
-body[data-mode="inbox"] .alt-app [data-mode~="inbox"] { display: block; }
+   Its controls are the New York State Design System's elements (nys-select, nys-button,
+   nys-textarea, nys-textinput, nys-checkbox), themed for the site by law.css's --nys-* tokens,
+   as on every other page; this file only lays out the page's own parts, all under .alt-app. Like
+   law.css, it names no colors: every one is a template variable. */
 
 .alt-app h2 { margin: 32px 0 8px; }
 .alt-app h3 { margin: 24px 0 6px; }
-.alt-app .row { display: flex; flex-wrap: wrap; gap: 12px 24px; }
-.alt-app .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.alt-app label { display: block; font-weight: 600; margin-top: 12px; }
-.alt-app .field label { margin-top: 0; }
-.alt-app .meta, .alt-app .hint { font-size: 15px; }
-
-/* Fields: the look of the errors page's filters (law.css .se-filter select). */
-.alt-app select, .alt-app textarea, .alt-app input[type="text"], .alt-app input[type="email"] {
-  font: inherit; font-size: 16px; max-width: 100%; padding: 6px 8px;
-  border: 1px solid var(--line); border-radius: 4px; background: var(--white); color: var(--ink);
-}
-.alt-app select { min-height: 40px; }
-.alt-app textarea { width: 100%; resize: vertical; }
-.alt-app input[type="text"], .alt-app input[type="email"] { width: 100%; max-width: 32rem; min-height: 40px; }
-.alt-app textarea[readonly] { background: var(--light); }
-.alt-app select:focus-visible, .alt-app textarea:focus-visible, .alt-app input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.alt-app [aria-invalid="true"] { border: 2px solid var(--bad); }
-
-/* Buttons: the template's .button (site.css), blue for Send, outlined for the rest. */
-.alt-app button {
-  display: inline-block; font: inherit; font-weight: 600; cursor: pointer; min-height: 40px;
-  padding: .5rem 1rem; border-radius: 4px; border: 2px solid var(--blue);
-  background: var(--white); color: var(--blue);
-}
-.alt-app button:hover { background: var(--blue-2); }
-.alt-app button[disabled] { opacity: .6; cursor: default; }
-.alt-app #send { background: var(--blue); color: var(--white); }
-.alt-app #send:hover { background: var(--blue-dark); }
+.alt-app .row { display: grid; gap: 12px 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+.alt-app nys-textarea, .alt-app nys-textinput, .alt-app nys-checkbox { display: block; margin-top: 16px; }
+.alt-app .hint { font-size: 15px; }
 .alt-app .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-
 .alt-app .pager { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 16px 0; }
+
 .alt-app figure { margin: 16px 0; padding: 8px; background: var(--white); border: 1px solid var(--line-soft); }
 .alt-app figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 .alt-app figcaption { font-size: 15px; margin-top: 8px; }
@@ -49,18 +20,16 @@ body[data-mode="inbox"] .alt-app [data-mode~="inbox"] { display: block; }
 .alt-app #uses a { overflow-wrap: anywhere; }
 .alt-app #uses blockquote { margin: 4px 0; padding: 4px 12px; border-left: 4px solid var(--line-soft); background: var(--bg-blue-lt); white-space: pre-wrap; }
 
+/* What the current description is: reviewed, an AI draft no person has checked, or none. */
 .alt-app .label-tag { display: inline-block; font-weight: 600; padding: 2px 8px; border-radius: 4px; border: 2px solid var(--line); }
 .alt-app .label-tag[data-kind="draft"] { border-color: var(--warn); }
 .alt-app .label-tag[data-kind="reviewed"] { border-color: var(--blue); }
 
-.alt-app fieldset { margin-top: 16px; border: 1px solid var(--line-soft); border-radius: 4px; padding: 8px 12px 12px; }
+.alt-app fieldset { margin-top: 16px; border: 1px solid var(--line-soft); border-radius: 4px; padding: 8px 12px 16px; }
 .alt-app fieldset legend { font-weight: 600; }
-.alt-app label.check { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; }
-.alt-app label.check input { margin-top: .35rem; flex: none; }
 .alt-app .payload { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg-blue-lt); border: 1px solid var(--line-soft); border-radius: 4px; padding: 8px; font-family: var(--font-mono); font-size: 14px; }
 .alt-app #save-status:not(:empty) { font-weight: 600; }
 
 /* The trap field: off screen, out of the tab order and the accessibility tree. People never see
    it; a robot that fills every box fills it, and the intake then files nothing. */
 .alt-app .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.alt-app .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
